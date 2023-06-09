@@ -1,0 +1,187 @@
+// Portal Cluster
+
+//Profile Collection
+"profile": {
+    //Personal Sub-collection
+    "student": {
+        "uid": ObjectId,
+        "name": String,
+        "email": String,
+        "phone": Number,
+        "address": String,
+        "dateofbirth": Date,
+        "gender": String,
+        "religion": String,
+        "bloodgroup": String,
+        "social": String,
+        "parentinfo": {
+            "father": {
+                "name": String,
+                "phone": Number,
+                "email": String
+            },
+            "mother": {
+                "name": String,
+                "phone": Number,
+                "email": String
+            }
+        }
+    }
+    // Education sub-collection
+    "education": {
+        "uid": ObjectId,
+        "background": [
+            {
+                "degree": String,
+                "year": Number,
+                "institute": String,
+                "result": String,
+                "board": String
+            }
+        ]
+        "current": {
+            "degree": String,
+            "ad_year": Number,
+            "pass_year": Number,
+            "institute": String,
+            "cgpa": Number,
+            "semester": Number,
+            "branch": String,
+            "division": String
+        }
+    }
+    //Attedance sub-collection
+    "attendance": {
+        "uid": ObjectId,
+        "semester": {
+            "semester": Number,
+            "course": [
+                {
+                    "name": String,
+                    "total": Number,
+                    "attended": Number,
+                    "percentage": Number
+                }
+            ]
+        }
+    }
+}
+
+//Academics Collection
+"academics": {
+    //Course sub-collection
+    "course": [
+        {
+            "code": String,
+            "name": String,
+            "semester": Number,
+            "credit": Number,
+            "type": String,
+            "teacher": String,
+            "Attedance": Number, //from attendance sub-collection
+        }
+    ],
+    //Result sub-collection
+    "result": {
+        "uid": ObjectId,
+        "cgpa": Number,
+        "semester": [
+            "semester": Number,
+            "course": [
+                "exam": [
+                    {
+                        "type": String,
+                        "date": Date,
+                        "marks": Number,
+                        "total": Number,
+                    }
+                ]
+                "grade": String,
+                "gpa": Number,
+            ]
+            "sgpa": Number,
+        ]
+    }
+}
+
+//extra-curricular Collection
+"extra-curricular": {
+    //Committee sub-collection
+    "committee": [
+        {
+            "name": String,
+            "faculty": String,
+            "member": [
+                {
+                    "uid": ObjectId,
+                    "name": String,
+                    "position": [
+                        {
+                            "pos": String,
+                            "duration": String
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    //Event sub-collection
+    "event": [
+        {
+            "uid": ObjectId,
+            "name": String,
+            "organizer": String,
+            "date": Date,
+            "description": String,
+            "report": document,
+        }
+    ],
+    //Volunteer-work sub-collection
+    "volunteer": [
+        {
+            "uid": ObjectId,
+            "organizer": String,
+            "date": Date,
+            "description": String,
+        }
+    ]
+}
+
+//CareerConnect Collection
+{
+    "uid": ObjectId,
+    "skills": String,
+    "internship": [
+        {
+            "company": String,
+            "duration": String,
+            "description": String,
+            "role": String,
+            "mode": String,
+            "stipend": Number,
+        }
+    ],
+    "placement": {
+        "company": String,
+        "start": Date,
+        "role": String,
+        "salary": Number,
+        "description": String,
+    },
+    "projects": [
+        {
+            "title": String,
+            "description": String,
+            "link": String,
+            "mentor": String,
+            "duration": String,
+            "team": [
+                {
+                    "uid": ObjectId,
+                    "name": String,
+                    "role": String,
+                }
+            ]
+        }
+    ],
+}
