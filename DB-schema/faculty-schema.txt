@@ -1,4 +1,166 @@
 //Portal Cluster
 
-
+{
+    dept: {
+        name: String,
+        id: String,
+        floor: Number,
+    },
+    teachers: [{
+        name: String,
+        id: String,
+        gender: String,
+        DOB: Date,
+        DOJ: Date,
+        address: String,
+        phone: Number,
+        email: String,
+        type: String, //Permanent, Temporary
+        deptName: String,
+        position: String, //HOD, Professor, Associate Professor, Assistant Professor, Lecturer
+        qualification: String,
+        specialization: String,
+        salary: Number,
+        courses: [{
+            name: String,
+            id: String,
+            credits: Number,
+            semester: String,
+            type: String, //OE, PE, core
+            deptName: String,
+            class: String,
+        }],
+        leaves: [{
+            allotedLeaves: Number,
+            remainingLeaves: Number,
+            numberOfDays: Number,
+            date: Date,
+            type: String,
+            reason: String,
+        }],
+        attendance: [{
+            date: Date,
+            punchInTime: Date,
+            punchOutTime: Date,
+            hours: Number,
+        }],
+        inchargeOfclass: String,
+        lecSchedule: [{
+            couresName: String,
+            classNumber: String,
+            semester: String,
+            day: String,
+            time: String,
+            roomNumber: String,
+            type: String,
+            typePlan: {
+                typeNo: Number,
+                topic: String,
+                suggestedReadings: String,
+            },
+        }],
+    }],
+    appraisal: [{
+        teacherName: String,
+        subject: [{
+            name: String,
+            semester: String,
+            totalLectures: Number,
+            lecturesTaken: Number,
+            percentFeedback: Number,
+            studentsAttended: Number,
+            remedialActivities: String,
+            OtherActivities: String,
+        }],
+        menteeFeedback: String, //from students db
+        guestLectures: [{
+            title: String,
+            guestName: String,
+            details: String,
+        }],
+        qpaper: [{
+            courseName: String,
+        }],
+        publications: [{
+            title: String,
+            name: String,
+            authors: String,
+            publisher: String,
+            paperLink: String,
+        }],
+        patent: [{
+            patentObtained: String,
+            details: String,
+        }],
+        books: [{
+            title: String,
+            authors: String,
+            publisher: String,
+        }],
+        mooc: [{
+            moocs: String,
+            title: String,
+            details: String,
+        }],
+        sponseredReasearch: [{
+            projTitle: String,
+            agency: String,
+            details: String,
+            fundedAmount: Number,
+        }],
+        consultancy: [{
+            consultancy: String,
+            consultant: String,
+            details: String, // Govt/Non Govt
+            fundedAmount: Number,
+        }],
+        citations: [{
+            citations: String,
+            prevYearCitations: Number,
+        }],
+        selfDevelopment: [{
+            title: String,
+            orgDetails: String,
+            dates: Date,
+            noOfDays: Number,
+        }],
+        softwareOrHardwareDev: [{
+            labSetup: String,
+            model: String,
+            details: String,
+        }],
+        activitiesNotCovered: [{}],
+        administration: Boolean,
+        outreachActivities: {
+            trainingOrganized: [{
+                organized: String,
+                sponserAgency: String,
+                funds: Number,
+                noOfDays: Number,
+            }],
+            invitedAsGuest: [{
+                instituteName: String,
+                dates: Date,
+                details: String,
+            }],
+            partOfCommittee: [{
+                partOfCommittee: String,
+                details: String,
+                organization: String,
+                dates: Date,
+            }],
+            articleInMedia: [{
+                details: String,
+            }],
+            coGuide: [{
+                instituteName: String,
+                details: String,
+            }],
+            collaboration: [{
+                instituteName: String,
+                details: String,
+            }],
+        }
+    }],
+}
 
