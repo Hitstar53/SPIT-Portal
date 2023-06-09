@@ -11,9 +11,9 @@ const profileSchema = new Schema({
     address: { type: String, required: true },
     dateOfBirth: { type: Date, required: true },
     gender: { type: String, required: true },
-    religion: { type: String, required: true },
     bloodGroup: { type: String, required: true },
-    social: { type: String, required: true },
+    religion: { type: String, required: false },
+    social: { type: String, required: false },
     parentInfo: {
       father: {
         name: { type: String, required: true },
@@ -31,11 +31,11 @@ const profileSchema = new Schema({
     uid: { type: Schema.Types.ObjectId, required: true },
     background: [
       {
-        degree: { type: String, required: true },
         year: { type: Number, required: true },
         institute: { type: String, required: true },
         result: { type: String, required: true },
-        board: { type: String, required: true }
+        degree: { type: String, required: true, default: null },
+        board: { type: String, required: true, default: null }
       }
     ],
     current: {
@@ -155,14 +155,14 @@ const careerConnectSchema = new Schema({
       description: { type: String, required: true },
       role: { type: String, required: true },
       mode: { type: String, required: true },
-      stipend: { type: Number, required: true }
+      stipend: { type: Number, required: false, default: null }
     }
   ],
   placement: {
     company: { type: String, required: true },
     start: { type: Date, required: true },
     role: { type: String, required: true },
-    salary: { type: Number, required: true },
+    salary: { type: Number, required: false, default: null },
     description: { type: String, required: true }
   },
   projects: [
