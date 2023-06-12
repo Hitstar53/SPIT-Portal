@@ -155,7 +155,7 @@ const careerConnectSchema = new Schema({
       description: { type: String, required: true },
       role: { type: String, required: true },
       mode: { type: String, required: true },
-      stipend: { type: Number, required: false, default: null }
+      stipend: { type: Number, required: true, default: null }
     }
   ],
   placement: {
