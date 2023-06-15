@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -21,7 +21,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import Logo from '../assets/SPIT_Logo Colour.png'
+import Logo from '../assets/SPIT_Logo Colour.png';
+import Tooltip from '@mui/material/Tooltip';
 import { SideBarData } from '../data/SideBarData';
 import { Button } from '@mui/material';
 import '../styles/SideBar.css'
@@ -98,11 +99,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer() {
+    const [active, setActive] = useState('Home');
     const [anchorEl, setAnchorEl] = useState(null);
     const Open = Boolean(anchorEl)
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
-        console.log(anchorEl);
     };
     const handleClose = () => {
         setAnchorEl(null);
@@ -117,6 +118,14 @@ export default function MiniDrawer() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    useEffect(() => {
+        const path = window.location.pathname;
+        const activePage = SideBarData.find((item) => item.path === path);
+        if (activePage) {
+            setActive(activePage.title);
+        }
+    }, []);
 
     return (
         <div>
@@ -138,18 +147,10 @@ export default function MiniDrawer() {
                     <div className='nav-bar'>
                         <h1>Welcome to S.P.I.T Faculty Portal</h1>
                         <div>
-                            <Button
-                            id='demo-positioned-button'
-                            aria-controls={Open ? 'demo-positioned-menu' : undefined}
-                            aria-haspopup='true'
-                            aria-expanded={Open ? 'true' : undefined}
-                            onClick={handleClick}
-                            >
-                                <IconButton>
-                                <Avatar/>
-                                <ArrowDropDownIcon sx={{color: "white"}}/>
-                                </IconButton>
-                            </Button>
+                            <IconButton onClick={handleClick}>
+                                <Avatar />
+                                <ArrowDropDownIcon sx={{ color: "white" }} />
+                            </IconButton>
                             <Menu
                                 id='demo-positioned-menu'
                                 aria-labelledby='demo-positioned-button'
@@ -168,22 +169,22 @@ export default function MiniDrawer() {
                                     'aria-labelledby': 'demo-positioned-button',
                                 }}
                             >
-                                <MenuItem onClick={() => {window.location.pathname = 'profile'}}><PersonIcon sx={{marginRight: 1}}/>View Profile</MenuItem>
-                                <MenuItem onClick={handleClose}><LogoutIcon sx={{marginRight: 1}}/>Logout</MenuItem>
+                                <MenuItem onClick={() => { window.location.pathname = 'profile' }}><PersonIcon sx={{ marginRight: 1 }} />View Profile</MenuItem>
+                                <MenuItem onClick={handleClose}><LogoutIcon sx={{ marginRight: 1 }} />Logout</MenuItem>
                             </Menu>
                         </div>
                     </div>
                 </Toolbar>
             </AppBar>
             <Drawer variant="permanent" open={open} >
-                <DrawerHeader>
+                <DrawerHeader onClick={handleDrawerClose} sx={{ cursor: "pointer" }}>
                     <img src={Logo} alt="Img here" width="40px" className='spit-logo' />
-                    <div style={{color: "white", marginRight: "-10px", marginLeft: "5px"}}>S.P.I.T Faculty Portal </div>
+                    <div style={{ color: "white", marginRight: "-10px", marginLeft: "5px" }}>S.P.I.T Faculty Portal </div>
                     <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon sx={{color: "white"}}/> : <ChevronLeftIcon sx={{color: "white"}}/>}
+                        {theme.direction === 'rtl' ? <ChevronRightIcon sx={{ color: "white" }} /> : <ChevronLeftIcon sx={{ color: "white" }} />}
                     </IconButton>
                 </DrawerHeader>
-                <Divider/>
+                <Divider />
                 <List>
                     {SideBarData.map((val, index) => (
                         <ListItem key={val.title} disablePadding sx={{ display: 'block' }}>
@@ -192,19 +193,39 @@ export default function MiniDrawer() {
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
                                     px: 2.5,
+                                    backgroundColor: active === val.title ? '#333' : 'transparent',
+                                    transition: 'background-color 0.3s ease-in-out',
+                                    '&:hover': {
+                                        backgroundColor: active === val.title ? '#333' : '#555',
+                                    },
                                 }}
-                                onClick={() => window.location.pathname = val.path}
+                                onClick={() => {
+                                    window.location.pathname = val.path;
+                                    setActive(val.title);
+                                }}
                             >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                        color: 'white'
-                                    }}
-                                >
-                                    {val.icon}
-                                </ListItemIcon>
+                                {!open ? (<Tooltip title={val.title} placement="right" arrow>
+                                    <ListItemIcon
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: open ? 3 : 'auto',
+                                            justifyContent: 'center',
+                                            color: 'white'
+                                        }}
+                                    >
+                                        {val.icon}
+                                    </ListItemIcon>
+                                </Tooltip>) :
+                                    (<ListItemIcon
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: open ? 3 : 'auto',
+                                            justifyContent: 'center',
+                                            color: 'white'
+                                        }}
+                                    >
+                                        {val.icon}
+                                    </ListItemIcon>)}
                                 <ListItemText primary={val.title} sx={{ opacity: open ? 1 : 0, color: "white" }} />
                             </ListItemButton>
                         </ListItem>
