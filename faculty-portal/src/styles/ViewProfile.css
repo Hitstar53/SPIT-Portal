@@ -1,0 +1,36 @@
+.full-view{
+    min-height: 100vh;
+}
+.wrapper{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+}
+.img-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.img-wrapper img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 2px solid #000;
+}
+.info-wrapper{
+    margin: 35px;
+}
+.bigger{
+    font-size: 2rem;
+    font-weight: 600;
+}
+.big{
+    font-size: 1.5rem;
+    font-weight: 400;
+    color:#333
+}
