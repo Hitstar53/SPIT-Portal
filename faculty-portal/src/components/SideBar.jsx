@@ -6,7 +6,6 @@ import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -16,9 +15,16 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import Avatar from '@mui/material/Avatar';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import PersonIcon from '@mui/icons-material/Person';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import Logo from '../assets/SPIT_Logo Colour.png'
+import { SideBarData } from '../data/SideBarData';
+import { Button } from '@mui/material';
+import '../styles/SideBar.css'
 
 const drawerWidth = 240;
 
@@ -87,6 +93,15 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer() {
+    const [anchorEl, setAnchorEl] = useState(null);
+    const Open = Boolean(anchorEl)
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+        console.log(anchorEl);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
     const theme = useTheme();
     const [open, setOpen] = useState(false);
 
@@ -115,9 +130,44 @@ export default function MiniDrawer() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div">
-                        Mini variant drawer
-                    </Typography>
+                    <div className='nav-bar'>
+                        <h1>Welcome to S.P.I.T Faculty Portal</h1>
+                        <div>
+                            <Button
+                            id='demo-positioned-button'
+                            aria-controls={Open ? 'demo-positioned-menu' : undefined}
+                            aria-haspopup='true'
+                            aria-expanded={Open ? 'true' : undefined}
+                            onClick={handleClick}
+                            >
+                                <IconButton>
+                                <Avatar/>
+                                <ArrowDropDownIcon />
+                                </IconButton>
+                            </Button>
+                            <Menu
+                                id='demo-positioned-menu'
+                                aria-labelledby='demo-positioned-button'
+                                anchorEl={anchorEl}
+                                open={Open}
+                                onClose={handleClose}
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'right',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                MenuListProps={{
+                                    'aria-labelledby': 'demo-positioned-button',
+                                }}
+                            >
+                                <MenuItem onClick={handleClose}><PersonIcon sx={{marginRight: 1}}/>Profile</MenuItem>
+                                <MenuItem onClick={handleClose}><LogoutIcon sx={{marginRight: 1}}/>Logout</MenuItem>
+                            </Menu>
+                        </div>
+                    </div>
                 </Toolbar>
             </AppBar>
             <Drawer variant="permanent" open={open}>
@@ -130,14 +180,15 @@ export default function MiniDrawer() {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                    {SideBarData.map((val, index) => (
+                        <ListItem key={val.title} disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
                                     px: 2.5,
                                 }}
+                                onClick={() => window.location.pathname = val.path}
                             >
                                 <ListItemIcon
                                     sx={{
@@ -146,34 +197,9 @@ export default function MiniDrawer() {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                    {val.icon}
                                 </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider />
-                <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                            <ListItemButton
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
-                                }}
-                            >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                                <ListItemText primary={val.title} sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
                         </ListItem>
                     ))}
