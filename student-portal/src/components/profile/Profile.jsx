@@ -1,5 +1,5 @@
 import * as React from "react";
-import profile from "../../assets/logo.png";
+import profile from "../../assets/user.svg";
 
 const Profile = () => {
   return (

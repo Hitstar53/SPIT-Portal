@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './AnnounceCard.module.css'
-import logo from '../../../assets/logo.png'
+import logo from "../../../assets/user.svg"
 
 const data = [
   {
