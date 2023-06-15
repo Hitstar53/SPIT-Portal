@@ -145,7 +145,7 @@ export default function MiniDrawer() {
                         <MenuIcon />
                     </IconButton>
                     <div className='nav-bar'>
-                        <h1>Welcome to S.P.I.T Faculty Portal</h1>
+                        <h4>Welcome to S.P.I.T Faculty Portal</h4>
                         <div>
                             <IconButton onClick={handleClick}>
                                 <Avatar />
