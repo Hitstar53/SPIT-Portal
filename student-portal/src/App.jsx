@@ -6,7 +6,7 @@ const App = () => {
   return (
     <React.Fragment>
     <div>
-      hello!!!
+      <h1>Student Portal</h1>
     </div>
     </React.Fragment>
   )
