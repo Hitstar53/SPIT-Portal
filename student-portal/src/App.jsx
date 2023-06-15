@@ -1,4 +1,9 @@
 import React, { useState } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import Dashboard from './components/dashboard/Dashboard';
+import Profile from './components/profile/Profile';
+
+import { Box } from '@mui/system';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MiniDrawer from './components/UI/MiniDrawer'
 import './App.css'
@@ -13,11 +18,22 @@ const App = () => {
     }
   });
   return (
-    <React.Fragment>
+    <Router>
       <ThemeProvider theme={theme}>
-        <MiniDrawer />
+        <Box sx={{ display: 'flex' }}>
+          <MiniDrawer />
+          <Box
+            component="main"
+            sx={{ flexGrow: 1, marginTop: 8 }}
+          >
+            <Routes>
+              <Route path="/" element={<Dashboard />} exact/>
+              <Route path="/profile" element={<Profile />} exact/>
+            </Routes>
+          </Box>
+        </Box>
       </ThemeProvider>
-    </React.Fragment>
+    </Router>
   )
 }
 
