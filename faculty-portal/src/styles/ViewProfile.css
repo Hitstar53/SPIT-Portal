@@ -34,14 +34,20 @@
     font-weight: 400;
     color:#333
 }
+.bigg{
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: white;
+}
 hr{
     width:95%;
     margin: 0 auto;
 }
 section{
-    margin: 55px;
+    margin: 15px;
     display: inline-block;
-    background-color: aliceblue;
+    background-color: #411CBA;
+    color: #fff;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
@@ -49,4 +55,12 @@ section{
 .infowrapper2{
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: stretch;
+}
+#section-2{
+    flex:1;
+}
+.info-wrapper h1{
+    padding: 5px 0px;
 }

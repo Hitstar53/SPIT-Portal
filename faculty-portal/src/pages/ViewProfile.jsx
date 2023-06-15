@@ -25,19 +25,19 @@ const ViewProfile = () => {
         <section className="section">
           <h1 className="bigger">Personal</h1>
           <div className="info-wrapper">
-            <h1 className="big">Date of Birth : 01/01/2000</h1>
-            <h1 className="big">Date of Joining : 01/02/2022</h1>
-            <h1 className="big">Gender : Male</h1>
-            <h1 className="big">Blood Group : B+</h1>
-            <h1 className="big">Type : Regular</h1>
+            <h1 className="bigg">Date of Birth : 01/01/2000</h1>
+            <h1 className="bigg">Date of Joining : 01/02/2022</h1>
+            <h1 className="bigg">Gender : Male</h1>
+            <h1 className="bigg">Blood Group : B+</h1>
+            <h1 className="bigg">Type : Regular</h1>
           </div>
         </section>
-        <section className="section">
+        <section className="section" id="section-2">
           <h1 className="bigger">Contact</h1>
           <div className="info-wrapper">
-            <h1 className="big">Email : shubham.more@spit.ac.in</h1>
-            <h1 className="big">Phone No. : 9975508234</h1>
-            <h1 className="big">
+            <h1 className="bigg">Email : shubham.more@spit.ac.in</h1>
+            <h1 className="bigg">Phone No. : 9975508234</h1>
+            <h1 className="bigg">
               Address : A/502, venice building, Mohak City, 90-Feet Road,
               Andheri west
             </h1>
