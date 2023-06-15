@@ -63,6 +63,12 @@ const ViewProfile = () => {
       <hr />
       <section>
         <h1 className="bigger">Academics :</h1>
+        <div className="section" id="section-3">
+          <h1 className="bigg">Qualification: B.Tech, 12th</h1>
+          <h1 className="bigg">Specialisation: AI, ML, NLP, Big Data</h1>
+          <h1 className="bigg">Class Incharge: S.E. Computer Engineering B</h1>
+
+        </div>
       </section>
     </div>
   );

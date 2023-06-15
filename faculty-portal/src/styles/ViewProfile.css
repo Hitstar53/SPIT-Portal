@@ -68,3 +68,8 @@ section{
 .info-wrapper h1{
     padding: 5px 0px;
 }
+#section-3{
+    /* width: 100%; */
+    /* margin: 0 auto;  */
+    padding: 30px;
+}
