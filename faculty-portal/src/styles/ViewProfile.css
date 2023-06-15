@@ -1,15 +1,15 @@
 .full-view{
     min-height: 100vh;
 }
-.wrapper{
+.profile-wrapper{
     display: flex;
     flex-direction: row;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
     margin-top: 1rem;
     flex-wrap: wrap;
     width: 90%;
-    margin: 0 auto 45px auto;
+    margin: 20px auto;
 }
 .img-wrapper{
     display: flex;
@@ -38,25 +38,29 @@
     font-size: 1.5rem;
     font-weight: 400;
     color: white;
+    display: flex;
+    align-items: flex-start;
 }
 hr{
-    width:95%;
     margin: 0 auto;
+    border-bottom: 2px solid grey;
 }
 section{
+    padding:15px
+}
+.section{
     margin: 15px;
     display: inline-block;
     background-color: #411CBA;
     color: #fff;
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    /* box-shadow: 0 0 10px rgba(0,0,0,0.2); */
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
-.infowrapper2{
+.info-wrapper-2{
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: stretch;
 }
 #section-2{
     flex:1;

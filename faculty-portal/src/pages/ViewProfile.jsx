@@ -1,11 +1,21 @@
 import React from "react";
 import { Box } from "@mui/material";
 import "../styles/ViewProfile.css";
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
+import BusinessIcon from '@mui/icons-material/Business';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import WcIcon from '@mui/icons-material/Wc';
+import BloodtypeIcon from '@mui/icons-material/Bloodtype';
+import MergeTypeIcon from '@mui/icons-material/MergeType';
 
 const ViewProfile = () => {
   return (
     <div className="full-view">
-      <div className="wrapper">
+      <div className="profile-wrapper">
         <div className="img-wrapper">
           <img
             src="https://www.w3schools.com/howto/img_avatar.png"
@@ -20,30 +30,40 @@ const ViewProfile = () => {
         </div>
       </div>
       <hr />
-      <h1 className="bigger">Details</h1>
-      <div className="info-wrapper-2">
-        <section className="section">
-          <h1 className="bigger">Personal</h1>
-          <div className="info-wrapper">
-            <h1 className="bigg">Date of Birth : 01/01/2000</h1>
-            <h1 className="bigg">Date of Joining : 01/02/2022</h1>
-            <h1 className="bigg">Gender : Male</h1>
-            <h1 className="bigg">Blood Group : B+</h1>
-            <h1 className="bigg">Type : Regular</h1>
+      <section>
+        <h1 className="bigger">Details :</h1>
+        <div className="info-wrapper-2">
+          <div className="section">
+            <h1 className="bigger">Personal</h1>
+            <div className="info-wrapper">
+              <h1 className="bigg"><CalendarMonthIcon sx={{marginRight:2.5,marginTop:.7}}/>Date of Birth : 01/01/2000</h1>
+              <h1 className="bigg"><CalendarTodayIcon sx={{marginRight:2.5,marginTop:.7}}/>Date of Joining : 01/02/2022</h1>
+              <h1 className="bigg"><WcIcon sx={{marginRight:2.5,marginTop:.7}}/>Gender : Male</h1>
+              <h1 className="bigg"><BloodtypeIcon sx={{marginRight:2.5,marginTop:.7}}/>Blood Group : B+</h1>
+              <h1 className="bigg"><MergeTypeIcon sx={{marginRight:2.5,marginTop:.7}}/>Type : Regular</h1>
+            </div>
           </div>
-        </section>
-        <section className="section" id="section-2">
-          <h1 className="bigger">Contact</h1>
-          <div className="info-wrapper">
-            <h1 className="bigg">Email : shubham.more@spit.ac.in</h1>
-            <h1 className="bigg">Phone No. : 9975508234</h1>
-            <h1 className="bigg">
-              Address : A/502, venice building, Mohak City, 90-Feet Road,
-              Andheri west
-            </h1>
+          <div className="section" id="section-2">
+            <h1 className="bigger">Contact</h1>
+            <div className="info-wrapper">
+              <h1 className="bigg"><EmailIcon sx={{marginRight:2.5,marginTop:.7}}/>Email : shubham.more@spit.ac.in</h1>
+              <h1 className="bigg"><PhoneIcon sx={{marginRight:2.5,marginTop:.7}}/>Phone No. : 9975508234</h1>
+              <h1 className="bigg">
+              <BusinessIcon sx={{marginRight:2.5,marginTop:.7}}/>
+                Address : A/502, venice building, Mohak City, 90-Feet Road,
+                Andheri west
+              </h1>
+              <h1 className="bigg"><GitHubIcon sx={{marginRight:2.5,marginTop:.7}}/>GitHub : Shubhamore</h1>
+            <h1 className="bigg"><LinkedInIcon sx={{marginRight:2.5,marginTop:.7}}/>LinkedIn : Shubhamore</h1>
+            </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+
+      <hr />
+      <section>
+        <h1 className="bigger">Academics :</h1>
+      </section>
     </div>
   );
 };
