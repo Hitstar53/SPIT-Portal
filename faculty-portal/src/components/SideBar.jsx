@@ -168,7 +168,7 @@ export default function MiniDrawer() {
                                     'aria-labelledby': 'demo-positioned-button',
                                 }}
                             >
-                                <MenuItem onClick={handleClose}><PersonIcon sx={{marginRight: 1}}/>View Profile</MenuItem>
+                                <MenuItem onClick={() => {window.location.pathname = 'profile'}}><PersonIcon sx={{marginRight: 1}}/>View Profile</MenuItem>
                                 <MenuItem onClick={handleClose}><LogoutIcon sx={{marginRight: 1}}/>Logout</MenuItem>
                             </Menu>
                         </div>
