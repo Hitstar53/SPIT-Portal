@@ -20,6 +20,7 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import logo from "../../assets/logo.png";
 import './MiniDrawer.css'
+import Profile from "../profile/Profile";
 
 const drawerWidth = 240;
 
@@ -126,7 +127,7 @@ const Drawer = styled(MuiDrawer, {
 
 export default function MiniDrawer() {
   const theme = useTheme({typography: {fontFamily: "Montserrat"}});
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -254,16 +255,7 @@ export default function MiniDrawer() {
             ))}
             </List>
         </List>
-      </Drawer>
-      <Box component="main" sx={{flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe totam
-          ab, modi tempore aut libero facere sequi velit, mollitia nobis id
-          tenetur molestias eius ad eos nesciunt iure, cupiditate
-          necessitatibus.
-        </Typography>
-      </Box>
+      </Drawer>    
     </Box>
   );
 }

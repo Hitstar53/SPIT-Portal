@@ -1,0 +1,52 @@
+.card {
+    color: #fff;
+    height: 350px;
+    padding: 1.5rem;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    background-color: #411cba;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+.cardItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cardItemLogo {
+    width: 5rem;
+}
+
+.cardItemContent {
+    flex: 1;
+}
+
+.cardItemContent h1 {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.cardItemContent p {
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.card::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.card::-webkit-scrollbar-track {
+    background-color: #ccc;
+    border-radius: 1rem;
+}
+
+.card::-webkit-scrollbar-thumb {
+    background-color: #411cba;
+    border-radius: 1rem;
+}
