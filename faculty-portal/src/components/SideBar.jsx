@@ -29,6 +29,7 @@ import '../styles/SideBar.css'
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
+    backgroundColor: "#1e1e1e",
     width: drawerWidth,
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
@@ -38,6 +39,7 @@ const openedMixin = (theme) => ({
 });
 
 const closedMixin = (theme) => ({
+    backgroundColor: "#1e1e1e",
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -50,9 +52,11 @@ const closedMixin = (theme) => ({
 });
 
 const DrawerHeader = styled('div')(({ theme }) => ({
+    height: 68,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
+    backgroundColor: "#1e1e1e",
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
 }));
@@ -60,6 +64,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
+    backgroundColor: "#1e1e1e",
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
@@ -142,7 +147,7 @@ export default function MiniDrawer() {
                             >
                                 <IconButton>
                                 <Avatar/>
-                                <ArrowDropDownIcon />
+                                <ArrowDropDownIcon sx={{color: "white"}}/>
                                 </IconButton>
                             </Button>
                             <Menu
@@ -163,22 +168,22 @@ export default function MiniDrawer() {
                                     'aria-labelledby': 'demo-positioned-button',
                                 }}
                             >
-                                <MenuItem onClick={handleClose}><PersonIcon sx={{marginRight: 1}}/>Profile</MenuItem>
+                                <MenuItem onClick={handleClose}><PersonIcon sx={{marginRight: 1}}/>View Profile</MenuItem>
                                 <MenuItem onClick={handleClose}><LogoutIcon sx={{marginRight: 1}}/>Logout</MenuItem>
                             </Menu>
                         </div>
                     </div>
                 </Toolbar>
             </AppBar>
-            <Drawer variant="permanent" open={open}>
+            <Drawer variant="permanent" open={open} >
                 <DrawerHeader>
-                    <img src={Logo} alt="Img here" width="40px" />
-                    <div>S.P.I.T Faculty Portal </div>
+                    <img src={Logo} alt="Img here" width="40px" className='spit-logo' />
+                    <div style={{color: "white", marginRight: "-10px", marginLeft: "5px"}}>S.P.I.T Faculty Portal </div>
                     <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                        {theme.direction === 'rtl' ? <ChevronRightIcon sx={{color: "white"}}/> : <ChevronLeftIcon sx={{color: "white"}}/>}
                     </IconButton>
                 </DrawerHeader>
-                <Divider />
+                <Divider/>
                 <List>
                     {SideBarData.map((val, index) => (
                         <ListItem key={val.title} disablePadding sx={{ display: 'block' }}>
@@ -195,11 +200,12 @@ export default function MiniDrawer() {
                                         minWidth: 0,
                                         mr: open ? 3 : 'auto',
                                         justifyContent: 'center',
+                                        color: 'white'
                                     }}
                                 >
                                     {val.icon}
                                 </ListItemIcon>
-                                <ListItemText primary={val.title} sx={{ opacity: open ? 1 : 0 }} />
+                                <ListItemText primary={val.title} sx={{ opacity: open ? 1 : 0, color: "white" }} />
                             </ListItemButton>
                         </ListItem>
                     ))}
