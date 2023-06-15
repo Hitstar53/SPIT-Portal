@@ -9,7 +9,7 @@
     margin-top: 1rem;
     flex-wrap: wrap;
     width: 90%;
-    margin: 0 auto;
+    margin: 0 auto 45px auto;
 }
 .img-wrapper{
     display: flex;
@@ -20,17 +20,33 @@
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    border: 2px solid #000;
+    border: 3.5px solid #000;
 }
 .info-wrapper{
     margin: 35px;
 }
 .bigger{
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: bolder;
 }
 .big{
     font-size: 1.5rem;
     font-weight: 400;
     color:#333
+}
+hr{
+    width:95%;
+    margin: 0 auto;
+}
+section{
+    margin: 55px;
+    display: inline-block;
+    background-color: aliceblue;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+.infowrapper2{
+    display: flex;
+    flex-wrap: wrap;
 }
