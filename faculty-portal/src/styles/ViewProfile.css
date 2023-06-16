@@ -23,7 +23,7 @@
     border: 3.5px solid #000;
 }
 .info-wrapper{
-    margin: 35px;
+    margin: 15px;
 }
 .bigger{
     font-size: 2rem;
@@ -40,6 +40,7 @@
     color: white;
     display: flex;
     align-items: flex-start;
+    overflow-wrap: anywhere;
 }
 hr{
     margin: 0 auto;
