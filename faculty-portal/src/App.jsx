@@ -18,7 +18,7 @@ const App = () => {
         <SideBar />
         <Box
           component="main"
-          sx={{ flexGrow: 1, bgcolor: '#F5F6FA', marginTop: 8 }}
+          sx={{ flexGrow: 1, bgcolor: '#F5F6FA', marginTop: 8,overflowX: 'hidden' }}
         >
           <Router>
             <Routes>
