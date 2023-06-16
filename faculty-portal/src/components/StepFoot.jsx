@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 
 export default function StepFoot({ activeStep, handleBack, handleNext, steps }) {
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, backgroundColor: '#fff', borderRadius: '8px', padding: '7.5px 15px', marginTop: '10px' }}>
+        <Box sx={{ backgroundColor: '#f5f5f5', display: 'flex', flexDirection: 'row', pt: 2, borderRadius: '8px', padding: '7.5px 15px', marginTop: '10px' }}>
             <Button
                 color="inherit"
                 disabled={activeStep === 0}

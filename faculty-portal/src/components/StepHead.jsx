@@ -5,7 +5,7 @@ import StepLabel from '@mui/material/StepLabel';
 
 export default function StepHead({ activeStep, steps }) {
     return (
-        <Stepper activeStep={activeStep} alternativeLabel sx={{ bgcolor: '#fff', padding: '2.5% 12.5%', margin: 'auto', borderRadius: '8px' }}>
+        <Stepper activeStep={activeStep} alternativeLabel sx={{ bgcolor: '#f5f5f5', padding: '2.5% 12.5%', margin: 'auto', borderRadius: '8px', minWidth: 1000 }}>
             {steps.map((label, index) => {
                 const stepProps = {};
                 return (
