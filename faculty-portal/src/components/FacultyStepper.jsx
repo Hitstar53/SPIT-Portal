@@ -3,11 +3,12 @@ import Box from '@mui/material/Box';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 import StepThree from './StepThree';
+import StepFour from './StepFour';
 import StepHead from './StepHead';
 import StepFoot from './StepFoot';
 // import Header from './Header';
 
-const steps = [`Upload EDF's`, `Map Channels`, `Save & Preview`];
+const steps = [`Dimension 1: Academics`, `Dimension 2: Research and Development`, `Dimension 3: Administration and Outreach `, `Dimension 4: Perception/ 360 degree feedback`];
 
 export default function FacultyStepper() {
 
@@ -32,10 +33,11 @@ export default function FacultyStepper() {
                 {activeStep === 0 && <StepOne />}
                 {activeStep === 1 && <StepTwo />}
                 {activeStep === 2 && <StepThree handleBack={handleBack} />}
-                {activeStep === 3 && <StepThree handleBack={handleBack} submitted={true} />}
+                {activeStep === 3 && <StepThree handleBack={handleBack} />}
+                {activeStep === 4 && <StepFour handleBack={handleBack} submitted={true} />}
 
                 {/* show footer only if all steps are not completed */}
-                {activeStep !== 3 && <StepFoot activeStep={activeStep} handleBack={handleBack} handleNext={handleNext} steps={steps} />}
+                {activeStep !== 4 && <StepFoot activeStep={activeStep} handleBack={handleBack} handleNext={handleNext} steps={steps} />}
             </Box>
         </React.Fragment>
     );
