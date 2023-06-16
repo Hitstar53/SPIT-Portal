@@ -28,6 +28,7 @@ const data = [
 const AnnounceCard = () => {
   return (
     <div className={styles.card}>
+      <div className={styles.inner}>  
       {data.map((item, index) => (
         <div className={styles.cardItem} key={index}>
           <div className={styles.cardItemLogo}>
@@ -39,6 +40,7 @@ const AnnounceCard = () => {
           </div>
         </div>
       ))}
+      </div>
     </div>
   )
 }
