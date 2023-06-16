@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
-import { toast } from 'react-hot-toast';
+import { Toaster, toast } from 'react-hot-toast';
 
 const StepOne = () => {
   const {
@@ -46,18 +46,15 @@ const StepOne = () => {
     toast.success('Form submitted successfully!');
   };
 
-  const showToastErrorMessage = (fieldName) => {
-    toast.error(`Please enter a value for ${fieldName}`);
-  };
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className='container' onSubmit={handleSubmit(onSubmit)}>
+      <Toaster />
       <div>
         <label className="form-label">
           Faculty Name
           <input type="text" {...register('facultyName', { required: true })} className="form-input" />
         </label>
-        {errors.facultyName && showToastErrorMessage('Faculty Name')}
+        {errors.facultyName && <span className="error-message">This field is required</span>}
       </div>
 
       <div>
@@ -65,7 +62,7 @@ const StepOne = () => {
           Department
           <input type="text" {...register('department', { required: true })} className="form-input" />
         </label>
-        {errors.department && showToastErrorMessage('Department')}
+        {errors.department && <span className="error-message">This field is required</span>}
       </div>
 
       <div>
@@ -73,7 +70,7 @@ const StepOne = () => {
           Designation
           <input type="text" {...register('designation', { required: true })} className="form-input" />
         </label>
-        {errors.designation && showToastErrorMessage('Designation')}
+        {errors.designation && <span className="error-message">This field is required</span>}
       </div>
 
       <h3>Courses</h3>
@@ -91,8 +88,9 @@ const StepOne = () => {
                 className="form-input"
               />
             </label>
-            {errors.courses && errors.courses[index] && errors.courses[index].name &&
-              showToastErrorMessage(`Course Name of Course ${index + 1}`)}
+            {errors.courses && errors.courses[index] && errors.courses[index].name && (
+              <span className="error-message">This field is required</span>
+            )}
           </div>
 
           <div>
@@ -104,8 +102,9 @@ const StepOne = () => {
                 className="form-input"
               />
             </label>
-            {errors.courses && errors.courses[index] && errors.courses[index].class &&
-              showToastErrorMessage(`Class of Course ${index + 1}`)}
+            {errors.courses && errors.courses[index] && errors.courses[index].class && (
+              <span className="error-message">This field is required</span>
+            )}
           </div>
 
           <div>
@@ -117,8 +116,9 @@ const StepOne = () => {
                 className="form-input"
               />
             </label>
-            {errors.courses && errors.courses[index] && errors.courses[index].semester &&
-              showToastErrorMessage(`Semester of Course ${index + 1}`)}
+            {errors.courses && errors.courses[index] && errors.courses[index].semester && (
+              <span className="error-message">This field is required</span>
+            )}
           </div>
 
           <div>
@@ -131,8 +131,9 @@ const StepOne = () => {
                 className="form-input"
               />
             </label>
-            {errors.courses && errors.courses[index] && errors.courses[index].targetedLectures &&
-              showToastErrorMessage(`Targeted Lectures of Course ${index + 1}`)}
+            {errors.courses && errors.courses[index] && errors.courses[index].targetedLectures && (
+              <span className="error-message">This field is required</span>
+            )}
           </div>
 
           <div>
@@ -145,8 +146,9 @@ const StepOne = () => {
                 className="form-input"
               />
             </label>
-            {errors.courses && errors.courses[index] && errors.courses[index].lecturesConducted &&
-              showToastErrorMessage(`Lectures Conducted of Course ${index + 1}`)}
+            {errors.courses && errors.courses[index] && errors.courses[index].lecturesConducted && (
+              <span className="error-message">This field is required</span>
+            )}
           </div>
 
           <div>
@@ -159,8 +161,9 @@ const StepOne = () => {
                 className="form-input"
               />
             </label>
-            {errors.courses && errors.courses[index] && errors.courses[index].percentageOfTargetAchieved &&
-              showToastErrorMessage(`Percentage of Target Achieved of Course ${index + 1}`)}
+            {errors.courses && errors.courses[index] && errors.courses[index].percentageOfTargetAchieved && (
+              <span className="error-message">This field is required</span>
+            )}
           </div>
 
           {index === fields.length - 1 && (
