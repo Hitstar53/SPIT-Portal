@@ -22,3 +22,7 @@ body {
     font-weight: bold;
     margin: 0.5rem;
 }
+
+.btn {
+    margin: 1rem;
+}
