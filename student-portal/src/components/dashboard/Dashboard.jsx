@@ -1,11 +1,13 @@
 import React from 'react'
-import AnnounceCard from '../UI/Cards/AnnounceCard'
 import UpcomingExams from './UpcomingExams'
+import AnnounceCard from '../UI/Cards/AnnounceCard'
 import EventCard from '../UI/Cards/EventCard'
+import styles from './Dashboard.module.css'
 
 const Dashboard = () => {
+    const dashboard = styles.dashboard + " flex flex-col gap-8 p-8 text-[var(--text-dark)]"
     return (
-        <div className="dashboard flex flex-col gap-8 p-8 text-[var(--text-dark)]" style={{minHeight: "calc(100vh - 64px)"}}>
+        <div className={dashboard}>
             <h1 className="text-4xl font-semibold">Dashboard</h1>
             <div className="flex flex-col gap-4">
                 <h1 className="text-xl p-1 font-semibold">Announcements</h1>

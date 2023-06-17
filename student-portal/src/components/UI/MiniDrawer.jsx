@@ -17,15 +17,15 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import logo from "../../assets/logo.png";
 import profile from "../../assets/user.svg";
-import './MiniDrawer.css'
+import "./MiniDrawer.css";
 import { Collapse } from "@mui/material";
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import Button from '@mui/material/Button';
-import Fab from '@mui/material/Fab';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import Button from "@mui/material/Button";
+import Fab from "@mui/material/Fab";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 import moodle from "../../assets/moodle.png";
 
 const drawerWidth = 280;
@@ -34,89 +34,75 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
   padding: 7,
-  '& .MuiSwitch-switchBase': {
+  "& .MuiSwitch-switchBase": {
     margin: 1,
     padding: 0,
-    transform: 'translateX(6px)',
-    '&.Mui-checked': {
-      color: '#fff',
-      transform: 'translateX(22px)',
-      '& .MuiSwitch-thumb:before': {
+    transform: "translateX(6px)",
+    "&.Mui-checked": {
+      color: "#fff",
+      transform: "translateX(22px)",
+      "& .MuiSwitch-thumb:before": {
         backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
-          '#fff',
+          "#fff"
         )}" d="M4.2 2.5l-.7 1.8-1.8.7 1.8.7.7 1.8.6-1.8L6.7 5l-1.9-.7-.6-1.8zm15 8.3a6.7 6.7 0 11-6.6-6.6 5.8 5.8 0 006.6 6.6z"/></svg>')`,
       },
-      '& + .MuiSwitch-track': {
+      "& + .MuiSwitch-track": {
         opacity: 1,
-        backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
+        backgroundColor: theme.palette.mode === "dark" ? "#8796A5" : "#aab4be",
       },
     },
   },
-  '& .MuiSwitch-thumb': {
-    backgroundColor: theme.palette.mode === 'dark' ? '#003892' : '#001e3c',
+  "& .MuiSwitch-thumb": {
+    backgroundColor: theme.palette.mode === "dark" ? "#003892" : "#001e3c",
     width: 32,
     height: 32,
-    '&:before': {
+    "&:before": {
       content: "''",
-      position: 'absolute',
-      width: '100%',
-      height: '100%',
+      position: "absolute",
+      width: "100%",
+      height: "100%",
       left: 0,
       top: 0,
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center',
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
       backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
-        '#fff',
+        "#fff"
       )}" d="M9.305 1.667V3.75h1.389V1.667h-1.39zm-4.707 1.95l-.982.982L5.09 6.072l.982-.982-1.473-1.473zm10.802 0L13.927 5.09l.982.982 1.473-1.473-.982-.982zM10 5.139a4.872 4.872 0 00-4.862 4.86A4.872 4.872 0 0010 14.862 4.872 4.872 0 0014.86 10 4.872 4.872 0 0010 5.139zm0 1.389A3.462 3.462 0 0113.471 10a3.462 3.462 0 01-3.473 3.472A3.462 3.462 0 016.527 10 3.462 3.462 0 0110 6.528zM1.665 9.305v1.39h2.083v-1.39H1.666zm14.583 0v1.39h2.084v-1.39h-2.084zM5.09 13.928L3.616 15.4l.982.982 1.473-1.473-.982-.982zm9.82 0l-.982.982 1.473 1.473.982-.982-1.473-1.473zM9.305 16.25v2.083h1.389V16.25h-1.39z"/></svg>')`,
     },
   },
-  '& .MuiSwitch-track': {
+  "& .MuiSwitch-track": {
     opacity: 1,
-    backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
+    backgroundColor: theme.palette.mode === "dark" ? "#8796A5" : "#aab4be",
     borderRadius: 20 / 2,
   },
 }));
-
 
 const sidebardata = [
   {
     text: "Home",
     icon: <i className="fas fa-house"></i>,
-    sub:[]
+    sub: [],
   },
   {
     text: "Academics",
     icon: <i className="fas fa-graduation-cap"></i>,
-    sub: [
-      "Courses",
-      "Timetable",
-      "Result"
-    ],
+    sub: ["Courses", "Timetable", "Result"],
   },
   {
     text: "Extra-Curricular",
     icon: <i className="fas fa-medal"></i>,
-    sub: [
-      "Activities",
-      "Committees",
-      "Vounteer Work"
-    ],
+    sub: ["Activities", "Committees", "Vounteer Work"],
   },
   {
     text: "CareerConnect",
     icon: <i className="fas fa-users"></i>,
-    sub: [
-      "Portfolio",
-      "Internships",
-      "Placements"
-    ],
+    sub: ["Portfolio", "Internships", "Placements"],
   },
   {
     text: "Faculty",
     icon: <i className="fas fa-chalkboard-user"></i>,
-    sub:[]
-  }
-
+    sub: [],
+  },
 ];
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -146,7 +132,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "space-between",
   color: "var(--text-light)",
-  width:"100%",
+  width: "100%",
   height: "4vh",
   padding: theme.spacing(0, 1),
 }));
@@ -188,9 +174,15 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function MiniDrawer() {
-  const theme = useTheme({typography: {fontFamily: "Montserrat"}});
+  const theme = useTheme({ typography: { fontFamily: "Montserrat" } });
   const [open, setOpen] = React.useState(true);
-  const [openSub, setOpenSub] = React.useState([false,false,false,false,false]);
+  const [openSub, setOpenSub] = React.useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -198,25 +190,23 @@ export default function MiniDrawer() {
 
   const handleDrawerClose = () => {
     setOpen(false);
-    setOpenSub([false,false,false,false,false]);
-    
+    setOpenSub([false, false, false, false, false]);
   };
 
- function handleClick(index){
-    const arr = [...openSub]
-    arr[index] = !arr[index]
-    for (let i = 0; i < arr.length; i++){
-      if (i===index) continue;  
+  function handleClick(index) {
+    const arr = [...openSub];
+    arr[index] = !arr[index];
+    for (let i = 0; i < arr.length; i++) {
+      if (i === index) continue;
       arr[i] = false;
     }
-      setOpenSub(arr);
-      setOpen(true);
-
-  };
+    setOpenSub(arr);
+    setOpen(true);
+  }
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" sx={{height:"4rem"}} open={open}>
+      <AppBar position="fixed" sx={{ height: "4rem" }} open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -232,38 +222,53 @@ export default function MiniDrawer() {
           </IconButton>
           <Typography
             sx={{
-                alignItems: "flex-end",
-                px: 2.5,
-                color: "var(--text-light)",
-                width: "100%",
-                display: "flex",
-                justifyContent: "flex-end",
-                gap: "1rem",
-                lineHeight: 1.2,
+              alignItems: "flex-end",
+              px: 2.5,
+              color: "var(--text-light)",
+              width: "100%",
+              display: "flex",
+              justifyContent: "flex-end",
+              gap: "1rem",
+              lineHeight: 1.2,
             }}
           >
-            <span style={{display: "flex", flexDirection: "column", textAlign: "right"}}>
-            <span style={{ fontSize: 24}}>
-                Hatim Sawai
-            </span>
-            <span style={{opacity:0.5, fontSize: 16}}>
-                2021300108
-            </span>
+            <span
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                textAlign: "right",
+              }}
+            >
+              <span style={{ fontSize: 24 }}>Hatim Sawai</span>
+              <span style={{ opacity: 0.5, fontSize: 16 }}>2021300108</span>
             </span>
             <img src={profile} alt="logo" style={{ width: 50, height: 50 }} />
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer PaperProps={{ sx: {borderRight: "none"} }}  variant="permanent" open={open}>
-        <DrawerHeader sx={{ backgroundColor: "var(--bg-dark)"}}>
-            <h1 style={{lineHeight: "1.2", display: "flex",alignItems: "center", gap: "1rem"}}>
-                <img src={logo} alt="logo" style={{width: 50, height: 50}}/>
-                <span>
-                    <span style={{font: "Tahoma", fontSize: 18}}>SPIT</span>
-                    <br />
-                    <span style={{font: "Tahoma", fontSize: 14, marginRight: 20}}>Student Portal</span>
-                </span>
-            </h1>
+      <Drawer
+        PaperProps={{ sx: { borderRight: "none" } }}
+        variant="permanent"
+        open={open}
+      >
+        <DrawerHeader sx={{ backgroundColor: "var(--bg-dark)" }}>
+          <h1
+            style={{
+              lineHeight: "1.2",
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+          >
+            <img src={logo} alt="logo" style={{ width: 50, height: 50 }} />
+            <span>
+              <span style={{ fontSize: 18 }}>SPIT</span>
+              <br />
+              <span style={{ fontSize: 14, marginRight: 20 }}>
+                Student Portal
+              </span>
+            </span>
+          </h1>
           <IconButton
             sx={{ color: "var(--text-light)" }}
             onClick={handleDrawerClose}
@@ -275,99 +280,176 @@ export default function MiniDrawer() {
             )}
           </IconButton>
         </DrawerHeader>
-              <List sx={{ backgroundColor: "var(--bg-dark)", height:'96dvh', display: "flex", flexDirection: 'column', justifyContent: "space-between"}}>
-            <List>
+        <List
+          sx={{
+            backgroundColor: "var(--bg-dark)",
+            height: "96dvh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
+          <List>
             {sidebardata.map((data, index) => (
               <div key={index}>
-                <ListItem  disablePadding sx={{ display: "block" }}>
-                <ListItemButton
+                <ListItem disablePadding sx={{ display: "block" }}>
+                  <ListItemButton
                     sx={{
-                        minHeight: 48,
-                        justifyContent: open ? "initial" : "center",
-                        px: 2.5,
-                        color: "var(--text-light)",
-                        fontFamily: "'Montserrat', sans-serif"
+                      minHeight: 48,
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
+                      color: "var(--text-light)",
                     }}
-                    onClick={()=>{handleClick(index)}}
-                >
+                    onClick={() => {
+                      handleClick(index);
+                    }}
+                  >
                     <ListItemIcon
-                    sx={{
+                      sx={{
                         minWidth: 0,
                         mr: open ? 3 : "auto",
                         justifyContent: "center",
                         color: "var(--text-light)",
-                        pl: open ?0.5: "auto",
-                    }}
+                        pl: open ? 0.5 : "auto",
+                      }}
                     >
-                        {data.icon}
+                      {data.icon}
                     </ListItemIcon>
-                    <ListItemText primary={data.text} sx={{ width: 160, opacity: open ? 1 : 0 }} />
-                    {open?
-                      ((index!=0&&index!=4)?
-                      openSub[index]?<ExpandLess />:<ExpandMore />
-                      :""):""
-                    }
-                </ListItemButton>
-                </ListItem> 
+                    <ListItemText
+                      primary={data.text}
+                      sx={{ width: 160, opacity: open ? 1 : 0 }}
+                    />
+                    {open ? (
+                      index != 0 && index != 4 ? (
+                        openSub[index] ? (
+                          <ExpandLess />
+                        ) : (
+                          <ExpandMore />
+                        )
+                      ) : (
+                        ""
+                      )
+                    ) : (
+                      ""
+                    )}
+                  </ListItemButton>
+                </ListItem>
                 <Collapse in={openSub[index]} timeout="auto" unmountOnExit>
-                 <List component="div" disablePadding>
-                  {
-                    data.sub.map((heading,index2) => {
-                      return <ListItemButton sx={{ pl: 8 }} key={index2}>
-                        <ListItemText sx={{pl:1,color:"var(--text-light)"}} primary={heading} />
-                      </ListItemButton>
-                    })
-                  }
-                 </List>
-                </Collapse>  
-          </div>
-                 
+                  <List component="div" disablePadding>
+                    {data.sub.map((heading, index2) => {
+                      return (
+                        <ListItemButton sx={{ pl: 8 }} key={index2}>
+                          <ListItemText
+                            sx={{ pl: 1, color: "var(--text-light)" }}
+                            primary={heading}
+                          />
+                        </ListItemButton>
+                      );
+                    })}
+                  </List>
+                </Collapse>
+              </div>
             ))}
-            </List>
-            <List>
-            
-            
-                <ListItem disablePadding sx={{ display: "block" }}>
-                <ListItemButton
-                    sx={{
-                    minHeight: 48,
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
+          </List>
+          <List>
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
+                  color: "var(--text-light)",
+                }}
+              >
+                <ListItemText primary="Theme" sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    display: "flex",
+                    justifyContent: "end",
                     color: "var(--text-light)",
-                    }}
+                  }}
                 >
-                  <ListItemText primary="Theme" sx={{ opacity: open ? 1 : 0 }} />
-                    <ListItemIcon
-                    sx={{
-                        minWidth: 0,
-                        display: "flex",
-                        justifyContent: "end",
-                        color: "var(--text-light)",
-                    }}
-                    >
-                      <FormGroup>
-                        <FormControlLabel sx={{display: 'flex', justifyContent: 'center', m :0}}
-                            control={<MaterialUISwitch defaultChecked />}/>
-                      </FormGroup>
-                    </ListItemIcon>
-                </ListItemButton>
-                </ListItem>
-                <ListItem sx={{display:"flex",flexDirection:open? 'row':"column",justifyContent:"center",gap:open?"3rem":"1rem"}}>
-              {open ? <Button variant="outlined" sx={{ borderColor: "var(--text-light)", color: "var(--text-light)", ":hover": { borderColor: "var(--text-light)", background: "var(--bg-light)", color:"var(--text-dark)"}}} disableElevation>Logout</Button>: 
-                <Fab size="small" color="primary" sx={{ background: "var(--bg-dark)", ":hover": { borderColor: "var(--text-light)", background: "var(--text-light)", color:"var(--text-dark)"}}} aria-label="add">
-                <i className="fa-solid fa-right-from-bracket"></i>
-              </Fab>
-
-              }               {open ? <Button variant="outlined" sx={{ borderColor: "var(--text-light)", color: "var(--text-light)", ":hover": { borderColor: "var(--text-light)", background: "var(--bg-light)", color:"var(--text-dark)"}}} disableElevation>Moodle</Button>: <Fab sx={{overflow:"hidden"}} size="small" color="secondary" aria-label="add">
-                <img src={moodle} alt="moodle" />
-              </Fab> }
-
-
-                </ListItem>
-            
-            </List>
+                  <FormGroup>
+                    <FormControlLabel
+                      sx={{ display: "flex", justifyContent: "center", m: 0 }}
+                      control={<MaterialUISwitch defaultChecked />}
+                    />
+                  </FormGroup>
+                </ListItemIcon>
+              </ListItemButton>
+            </ListItem>
+            <ListItem
+              sx={{
+                display: "flex",
+                flexDirection: open ? "row" : "column",
+                justifyContent: "center",
+                gap: open ? "4rem" : "1rem",
+              }}
+            >
+              {open ? (
+                <Button
+                  variant="outlined"
+                  sx={{
+                    borderColor: "var(--text-light)",
+                    color: "var(--text-light)",
+                    ":hover": {
+                      borderColor: "var(--text-light)",
+                      background: "var(--bg-light)",
+                      color: "var(--text-dark)",
+                    },
+                  }}
+                  disableElevation
+                >
+                  Logout
+                </Button>
+              ) : (
+                <Fab
+                  size="small"
+                  color="primary"
+                  sx={{
+                    background: "var(--bg-dark)",
+                    ":hover": {
+                      borderColor: "var(--text-light)",
+                      background: "var(--text-light)",
+                      color: "var(--text-dark)",
+                    },
+                  }}
+                  aria-label="add"
+                >
+                  <i className="fa-solid fa-right-from-bracket"></i>
+                </Fab>
+              )}{" "}
+              {open ? (
+                <Button
+                  variant="outlined"
+                  sx={{
+                    borderColor: "var(--text-light)",
+                    color: "var(--text-light)",
+                    ":hover": {
+                      borderColor: "var(--text-light)",
+                      background: "var(--bg-light)",
+                      color: "var(--text-dark)",
+                    },
+                  }}
+                  disableElevation
+                >
+                  Moodle
+                </Button>
+              ) : (
+                <Fab
+                  sx={{ overflow: "hidden" }}
+                  size="small"
+                  color="secondary"
+                  aria-label="add"
+                >
+                  <img src={moodle} alt="moodle" />
+                </Fab>
+              )}
+            </ListItem>
+          </List>
         </List>
-      </Drawer>    
+      </Drawer>
     </Box>
   );
 }

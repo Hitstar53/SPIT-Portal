@@ -22,7 +22,6 @@ export default function EventAccordion(props) {
                     backgroundColor: "var(--primary-color)", 
                     color: "var(--text-light)",
                     border: "none",
-                    
                     boxShadow: "none",
                 }}
                 >
