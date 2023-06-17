@@ -12,7 +12,7 @@ const App = () => {
   const theme = createTheme({
     typography: {
       fontFamily: [
-        'Montserrat',
+        'Poppins',
         'sans-serif',
       ].join(','),
     }
