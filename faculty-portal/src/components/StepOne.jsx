@@ -43,7 +43,6 @@ const StepOne = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    // You can perform further actions with the form data, such as sending it to an API.
     toast.success('Form submitted successfully!');
   };
 
@@ -52,7 +51,15 @@ const StepOne = () => {
       <Toaster />
       <div>
         <label className="form-label">
-          Faculty Name
+          Year of Assessment: 
+          <input type="text" {...register('yearOfAssessment', { required: true })} className="form-input" />
+        </label>
+        {errors.facultyName && <span className="error-message">This field is required</span>}
+      </div>
+
+      <div>
+        <label className="form-label">
+          Faculty Name: 
           <input type="text" {...register('facultyName', { required: true })} className="form-input" />
         </label>
         {errors.facultyName && <span className="error-message">This field is required</span>}
@@ -60,7 +67,7 @@ const StepOne = () => {
 
       <div>
         <label className="form-label">
-          Department
+          Department: 
           <input type="text" {...register('department', { required: true })} className="form-input" />
         </label>
         {errors.department && <span className="error-message">This field is required</span>}
@@ -68,7 +75,7 @@ const StepOne = () => {
 
       <div>
         <label className="form-label">
-          Designation
+          Designation: 
           <input type="text" {...register('designation', { required: true })} className="form-input" />
         </label>
         {errors.designation && <span className="error-message">This field is required</span>}

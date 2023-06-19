@@ -1,7 +1,8 @@
 export const Teacher = {
-    name: "John Doe",
+    name: "Anand Godbole",
+    id: "emp123", 
     dob: "01/02/1995",
-    doj: "01/02/2020",
+    doj: "02/02/2020",
     gender: "Male",
     address:"123, ABC Street, XYZ City, 123456",
     email: "example@spit.ac.in",
@@ -21,7 +22,6 @@ export const Teacher = {
             sem: 4,
             lecTarget: 40,
             lecTaken: 38,
-            percentTarget: (lecTaken/lecTarget)*100,
             lecPlan: [
             {
                 lecNo: 1,
@@ -104,7 +104,6 @@ export const Teacher = {
             sem: 6,
             lecTarget: 35,
             lecTaken: 32,
-            percentTarget: (lecTaken/lecTarget)*100,
             lecPlan: [
             {
                 lecNo: 1,
