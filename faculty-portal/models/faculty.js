@@ -4,7 +4,7 @@ const teacherSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique: tru
+        unique: true
     },
     email: {
         type: String,
@@ -70,15 +70,13 @@ const teacherSchema = new mongoose.Schema({
     linkedinProfile: {
         type: String
     },
-    aadharCardNumber: {
-        type: Number,
-        required: true,
-        max: 12
+    aadharCard: {
+        data: Buffer,
+        contentType: String
     },
-    panCardNumber: {
-        type: Number,
-        required: true,
-        max: 10
+    panCard: {
+        data: Buffer,
+        contentType: String
     }
 
 });

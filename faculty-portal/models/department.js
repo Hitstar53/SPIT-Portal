@@ -14,15 +14,10 @@ const departmentSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    HOD: when({
+    HOD: {
         type: String,
-        required: true
-    }).when('role').in(['HOD', 'Department Head']),
-    HODRef: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Faculty',
-        required: true
-    }
+        required: true,
+    },
 });
 
 
