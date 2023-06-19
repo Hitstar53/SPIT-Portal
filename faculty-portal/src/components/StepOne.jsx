@@ -12,6 +12,24 @@ const StepOne = () => {
     watch,
   } = useForm();
 
+  const form = useForm({
+    defaultValues: {
+      yearOfAssessment: '',
+      facultyName: Teacher.name,
+      department: Teacher.department,
+      designation: Teacher.designation,
+      courses: Teacher.courses.map((course) => ({
+        name: course.courseName,
+        class: course.class,
+        semester: course.sem,
+        targetedLectures: "",
+        lecturesConducted: "",
+        percentageOfTargetAchieved: ((course.lecturesConducted / course.targetedLectures) * 100).toFixed(2),
+      })),
+      averagePercentage: calculateAveragePercentage().toFixed(2),
+    },    
+  })
+
   const calculateAveragePercentage = () => {
     const totalCourses = Teacher.courses.length;
     let totalPercentage = 0;
