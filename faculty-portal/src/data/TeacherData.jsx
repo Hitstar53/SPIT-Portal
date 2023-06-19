@@ -1,4 +1,4 @@
-export const TeacherData = {
+export const Teacher = {
     name: "John Doe",
     dob: "01/02/1995",
     doj: "01/02/2020",

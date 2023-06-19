@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { Toaster, toast } from 'react-hot-toast';
+import { Teacher } from '../data/TeacherData';
 
 const StepOne = () => {
   const {
