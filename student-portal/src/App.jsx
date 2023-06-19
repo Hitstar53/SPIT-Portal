@@ -27,8 +27,8 @@ const App = () => {
             sx={{ flexGrow: 1, marginTop: 8 }}
           >
             <Routes>
-              <Route path="/" element={<Dashboard />} exact/>
-              <Route path="/profile" element={<Profile />} exact/>
+              <Route path="/student/" element={<Dashboard />} exact/>
+              <Route path="/student/profile" element={<Profile />} exact/>
             </Routes>
           </Box>
         </Box>

@@ -5,22 +5,22 @@ import logo from "../../../assets/user.svg"
 const data = [
   {
     logo: logo,
-    title: "Announcement 1",
+    title: "Dr. YS Rao",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc"
   },
   {
     logo: logo,
-    title: "Announcement 2",
+    title: "Prof. Ruchika Patil",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc"
   },
   {
     logo: logo,
-    title: "Announcement 3",
+    title: "Dr. B.N. Chaudhari",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc"
   },
   {
     logo: logo,
-    title: "Announcement 4",
+    title: "Dhananjay Kalbande",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc"
   },
 ]
@@ -34,10 +34,8 @@ const AnnounceCard = () => {
           <div className={styles.cardItemLogo}>
             <img src={item.logo} alt="logo" />
           </div>
-          <div className={styles.cardItemContent}>
-            <h1>{item.title}</h1>
-            <p>{item.description}</p>
-          </div>
+          <h1 className={styles.cardItemHeader}>{item.title}</h1>
+          <p className={styles.cardItemContent}>{item.description}</p>
         </div>
       ))}
       </div>

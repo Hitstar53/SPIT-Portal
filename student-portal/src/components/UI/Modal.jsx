@@ -49,42 +49,16 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function Modal(props) {
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
-
     return (
         <div>
-            <Button 
-                variant="outlined" 
-                onClick={handleClickOpen}
-                sx={{
-                    backgroundColor: 'var(--tertiary-color)',
-                    color: 'var(--text-light)',
-                    borderRadius: '1rem',
-                    textTransform: 'none',
-                    '&:hover': {
-                        backgroundColor: 'var(--secondary-color)',
-                        color: 'var(--text-dark)',
-                        border: '2px solid var(--primary-color)'
-                    }
-                }}
-            >
-                {props.buttonText}
-            </Button>
             <BootstrapDialog
-                onClose={handleClose}
+                onClose={props.onClose}
                 aria-labelledby="customized-dialog-title"
-                open={open}
+                open={props.open}
             >
                 <BootstrapDialogTitle 
                     id="customized-dialog-title" 
-                    onClose={handleClose}
+                    onClose={props.onClose}
                     sx={{
                         fontSize: '1.5rem',
                         fontWeight: 'bold',
@@ -104,7 +78,7 @@ export default function Modal(props) {
                 <DialogActions>
                     <Button 
                         autoFocus 
-                        onClick={handleClose}
+                        onClick={props.onClose}
                         sx={{
                             color: 'var(--text-dark)',
                             fontWeight: 'bold',

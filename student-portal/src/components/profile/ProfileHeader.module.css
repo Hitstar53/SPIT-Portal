@@ -1,0 +1,61 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}
+
+.img {
+    width: 175px;
+    height: 175px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.profilePic {
+    border-radius: 50%;
+    position: relative;
+}
+
+.edit {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 0.65rem;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+}
+
+.editIcon {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.title h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.title h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.titleIcon {
+    width: 2rem;
+    height: 2rem;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.titleIcon:hover {
+    opacity: 1;
+}

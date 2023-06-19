@@ -1,0 +1,21 @@
+.header {
+    margin-top: 2.5rem;
+    margin-bottom: 0.625rem;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.PartInfo {
+    font-size: 1.125rem;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.625rem;
+}
+
+.twoCol {
+    display: flex;
+    flex-direction: row;
+    gap: 0.625rem;
+    align-items: center;
+    width: 50%;
+}
