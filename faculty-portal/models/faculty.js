@@ -61,8 +61,57 @@ const teacherSchema = new mongoose.Schema({
     }],
     classIncharge: {
         type: String,
-
     },
+    courses: [{
+        courseName: {
+            type: String,
+            required: true
+        },
+        courseCode: {
+            type: String,
+            required: true
+        },
+        courseType: {
+            type: String,
+            required: true
+        },
+        lecType: {
+            type: String,
+            required: true
+        },
+        class: {
+            type: String,
+            required: true
+        },
+        semester: {
+            type: String,
+            required: true
+        },
+        targetedLectures: {
+            type: Number,
+            required: true,
+            default: 0
+        },
+        completedLectures: {
+            type: Number,
+            required: true,
+            default: 0
+        },
+        lecPlan: [{
+            lecNumber: {
+                type: Number,
+                required: true
+            },
+            topic: {
+                type: String,
+                required: true
+            },
+            suggestedReading: {
+                type: String,
+                required: true
+            },
+        }],
+    }],
     profilePicture: {
         data: Buffer,
         contentType: String
