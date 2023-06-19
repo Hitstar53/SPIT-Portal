@@ -4,7 +4,7 @@ const teacherSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique: tru
+        unique: true
     },
     email: {
         type: String,
