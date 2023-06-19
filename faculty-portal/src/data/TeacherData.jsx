@@ -11,7 +11,7 @@ export const Teacher = {
     type: "Regular",
     department: "Computer Science and Engineering",
     qualification: "PhD",
-    specialization:"Machine Learning, Artificial Intelligence, Image Processing, Computer Vision",
+    specialization:["Machine Learning", "Artificial Intelligence", "Image Processing" , "Computer Vision"],
     inchargeOf: "CSE-1A",
     courses: [
         {
@@ -20,8 +20,8 @@ export const Teacher = {
             lecType: 'Theory',
             class: 'CSE-1A',
             sem: 4,
-            lecTarget: 40,
-            lecTaken: 38,
+            targetedLectures: 40,
+            lecturesConducted: 38,
             lecPlan: [
             {
                 lecNo: 1,
@@ -61,8 +61,8 @@ export const Teacher = {
             lecType: 'Lab',
             class: 'CSE-1A',
             sem: 4,
-            lecTarget: 12,
-            lecTaken: 11,
+            targetedLectures: 12,
+            lecturesConducted: 11,
             lecPlan: [
             {
                 lecNo: 1,
@@ -102,8 +102,8 @@ export const Teacher = {
             lecType: 'Theory',
             class: 'CSE-1A',
             sem: 6,
-            lecTarget: 35,
-            lecTaken: 32,
+            targetedLectures: 35,
+            lecturesConducted: 32,
             lecPlan: [
             {
                 lecNo: 1,
