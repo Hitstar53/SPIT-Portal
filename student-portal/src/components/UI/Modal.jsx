@@ -72,6 +72,7 @@ export default function Modal(props) {
                             padding: '0 0.75rem',
                         }}
                     >
+                        {props.children}
                         {props.content}
                     </Typography>
                 </DialogContent>
@@ -87,7 +88,7 @@ export default function Modal(props) {
                             }
                         }}
                     >
-                        Got it!
+                        {props.action}
                     </Button>
                 </DialogActions>
             </BootstrapDialog>

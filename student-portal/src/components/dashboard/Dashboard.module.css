@@ -1,5 +1,7 @@
 .dashboard {
-    min-height: calc(100vh - 64px)
+  min-height: calc(100vh - 64px);
+  color: var(--text-color);
+  background-color: var(--bg-color);
 }
 
 ::-webkit-scrollbar {

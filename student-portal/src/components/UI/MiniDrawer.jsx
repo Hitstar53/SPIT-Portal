@@ -203,6 +203,22 @@ export default function MiniDrawer() {
     setOpenSub(arr);
     setOpen(true);
   }
+
+  const DarkMode = () => {
+    document.querySelector("body").setAttribute("data-theme", "dark");
+  }
+
+  const LightMode = () => {
+    document.querySelector("body").setAttribute("data-theme", "light");
+  }
+
+  const toggleTheme = (event) => {
+    if (event.target.checked) {
+      DarkMode();
+    } else {
+      LightMode();
+    }
+  };
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -373,7 +389,7 @@ export default function MiniDrawer() {
                   <FormGroup>
                     <FormControlLabel
                       sx={{ display: "flex", justifyContent: "center", m: 0 }}
-                      control={<MaterialUISwitch defaultChecked />}
+                      control={<MaterialUISwitch onClick={toggleTheme} theme={theme} />}
                     />
                   </FormGroup>
                 </ListItemIcon>

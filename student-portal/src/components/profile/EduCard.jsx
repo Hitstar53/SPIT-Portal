@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./EduInfo.module.css";
+import styles from "./EduCard.module.css";
 
 const EduCard = (props) => {
   return (
-    <div className="card">
+    <div className={styles.card}>
       <div>
         <h3 className={styles.header}>{props.info.edulevel}</h3>
         <div className={styles.row}>

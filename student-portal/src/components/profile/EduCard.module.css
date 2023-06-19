@@ -14,7 +14,7 @@ label {
     font-size: 1.125rem;
     display: flex;
     flex-direction: row; 
-    justify-content: start;
+    justify-content: flex-start
 }
 
 .twoCol {
@@ -32,6 +32,6 @@ label {
 }
 
 .card {
-    background-color: #B6C3F1;
-    border-radius: 25px;
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
 }

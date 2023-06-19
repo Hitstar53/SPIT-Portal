@@ -1,4 +1,5 @@
 .profile {
-    color: var(--text-dark);
-    margin: 30px;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    padding: 30px;
 }

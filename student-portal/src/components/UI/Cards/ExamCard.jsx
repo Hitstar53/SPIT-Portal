@@ -45,6 +45,7 @@ const ExamCard = (props) => {
                 open={open}
                 title={title} 
                 content={content}
+                action="Close"
                 onClose={handleClose}
             />
           )}

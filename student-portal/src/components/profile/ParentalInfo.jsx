@@ -3,7 +3,7 @@ import styles from "./ParentalInfo.module.css";
 
 const ParentalInfo = (props) => {
   return (
-    <div>
+    <div className={styles.parentalInfo}>
       <h3 className = {styles.header}>
         Parental Information
       </h3>

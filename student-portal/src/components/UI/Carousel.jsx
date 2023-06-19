@@ -14,6 +14,7 @@ import EduCard from '../profile/EduCard';
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const currInfo = {
+    edulevel: "Current Degree",
     inst: "Sardar Patel Institute of Technology",
     degree: "Bachelors in Technology",
     branch: "Computer Science",
@@ -25,6 +26,7 @@ const currInfo = {
 }
 
 const junclgInfo = {
+    edulevel: "Junior College",
     inst: "Nirmala Memorial Foundation and Junior College",
     admyear: 2019,
     passyear: 2021,
@@ -32,6 +34,7 @@ const junclgInfo = {
 }
 
 const schlInfo = {
+    edulevel: "School",
     inst: "Swami Vivekanand International School",
     passyear: 2019,
     score: 95.6,
@@ -61,7 +64,7 @@ function Carousel() {
   };
 
   return (
-    <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
+    <Box sx={{ maxWidth: "fit-content", flexGrow: 1 }}>
       <Paper
         square
         elevation={0}
@@ -115,7 +118,7 @@ function Carousel() {
             Back
           </Button>
         }
-      />s
+      />
     </Box>
   );
 }

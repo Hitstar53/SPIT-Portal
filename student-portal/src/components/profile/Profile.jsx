@@ -3,7 +3,6 @@ import styles from "./Profile.module.css";
 import ProfileHeader from "./ProfileHeader";
 import PersonalInfo from "./PersonalInfo";
 import ParentalInfo from "./ParentalInfo";
-import EduInfo from "./EduInfo";
 import Carousel from "../UI/Carousel";
 
 const user = {
@@ -31,8 +30,7 @@ const Profile = () => {
     <div className={styles.profile}>
       <ProfileHeader info={user} />
       <PersonalInfo info={user} />
-      <ParentalInfo info={user} />  
-      <EduInfo />
+      <ParentalInfo info={user} />
       <Carousel />
     </div>
   )

@@ -1,4 +1,5 @@
 import React from 'react'
+import ProfileForm from './profileform/ProfileForm';
 import Modal from '../UI/Modal'
 import { FaEdit } from "react-icons/fa";
 import { LuEdit2 } from "react-icons/lu";
@@ -29,9 +30,11 @@ const ProfileHeader = (props) => {
           <Modal
             open={open}
             title="Edit Profile Details"
-            content="lorem ipsum"
+            action="Save"
             onClose={handleClose}
-          />
+          >
+            <ProfileForm />
+          </Modal>
         )}
       </div>
     );

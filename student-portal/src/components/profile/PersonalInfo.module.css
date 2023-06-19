@@ -1,5 +1,6 @@
 .personalInfo {
     padding-bottom: 1.5rem;
+    padding-left: 1rem;
     border-bottom: 1px solid #1a1a1a;
 }
 
@@ -11,16 +12,25 @@
 }
 
 .PersInfo {
+    width: 100%;
     font-size: 1.125rem;
     display: flex;
     flex-direction: row;
     margin-bottom: 0.625rem;
+    align-items: center;
+    gap: 0.625rem;
 }
 
 .twoCol {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 0.625rem;
+    gap: 1rem;
     width: 50%;
+}
+
+.twoCol i,
+.PersInfo i {
+    width: 1.25rem;
+    height: 1.25rem;
 }

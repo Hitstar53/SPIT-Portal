@@ -13,8 +13,9 @@
 }
 
 .profilePic {
+    width: 175px;
+    height: 175px;
     border-radius: 50%;
-    position: relative;
 }
 
 .edit {
