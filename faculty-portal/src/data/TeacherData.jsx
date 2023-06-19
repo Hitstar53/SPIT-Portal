@@ -63,7 +63,6 @@ export const Teacher = {
             sem: 4,
             lecTarget: 12,
             lecTaken: 11,
-            percentTarget: (lecTaken/lecTarget)*100,
             lecPlan: [
             {
                 lecNo: 1,
