@@ -293,20 +293,8 @@
             "name":"Swift-Reader",
             "duration":"4 months",
             "domain":"Machine Learning",
-            "techStack":[{
-                "type":"React"
-            },
-            {
-                "type":"Django"
-            },
-            {
-                "type":"BeautifulSoup"
-            }],
-            "team":[
-                {"type":"Saad Surve"},
-                {"type":"Ankit Mishra"},
-                {"type":"Yusuf Sodawala"}
-            ],
+            "techStack":["React","Django","BeautifulSoup"],
+            "team":["Saad Surve","Yusuf Sodawala","Ankit Mishra"],
             "description":"something regarding project",
             "mentor":"Prof. Jignesh Sisodia"
         },
@@ -314,19 +302,8 @@
             "name":"IPL-Auction Website",
             "duration":"4 months",
             "domain":"Web Development",
-            "techStack":[{
-                "type":"React"
-            },
-            {
-                "type":"MongoDB"
-            },
-            {
-                "type":"node.js"
-            }],
-            "team":[
-                {"type":"Saad Surve"},
-                {"type":"Yusuf Sodawala"}
-            ],
+            "techStack":["React","MongoDB","node.js"],
+            "team":["Saad Surve","Yusuf Sodawala"],
             "description":"something regarding project",
             "mentor":"none"
         }],
@@ -335,19 +312,9 @@
             "name":"xyz",
             "duration":"4 months",
             "domain":"Web Development",
-            "techStack":[{
-                "type":"React"
-            },
-            {
-                "type":"MongoDB"
-            },
-            {
-                "type":"node.js"
-            }],
-            "team":[
-                {"type":"Saad Surve"},
-                {"type":"Yusuf Sodawala"}
-            ],
+            "techStack":["React","MongoDB","node.js"],
+            "team":["Saad Surve","Yusuf Sodawala"]
+            ,
             "description":"something regarding project",
             "mentor":"none"
         },
@@ -355,19 +322,8 @@
             "name":"IPL-Auction Website",
             "duration":"4 months",
             "domain":"Web Development",
-            "techStack":[{
-                "type":"React"
-            },
-            {
-                "type":"MongoDB"
-            },
-            {
-                "type":"node.js"
-            }],
-            "team":[
-                {"type":"Saad Surve"},
-                {"type":"Yusuf Sodawala"}
-            ],
+            "techStack":["React","MongoDB","node.js"],
+            "team":["Saad Surve","Yusuf Sodawala"],
             "description":"something regarding project",
             "mentor":"none"
         }
@@ -386,9 +342,7 @@
             "mode":"offline",
             "description":"csome random description"
         }],
-        "placement":{
-            "type":"none"
-        }
+        "placement":"none"
     }
 ]
 }
