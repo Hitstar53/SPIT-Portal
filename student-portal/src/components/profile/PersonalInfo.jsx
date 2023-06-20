@@ -1,16 +1,32 @@
 import React, { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import Modal from "../UI/Modal";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+// import CustDatePicker from "../../UI/CustDatePicker";
 import styles from "./PersonalInfo.module.css";
-import PersonalInfoForm from "./profileform/PersonalInfoForm";
+import PersonalInfoForm from "./profileforms/PersonalInfoForm";
 
 const PersonalInfo = (props) => {
   const [open, setOpen] = useState(false);
+  // const handleClickOpen = () => {
+  //   if (!open) {
+  //     setOpen(true);
+  //   } else {
+  //     setOpen(false);
+  //   }
+  // };
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+    console.log(data);
   };
   return (
     <div className={styles.personalInfo}>
@@ -21,17 +37,29 @@ const PersonalInfo = (props) => {
       {open && (
         <Modal
           open={open}
-          title="Edit Profile Details"
+          title="Edit Personal Information"
           action="Save"
           onClose={handleClose}
+          form="persinfoform"
         >
-          <PersonalInfoForm />
+          <PersonalInfoForm 
+            info={props.info}
+            onSubmit={handleSubmit}
+          />
         </Modal>
       )}
       <div className={styles.PersInfo}>
         <div className={styles.twoCol}>
           <i className="fa-solid fa-phone"></i>
-          <span className={styles.iconInfo}>+91 {props.info.phone}</span>
+          {!open && <span className={styles.iconInfo}>+91 {props.info.phone}</span>}
+          {open && (
+            <TextField
+              id="outlined-required"
+              label="Mobile Number"
+              type="text"
+              defaultValue={props.info.phone}
+            />
+          )}
         </div>
         <div className={styles.twoCol}>
           <i className="fa-solid fa-envelope"></i>

@@ -1,5 +1,5 @@
 .card {
-    color: var(--text-dark);
+    color: var(--text-color);
     width: 175px;
     height: 250px;
     border-radius: 1.5rem;

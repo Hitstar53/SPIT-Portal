@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ParentInfoForm from "./profileform/ParentInfoForm";
+import ParentInfoForm from "./profileforms/ParentInfoForm";
 import { FaEdit } from "react-icons/fa";
 import Modal from "../UI/Modal";
 import styles from "./ParentalInfo.module.css";

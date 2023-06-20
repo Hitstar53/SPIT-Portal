@@ -1,5 +1,5 @@
 import React from 'react'
-import ProfileForm from './profileform/PersonalInfoForm';
+import ProfileForm from './profileforms/PersonalInfoForm';
 import Modal from '../UI/Modal'
 import { FaEdit } from "react-icons/fa";
 import { LuEdit2 } from "react-icons/lu";

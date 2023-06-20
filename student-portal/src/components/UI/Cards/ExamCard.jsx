@@ -32,9 +32,8 @@ const ExamCard = (props) => {
               borderRadius: "1rem",
               textTransform: "none",
               "&:hover": {
-                backgroundColor: "var(--secondary-color)",
-                color: "var(--text-dark)",
-                border: "2px solid var(--primary-color)",
+                backgroundColor: "var(--tertiary-color)",
+                boxShadow: "0px 0px 10px 0px var(--tertiary-color)"
               },
             }}
           >

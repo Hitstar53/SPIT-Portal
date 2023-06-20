@@ -50,48 +50,64 @@ BootstrapDialogTitle.propTypes = {
 
 export default function Modal(props) {
     return (
-        <div>
-            <BootstrapDialog
-                onClose={props.onClose}
-                aria-labelledby="customized-dialog-title"
-                open={props.open}
+      <div>
+        <BootstrapDialog
+          onClose={props.onClose}
+          aria-labelledby="customized-dialog-title"
+          open={props.open}
+        >
+          <BootstrapDialogTitle
+            id="customized-dialog-title"
+            onClose={props.onClose}
+            sx={{
+              fontSize: "1.5rem",
+              fontWeight: "bold",
+              color: "var(--text-color)",
+              backgroundColor: "var(--bg-color)"
+            }}
+          >
+            {props.title}
+          </BootstrapDialogTitle>
+          <DialogContent 
+            dividers
+            sx={{
+                color: "var(--text-color)",
+                backgroundColor: "var(--bg-color)"
+            }}
+          >
+            <Typography
+              gutterBottom
+              sx={{
+                padding: "0 0.75rem",
+              }}
             >
-                <BootstrapDialogTitle 
-                    id="customized-dialog-title" 
-                    onClose={props.onClose}
-                    sx={{
-                        fontSize: '1.5rem',
-                        fontWeight: 'bold',
-                    }}
-                >
-                    {props.title}
-                </BootstrapDialogTitle>
-                <DialogContent dividers>
-                    <Typography gutterBottom
-                        sx={{
-                            padding: '0 0.75rem',
-                        }}
-                    >
-                        {props.children}
-                        {props.content}
-                    </Typography>
-                </DialogContent>
-                <DialogActions>
-                    <Button 
-                        autoFocus 
-                        onClick={props.onClose}
-                        sx={{
-                            color: 'var(--text-dark)',
-                            fontWeight: 'bold',
-                            '&:hover': {
-                                backgroundColor: 'var(--secondary-color)',
-                            }
-                        }}
-                    >
-                        {props.action}
-                    </Button>
-                </DialogActions>
-            </BootstrapDialog>
-        </div>
+              {props.content}
+              {props.children}
+            </Typography>
+          </DialogContent>
+          <DialogActions
+            sx={{
+                color: "var(--text-color)",
+                backgroundColor: "var(--bg-color)",
+            }}
+          >
+            <Button
+              type="submit"
+              form={props.formid}
+              autoFocus
+              onClick={props.onClose}
+              sx={{
+                color: "var(--text-color)",
+                fontWeight: "bold",
+                "&:hover": {
+                  backgroundColor: "var(--secondary-color)",
+                },
+              }}
+            >
+              {props.action}
+            </Button>
+          </DialogActions>
+        </BootstrapDialog>
+      </div>
     );
 }

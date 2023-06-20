@@ -11,7 +11,7 @@ const user = {
     phone: "8454852753",
     email: "hatim.sawai@spit.ac.in",
     address: "26/A, Shanti Niketan C.H.S., Gulmohar Road, Lower Parel - 28.",
-    dob: "28/1/2003",
+    dob: "01/28/2003",
     gender: "Male",
     blood: "B+",
     religion: "Islam",

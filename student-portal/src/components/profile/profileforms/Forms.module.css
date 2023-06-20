@@ -1,4 +1,5 @@
 .form {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    color: var(--text-color) !important;
 }
