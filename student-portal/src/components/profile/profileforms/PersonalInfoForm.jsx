@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import CustDatePicker from "../../UI/CustDatePicker";
-import styles from "./ProfileForm.module.css";
+import styles from "./Forms.module.css";
 
 const PersonalInfoForm = () => {
   return (
