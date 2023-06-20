@@ -26,7 +26,7 @@ const StepOne = () => {
         lecturesConducted: "",
         percentageOfTargetAchieved: ((course.lecturesConducted / course.targetedLectures) * 100).toFixed(2),
       })),
-      averagePercentage: calculateAveragePercentage().toFixed(2),
+      // averagePercentage: calculateAveragePercentage().toFixed(2),
     },    
   })
 

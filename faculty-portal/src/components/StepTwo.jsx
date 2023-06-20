@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import "../styles/Appraisal2.css";
-import { DevTool } from "@hookform/devtools";
 
 function StepTwo() {
   const [dimension2, setDimension2] = useState([{}]);
@@ -12,7 +11,7 @@ function StepTwo() {
     remove: removePaper,
   } = useFieldArray({
     control,
-    name: "papers",
+    name: "RP1.papers",
   });
   const {
     fields: patentFields,
@@ -20,7 +19,7 @@ function StepTwo() {
     remove: removePatent,
   } = useFieldArray({
     control,
-    name: "patents",
+    name: "RP2.patents",
   });
   const {
     fields: bookFields,
@@ -28,7 +27,7 @@ function StepTwo() {
     remove: removeBook,
   } = useFieldArray({
     control,
-    name: "books",
+    name: "RP2.books",
   });
   const {
     fields: moocFields,
@@ -36,7 +35,7 @@ function StepTwo() {
     remove: removeMOOC,
   } = useFieldArray({
     control,
-    name: "moocs",
+    name: "RP2.moocs",
   });
   const {
     fields: sponsoredFields,
@@ -76,9 +75,8 @@ function StepTwo() {
     remove: removeExtras,
   } = useFieldArray({
     control,
-    name: 'extras',
+    name: "extras",
   });
-  
 
   const onSubmit = (data) => {
     console.log(data);
@@ -100,307 +98,316 @@ function StepTwo() {
             <h3>Paper #{index + 1}</h3>
             <label className="form-label">Title</label>
             <input
-              {...register(`papers[${index}].title`)}
+              {...register(`RP1.papers[${index}].title`)}
               className="form-input"
             />
 
             <label className="form-label">Journal</label>
             <input
-              {...register(`papers[${index}].journal`)}
+              {...register(`RP1.papers[${index}].journal`)}
               className="form-input"
             />
 
             <label className="form-label">Author</label>
             <input
-              {...register(`papers[${index}].author`)}
+              {...register(`RP1.papers[${index}].author`)}
               className="form-input"
             />
 
             <label className="form-label">Publisher</label>
             <input
-              {...register(`papers[${index}].publisher`)}
+              {...register(`RP1.papers[${index}].publisher`)}
               className="form-input"
             />
 
             <label className="form-label">Paper Link</label>
             <input
-              {...register(`papers[${index}].paperLink`)}
+              {...register(`RP1.papers[${index}].link`)}
               className="form-input"
             />
 
-            <button type="button" onClick={() => removePaper(index)}>
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => removePaper(index)}
+            >
               Remove Paper
             </button>
           </div>
         ))}
-
-        <button type="button" onClick={() => appendPaper({})}>
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => appendPaper({})}
+        >
           Add Paper
         </button>
 
-        <h1>RP2: Patents</h1>
+        <h1>RP2: Patents and Books</h1>
         {patentFields.map((field, index) => (
           <div key={field.id}>
-            <label className="form-label">Patent Obtained {index + 1}</label>
+            <h3>Patent #{index + 1}</h3>
+            <label className="form-label">Title</label>
             <input
-              type="text"
-              {...register(`patents[${index}].name`)}
-              className="form-input"
-            />
-            <label className="form-label">Patent details</label>
-            <input
-              type="text"
-              {...register(`patents[${index}].details`)}
+              {...register(`RP2.patents[${index}].title`)}
               className="form-input"
             />
 
-            <button type="button" onClick={() => removePatent(index)}>
+            <label className="form-label">Inventor</label>
+            <input
+              {...register(`RP2.patents[${index}].inventor`)}
+              className="form-input"
+            />
+
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => removePatent(index)}
+            >
               Remove
             </button>
           </div>
         ))}
-
-        <button type="button" onClick={() => appendPatent({})}>
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => appendPatent({})}
+        >
           Add Patent
         </button>
 
-        <h1>RP3: Books</h1>
         {bookFields.map((field, index) => (
           <div key={field.id}>
             <h3>Book #{index + 1}</h3>
             <label className="form-label">Title</label>
             <input
-              type="text"
-              {...register(`books[${index}].title`)}
+              {...register(`RP2.books[${index}].title`)}
               className="form-input"
             />
 
             <label className="form-label">Author</label>
             <input
-              type="text"
-              {...register(`books[${index}].author`)}
+              {...register(`RP2.books[${index}].author`)}
               className="form-input"
             />
 
-            <label className="form-label">Publisher</label>
-            <input
-              type="text"
-              {...register(`books[${index}].publisher`)}
-              className="form-input"
-            />
-
-            <button type="button" onClick={() => removeBook(index)}>
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => removeBook(index)}
+            >
               Remove Book
             </button>
           </div>
         ))}
-
-        <button type="button" onClick={() => appendBook({})}>
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => appendBook({})}
+        >
           Add Book
         </button>
 
-        <h1>RP4: MOOC</h1>
         {moocFields.map((field, index) => (
           <div key={field.id}>
             <h3>MOOC #{index + 1}</h3>
-            <label className="form-label">Name</label>
+            <label className="form-label">Title</label>
             <input
-              type="text"
-              {...register(`moocs[${index}].name`)}
+              {...register(`RP2.moocs[${index}].title`)}
               className="form-input"
             />
 
-            <label className="form-label">Duration</label>
+            <label className="form-label">Platform</label>
             <input
-              type="text"
-              {...register(`moocs[${index}].duration`)}
+              {...register(`RP2.moocs[${index}].platform`)}
               className="form-input"
             />
 
-            <label className="form-label">Details</label>
-            <input
-              type="text"
-              {...register(`moocs[${index}].details`)}
-              className="form-input"
-            />
-
-            <button type="button" onClick={() => removeMOOC(index)}>
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => removeMOOC(index)}
+            >
               Remove MOOC
             </button>
           </div>
         ))}
-
-        <button type="button" onClick={() => appendMOOC({})}>
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => appendMOOC({})}
+        >
           Add MOOC
         </button>
 
-        <h1>RP5: Sponsored</h1>
+        <h1>Sponsored Research</h1>
         {sponsoredFields.map((field, index) => (
           <div key={field.id}>
-            <h3>Sponsored #{index + 1}</h3>
-            <label className="form-label">Date</label>
-            <input
-              type="text"
-              {...register(`sponsored[${index}].date`)}
-              className="form-input"
-            />
-
+            <h3>Sponsored Research #{index + 1}</h3>
             <label className="form-label">Title</label>
             <input
-              type="text"
               {...register(`sponsored[${index}].title`)}
               className="form-input"
             />
 
-            <label className="form-label">Agency</label>
+            <label className="form-label">Sponsor</label>
             <input
-              type="text"
-              {...register(`sponsored[${index}].agency`)}
+              {...register(`sponsored[${index}].sponsor`)}
               className="form-input"
             />
 
-            <label className="form-label">Details</label>
-            <input
-              type="text"
-              {...register(`sponsored[${index}].details`)}
-              className="form-input"
-            />
-
-            <label className="form-label">Amount</label>
-            <input
-              type="text"
-              {...register(`sponsored[${index}].amount`)}
-              className="form-input"
-            />
-
-            <button type="button" onClick={() => removeSponsored(index)}>
-              Remove Sponsored
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => removeSponsored(index)}
+            >
+              Remove Sponsored Research
             </button>
           </div>
         ))}
-
-        <button type="button" onClick={() => appendSponsored({})}>
-          Add Sponsored
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => appendSponsored({})}
+        >
+          Add Sponsored Research
         </button>
 
-        <div>
-          <h1>RP6: Citations</h1>
-          <label className="form-label">
-            Number of citations in the previous calendar year
-          </label>
-          <input
-            type="text"
-            {...register(`citations.number`)}
-            className="form-input"
-          />
-        </div>
+        <h1>Citations</h1>
+        {citationsFields.map((field, index) => (
+          <div key={field.id}>
+            <h3>Citation #{index + 1}</h3>
+            <label className="form-label">Title</label>
+            <input
+              {...register(`citations[${index}].title`)}
+              className="form-input"
+            />
 
-        <h1>RP7: Development</h1>
+            <label className="form-label">Author</label>
+            <input
+              {...register(`citations[${index}].author`)}
+              className="form-input"
+            />
+
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => removeCitations(index)}
+            >
+              Remove Citation
+            </button>
+          </div>
+        ))}
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => appendCitations({})}
+        >
+          Add Citation
+        </button>
+
+        <h1>Development</h1>
         {developmentFields.map((field, index) => (
           <div key={field.id}>
             <h3>Development #{index + 1}</h3>
             <label className="form-label">Title</label>
             <input
-              type="text"
               {...register(`development[${index}].title`)}
               className="form-input"
             />
 
-            <label className="form-label">Organization</label>
+            <label className="form-label">Description</label>
             <input
-              type="text"
-              {...register(`development[${index}].organization`)}
+              {...register(`development[${index}].description`)}
               className="form-input"
             />
 
-            <label className="form-label">Dates</label>
-            <input
-              type="text"
-              {...register(`development[${index}].dates`)}
-              className="form-input"
-            />
-
-            <label className="form-label">Days</label>
-            <input
-              type="text"
-              {...register(`development[${index}].days`)}
-              className="form-input"
-            />
-
-            <button type="button" onClick={() => removeDevelopment(index)}>
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => removeDevelopment(index)}
+            >
               Remove Development
             </button>
           </div>
         ))}
-
-        <button type="button" onClick={() => appendDevelopment({})}>
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => appendDevelopment({})}
+        >
           Add Development
         </button>
 
-        <h1>RP8: Soft/Hard Dev</h1>
+        <h1>Soft and Hard Skills Development</h1>
         {soft_hard_devFields.map((field, index) => (
           <div key={field.id}>
-            <h3>Soft/Hard Dev #{index + 1}</h3>
-            <label className="form-label">Type</label>
+            <h3>Skill #{index + 1}</h3>
+            <label className="form-label">Skill Name</label>
             <input
-              type="text"
-              {...register(`soft_hard_dev[${index}].type`)}
+              {...register(`soft_hard_dev[${index}].skillName`)}
               className="form-input"
             />
 
-            <label className="form-label">Model</label>
+            <label className="form-label">Level</label>
             <input
-              type="text"
-              {...register(`soft_hard_dev[${index}].model`)}
+              {...register(`soft_hard_dev[${index}].level`)}
               className="form-input"
             />
 
-            <label className="form-label">Details</label>
-            <input
-              type="text"
-              {...register(`soft_hard_dev[${index}].details`)}
-              className="form-input"
-            />
-
-            <button type="button" onClick={() => removeSoftHardDev(index)}>
-              Remove Soft/Hard Dev
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => removeSoftHardDev(index)}
+            >
+              Remove Skill
             </button>
           </div>
         ))}
-
-        <button type="button" onClick={() => appendSoftHardDev({})}>
-          Add Soft/Hard Dev
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => appendSoftHardDev({})}
+        >
+          Add Skill
         </button>
 
-        <h1>RP9: Extras</h1>
+        <h1>Extras</h1>
         {extrasFields.map((field, index) => (
           <div key={field.id}>
             <h3>Extra #{index + 1}</h3>
-            <label className="form-label">Date</label>
+            <label className="form-label">Title</label>
             <input
-              type="text"
-              {...register(`extras[${index}].date`)}
+              {...register(`extras[${index}].title`)}
               className="form-input"
             />
 
-            <label className="form-label">Details</label>
+            <label className="form-label">Description</label>
             <input
-              type="text"
-              {...register(`extras[${index}].details`)}
+              {...register(`extras[${index}].description`)}
               className="form-input"
             />
 
-            <button type="button" onClick={() => removeExtras(index)}>
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => removeExtras(index)}
+            >
               Remove Extra
             </button>
           </div>
         ))}
-
-        <button type="button" onClick={() => appendExtras({})}>
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => appendExtras({})}
+        >
           Add Extra
         </button>
 
-        <input type="submit" value="Submit" />
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
       </form>
     </>
   );
