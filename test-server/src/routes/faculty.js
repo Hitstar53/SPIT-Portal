@@ -1,27 +1,20 @@
 import express from 'express';
-// import { facultyModel } from '../models/Faculty.js';
-import Faculty from '../models/Faculty.js'
+import { facultyModel } from '../models/Faculty.js';
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-    const faculty = await Faculty.find({}).catch((err) => {
-        console.log(err);
-        });
-        console.log(faculty)
-    res.json(faculty);
-})
-
-router.get("/info", async (req, res) => {
+router.post("/info", async (req, res) => {
     const { name, email } = req.body;
 
-    console.log(name,email)
+    console.log(name, email);
 
-    const faculty = await facultyModel.findOne({ name: name }).catch((err) => {
+    const faculty = await facultyModel.findOne({ name }).catch((err) => {
         console.log(err);
-      });
-    console.log(faculty)
-    res.json(faculty);
-})
+        res.status(500).json({ error: "Failed to create faculty" });
+    });
 
-export {router as facultyRouter}
+    console.log(faculty);
+    res.json(faculty);
+});
+
+export default router;
