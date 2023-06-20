@@ -251,8 +251,144 @@
             ],
             "sgpa":8.9,
             "status":"completed"
-        }]
+        }],
+        "committees":[{
+            "committeeDetails":"none",
+            "tenure":"2022-2023",
+            "position":"Deputy Tech Head"
+        },
+        {
+            "committeeDetails":"none",
+            "tenure":"2022-2023",
+            "position":"Head Of Operations"
+        }],
+        "participation":[{
+            "eventName":"Takedown",
+            "date":"new Date('2022-05-12')",
+            "organization":"CSI",
+            "description":"A coding event where two teams compete against each other in order to determine who can solve a problem faster"
+        },
+        {
+            "eventName":"Code Red",
+            "date":"new Date('2023-03-25')",
+            "organization":"Oculus",
+            "description":"A no code hackathon"
+        }],
+        "volunteerWork":[{
+            "eventName":"TechRace",
+            "date":"new Date('2023-01-29')",
+            "organization":"Oculus",
+            "description":"A Treasure across South Bombay"
+        },
+        {
+            "eventName":"IPL Auction",
+            "date":"new Date('2023-03-24')",
+            "organization":"Oculus",
+            "description":"A fun event where you create your dream team"
+        }],
+        "skills":[
+            "Java","python","Html&CSS","MERN Stack"
+        ],
+        "projects":[{
+            "name":"Swift-Reader",
+            "duration":"4 months",
+            "domain":"Machine Learning",
+            "techStack":[{
+                "type":"React"
+            },
+            {
+                "type":"Django"
+            },
+            {
+                "type":"BeautifulSoup"
+            }],
+            "team":[
+                {"type":"Saad Surve"},
+                {"type":"Ankit Mishra"},
+                {"type":"Yusuf Sodawala"}
+            ],
+            "description":"something regarding project",
+            "mentor":"Prof. Jignesh Sisodia"
+        },
+        {
+            "name":"IPL-Auction Website",
+            "duration":"4 months",
+            "domain":"Web Development",
+            "techStack":[{
+                "type":"React"
+            },
+            {
+                "type":"MongoDB"
+            },
+            {
+                "type":"node.js"
+            }],
+            "team":[
+                {"type":"Saad Surve"},
+                {"type":"Yusuf Sodawala"}
+            ],
+            "description":"something regarding project",
+            "mentor":"none"
+        }],
+        "research":[
+        {
+            "name":"xyz",
+            "duration":"4 months",
+            "domain":"Web Development",
+            "techStack":[{
+                "type":"React"
+            },
+            {
+                "type":"MongoDB"
+            },
+            {
+                "type":"node.js"
+            }],
+            "team":[
+                {"type":"Saad Surve"},
+                {"type":"Yusuf Sodawala"}
+            ],
+            "description":"something regarding project",
+            "mentor":"none"
+        },
+        {
+            "name":"IPL-Auction Website",
+            "duration":"4 months",
+            "domain":"Web Development",
+            "techStack":[{
+                "type":"React"
+            },
+            {
+                "type":"MongoDB"
+            },
+            {
+                "type":"node.js"
+            }],
+            "team":[
+                {"type":"Saad Surve"},
+                {"type":"Yusuf Sodawala"}
+            ],
+            "description":"something regarding project",
+            "mentor":"none"
+        }
+        ],
+        "internship":[{
+            "organization":"SPIT",
+            "position":"software Developer",
+            "duration":"2 months",
+            "mode":"offline",
+            "description":"create SPIT Portal"
+        },
+        {
+            "organization":"DB",
+            "position":"software Developer",
+            "duration":"2 months",
+            "mode":"offline",
+            "description":"csome random description"
+        }],
+        "placement":{
+            "type":"none"
+        }
     }
 ]
 }
-]
