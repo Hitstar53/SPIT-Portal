@@ -27,6 +27,10 @@ const teacherSchema = new mongoose.Schema({
         required: true,
         default: Date.now
     },
+    bloodGroup: {
+        type: Date,
+        required: true,
+    },
     dateOfJoining: {
         type: Date,
         required: true,
@@ -119,13 +123,14 @@ const teacherSchema = new mongoose.Schema({
     linkedinProfile: {
         type: String
     },
-    aadharCard: {
-        data: Buffer,
-        contentType: String
+    aadharCardNumber: {
+        type: Number,
+        required: true
+
     },
-    panCard: {
-        data: Buffer,
-        contentType: String
+    panCardNumber: {
+        type: Number,
+        required: true
     }
 
 });

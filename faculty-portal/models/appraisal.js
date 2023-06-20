@@ -6,84 +6,104 @@ const appraisalSchema = new mongoose.Schema({
         ref: 'Faculty',
         required: true
     },
+    YearofAssesment: {
+        type: String
+    },
     Dimension1: {
-        AP1: {
-            courseData: [{
-                courseName: {
-                    type: String
+
+        courses:
+        {
+            courses: [{
+                name: {
+                    type: String,
+                    required: true
                 },
                 class: {
-                    type: String
+                    type: String,
+                    required: true
                 },
-                sem: {
-                    type: String
+                Sem: {
+                    type: String,
+                    required: true
                 },
-                marksObtained: [{
+                AP2MarksObtained: {
                     type: Number
-                }],
-            }],
-            marks: {
-                type: Number
+                },
+                LecturesTarget: {
+                    type: Number
+                },
+                LectureConducted: {
+                    type: Number
+                },
+                PercentAcheived: {
+                    type: Number,
+                    max: 100
+                },
+                Percentagefeedback: {
+                    type: Number,
+                    max: 100
+                },
+                AttendanceStudent: {
+                    type: Number
+                },
+                Actvityremedial: {
+                    type: String
+                },
+                NotworthyDetails: {
+                    type: String
+                },
+                PaperSet: [{
+                    papersetforCourse: {
+                        type: String
+                    },
+                    Marks: {
+                        type: Number
+                    }
+                }]
             }
-        },
-        AP2: {
-            averageMarks: {
-                type: Number
-            },
-            marks: {
-                type: Number
-            }
-        },
-        AP3: {
-            courseData: [{
-                courseName: {
-                    type: String
-                },
-                targetedLectures: {
-                    type: Number
-                },
-                completedLectures: {
-                    type: Number
-                },
-                percentTargetAchieved: {
-                    type: Number
-                }
-            }],
-            averagePercentage: {
-                type: Number
-            }
-        },
-        AP4: {
-            semData: [{
-                sem: {
-                    type: String
-                },
-                subject: {
-                    type: String
-                },
-                percentFeedback: {
-                    type: Number
-                }
-            }],
-            marks: {
-                type: Number
-            }
+            ],
 
-        },
-        AP5: {
-            attendance: [{
-                type: Number
-            }],
-            averageAttendance: {
-                type: Number
+            AP1Marks: {
+                type: Number,
+                max: 10
             },
-            marks: {
-                type: Number
-            }
+            AP2Average: {
+                type: Number,
+                max: 10
+            },
+            AP3Average: {
+                type: Number,
+                max: 5
+            },
+            AP4Marks: {
+                type: Number,
+                max: 30
+            },
+            AP5Marks: {
+                type: Number,
+                max: 5
+            },
+
+            AP8Marks: {
+                type: Number,
+                max: 5
+            },
+            AP9Marks: {
+                type: Number,
+                max: 10
+            },
+            AP10Marks: {
+                type: Number,
+                max: 10
+            },
         },
+
+
+
         AP6: {
             menteeFeedback: [{
-                type: String
+                type: Number //  changes from string quantified and filled here 
+
             }],
             averageMarks: {
                 type: Number
@@ -109,22 +129,7 @@ const appraisalSchema = new mongoose.Schema({
             }
 
         },
-        AP8: {
-            activityData: [{
-                sem: {
-                    type: Number
-                },
-                subject: {
-                    type: String
-                },
-                activity: {
-                    type: String
-                }
-            }],
-            totalMarks: {
-                type: Number
-            }
-        },
+
         AP9: {
             activityData: [{
                 semester: {
@@ -162,132 +167,164 @@ const appraisalSchema = new mongoose.Schema({
     },
 
     Dimension2: {
-        papers:
-            [{
-                title: {
-                    type: String
-                },
-                journal: {
-                    type: String
-                },
-                author: {
-                    type: String
-                },
-                publisher: {
-                    type: String
-                },
-                paperLink: {
-                    type: String
+        RP1: {
+            papers:
+                [{
+                    title: {
+                        type: String
+                    },
+                    journal: {
+                        type: String
+                    },
+                    author: {
+                        type: String
+                    },
+                    publisher: {
+                        type: String
+                    },
+                    paperLink: {
+                        type: String
+                    }
                 }
+                ],
+            Total_marks: {
+                type: String,
+                max: 30
             }
+        },
+        RP2: {
+            patents: [
+                {
+                    name: {
+                        type: String
+                    },
+                    details: {
+                        type: String
+                    }
+                }
             ],
-        patents: [
-            {
-                name: {
-                    type: String
-                },
-                details: {
-                    type: String
-                }
-            }
-        ],
-        books: [
-            {
-                title: {
-                    type: String
-                },
-                author: {
-                    type: String
-                },
-                publisher: {
-                    type: String
-                }
+            books: [
+                {
+                    title: {
+                        type: String
+                    },
+                    author: {
+                        type: String
+                    },
+                    publisher: {
+                        type: String
+                    }
 
-            }
-        ],
-        moocs: [
-            {
-                name: {
-                    type: String
-                },
-                duration: {
-                    type: String
-                },
-                details: {
-                    type: String
                 }
-            }
-        ],
-        sponsored: [
-            {
-                date: {
-                    type: Date
-                },
-                title: {
-                    type: String
-                },
-                agency: {
-                    type: String
-                },
-                details: {
-                    type: String
-                },
-                amount: {
-                    type: String
+            ],
+            moocs: [
+                {
+                    name: {
+                        type: String
+                    },
+                    duration: {
+                        type: String
+                    },
+                    details: {
+                        type: String
+                    }
                 }
+            ],
+            total_marks: {
+                type: Number,
+                max: 30
+            },
 
-            }
-        ],
-        citations: {
+
+        },
+        RP3: {
+            sponsored: [
+                {
+                    date: {
+                        type: Date
+                    },
+                    title: {
+                        type: String
+                    },
+                    agency: {
+                        type: String
+                    },
+                    details: {
+                        type: String
+                    },
+                    amount: {
+                        type: String
+                    }
+
+                }
+            ],
+        },
+
+
+        RP4citations: {
             number: {
                 type: Number
-            }
-        },
-        development: [
-            {
-                title: {
-                    type: String
-                },
-                organisation: {
-                    type: String
-                },
-                dates: {
-                    type: Date
-                },
-                days: {
-                    type: Number
-                }
-            }
-        ],
-        soft_hard_dev: [{
-            type: {
-                type: String
             },
-            model: {
-                type: String
-            },
-            details: {
-                type: String
+            Marks: {
+                type: Number,
+                max: 25
             }
-        }],
-        activity_non_covered: [
-            {
-                Date: {
-                    type: Date
+        },
+
+
+
+        RP5: {
+            development: [
+                {
+                    title: {
+                        type: String
+                    },
+                    organisation: {
+                        type: String
+                    },
+                    dates: {
+                        type: Date
+                    },
+                    days: {
+                        type: Number
+                    }
+                }
+            ],
+        },
+
+        RP6: {
+            soft_hard_dev: [{
+                type: {
+                    type: String
                 },
-                Details: {
+                model: {
+                    type: String
+                },
+                details: {
                     type: String
                 }
+            }],
+            Marks: {
+                type: Number,
+                max: 10
             }
-        ],
-        total_marks_papers: {
-            type: Number
         },
-        total_marks_patent_book_mooc: {
-            type: Number
-        },
-        citation_marks: {
-            type: Number
+
+        RP7: {
+            activity_non_covered: [
+                {
+                    Date: {
+                        type: Date
+                    },
+                    Details: {
+                        type: String
+                    }
+                }
+            ],
+            marks: {
+                type: Number,
+                max: 10
+            }
         },
 
         totalMarks: {

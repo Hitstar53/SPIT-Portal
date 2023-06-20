@@ -1,9 +1,11 @@
 const asyncHandler = require('express-async-handler');
-const Faculty = require('../models/faculty')
+const Faculty = require('../models/faculty.js')
 const { error } = require("console");
 
 const getFaculty = asyncHandler(async (req, res) => {
-
+    const faculties = await Faculty.find();
+    res.status(200).json(faculties);
+    console.log("Inside getFaculty");
 })
 
 
