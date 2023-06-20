@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 const teacherSchema = new mongoose.Schema({
     name: {
@@ -11,10 +11,7 @@ const teacherSchema = new mongoose.Schema({
         required: true,
         unique: true,
         trim: true
-    },
-   
+    }
 });
 
-// export const facultyModel = mongoose.model('faculty', teacherSchema);
-models.export =mongoose.model('faculty', teacherSchema);
-
+export const facultyModel = mongoose.model('faculty', teacherSchema);
