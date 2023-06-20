@@ -11,7 +11,7 @@ app.use(cors());
 app.use("/faculty", facultyRouter);
 
 mongoose.connect(
-    "mongodb+srv://siddhesh:1234@cluster0.rnjvol7.mongodb.net/test?retryWrites=true&w=majority",
+    "mongodb+srv://siddhesh:1234@cluster0.rnjvol7.mongodb.net/faculty?retryWrites=true&w=majority",
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,

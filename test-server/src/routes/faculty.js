@@ -4,17 +4,22 @@ import { facultyModel } from '../models/Faculty.js';
 const router = express.Router();
 
 router.post("/info", async (req, res) => {
-    const { name, email } = req.body;
+    const { name, courses } = req.body; 
 
-    console.log(name, email);
+    try {
+        const filter = { name: name }; 
+        const update = { courses: courses }; 
 
-    const faculty = await facultyModel.findOne({ name }).catch((err) => {
-        console.log(err);
-        res.status(500).json({ error: "Failed to create faculty" });
-    });
+        const faculty = await facultyModel.findOneAndUpdate(filter, update, {
+            new: true 
+        });
 
-    console.log(faculty);
-    res.json(faculty);
+        console.log(faculty);
+        res.json(faculty);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Failed to update faculty" });
+    }
 });
 
 export default router;
