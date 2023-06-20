@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
-import "../styles/Appraisal2.css";
+// import "../styles/Appraisal2.css";
 import { DevTool } from "@hookform/devtools";
 
 function StepTwo() {
@@ -84,7 +84,6 @@ function StepTwo() {
     console.log(data);
     // Perform any necessary actions with the form data, such as storing it in a database
     setDimension2(data);
-    console.log(dimension2);
   };
 
   useEffect(() => {
