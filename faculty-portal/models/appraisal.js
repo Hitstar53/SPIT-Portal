@@ -12,7 +12,7 @@ const appraisalSchema = new mongoose.Schema({
     Dimension1: {
 
         courses:
-            [{
+           {courses: [{
         name :{
             type:String,
             required:true
@@ -60,6 +60,7 @@ const appraisalSchema = new mongoose.Schema({
             }
         }]}
     ],
+
         AP1Marks:{
             type:Number,
             max:10
@@ -92,9 +93,10 @@ const appraisalSchema = new mongoose.Schema({
         AP10Marks:{
             type:Number,
             max:10
-        }
-
         },
+    },
+
+        
         
         AP6: {
             menteeFeedback: [{
@@ -163,7 +165,8 @@ const appraisalSchema = new mongoose.Schema({
     },
 
     Dimension2: {
-        papers:
+       RP1:{
+       papers:
             [{
                 title: {
                     type: String
@@ -182,6 +185,12 @@ const appraisalSchema = new mongoose.Schema({
                 }
             }
             ],
+            Total_marks:{
+                type:String,
+                max:30
+            }
+       }, 
+       RP2:{
         patents: [
             {
                 name: {
@@ -192,7 +201,7 @@ const appraisalSchema = new mongoose.Schema({
                 }
             }
         ],
-        books: [
+         books: [
             {
                 title: {
                     type: String
@@ -206,7 +215,7 @@ const appraisalSchema = new mongoose.Schema({
 
             }
         ],
-        moocs: [
+         moocs: [
             {
                 name: {
                     type: String
@@ -219,7 +228,15 @@ const appraisalSchema = new mongoose.Schema({
                 }
             }
         ],
-        sponsored: [
+         total_marks: {
+            type: Number,
+            max:30
+        },
+        
+
+       },
+       RP3:{
+            sponsored: [
             {
                 date: {
                     type: Date
@@ -239,12 +256,23 @@ const appraisalSchema = new mongoose.Schema({
 
             }
         ],
-        citations: {
+       },
+       
+       
+       RP4citations: {
             number: {
                 type: Number
+            },
+            Marks:{
+                type:Number,
+                max:25
             }
         },
-        development: [
+       
+       
+       
+       RP5:{
+        development:[
             {
                 title: {
                     type: String
@@ -260,6 +288,9 @@ const appraisalSchema = new mongoose.Schema({
                 }
             }
         ],
+       },
+       
+       RP6:{
         soft_hard_dev: [{
             type: {
                 type: String
@@ -271,7 +302,14 @@ const appraisalSchema = new mongoose.Schema({
                 type: String
             }
         }],
-        activity_non_covered: [
+        Marks:{
+            type:Number,
+            max:10
+        }
+       },
+
+       RP7:{
+       activity_non_covered: [
             {
                 Date: {
                     type: Date
@@ -281,16 +319,12 @@ const appraisalSchema = new mongoose.Schema({
                 }
             }
         ],
-        total_marks_papers: {
-            type: Number
-        },
-        total_marks_patent_book_mooc: {
-            type: Number
-        },
-        citation_marks: {
-            type: Number
-        },
-
+        marks:{
+            type:Number,
+            max:10
+        }
+       },
+        
         totalMarks: {
             type: Number
         }
