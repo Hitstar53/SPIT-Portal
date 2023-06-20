@@ -130,6 +130,4 @@ const teacherSchema = new mongoose.Schema({
 
 });
 
-const Faculty = mongoose.model('Faculty', teacherSchema);
-
-module.exports = Faculty;
+module.exports = mongoose.model('Faculty', teacherSchema);
