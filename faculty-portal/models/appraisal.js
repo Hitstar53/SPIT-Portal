@@ -102,10 +102,7 @@ const appraisalSchema = new mongoose.Schema({
 
         AP6: {
             menteeFeedback: [{
-                type: Number //  changes from string quantified and filled here 
-
-                type: Number //  changes from string quantified and filled here 
-
+                type: Number //  changes from string quantified and filled here
             }],
             averageMarks: {
                 type: Number
