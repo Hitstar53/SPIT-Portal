@@ -6,84 +6,100 @@ const appraisalSchema = new mongoose.Schema({
         ref: 'Faculty',
         required: true
     },
+    YearofAssesment :{
+        type:String
+    },
     Dimension1: {
-        AP1: {
-            courseData: [{
-                courseName: {
-                    type: String
-                },
-                class: {
-                    type: String
-                },
-                sem: {
-                    type: String
-                },
-                marksObtained: [{
-                    type: Number
-                }],
-            }],
-            marks: {
-                type: Number
-            }
+
+        courses:
+            [{
+        name :{
+            type:String,
+            required:true
         },
-        AP2: {
-            averageMarks: {
-                type: Number
+        class :{
+            type:String,
+            required : true
+        },
+        Sem :{
+            type:String,
+            required : true
+        },
+        AP2MarksObtained:{
+            type:Number
+        },
+        LecturesTarget:{
+            type:Number
+        },
+        LectureConducted:{
+            type:Number
+        },
+        PercentAcheived:{
+            type:Number,
+            max:100
+        },
+        Percentagefeedback:{
+            type:Number,
+            max:100
+        },
+        AttendanceStudent:{
+            type:Number
+        },
+        Actvityremedial:{
+            type:String
+        },
+        NotworthyDetails:{
+            type:String
+        },
+        PaperSet:[{
+            papersetforCourse:{
+                type:String
             },
-            marks: {
-                type: Number
+            Marks:{
+                type:Number
             }
+        }]}
+    ],
+        AP1Marks:{
+            type:Number,
+            max:10
         },
-        AP3: {
-            courseData: [{
-                courseName: {
-                    type: String
-                },
-                targetedLectures: {
-                    type: Number
-                },
-                completedLectures: {
-                    type: Number
-                },
-                percentTargetAchieved: {
-                    type: Number
-                }
-            }],
-            averagePercentage: {
-                type: Number
-            }
+        AP2Average:{
+            type:Number,
+            max:10
         },
-        AP4: {
-            semData: [{
-                sem: {
-                    type: String
-                },
-                subject: {
-                    type: String
-                },
-                percentFeedback: {
-                    type: Number
-                }
-            }],
-            marks: {
-                type: Number
-            }
+         AP3Average:{
+            type:Number,
+            max:5
+        },
+        AP4Marks:{
+            type:Number,
+            max:30
+        },
+        AP5Marks:{
+            type:Number,
+            max:5
+        },
+       
+        AP8Marks:{
+            type:Number,
+            max:5
+        },
+        AP9Marks:{
+            type:Number,
+            max:10
+        },
+        AP10Marks:{
+            type:Number,
+            max:10
+        }
 
         },
-        AP5: {
-            attendance: [{
-                type: Number
-            }],
-            averageAttendance: {
-                type: Number
-            },
-            marks: {
-                type: Number
-            }
-        },
+        
         AP6: {
             menteeFeedback: [{
-                type: String
+                type: Number //  changes from string quantified and filled here 
+
             }],
             averageMarks: {
                 type: Number
@@ -109,22 +125,7 @@ const appraisalSchema = new mongoose.Schema({
             }
 
         },
-        AP8: {
-            activityData: [{
-                sem: {
-                    type: Number
-                },
-                subject: {
-                    type: String
-                },
-                activity: {
-                    type: String
-                }
-            }],
-            totalMarks: {
-                type: Number
-            }
-        },
+       
         AP9: {
             activityData: [{
                 semester: {
