@@ -12,7 +12,7 @@ function StepTwo() {
     remove: removePaper,
   } = useFieldArray({
     control,
-    name: "papers",
+    name: "RP1.papers",
   });
   const {
     fields: patentFields,
@@ -20,7 +20,7 @@ function StepTwo() {
     remove: removePatent,
   } = useFieldArray({
     control,
-    name: "patents",
+    name: "RP2.patents",
   });
   const {
     fields: bookFields,
@@ -28,7 +28,7 @@ function StepTwo() {
     remove: removeBook,
   } = useFieldArray({
     control,
-    name: "books",
+    name: "RP2.books",
   });
   const {
     fields: moocFields,
@@ -36,7 +36,7 @@ function StepTwo() {
     remove: removeMOOC,
   } = useFieldArray({
     control,
-    name: "moocs",
+    name: "RP2.moocs",
   });
   const {
     fields: sponsoredFields,
@@ -44,7 +44,7 @@ function StepTwo() {
     remove: removeSponsored,
   } = useFieldArray({
     control,
-    name: "sponsored",
+    name: "RP3.sponsored",
   });
   const {
     fields: citationsFields,
@@ -52,7 +52,7 @@ function StepTwo() {
     remove: removeCitations,
   } = useFieldArray({
     control,
-    name: "citations",
+    name: "RP4.citations",
   });
   const {
     fields: developmentFields,
@@ -60,7 +60,7 @@ function StepTwo() {
     remove: removeDevelopment,
   } = useFieldArray({
     control,
-    name: "development",
+    name: "RP5.development",
   });
   const {
     fields: soft_hard_devFields,
@@ -68,7 +68,7 @@ function StepTwo() {
     remove: removeSoftHardDev,
   } = useFieldArray({
     control,
-    name: "soft_hard_dev",
+    name: "RP6.soft_hard_dev",
   });
   const {
     fields: extrasFields,
@@ -76,7 +76,7 @@ function StepTwo() {
     remove: removeExtras,
   } = useFieldArray({
     control,
-    name: 'extras',
+    name: 'RP7.extras',
   });
   
 
@@ -88,7 +88,7 @@ function StepTwo() {
   };
 
   useEffect(() => {
-    console.log("new dimension2=", dimension2);
+    console.log("dimension2=", dimension2);
   }, [dimension2]);
 
   return (
@@ -100,31 +100,31 @@ function StepTwo() {
             <h3>Paper #{index + 1}</h3>
             <label className="form-label">Title</label>
             <input
-              {...register(`papers[${index}].title`)}
+              {...register(`RP1.papers[${index}].title`)}
               className="form-input"
             />
 
             <label className="form-label">Journal</label>
             <input
-              {...register(`papers[${index}].journal`)}
+              {...register(`RP1.papers[${index}].journal`)}
               className="form-input"
             />
 
             <label className="form-label">Author</label>
             <input
-              {...register(`papers[${index}].author`)}
+              {...register(`RP1.papers[${index}].author`)}
               className="form-input"
             />
 
             <label className="form-label">Publisher</label>
             <input
-              {...register(`papers[${index}].publisher`)}
+              {...register(`RP1.papers[${index}].publisher`)}
               className="form-input"
             />
 
             <label className="form-label">Paper Link</label>
             <input
-              {...register(`papers[${index}].paperLink`)}
+              {...register(`RP1.papers[${index}].paperLink`)}
               className="form-input"
             />
 
@@ -144,13 +144,13 @@ function StepTwo() {
             <label className="form-label">Patent Obtained {index + 1}</label>
             <input
               type="text"
-              {...register(`patents[${index}].name`)}
+              {...register(`RP2.patents[${index}].name`)}
               className="form-input"
             />
             <label className="form-label">Patent details</label>
             <input
               type="text"
-              {...register(`patents[${index}].details`)}
+              {...register(`RP2.patents[${index}].details`)}
               className="form-input"
             />
 
@@ -171,21 +171,21 @@ function StepTwo() {
             <label className="form-label">Title</label>
             <input
               type="text"
-              {...register(`books[${index}].title`)}
+              {...register(`RP2.books[${index}].title`)}
               className="form-input"
             />
 
             <label className="form-label">Author</label>
             <input
               type="text"
-              {...register(`books[${index}].author`)}
+              {...register(`RP2.books[${index}].author`)}
               className="form-input"
             />
 
             <label className="form-label">Publisher</label>
             <input
               type="text"
-              {...register(`books[${index}].publisher`)}
+              {...register(`RP2.books[${index}].publisher`)}
               className="form-input"
             />
 
@@ -206,21 +206,21 @@ function StepTwo() {
             <label className="form-label">Name</label>
             <input
               type="text"
-              {...register(`moocs[${index}].name`)}
+              {...register(`RP2.moocs[${index}].name`)}
               className="form-input"
             />
 
             <label className="form-label">Duration</label>
             <input
               type="text"
-              {...register(`moocs[${index}].duration`)}
+              {...register(`RP2.moocs[${index}].duration`)}
               className="form-input"
             />
 
             <label className="form-label">Details</label>
             <input
               type="text"
-              {...register(`moocs[${index}].details`)}
+              {...register(`RP2.moocs[${index}].details`)}
               className="form-input"
             />
 
@@ -241,35 +241,35 @@ function StepTwo() {
             <label className="form-label">Date</label>
             <input
               type="text"
-              {...register(`sponsored[${index}].date`)}
+              {...register(`RP3.sponsored[${index}].date`)}
               className="form-input"
             />
 
             <label className="form-label">Title</label>
             <input
               type="text"
-              {...register(`sponsored[${index}].title`)}
+              {...register(`RP3.sponsored[${index}].title`)}
               className="form-input"
             />
 
             <label className="form-label">Agency</label>
             <input
               type="text"
-              {...register(`sponsored[${index}].agency`)}
+              {...register(`RP3.sponsored[${index}].agency`)}
               className="form-input"
             />
 
             <label className="form-label">Details</label>
             <input
               type="text"
-              {...register(`sponsored[${index}].details`)}
+              {...register(`RP3.sponsored[${index}].details`)}
               className="form-input"
             />
 
             <label className="form-label">Amount</label>
             <input
               type="text"
-              {...register(`sponsored[${index}].amount`)}
+              {...register(`RP3.sponsored[${index}].amount`)}
               className="form-input"
             />
 
@@ -290,7 +290,7 @@ function StepTwo() {
           </label>
           <input
             type="text"
-            {...register(`citations.number`)}
+            {...register(`RP4.citations.number`)}
             className="form-input"
           />
         </div>
@@ -302,28 +302,28 @@ function StepTwo() {
             <label className="form-label">Title</label>
             <input
               type="text"
-              {...register(`development[${index}].title`)}
+              {...register(`RP5.development[${index}].title`)}
               className="form-input"
             />
 
             <label className="form-label">Organization</label>
             <input
               type="text"
-              {...register(`development[${index}].organization`)}
+              {...register(`RP5.development[${index}].organization`)}
               className="form-input"
             />
 
             <label className="form-label">Dates</label>
             <input
               type="text"
-              {...register(`development[${index}].dates`)}
+              {...register(`RP5.development[${index}].dates`)}
               className="form-input"
             />
 
             <label className="form-label">Days</label>
             <input
               type="text"
-              {...register(`development[${index}].days`)}
+              {...register(`RP5.development[${index}].days`)}
               className="form-input"
             />
 
@@ -344,21 +344,21 @@ function StepTwo() {
             <label className="form-label">Type</label>
             <input
               type="text"
-              {...register(`soft_hard_dev[${index}].type`)}
+              {...register(`RP6.soft_hard_dev[${index}].type`)}
               className="form-input"
             />
 
             <label className="form-label">Model</label>
             <input
               type="text"
-              {...register(`soft_hard_dev[${index}].model`)}
+              {...register(`RP6.soft_hard_dev[${index}].model`)}
               className="form-input"
             />
 
             <label className="form-label">Details</label>
             <input
               type="text"
-              {...register(`soft_hard_dev[${index}].details`)}
+              {...register(`RP6.soft_hard_dev[${index}].details`)}
               className="form-input"
             />
 
@@ -379,14 +379,14 @@ function StepTwo() {
             <label className="form-label">Date</label>
             <input
               type="text"
-              {...register(`extras[${index}].date`)}
+              {...register(`RP7.extras[${index}].date`)}
               className="form-input"
             />
 
             <label className="form-label">Details</label>
             <input
               type="text"
-              {...register(`extras[${index}].details`)}
+              {...register(`RP7.extras[${index}].details`)}
               className="form-input"
             />
 

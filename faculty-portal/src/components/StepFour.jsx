@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
 
-export default function StepFour() {
+function StepFour() {
+
   return (
     <div>
-      Step Four
+        <h1>StepFour</h1>
     </div>
-  )
+  );
 }
+
+export default StepFour;

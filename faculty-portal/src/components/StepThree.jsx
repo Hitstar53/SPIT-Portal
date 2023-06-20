@@ -70,12 +70,12 @@ function StepThree() {
             className="form-input"
             ref={register()}
           />
-          <button type="button" onClick={() => removeOrganized(index)}>
+          <button type="button" className="btn btn-danger" onClick={() => removeOrganized(index)}>
             Delete
           </button>
         </div>
       ))}
-      <button type="button" onClick={() => appendOrganized({})}>
+      <button type="button" className="btn btn-success" onClick={() => appendOrganized({})}>
         Add Organized
       </button>
 
@@ -107,12 +107,12 @@ function StepThree() {
             className="form-input"
             ref={register()}
           />
-          <button type="button" onClick={() => removeInvited(index)}>
+          <button type="button" className="btn btn-danger" onClick={() => removeInvited(index)}>
             Delete
           </button>
         </div>
       ))}
-      <button type="button" onClick={() => appendInvited({})}>
+      <button type="button" className="btn btn-success" onClick={() => appendInvited({})}>
         Add Invited
       </button>
 
@@ -152,12 +152,12 @@ function StepThree() {
             className="form-input"
             ref={register()}
           />
-          <button type="button" onClick={() => removeCommittee(index)}>
+          <button type="button" className="btn btn-danger" onClick={() => removeCommittee(index)}>
             Delete
           </button>
         </div>
       ))}
-      <button type="button" onClick={() => appendCommittee({})}>
+      <button type="button" className="btn btn-success" onClick={() => appendCommittee({})}>
         Add Selection Committee
       </button>
 
@@ -173,12 +173,12 @@ function StepThree() {
             className="form-input"
             ref={register()}
           />
-          <button type="button" onClick={() => removeArticle(index)}>
+          <button type="button" className="btn btn-danger" onClick={() => removeArticle(index)}>
             Delete
           </button>
         </div>
       ))}
-      <button type="button" onClick={() => appendArticle({})}>
+      <button type="button" className="btn btn-success" onClick={() => appendArticle({})}>
         Add Article
       </button>
 
@@ -202,12 +202,12 @@ function StepThree() {
             className="form-input"
             ref={register()}
           />
-          <button type="button" onClick={() => removeCoGuide(index)}>
+          <button type="button" className="btn btn-danger" onClick={() => removeCoGuide(index)}>
             Delete
           </button>
         </div>
       ))}
-      <button type="button" onClick={() => appendCoGuide({})}>
+      <button type="button" className="btn btn-success" onClick={() => appendCoGuide({})}>
         Add CoGuide
       </button>
 
@@ -231,12 +231,12 @@ function StepThree() {
             className="form-input"
             ref={register()}
           />
-          <button type="button" onClick={() => removeCollaboration(index)}>
+          <button type="button" className="btn btn-danger" onClick={() => removeCollaboration(index)}>
             Delete
           </button>
         </div>
       ))}
-      <button type="button" onClick={() => appendCollaboration({})}>
+      <button type="button" className="btn btn-success" onClick={() => appendCollaboration({})}>
         Add Collaboration
       </button>
 

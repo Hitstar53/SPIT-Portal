@@ -20,6 +20,11 @@ export default function FacultyStepper() {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
+    React.useEffect(() => {
+        console.log(activeStep);
+    }, [activeStep])
+
+
     return (
         <React.Fragment>
             {/* header with Test_Study as heading and profile button */}
@@ -33,8 +38,8 @@ export default function FacultyStepper() {
                 {activeStep === 0 && <StepOne />}
                 {activeStep === 1 && <StepTwo />}
                 {activeStep === 2 && <StepThree handleBack={handleBack} />}
-                {activeStep === 3 && <StepThree handleBack={handleBack} />}
-                {activeStep === 4 && <StepFour handleBack={handleBack} submitted={true} />}
+                {activeStep === 3 && <StepFour handleBack={handleBack} />}
+                {/* {activeStep === 4 && <StepFour handleBack={handleBack} submitted={true} />} */}
 
                 {/* show footer only if all steps are not completed */}
                 {activeStep !== 4 && <StepFoot activeStep={activeStep} handleBack={handleBack} handleNext={handleNext} steps={steps} />}
