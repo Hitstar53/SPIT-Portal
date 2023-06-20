@@ -2,16 +2,12 @@ import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MobileStepper from '@mui/material/MobileStepper';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
 import EduCard from '../profile/EduCard';
-
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+import './Carousel.css';
 
 const currInfo = {
     edulevel: "Current Degree",
@@ -28,16 +24,20 @@ const currInfo = {
 const junclgInfo = {
     edulevel: "Junior College",
     inst: "Nirmala Memorial Foundation and Junior College",
+    qualification: "Higher Secondary Certificate",
     admyear: 2019,
     passyear: 2021,
-    score: 94.8,
+    score: "467/500",
+    percentage: 94.8,
 }
 
 const schlInfo = {
     edulevel: "School",
     inst: "Swami Vivekanand International School",
+    qualification: "Secondary School Certificate",
     passyear: 2019,
-    score: 95.6,
+    score: "285/300",
+    percentage: 95.6,
 }
 
 const eduinfo = [
@@ -64,44 +64,31 @@ function Carousel() {
   };
 
   return (
-    <Box sx={{ maxWidth: "fit-content", flexGrow: 1 }}>
-      <Paper
-        square
-        elevation={0}
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          height: 50,
-          pl: 2,
-          bgcolor: 'background.default',
-        }}
-      >
-      </Paper>
-      <AutoPlaySwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+    <Box className="carousel">
+      <SwipeableViews
+        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
       >
-      {eduinfo.map((info, index) => (
-        <EduCard
-          key={index}
-          info={info}
-        />
-      ))}
-      </AutoPlaySwipeableViews>
+        {eduinfo.map((info, index) => (
+          <EduCard key={index} index={index} info={info} />
+        ))}
+      </SwipeableViews>
       <MobileStepper
+        sx={{ backgroundColor: "var(--bg-color)" }}
         steps={maxSteps}
         position="static"
         activeStep={activeStep}
         nextButton={
           <Button
+            sx={{ color: "var(--text-color)" }}
             size="small"
             onClick={handleNext}
             disabled={activeStep === maxSteps - 1}
           >
             Next
-            {theme.direction === 'rtl' ? (
+            {theme.direction === "rtl" ? (
               <KeyboardArrowLeft />
             ) : (
               <KeyboardArrowRight />
@@ -109,8 +96,13 @@ function Carousel() {
           </Button>
         }
         backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === 'rtl' ? (
+          <Button
+            sx={{ color: "var(--text-color)" }}
+            size="small"
+            onClick={handleBack}
+            disabled={activeStep === 0}
+          >
+            {theme.direction === "rtl" ? (
               <KeyboardArrowRight />
             ) : (
               <KeyboardArrowLeft />

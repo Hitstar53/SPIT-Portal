@@ -24,7 +24,7 @@ const App = () => {
           <MiniDrawer />
           <Box
             component="main"
-            sx={{ flexGrow: 1, marginTop: 8 }}
+            sx={{ flexGrow: 1, marginTop: 8, overflow: 'hidden' }}
           >
             <Routes>
               <Route path="/student/" element={<Dashboard />} exact/>

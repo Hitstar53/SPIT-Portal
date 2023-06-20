@@ -2,4 +2,5 @@
     color: var(--text-color);
     background-color: var(--bg-color);
     padding: 30px;
+    min-width: calc(100% - 350px);
 }

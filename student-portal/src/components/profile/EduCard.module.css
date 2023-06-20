@@ -1,5 +1,4 @@
 .header {
-    margin-top: 2.5rem;
     margin-bottom: 0.625rem;
     font-weight: 600;
     font-size: 1.5rem;
@@ -34,4 +33,8 @@ label {
 .card {
     padding: 1.25rem;
     margin-bottom: 1.25rem;
+    background-color: var(--secondary-color);
+    border-radius: 1.5rem;
+    height: 100%;
 }
+

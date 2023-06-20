@@ -3,7 +3,7 @@ import styles from "./Profile.module.css";
 import ProfileHeader from "./ProfileHeader";
 import PersonalInfo from "./PersonalInfo";
 import ParentalInfo from "./ParentalInfo";
-import Carousel from "../UI/Carousel";
+import EduInfo from "./EduInfo";
 
 const user = {
     uid: 2021300108,
@@ -31,7 +31,7 @@ const Profile = () => {
       <ProfileHeader info={user} />
       <PersonalInfo info={user} />
       <ParentalInfo info={user} />
-      <Carousel />
+      <EduInfo />
     </div>
   )
 }

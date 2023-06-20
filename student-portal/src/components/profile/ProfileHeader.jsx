@@ -1,5 +1,5 @@
 import React from 'react'
-import ProfileForm from './profileform/ProfileForm';
+import ProfileForm from './profileform/PersonalInfoForm';
 import Modal from '../UI/Modal'
 import { FaEdit } from "react-icons/fa";
 import { LuEdit2 } from "react-icons/lu";
@@ -23,19 +23,9 @@ const ProfileHeader = (props) => {
             </div>
         </div>
         <div className={styles.title}>
-          <h1> {props.info.name} <FaEdit onClick={handleClickOpen} className={styles.titleIcon} /> </h1>
+          <h1> {props.info.name} </h1>
           <h2> UID: {props.info.uid} </h2>
         </div>
-        {open && (
-          <Modal
-            open={open}
-            title="Edit Profile Details"
-            action="Save"
-            onClose={handleClose}
-          >
-            <ProfileForm />
-          </Modal>
-        )}
       </div>
     );
 }
