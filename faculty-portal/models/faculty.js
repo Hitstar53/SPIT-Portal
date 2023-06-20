@@ -15,7 +15,7 @@ const teacherSchema = new mongoose.Schema({
     mobileNumber: {
         type: Number,
         required: true,
-        max: 10,
+        max: 9999999999,
     },
     id: {
         type: String,

@@ -104,6 +104,8 @@ const appraisalSchema = new mongoose.Schema({
             menteeFeedback: [{
                 type: Number //  changes from string quantified and filled here 
 
+                type: Number //  changes from string quantified and filled here 
+
             }],
             averageMarks: {
                 type: Number
