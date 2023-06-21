@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./EduCard.module.css";
+import { useState } from "react";
 
 const EduCard = (props) => {
   const key = props.index;
-
   return (
     <div className={styles.card}>
       <div>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { Route, Routes, useMatch, useLocation } from 'react-router-dom'
 import Dashboard from './components/dashboard/Dashboard';
 import Profile from './components/profile/Profile';
+import Login from './components/login/Login';
 
 import { Box } from '@mui/system';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -17,23 +18,23 @@ const App = () => {
       ].join(','),
     }
   });
+  let match = useMatch('/')
   return (
-    <Router>
       <ThemeProvider theme={theme}>
         <Box sx={{ display: 'flex' }}>
-          <MiniDrawer />
+          {match ? null : <MiniDrawer />}
           <Box
             component="main"
-            sx={{ flexGrow: 1, marginTop: 8, overflow: 'hidden' }}
+            sx={{ flexGrow: 1, marginTop: match ? 0 : 8, overflow: 'hidden' }}
           >
             <Routes>
-              <Route path="/student/" element={<Dashboard />} exact/>
-              <Route path="/student/profile" element={<Profile />} exact/>
+                <Route path="/" element={<Login />} exact/>
+                <Route path="/student/" element={<Dashboard />} exact/>
+                <Route path="/student/profile" element={<Profile />} exact/>
             </Routes>
           </Box>
         </Box>
       </ThemeProvider>
-    </Router>
   )
 }
 
