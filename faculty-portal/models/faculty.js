@@ -33,8 +33,8 @@ const teacherSchema = new mongoose.Schema({
         type: Date,
     },
     dateOfJoining: {
-        type: Date,
-        default: Date.now
+        type: String,
+        default: ""
     },
     address: {
         type: String,
