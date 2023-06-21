@@ -9,21 +9,21 @@ const getAppraisal = asyncHandler(async (req, res) => {
 })
 
 
-const setApprisal = asyncHandler(async (req, res) => {
+const setAppraisal = asyncHandler(async (req, res) => {
 
 })
 
-const updateApprisal = asyncHandler(async (req, res) => {
+const updateAppraisal = asyncHandler(async (req, res) => {
 
 })
 
-const deleteApprisal = asyncHandler(async (req, res) => {
+const deleteAppraisal = asyncHandler(async (req, res) => {
 
 })
 
 module.exports = {
-    getApprisal,
-    setApprisal,
-    updateApprisal,
-    deleteApprisal,
+    getAppraisal,
+    setAppraisal,
+    updateAppraisal,
+    deleteAppraisal,
 }
