@@ -17,6 +17,6 @@ app.use(express.urlencoded({ extended: false }));
 // const URI = process.env.MONGO_URI;
 
 app.use('/api/faculty', require('./routes/teacherRoutes'));
-app.use('/api/faculty/appraisal', require('./routes/appraisalRoute'));
+app.use('/api/faculty/appraisal', require('./routes/appraisalRoutes'));
 app.use(errorHandler);
 app.listen(port, () => console.log(`Server Started on Port ${port}`));

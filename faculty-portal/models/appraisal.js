@@ -3,22 +3,21 @@ const mongoose = require('mongoose');
 const appraisalSchema = new mongoose.Schema({
     teacherName: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Faculty',
-        required: true
+        ref: 'Faculty'
     },
     YearofAssesment: {
         type: String
     },
     department: {
         type: String,
-        required: true
+
     },
     designation: {
         type: String,
-        required: true
+
     },
     Dimension1: {
-        courses:
+        info:
         {
             courses: [{
                 name: {
@@ -196,7 +195,7 @@ const appraisalSchema = new mongoose.Schema({
             Total_marks: {
                 type: String,
                 max: 30
-            }
+            }   
         },
         RP2: {
             patents: [

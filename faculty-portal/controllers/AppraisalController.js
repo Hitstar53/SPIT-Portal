@@ -1,32 +1,29 @@
 const asyncHandler = require('express-async-handler');
-const Apprisal = require('../models/appraisal.js')
+const Appraisal = require('../models/appraisal.js')
 const { error } = require("console");
 
-const getAppraisal = asyncHandler(async (req, res) => {
-    const faculties = await Faculty.find();
-    res.status(200).json(faculties);
-    console.log("Inside getFaculty");
+const setAppraisal = asyncHandler(async (req, res) => {
+    console.log("Inside setAppraisalDim1");
+    try {
+        const { Dimension1, Dimension2, Dimension3, Dimension4 } = req.body;
+        // const { RP1, totalMarks } = req.body;
+        // const { totalMarks } = req.body;
+        const newAppraisal = new Appraisal({
+            Dimension1,
+            Dimension2,
+            Dimension3,
+            Dimension4
+        });
+        const savedAppraisal = await newAppraisal.save();
+        res.status(200).json(savedAppraisal);
+
+
+    } catch (error) {
+        console.error('Error saving course:', error);
+        throw error;
+    }
 })
-
-
-const setAppraisalDim1 = asyncHandler(async (req, res) => {
-    
-})
-const setAppraisalDim2 = asyncHandler(async (req, res) => {
-
-})
-const setAppraisalDim3 = asyncHandler(async (req, res) => {
-
-})
-
-const setAppraisalDim4 = asyncHandler(async (req, res) => {
-
-})
-
 
 module.exports = {
- setAppraisalDim1,
- setAppraisalDim2,
- setAppraisalDim3,
- setAppraisalDim4
+    setAppraisal
 }
