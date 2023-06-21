@@ -7,9 +7,9 @@ const {
   deleteAppraisal,
 } = require("../controllers/AppraisalController");
 
-router.get("/:id", getAppraisal);
-router.post("/", setAppraisal);
-router.put("/:id", updateAppraisal);
-router.delete("/:id", deleteAppraisal);
+// router.get("/:id", getAppraisal);
+// router.post("/", setAppraisal);
+// router.put("/:id", updateAppraisal);
+// router.delete("/:id", deleteAppraisal);
 
 module.exports = router;
