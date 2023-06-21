@@ -1,19 +1,9 @@
 import React from 'react'
-import ProfileForm from './profileforms/PersonalInfoForm';
-import Modal from '../UI/Modal'
-import { FaEdit } from "react-icons/fa";
 import { LuEdit2 } from "react-icons/lu";
 import profile from "../../assets/user.svg";
 import styles from './ProfileHeader.module.css'
 
 const ProfileHeader = (props) => {
-    const [open, setOpen] = React.useState(false);
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-    const handleClose = () => {
-      setOpen(false);
-    };
     return (
       <div className={styles.header}>
         <div className={styles.img}>

@@ -31,7 +31,17 @@
     flex-direction: row;
     margin-bottom: 0.625rem;
     align-items: center;
-    gap: 0.625rem;
+    gap: 1rem;
+}
+
+.twoColAddress {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    font-size: 1.125rem;
+    margin-bottom: 2.5rem;
 }
 
 .twoCol {
@@ -43,7 +53,7 @@
 }
 
 .twoCol i,
-.PersInfo i {
+.twoColAddress i {
     width: 1.25rem;
     height: 1.25rem;
 }

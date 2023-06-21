@@ -1,13 +1,19 @@
-import React, { useState } from "react";
-import { FaEdit } from "react-icons/fa";
-import Modal from "../UI/Modal";
+import React, { useState, useEffect, useRef } from "react";
+import { FaEdit, FaSave } from "react-icons/fa";
 import TextField from "@mui/material/TextField";
+import Fab from "@mui/material/Fab";
 import MenuItem from "@mui/material/MenuItem";
-import CustDatePicker from "../UI/CustDatePicker";
+import Box from "@mui/material/Box";
+// import CustDatePicker from "../UI/CustDatePicker";
+import dayjs from "dayjs";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateField } from "@mui/x-date-pickers/DateField";
 import styles from "./PersonalInfo.module.css";
 
 const PersonalInfo = (props) => {
   const [edit, setEdit] = useState(false);
+  const [personalInfo, setPersonalInfo] = useState({});
   const handleClickEdit = () => {
     if (!edit) {
       setEdit(true);
@@ -15,81 +21,153 @@ const PersonalInfo = (props) => {
       setEdit(false);
     }
   };
+  useEffect(() => {
+    setPersonalInfo({
+      phone: props.info.phone,
+      email: props.info.email,
+      address: props.info.address,
+      dob: props.info.dob,
+      gender: props.info.gender,
+      blood: props.info.blood,
+      religion: props.info.religion,
+      linkedin: props.info.linkedin,
+      github: props.info.github,
+    });
+  }, []);
+  const handleDateChange = (e) => {
+    setPersonalInfo({ ...personalInfo, "dob": `${(e.$M)+1}/${e.$D}/${e.$y}`});
+  };
+  const handleChange = (e) => {
+    setPersonalInfo({ ...personalInfo, [e.target.name]: e.target.value});
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    console.log(data);
+    setEdit(false);
   };
   return (
-    <div className={styles.personalInfo}>
+    <Box
+      className={styles.personalInfo}
+      component="form"
+      sx={{
+        "& .MuiTextField-root": { m: 1, width: "100%" },
+        "& .MuiOutlinedInput-input": { color: "var(--text-color) !important" },
+        "& .MuiOutlinedInput-notchedOutline": {
+          borderColor: "var(--dark-override-color) !important",
+        },
+        "& .MuiInputLabel-root": { color: "var(--text-color) !important" },
+        "& .Mui-focused": { color: "var(--dark-override-color) !important" },
+      }}
+      noValidate
+      onSubmit={handleSubmit}
+      autoComplete="off"
+    >
       <h3 className={styles.header}>
         Personal Information
-        <FaEdit onClick={handleClickEdit} className={styles.titleIcon} />
+        {!edit ? (
+          <FaEdit onClick={handleClickEdit} className={styles.titleIcon} />
+        ) : (
+          <Fab
+            type="submit"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              fontWeight: "bold",
+              borderRadius: "0",
+              backgroundColor: "var(--secondary-color)",
+              color: "var(--text-color)",
+              padding: "0.5rem 1rem",
+              ":hover": {
+                backgroundColor: "var(--secondary-color)",
+              },
+            }}
+            variant="extended"
+            size="small"
+            aria-label="add"
+          >
+            <FaSave />
+            Save
+          </Fab>
+        )}
       </h3>
       <div className={styles.PersInfo}>
         <div className={styles.twoCol}>
           <i className="fa-solid fa-phone"></i>
           {!edit && (
-            <span className={styles.iconInfo}>+91 {props.info.phone}</span>
+            <span className={styles.iconInfo}>+91 {personalInfo.phone}</span>
           )}
           {edit && (
             <TextField
+              name="phone"
               id="outlined-required"
               label="Mobile Number"
               type="text"
-              defaultValue={props.info.phone}
+              onChange={handleChange}
+              defaultValue={personalInfo.phone}
             />
           )}
         </div>
         <div className={styles.twoCol}>
           <i className="fa-solid fa-envelope"></i>
-          {!edit && <span className={styles.iconInfo}>{props.info.email}</span>}
+          {!edit && (
+            <span className={styles.iconInfo}>{personalInfo.email}</span>
+          )}
           {edit && (
             <TextField
+              name="email"
               id="outlined-required"
               label="Email"
               type="email"
-              defaultValue={props.info.email}
+              onChange={handleChange}
+              defaultValue={personalInfo.email}
             />
           )}
         </div>
       </div>
-      <div style={{ marginBottom: "40px" }} className={styles.PersInfo}>
+      <div className={styles.twoColAddress}>
         <i className="fa-solid fa-location-dot"></i>
-        {!edit && <span className={styles.iconInfo}>{props.info.address}</span>}
+        {!edit && (
+          <span className={styles.iconInfo}>{personalInfo.address}</span>
+        )}
         {edit && (
           <TextField
+            name="address"
             id="outlined-required"
             label="Address"
             type="text"
-            defaultValue={props.info.address}
-            sx = {{width:"100%"}}
+            onChange={handleChange}
+            defaultValue={personalInfo.address}
           />
         )}
       </div>
       <div className={styles.PersInfo}>
         <div className={styles.twoCol}>
           <i className="fa-solid fa-calendar-days"></i>
-          {!edit && <span className={styles.iconInfo}>{props.info.dob}</span>}
+          {!edit && <span className={styles.iconInfo}>{personalInfo.dob}</span>}
           {edit && (
-            <CustDatePicker
-              label="Date of Birth"
-              defaultValue={props.info.dob}
-            />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateField
+                name="dob"
+                label="Date of Birth"
+                onChange={handleDateChange}
+                value={dayjs(personalInfo.dob)}
+              />
+            </LocalizationProvider>
           )}
         </div>
         <div className={styles.twoCol}>
           <i className="fa-solid fa-venus-mars"></i>
           {!edit && (
-            <span className={styles.iconInfo}>{props.info.gender}</span>
+            <span className={styles.iconInfo}>{personalInfo.gender}</span>
           )}
           {edit && (
             <TextField
+              name="gender"
               id="outlined-required"
               select
               label="Gender"
-              defaultValue={props.info.gender}
+              onChange={handleChange}
+              defaultValue={personalInfo.gender}
             >
               <MenuItem key="Male" value="Male">
                 Male
@@ -107,27 +185,33 @@ const PersonalInfo = (props) => {
       <div className={styles.PersInfo}>
         <div className={styles.twoCol}>
           <i className="fa-solid fa-droplet"></i>
-          {!edit && <span className={styles.iconInfo}>{props.info.blood}</span>}
+          {!edit && (
+            <span className={styles.iconInfo}>{personalInfo.blood}</span>
+          )}
           {edit && (
             <TextField
+              name="blood"
               id="outlined-required"
               label="Blood Group"
               type="text"
-              defaultValue={props.info.blood}
+              onChange={handleChange}
+              defaultValue={personalInfo.blood}
             />
           )}
         </div>
         <div className={styles.twoCol}>
           <i className="fa-solid fa-hands-praying"></i>
           {!edit && (
-            <span className={styles.iconInfo}>{props.info.religion}</span>
+            <span className={styles.iconInfo}>{personalInfo.religion}</span>
           )}
           {edit && (
             <TextField
+              name="religion"
               id="outlined-required"
               label="Religion"
               type="text"
-              defaultValue={props.info.religion}
+              onChange={handleChange}
+              defaultValue={personalInfo.religion}
             />
           )}
         </div>
@@ -136,33 +220,37 @@ const PersonalInfo = (props) => {
         <div className={styles.twoCol}>
           <i className="fa-brands fa-linkedin"></i>
           {!edit && (
-            <span className={styles.iconInfo}>{props.info.linkedin}</span>
+            <span className={styles.iconInfo}>{personalInfo.linkedin}</span>
           )}
           {edit && (
             <TextField
+              name="linkedin"
               id="outlined-required"
               label="LinkedIn"
               type="text"
-              defaultValue={props.info.linkedin}
+              onChange={handleChange}
+              defaultValue={personalInfo.linkedin}
             />
           )}
         </div>
         <div className={styles.twoCol}>
           <i className="fa-brands fa-github"></i>
           {!edit && (
-            <span className={styles.iconInfo}>{props.info.github}</span>
+            <span className={styles.iconInfo}>{personalInfo.github}</span>
           )}
           {edit && (
             <TextField
+              name="github"
               id="outlined-required"
               label="Github"
               type="text"
-              defaultValue={props.info.github}
+              onChange={handleChange}
+              defaultValue={personalInfo.github}
             />
           )}
         </div>
       </div>
-    </div>
+    </Box>
   );
 };
 

@@ -24,6 +24,7 @@
 
 /* dark theme */
 [data-theme="dark"]{
+    --dark-override-color: #b6c3f1;
     --primary-color: #3a3a3a;
     --secondary-color: #5a5a5a;
     --tertiary-color: #1e1e1e;
@@ -38,5 +39,5 @@
     --text-dark: #222;
     --text-color: #fff;
     --scrollbar-track: #ccc;
-    --scrollbar-thumb: rgba(65, 28, 186, 0.5);
+    --scrollbar-thumb: rgba(10, 10, 13, 0.5);
 }

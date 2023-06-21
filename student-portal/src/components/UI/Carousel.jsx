@@ -7,9 +7,10 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import EduCard from '../profile/EduCard';
+import { useState,useEffect } from 'react';
 import './Carousel.css';
 
-const currInfo = {
+const Currinfo = {
     edulevel: "Current Degree",
     inst: "Sardar Patel Institute of Technology",
     degree: "Bachelors in Technology",
@@ -21,7 +22,7 @@ const currInfo = {
     cgpa: 9.1,
 }
 
-const junclgInfo = {
+const junclginfo = {
     edulevel: "Junior College",
     inst: "Nirmala Memorial Foundation and Junior College",
     qualification: "Higher Secondary Certificate",
@@ -31,7 +32,7 @@ const junclgInfo = {
     percentage: 94.8,
 }
 
-const schlInfo = {
+const Schlinfo = {
     edulevel: "School",
     inst: "Swami Vivekanand International School",
     qualification: "Secondary School Certificate",
@@ -40,17 +41,25 @@ const schlInfo = {
     percentage: 95.6,
 }
 
-const eduinfo = [
-  currInfo,
-  junclgInfo,
-  schlInfo,
-];
-
-function Carousel() {
+  function Carousel() {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = eduinfo.length;
-
+  const [currInfo,setCurrInfo] = React.useState();
+  const [junClgInfo,setJunClgInfo] = React.useState();
+  const [schlInfo,setSchlInfo] = React.useState();
+  const [eduInfo,seteduInfo] = React.useState([]);
+  const  setEverything = async ()=>{
+    
+    setCurrInfo(Currinfo);
+    setJunClgInfo(junclginfo);
+    setSchlInfo(Schlinfo);
+    seteduInfo([Currinfo,junclginfo,Schlinfo]);
+  }
+  useEffect(() => {
+    setEverything()
+  }, [])
+  
+  const maxSteps = eduInfo.length;
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -61,18 +70,33 @@ function Carousel() {
 
   const handleStepChange = (step) => {
     setActiveStep(step);
-  };
+  }; 
 
+  const handleChange = (e) => {
+    setCurrInfo({...currInfo,[e.target.name]:e.target.value})
+    setJunClgInfo({...junClgInfo,[e.target.name]:e.target.value})
+    setSchlInfo({...schlInfo,[e.target.name]:e.target.value})
+    seteduInfo([currInfo,junClgInfo,schlInfo])
+    console.log(currInfo)
+  }
   return (
-    <Box className="carousel">
+    <Box className="carousel" sx={{
+      "& .MuiTextField-root": { m: 1, width: "100%" },
+        "& .MuiOutlinedInput-input": { color: "var(--text-color) !important" },
+        "& .MuiOutlinedInput-notchedOutline": {
+          borderColor: "var(--dark-override-color) !important",
+        },
+        "& .MuiInputLabel-root": { color: "var(--text-color) !important" },
+        "& .Mui-focused": { color: "var(--dark-override-color) !important" },
+    }}>
       <SwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
       >
-        {eduinfo.map((info, index) => (
-          <EduCard key={index} index={index} info={info} />
+        {eduInfo.map((info, index) => (
+          <EduCard key={index} index={index} info={info} handleChange={handleChange}/>
         ))}
       </SwipeableViews>
       <MobileStepper

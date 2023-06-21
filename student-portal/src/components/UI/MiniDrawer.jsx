@@ -412,7 +412,7 @@ export default function MiniDrawer() {
                     ":hover": {
                       borderColor: "var(--text-light)",
                       background: "var(--bg-light)",
-                      color: "var(--text-dark)",
+                      color: "var(x`--text-dark)",
                     },
                   }}
                   disableElevation

@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "lottie-react": "^2.4.0"
+    "@react-spring/web": "^9.7.2",
+    "react-spring": "^9.7.1"
   }
 }
