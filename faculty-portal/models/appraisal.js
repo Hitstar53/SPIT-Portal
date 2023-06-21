@@ -4,18 +4,18 @@ const appraisalSchema = new mongoose.Schema({
     teacherName: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Faculty',
-        required: true
+        
     },
     YearofAssesment: {
         type: String
     },
     department: {
         type: String,
-        required: true
+        
     },
     designation: {
         type: String,
-        required: true
+        
     },
     Dimension1: {
         courses:
@@ -23,15 +23,15 @@ const appraisalSchema = new mongoose.Schema({
             courses: [{
                 name: {
                     type: String,
-                    required: true
+                    
                 },
                 class: {
                     type: String,
-                    required: true
+                    
                 },
                 Sem: {
                     type: String,
-                    required: true
+                    
                 },
                 AP2MarksObtained: {
                     type: Number
@@ -345,11 +345,11 @@ const appraisalSchema = new mongoose.Schema({
             instituteLevelAssignments: [{
                 role: {
                     type: String,
-                    required: true,
+                    ,
                 },
                 tick: {
                     type: Boolean,
-                    required: true,
+                    ,
                 },
                 marks: {
                     type: Number
