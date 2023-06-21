@@ -9,6 +9,14 @@ const appraisalSchema = new mongoose.Schema({
     YearofAssesment: {
         type: String
     },
+    department: {
+        type: String,
+        required: true
+    },
+    designation: {
+        type: String,
+        required: true
+    },
     Dimension1: {
         courses:
         {
