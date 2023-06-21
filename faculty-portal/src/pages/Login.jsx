@@ -1,23 +1,27 @@
-import { React, useState } from "react";
+import { React, useState, useContext, useEffect } from "react";
 import axios from "axios";
 import "../styles/Login.css";
+import { UserContext } from "../context/UserContext";
 
-export default function Login({ isLoggedIn, setIsLoggedIn}) {
+export default function Login({ isLoggedIn, setIsLoggedIn }) {
   const [email, setEmail] = useState("");
-
-
+  const { setUser } = useContext(UserContext);
   const handleLogin = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:5000/api/faculty/login", 
-    { email }).then((res) => {
-      console.log(res);
-      setIsLoggedIn(true)
-      localStorage.setItem("loggedin", true);
-    }).catch((err) => {
-        localStorage.clear()
-      console.log(err);
-    })
-  }
+    axios
+      .post("http://localhost:5000/api/faculty/login", { email })
+      .then((res) => {
+        setIsLoggedIn(true);
+        setUser(res.data)
+        localStorage.setItem("loggedin", true);
+      })
+      .catch((err) => {
+        localStorage.clear();
+        console.log(err);
+      });
+  };
+
+ 
 
   return (
     <div className="Auth-form-container">
