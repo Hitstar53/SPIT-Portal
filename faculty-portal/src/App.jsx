@@ -43,7 +43,7 @@ const App = () => {
           </Box>
         </Box>
       ) : (
-        <Login />
+        <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       )}
     </div>
   );

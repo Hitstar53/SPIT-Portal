@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/Login.css";
 
-export default function Login() {
+export default function Login({ isLoggedIn, setIsLoggedIn}) {
   return (
     <div className="Auth-form-container">
       <form className="Auth-form">
