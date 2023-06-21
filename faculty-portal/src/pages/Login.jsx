@@ -12,7 +12,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn}) {
     { email }).then((res) => {
       console.log(res);
       setIsLoggedIn(true)
-      localStorage.setItem("loggedin", isLoggedIn);
+      localStorage.setItem("loggedin", true);
     }).catch((err) => {
         localStorage.clear()
       console.log(err);

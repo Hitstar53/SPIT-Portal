@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import SideBar from "./components/SideBar";
 import { Box } from "@mui/system";
@@ -14,6 +14,13 @@ import Login from "./pages/Login";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("loggedin")) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   return (
     <div className="App">
       {isLoggedIn ? (
