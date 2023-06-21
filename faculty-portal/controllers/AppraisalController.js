@@ -9,21 +9,24 @@ const getAppraisal = asyncHandler(async (req, res) => {
 })
 
 
-const setAppraisal = asyncHandler(async (req, res) => {
+const setAppraisalDim1 = asyncHandler(async (req, res) => {
+    
+})
+const setAppraisalDim2 = asyncHandler(async (req, res) => {
+
+})
+const setAppraisalDim3 = asyncHandler(async (req, res) => {
 
 })
 
-const updateAppraisal = asyncHandler(async (req, res) => {
+const setAppraisalDim4 = asyncHandler(async (req, res) => {
 
 })
 
-const deleteAppraisal = asyncHandler(async (req, res) => {
-
-})
 
 module.exports = {
-    getAppraisal,
-    setAppraisal,
-    updateAppraisal,
-    deleteAppraisal,
+ setAppraisalDim1,
+ setAppraisalDim2,
+ setAppraisalDim3,
+ setAppraisalDim4
 }
