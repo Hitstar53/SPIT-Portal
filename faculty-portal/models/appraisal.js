@@ -10,7 +10,6 @@ const appraisalSchema = new mongoose.Schema({
         type: String
     },
     Dimension1: {
-
         courses:
         {
             courses: [{

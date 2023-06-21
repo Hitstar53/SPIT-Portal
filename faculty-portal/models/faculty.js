@@ -1,7 +1,16 @@
 const mongoose = require('mongoose')
-
 const teacherSchema = new mongoose.Schema({
-    name: {
+    firstName: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    middleName: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    lastName: {
         type: String,
         required: true,
         unique: true
@@ -44,10 +53,10 @@ const teacherSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    qualification: [{
+    qualification: {
         type: String,
         required: true
-    }],
+    },
     department: {
         type: String,
         required: true
@@ -75,6 +84,10 @@ const teacherSchema = new mongoose.Schema({
             type: String,
             required: true
         },
+        enrollmentKey: {
+            type: String,
+            required: true
+        },
         courseType: {
             type: String,
             required: true
@@ -86,6 +99,10 @@ const teacherSchema = new mongoose.Schema({
         class: {
             type: String,
             required: true
+        },
+        year: {
+            type: Number,
+            required: true,
         },
         semester: {
             type: String,
@@ -101,6 +118,24 @@ const teacherSchema = new mongoose.Schema({
             required: true,
             default: 0
         },
+        timetable: [{
+            startTime: {
+                type: Number,
+                required: true,
+            },
+            endTime: {
+                type: Number,
+                required: true,
+            },
+            day: {
+                type: String,
+                required: true,
+            },
+            roomno: {
+                type: Number,
+                required: true,
+            }
+        }],
         lecPlan: [{
             lecNumber: {
                 type: Number,
@@ -112,6 +147,32 @@ const teacherSchema = new mongoose.Schema({
             },
             suggestedReading: {
                 type: String,
+                required: true
+            },
+        }],
+        isePlan: [{
+            iseNumber: {
+                type: Number,
+                required: true
+            },
+            date: {
+                type: Date,
+                required: true
+            },
+            topic: {
+                type: String,
+                required: true
+            },
+            modality: {
+                type: String,
+                required: true
+            },
+            marks: {
+                type: Number,
+                required: true
+            },
+            weightage: {
+                type: Number,
                 required: true
             },
         }],
@@ -131,8 +192,23 @@ const teacherSchema = new mongoose.Schema({
     panCardNumber: {
         type: Number,
         required: true
-    }
+    },
 
+    events: [{
+        title: {
+
+        },
+        startDate: {
+
+        },
+        endDate: {
+
+        },
+    },
+    ],
+    history: [{
+        type: Object,
+    }]
 });
 
 module.exports = mongoose.model('Faculty', teacherSchema);

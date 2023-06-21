@@ -3,11 +3,10 @@ const Faculty = require('../models/faculty.js')
 const { error } = require("console");
 
 const getFaculty = asyncHandler(async (req, res) => {
-    const faculties = await Faculty.find();
-    res.status(200).json(faculties);
     console.log("Inside getFaculty");
+    const faculties = await Faculty.findById(req.params.id);
+    res.status(200).json(faculties);
 })
-
 
 const setFaculty = asyncHandler(async (req, res) => {
 
@@ -27,3 +26,4 @@ module.exports = {
     updateFaculty,
     deleteFaculty,
 }
+
