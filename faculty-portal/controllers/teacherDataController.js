@@ -20,24 +20,13 @@ const deleteFaculty = asyncHandler(async (req, res) => {
 
 })
 
-const infoFaculty = async(req,res)=>{
-    const {email} = req.body;
-    const det = await Faculty.findOne({email:email})
-    console.log(det)
-    if(det){
-        res.status(200).send(det)
-    } else{
-        res.status(404).send("No data else")
-    }
-}
-
 const loginFaculty = async(req, res)=>{
     const {email} = req.body;
     const det = await Faculty.findOne({email:email})
     if(det){
-        res.status(200).send(true)
+        res.status(200).send(det)
     } else{
-        res.status(404).send(false)
+        res.status(404).send("NO data found")
     }
 }
 
@@ -47,6 +36,5 @@ module.exports = {
     updateFaculty,
     deleteFaculty,
     loginFaculty,
-    infoFaculty,
 }
 
