@@ -20,13 +20,13 @@ const deleteFaculty = asyncHandler(async (req, res) => {
 
 })
 
-const loginFaculty = async (req, res) => {
-    const { email } = req.body;
-    const det = await Faculty.findOne({ email: email })
-    if (det) {
-        res.status(200).send(true)
-    } else {
-        res.status(404).send(false)
+const loginFaculty = async(req, res)=>{
+    const {email} = req.body;
+    const det = await Faculty.findOne({email:email})
+    if(det){
+        res.status(200).send(det)
+    } else{
+        res.status(404).send("NO data found")
     }
 }
 
