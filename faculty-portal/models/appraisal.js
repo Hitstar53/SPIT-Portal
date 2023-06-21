@@ -5,7 +5,7 @@ const appraisalSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Faculty'
     },
-    YearofAssesment: {
+    yearofAssesment: {
         type: String
     },
     department: {
@@ -22,15 +22,12 @@ const appraisalSchema = new mongoose.Schema({
             courses: [{
                 name: {
                     type: String,
-                    required: true
                 },
                 class: {
                     type: String,
-                    required: true
                 },
-                Sem: {
+                sem: {
                     type: String,
-                    required: true
                 },
                 AP2MarksObtained: {
                     type: Number
@@ -75,7 +72,7 @@ const appraisalSchema = new mongoose.Schema({
             },
             AP2Average: {
                 type: Number,
-                max: 10
+                //max: 10
             },
             AP3Average: {
                 type: Number,
@@ -195,7 +192,7 @@ const appraisalSchema = new mongoose.Schema({
             Total_marks: {
                 type: Number,
                 max: 30
-            }   
+            }
         },
         RP2: {
             patents: [
@@ -319,7 +316,7 @@ const appraisalSchema = new mongoose.Schema({
             activity_non_covered: [
                 {
                     Date: {
-                        type: String 
+                        type: String
                     },
                     Details: {
                         type: String
