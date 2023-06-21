@@ -117,7 +117,7 @@ const appraisalSchema = new mongoose.Schema({
         AP7: {
             guestLectureData: [{
                 date: {
-                    type: Date
+                    type: String
                 },
                 title: {
                     type: String
@@ -193,7 +193,7 @@ const appraisalSchema = new mongoose.Schema({
                 }
                 ],
             Total_marks: {
-                type: String,
+                type: Number,
                 max: 30
             }   
         },
@@ -246,7 +246,7 @@ const appraisalSchema = new mongoose.Schema({
             sponsored: [
                 {
                     date: {
-                        type: Date
+                        type: String
                     },
                     title: {
                         type: String
@@ -288,7 +288,7 @@ const appraisalSchema = new mongoose.Schema({
                         type: String
                     },
                     dates: {
-                        type: Date
+                        type: String
                     },
                     days: {
                         type: Number
@@ -319,7 +319,7 @@ const appraisalSchema = new mongoose.Schema({
             activity_non_covered: [
                 {
                     Date: {
-                        type: Date
+                        type: String 
                     },
                     Details: {
                         type: String
@@ -372,10 +372,10 @@ const appraisalSchema = new mongoose.Schema({
         DP1: {
             departmentLevelAssignments: [{
                 role: {
-                    type: String,
+                    type: String
                 },
                 tick: {
-                    type: Boolean,
+                    type: Boolean
                 },
                 marks: {
                     type: Number
@@ -434,7 +434,7 @@ const appraisalSchema = new mongoose.Schema({
                         type: String
                     },
                     Date: {
-                        type: Date
+                        type: String
                     }
                 }
             ],
