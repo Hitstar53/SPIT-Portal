@@ -11,8 +11,10 @@ export default function Login({ isLoggedIn, setIsLoggedIn}) {
     axios.post("http://localhost:5000/api/faculty/login", 
     { email }).then((res) => {
       console.log(res);
-      setIsLoggedIn(true);
+      setIsLoggedIn(true)
+      localStorage.setItem("loggedin", isLoggedIn);
     }).catch((err) => {
+        localStorage.clear()
       console.log(err);
     })
   }
