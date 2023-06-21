@@ -579,10 +579,6 @@ const appraisalSchema = new mongoose.Schema({
             type: Number
         }
     }
-
-
-
-
 });
 
 const Appraisal = mongoose.model('Appraisal', appraisalSchema);

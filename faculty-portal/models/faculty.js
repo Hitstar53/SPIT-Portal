@@ -26,11 +26,11 @@ const teacherSchema = new mongoose.Schema({
         unique: true
     },
     dateOfBirth: {
-        type: Date,
-        default: Date.now
+        type: String,
+        default: ""
     },
     bloodGroup: {
-        type: Date,
+        type: String,
     },
     dateOfJoining: {
         type: String,
