@@ -14,7 +14,7 @@ const Login = () => {
     <div className={styles.loginPage}>
       <div className={styles.loginCard}>
         <div className={styles.header}>
-          <h1 className={styles.title}>Sardar Patel Institute of Technology</h1>
+          <h1 className={styles.title}>Welcome to the SPIT Portal</h1>
         </div>
         <button className={styles.loginButt} onClick={() => login()}>
           <i className="fa-brands fa-google" style={{marginRight: "10px"}}></i>
@@ -32,9 +32,11 @@ const Login = () => {
         <div className={styles.links}>
           <a href="#">
             <img className={styles.linksImg} src={moodle} alt="moodle" />
+            <p>Moodle</p>
           </a>
           <a href="#">
             <img className={styles.linksImg} src={logo} alt="spit" />
+            <p>Website</p>
           </a>
         </div>
       </div>
