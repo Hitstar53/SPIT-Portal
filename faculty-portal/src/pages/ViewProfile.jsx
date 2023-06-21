@@ -18,6 +18,7 @@ const ViewProfile = () => {
   // React.useEffect(()=>{
   //   console.log(user)
   // },[])
+  if(!user) return <h1>Loading...</h1>
   return (
     <div className="full-view">
       <div className="profile-wrapper">
