@@ -98,13 +98,17 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-export default function MiniDrawer() {
+export default function MiniDrawer({setIsLoggedIn}) {
     const [active, setActive] = useState('Home');
     const [anchorEl, setAnchorEl] = useState(null);
     const Open = Boolean(anchorEl)
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+    const handleLogOut = () => {
+        setIsLoggedIn(false);
+        localStorage.clear()
+    }
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -170,7 +174,7 @@ export default function MiniDrawer() {
                                 }}
                             >
                                 <MenuItem onClick={() => { window.location.pathname = 'profile' }}><PersonIcon sx={{ marginRight: 1 }} />View Profile</MenuItem>
-                                <MenuItem onClick={handleClose}><LogoutIcon sx={{ marginRight: 1 }} />Logout</MenuItem>
+                                <MenuItem onClick={handleLogOut}><LogoutIcon sx={{ marginRight: 1 }} />Logout</MenuItem>
                             </Menu>
                         </div>
                     </div>

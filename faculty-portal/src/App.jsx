@@ -18,7 +18,7 @@ const App = () => {
     <div className="App">
       {isLoggedIn ? (
         <Box sx={{ display: "flex" }}>
-          <SideBar />
+          <SideBar setIsLoggedIn={setIsLoggedIn} />
           <Box
             component="main"
             sx={{
