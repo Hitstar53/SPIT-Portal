@@ -5,9 +5,10 @@ import { UserContext } from "../context/UserContext";
 
 export default function Login({ isLoggedIn, setIsLoggedIn }) {
   const [email, setEmail] = useState("");
-  const { setUser } = useContext(UserContext);
+  const { user , setUser } = useContext(UserContext);
   const handleLogin = (e) => {
     e.preventDefault();
+    console.log("login submitted")
     axios
       .post("http://localhost:5000/api/faculty/login", { email })
       .then((res) => {
@@ -15,6 +16,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
         setUser(res.data)
         localStorage.setItem("loggedin", true);
       })
+      .then(console.log("user setted",user))
       .catch((err) => {
         localStorage.clear();
         console.log(err);
