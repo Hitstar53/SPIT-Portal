@@ -3,21 +3,22 @@ const mongoose = require('mongoose');
 const appraisalSchema = new mongoose.Schema({
     teacherName: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Faculty'
+        ref: 'Faculty',
+        required: true
     },
     yearofAssesment: {
         type: String
     },
     department: {
         type: String,
-
+        required: true
     },
     designation: {
         type: String,
-
+        required: true
     },
     Dimension1: {
-        info:
+        courses:
         {
             courses: [{
                 name: {
@@ -114,7 +115,7 @@ const appraisalSchema = new mongoose.Schema({
         AP7: {
             guestLectureData: [{
                 date: {
-                    type: String
+                    type: Date
                 },
                 title: {
                     type: String
@@ -190,10 +191,11 @@ const appraisalSchema = new mongoose.Schema({
                 }
                 ],
             Total_marks: {
-                type: Number,
+                type: String,
                 max: 30
             }
-        },
+            },
+        // },
         RP2: {
             patents: [
                 {
@@ -243,7 +245,7 @@ const appraisalSchema = new mongoose.Schema({
             sponsored: [
                 {
                     date: {
-                        type: String
+                        type: Date
                     },
                     title: {
                         type: String
@@ -285,7 +287,7 @@ const appraisalSchema = new mongoose.Schema({
                         type: String
                     },
                     dates: {
-                        type: String
+                        type: Date
                     },
                     days: {
                         type: Number
@@ -334,8 +336,6 @@ const appraisalSchema = new mongoose.Schema({
         }
 
     },
-
-
     Dimension3: {
         IP1: {
             instituteLevelAssignments: [{
@@ -369,10 +369,10 @@ const appraisalSchema = new mongoose.Schema({
         DP1: {
             departmentLevelAssignments: [{
                 role: {
-                    type: String
+                    type: String,
                 },
                 tick: {
-                    type: Boolean
+                    type: Boolean,
                 },
                 marks: {
                     type: Number
@@ -431,7 +431,7 @@ const appraisalSchema = new mongoose.Schema({
                         type: String
                     },
                     Date: {
-                        type: String
+                        type: Date
                     }
                 }
             ],
