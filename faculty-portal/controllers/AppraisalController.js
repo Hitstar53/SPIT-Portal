@@ -5,7 +5,7 @@ const { error } = require("console");
 const setAppraisal = asyncHandler(async (req, res) => {
     console.log("Inside setAppraisalDim1");
     try {
-        const { Dimension1, Dimension2, Dimension3, Dimension4 } = req.body;
+        const { Dimension1, Dimension2, Dimension3, Dimension4, finalGrandTotal } = req.body;
 
         //Dimension1 starts
         var total = 0;
@@ -24,10 +24,12 @@ const setAppraisal = asyncHandler(async (req, res) => {
         }
         avgAP2Marks = total / Dimension1.info.courses.length;
 
+        avgAP2Marks = avgAP2Marks>10?10:avgAP2Marks;
+
         for (var i = 0; i < Dimension1.info.courses.length; i++) {
             var averagePercent =
-                (Dimension1.info.courses[i].LectureConducted /
-                    Dimension1.info.courses[i].LecturesTarget) *
+                (Dimension1.info.courses[i].AP3LectureConducted /
+                    Dimension1.info.courses[i].AP3LecturesTarget) *
                 100;
             Dimension1.info.courses[i].AP3PercentAchieved = averagePercent;
         }
@@ -122,13 +124,14 @@ const setAppraisal = asyncHandler(async (req, res) => {
 
         Dimension1.info.AP1Marks = avgAP1Marks;
         Dimension1.info.AP2Average = avgAP2Marks;
+        Dimension1.info.AP2Marks = avgAP2Marks;
         Dimension1.info.AP3Average = averagePercent;
         Dimension1.info.AP4Marks = averagePercentAP4;
         Dimension1.info.AP5Average = averageAttedanceAP5;
         Dimension1.info.AP5Marks = AP5Marks;
         Dimension1.AP6.averageMarks = averageMenteeFeedback;
         Dimension1.AP7.totalMarks = totalpercentAP7;
-        Dimension1.AP10.totalMarks = averageAuditMarks;
+        Dimension1.AP10.averageMarks = averageAuditMarks;
 
         // ==========================================================================================================
         //Dimension2 starts
@@ -231,11 +234,11 @@ const setAppraisal = asyncHandler(async (req, res) => {
             Dimension4.confidentialReport.principalRemarks *
             Dimension4.feedbackMarks.E;
 
-        finalGrandTotal.GrandTotal =
-            finalGrandTotal.dimension1.finalMarks +
-            finalGrandTotal.dimension2.finalMarks +
-            finalGrandTotal.dimension3.finalMarks +
-            finalGrandTotal.dimension4.finalMarks;
+        // finalGrandTotal.GrandTotal =
+        //     finalGrandTotal.dimension1.finalMarks +
+        //     finalGrandTotal.dimension2.finalMarks +
+        //     finalGrandTotal.dimension3.finalMarks +
+        //     finalGrandTotal.dimension4.finalMarks;
 
         // =============================================================================================================
         const newAppraisal = new Appraisal({

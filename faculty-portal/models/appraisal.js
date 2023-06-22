@@ -463,7 +463,7 @@ const appraisalSchema = new mongoose.Schema({
         },
 
         collaboration: {
-            institutionDetails: [{
+            institutionDetails:[{
                 name: {
                     type: String
                 },
@@ -512,9 +512,9 @@ const appraisalSchema = new mongoose.Schema({
             perceptionMarks: {
                 type: Number
             },
-            grandTotal: {
-                type: Number
-            },
+            // grandTotal: {
+            //     type: Number
+            // },
 
         }
     },
