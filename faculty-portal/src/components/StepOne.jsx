@@ -1,19 +1,34 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useFieldArray } from 'react-hook-form';
 import { Toaster, toast } from 'react-hot-toast';
 import { UserContext } from '../context/UserContext';
-import "../styles/Appraisal.css"
+import "../styles/Appraisal.css";
 
 const StepOne = () => {
   const { user } = useContext(UserContext);
-  // console.log(user)
+  // const classes = [
+  //   { value: 'SE Computer Science - A', label: 'SE Computer Science - A' },
+  //   { value: 'SE Computer Science - B', label: 'SE Computer Science - B' },
+  //   { value: 'SE CSE - AIML', label: 'SE CSE - AIML' },
+  //   { value: 'SE CSE - DS', label: 'SE CSE - DS' }
+  // ];
+
+  // const {
+  //   fields: courseFields,
+  //   append,
+  //   remove,
+  // } = useFieldArray({
+  //   control,
+  //   name: '',
+  // });
+  
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
-    watch,
+    control
   } = useForm();
 
   useEffect(() => {
@@ -27,7 +42,7 @@ const StepOne = () => {
   }, []);
 
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(data)
     localStorage.setItem('dim1Data', JSON.stringify(data));
     toast.success('Form submitted successfully!');
   };
@@ -44,13 +59,13 @@ const StepOne = () => {
             className="form-input"
           />
         </label>
-        {errors.yearOfAssessment && <p className='error'>*This field is required</p>}
+        {errors.yearOfAssessment && <p className="error">*This field is required</p>}
       </div>
 
       <div className="inputs">
         <label className="form-label">
           Faculty Name:
-          <input 
+          <input
             type="text"
             {...register('facultyName', { required: true })}
             className="form-input"
@@ -58,7 +73,7 @@ const StepOne = () => {
             value={user.fullName}
           />
         </label>
-        {errors.facultyName && <p className='error'>*This field is required</p>}
+        {errors.facultyName && <p className="error">*This field is required</p>}
       </div>
 
       <div className="inputs">
@@ -72,7 +87,7 @@ const StepOne = () => {
             value={user.department}
           />
         </label>
-        {errors.department && <p className='error'>*This field is required</p>}
+        {errors.department && <p className="error">*This field is required</p>}
       </div>
 
       <div className="inputs">
@@ -86,11 +101,128 @@ const StepOne = () => {
             value={user.designation}
           />
         </label>
-        {errors.designation && <p className='error'>*This field is required</p>}
+        {errors.designation && <p className="error">*This field is required</p>}
       </div>
 
       <h3>Courses</h3>
 
+      <div className="inputs">
+        <label className="form-label">
+          Course Name:
+          <input
+            type="text"
+            {...register('Dimension1.info.courses[0].name', { required: true })}
+            className="form-input"
+          />
+        </label>
+        {errors['Dimension1.info.courses[0].name'] && (
+          <p className="error">*This field is required</p>
+        )}
+      </div>
+
+      <div className="inputs">
+        <label className="form-label">
+          Class Name:
+          <input
+            type="text"
+            {...register('Dimension1.info.courses[0].class', { required: true })}
+            className="form-input"
+          />
+        </label>
+        {errors['Dimension1.info.courses[0].class'] && (
+          <p className="error">*This field is required</p>
+        )}
+      </div>
+
+      <div className="inputs">
+        <label className="form-label">
+          Sem:
+          <select className='form-input' {...register("Dimension1.info.courses[0].sem")}>
+            <option value="1">I</option>
+            <option value="2">II</option>
+            <option value="3">III</option>
+            <option value="4">IV</option>
+            <option value="5">V</option>
+            <option value="6">VI</option>
+            <option value="7">VII</option>
+            <option value="8">VIII</option>
+          </select>
+        </label>
+        {errors['Dimension1.info.courses[0].sem'] && (
+          <p className="error">*This field is required</p>
+        )}
+      </div>
+
+      <div className="inputs">
+        <label className="form-label">
+          Marks Obtained:
+          <input
+            type="number"
+            {...register('Dimension1.info.courses[0].AP2MarksObtained', { required: true })}
+            className="form-input"
+          />
+          <p className='marks-info'>(To be filled from  audited course file)</p>
+        </label>
+        {errors['Dimension1.info.courses[0].AP2MarksObtained'] && (
+          <p className="error">*This field is required</p>
+        )}
+      </div>
+
+      <div className="inputs">
+        <label className="form-label">
+          Lecture Target:
+          <input
+            type="number"
+            {...register('Dimension1.info.courses[0].AP3LecturesTarget', { required: true })}
+            className="form-input"
+          />
+        </label>
+        {errors['Dimension1.info.courses[0].AP3LecturesTarget'] && (
+          <p className="error">*This field is required</p>
+        )}
+      </div>
+
+      <div className="inputs">
+        <label className="form-label">
+          Total Lectures Taken:
+          <input
+            type="number"
+            {...register('Dimension1.info.courses[0].AP3LectureConducted', { required: true })}
+            className="form-input"
+          />
+        </label>
+        {errors['Dimension1.info.courses[0].AP3LectureConducted'] && (
+          <p className="error">*This field is required</p>
+        )}
+      </div>
+
+      <div className="inputs">
+        <label className="form-label">
+          Total Lectures Taken:
+          <input
+            type="number"
+            {...register('Dimension1.info.courses[0].AP3LectureConducted', { required: true })}
+            className="form-input"
+          />
+        </label>
+        {errors['Dimension1.info.courses[0].AP3LectureConducted'] && (
+          <p className="error">*This field is required</p>
+        )}
+      </div>
+
+      <div className="inputs">
+        <label className="form-label">
+        Percentage feedback:
+          <input
+            type="number"
+            {...register('Dimension1.info.courses[0].AP4PercentFeedback', { required: true })}
+            className="form-input"
+          />
+        </label>
+        {errors['Dimension1.info.courses[0].AP4PercentFeedback'] && (
+          <p className="error">*This field is required</p>
+        )}
+      </div>
 
       <button className="btn btn-primary submit-btn" type="submit">
         Submit
