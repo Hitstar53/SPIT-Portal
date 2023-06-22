@@ -147,8 +147,8 @@ const setAppraisal = asyncHandler(async (req, res) => {
                 Dimension3Marks = Dimension3Marks + 10;
             }
         }
-        for (var i = 0; i < Dimension3.IP3.length; i++) {
-            if (Dimension3.IP3[i].tick) {
+        for (var i = 0; i < Dimension3.DP1.length; i++) {
+            if (Dimension3.DP1[i].tick) {
                 Dimension3Marks = Dimension3Marks + 10;
             }
         }
@@ -225,6 +225,8 @@ const setAppraisal = asyncHandler(async (req, res) => {
             Dimension4.feedbackMarks.B +
             Dimension4.feedbackMarks.C +
             Dimension4.feedbackMarks.D;
+
+
         Dimension4.confidentialReport.perceptionMarks =
             Dimension4.confidentialReport.principalRemarks *
             Dimension4.feedbackMarks.E;
