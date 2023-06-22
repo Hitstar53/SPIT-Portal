@@ -32,7 +32,7 @@ function BootstrapDialogTitle(props) {
                     sx={{
                         position: 'absolute',
                         right: 8,
-                        top: 8,
+                        top: 12,
                         color: (theme) => theme.palette.grey[500],
                     }}
                 >
@@ -82,7 +82,6 @@ export default function Modal(props) {
               }}
             >
               {props.content}
-              {props.children}
             </Typography>
           </DialogContent>
           <DialogActions
@@ -93,7 +92,6 @@ export default function Modal(props) {
           >
             <Button
               type="submit"
-              form={props.formid}
               autoFocus
               onClick={props.onClose}
               sx={{

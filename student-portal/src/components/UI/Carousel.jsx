@@ -93,7 +93,6 @@ const Schlinfo = {
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
-        
       >
           <EduCard index={0} info={currInfo} handleChange={handleChangeCurr}/>
           <EduCard index={1} info={junClgInfo} handleChange={handleChangeJuncol}/>

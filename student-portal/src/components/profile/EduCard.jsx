@@ -22,7 +22,7 @@ const EduCard = (props) => {
   const key = props.index;
   return (
     <Box component='form' onSubmit={handleSubmit} autoComplete="off" className={styles.card}>
-      <div>
+      <div className={styles.cardInner}>
         <div className={styles.header}>
         <h3 className={styles.heading}>{props?.info?.edulevel} </h3>
         {!edit ? (
@@ -37,7 +37,7 @@ const EduCard = (props) => {
                 fontWeight: "bold",
                 borderRadius: "12px",
                 backgroundColor: "var(--primary-color)",
-                color: "var(--bg-color)",
+                color: "var(--bg-light)",
                 padding: "0.5rem 1rem",
                 ":hover": {
                   backgroundColor: "var(--tertiary-color)",
@@ -53,8 +53,8 @@ const EduCard = (props) => {
             </Fab>
           )}
         </div>
-        <div className={styles.row}>
-          <div className={styles.twoCol} style={{display:'flex', alignItems:'center'}}>
+        <div className={styles.row1}>
+          <div className={styles.twoCol}>
             {!edit && (<p><label className={styles.label}>Institute:&nbsp;&nbsp;</label>{props?.info?.inst}</p>)}
             {edit && (
             <TextField
@@ -68,7 +68,7 @@ const EduCard = (props) => {
           )}
           </div>
           {key === 0 && (
-            <div className={styles.twoCol} style={{display:'flex', alignItems:'center'}}>
+            <div className={styles.twoColLast} >
               {!edit && (<p><label>Degree:&nbsp;&nbsp;</label>{props?.info?.degree}</p>)}
             {edit && (
             <TextField
@@ -83,7 +83,7 @@ const EduCard = (props) => {
             </div>
           )}
           {(key === 1 || key === 2) && (
-            <div className={styles.twoCol} style={{display:'flex', alignItems:'center'}}>
+            <div className={styles.twoColLast}>
               {!edit && (<p><label>Qualification:&nbsp;&nbsp;</label>{props.info.qualification}</p>)}
             {edit && (
             <TextField
@@ -99,8 +99,8 @@ const EduCard = (props) => {
           )}
         </div>
         {key === 0 && (
-          <div className={styles.row}>
-            <div className={styles.threeCol} style={{display:'flex', alignItems:'center'}}>
+          <div className={styles.row2}>
+            <div className={styles.threeCol}>
               {!edit && (<p><label>Branch:&nbsp;&nbsp;</label>{props?.info?.branch}</p>)}
             {edit && (
             <TextField
@@ -113,7 +113,7 @@ const EduCard = (props) => {
             />
           )}
             </div>
-            <div className={styles.threeCol} style={{display:'flex', alignItems:'center'}}>
+            <div className={styles.threeColMiddle} >
               {!edit && (<p><label>Division:&nbsp;&nbsp;</label>{props?.info?.div}</p>)}
             {edit && (
             <TextField
@@ -126,7 +126,7 @@ const EduCard = (props) => {
             />
           )}
             </div>
-            <div className={styles.threeCol} style={{display:'flex', alignItems:'center'}}>
+            <div className={styles.threeColLast}>
               {!edit && (<p><label>Semester:&nbsp;&nbsp;</label>{props?.info?.sem}</p>)}
             {edit && (
             <TextField
@@ -141,9 +141,9 @@ const EduCard = (props) => {
             </div>
           </div>
         )}
-        <div className={styles.row}>
+        <div className={styles.row3}>
           {key === 0 && (
-            <div className={styles.threeCol} style={{display:'flex', alignItems:'center'}}>
+            <div className={styles.threeCol}>
               {!edit && (<p><label>Admission Year:&nbsp;&nbsp;</label>{props?.info?.admyear}</p>)}
             {edit && (
             <TextField
@@ -157,7 +157,7 @@ const EduCard = (props) => {
           )}
             </div>
           )}
-          <div className={styles.threeCol} style={{display:'flex', alignItems:'center'}}>
+          {key == 0 && (<div className={styles.threeColMiddle}>
             {!edit && (<p><label>Passing Year:&nbsp;&nbsp;</label>{props?.info?.passyear}</p>)}
             {edit && (
             <TextField
@@ -170,8 +170,9 @@ const EduCard = (props) => {
             />
           )}
           </div>
+          )}
           {key === 0 && (
-            <div className={styles.threeCol} style={{display:'flex', alignItems:'center'}}>
+            <div className={styles.threeColLast}>
               {!edit && (<p><label>CGPA:&nbsp;&nbsp;</label>{props?.info?.cgpa}</p>)}
             {edit && (
             <TextField
@@ -185,8 +186,22 @@ const EduCard = (props) => {
           )}
             </div>
           )}
+          {(key == 1 || key == 2) && (<div className={styles.threeCol}>
+            {!edit && (<p><label>Passing Year:&nbsp;&nbsp;</label>{props?.info?.passyear}</p>)}
+            {edit && (
+            <TextField
+              id="outlined-required"
+              label="Passing Year"
+              type="text"
+              name= "passyear"
+              defaultValue={props?.info?.passyear}
+              onChange={props?.handleChange}
+            />
+          )}
+          </div>
+          )}
           {(key === 1 || key === 2) && (
-            <div className={styles.threeCol} style={{display:'flex', alignItems:'center'}}>
+            <div className={styles.threeColMiddle}>
               {!edit && (<p><label>Score:&nbsp;&nbsp;</label>{props?.info?.score}</p>)}
             {edit && (
             <TextField
@@ -201,7 +216,7 @@ const EduCard = (props) => {
             </div>
           )}
           {(key === 1 || key === 2) && (
-            <div className={styles.threeCol} style={{display:'flex', alignItems:'center'}}>
+            <div className={styles.threeColLast}>
               {!edit && (<p><label>Percentage:&nbsp;&nbsp;</label>{props?.info?.percentage}</p>)}
             {edit && (
             <TextField

@@ -11,16 +11,23 @@
 }
 
 .card .inner {
-    padding: 1.5rem;
+    padding: 1rem 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 0.5rem;
     overflow: auto;
 }
 
 .cardItem {
     display: grid;
     grid-template-columns: 1fr 10fr;
+    cursor: pointer;
+    border-radius: 2rem;
+    padding: 1rem;
+}
+
+.cardItem:hover {
+    background-color: var(--tertiary-color);
 }
 
 .cardItemLogo {

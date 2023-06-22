@@ -16,33 +16,45 @@ label {
     gap: 1rem;
 }
 
-.row {
+.row1,
+.row2,
+.row3 {
     font-size: 1.125rem;
-    display: flex;
-    flex-direction: row; 
-    justify-content: flex-start
-}
-
-.twoCol {
-    display: flex;
-    flex-direction: row;
-    gap: 0.6rem;
-    width: 50%;
-}
-
-.threeCol {
-    display: flex;
-    flex-direction: row;
+    display: grid;
     gap: 0.625rem;
-    width: 33%;
+    margin-bottom: 0.625rem;
+}
+
+.row1 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.row2,
+.row3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.threeColMiddle {
+    display: flex;
+    justify-content: center;
+}
+
+.twoColLast,
+.threeColLast {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .card {
+    height: 100%;
     padding: 1.25rem;
     margin-bottom: 1.25rem;
-    background-color: var(--secondary-color);
     border-radius: 1.5rem;
-    height: 100%;
+    background-color: var(--secondary-color);
+}
+
+.cardInner {
+    padding: 0.5rem 1rem;
 }
 
 .titleIcon {

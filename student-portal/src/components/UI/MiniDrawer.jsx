@@ -218,9 +218,13 @@ export default function MiniDrawer() {
   const [picture, setPicture] = React.useState("")
   React.useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userinfo"))
-    console.log(userInfo)
+    console.log(userInfo?.picture)
     setName(userInfo?.name)
-    setPicture(userInfo?.picture)
+    if (userInfo?.picture) {
+      setPicture(userInfo?.picture)
+    } else {
+      setPicture(profile)
+    }
   }
   ,[])
   const toggleTheme = (event) => {

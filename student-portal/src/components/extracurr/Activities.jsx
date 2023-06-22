@@ -38,12 +38,12 @@ function createCard(cominfo) {
 }
 
 const volinfo = [
-    {
-  volname: "Abhyudaya",
-  instructor: "Dr. Y.S. Rao",
-  desc: "Teaching underprivedgled school students.",
-  voldur: "30 hrs, 2023",
-    },
+  {
+    volname: "Abhyudaya",
+    instructor: "Dr. Y.S. Rao",
+    desc: "Teaching underprivedgled school students.",
+    voldur: "30 hrs, 2023",
+  },
   {
     volname: "Abhyudaya",
     instructor: "Dr. Y.S. Rao",

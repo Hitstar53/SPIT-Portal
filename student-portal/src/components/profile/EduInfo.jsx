@@ -7,13 +7,10 @@ import { Box } from "@mui/material";
 
 
 const EduInfo = () => {
-  
-
     return (
       <Box className={styles.eduInfo}>
         <h3 className={styles.header}>
           Educational Information
-
         </h3>
         <Carousel />
       </Box>

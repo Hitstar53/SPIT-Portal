@@ -19,7 +19,6 @@ const Login = () => {
         headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
       })
       .then(res => res.data);
-      console.log(userInfo);
       localStorage.setItem('userinfo', JSON.stringify(userInfo));
       localStorage.setItem('isLoggedIn', true);
       navigate('/student/home')
@@ -52,11 +51,11 @@ const Login = () => {
           Login as Student
         </button>
         <div className={styles.links}>
-          <a href="https://moodle.spit.ac.in/login/">
+          <a target="_blank" href="https://moodle.spit.ac.in/login/">
             <img className={styles.linksImg} src={moodle} alt="moodle" />
             <p>Moodle</p>
           </a>
-          <a href="https://www.spit.ac.in/">
+          <a target="_blank" href="https://www.spit.ac.in/">
             <img className={styles.linksImg} src={logo} alt="spit" />
             <p>Website</p>
           </a>

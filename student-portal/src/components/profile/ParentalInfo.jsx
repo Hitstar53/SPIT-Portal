@@ -39,10 +39,12 @@ const ParentalInfo = (props) => {
       component="form"
       sx={{
         "& .MuiTextField-root": { m: 1, width: "100%" },
-        "& .MuiOutlinedInput-input": { color: "var(--text-color) !important"},
-        "& .MuiOutlinedInput-notchedOutline": {borderColor: "var(--dark-override-color) !important"},
-        "& .MuiInputLabel-root": {color: "var(--text-color) !important"},
-        "& .Mui-focused": {color: "var(--dark-override-color) !important"},
+        "& .MuiOutlinedInput-input": { color: "var(--text-color) !important" },
+        "& .MuiOutlinedInput-notchedOutline": {
+          borderColor: "var(--dark-override-color) !important",
+        },
+        "& .MuiInputLabel-root": { color: "var(--text-color) !important" },
+        "& .Mui-focused": { color: "var(--dark-override-color) !important" },
       }}
       onSubmit={handleSubmit}
       noValidate
@@ -118,14 +120,14 @@ const ParentalInfo = (props) => {
           <div className={styles.twoCol}>
             <i className="fas fa-phone"></i>
             {!edit && (
-              <span className={styles.iconInfo}>{parentalInfo.fphone}</span>
+              <span className={styles.iconInfo}>+91 {parentalInfo.fphone}</span>
             )}
             {edit && (
               <TextField
                 InputLabelProps={{
-                  sx:{
-                    color:"var(--text-color)",
-                  }
+                  sx: {
+                    color: "var(--text-color)",
+                  },
                 }}
                 name="fphone"
                 onChange={handleChange}
@@ -139,7 +141,7 @@ const ParentalInfo = (props) => {
           <div className={styles.twoCol}>
             <i className="fas fa-phone"></i>
             {!edit && (
-              <span className={styles.iconInfo}>{parentalInfo.mphone}</span>
+              <span className={styles.iconInfo}>+91 {parentalInfo.mphone}</span>
             )}
             {edit && (
               <TextField

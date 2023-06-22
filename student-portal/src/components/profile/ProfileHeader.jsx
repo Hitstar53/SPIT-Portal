@@ -2,7 +2,6 @@ import React from 'react'
 import { LuEdit2 } from "react-icons/lu";
 import profile from "../../assets/user.svg";
 import styles from './ProfileHeader.module.css'
-import CustomDropZone from '../UI/CustomDropZone.jsx'
 
 const ProfileHeader = (props) => {
     return (

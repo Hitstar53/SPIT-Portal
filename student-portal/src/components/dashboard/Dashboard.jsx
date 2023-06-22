@@ -13,11 +13,11 @@ const Dashboard = () => {
                 <h1 className="text-xl p-1 font-semibold heading">Announcements</h1>
                 <AnnounceCard />
             </div>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 mt-6">
                 <h1 className="text-xl p-1 font-semibold heading">Upcoming Exams</h1>
                 <UpcomingExams />
             </div>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4 mt-6">
                 <h1 className="text-xl p-1 font-semibold heading">Upcoming Events</h1>
                 <EventCard />
             </div>

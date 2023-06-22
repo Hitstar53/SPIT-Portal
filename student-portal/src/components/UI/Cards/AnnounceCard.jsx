@@ -1,4 +1,5 @@
 import React from 'react'
+import Announcement from './Announcement'
 import styles from './AnnounceCard.module.css'
 import logo from "../../../assets/user.svg"
 
@@ -28,19 +29,13 @@ const data = [
 const AnnounceCard = () => {
   return (
     <div className={styles.card}>
-      <div className={styles.inner}>  
-      {data.map((item, index) => (
-        <div className={styles.cardItem} key={index}>
-          <div className={styles.cardItemLogo}>
-            <img src={item.logo} alt="logo" />
-          </div>
-          <h1 className={styles.cardItemHeader}>{item.title}</h1>
-          <p className={styles.cardItemContent}>{item.description}</p>
-        </div>
-      ))}
+      <div className={styles.inner}>
+        {data.map((item, index) => (
+          <Announcement key={index} item={item} />
+        ))}
       </div>
     </div>
-  )
+  );
 }
 
 export default AnnounceCard
