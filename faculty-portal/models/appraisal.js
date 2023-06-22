@@ -84,8 +84,8 @@ const appraisalSchema = new mongoose.Schema({
                 type: Number,
                 //max: 30
             },
-            AP5Average :{
-                type:Number
+            AP5Average: {
+                type: Number
             },
             AP5Marks: {
                 type: Number,
@@ -228,7 +228,7 @@ const appraisalSchema = new mongoose.Schema({
                         type: String
                     },
                     duration: {
-                        type: String
+                        type: Number
                     },
                     details: {
                         type: String
@@ -335,48 +335,45 @@ const appraisalSchema = new mongoose.Schema({
         }
     },
     Dimension3: {
-        IP1: {
-            instituteLevelAssignments: [{
-                role: {
-                    type: String,
-                    // required: true,
-                },
-                tick: {
-                    type: Boolean,
-                    // required: true,
-                },
-                marks: {
-                    type: Number
-                }
-            }],
-        },
-        IP2: {
-            otherInstituteLevelAssignments: [{
-                role: {
-                    type: String,
-                },
-                tick: {
-                    type: Boolean,
+        IP1: [{
+            role: {
+                type: String,
+                // required: true,
+            },
+            tick: {
+                type: Boolean,
+                // required: true,
+            },
+            marks: {
+                type: Number,
+                default: 20
+            }
+        }],
+        IP2: [{
+            role: {
+                type: String,
+            },
+            tick: {
+                type: Boolean,
 
-                },
-                marks: {
-                    type: Number
-                }
-            }],
-        },
-        DP1: {
-            departmentLevelAssignments: [{
-                role: {
-                    type: String,
-                },
-                tick: {
-                    type: Boolean,
-                },
-                marks: {
-                    type: Number
-                }
-            }],
-        },
+            },
+            marks: {
+                type: Number,
+                default: 10
+            }
+        }],
+        DP1: [{
+            role: {
+                type: String,
+            },
+            tick: {
+                type: Boolean,
+            },
+            marks: {
+                type: Number,
+                default: 10
+            }
+        }],
         totalIP1IP2DP1Marks: {
             type: Number
         },
