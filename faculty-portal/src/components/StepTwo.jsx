@@ -4,7 +4,7 @@ import "../styles/Appraisal2.css";
 
 function StepTwo() {
   const [dimension2, setDimension2] = useState([{}]);
-  const { register, control, handleSubmit } = useForm();
+  const { register, control, handleSubmit, setValue } = useForm();
   const {
     fields: paperFields,
     append: appendPaper,
@@ -81,12 +81,23 @@ function StepTwo() {
 
   const onSubmit = (data) => {
     console.log(data);
+    localStorage.setItem('dim2Data', JSON.stringify(data));
     setDimension2(data);
   };
 
   useEffect(() => {
     console.log("dimension2=", dimension2);
   }, [dimension2]);
+
+  useEffect(() => {
+    const storedData = localStorage.getItem('dim2Data');
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      Object.keys(parsedData).forEach((key) => {
+        setValue(key, parsedData[key]);
+      });
+    }
+  }, []);
 
   return (
     <>
