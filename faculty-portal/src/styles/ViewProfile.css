@@ -64,7 +64,7 @@ section{
     display: flex;
     flex-wrap: wrap;
 }
-#section-2{
+#section-2,#section-3{
     flex:1;
     min-width: 375px;
 }
