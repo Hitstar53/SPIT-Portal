@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 
 const appraisalSchema = new mongoose.Schema({
-    teacherName: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Faculty',
+    facultyName: {
+        type: String
     },
     yearofAssesment: {
         type: String
