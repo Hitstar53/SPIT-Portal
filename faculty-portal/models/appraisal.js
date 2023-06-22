@@ -463,14 +463,14 @@ const appraisalSchema = new mongoose.Schema({
         },
 
         collaboration: {
-            institutionDetails: {
+            institutionDetails:[{
                 name: {
                     type: String
                 },
                 details: {
                     type: String
                 }
-            },
+            }],
             totalMarks: {
                 type: Number
             }
