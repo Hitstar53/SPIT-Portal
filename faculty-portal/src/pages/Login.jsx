@@ -7,7 +7,7 @@ import axios from "axios"
 import { UserContext } from "../context/UserContext";
 
 const Login = ({ isLoggedIn, setIsLoggedIn}) => {
-  const {user, setUser} = useContext(UserContext);
+  const {user, setUser,picture,setPicture} = useContext(UserContext);
 
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => 
@@ -17,7 +17,8 @@ const Login = ({ isLoggedIn, setIsLoggedIn}) => {
         headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
       })
       .then(res => res.data);
-      localStorage.setItem('userinfo', JSON.stringify(userInfo));
+      console.log(userInfo.picture)
+      localStorage.setItem('userInfo', JSON.stringify(userInfo));
       handleLogin(userInfo.email)
     }
   });
