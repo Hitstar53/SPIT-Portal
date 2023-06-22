@@ -27,8 +27,8 @@
   align-items: center;
   padding: 2.5rem;
   border-radius: 1.6rem;
-  box-shadow: 0px 0px 10px 3px #888888;
-  background-color: var(--primary-color);
+  box-shadow: 0px 0px 10px 2px #1e1e1e;
+  backdrop-filter: blur(10px) brightness(75%);
 }
 
 .loginPage {
@@ -39,7 +39,14 @@
   justify-items: center;
   color: var(--text-light);
   height: 100vh;
-  background-color: var(--secondary-color);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.5) 25%,
+    rgba(255, 255, 255, 0.1) 100%
+  ), url('../../assets/spitbg.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 .header {

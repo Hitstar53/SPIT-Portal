@@ -3,9 +3,10 @@ import styles from "./EduCard.module.css";
 import { useState } from "react";
 import { TextField } from "@mui/material";
 import { FaEdit } from "react-icons/fa";
+import { Fab } from '@mui/material';
 
 const EduCard = (props) => {
-  const [edit, setEdit] = useState(false);
+    const [edit, setEdit] = useState(false);
     const handleClickEdit = () => {
       if (!edit) {
         setEdit(true);

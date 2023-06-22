@@ -7,7 +7,7 @@ const ProfileHeader = (props) => {
     return (
       <div className={styles.header}>
         <div className={styles.img}>
-            <img src={profile} alt="profile photo" className={styles.profilePic} />
+            <img src={props.info.picture} alt="profile photo" className={styles.profilePic} />
             <div className={styles.edit}>
               <LuEdit2 className={styles.editIcon} />
             </div>

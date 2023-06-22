@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -184,6 +185,8 @@ export default function MiniDrawer() {
     false,
   ]);
 
+  const navigate = useNavigate();
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -211,7 +214,15 @@ export default function MiniDrawer() {
   const LightMode = () => {
     document.querySelector("body").setAttribute("data-theme", "light");
   }
-
+  const [name, setName] = React.useState("")
+  const [picture, setPicture] = React.useState("")
+  React.useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("userinfo"))
+    console.log(userInfo)
+    setName(userInfo?.name)
+    setPicture(userInfo?.picture)
+  }
+  ,[])
   const toggleTheme = (event) => {
     if (event.target.checked) {
       DarkMode();
@@ -219,6 +230,10 @@ export default function MiniDrawer() {
       LightMode();
     }
   };
+
+  const profileHandler = () => {
+    navigate("/student/profile");
+  }
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -255,10 +270,10 @@ export default function MiniDrawer() {
                 textAlign: "right",
               }}
             >
-              <span style={{ fontSize: 24 }}>Hatim Sawai</span>
+              <span style={{ fontSize: 24 }}>{name}</span>
               <span style={{ opacity: 0.5, fontSize: 16 }}>2021300108</span>
             </span>
-            <img src={profile} alt="logo" style={{ width: 50, height: 50 }} />
+            <img onClick={profileHandler} src={picture} alt="logo" style={{ width: 50, height: 50, borderRadius: "50%", cursor: "pointer" }} />
           </Typography>
         </Toolbar>
       </AppBar>
@@ -416,6 +431,10 @@ export default function MiniDrawer() {
                     },
                   }}
                   disableElevation
+                  onClick={()=>{
+                    localStorage.clear()
+                    navigate('/')
+                  }}
                 >
                   Logout
                 </Button>
@@ -450,7 +469,7 @@ export default function MiniDrawer() {
                   }}
                   disableElevation
                 >
-                  Moodle
+                  <a href="https://moodle.spit.ac.in">Moodle</a>
                 </Button>
               ) : (
                 <Fab

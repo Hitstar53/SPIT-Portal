@@ -23,9 +23,21 @@ const user = {
     mphone: "70455 88515",
     femail: "yusufsawai@gmail.com",
     memail: "faridasawai@gmail.com ",
+    picture:"",
   };
 
+
+
 const Profile = () => {
+  const [userInfo,setUserInfo] = React.useState({})
+  React.useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("userinfo"))
+    console.log(userInfo)
+    setUserInfo(userInfo)
+    user.name=userInfo.name
+    user.picture=userInfo.picture
+  }
+  ,[])
   return (
     <div className={styles.profile}>
       <ProfileHeader info={user} />
