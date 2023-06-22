@@ -80,6 +80,15 @@ const ViewProfile = () => {
 
         </div>
       </section>
+
+      <hr id="hr" />
+      <section>
+        <h1 className="bigger">Documents :</h1>
+        <div className="section" id="section-3">
+          <h1 className="bigg">Aadhar Card Number: XXXXXXXXX</h1>
+          <h1 className="bigg">PAN Card Number: XXX XXX XXX XXX</h1>
+        </div>
+      </section>
     </div>
   );
 };

@@ -66,6 +66,7 @@ section{
 }
 #section-2{
     flex:1;
+    min-width: 375px;
 }
 .info-wrapper h1{
     padding: 5px 0px;
