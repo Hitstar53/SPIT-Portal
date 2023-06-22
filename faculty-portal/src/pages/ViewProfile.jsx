@@ -12,19 +12,23 @@ import WcIcon from '@mui/icons-material/Wc';
 import BloodtypeIcon from '@mui/icons-material/Bloodtype';
 import MergeTypeIcon from '@mui/icons-material/MergeType';
 import { UserContext } from "../context/UserContext";
+import ProfileForm from "./ProfileForm";
+import { Link } from "react-router-dom";
 
 const ViewProfile = () => {
   const {user}=useContext(UserContext)
+  const userInfo=JSON.parse(localStorage.getItem('userInfo'))
   // React.useEffect(()=>{
   //   console.log(user)
   // },[])
   if(!user) return <h1>Loading...</h1>
   return (
     <div className="full-view">
+    <Link to="/edit-profile">Edit profile</Link>
       <div className="profile-wrapper">
         <div className="img-wrapper">
           <img
-            src="https://www.w3schools.com/howto/img_avatar.png"
+            src={userInfo.picture}
             alt="profile"
           />
         </div>

@@ -11,6 +11,7 @@ import MiniProj from "./pages/MiniProj";
 import Appraisal from "./pages/Appraisal";
 import ViewProfile from "./pages/ViewProfile";
 import Login from "./pages/Login";
+import ProfileForm from "./pages/ProfileForm";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -45,6 +46,7 @@ const App = () => {
                 <Route path="/leaves" element={<Leaves />} />
                 <Route path="/mini-proj" element={<MiniProj />} />
                 <Route path="/appraisal" element={<Appraisal />} />
+                <Route path="/edit-profile" element={<ProfileForm />} />
               </Routes>
             </Router>
           </Box>
