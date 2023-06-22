@@ -31,6 +31,12 @@ body {
     margin: 1rem;
 }
 
+.inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .form-label {
     font-size: 1.2rem;
     font-weight: 500;
@@ -42,4 +48,11 @@ body {
     border: 1px solid #ccc;
     border-radius: 0.5rem;
     margin: 0.5rem 0.5rem;
+}
+
+.error {
+    color: red;
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+    text-align: right;
 }

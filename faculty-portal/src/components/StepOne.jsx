@@ -2,10 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Toaster, toast } from 'react-hot-toast';
 import { UserContext } from '../context/UserContext';
+import "../styles/Appraisal.css"
 
 const StepOne = () => {
   const { user } = useContext(UserContext);
-  console.log(user)
+  // console.log(user)
 
   const {
     register,
@@ -15,36 +16,16 @@ const StepOne = () => {
     watch,
   } = useForm();
 
-  const form = useForm({
-    defaultValues: {
-      yearOfAssessment: '',
-      facultyName: user.firstName+" "+user.middleName+" "+user.lastName,
-      department: user.department,
-      designation: user.designation
-      },
-
-    },    
-)
 
   const onSubmit = (data) => {
     console.log(data);
     toast.success('Form submitted successfully!');
   };
 
-  useEffect(() => {
-    setValue('facultyName', user.firstName+" "+user.middleName+" "+user.lastName);
-    setValue('department', user.department);
-    setValue('designation', user.designation);
-    user.courses.forEach((course, index) => {
-      setValue(`courses[${index}].lecturesConducted`, course.lecturesConducted);
-      setValue(`courses[${index}].targetedLectures`, course.targetedLectures);
-    });
-  }, [setValue]);
-
   return (
     <form className="container" onSubmit={handleSubmit(onSubmit)}>
       <Toaster />
-      <div>
+      <div className="inputs">
         <label className="form-label">
           Year of Assessment:
           <input
@@ -53,24 +34,24 @@ const StepOne = () => {
             className="form-input"
           />
         </label>
-        {errors.facultyName && <span className="error-message">This field is required</span>}
+        {errors.yearOfAssessment && <p className='error'>*This field is required</p>}
       </div>
 
-      <div>
+      <div className="inputs">
         <label className="form-label">
           Faculty Name:
-          <input
+          <input 
             type="text"
             {...register('facultyName', { required: true })}
             className="form-input"
             readOnly
-            value={user.name}
+            value={user.fullName}
           />
         </label>
-        {errors.facultyName && <span className="error-message">This field is required</span>}
+        {errors.facultyName && <p className='error'>*This field is required</p>}
       </div>
 
-      <div>
+      <div className="inputs">
         <label className="form-label">
           Department:
           <input
@@ -81,10 +62,10 @@ const StepOne = () => {
             value={user.department}
           />
         </label>
-        {errors.department && <span className="error-message">This field is required</span>}
+        {errors.department && <p className='error'>*This field is required</p>}
       </div>
 
-      <div>
+      <div className="inputs">
         <label className="form-label">
           Designation:
           <input
@@ -95,7 +76,7 @@ const StepOne = () => {
             value={user.designation}
           />
         </label>
-        {errors.designation && <span className="error-message">This field is required</span>}
+        {errors.designation && <p className='error'>*This field is required</p>}
       </div>
 
       <h3>Courses</h3>
