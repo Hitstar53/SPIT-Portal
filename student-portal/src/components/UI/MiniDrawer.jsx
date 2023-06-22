@@ -92,7 +92,7 @@ const sidebardata = [
   {
     text: "Extra-Curricular",
     icon: <i className="fas fa-medal"></i>,
-    sub: ["Activities", "Committees", "Vounteer Work"],
+    sub: ["Activities","Events","Committees"],
   },
   {
     text: "CareerConnect",
@@ -273,7 +273,17 @@ export default function MiniDrawer() {
               <span style={{ fontSize: 24 }}>{name}</span>
               <span style={{ opacity: 0.5, fontSize: 16 }}>2021300108</span>
             </span>
-            <img onClick={profileHandler} src={picture} alt="logo" style={{ width: 50, height: 50, borderRadius: "50%", cursor: "pointer" }} />
+            <img
+              onClick={profileHandler}
+              src={picture}
+              alt="logo"
+              style={{
+                width: 50,
+                height: 50,
+                borderRadius: "50%",
+                cursor: "pointer",
+              }}
+            />
           </Typography>
         </Toolbar>
       </AppBar>
@@ -344,12 +354,22 @@ export default function MiniDrawer() {
                         pl: open ? 0.5 : "auto",
                       }}
                     >
-                      {data.icon}
+                      {data.icon} 
                     </ListItemIcon>
-                    <ListItemText
-                      primary={data.text}
-                      sx={{ width: 160, opacity: open ? 1 : 0 }}
-                    />
+                    <Link
+                      to={
+                        index == 0 || index == 4
+                          ? "/student/" + data.text.toLowerCase()
+                          : "/student/home"
+                      }
+                    >
+                      {
+                        open ? <ListItemText
+                        primary={data.text}
+                        sx={{ width: 160, opacity: open ? 1 : 0 }}
+                      /> : ""
+                    }
+                    </Link>
                     {open ? (
                       index != 0 && index != 4 ? (
                         openSub[index] ? (
@@ -370,10 +390,14 @@ export default function MiniDrawer() {
                     {data.sub.map((heading, index2) => {
                       return (
                         <ListItemButton sx={{ pl: 8 }} key={index2}>
-                          <ListItemText
-                            sx={{ pl: 1, color: "var(--text-light)" }}
-                            primary={heading}
-                          />
+                          <Link 
+                            to={"/student/" + heading.toLowerCase()}
+                          >
+                            <ListItemText
+                              sx={{ pl: 1, color: "var(--text-light)" }}
+                              primary={heading}
+                            />
+                          </Link>
                         </ListItemButton>
                       );
                     })}
@@ -404,7 +428,9 @@ export default function MiniDrawer() {
                   <FormGroup>
                     <FormControlLabel
                       sx={{ display: "flex", justifyContent: "center", m: 0 }}
-                      control={<MaterialUISwitch onClick={toggleTheme} theme={theme} />}
+                      control={
+                        <MaterialUISwitch onClick={toggleTheme} theme={theme} />
+                      }
                     />
                   </FormGroup>
                 </ListItemIcon>
@@ -431,9 +457,10 @@ export default function MiniDrawer() {
                     },
                   }}
                   disableElevation
-                  onClick={()=>{
-                    localStorage.clear()
-                    navigate('/')
+                  onClick={() => {
+                    localStorage.setItem('isLoggedIn', false);
+                    localStorage.removeItem('userInfo');
+                    navigate("/");
                   }}
                 >
                   Logout
@@ -469,16 +496,18 @@ export default function MiniDrawer() {
                   }}
                   disableElevation
                 >
-                  <a href="https://moodle.spit.ac.in">Moodle</a>
+                  <a target="_blank" href="https://moodle.spit.ac.in">Moodle</a>
                 </Button>
               ) : (
                 <Fab
-                  sx={{ overflow: "hidden" }}
-                  size="small"
-                  color="secondary"
-                  aria-label="add"
+                sx={{ overflow: "hidden" }}
+                size="small"
+                color="secondary"
+                aria-label="add"
                 >
-                  <img src={moodle} alt="moodle" />
+                  <a target="_blank" href="https://moodle.spit.ac.in">
+                    <img src={moodle} alt="moodle" />
+                  </a>
                 </Fab>
               )}
             </ListItem>

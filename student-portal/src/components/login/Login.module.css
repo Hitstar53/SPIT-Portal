@@ -7,6 +7,17 @@
   transition: 0.25s ease;
 }
 
+.loginButt:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.loginButt:disabled:hover {
+  transform: scale(1);
+  background: none;
+  color: var(--text-light);
+}
+
 .loginButt:hover {
   transform: scale(1.1);
   background-color: var(--bg-color);
@@ -57,12 +68,13 @@
   margin-bottom: 1.25rem;
 }
 
-hr {
+.divider {
   border: none;
   background-color: white;
   display: inline-block;
   width: 6.25rem;
   opacity: 0.3;
+  height: 05px;
 }
 
 .links {

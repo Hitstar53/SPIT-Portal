@@ -73,7 +73,7 @@ const PersonalInfo = (props) => {
               alignItems: "center",
               gap: "0.5rem",
               fontWeight: "bold",
-              borderRadius: "0",
+              borderRadius: "10px",
               backgroundColor: "var(--secondary-color)",
               color: "var(--text-color)",
               padding: "0.5rem 1rem",

@@ -21,6 +21,7 @@ const Login = () => {
       .then(res => res.data);
       console.log(userInfo);
       localStorage.setItem('userinfo', JSON.stringify(userInfo));
+      localStorage.setItem('isLoggedIn', true);
       navigate('/student/home')
     }
   });
@@ -31,7 +32,7 @@ const Login = () => {
         <div className={styles.header}>
           <h1 className={styles.title}>Welcome to the S.P.I.T. Portal</h1>
         </div>
-        <button className={styles.loginButt} onClick={() => login()}>
+        <button className={styles.loginButt} onClick={() => login()} disabled>
           <i
             className="fa-brands fa-google"
             style={{ marginRight: "10px" }}
@@ -39,9 +40,9 @@ const Login = () => {
           Login as Faculty
         </button>
         <div className={styles.or}>
-          <hr style={{ height: "0.5px" }} />
+          <hr className={styles.divider} />
           <div style={{ margin: "10px" }}>or</div>
-          <hr style={{ height: "0.5px" }} />
+          <hr className={styles.divider} />
         </div>
         <button className={styles.loginButt} onClick={() => login()}>
           <i

@@ -1,0 +1,36 @@
+.activitiesPage {
+  margin: 2rem;
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.committees {
+  margin-bottom: 2rem;
+}
+
+.divider {
+  border: none;
+  background-color: grey;
+  height: 1px;
+  opacity: 0.5;
+}
+
+.volunteer {
+    margin-bottom: 3rem;
+  }
+
+.comGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

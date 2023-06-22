@@ -1,0 +1,38 @@
+.volCard {
+    background-color: var(--secondary-color);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    align-items: center;
+    width: 50%;
+  }
+
+  .instructor {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  .volname {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  h2 {
+    font-size: 10rem;
+    font-weight: 1000px;
+  }
+  
+  .position {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      font-size: 1rem;
+      font-weight: 300;
+      width: 100%;
+  }
+
+  .content {
+    width: 100%;
+  }
+  

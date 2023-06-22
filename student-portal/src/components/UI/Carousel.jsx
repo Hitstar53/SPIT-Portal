@@ -16,7 +16,7 @@ const Currinfo = {
     degree: "Bachelors in Technology",
     branch: "Computer Science",
     div: "B",
-    sem: "Three",
+    sem: 4,
     admyear: 2021,
     passyear: 2025,
     cgpa: 9.1,
@@ -38,7 +38,7 @@ const Schlinfo = {
     qualification: "Secondary School Certificate",
     passyear: 2019,
     score: "285/300",
-    percentage: 95.6,
+    percentage: 95.6, 
 }
 
   function Carousel() {
@@ -47,19 +47,16 @@ const Schlinfo = {
   const [currInfo,setCurrInfo] = React.useState();
   const [junClgInfo,setJunClgInfo] = React.useState();
   const [schlInfo,setSchlInfo] = React.useState();
-  const [eduInfo,seteduInfo] = React.useState([]);
   const  setEverything = async ()=>{
-    
     setCurrInfo(Currinfo);
     setJunClgInfo(junclginfo);
     setSchlInfo(Schlinfo);
-    seteduInfo([Currinfo,junclginfo,Schlinfo]);
   }
-  useEffect(() => {
+  React.useEffect(() => {
     setEverything()
   }, [])
   
-  const maxSteps = eduInfo.length;
+  const maxSteps = 3;
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -72,12 +69,14 @@ const Schlinfo = {
     setActiveStep(step);
   }; 
 
-  const handleChange = (e) => {
+  const handleChangeCurr = (e) => {
     setCurrInfo({...currInfo,[e.target.name]:e.target.value})
+  }
+  const handleChangeJuncol = (e) => {
     setJunClgInfo({...junClgInfo,[e.target.name]:e.target.value})
+  }
+  const handleChangeSchl = (e) => {
     setSchlInfo({...schlInfo,[e.target.name]:e.target.value})
-    seteduInfo([currInfo,junClgInfo,schlInfo])
-    console.log(currInfo)
   }
   return (
     <Box className="carousel" sx={{
@@ -94,10 +93,11 @@ const Schlinfo = {
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
+        
       >
-        {eduInfo.map((info, index) => (
-          <EduCard key={index} index={index} info={info} handleChange={handleChange}/>
-        ))}
+          <EduCard index={0} info={currInfo} handleChange={handleChangeCurr}/>
+          <EduCard index={1} info={junClgInfo} handleChange={handleChangeJuncol}/>
+          <EduCard index={2} info={schlInfo} handleChange={handleChangeSchl}/>
       </SwipeableViews>
       <MobileStepper
         sx={{ backgroundColor: "var(--bg-color)" }}

@@ -1,14 +1,21 @@
 import React from "react";
-import styles from "./CommitteeCard.css";
+import styles from "./CommitteeCard.module.css";
+import logo from "../../assets/user.svg";
 
-const CommitteeCard = () => {
+const CommitteeCard = (props) => {
   return (
     <div className={styles.comCard}>
-      <img />
-      <h2>Computer Society of India (C.S.I.)</h2>
-      <div className={styles.position}>
-        <div>Technical Head</div>
-        <div>2022-23</div>
+      <img
+        src={props.comlogo}
+        alt="committee logo"
+        className={styles.comLogo}
+      />
+      <div className={styles.content}>
+        <h2 className={styles.comname}>{props.comname}</h2>
+        <div className={styles.position}>
+          <div>{props.compos}</div>
+          <div>{props.comyear}</div>
+        </div>
       </div>
     </div>
   );
