@@ -16,6 +16,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
         else {
             avgAP1Marks = Dimension1.info.courses.length * 4;
         }
+        // ----------------------------------------------------------------------------------------
 
         for (var i = 0; i < Dimension1.info.courses.length; i++) {
             total = total + Dimension1.info.courses[i].AP2MarksObtained
@@ -24,16 +25,16 @@ const setAppraisal = asyncHandler(async (req, res) => {
 
         for (var i = 0; i < Dimension1.info.courses.length; i++) {
             var averagePercent = (Dimension1.info.courses[i].LectureConducted / Dimension1.info.courses[i].LecturesTarget) * 100;
-            Dimension1.info.courses[i].PercentAcheived = averagePercent;
+            Dimension1.info.courses[i].AP3PercentAchieved = averagePercent;
 
         }
         var totalTarget = 0;
         var averagePercent = 0
         for (var i = 0; i < Dimension1.info.courses.length; i++) {
-            totalTarget = totalTarget + Dimension1.info.courses[i].PercentAcheived
+            totalTarget = totalTarget + Dimension1.info.courses[i].AP3PercentAchieved
         }
         averagePercent = totalTarget / Dimension1.info.courses.length;
-        Dimension1.info.AP3Average = averagePercent;
+
         if (averagePercent < 80) {
             //To be discussed
         }
@@ -46,9 +47,35 @@ const setAppraisal = asyncHandler(async (req, res) => {
         if (averagePercent >= 95 && averagePercent <= 100) {
             Dimension1.info.AP3Marks = 5
         }
+        // -----------------------------------------------------------------------------------
 
-        Dimension1.info.AP2Average = avgAP2Marks
+        var totalpercentAP4 = 0;
+        var averagePercentAP4 = 0
+        for (var i = 0; i < Dimension1.info.courses.length; i++) {
+            totalpercentAP4 = totalpercentAP4 + Dimension1.info.courses[i].AP4PercentFeedback
+        }
+        averagePercentAP4 = totalpercentAP4 / Dimension1.info.courses.length;
+
+        if (averagePercentAP4 > 30) {
+            averagePercentAP4 = 30
+        }
+
+         var totalpercentAP5 = 0;
+         var averagePercentAP4 = 0;
+         for (var i = 0; i < Dimension1.info.courses.length; i++) {
+           totalpercentAP4 =
+             totalpercentAP4 + Dimension1.info.courses[i].AP4PercentFeedback;
+         }
+         averagePercentAP4 = totalpercentAP4 / Dimension1.info.courses.length;
+
+         if (averagePercentAP4 > 30) {
+           averagePercentAP4 = 30;
+         }
+
         Dimension1.info.AP1Marks = avgAP1Marks
+        Dimension1.info.AP2Average = avgAP2Marks
+        Dimension1.info.AP3Average = averagePercent;
+        Dimension1.info.AP4Marks = averagePercentAP4;
 
         const newAppraisal = new Appraisal({
             Dimension1,

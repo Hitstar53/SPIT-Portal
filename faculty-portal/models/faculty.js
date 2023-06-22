@@ -1,16 +1,20 @@
 const mongoose = require('mongoose')
 const teacherSchema = new mongoose.Schema({
-    firstName: {
+    fullName: {
         type: String,
         unique: true
+    },
+    firstName: {
+        type: String,
+        // unique: true
     },
     middleName: {
         type: String,
-        unique: true
+        // unique: true
     },
     lastName: {
         type: String,
-        unique: true
+        // unique: true
     },
     email: {
         type: String,
@@ -19,7 +23,7 @@ const teacherSchema = new mongoose.Schema({
     },
     mobileNumber: {
         type: Number,
-        max: 9999999999,
+        // max: 9999999999,
     },
     id: {
         type: String,
