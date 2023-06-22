@@ -129,6 +129,36 @@ const setAppraisal = asyncHandler(async (req, res) => {
         //Dimension2 starts
 
 
+
+        // =============================================================================================================
+        //Dimesion3 starts
+
+        var Dimension3Marks = 0;
+        for (var i = 0; i < Dimension3.IP1.length; i++) {
+            if (Dimension3.IP1[i].tick) {
+                Dimension3Marks = Dimension3Marks + 20;
+            }
+        }
+        for (var i = 0; i < Dimension3.IP2.length; i++) {
+            if (Dimension3.IP2[i].tick) {
+                Dimension3Marks = Dimension3Marks + 10;
+            }
+        }
+        for (var i = 0; i < Dimension3.IP3.length; i++) {
+            if (Dimension3.IP3[i].tick) {
+                Dimension3Marks = Dimension3Marks + 10;
+            }
+        }
+
+        Dimension3.totalIP1IP2DP1Marks = Dimension3Marks;
+
+        // --------------------------------------------------------------------
+        //Dimension4 starts
+
+
+
+
+        // =============================================================================================================
         const newAppraisal = new Appraisal({
             Dimension1,
             Dimension2,
