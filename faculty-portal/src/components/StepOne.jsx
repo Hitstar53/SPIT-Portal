@@ -16,9 +16,19 @@ const StepOne = () => {
     watch,
   } = useForm();
 
+  useEffect(() => {
+    const storedData = localStorage.getItem('dim1Data');
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      Object.keys(parsedData).forEach((key) => {
+        setValue(key, parsedData[key]);
+      });
+    }
+  }, []);
 
   const onSubmit = (data) => {
     console.log(data);
+    localStorage.setItem('dim1Data', JSON.stringify(data));
     toast.success('Form submitted successfully!');
   };
 
