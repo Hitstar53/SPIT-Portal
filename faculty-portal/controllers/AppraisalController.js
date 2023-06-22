@@ -7,18 +7,44 @@ const setAppraisal = asyncHandler(async (req, res) => {
     try {
         const { Dimension1, Dimension2, Dimension3, Dimension4 } = req.body;
         var total = 0;
-        var avgAP2Marks = 0;
-        for (var i = 0; i < Dimension1.info.courses.length; i++) {
-            total = total + Dimension1.info.courses[i].AP2MarksObtained
-        }
-        avgAP2Marks = total / Dimension1.info.courses.length;
-
         var avgAP1Marks = 0;
+        var avgAP2Marks = 0;
+
         if (Dimension1.info.courses.length > 2) {
             avgAP1Marks = 10;
         }
         else {
             avgAP1Marks = Dimension1.info.courses.length * 4;
+        }
+
+        for (var i = 0; i < Dimension1.info.courses.length; i++) {
+            total = total + Dimension1.info.courses[i].AP2MarksObtained
+        }
+        avgAP2Marks = total / Dimension1.info.courses.length;
+
+        for (var i = 0; i < Dimension1.info.courses.length; i++) {
+            var averagePercent = (Dimension1.info.courses[i].LectureConducted / Dimension1.info.courses[i].LecturesTarget) * 100;
+            Dimension1.info.courses[i].PercentAcheived = averagePercent;
+
+        }
+        var totalTarget = 0;
+        var averagePercent = 0
+        for (var i = 0; i < Dimension1.info.courses.length; i++) {
+            totalTarget = totalTarget + Dimension1.info.courses[i].PercentAcheived
+        }
+        averagePercent = totalTarget / Dimension1.info.courses.length;
+        Dimension1.info.AP3Average = averagePercent;
+        if (averagePercent < 80) {
+            //To be discussed
+        }
+        if (averagePercent >= 80 && averagePercent < 90) {
+            Dimension1.info.AP3Marks = 3
+        }
+        if (averagePercent >= 90 && averagePercent < 95) {
+            Dimension1.info.AP3Marks = 4
+        }
+        if (averagePercent >= 95 && averagePercent <= 100) {
+            Dimension1.info.AP3Marks = 5
         }
 
         Dimension1.info.AP2Average = avgAP2Marks
@@ -35,7 +61,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
 
 
     } catch (error) {
-        console.error('Error saving course:', error);
+        console.error('Error saving appraisal:', error);
         throw error;
     }
 })

@@ -4,21 +4,18 @@ const appraisalSchema = new mongoose.Schema({
     teacherName: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Faculty',
-        required: true
     },
     yearofAssesment: {
         type: String
     },
     department: {
         type: String,
-        required: true
     },
     designation: {
         type: String,
-        required: true
     },
     Dimension1: {
-        courses:
+        info:
         {
             courses: [{
                 name: {
@@ -33,34 +30,34 @@ const appraisalSchema = new mongoose.Schema({
                 AP2MarksObtained: {
                     type: Number
                 },
-                LecturesTarget: {
+                AP3LecturesTarget: {
                     type: Number
                 },
-                LectureConducted: {
+                AP3LectureConducted: {
                     type: Number
                 },
-                PercentAcheived: {
+                AP3PercentAchieved: {
                     type: Number,
-                    max: 100
+                    // max: 100
                 },
-                Percentagefeedback: {
+                AP4PercentFeedback: {
                     type: Number,
-                    max: 100
+                    // max: 100
                 },
-                AttendanceStudent: {
+                AP5AttendanceStudent: {
                     type: Number
                 },
-                Actvityremedial: {
+                AP8ActivityRemedial: {
                     type: String
                 },
-                NotworthyDetails: {
+                AP9noteworthyDetails: {
                     type: String
                 },
-                PaperSet: [{
-                    papersetforCourse: {
+                paperSet: [{
+                    paperSetForCourse: {
                         type: String
                     },
-                    Marks: {
+                    marks: {
                         type: Number
                     }
                 }]
@@ -75,34 +72,36 @@ const appraisalSchema = new mongoose.Schema({
                 type: Number,
                 //max: 10
             },
+            AP2Marks: {
+                type: Number
+            },
             AP3Average: {
                 type: Number,
-                max: 5
+            },
+            AP3Marks: {
+                type: Number,
             },
             AP4Marks: {
                 type: Number,
-                max: 30
+                //max: 30
             },
             AP5Marks: {
                 type: Number,
-                max: 5
+                // max: 5
             },
-
             AP8Marks: {
                 type: Number,
-                max: 5
+                // max: 5
             },
             AP9Marks: {
                 type: Number,
-                max: 10
+                // max: 10
             },
             AP10Marks: {
                 type: Number,
-                max: 10
+                // max: 10
             },
         },
-
-
 
         AP6: {
             menteeFeedback: [{
@@ -115,7 +114,7 @@ const appraisalSchema = new mongoose.Schema({
         AP7: {
             guestLectureData: [{
                 date: {
-                    type: Date
+                    type: String
                 },
                 title: {
                     type: String
@@ -190,11 +189,11 @@ const appraisalSchema = new mongoose.Schema({
                     }
                 }
                 ],
-            Total_marks: {
-                type: String,
-                max: 30
+            totalMarks: {
+                type: Number,
+                // max: 30
             }
-            },
+        },
         // },
         RP2: {
             patents: [
@@ -257,7 +256,7 @@ const appraisalSchema = new mongoose.Schema({
                         type: String
                     },
                     amount: {
-                        type: String
+                        type: Number
                     }
 
                 }
@@ -265,29 +264,27 @@ const appraisalSchema = new mongoose.Schema({
         },
 
 
-        RP4citations: {
+        RP4: {
             number: {
                 type: Number
             },
             Marks: {
-                type: Number,
-                max: 25
+                type: Number
+                // max: 25
             }
         },
 
-
-
         RP5: {
-            development: [
+            selfDevelopment: [
                 {
                     title: {
                         type: String
                     },
-                    organisation: {
+                    organization: {
                         type: String
                     },
                     dates: {
-                        type: Date
+                        type: String
                     },
                     days: {
                         type: Number
@@ -297,7 +294,7 @@ const appraisalSchema = new mongoose.Schema({
         },
 
         RP6: {
-            soft_hard_dev: [{
+            softHardDev: [{
                 type: {
                     type: String
                 },
@@ -308,44 +305,43 @@ const appraisalSchema = new mongoose.Schema({
                     type: String
                 }
             }],
-            Marks: {
+            marks: {
                 type: Number,
-                max: 10
+                //max: 10
             }
         },
 
         RP7: {
-            activity_non_covered: [
+            activityNotCovered: [
                 {
-                    Date: {
+                    date: {
                         type: String
                     },
-                    Details: {
+                    details: {
                         type: String
                     }
                 }
             ],
             marks: {
                 type: Number,
-                max: 10
+                //max: 10
             }
         },
 
         totalMarks: {
             type: Number
         }
-
     },
     Dimension3: {
         IP1: {
             instituteLevelAssignments: [{
                 role: {
                     type: String,
-                    required: true,
+                    // required: true,
                 },
                 tick: {
                     type: Boolean,
-                    required: true,
+                    // required: true,
                 },
                 marks: {
                     type: Number
@@ -379,63 +375,66 @@ const appraisalSchema = new mongoose.Schema({
                 }
             }],
         },
+        totalIP1IP2DP1Marks: {
+            type: Number
+        },
         OP1: {
-            organised: [
+            organized: [
                 {
                     name: {
                         type: String
                     },
-                    sponsered: {
+                    sponsored: {
                         type: String
                     },
                     fund: {
                         type: Number
                     },
-                    Days: {
+                    days: {
                         type: Number
                     }
                 }
             ],
-            total_marks: {
+            totalMarks: {
                 type: Number
             }
         },
         Invited: {
-
-            invitatedAt: [{
+            invitedAt: [{
                 industryName: {
                     type: String
                 },
-                Dates: {
-                    type: Date
+                dates: {
+                    type: String
                 },
-                Details: {
+                details: {
                     type: String
                 }
             }],
-            total_marks: {
-                type: String
+            totalMarks: {
+                type: Number
             }
 
         },
+
         Partof: {
             committee: [
                 {
                     name: {
                         type: String
                     },
-                    Details: {
+                    details: {
                         type: String
                     },
-                    Organization: {
+                    organization: {
                         type: String
                     },
-                    Date: {
-                        type: Date
+                    date: {
+                        type: String
                     }
                 }
             ],
-            total_marks: {
+            totalMarks: {
                 type: Number
             }
         },
@@ -477,18 +476,14 @@ const appraisalSchema = new mongoose.Schema({
                 type: Number
             }
         },
-
-
         totalMarks: {
             type: Number
         }
-
     },
 
 
 
     Dimension4: {
-
         feedbackMarks: {
             A: {
                 type: Number
@@ -511,16 +506,17 @@ const appraisalSchema = new mongoose.Schema({
             HODRemarks: {
                 type: String
             },
-            grandTotal: {
-                type: Number
-            },
 
             principalRemarks: {
                 type: Number
             },
             perceptionMarks: {
                 type: Number
-            }
+            },
+            grandTotal: {
+                type: Number
+            },
+
         }
     },
 
