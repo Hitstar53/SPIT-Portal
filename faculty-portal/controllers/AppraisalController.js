@@ -6,6 +6,8 @@ const setAppraisal = asyncHandler(async (req, res) => {
     console.log("Inside setAppraisalDim1");
     try {
         const { Dimension1, Dimension2, Dimension3, Dimension4 } = req.body;
+
+        //Dimension1 starts
         var total = 0;
         var avgAP1Marks = 0;
         var avgAP2Marks = 0;
@@ -59,23 +61,73 @@ const setAppraisal = asyncHandler(async (req, res) => {
         if (averagePercentAP4 > 30) {
             averagePercentAP4 = 30
         }
+        // -----------------------------------------------------------------------------------
+        //AP5
+        var totalAttendanceP5 = 0;
+        var averageAttedanceAP5 = 0;
+        var AP5Marks = 0;
+        for (var i = 0; i < Dimension1.info.courses.length; i++) {
+            totalAttendanceP5 =
+                totalAttendanceP5 + Dimension1.info.courses[i].AP5AttendanceStudent;
+        }
+        averageAttedanceAP5 = totalAttendanceP5 / Dimension1.info.courses.length;
 
-         var totalpercentAP5 = 0;
-         var averagePercentAP4 = 0;
-         for (var i = 0; i < Dimension1.info.courses.length; i++) {
-           totalpercentAP4 =
-             totalpercentAP4 + Dimension1.info.courses[i].AP4PercentFeedback;
-         }
-         averagePercentAP4 = totalpercentAP4 / Dimension1.info.courses.length;
+        if (averageAttedanceAP5 >= 90 && averageAttedanceAP5 <= 100) {
+            AP5Marks = 5;
+        } else if (averageAttedanceAP5 >= 80 && averageAttedanceAP5 < 90) {
+            AP5Marks = 4;
+        } else if (averageAttedanceAP5 >= 70 && averageAttedanceAP5 < 80) {
+            AP5Marks = 3;
+        } else if (averageAttedanceAP5 >= 60 && averageAttedanceAP5 < 70) {
+            AP5Marks = 2;
+        } else {
+            AP5Marks = 1;
+        }
+        // ---------------------------------------------------------------------------------------
+        //AP6
+        var totalMenteeFeedback = 0;
+        var averageMenteeFeedback = 0;
+        for (var i = 0; i < Dimension1.AP6.menteeFeedback.length; i++) {
+            totalMenteeFeedback = totalMenteeFeedback + Dimension1.AP6.menteeFeedback[i];
+        }
+        averageMenteeFeedback = totalMenteeFeedback / Dimension1.AP6.menteeFeedback.length;
 
-         if (averagePercentAP4 > 30) {
-           averagePercentAP4 = 30;
-         }
+        if (averageMenteeFeedback > 5) {
+            averageMenteeFeedback = 5;
+        }
+
+        //  ---------------------------------------------------------------
+        //AP7
+        var totalpercentAP7 = Dimension1.AP7.guestLectureData.length == 1 ? 3 : 5;
+
+        //  ---------------------------------------------------------------
+        //AP10
+        var totalAuditMarks = 0;
+        var averageAuditMarks = 0;
+        for (var i = 0; i < Dimension1.AP10.paper.length; i++) {
+            totalAuditMarks = totalAuditMarks + Dimension1.AP10.paper[i].marks;
+        }
+        averageAuditMarks = totalAuditMarks / Dimension1.AP10.paper.length;
+
+        if (averageAuditMarks > 10) {
+            averageAuditMarks = 10;
+        }
+
+        // ---------------------------------------------------------------------------------
 
         Dimension1.info.AP1Marks = avgAP1Marks
         Dimension1.info.AP2Average = avgAP2Marks
         Dimension1.info.AP3Average = averagePercent;
         Dimension1.info.AP4Marks = averagePercentAP4;
+        Dimension1.info.AP5Average = averageAttedanceAP5;
+        Dimension1.info.AP5Marks = AP5Marks;
+        Dimension1.AP6.averageMarks = averageMenteeFeedback;
+        Dimension1.AP7.totalMarks = totalpercentAP7;
+        Dimension1.AP10.totalMarks = averageAuditMarks;
+
+        // ==========================================================================================================
+        //Dimension2 starts
+
 
         const newAppraisal = new Appraisal({
             Dimension1,

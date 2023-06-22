@@ -84,6 +84,9 @@ const appraisalSchema = new mongoose.Schema({
                 type: Number,
                 //max: 30
             },
+            AP5Average :{
+                type:Number
+            },
             AP5Marks: {
                 type: Number,
                 // max: 5
