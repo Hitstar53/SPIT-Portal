@@ -131,7 +131,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
 
 
         // =============================================================================================================
-        //Dimesion3 starts
+        //Dimension3 starts
 
         var Dimension3Marks = 0;
         for (var i = 0; i < Dimension3.IP1.length; i++) {
@@ -154,8 +154,11 @@ const setAppraisal = asyncHandler(async (req, res) => {
 
         // --------------------------------------------------------------------
         //Dimension4 starts
+        Dimension4.feedbackMarks.E = Dimension4.feedbackMarks.A + Dimension4.feedbackMarks.B + Dimension4.feedbackMarks.C + Dimension4.feedbackMarks.D;
+        Dimension4.confidentialReport.perceptionMarks = Dimension4.confidentialReport.principalRemarks * Dimension4.feedbackMarks.E;
 
 
+        finalGrandTotal.GrandTotal = finalGrandTotal.dimension1.finalMarks + finalGrandTotal.dimension2.finalMarks + finalGrandTotal.dimension3.finalMarks + finalGrandTotal.dimension4.finalMarks;
 
 
         // =============================================================================================================
@@ -163,7 +166,8 @@ const setAppraisal = asyncHandler(async (req, res) => {
             Dimension1,
             Dimension2,
             Dimension3,
-            Dimension4
+            Dimension4,
+            finalGrandTotal
         });
         const savedAppraisal = await newAppraisal.save();
         res.status(200).json(savedAppraisal);
