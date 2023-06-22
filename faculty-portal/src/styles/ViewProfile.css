@@ -42,9 +42,10 @@
     align-items: flex-start;
     overflow-wrap: anywhere;
 }
-hr{
+#hr{
     margin: 0 auto;
     border-bottom: 2px solid grey;
+    width:100%;
 }
 section{
     padding:15px

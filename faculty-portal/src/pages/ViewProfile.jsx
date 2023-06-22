@@ -39,7 +39,7 @@ const ViewProfile = () => {
           <h1 className="big">ID : 2021300079</h1>
         </div>
       </div>
-      <hr />
+      <hr id="hr" />
       <section>
         <h1 className="bigger">Details :</h1>
         <div className="info-wrapper-2">
@@ -70,7 +70,7 @@ const ViewProfile = () => {
         </div>
       </section>
 
-      <hr />
+      <hr id="hr" />
       <section>
         <h1 className="bigger">Academics :</h1>
         <div className="section" id="section-3">
