@@ -1,52 +1,80 @@
-import { React, useState, useContext, useEffect } from "react";
-import axios from "axios";
-import "../styles/Login.css";
+import React, { useContext, useState } from "react";
+import styles from "../styles/Login.module.css";
+import { useGoogleLogin,GoogleLogin } from "@react-oauth/google";
+import moodle from "../assets/moodle.png";
+import logo from "../assets/SPIT_Logo Colour.png";
+import axios from "axios"
 import { UserContext } from "../context/UserContext";
 
-export default function Login({ isLoggedIn, setIsLoggedIn }) {
-  const [email, setEmail] = useState("");
-  const { user , setUser } = useContext(UserContext);
-  const handleLogin = (e) => {
-    e.preventDefault();
-    console.log("login submitted")
-    axios
-      .post("http://localhost:5000/api/faculty/login", { email })
-      .then((res) => {
-        setIsLoggedIn(true);
-        setUser(res.data)
-        localStorage.setItem("loggedin", true);
+const Login = ({ isLoggedIn, setIsLoggedIn}) => {
+  const {user, setUser} = useContext(UserContext);
+
+  const login = useGoogleLogin({
+    onSuccess: async (tokenResponse) => 
+    { 
+      const userInfo = await axios
+      .get('https://www.googleapis.com/oauth2/v3/userinfo', {
+        headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
       })
-      .then(console.log("user setted",user))
-      .catch((err) => {
-        localStorage.clear();
-        console.log(err);
-      });
+      .then(res => res.data);
+      localStorage.setItem('userinfo', JSON.stringify(userInfo));
+      handleLogin(userInfo.email)
+    }
+  });
+
+  const handleLogin = async(email) => {
+    await axios
+    .post("http://localhost:5000/api/faculty/login", { email })
+    .then((res) => {
+      console.log(res.data);
+      setIsLoggedIn(true);
+      setUser(res.data)
+      localStorage.setItem("loggedin", true);
+    })
+    .catch((err) => {
+      localStorage.clear();
+      console.log(err);
+    });
   };
 
- 
-
   return (
-    <div className="Auth-form-container">
-      <form onSubmit={handleLogin} className="Auth-form">
-        <div className="Auth-form-content">
-          <h3 className="Auth-form-title">Sign In</h3>
-          <div className="form-group mt-3">
-            <label>Email address</label>
-            <input
-              type="email"
-              className="form-control mt-1"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          </div>
+    <div className={styles.loginPage}>
+      <div className={styles.loginCard}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Welcome to the S.P.I.T. Portal</h1>
         </div>
-      </form>
+        <button className={styles.loginButt} onClick={() => login()}>
+          <i
+            className="fa-brands fa-google"
+            style={{ marginRight: "10px" }}
+          ></i>
+          Login as Faculty
+        </button>
+        <div className={styles.or}>
+          <hr style={{ height: "0.5px" }} />
+          <div style={{ margin: "10px" }}>or</div>
+          <hr style={{ height: "0.5px" }} />
+        </div>
+        <button className={styles.loginButt} onClick={() => login()}>
+          <i
+            className="fa-brands fa-google"
+            style={{ marginRight: "10px" }}
+          ></i>
+          Login as Student
+        </button>
+        <div className={styles.links}>
+          <a href="https://moodle.spit.ac.in/login/">
+            <img className={styles.linksImg} src={moodle} alt="moodle" />
+            <p>Moodle</p>
+          </a>
+          <a href="https://www.spit.ac.in/">
+            <img className={styles.linksImg} src={logo} alt="spit" />
+            <p>Website</p>
+          </a>
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default Login;
