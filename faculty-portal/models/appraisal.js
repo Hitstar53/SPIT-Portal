@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const appraisalSchema = new mongoose.Schema({
-    facultyName: {
+    yearofAssesment: {
         type: String
     },
-    yearofAssesment: {
+    facultyName: {
         type: String
     },
     department: {
