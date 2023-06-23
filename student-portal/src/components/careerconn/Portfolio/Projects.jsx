@@ -1,23 +1,23 @@
 import React from 'react'
-import ProjectCard from "./ProjectCard"
+import ProjectCard from "./PortfolioCard"
 import styles from './Projects.module.css'
 
 const ProjectData = [
   {
-    title: "Project 1",
-    duration: "1 month",
-    team: ["A", "B", "C"],
+    title: "ReviewScope - AI Product Reviewer",
+    duration: "3 months",
+    team: ["Hatim", "Omkar", "Udit"],
     domain: "Web Development",
-    techStack: ["React", "Node", "MongoDB"],
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+    techStack: ["React", "Node", "MongoDB", "Express", "HTML", "CSS", "JS"],
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
   },
   {
-    title: "Project 2",
+    title: "ReviewScope - AI Product Reviewer",
     duration: "2 months",
-    team: ["A", "B", "C"],
+    team: ["Hatim", "Omkar", "Udit"],
     domain: "Web Development",
-    techStack: ["React", "Node", "MongoDB"],
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+    techStack: ["React", "Node", "MongoDB", "Express", "HTML", "CSS", "JS"],
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
   },
 ]
 
@@ -34,6 +34,7 @@ const Projects = (props) => {
               domain={project.domain}
               techStack={project.techStack}
               description={project.description}
+              style={""}
             />
           )
         })

@@ -218,7 +218,6 @@ export default function MiniDrawer() {
   const [picture, setPicture] = React.useState("")
   React.useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userinfo"))
-    console.log(userInfo?.picture)
     setName(userInfo?.name)
     if (userInfo?.picture) {
       setPicture(userInfo?.picture)

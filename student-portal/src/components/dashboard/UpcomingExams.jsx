@@ -1,6 +1,5 @@
 import React from 'react'
 import ExamCard from '../UI/Cards/ExamCard'
-import Modal from '../UI/Modal'
 import styles from './UpcomingExams.module.css'
 
 const data = [

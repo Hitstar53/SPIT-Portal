@@ -10,7 +10,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import styles from './Internship.module.css'
 import AddButton from '../UI/AddButton';
-import MultiFieldModal from '../UI/MultiFieldModal';
+import MultiFieldModal from '../UI/Modals/MultiFieldModal';
 import TextField from '@mui/material/TextField';
 
 const Internship = () => {
@@ -66,7 +66,13 @@ const Internship = () => {
   return (
     internships.length > 0 && (
       <div className={dashboard}>
-        <h1 className="text-4xl font-semibold pb-8 flex justify-between">Internships <AddButton /></h1>
+        <h1 className="text-4xl font-semibold pb-8 flex justify-between">
+          Internships 
+          <AddButton
+            onClick={handleDataSubmit}
+            btntext="Add Internship"
+          />
+        </h1>
         {
           internships.map((info,index) => {
             return<div key={index} style={index==0?{borderTop:"1px solid var(--text-color)"}:{}} className={styles.internshipCard}>

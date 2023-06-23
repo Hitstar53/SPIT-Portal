@@ -17,20 +17,23 @@ const eventinfo = [
   },
 ]
 
-function eventCard(eventinfo) {
-  return (
-    <EventsCard
-      eventname = {eventinfo.eventname}
-      eventdate = {eventinfo.eventdate}
-    />
-  );
-}
-
 const Events = () => {
   return (
     <div className={styles.eventsPage}>
       <h1 className={styles.heading}>Your Participation</h1>
-      <div className={styles.comGrid}>{eventinfo.map(eventCard)}</div>
+      <div className={styles.comGrid}>
+        {
+          eventinfo.map((event,index) => {
+            return (
+              <EventsCard
+                key={index}
+                eventname={event.eventname}
+                eventdate={event.eventdate}
+              />
+            );
+          })
+        }
+      </div>
     </div>
   );
 };

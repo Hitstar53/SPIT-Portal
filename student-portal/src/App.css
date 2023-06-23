@@ -8,6 +8,8 @@
     --primary-color: #411cba;
     --secondary-color: #b6c3f1;
     --tertiary-color: #301683;
+    --card-color: #301683;
+    --card-alt-color: #b6c3f1;
     --danger-color: #f44336;
     --success-color: #4caf50;
     --warning-color: #ff9800;
@@ -21,6 +23,7 @@
     --scrollbar-track: #ccc;
     --scrollbar-thumb: rgba(65, 28, 186, 0.5);
     --pill-color: #ccc;
+    --pill-border-color: #ccc;
 }
 
 /* dark theme */
@@ -29,6 +32,8 @@
     --primary-color: #3a3a3a;
     --secondary-color: #5a5a5a;
     --tertiary-color: #1e1e1e;
+    --card-color: #2e2e2e;
+    --card-alt-color: #2e2e2e;
     --danger-color: #f44336;
     --success-color: #4caf50;
     --warning-color: #ff9800;
@@ -40,6 +45,7 @@
     --text-dark: #222;
     --text-color: #fff;
     --pill-color: #5a5a5a;
+    --pill-border-color: #ccc;
     --scrollbar-track: #ccc;
     --scrollbar-thumb: rgba(18, 18, 28, 0.5);
 }

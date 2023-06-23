@@ -76,7 +76,9 @@ const Activities = () => {
         <div className={styles.header}>
           <h1 className={styles.heading}>Committee Work</h1>
           <div>
-            <AddButton />
+            <AddButton
+              btntext="Add Committee"
+            />
           </div>
         </div>
         <div className={styles.comGrid}>{cominfo.map(createCard)}</div>
@@ -86,7 +88,9 @@ const Activities = () => {
       <div className={styles.header}>
           <h1 className={styles.heading}>Volunteer Work</h1>
           <div>
-            <AddButton />
+            <AddButton
+              btntext="Add Work"
+            />
           </div>
         </div>
          <div className={styles.comGrid}>{volinfo.map(volCard)}</div> 

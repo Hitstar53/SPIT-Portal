@@ -2,7 +2,7 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
 import AddButton from "../../UI/AddButton";
-import FormModal from "../../UI/FormModal";
+import FormModal from "../../UI/Modals/FormModal";
 import styles from './SkillSet.module.css'
 
 const skills = [
@@ -76,6 +76,7 @@ export default function SkillSet() {
       })}
       <AddButton 
         onClick={handleClickOpen}
+        btntext="Add Skill"
         styles={{
           borderColor: "var(--text-color)",
         }}

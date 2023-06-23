@@ -54,18 +54,24 @@ const App = () => {
             sx={{ flexGrow: 1, marginTop: match ? 0 : 8, overflow: 'hidden' }}
           >
             <Routes>
+                {/* main login page */}
                 <Route path="/" element={<Login />} exact/>
+                {/* home page */}
                 <Route path="/student/home" element={<Dashboard />} exact/>
                 <Route path="/student/profile" element={<Profile />} exact/>
+                {/* Academics Routes */}
                 <Route path="/student/courses" element={<Courses />} exact/>
+                {/* Extracurricular Routes */}
                 <Route path="/student/activities" element={<Activities />} exact/>
                 <Route path="/student/committees" element={<Committees />} exact/>
                 <Route path="/student/comadmin" element={<ComAdmin />} exact/>
                 <Route path="/student/events" element={<Events />} exact/>
+                {/* Career Connect Routes */}
                 <Route path="/student/portfolio" element={<Portfolio />} exact/>
                 <Route path="/student/internships" element={<Internship />} exact/>
                 <Route path="/student/placements" element={<Placement />} exact/>
-                <Route path="*" element={<h1>404 Not Found</h1>} />
+                {/* 404 page */}
+                <Route path="*" element={<h1 className='text-4xl font-bold flex items-center justify-center h-[calc(100vh-64px)] text-[var(--text-color)] bg-[var(--bg-color)]'>Coming Soon...</h1>} />
             </Routes>
           </Box>
         </Box>

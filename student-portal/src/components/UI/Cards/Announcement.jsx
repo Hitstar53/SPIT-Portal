@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ScrollModal from '../ScrollModal'
+import ScrollModal from '../Modals/ScrollModal'
 import styles from './AnnounceCard.module.css'
 
 const Announcement = (props) => {

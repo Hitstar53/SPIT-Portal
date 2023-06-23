@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Modal from '../Modal'
+import Modal from '../Modals/Modal'
 import Button from '@mui/material/Button'
 import styles from './ExamCard.module.css'
 
