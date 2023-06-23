@@ -100,10 +100,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function MiniDrawer({setIsLoggedIn}) {
     const userInfo=JSON.parse(localStorage.getItem("userInfo"))
-    const [active, setActive] = useState('Home');
+    const [active, setActive] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
     const Open = Boolean(anchorEl)
     const handleClick = (event) => {
+        setActive(null)
         setAnchorEl(event.currentTarget);
     };
     const handleLogOut = () => {
@@ -153,7 +154,6 @@ export default function MiniDrawer({setIsLoggedIn}) {
                         <h4>Welcome to S.P.I.T Faculty Portal</h4>
                         <div>
                             <IconButton onClick={handleClick}>
-                                {/* <Avatar /> */}
                                 <img src={userInfo.picture} alt="profile" className="profile-pic" />
                                 <ArrowDropDownIcon sx={{ color: "white" }} />
                             </IconButton>
