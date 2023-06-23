@@ -45,7 +45,6 @@ export default function ProfileForm() {
     })
     .then(res=>res.json())
     .then(data=>setUser(data))
-    .then(data=>console.log(data))
   }
 
   // useEffect(() => {
@@ -135,7 +134,7 @@ export default function ProfileForm() {
               <div className="input-box">
                 <label>
                   Email:
-                  <input {...register("email")} />
+                  <input disabled {...register("email")} />
                 </label>
               </div>
 
