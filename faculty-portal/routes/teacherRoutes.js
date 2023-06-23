@@ -7,5 +7,5 @@ router.post('/update', teacherDataController.updateFaculty);
 router.delete('/delete/course', teacherDataController.deleteCourses);
 router.delete('/retrieve/course', teacherDataController.retrieveFacultyCourses);
 router.post('/login', teacherDataController.loginFaculty)
-
+router.post('/add/event', teacherDataController.addEvent)
 module.exports = router; 

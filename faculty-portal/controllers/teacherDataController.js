@@ -66,3 +66,19 @@ exports.loginFaculty = async (req, res) => {
         res.status(404).send("NO data found")
     }
 }
+
+exports.addEvent = asyncHandler(async (req, res) => {
+    const {email, events} = req.body;
+    try {
+        const det = await Faculty.updateOne({email:email},{
+            $push: {
+                events: events
+            }
+        })
+        console.log(det);
+        res.status(200).send(det);
+    } catch (err) {
+        console.log(err);
+        res.status(504).send("Internal Server Error");
+    }
+})  

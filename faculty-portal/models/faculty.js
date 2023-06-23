@@ -159,13 +159,13 @@ const teacherSchema = new mongoose.Schema({
 
     events: [{
         title: {
-
+            type: String,
         },
         startDate: {
-
+            type: String,
         },
         endDate: {
-
+            type: String,
         },
     },
     ],
