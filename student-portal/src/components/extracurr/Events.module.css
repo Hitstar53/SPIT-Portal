@@ -1,0 +1,49 @@
+.eventsCard {
+    background-color: var(--primary-color);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+    padding: 0.8rem;
+    color: var(--text-light);
+    align-items: center;
+    width: 100%;
+    box-shadow: 0px 0px 5px 2px var(--tertiary-color);
+    margin-bottom: 1rem;
+  }
+  
+  .eventname {
+    font-size: 1.2rem;
+    font-weight: 450;
+  }
+  
+  .position {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      font-size: 1rem;
+      font-weight: 300;
+      width: 100%;
+  }
+  
+  .content {
+    width: 100%;
+  }
+
+  .eventsPage {
+    padding: 2rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: calc(100vh - 64px);
+  }
+
+  .heading {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 1rem 0;
+  }
+
+  .comGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }

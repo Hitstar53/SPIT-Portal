@@ -1,0 +1,32 @@
+.comAdminPage {
+  padding: 2rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: calc(100vh - 64px);
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 1rem 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subheading {
+  font-size: 1.7rem;
+  font-weight: 550;
+  margin-top: 3rem;
+}
+
+.divider {
+    border: none;
+    background-color: grey;
+    height: 1px;
+    opacity: 0.5;
+  }

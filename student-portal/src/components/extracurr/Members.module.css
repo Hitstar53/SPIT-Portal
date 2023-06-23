@@ -1,0 +1,15 @@
+.header {
+  display: grid;
+  font-size: 1.3rem;
+  font-weight: 550;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.divider {
+  border: none;
+  background-color: grey;
+  height: 1px;
+  opacity: 0.5;
+}

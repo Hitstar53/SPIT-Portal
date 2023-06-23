@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./Activities.module.css";
-import CommitteeCard from "./CommitteeCard";
+import CommitteeWorkCard from "./CommitteeWorkCard";
 import VolunteerWork from "./VolunteerWork";
 import logo from "../../assets/user.svg";
-import AddButton from "./AddButton.jsx";
+import AddButton from "../UI/AddButton.jsx";
 
 const cominfo = [
   {
@@ -28,7 +28,7 @@ const cominfo = [
 
 function createCard(cominfo) {
   return (
-    <CommitteeCard
+    <CommitteeWorkCard
       comlogo={cominfo.comlogo}
       comname={cominfo.comname}
       compos={cominfo.compos}
@@ -74,7 +74,7 @@ const Activities = () => {
     <div className={styles.activitiesPage}>
       <div className={styles.committees}>
         <div className={styles.header}>
-          <h1 className={styles.heading}>Committees</h1>
+          <h1 className={styles.heading}>Committee Work</h1>
           <div>
             <AddButton />
           </div>
@@ -83,8 +83,13 @@ const Activities = () => {
       </div>
       <hr className={styles.divider} />
       <div className={styles.volunteer}>
-        <h1 className={styles.heading}>Volunteer Work</h1>
-        <VolunteerWork info={volinfo} />
+      <div className={styles.header}>
+          <h1 className={styles.heading}>Volunteer Work</h1>
+          <div>
+            <AddButton />
+          </div>
+        </div>
+         <div className={styles.comGrid}>{volinfo.map(volCard)}</div> 
       </div>
     </div>
   );

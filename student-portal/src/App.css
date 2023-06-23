@@ -20,6 +20,7 @@
     --text-color: #222;
     --scrollbar-track: #ccc;
     --scrollbar-thumb: rgba(65, 28, 186, 0.5);
+    --pill-color: #ccc;
 }
 
 /* dark theme */
@@ -38,6 +39,7 @@
     --text-light: #fff;
     --text-dark: #222;
     --text-color: #fff;
+    --pill-color: #5a5a5a;
     --scrollbar-track: #ccc;
-    --scrollbar-thumb: rgba(10, 10, 13, 0.5);
+    --scrollbar-thumb: rgba(18, 18, 28, 0.5);
 }

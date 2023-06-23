@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./CommitteeCard.module.css";
+import styles from "./CommitteeWorkCard.module.css";
 import logo from "../../assets/user.svg";
 
-const CommitteeCard = (props) => {
+const CommitteeWorkCard = (props) => {
   return (
     <div className={styles.comCard}>
       <img
@@ -21,4 +21,4 @@ const CommitteeCard = (props) => {
   );
 };
 
-export default CommitteeCard;
+export default CommitteeWorkCard;

@@ -482,7 +482,12 @@ export default function MiniDrawer() {
                     },
                   }}
                   aria-label="add"
-                >
+                  onClick={()=>{
+                    localStorage.setItem('isLoggedIn', false);
+                    localStorage.removeItem('userInfo');
+                    navigate("/");
+                  }}
+                > 
                   <i className="fa-solid fa-right-from-bracket"></i>
                 </Fab>
               )}{" "}

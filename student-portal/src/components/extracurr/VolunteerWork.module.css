@@ -5,7 +5,9 @@
     flex-direction: row;
     padding: 10px;
     align-items: center;
-    width: 50%;
+    width: 100%;
+    color: var(--text-color);
+    box-shadow: 0px 0px 5px 2px var(--secondary-color);
   }
 
   .instructor {

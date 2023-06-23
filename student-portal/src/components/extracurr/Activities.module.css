@@ -1,11 +1,13 @@
 .activitiesPage {
-  margin: 2rem;
+  padding: 2rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .heading {
   font-size: 2rem;
   font-weight: 600;
-  margin-top: 1rem;
+  margin: 1rem 0;
 }
 
 .committees {
@@ -20,7 +22,7 @@
 }
 
 .volunteer {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
 .comGrid {
@@ -33,4 +35,5 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
