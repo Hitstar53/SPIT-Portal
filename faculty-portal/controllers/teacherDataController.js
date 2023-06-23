@@ -17,8 +17,9 @@ exports.updateFaculty = asyncHandler(async (req, res) => {
     console.log(email);
     try {
         var facultyDetails = await Faculty.updateOne({ email: email }, req.body);
-        console.log(facultyDetails);
-        res.status(200).send(facultyDetails);
+        var newDet = await Faculty.findOne({ email: email });
+        console.log(newDet);
+        res.status(200).send(newDet);
     }
     catch (err) {
         console.log(err);
