@@ -23,7 +23,7 @@ const AddButton = (props) => {
         gap: "0.4rem",},...{...props.styles}
       }}
     >
-      <i class="fa-solid fa-plus"></i>
+      <i className="fa-solid fa-plus"></i>
       <span>ADD</span>
     </Button>
   );

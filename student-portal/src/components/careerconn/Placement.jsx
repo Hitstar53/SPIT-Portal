@@ -38,21 +38,23 @@ const Placement = () => {
         })
         setCompanyInfo({
             companyName: companyinfo.companyName,
-            contactInfo: companyinfo.contactInfo,
+            contactNo: companyinfo.contactNo,
             address: companyinfo.address,
         })
-    }); 
-    const handleChange = (e) => {
-        console.log(e.target.value);
-        setRoleInfo({ ...roleInfo, [e.target.name]: e.target.value});
-        setCompanyInfo({ ...companyInfo, [e.target.name]: e.target.value});
-      }
+    },[]); 
+    const handleChangeRole = (event) => {
+        setRoleInfo({ ...roleInfo, [event.target.name]: event.target.value});
+        
+    }
+    const handleChangeCompany = (event) => {
+        setCompanyInfo({ ...companyInfo, [event.target.name]: event.target.value});
+    }
     const handleSubmit = (event) => {
         event.preventDefault();
         setEdit(false)
-      };
+    };
   return (
-    <div className={container}>
+    <div className={container} style={{height:'calc(100%-64px)'}}>
     <Box component='form'
     sx={{
         "& .MuiTextField-root": { m: 1, width: "90%" },
@@ -102,7 +104,7 @@ const Placement = () => {
         <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', padding:'0.25rem'}}>
             <div style={{width:'50%'}}>
             {!edit && (
-              <span>Company Name:&nbsp;&nbsp;{companyinfo.companyName}</span>
+              <span>Company Name:&nbsp;&nbsp;{companyInfo.companyName}</span>
             )}
             {edit && (
               <TextField
@@ -110,14 +112,14 @@ const Placement = () => {
                 id="outlined-required"
                 label="Company Name"
                 type="text"
-                defaultValue={companyinfo.companyName}
-                onChange={handleChange}
+                defaultValue={companyInfo.companyName}
+                onChange={handleChangeCompany}
               />
             )}
             </div>
             <div style={{width:'50%'}}>
             {!edit && (
-              <span>Contact Information:&nbsp;&nbsp;{companyinfo.contactNo}</span>
+              <span>Contact Information:&nbsp;&nbsp;{companyInfo.contactNo}</span>
             )}
             {edit && (
               <TextField
@@ -125,15 +127,15 @@ const Placement = () => {
                 id="outlined-required"
                 label="Contact Number"
                 type="text"
-                defaultValue={companyinfo.contactNo}
-                onChange={handleChange}
+                defaultValue={companyInfo.contactNo}
+                onChange={handleChangeCompany}
               />
             )}
             </div>    
       </div>
         <div style={{padding:'0.25rem'}}>
         {!edit && (
-              <span>Address:&nbsp;&nbsp;{companyinfo.address}</span>
+              <span>Address:&nbsp;&nbsp;{companyInfo.address}</span>
             )}
             {edit && (
               <TextField
@@ -141,8 +143,8 @@ const Placement = () => {
                 id="outlined-required"
                 label="Address"
                 type="text"
-                defaultValue={companyinfo.address}
-                onChange={handleChange}
+                defaultValue={companyInfo.address}
+                onChange={handleChangeCompany}
               />
             )}
         </div>
@@ -152,7 +154,7 @@ const Placement = () => {
         <div>
         <div style={{padding:'0.25rem'}}>
         {!edit && (
-              <span>Role:&nbsp;&nbsp;{roleinfo.role}</span>
+              <span>Role:&nbsp;&nbsp;{roleInfo.role}</span>
             )}
             {edit && (
               <TextField
@@ -160,14 +162,14 @@ const Placement = () => {
                 id="outlined-required"
                 label="Role"
                 type="text"
-                defaultValue={roleinfo.role}
-                onChange={handleChange}
+                defaultValue={roleInfo.role}
+                onChange={handleChangeRole}
               />
             )}
         </div>
         <div style={{padding:'0.25rem'}}>
         {!edit && (
-              <span>Job Description:&nbsp;&nbsp;{roleinfo.jobDescription}</span>
+              <span>Job Description:&nbsp;&nbsp;{roleInfo.jobDescription}</span>
             )}
             {edit && (
               <TextField
@@ -175,14 +177,14 @@ const Placement = () => {
                 id="outlined-required"
                 label="Job Description"
                 type="text"
-                defaultValue={roleinfo.jobDescription}
-                onChange={handleChange}
+                defaultValue={roleInfo.jobDescription}
+                onChange={handleChangeRole}
               />
             )}
         </div>
         <div style={{padding:'0.25rem'}}>
         {!edit && (
-              <span>Joining Date:&nbsp;&nbsp;{roleinfo.joinDate}</span>
+              <span>Joining Date:&nbsp;&nbsp;{roleInfo.joinDate}</span>
             )}
             {edit && (
               <TextField
@@ -190,14 +192,14 @@ const Placement = () => {
                 id="outlined-required"
                 label="Joining Date"
                 type="text"
-                defaultValue={roleinfo.joinDate}
-                onChange={handleChange}
+                defaultValue={roleInfo.joinDate}
+                onChange={handleChangeRole}
               />
             )}
         </div>
         <div style={{padding:'0.25rem'}}>
         {!edit && (
-              <span>C.T.C.:&nbsp;&nbsp;{roleinfo.ctc}</span>
+              <span>C.T.C.:&nbsp;&nbsp;{roleInfo.ctc}</span>
             )}
             {edit && (
               <TextField
@@ -205,8 +207,8 @@ const Placement = () => {
                 id="outlined-required"
                 label="C.T.C."
                 type="text"
-                defaultValue={roleinfo.ctc}
-                onChange={handleChange}
+                defaultValue={roleInfo.ctc}
+                onChange={handleChangeRole}
               />
             )}
         </div>   

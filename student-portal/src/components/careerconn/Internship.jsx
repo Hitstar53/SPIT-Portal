@@ -10,6 +10,9 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import styles from './Internship.module.css'
 import AddButton from '../UI/AddButton';
+import MultiFieldModal from '../UI/MultiFieldModal';
+import TextField from '@mui/material/TextField';
+
 const Internship = () => {
   const [open, setOpen] = React.useState(false);
   const [index,setIndex] = React.useState(0);
@@ -17,8 +20,17 @@ const Internship = () => {
   function handleClickOpen(index) {
     setIndex(index);
     setOpen(true);
+    console.log(index)
   };
-
+  const [newData, setNewData] = React.useState({})
+  const handleDataChange = (e) => {
+    setNewData({...newData,[e.target.name]:e.target.value})
+  }
+  const handleDataSubmit = (e) =>{
+    const arr = internships
+    arr.unshift(newData)
+    setInternships(arr)
+  }
   const handleClose = () => {
     setOpen(false);
   };
@@ -26,6 +38,7 @@ const Internship = () => {
     const arr = internships
     arr.splice(index,1)
     setInternships(arr)
+    setOpen(false)
   }
   const dashboard = styles.dashboard + " flex flex-col p-8"
   const internshipsDummy = [
@@ -85,6 +98,17 @@ const Internship = () => {
                   
           })
         }
+        <MultiFieldModal title="TITLE" content="THIS IS THE CONTENT">
+          <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Email Address"
+              type="email"
+              fullWidth
+              variant="standard"
+            />
+        </MultiFieldModal>
             <Dialog
             open={open}
             onClose={handleClose}

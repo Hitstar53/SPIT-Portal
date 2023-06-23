@@ -1,14 +1,13 @@
 import React from "react";
 import styles from "./Members.module.css";
 
-const Members = () => {
+const Members = (props) => {
   return (
     <div>
-      <div className={styles.header}>
-        <h3>Name</h3>
-        <h3>Position</h3>
+      <div className={styles.cols}>
+        <div>{props.name}</div>
+        <div>{props.pos}</div>
       </div>
-      <hr className={styles.divider}/>
     </div>
   );
 };
