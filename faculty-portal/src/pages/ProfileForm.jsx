@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
 import "../styles/ProfileForm.css";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import { Navigate, redirect } from "react-router-dom";
 
 export default function ProfileForm() {
+  const [redirect,setRedirect]=useState(false)
   const {user,setUser}=useContext(UserContext)
   const {
     register,
@@ -45,7 +47,10 @@ export default function ProfileForm() {
     })
     .then(res=>res.json())
     .then(data=>setUser(data))
+    .then(setRedirect(true))
   }
+
+  if(redirect) return <Navigate to="/profile" />
 
   // useEffect(() => {
     // fetch(`http://localhost:5000/api/faculty/get`,{
