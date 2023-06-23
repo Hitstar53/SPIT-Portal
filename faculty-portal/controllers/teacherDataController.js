@@ -2,35 +2,62 @@ const asyncHandler = require('express-async-handler');
 const Faculty = require('../models/faculty.js')
 const { error } = require("console");
 
-const getFaculty = asyncHandler(async (req, res) => {
+exports.getFaculty = asyncHandler(async (req, res) => {
     console.log("Inside getFaculty");
     const faculties = await Faculty.findById(req.params.id);
     res.status(200).json(faculties);
 })
 
-const setFaculty = asyncHandler(async (req, res) => {
+exports.setFaculty = asyncHandler(async (req, res) => {
 
 })
 
-const updateFaculty = asyncHandler(async (req, res) => {
+exports.updateFaculty = asyncHandler(async (req, res) => {
     const email = req.body.email;
     console.log(email);
-    try{
+    try {
         var facultyDetails = await Faculty.updateOne({ email: email }, req.body);
         console.log(facultyDetails);
         res.status(200).send(facultyDetails);
     }
-    catch(err){
+    catch (err) {
         console.log(err);
         res.status(504).send(err);
     }
 })
 
-const deleteFaculty = asyncHandler(async (req, res) => {
+exports.retrieveFacultyCourses = asyncHandler(async (req, res) => {
+    const email = req.body.email;
+    try {
+        const det = await Faculty.findOne({ email: email });
+        det.courses = det.history.pop();
+        const newDet = await Faculty.updateOne({ email: email }, det);
+        res.status(200).send(newDet);
+    } catch (err) {
+        console.log(err);
+        res.status(504).send("Internal Server Error");
+    }
+})
+
+exports.deleteCourses = asyncHandler(async (req, res) => {
+    const email = req.body.email;
+    try {
+        const faculty = await Faculty.findOne({ email });
+        faculty.history.push(faculty.courses);
+        faculty.courses = [];
+
+        const det = await Faculty.updateOne({ email: email },
+            faculty
+        );
+        res.status(200).send("Removed details");
+    } catch (err) {
+        console.log(err);
+        res.status(504).send("Internal Server Error");
+    }
 
 })
 
-const loginFaculty = async (req, res) => {
+exports.loginFaculty = async (req, res) => {
     const { email } = req.body;
     const det = await Faculty.findOne({ email: email })
     if (det) {
@@ -39,12 +66,3 @@ const loginFaculty = async (req, res) => {
         res.status(404).send("NO data found")
     }
 }
-
-module.exports = {
-    getFaculty,
-    setFaculty,
-    updateFaculty,
-    deleteFaculty,
-    loginFaculty,
-}
-

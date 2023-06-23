@@ -169,9 +169,9 @@ const teacherSchema = new mongoose.Schema({
         },
     },
     ],
-    history: [{
-        type: Object,
-    }]
+    history: {
+        type: Array,
+    }
 });
 
 module.exports = mongoose.model('Faculty', teacherSchema);
