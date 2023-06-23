@@ -6,12 +6,16 @@ import "../styles/Appraisal.css";
 
 const StepOne = () => {
   const { user } = useContext(UserContext);
-  // const classes = [
-  //   { value: 'SE Computer Science - A', label: 'SE Computer Science - A' },
-  //   { value: 'SE Computer Science - B', label: 'SE Computer Science - B' },
-  //   { value: 'SE CSE - AIML', label: 'SE CSE - AIML' },
-  //   { value: 'SE CSE - DS', label: 'SE CSE - DS' }
-  // ];
+  const options = [
+    { value: '1', label: 'I' },
+    { value: '2', label: 'II' },
+    { value: '3', label: 'III' },
+    { value: '4', label: 'IV' },
+    { value: '5', label: 'V' },
+    { value: '6', label: 'VI' },
+    { value: '7', label: 'VII' },
+    { value: '8', label: 'VIII' },
+  ];
 
   // const {
   //   fields: courseFields,
@@ -138,14 +142,9 @@ const StepOne = () => {
         <label className="form-label">
           Sem:
           <select className='form-input' {...register("Dimension1.info.courses[0].sem")}>
-            <option value="1">I</option>
-            <option value="2">II</option>
-            <option value="3">III</option>
-            <option value="4">IV</option>
-            <option value="5">V</option>
-            <option value="6">VI</option>
-            <option value="7">VII</option>
-            <option value="8">VIII</option>
+          {options.map((option) => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
           </select>
         </label>
         {errors['Dimension1.info.courses[0].sem'] && (
