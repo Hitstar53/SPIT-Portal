@@ -18,6 +18,7 @@ import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import FingerprintIcon from "@mui/icons-material/Fingerprint";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import { Link } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
 
 const ViewProfile = () => {
   const { user } = useContext(UserContext);
@@ -31,7 +32,12 @@ const ViewProfile = () => {
         <h1>Loading...</h1>
       ) : (
         <div className="full-view">
-          <Link to="/edit-profile">Edit profile</Link>
+          <div className="profile-toolbar">
+            <Link to="/edit-profile">
+              <EditIcon />
+              Edit profile
+            </Link>
+          </div>
           <div className="profile-wrapper">
             <div className="img-wrapper">
               <img src={userInfo.picture} alt="profile" />
@@ -68,7 +74,7 @@ const ViewProfile = () => {
                   </h1>
                   <h1 className="bigg">
                     <BloodtypeIcon sx={{ marginRight: 2.5, marginTop: 0.2 }} />
-                    Blood Group : B+
+                    Blood Group : {user.bloodGroup}
                   </h1>
                   <h1 className="bigg">
                     <MergeTypeIcon sx={{ marginRight: 2.5, marginTop: 0.2 }} />
@@ -89,16 +95,15 @@ const ViewProfile = () => {
                   </h1>
                   <h1 className="bigg">
                     <BusinessIcon sx={{ marginRight: 2.5, marginTop: 0.2 }} />
-                    Address : A/502, venice building, Mohak City, 90-Feet Road,
-                    Andheri west
+                    Address : {user.address}
                   </h1>
                   <h1 className="bigg">
                     <GitHubIcon sx={{ marginRight: 2.5, marginTop: 0.2 }} />
-                    GitHub : Shubhamore
+                    GitHub : {user.gitHubProfile}
                   </h1>
                   <h1 className="bigg">
                     <LinkedInIcon sx={{ marginRight: 2.5, marginTop: 0.2 }} />
-                    LinkedIn : Shubhamore
+                    LinkedIn : {user.linkedinProfile}
                   </h1>
                 </div>
               </div>
@@ -114,19 +119,19 @@ const ViewProfile = () => {
                 <div className="info-wrapper">
                   <h1 className="bigg">
                     <SchoolIcon sx={{ marginRight: 2.5, marginTop: 0.2 }} />
-                    Qualification: B.Tech, 12th
+                    Qualification: {user.qualification}
                   </h1>
                   <h1 className="bigg">
                     <AutoAwesomeIcon
                       sx={{ marginRight: 2.5, marginTop: 0.2 }}
                     />
-                    Specialisation:{" "}
+                    Specialisation:{" "} {user.specialization}
                   </h1>
                   <h1 className="bigg">
                     <LeaderboardIcon
                       sx={{ marginRight: 2.5, marginTop: 0.2 }}
                     />
-                    Class Incharge: S.E. Computer Engineering B
+                    Class Incharge: {user.classIncharge}
                   </h1>
                 </div>
               </div>
@@ -137,13 +142,13 @@ const ViewProfile = () => {
                     <FingerprintIcon
                       sx={{ marginRight: 2.5, marginTop: 0.2 }}
                     />
-                    Aadhar Card Number: XXXXXXXXX
+                    Aadhar Card Number: {user.aadharCardNumber}
                   </h1>
                   <h1 className="bigg">
                     <AccountBalanceIcon
                       sx={{ marginRight: 2.5, marginTop: 0.2 }}
                     />
-                    PAN Card Number: XXX XXX XXX XXX
+                    PAN Card Number: {user.panCardNumber}
                   </h1>
                 </div>
               </div>

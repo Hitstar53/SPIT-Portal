@@ -23,7 +23,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App" style={{minHeight:"100vh"}}>
       {isLoggedIn ? (
         <Box sx={{ display: "flex" }}>
           <SideBar setIsLoggedIn={setIsLoggedIn} />

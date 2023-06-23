@@ -1,71 +1,221 @@
 import { useForm } from "react-hook-form";
+import "../styles/ProfileForm.css";
+import { useEffect } from "react";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 export default function ProfileForm() {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const {user,setUser}=useContext(UserContext)
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    defaultValues:{
+      fullName:user.fullName,
+      designation:user.designation,
+      department:user.department,
+      id:user.id,
+      dateOfBirth:user.dateOfBirth,
+      dateOfJoining:user.dateOfJoining,
+      gender:user.gender,
+      bloodGroup:user.bloodGroup,
+      type:user.type,
+      email:user.email,
+      mobileNumber:user.mobileNumber,
+      address:user.address,
+      gitHubProfile:user.gitHubProfile,
+      linkedinProfile:user.linkedinProfile,
+      qualification:user.qualification,
+      specialization:user.specialization,
+      classIncharge:user.classIncharge,
+      aadharCardNumber:user.aadharCardNumber,
+      panCardNumber:user.panCardNumber
+    }
+  });
+  const onSubmit = (data) => {
+    console.log("data to be submitted",data);
+    fetch(`http://localhost:5000/api/faculty/update`,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body:JSON.stringify(data)
+    })
+    .then(res=>res.json())
+    .then(data=>setUser(data))
+    .then(data=>console.log(data))
+  }
+
+  // useEffect(() => {
+    // fetch(`http://localhost:5000/api/faculty/get`,{
 
   console.log(watch("example")); // watch input value by passing the name of it
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label>Full Name:</label>
-      <input {...register("fullName")} />
+    <>
+      <h1 className="profile-heading">Edit Profile</h1>
+      <div className="profile-form">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="section-form">
+            <h1>Indentity</h1>
+            <div className="section-data">
+              <div className="input-box">
+                <label>
+                  Full Name:
+                  <input {...register("fullName")} />
+                </label>
+              </div>
 
-      <label>Designation:</label>
-      <input {...register("designation")} />
+              <div className="input-box">
+                <label>
+                  Designation:
+                  <input {...register("designation")} />
+                </label>
+              </div>
 
-      <label>Department:</label>
-      <input {...register("department")} />
+              <div className="input-box">
+                <label>
+                  Department:
+                  <input {...register("department")} />
+                </label>
+              </div>
 
-      <label>ID:</label>
-      <input {...register("id")} />
+              <div className="input-box">
+                <label>
+                  ID:
+                  <input {...register("id")} />
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className="section-form">
+            <h1>Personal</h1>
+            <div className="section-data">
+              <div className="input-box">
+                <label>
+                  Date of Birth:
+                  <input {...register("dateOfBirth")} />
+                </label>
+              </div>
 
-      <label>Date of Birth:</label>
-      <input {...register("dateOfBirth")} />
+              <div className="input-box">
+                <label>
+                  Date of Joining:
+                  <input {...register("dateOfJoining")} />
+                </label>
+              </div>
 
-      <label>Date of Joining:</label>
-      <input {...register("dateOfJoining")} />
+              <div className="input-box">
+                <label>
+                  Gender:
+                  <input {...register("gender")} />
+                </label>
+              </div>
 
-      <label>Gender:</label>
-      <input {...register("gender")} />
+              <div className="input-box">
+                <label>
+                  Blood Group:
+                  <input {...register("bloodGroup")} />
+                </label>
+              </div>
 
-      <label>Blood Group:</label>
-      <input {...register("bloodGroup")} />
+              <div className="input-box">
+                <label>
+                  Type:
+                  <input {...register("type")} />
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className="section-form">
+            <h1>Contacts</h1>
+            <div className="section-data">
+              <div className="input-box">
+                <label>
+                  Email:
+                  <input {...register("email")} />
+                </label>
+              </div>
 
-      <label>Type:</label>
-      <input {...register("type")} />
+              <div className="input-box">
+                <label>
+                  Mobile Number:
+                  <input {...register("mobileNumber")} />
+                </label>
+              </div>
 
-      <label>Email:</label>
-      <input {...register("email")} />
+              <div className="input-box">
+                <label>
+                  Address:
+                  <input {...register("address")} />
+                </label>
+              </div>
 
-      <label>Mobile Number:</label>
-      <input {...register("mobileNumber")} />
+              <div className="input-box">
+                <label>
+                  GitHub Profile:
+                  <input {...register("gitHubProfile")} />
+                </label>
+              </div>
 
-      <label>Address:</label>
-      <input {...register("address")} />
+              <div className="input-box">
+                <label>
+                  LinkedIn Profile:
+                  <input {...register("linkedinProfile")} />
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className="section-form">
+            <h1>Academics</h1>
+            <div className="section-data">
+              <div className="input-box">
+                <label>
+                  Qualification:
+                  <input {...register("qualification")} />
+                </label>
+              </div>
 
-      <label>GitHub Profile:</label>
-      <input {...register("gitHubProfile")} />
+              <div className="input-box">
+                <label>
+                  Specialization:
+                  <input {...register("specialization[0]")} />
+                </label>
+              </div>
 
-      <label>LinkedIn Profile:</label>
-      <input {...register("linkedinProfile")} />
+              <div className="input-box">
+                <label>
+                  Class Incharge:
+                  <input {...register("classIncharge")} />
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className="section-form">
+            <h1>Documents</h1>
+            <div className="section-data">
+              <div className="input-box">
+                <label>
+                  Aadhar Card Number:
+                  <input {...register("aadharCardNumber")} />
+                </label>
+              </div>
 
-      <label>Qualification:</label>
-      <input {...register("qualification")} />
-
-      <label>Specialization:</label>
-      <input {...register("specialization[0]")} />
-
-      <label>Class Incharge:</label>
-      <input {...register("classIncharge")} />
-
-      <label>Aadhar Card Number:</label>
-      <input {...register("aadharCardNumber")} />
-
-      <label>PAN Card Number:</label>
-      <input {...register("panCardNumber")} />
-
-      <input type="submit" />
-    </form>
+              <div className="input-box">
+                <label>
+                  PAN Card Number:
+                  <input {...register("panCardNumber")} />
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className="btn-div">
+            <input type="submit" className="profile-submit"/>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
