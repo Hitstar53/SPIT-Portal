@@ -19,8 +19,6 @@
 }
 
 span.rbc-btn-group button {
-    /* Your button styles here */
-    /* For example: */
     background-color: #301683;
     color: #FFFFFF;
     padding: 8px 16px;
@@ -30,8 +28,6 @@ span.rbc-btn-group button {
 }
 
 span.rbc-btn-group button:hover {
-    /* Your button hover styles here */
-    /* For example: */
     background-color: #B6C3F1;
     color: #1e1e1e;
 }
@@ -95,3 +91,21 @@ button.rbc-active {
 .rbc-day-bg {
     border-right: 1px  solid grey;
 }
+
+.rbc-calendar {
+    width: 100%;
+    height: 38rem !important;
+}
+
+.modal {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    /* min-width: 250px; */
+  }
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+

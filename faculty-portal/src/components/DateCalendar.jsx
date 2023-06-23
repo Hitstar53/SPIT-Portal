@@ -12,6 +12,15 @@ import DatePicker from "react-datepicker";
 import enUS from "date-fns/locale/en-US";
 import Fab from '@mui/material/Fab';
 import EditIcon from '@mui/icons-material/Add';
+import dayjs from 'dayjs';
+import { TextField } from "@mui/material";
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
 import "../styles/DateCalendar.css"
 
 const locales = {
@@ -33,48 +42,22 @@ const DateCalendar = () => {
 
     const toggle = () => setModal(!modal);
 
-    const handleAddEvent = () => {
+    const handleAddEvent = async () => {
+        console.log(newEvent)
+        if (newEvent.title === "" || newEvent.start === "" || newEvent.end === "") {
+            toast("Please enter all the Event Fields", {
+                duration: 2000,
+                position: 'top-center',
+            });
+            return;
+        }
+        // await axios.post()
         setAllEvents([...allEvents, newEvent]);
         setNewEvent({ title: "", start: "", end: "" });
     };
 
     return (
         <div className="calendar-container">
-            {/* <h1>Calendar</h1>
-            <h2>Add New Event</h2>
-            <div>
-                <input
-                    type="text"
-                    placeholder="Event Title"
-                    style={{ width: "20%", marginRight: "10px" }}
-                    value={newEvent.title}
-                    onChange={(e) =>
-                        setNewEvent({ ...newEvent, title: e.target.value })
-                    }
-                />
-            </div>
-            <div>
-
-                <DatePicker
-                    placeholderText="Start Date"
-                    style={{ marginRight: "10px" }}
-                    selected={newEvent.start}
-                    onChange={(date) =>
-                        setNewEvent({ ...newEvent, start: date })
-                    }
-                />
-                <DatePicker
-                    placeholderText="End Date"
-                    style={{ marginRight: "10px" }}
-                    selected={newEvent.end}
-                    onChange={(date) =>
-                        setNewEvent({ ...newEvent, end: date })
-                    }
-                />
-                <button onClick={handleAddEvent}>
-                    Add Event
-                </button>
-            </div> */}
             <Calendar
                 className="calendar"
                 localizer={localizer}
@@ -101,22 +84,39 @@ const DateCalendar = () => {
                 <EditIcon sx={{ mr: 1 }} />
                 Add Event
             </Fab>
-            <Modal isOpen={modal} toggle={toggle} >
-                <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+            <ToastContainer />
+            <Modal className="modal-main" isOpen={modal} toggle={toggle} >
+                <ModalHeader toggle={toggle} className="modal-title">Event Details</ModalHeader>
                 <ModalBody>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
+                    <div>
+                        <TextField
+                            id="filled-password-input"
+                            label="Event Title"
+                            type="text"
+                            variant="filled"
+                            style={{ width: "25rem", marginBottom: "10px" }}
+                            value={newEvent.title}
+                            onChange={(e) =>
+                                setNewEvent({ ...newEvent, title: e.target.value })
+                            }
+                        />
+                    </div>
+                    <div>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DemoItem label="Start Date">
+                                <MobileDateTimePicker  value={newEvent.start} onChange={(date) => setNewEvent({ ...newEvent, start: date.$d })} />
+                            </DemoItem>
+                            <DemoItem label="End Date">
+                                <MobileDateTimePicker  value={newEvent.end} onChange={(date) => setNewEvent({ ...newEvent, end: date.$d })} />
+                            </DemoItem>
+                        </LocalizationProvider>
+                    </div>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={toggle}>
-                        Do Something
+                    <Button color="success" onClick={handleAddEvent}>
+                        Add Event
                     </Button>{' '}
-                    <Button color="secondary" onClick={toggle}>
+                    <Button color="danger" onClick={toggle}>
                         Cancel
                     </Button>
                 </ModalFooter>
