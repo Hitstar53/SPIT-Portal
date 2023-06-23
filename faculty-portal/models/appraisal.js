@@ -52,7 +52,7 @@ const appraisalSchema = new mongoose.Schema({
                 AP9noteworthyDetails: {
                     type: String
                 },
-                paperSet: [{
+                AP10paperSet: [{
                     paperSetForCourse: {
                         type: String
                     },
@@ -128,6 +128,7 @@ const appraisalSchema = new mongoose.Schema({
                     type: String
                 }
             }],
+            
             totalMarks: {
                 type: Number
             }
@@ -150,19 +151,19 @@ const appraisalSchema = new mongoose.Schema({
                 type: Number
             }
         },
-        AP10: {
-            paper: [{
-                course: {
-                    type: String
-                },
-                marks: {
-                    type: Number
-                }
-            }],
-            averageMarks: {
-                type: Number
-            }
-        },
+        // AP10: {
+        //     paper: [{
+        //         course: {
+        //             type: String
+        //         },
+        //         marks: {
+        //             type: Number
+        //         }
+        //     }],
+        //     averageMarks: {
+        //         type: Number
+        //     }
+        // },
 
         totalMarks: {
             type: Number
