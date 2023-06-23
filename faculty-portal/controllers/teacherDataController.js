@@ -13,7 +13,17 @@ const setFaculty = asyncHandler(async (req, res) => {
 })
 
 const updateFaculty = asyncHandler(async (req, res) => {
-
+    const email = req.body.email;
+    console.log(email);
+    try{
+        var facultyDetails = await Faculty.updateOne({ email: email }, req.body);
+        console.log(facultyDetails);
+        res.status(200).send(facultyDetails);
+    }
+    catch(err){
+        console.log(err);
+        res.status(504).send(err);
+    }
 })
 
 const deleteFaculty = asyncHandler(async (req, res) => {
