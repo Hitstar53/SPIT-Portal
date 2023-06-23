@@ -150,6 +150,9 @@ const teacherSchema = new mongoose.Schema({
     linkedinProfile: {
         type: String
     },
+    gitHubProfile: {
+        type: String
+    },
     aadharCardNumber: {
         type: Number,
     },
