@@ -207,13 +207,29 @@ export default function MiniDrawer() {
     setOpen(true);
   }
 
+  const [checked, setChecked] = React.useState(
+    localStorage.getItem("theme") === "dark" ? true : false
+  );
+
+  React.useEffect(() => {
+    if (localStorage.getItem("theme") === "dark") {
+      DarkMode();
+      setChecked(true);
+    } else {
+      LightMode();
+      setChecked(false);
+    }
+  }, []);
+
   const DarkMode = () => {
     document.querySelector("body").setAttribute("data-theme", "dark");
+    localStorage.setItem("theme", "dark");
   }
-
   const LightMode = () => {
     document.querySelector("body").setAttribute("data-theme", "light");
+    localStorage.setItem("theme", "light");
   }
+
   const [name, setName] = React.useState("")
   const [picture, setPicture] = React.useState("")
   React.useEffect(() => {
@@ -226,11 +242,14 @@ export default function MiniDrawer() {
     }
   }
   ,[])
+
   const toggleTheme = (event) => {
     if (event.target.checked) {
       DarkMode();
+      setChecked(true);
     } else {
       LightMode();
+      setChecked(false);
     }
   };
 
@@ -432,7 +451,7 @@ export default function MiniDrawer() {
                     <FormControlLabel
                       sx={{ display: "flex", justifyContent: "center", m: 0 }}
                       control={
-                        <MaterialUISwitch onClick={toggleTheme} theme={theme} />
+                        <MaterialUISwitch checked={checked} onChange={toggleTheme} theme={theme} />
                       }
                     />
                   </FormGroup>

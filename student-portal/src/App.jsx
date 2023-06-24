@@ -16,6 +16,8 @@ import './App.css';
 import Committees from "./components/extracurr/Committees";
 import ComAdmin from "./components/extracurr/ComAdmin";
 
+let loadNumber = 1
+
 const App = () => {
   const navigate = useNavigate()
   const initialRender = useRef(true)
@@ -29,20 +31,20 @@ const App = () => {
   });
   let match = useMatch('/')
 
+  useEffect(() => {
+    if (loadNumber <= 2) {
+      loadNumber++
+      return
+    }
+    localStorage.setItem("isLoggedIn", false);
+  }, []);
+
   useEffect(()=>{
     const isLoggedIn = localStorage.getItem('isLoggedIn')
     if (isLoggedIn==="false") {
       navigate('/')
     }
   },[])
-
-  useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false;
-      return;
-    }
-    localStorage.setItem("isLoggedIn", false);
-  }, []);
 
   return (
       <ThemeProvider theme={theme}>

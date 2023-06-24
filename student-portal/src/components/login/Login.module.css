@@ -55,7 +55,7 @@
     rgba(0, 0, 0, 0.6) 0%,
     rgba(0, 0, 0, 0.5) 25%,
     rgba(255, 255, 255, 0.1) 100%
-  ), url('../../assets/spitbg.jpg');
+  ), url('../../assets/spitbg.webp');
   background-size: cover;
   background-position: center;
 }
