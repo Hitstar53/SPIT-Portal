@@ -93,3 +93,102 @@
     line-height: 1.5;
     opacity: 0.75;
 }
+
+@media (max-width: 1024px) {
+    .card {
+        border-radius: 1.5rem;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 1.25rem;
+    }
+
+    .row1 {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .teamHeading {
+        font-size: 1rem;
+    }
+
+    .teamMember {
+        font-size: 1rem;
+        padding-right: 0.5rem;
+    }
+
+    .domain {
+        font-size: 1rem;
+        gap: 1rem;
+    }
+
+    .techStack {
+        margin: 0.5rem 0;
+        gap: 1rem;
+    }
+
+    .tech {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        border-radius: 1rem;
+    }
+
+    .header {
+        font-size: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+        padding-bottom: 1rem;
+    }
+
+    .row1 {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .team {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .teamHeading {
+        font-size: 0.75rem;
+    }
+
+    .teamMember {
+        font-size: 0.75rem;
+        padding-right: 0.5rem;
+    }
+
+    .domain {
+        font-size: 0.75rem;
+        gap: 0.5rem;
+    }
+
+    .techStack {
+        margin: 0.5rem 0;
+        gap: 0.5rem;
+    }
+
+    .tech {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.5rem;
+    }
+
+    .description {
+        font-size: 0.75rem;
+    }
+}

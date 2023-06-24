@@ -29,21 +29,20 @@ const App = () => {
   });
   let match = useMatch('/')
 
+  useEffect(()=>{
+    const isLoggedIn = localStorage.getItem('isLoggedIn')
+    if (isLoggedIn==="false") {
+      navigate('/')
+    }
+  },[])
 
-  // useEffect(()=>{
-  //   const isLoggedIn = localStorage.getItem('isLoggedIn')
-  //   if (isLoggedIn==="false") {
-  //     navigate('/')
-  //   }
-  // },[])
-
-  // useEffect(() => {
-  //   if (initialRender.current) {
-  //     initialRender.current = false;
-  //     return;
-  //   }
-  //   localStorage.setItem("isLoggedIn", false);
-  // }, []);
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+      return;
+    }
+    localStorage.setItem("isLoggedIn", false);
+  }, []);
 
   return (
       <ThemeProvider theme={theme}>

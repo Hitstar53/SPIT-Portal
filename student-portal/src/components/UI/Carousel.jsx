@@ -5,9 +5,8 @@ import MobileStepper from '@mui/material/MobileStepper';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import SwipeableViews from 'react-swipeable-views';
+import SwipeableViews from 'react-swipeable-views-react-18-fix'
 import EduCard from '../profile/EduCard';
-import { useState,useEffect } from 'react';
 import './Carousel.css';
 
 const Currinfo = {
