@@ -46,7 +46,6 @@ const DateCalendar = () => {
         console.log(newEvent)
         if (newEvent.title === "" || newEvent.start === "" || newEvent.end === "") {
             toast("Please enter all the Event Fields", {
-                duration: 2000,
                 position: 'top-center',
             });
             return;
