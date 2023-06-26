@@ -97,20 +97,6 @@ const teacherSchema = new mongoose.Schema({
             type: Number,
             default: 0
         },
-        timetable: [{
-            startTime: {
-                type: Number,
-            },
-            endTime: {
-                type: Number,
-            },
-            day: {
-                type: String,
-            },
-            roomno: {
-                type: Number,
-            }
-        }],
         lecPlan: [{
             lecNumber: {
                 type: Number,
@@ -160,6 +146,21 @@ const teacherSchema = new mongoose.Schema({
         type: Number,
     },
 
+    timetable: [{
+        startTime: {
+            type: Number,
+        },
+        endTime: {
+            type: Number,
+        },
+        day: {
+            type: String,
+        },
+        roomno: {
+            type: Number,
+        }
+    }],
+    
     events: [{
         title: {
             type: String,
