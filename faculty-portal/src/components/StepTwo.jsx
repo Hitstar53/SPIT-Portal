@@ -155,7 +155,7 @@ function StepTwo() {
           Add Paper
         </button>
 
-        <h1>RP2: Patents</h1>
+        <h1>  RP 2: -Patent/books/Monograms/ MOOC (30 marks)</h1>
         {patentFields.map((field, index) => (
           <div key={field.id}>
             <label className="form-label">Patent Obtained {index + 1}
@@ -182,8 +182,6 @@ function StepTwo() {
         <button type="button" onClick={() => appendPatent({})}>
           Add Patent
         </button>
-
-        <h1>RP3: Books</h1>
         {bookFields.map((field, index) => (
           <div key={field.id}>
             <h3>Book #{index + 1}</h3>
@@ -221,7 +219,6 @@ function StepTwo() {
           Add Book
         </button>
 
-        <h1>RP4: MOOC</h1>
         {moocFields.map((field, index) => (
           <div key={field.id}>
             <h3>MOOC #{index + 1}</h3>
@@ -259,7 +256,7 @@ function StepTwo() {
           Add MOOC
         </button>
 
-        <h1>RP5: Sponsored</h1>
+        <h1>RP3: Sponsored Research and Consultancy</h1>
         {sponsoredFields.map((field, index) => (
           <div key={field.id}>
             <h3>Sponsored #{index + 1}</h3>
@@ -314,7 +311,7 @@ function StepTwo() {
         </button>
 
         <div>
-          <h1>RP6: Citations</h1>
+          <h1>RP4: Citations</h1>
           <label className="form-label">
             Number of citations in the previous calendar year
             <input
@@ -325,7 +322,7 @@ function StepTwo() {
           </label>
         </div>
 
-        <h1>RP7: Development</h1>
+        <h1>RP5: Self Development</h1>
         {developmentFields.map((field, index) => (
           <div key={field.id}>
             <h3>Development #{index + 1}</h3>
@@ -371,7 +368,7 @@ function StepTwo() {
           Add Development
         </button>
 
-        <h1>RP8: Soft/Hard Dev</h1>
+        <h1>RP6: New Software development / Hardware lab setup development</h1>
         {soft_hard_devFields.map((field, index) => (
           <div key={field.id}>
             <h3>Soft/Hard Dev #{index + 1}</h3>
@@ -409,7 +406,7 @@ function StepTwo() {
           Add Soft/Hard Dev
         </button>
 
-        <h1>RP9: Extras</h1>
+        <h1>RP7: Any activity not covered.</h1>
         {extrasFields.map((field, index) => (
           <div key={field.id}>
             <h3>Extra #{index + 1}</h3>
