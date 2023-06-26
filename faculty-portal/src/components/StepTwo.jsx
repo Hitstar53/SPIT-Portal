@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
-import "../styles/Appraisal2.css";
+import Table from "react-bootstrap/Table";
 
 function StepTwo() {
   const [dimension2, setDimension2] = useState([{}]);
@@ -102,62 +102,72 @@ function StepTwo() {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1>RP1: Publications</h1>
-        <table>
-          <tr>
-            <th>Paper Title</th>
-            <th>Journal/ Conference Name</th>
-            <th>Authors</th>
-            <th>Publisher</th>
-            <th>Paper Link</th>
-          </tr>
-        </table>
-        {paperFields.map((field, index) => (
-          <div key={field.id}>
-            <h3>Paper #{index + 1}</h3>
-            <label className="form-label">
-              Title
-              <input
-                {...register(`RP1.papers[${index}].title`)}
-                className="form-input"
-              />
-            </label>
-            <label className="form-label">
-              Journal
-              <input
-                {...register(`RP1.papers[${index}].journal`)}
-                className="form-input"
-              />
-            </label>
 
-            <label className="form-label">
-              Author
-              <input
-                {...register(`RP1.papers[${index}].author`)}
-                className="form-input"
-              />
-            </label>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Paper Title</th>
+              <th>Journal/ Conference Name</th>
+              <th>Authors</th>
+              <th>Publisher</th>
+              <th>Paper Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            {paperFields.map((field, index) => (
+              <tr>
+              {/* <div key={field.id}> */}
+                <td>
+                <label className="form-label">
+                  <input
+                    {...register(`RP1.papers[${index}].title`)}
+                    className="form-input"
+                  />
+                </label>
+                </td>
+                <td>
+                <label className="form-label">
+                  <input
+                    {...register(`RP1.papers[${index}].journal`)}
+                    className="form-input"
+                  />
+                </label>
+                </td>
 
-            <label className="form-label">
-              Publisher
-              <input
-                {...register(`RP1.papers[${index}].publisher`)}
-                className="form-input"
-              />
-            </label>
+                <td>
+                <label className="form-label">
+                  <input
+                    {...register(`RP1.papers[${index}].author`)}
+                    className="form-input"
+                  />
+                </label>
+                </td>
 
-            <label className="form-label">
-              Paper Link
-              <input
-                {...register(`RP1.papers[${index}].paperLink`)}
-                className="form-input"
-              />
-            </label>
+                <td>
+                <label className="form-label">
+                  <input
+                    {...register(`RP1.papers[${index}].publisher`)}
+                    className="form-input"
+                  />
+                </label>
+                </td>
 
-            <button type="button" onClick={() => removePaper(index)}>
-              Remove Paper
-            </button>
-          </div>
-        ))}
+                <td>
+                <label className="form-label">
+                  <input
+                    {...register(`RP1.papers[${index}].paperLink`)}
+                    className="form-input"
+                  />
+                </label>
+                </td>
+
+                <button type="button" onClick={() => removePaper(index)}>
+                </button>
+              {/* </div> */}
+              </tr>
+            ))}
+          </tbody>
+        </Table>
 
         <button type="button" onClick={() => appendPaper({})}>
           Add Paper
