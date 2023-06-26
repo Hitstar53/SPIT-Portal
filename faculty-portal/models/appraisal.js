@@ -47,17 +47,21 @@ const appraisalSchema = new mongoose.Schema({
                     type: Number
                 },
                 AP8ActivityRemedial: {
-                    type: String
+                    type: String,
+                    default: "Null"
                 },
                 AP9noteworthyDetails: {
-                    type: String
+                    type: String,
+                    default: "Null"
                 },
                 AP10paperSet: [{
                     paperSetForCourse: {
-                        type: String
+                        type: String,
+                        default: "Null"
                     },
                     marks: {
-                        type: Number
+                        type: Number,
+                        default: 0
                     }
                 }]
             }
@@ -128,7 +132,7 @@ const appraisalSchema = new mongoose.Schema({
                     type: String
                 }
             }],
-            
+
             totalMarks: {
                 type: Number
             }
@@ -464,7 +468,7 @@ const appraisalSchema = new mongoose.Schema({
         },
 
         collaboration: {
-            institutionDetails:[{
+            institutionDetails: [{
                 name: {
                     type: String
                 },
