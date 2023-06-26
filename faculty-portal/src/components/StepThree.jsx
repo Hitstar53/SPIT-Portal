@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
+import { ip1, ip2, dp1 } from '../data/Dim3';
+import "../styles/Appraisal3.css"
 
 function StepThree() {
-  const [dimension3,setDimension3]=useState([{}])
+  const [dimension3, setDimension3] = useState([{}])
   const { register, control, handleSubmit } = useForm();
   const { fields: organizedFields, append: appendOrganized, remove: removeOrganized } = useFieldArray({
     control,
@@ -30,16 +32,81 @@ function StepThree() {
   });
 
   const onSubmit = (data) => {
+    console.log(data)
     setDimension3(data)
   };
 
-  useEffect(()=>{
-    console.log(dimension3)
-  },[dimension3])
+  useEffect(() => {
+    // console.log(dimension3)
+  }, [dimension3])
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {/* Organized */}
+      <h2 className='table-title'>Administrative role executed</h2>
+      <div className='dim3-table'>
+        <div className='tab'>
+          <h5 className='tb-title'>IP1: Institute level assignments</h5>
+          <div className='tab-title'>
+            <div className='form-input-title' style={{border: "none", marginBottom: "0rem"}}>
+              Role
+            </div>
+            <div className='form-input-title' style={{border: "none", marginBottom: "0rem"}}>
+              Tick
+            </div>
+          </div>
+          {ip1.map((item, index) => (
+            <div key={item}>
+              <label className="tb-field">
+                {item}
+                <input className='form-input-tb' type="text" defaultValue={item} {...register(`IP1[${index}].role`)} readOnly />
+                <input className='form-input-cb' type="checkbox" placeholder={item} {...register(`IP1[${index}].tick`)} />
+              </label>
+            </div>
+          ))}
+        </div>
+
+        <div className='tab'>
+          <h5 className='tb-title'>IP2: Other Institute level assignments</h5>
+                 <div className='tab-title'>
+            <div className='form-input-title' style={{border: "none", marginBottom: "0rem"}}>
+              Role
+            </div>
+            <div className='form-input-title' style={{border: "none", marginBottom: "0rem"}}>
+              Tick
+            </div>
+          </div>
+          {ip2.map((item, index) => (
+            <div key={item}>
+              <label className="tb-field">
+              {item}
+                <input className='form-input-tb' type="text" defaultValue={item} {...register(`IP2[${index}].role`)} readOnly />
+                <input className='form-input-cb' type="checkbox" placeholder={item} {...register(`IP2[${index}].tick`)} />
+              </label>
+            </div>
+          ))}
+        </div>
+
+        <div className='tab'>
+          <h5 className='tb-title'>DP1: Department level assignments</h5>
+                 <div className='tab-title'>
+            <div className='form-input-title' style={{border: "none", marginBottom: "0rem"}}>
+              Role
+            </div>
+            <div className='form-input-title' style={{border: "none", marginBottom: "0rem"}}>
+              Tick
+            </div>
+          </div>
+          {dp1.map((item, index) => (
+            <div key={item}>
+              <label className="tb-field">
+              {item}
+                <input className='form-input-tb' type="text" defaultValue={item} {...register(`DP1[${index}].role`)} readOnly />
+                <input className='form-input-cb' type="checkbox" placeholder={item} {...register(`DP1[${index}].tick`)} />
+              </label>
+            </div>
+          ))}
+        </div>
+      </div>
       <h3>Organized</h3>
       {organizedFields.map((item, index) => (
         <div key={item.id}>

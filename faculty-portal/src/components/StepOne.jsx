@@ -83,6 +83,8 @@ const StepOne = () => {
   return (
     <form className="container" onSubmit={handleSubmit(onSubmit)}>
       <Toaster />
+      <div className='basic-info'>
+
       <div className="inputs">
         <label className="form-label">
           Year of Assessment:
@@ -136,8 +138,7 @@ const StepOne = () => {
         </label>
         {errors.designation && <p className="error">*This field is required</p>}
       </div>
-
-
+      </div>
 
       {courseFields.map((field, index) => (
         <div key={field.id}>
