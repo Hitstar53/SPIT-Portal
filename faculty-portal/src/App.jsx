@@ -12,6 +12,7 @@ import Appraisal from "./pages/Appraisal";
 import ViewProfile from "./pages/ViewProfile";
 import Login from "./pages/Login";
 import ProfileForm from "./pages/ProfileForm";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -54,6 +55,19 @@ const App = () => {
       ) : (
         <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       )}
+      <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                limit={1}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover={false}
+                theme="light"
+            />
     </div>
   );
 };

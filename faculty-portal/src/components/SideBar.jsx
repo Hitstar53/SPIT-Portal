@@ -26,6 +26,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { SideBarData } from '../data/SideBarData';
 import { Button } from '@mui/material';
 import '../styles/SideBar.css'
+import {toast} from 'react-toastify'
 
 const drawerWidth = 240;
 
@@ -109,6 +110,16 @@ export default function MiniDrawer({setIsLoggedIn}) {
     };
     const handleLogOut = () => {
         setIsLoggedIn(false);
+        toast.success('Logged Out Successfull!', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
         localStorage.clear()
     }
     const handleClose = () => {
