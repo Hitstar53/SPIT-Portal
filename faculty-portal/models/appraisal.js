@@ -182,8 +182,16 @@ const appraisalSchema = new mongoose.Schema({
                     title: {
                         type: String
                     },
-                    journal: {
-                        type: String
+                    conferenceOrJournal: {
+                        name: {
+                            type: String
+                        },
+                        type: {
+                            type: String
+                        },
+                        reputation: {
+                            type: String
+                        }
                     },
                     author: {
                         type: String
@@ -210,7 +218,10 @@ const appraisalSchema = new mongoose.Schema({
                     },
                     details: {
                         type: String
-                    }
+                    },
+                    status: {
+                        type: String
+                    },
                 }
             ],
             books: [
@@ -223,8 +234,10 @@ const appraisalSchema = new mongoose.Schema({
                     },
                     publisher: {
                         type: String
-                    }
-
+                    },
+                    status: {
+                        type: String
+                    },
                 }
             ],
             moocs: [
@@ -240,7 +253,7 @@ const appraisalSchema = new mongoose.Schema({
                     }
                 }
             ],
-            total_marks: {
+            totalMarks: {
                 type: Number,
                 max: 30
             },
@@ -268,6 +281,9 @@ const appraisalSchema = new mongoose.Schema({
 
                 }
             ],
+            totalMarks: {
+                type: Number,
+            }
         },
 
 
@@ -275,7 +291,7 @@ const appraisalSchema = new mongoose.Schema({
             number: {
                 type: Number
             },
-            Marks: {
+            totalMarks: {
                 type: Number
                 // max: 25
             }
@@ -284,6 +300,9 @@ const appraisalSchema = new mongoose.Schema({
         RP5: {
             selfDevelopment: [
                 {
+                    type: {
+                        type: String
+                    },
                     title: {
                         type: String
                     },
@@ -293,11 +312,14 @@ const appraisalSchema = new mongoose.Schema({
                     dates: {
                         type: String
                     },
-                    days: {
+                    duration: {
                         type: Number
                     }
                 }
             ],
+            totalMarks: {
+                type: Number
+            }
         },
 
         RP6: {
@@ -312,7 +334,7 @@ const appraisalSchema = new mongoose.Schema({
                     type: String
                 }
             }],
-            marks: {
+            totalMarks: {
                 type: Number,
                 //max: 10
             }

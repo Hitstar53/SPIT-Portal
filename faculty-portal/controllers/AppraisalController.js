@@ -172,6 +172,108 @@ const setAppraisal = asyncHandler(async (req, res) => {
         // ==========================================================================================================
         //Dimension2 starts
 
+        //RP1
+        var rp1marks = 0;
+        for (var i = 0; i < Dimension2.RP1.papers.length; i++) {
+            if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Journal" && Dimension2.RP1.papers[i].conferenceOrJournal.reputation == "High") {
+                rp1marks = rp1marks + 20;
+            }
+            if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Journal" && Dimension2.RP1.papers[i].conferenceOrJournal.reputation == "Medium") {
+                rp1marks = rp1marks + 15;
+            }
+            if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Journal" && Dimension2.RP1.papers[i].conferenceOrJournal.reputation == "None") {
+                rp1marks = rp1marks + 10;
+            }
+            if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Conference" && Dimension2.RP1.papers[i].conferenceOrJournal.reputation == "High") {
+                rp1marks = rp1marks + 10;
+            }
+            if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Conference" && (Dimension2.RP1.papers[i].conferenceOrJournal.reputation == "None" || Dimension2.RP1.papers[i].conferenceOrJournal.reputation == "Medium")) {
+                rp1marks = rp1marks + 7;
+            }
+        }
+        if (rp1marks > 30) {
+            rp1marks = 30;
+        }
+
+        // ------------------------------------
+        //RP2
+        var rp2marks = 0;
+        for (var i = 0; i < Dimension2.RP2.patents.length; i++) {
+            if (Dimension2.RP2.patents[i].status == "Obtained") {
+                rp2marks = rp2marks + 15;
+            }
+            if (Dimension2.RP2.patents[i].status == "Published") {
+                rp2marks = rp2marks + 5;
+            }
+        }
+        for (var i = 0; i < Dimension2.RP2.books.length; i++) {
+            if (Dimension2.RP2.books[i].status == "Published") {
+                rp2marks = rp2marks + 15;
+            }
+            if (Dimension2.RP2.books[i].status == "Book Chapter/Monograms/Copyright") {
+                rp2marks = rp2marks + 5;
+            }
+        }
+        for (var i = 0; i < Dimension2.RP2.moocs.length; i++) {
+            if (Dimension2.RP2.moocs[i].duration >= 8 && Dimension2.RP2.moocs[i].duration < 12) {
+                rp2marks = rp2marks + 5;
+            }
+            if (Dimension2.RP2.moocs[i].duration >= 12 && Dimension2.RP2.moocs[i].duration < 24) {
+                rp2marks = rp2marks + 10;
+            }
+            if (Dimension2.RP2.moocs[i].duration >= 24 && Dimension2.RP2.moocs[i].duration < 32) {
+                rp2marks = rp2marks + 15;
+            }
+            if (Dimension2.RP2.moocs[i].duration >= 32 && Dimension2.RP2.moocs[i].duration < 40) {
+                rp2marks = rp2marks + 15;
+            }
+            if (Dimension2.RP2.moocs[i].duration >= 40) {
+                rp2marks = rp2marks + 20;
+            }
+        }
+
+        if (rp2marks > 30) {
+            rp2marks = 30;
+        }
+
+        // ----------------------------------
+        //RP3
+        // ----------------------------
+        //RP5
+        var rp5marks = 0
+        for (var i = 0; i < Dimension2.RP5.selfDevelopment.length; i++) {
+            if (Dimension2.RP5.selfDevelopment[i].type == "STTP" || Dimension2.RP5.selfDevelopment[i].type == "FDP") {
+                rp5marks = rp5marks + (1 * Dimension2.RP5.selfDevelopment[i].duration);
+            }
+            if (Dimension2.RP5.selfDevelopment[i].type == "MOOC") {
+                rp5marks = rp5marks + (1 * Dimension2.RP5.selfDevelopment[i].duration);
+            }
+            if (Dimension2.RP5.selfDevelopment[i].type == "Industry Internship") {
+                rp5marks = rp5marks + (5 * Dimension2.RP5.selfDevelopment[i].duration);
+            }
+        }
+
+        if (rp5marks > 20) {
+            rp5marks = 20;
+        }
+        // -----------------------------------------------------
+        //RP6
+        // ------------------------------------
+        //RP7
+        // ------------------------------
+
+
+
+
+
+        Dimension2.RP1.totalMarks = rp1marks;
+        Dimension2.RP2.totalMarks = rp2marks;
+        Dimension2.RP4.totalMarks = (Dimension2.RP4.number * 0.4) <= 25 ? (Dimension2.RP4.number * 0.4) : 25;
+        Dimension2.RP5.totalMarks = rp5marks;
+
+
+        Dimension2.totalMarks = Dimension2.RP1.totalMarks + Dimension2.RP2.totalMarks + Dimension2.RP3.totalMarks + Dimension2.RP4.totalMarks + Dimension2.RP5.totalMarks + Dimension2.RP6.totalMarks + Dimension2.RP7.totalMarks;
+
 
 
         // =============================================================================================================
