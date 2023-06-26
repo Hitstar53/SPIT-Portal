@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGoogleLogin, GoogleLogin } from "@react-oauth/google";
 import styles from "./Login.module.css";
-import { useGoogleLogin,GoogleLogin } from "@react-oauth/google";
 import moodle from "../../assets/moodle.png";
 import logo from "../../assets/spitlogo.jpg";
-import bg from "../../assets/spitbg.jpg";
-import LoginAnim from "../../assets/loginAnim.json";
-import axios from "axios"
-import { useNavigate } from "react-router-dom"
+import axios from "axios";
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => 
     { 
@@ -21,7 +19,7 @@ const Login = () => {
       .then(res => res.data);
       localStorage.setItem('userinfo', JSON.stringify(userInfo));
       localStorage.setItem('isLoggedIn', true);
-      navigate('/student/home')
+      navigate('student/home')
     }
   });
 

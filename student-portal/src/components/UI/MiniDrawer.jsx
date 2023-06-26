@@ -1,5 +1,6 @@
 import * as React from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
+import MediaQuery, { useMediaQuery } from "react-responsive";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -29,7 +30,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import moodle from "../../assets/moodle.png";
 
-const drawerWidth = 280;
+const drawerWidth = 275;
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -185,7 +186,20 @@ export default function MiniDrawer() {
     false,
   ]);
 
+  // extract the () part from theme.breakpoints.down("sm")
+  const extractedQuery = theme.breakpoints.down("sm").substring(7);
+  const isMobile = useMediaQuery({ query: extractedQuery });
+
+  React.useEffect(() => {
+    if (isMobile) {
+      setOpen(false);
+    } else {
+      setOpen(true);
+    }
+  }, [isMobile]);
+
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -224,24 +238,23 @@ export default function MiniDrawer() {
   const DarkMode = () => {
     document.querySelector("body").setAttribute("data-theme", "dark");
     localStorage.setItem("theme", "dark");
-  }
+  };
   const LightMode = () => {
     document.querySelector("body").setAttribute("data-theme", "light");
     localStorage.setItem("theme", "light");
-  }
+  };
 
-  const [name, setName] = React.useState("")
-  const [picture, setPicture] = React.useState("")
+  const [name, setName] = React.useState("");
+  const [picture, setPicture] = React.useState("");
   React.useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem("userinfo"))
-    setName(userInfo?.name)
+    const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+    setName(userInfo?.name);
     if (userInfo?.picture) {
-      setPicture(userInfo?.picture)
+      setPicture(userInfo?.picture);
     } else {
-      setPicture(profile)
+      setPicture(profile);
     }
-  }
-  ,[])
+  }, []);
 
   const toggleTheme = (event) => {
     if (event.target.checked) {
@@ -255,7 +268,7 @@ export default function MiniDrawer() {
 
   const profileHandler = () => {
     navigate("/student/profile");
-  }
+  };
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -292,8 +305,12 @@ export default function MiniDrawer() {
                 textAlign: "right",
               }}
             >
-              <span style={{ fontSize: 24 }}>{name}</span>
-              <span style={{ opacity: 0.5, fontSize: 16 }}>2021300108</span>
+              {!isMobile && (
+                <>
+                  <span style={{ fontSize: 24 }}>{name}</span>
+                  <span style={{ opacity: 0.5, fontSize: 16 }}>2021300108</span>
+                </>
+              )}
             </span>
             <img
               onClick={profileHandler}
@@ -376,21 +393,23 @@ export default function MiniDrawer() {
                         pl: open ? 0.5 : "auto",
                       }}
                     >
-                      {data.icon} 
+                      {data.icon}
                     </ListItemIcon>
                     <Link
                       to={
                         index == 0 || index == 4
-                          ? "/student/" + data.text.toLowerCase()
-                          : "/student/home"
+                          ? data.text.toLowerCase()
+                          : location.pathname
                       }
                     >
-                      {
-                        open ? <ListItemText
-                        primary={data.text}
-                        sx={{ width: 160, opacity: open ? 1 : 0 }}
-                      /> : ""
-                    }
+                      {open ? (
+                        <ListItemText
+                          primary={data.text}
+                          sx={{ width: 160, opacity: open ? 1 : 0 }}
+                        />
+                      ) : (
+                        ""
+                      )}
                     </Link>
                     {open ? (
                       index != 0 && index != 4 ? (
@@ -412,9 +431,7 @@ export default function MiniDrawer() {
                     {data.sub.map((heading, index2) => {
                       return (
                         <ListItemButton sx={{ pl: 8 }} key={index2}>
-                          <Link 
-                            to={"/student/" + heading.toLowerCase()}
-                          >
+                          <Link to={"/student/" + heading.toLowerCase()}>
                             <ListItemText
                               sx={{ pl: 1, color: "var(--text-light)" }}
                               primary={heading}
@@ -451,7 +468,11 @@ export default function MiniDrawer() {
                     <FormControlLabel
                       sx={{ display: "flex", justifyContent: "center", m: 0 }}
                       control={
-                        <MaterialUISwitch checked={checked} onChange={toggleTheme} theme={theme} />
+                        <MaterialUISwitch
+                          checked={checked}
+                          onChange={toggleTheme}
+                          theme={theme}
+                        />
                       }
                     />
                   </FormGroup>
@@ -480,8 +501,8 @@ export default function MiniDrawer() {
                   }}
                   disableElevation
                   onClick={() => {
-                    localStorage.setItem('isLoggedIn', false);
-                    localStorage.removeItem('userInfo');
+                    localStorage.setItem("isLoggedIn", false);
+                    localStorage.removeItem("userinfo");
                     navigate("/");
                   }}
                 >
@@ -500,12 +521,12 @@ export default function MiniDrawer() {
                     },
                   }}
                   aria-label="add"
-                  onClick={()=>{
-                    localStorage.setItem('isLoggedIn', false);
-                    localStorage.removeItem('userInfo');
+                  onClick={() => {
+                    localStorage.setItem("isLoggedIn", false);
+                    localStorage.removeItem("userinfo");
                     navigate("/");
                   }}
-                > 
+                >
                   <i className="fa-solid fa-right-from-bracket"></i>
                 </Fab>
               )}{" "}
@@ -523,14 +544,16 @@ export default function MiniDrawer() {
                   }}
                   disableElevation
                 >
-                  <a target="_blank" href="https://moodle.spit.ac.in">Moodle</a>
+                  <a target="_blank" href="https://moodle.spit.ac.in">
+                    Moodle
+                  </a>
                 </Button>
               ) : (
                 <Fab
-                sx={{ overflow: "hidden" }}
-                size="small"
-                color="secondary"
-                aria-label="add"
+                  sx={{ overflow: "hidden" }}
+                  size="small"
+                  color="secondary"
+                  aria-label="add"
                 >
                   <a target="_blank" href="https://moodle.spit.ac.in">
                     <img src={moodle} alt="moodle" />

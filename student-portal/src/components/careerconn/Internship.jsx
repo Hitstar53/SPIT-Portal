@@ -12,56 +12,67 @@ import styles from './Internship.module.css'
 import AddButton from '../UI/AddButton';
 import MultiFieldModal from '../UI/Modals/MultiFieldModal';
 import TextField from '@mui/material/TextField';
+import  MenuItem  from '@mui/material/MenuItem';
+
+const internshipsDummy = [
+  {
+    inst: "Sardar Patel Institute of Technology",
+    tenure: "June - July 2024",
+    position: "Software Developer",
+    financed: "Paid",
+    mode: "Offline",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc",
+  },
+  {
+    inst: "Sardar Patel Institute of Technology",
+    tenure: "June - July 2023",
+    position: "Software Developer",
+    financed: "Unpaid",
+    mode: "Online",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc",
+  },
+];
 
 const Internship = () => {
   const [open, setOpen] = React.useState(false);
   const [index,setIndex] = React.useState(0);
-  const [internships, setInternships] = React.useState([])
+  const [internships, setInternships] = React.useState(internshipsDummy);
   function handleClickOpen(index) {
     setIndex(index);
     setOpen(true);
     console.log(index)
   };
-  const [newData, setNewData] = React.useState({})
-  const handleDataChange = (e) => {
-    setNewData({...newData,[e.target.name]:e.target.value})
-  }
-  const handleDataSubmit = (e) =>{
-    const arr = internships
-    arr.unshift(newData)
-    setInternships(arr)
-  }
   const handleClose = () => {
     setOpen(false);
   };
   const handleChange = () => {
-    const arr = internships
-    arr.splice(index,1)
-    setInternships(arr)
-    setOpen(false)
+    const arr = [...internships];
+    arr.splice(index, 1);
+    setInternships(arr);
+    setOpen(false);
+  };
+  // Functions for dialog (copy from here )
+  const [openDialog, setOpenDialog] = React.useState(false);
+  const handleClickOpenDialog = () => {
+    setOpenDialog(true);
+  };
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+  const [newData, setNewData] = React.useState({})
+  const handleDataChange = (e) => {
+    setNewData({...newData,[e.target.name]:e.target.value})
   }
+  const handleDataSubmit = (e) => {
+    e.preventDefault();
+    const arr = [...internships]
+    arr.unshift(newData)
+    setInternships(arr)
+  }
+  // Functions for dialog (copy till here )
   const dashboard = styles.dashboard + " flex flex-col p-8"
-  const internshipsDummy = [
-    {
-      inst:"Sardar Patel Institute of Technology",
-      tenure:"June - July 2024",
-      position:"Software Developer",
-      financed:"Paid",
-      mode:"Offline",
-      description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc",
-    }
-    ,{
-      inst:"Sardar Patel Institute of Technology",
-      tenure:"June - July 2023",
-      position:"Software Developer",
-      financed:"Unpaid",
-      mode:"Online",
-      description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc",
-    }
-  ]
-  React.useEffect(() => {
-    setInternships(internshipsDummy);
-  }, [])
   
   return (
     internships.length > 0 && (
@@ -69,7 +80,7 @@ const Internship = () => {
         <h1 className="text-4xl font-semibold pb-8 flex justify-between">
           Internships 
           <AddButton
-            onClick={handleDataSubmit}
+            onClick={handleClickOpenDialog}
             btntext="Add Internship"
           />
         </h1>
@@ -82,7 +93,7 @@ const Internship = () => {
                       
                           <DeleteIcon sx={{color:"var(--text-color)",cursor:"pointer"}}  onClick={()=>{
                               handleClickOpen(index)
-                          }} />
+                          }}/>
                  
                       </div>
                       <div>{info.tenure}</div>
@@ -104,16 +115,86 @@ const Internship = () => {
                   
           })
         }
-        <MultiFieldModal title="TITLE" content="THIS IS THE CONTENT">
+        <MultiFieldModal handleDataSubmit={handleDataSubmit} openDialog={openDialog} handleClickOpenDialog={handleClickOpenDialog} handleCloseDialog={handleCloseDialog}  title="Add new internship">
           <TextField
+              required
               autoFocus
               margin="dense"
-              id="name"
-              label="Email Address"
-              type="email"
+              name="inst"
+              label="Organization"
+              autoComplete="off"
+              type="text"
               fullWidth
               variant="standard"
+              onChange={handleDataChange}
             />
+          <TextField
+              required
+              margin="dense"
+              name="tenure"
+              label="Duration"
+              autoComplete="off"
+              type="text"
+              fullWidth
+              variant="standard"
+              onChange={handleDataChange}
+            />
+          <TextField
+              required
+              margin="dense"
+              name="position"
+              label="Position"
+              autoComplete="off"
+              type="text"
+              fullWidth
+              variant="standard"
+              onChange={handleDataChange}
+            />
+          <TextField
+              name="financed"
+              id="outlined-required"
+              select
+              fullWidth
+              autocomplete="off"
+              sx={{margin:'1rem 0 0 0'}}
+              label="Paid or Unpaid"
+              onChange={handleDataChange}
+            >
+              <MenuItem key="Paid" value="Paid">
+                Paid
+              </MenuItem>
+              <MenuItem key="UnPaid" value="UnPaid">
+                Unpaid
+              </MenuItem>
+            </TextField>
+             <TextField
+              name="mode"
+              id="outlined-required"
+              select
+              fullWidth
+              sx={{margin: '1rem 0 0 0'}}
+              label="Mode"
+              onChange={handleDataChange}
+            >
+              <MenuItem key="Online" value="Online">
+                Online
+              </MenuItem>
+              <MenuItem key="Offline" value="Offline">
+                Offline
+              </MenuItem>
+            </TextField>
+              <TextField
+                  multiline
+                  required
+                  margin="dense"
+                  name="description"
+                  label="Description"
+                  autoComplete="off"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  onChange={handleDataChange}
+                />
         </MultiFieldModal>
             <Dialog
             open={open}

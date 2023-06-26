@@ -4,7 +4,12 @@ import { useState, useEffect } from 'react';
 import Fab from "@mui/material/Fab";
 import { FaEdit, FaSave } from "react-icons/fa";
 import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
+import Box from "@mui/material/Box";import dayjs from 'dayjs';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateField } from "@mui/x-date-pickers/DateField";
+import {BsPersonWorkspace} from 'react-icons/bs';
 
 const Placement = () => {
     const container = styles.container + " flex flex-col gap-8 p-8"
@@ -49,6 +54,9 @@ const Placement = () => {
     const handleChangeCompany = (event) => {
         setCompanyInfo({ ...companyInfo, [event.target.name]: event.target.value});
     }
+    const handleChangeDate = (event) => {
+      setRoleInfo({ ...roleInfo, "joinDate": `${(event.$M)+1}/${event.$D}/${event.$y}`});
+    };
     const handleSubmit = (event) => {
         event.preventDefault();
         setEdit(false)
@@ -104,7 +112,7 @@ const Placement = () => {
         <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', padding:'0.25rem'}}>
             <div style={{width:'50%'}}>
             {!edit && (
-              <span>Company Name:&nbsp;&nbsp;{companyInfo.companyName}</span>
+              <span><BsPersonWorkspace />&nbsp;&nbsp;{companyInfo.companyName}</span>
             )}
             {edit && (
               <TextField
@@ -187,14 +195,14 @@ const Placement = () => {
               <span>Joining Date:&nbsp;&nbsp;{roleInfo.joinDate}</span>
             )}
             {edit && (
-              <TextField
-                name="joinDate"
-                id="outlined-required"
-                label="Joining Date"
-                type="text"
-                defaultValue={roleInfo.joinDate}
-                onChange={handleChangeRole}
-              />
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateField
+                  name="joinDate"
+                  label="Date Of Joining"
+                  value={dayjs(roleInfo.joinDate)}
+                  onChange={handleChangeDate}
+                />
+            </LocalizationProvider>
             )}
         </div>
         <div style={{padding:'0.25rem'}}>

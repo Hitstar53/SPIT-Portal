@@ -12,8 +12,10 @@
   }
   
   .eventname {
-    font-size: 1.2rem;
-    font-weight: 450;
+    font-size: 1.6rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
   }
   
   .position {
@@ -23,6 +25,7 @@
       font-size: 1rem;
       font-weight: 300;
       width: 100%;
+      align-items: center;
   }
   
   .content {
@@ -31,6 +34,18 @@
 
   .horizontalLine {
     border: none;
-    border-bottom: 1px solid rgb(255, 255, 255);
-    margin: 10px 0;
+    width: 100%;
+    height: 1px;
+    background-color: white;
+  }
+
+  .organisation_name{
+    font-size: 1.4rem;
+    font-weight: 350;
+    margin-bottom: 10px;
+  }
+
+  .descr{
+    font-size: 1.1rem;
+    font-weight: 350;
   }

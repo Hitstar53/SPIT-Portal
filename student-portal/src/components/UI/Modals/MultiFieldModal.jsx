@@ -6,25 +6,12 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Box from '@mui/material/Box'
 
-
-export default function FormDialog(props) {
-  const [open, setOpen] = React.useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  
-  const handleClose = () => {
-    setOpen(false);
-  };
-  
-
+export default function MultiFieldModal(props) {
   return (
-    <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
-      </Button>
-      <Dialog open={open} onClose={handleClose}>
+    <>
+      <Dialog component="form" onSubmit={props.handleDataSubmit} open={props.openDialog} onClose={props.handleCloseDialog}>
         <DialogTitle>{props.title}</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -33,10 +20,10 @@ export default function FormDialog(props) {
           {props.children}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Save</Button>
+          <Button onClick={props.handleCloseDialog}>Cancel</Button>
+          <Button type="submit" onClick={props.handleCloseDialog}>Save</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 }

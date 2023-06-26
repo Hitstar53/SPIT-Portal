@@ -15,7 +15,6 @@ const Courses = () => {
             animationRef.current.play()
             animationRef.current.setSpeed(5)
           }}
-          loop={false}
           lottieRef={animationRef}
           animationData={animationData} 
         />
