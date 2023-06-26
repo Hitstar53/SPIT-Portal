@@ -75,13 +75,12 @@ function StepTwo() {
     remove: removeExtras,
   } = useFieldArray({
     control,
-    name: 'RP7.extras',
+    name: "RP7.extras",
   });
-
 
   const onSubmit = (data) => {
     console.log(data);
-    localStorage.setItem('dim2Data', JSON.stringify(data));
+    localStorage.setItem("dim2Data", JSON.stringify(data));
     setDimension2(data);
   };
 
@@ -90,7 +89,7 @@ function StepTwo() {
   }, [dimension2]);
 
   useEffect(() => {
-    const storedData = localStorage.getItem('dim2Data');
+    const storedData = localStorage.getItem("dim2Data");
     if (storedData) {
       const parsedData = JSON.parse(storedData);
       Object.keys(parsedData).forEach((key) => {
@@ -101,8 +100,17 @@ function StepTwo() {
 
   return (
     <>
-      <h1>RP1: Publications</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <h1>RP1: Publications</h1>
+        <table>
+          <tr>
+            <th>Paper Title</th>
+            <th>Journal/ Conference Name</th>
+            <th>Authors</th>
+            <th>Publisher</th>
+            <th>Paper Link</th>
+          </tr>
+        </table>
         {paperFields.map((field, index) => (
           <div key={field.id}>
             <h3>Paper #{index + 1}</h3>
@@ -155,17 +163,19 @@ function StepTwo() {
           Add Paper
         </button>
 
-        <h1>RP2: Patents</h1>
+        <h1> RP 2: -Patent/books/Monograms/ MOOC (30 marks)</h1>
         {patentFields.map((field, index) => (
           <div key={field.id}>
-            <label className="form-label">Patent Obtained {index + 1}
+            <label className="form-label">
+              Patent Obtained {index + 1}
               <input
                 type="text"
                 {...register(`RP2.patents[${index}].name`)}
                 className="form-input"
               />
             </label>
-            <label className="form-label">Patent details
+            <label className="form-label">
+              Patent details
               <input
                 type="text"
                 {...register(`RP2.patents[${index}].details`)}
@@ -182,12 +192,11 @@ function StepTwo() {
         <button type="button" onClick={() => appendPatent({})}>
           Add Patent
         </button>
-
-        <h1>RP3: Books</h1>
         {bookFields.map((field, index) => (
           <div key={field.id}>
             <h3>Book #{index + 1}</h3>
-            <label className="form-label">Title
+            <label className="form-label">
+              Title
               <input
                 type="text"
                 {...register(`RP2.books[${index}].title`)}
@@ -195,7 +204,8 @@ function StepTwo() {
               />
             </label>
 
-            <label className="form-label">Author
+            <label className="form-label">
+              Author
               <input
                 type="text"
                 {...register(`RP2.books[${index}].author`)}
@@ -203,7 +213,8 @@ function StepTwo() {
               />
             </label>
 
-            <label className="form-label">Publisher
+            <label className="form-label">
+              Publisher
               <input
                 type="text"
                 {...register(`RP2.books[${index}].publisher`)}
@@ -221,11 +232,11 @@ function StepTwo() {
           Add Book
         </button>
 
-        <h1>RP4: MOOC</h1>
         {moocFields.map((field, index) => (
           <div key={field.id}>
             <h3>MOOC #{index + 1}</h3>
-            <label className="form-label">Name
+            <label className="form-label">
+              Name
               <input
                 type="text"
                 {...register(`RP2.moocs[${index}].name`)}
@@ -233,7 +244,8 @@ function StepTwo() {
               />
             </label>
 
-            <label className="form-label">Duration
+            <label className="form-label">
+              Duration
               <input
                 type="text"
                 {...register(`RP2.moocs[${index}].duration`)}
@@ -241,7 +253,8 @@ function StepTwo() {
               />
             </label>
 
-            <label className="form-label">Details
+            <label className="form-label">
+              Details
               <input
                 type="text"
                 {...register(`RP2.moocs[${index}].details`)}
@@ -259,11 +272,12 @@ function StepTwo() {
           Add MOOC
         </button>
 
-        <h1>RP5: Sponsored</h1>
+        <h1>RP3: Sponsored Research and Consultancy</h1>
         {sponsoredFields.map((field, index) => (
           <div key={field.id}>
             <h3>Sponsored #{index + 1}</h3>
-            <label className="form-label">Date
+            <label className="form-label">
+              Date
               <input
                 type="text"
                 {...register(`RP3.sponsored[${index}].date`)}
@@ -271,7 +285,8 @@ function StepTwo() {
               />
             </label>
 
-            <label className="form-label">Title
+            <label className="form-label">
+              Title
               <input
                 type="text"
                 {...register(`RP3.sponsored[${index}].title`)}
@@ -279,7 +294,8 @@ function StepTwo() {
               />
             </label>
 
-            <label className="form-label">Agency
+            <label className="form-label">
+              Agency
               <input
                 type="text"
                 {...register(`RP3.sponsored[${index}].agency`)}
@@ -287,7 +303,8 @@ function StepTwo() {
               />
             </label>
 
-            <label className="form-label">Details
+            <label className="form-label">
+              Details
               <input
                 type="text"
                 {...register(`RP3.sponsored[${index}].details`)}
@@ -295,7 +312,8 @@ function StepTwo() {
               />
             </label>
 
-            <label className="form-label">Amount
+            <label className="form-label">
+              Amount
               <input
                 type="text"
                 {...register(`RP3.sponsored[${index}].amount`)}
@@ -314,7 +332,7 @@ function StepTwo() {
         </button>
 
         <div>
-          <h1>RP6: Citations</h1>
+          <h1>RP4: Citations</h1>
           <label className="form-label">
             Number of citations in the previous calendar year
             <input
@@ -325,11 +343,12 @@ function StepTwo() {
           </label>
         </div>
 
-        <h1>RP7: Development</h1>
+        <h1>RP5: Self Development</h1>
         {developmentFields.map((field, index) => (
           <div key={field.id}>
             <h3>Development #{index + 1}</h3>
-            <label className="form-label">Title
+            <label className="form-label">
+              Title
               <input
                 type="text"
                 {...register(`RP5.development[${index}].title`)}
@@ -337,7 +356,8 @@ function StepTwo() {
               />
             </label>
 
-            <label className="form-label">Organization
+            <label className="form-label">
+              Organization
               <input
                 type="text"
                 {...register(`RP5.development[${index}].organization`)}
@@ -345,7 +365,8 @@ function StepTwo() {
               />
             </label>
 
-            <label className="form-label">Dates
+            <label className="form-label">
+              Dates
               <input
                 type="text"
                 {...register(`RP5.development[${index}].dates`)}
@@ -353,7 +374,8 @@ function StepTwo() {
               />
             </label>
 
-            <label className="form-label">Days
+            <label className="form-label">
+              Days
               <input
                 type="text"
                 {...register(`RP5.development[${index}].days`)}
@@ -371,11 +393,12 @@ function StepTwo() {
           Add Development
         </button>
 
-        <h1>RP8: Soft/Hard Dev</h1>
+        <h1>RP6: New Software development / Hardware lab setup development</h1>
         {soft_hard_devFields.map((field, index) => (
           <div key={field.id}>
             <h3>Soft/Hard Dev #{index + 1}</h3>
-            <label className="form-label">Type
+            <label className="form-label">
+              Type
               <input
                 type="text"
                 {...register(`RP6.soft_hard_dev[${index}].type`)}
@@ -383,7 +406,8 @@ function StepTwo() {
               />
             </label>
 
-            <label className="form-label">Model
+            <label className="form-label">
+              Model
               <input
                 type="text"
                 {...register(`RP6.soft_hard_dev[${index}].model`)}
@@ -391,7 +415,8 @@ function StepTwo() {
               />
             </label>
 
-            <label className="form-label">Details
+            <label className="form-label">
+              Details
               <input
                 type="text"
                 {...register(`RP6.soft_hard_dev[${index}].details`)}
@@ -409,11 +434,12 @@ function StepTwo() {
           Add Soft/Hard Dev
         </button>
 
-        <h1>RP9: Extras</h1>
+        <h1>RP7: Any activity not covered.</h1>
         {extrasFields.map((field, index) => (
           <div key={field.id}>
             <h3>Extra #{index + 1}</h3>
-            <label className="form-label">Date
+            <label className="form-label">
+              Date
               <input
                 type="text"
                 {...register(`RP7.extras[${index}].date`)}
@@ -421,7 +447,8 @@ function StepTwo() {
               />
             </label>
 
-            <label className="form-label">Details
+            <label className="form-label">
+              Details
               <input
                 type="text"
                 {...register(`RP7.extras[${index}].details`)}

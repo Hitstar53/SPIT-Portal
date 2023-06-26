@@ -5,6 +5,7 @@ import moodle from "../assets/moodle.png";
 import logo from "../assets/SPIT_Logo Colour.png";
 import axios from "axios"
 import { UserContext } from "../context/UserContext";
+import { toast } from "react-toastify";
 
 const Login = ({ isLoggedIn, setIsLoggedIn}) => {
   const {user, setUser,picture,setPicture} = useContext(UserContext);
@@ -31,10 +32,30 @@ const Login = ({ isLoggedIn, setIsLoggedIn}) => {
       setIsLoggedIn(true);
       setUser(res.data)
       localStorage.setItem("loggedin", true);
+        toast.success('Login Successfull', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     })
     .catch((err) => {
       localStorage.clear();
       console.log(err);
+      toast.error('Login Failed!', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     });
   };
 

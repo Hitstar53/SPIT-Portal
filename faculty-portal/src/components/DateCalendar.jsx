@@ -18,7 +18,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import "../styles/DateCalendar.css"
@@ -90,19 +90,6 @@ const DateCalendar = () => {
                 <EditIcon sx={{ mr: 1 }} />
                 Add Event
             </Fab>
-            <ToastContainer
-                position="top-center"
-                autoClose={3000}
-                limit={1}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover={false}
-                theme="light"
-            />
             <Modal className="modal-main" isOpen={modal} toggle={toggle} >
                 <ModalHeader toggle={toggle} className="modal-title">Event Details</ModalHeader>
                 <ModalBody>

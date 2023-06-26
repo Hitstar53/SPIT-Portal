@@ -4,6 +4,7 @@ import { useEffect,useState } from "react";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { Navigate, redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function ProfileForm() {
   const [redirect,setRedirect]=useState(false)
@@ -48,6 +49,16 @@ export default function ProfileForm() {
     .then(res=>res.json())
     .then(data=>setUser(data))
     .then(setRedirect(true))
+    .then(toast.success('Profile Updated Successfully', {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      }))
   }
 
   if(redirect) return <Navigate to="/profile" />
