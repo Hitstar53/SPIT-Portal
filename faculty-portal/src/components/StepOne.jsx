@@ -8,6 +8,7 @@ const StepOne = () => {
   const [Dimension1, setDimension1] = useState({});
   const { user } = useContext(UserContext);
   const options = [
+    { value: '', label: 'Select an option' },
     { value: '1', label: 'I' },
     { value: '2', label: 'II' },
     { value: '3', label: 'III' },
@@ -42,6 +43,24 @@ const StepOne = () => {
   } = useFieldArray({
     control,
     name: 'Dimension1.info.courses.papers',
+  });
+
+  const {
+    fields: menteeFields,
+    append: appendMentee,
+    remove: removeMentee,
+  } = useFieldArray({
+    control,
+    name: 'Dimension1.info.AP6.menteeFeedback',
+  });
+
+  const {
+    fields: guestFields,
+    append: appendGuest,
+    remove: removeGuest,
+  } = useFieldArray({
+    control,
+    name: 'Dimension1.info.AP7.guestLectureData',
   });
 
   useEffect(() => {
@@ -118,7 +137,7 @@ const StepOne = () => {
         {errors.designation && <p className="error">*This field is required</p>}
       </div>
 
-      <h3>Courses</h3>
+
 
       {courseFields.map((field, index) => (
         <div key={field.id}>
@@ -154,7 +173,10 @@ const StepOne = () => {
           <div className="inputs">
             <label className="form-label">
               Sem:
-              <select className='form-input' {...register(`Dimension1.info.courses[${index}].sem`)}>
+              <select 
+              defaultValue=''
+              className='form-input' 
+              {...register(`Dimension1.info.courses[${index}].sem`)}>
                 {options.map((option) => (
                   <option key={option.value} value={option.value}>{option.label}</option>
                 ))}
@@ -244,9 +266,6 @@ const StepOne = () => {
                 className="form-textarea"
                 {...register(`Dimension1.info.courses[${index}].AP8ActivityRemedial`, { required: false })} />
             </label>
-            {errors[`Dimension1.info.courses[${index}].AP8ActivityRemedial`] && (
-              <p className="error">*This field is required</p>
-            )}
           </div>
 
           <div className="inputs">
@@ -257,9 +276,6 @@ const StepOne = () => {
                 className="form-textarea"
                 {...register(`Dimension1.info.courses[${index}].AP9noteworthyDetails`, { required: false })} />
             </label>
-            {errors[`Dimension1.info.courses[${index}].AP9noteworthyDetails`] && (
-              <p className="error">*This field is required</p>
-            )}
           </div>
 
           {paperFields.map((field, pindex) => (
@@ -292,40 +308,138 @@ const StepOne = () => {
                   <p className="error">*This field is required</p>
                 )}
               </div>
-              
-          <button type="button" className="btn btn-danger" onClick={() => removePaper(pindex)}>
-            Remove Question Paper
-          </button>
+
+              <button type="button" className="btn btn-danger" onClick={() => removePaper(pindex)}>
+                Remove Question Paper
+              </button>
 
             </div>
           ))}
-          
+
           <div className='buttons'>
 
-          <button type='button' className='btn btn-success' onClick={() => appendPaper({})}>
-            Add Question Paper
-          </button>
+            <button type='button' className='btn btn-success' onClick={() => appendPaper({})}>
+              Add Question Paper
+            </button>
 
-          <button type="button" className="btn btn-danger" onClick={() => removeCourse(index)}>
-            Remove Course
-          </button>
+            <button type="button" className="btn btn-danger" onClick={() => removeCourse(index)}>
+              Remove Course
+            </button>
           </div>
 
         </div>
       ))}
-      
+
+      {menteeFields.map((field, index) => (
+        <div key={field.id}>
+          <h3>Mentee {index + 1}</h3>
+          <div className="inputs">
+            <label className="form-label">
+              Mentee Feedback:
+              <input
+                type="number"
+                {...register(`Dimension1.AP6.menteeFeedback[${index}]`, { required: true })}
+                className="form-input"
+              />
+            </label>
+            {errors[`Dimension1.AP6.menteeFeedback[${index}]`] && (
+              <p className="error">*This field is required</p>
+            )}
+          </div>
+          <button type="button" className="btn btn-danger" onClick={() => removeMentee(index)}>
+            Remove Mentee
+          </button>
+        </div>
+      ))}
+
+      {guestFields.map((field, index) => (
+        <div key={field.id}>
+          <h3>Guest Lecture {index + 1}</h3>
+          <div className="inputs">
+            <label className="form-label">
+              Lecture Date:
+              <input
+                className='form-input'
+                type="datetime-local"
+                placeholder="date local"
+                {...register(`Dimension1.AP7.guestLectureData[${index}].date`, { required: true })}
+              />
+            </label>
+            {errors[`Dimension1.AP7.guestLectureData[${index}]`] && (
+              <p className="error">*This field is required</p>
+            )}
+          </div>
+
+          <div className="inputs">
+            <label className="form-label">
+              Lecture Title:
+              <input
+                type="text"
+                {...register(`Dimension1.AP7.guestLectureData[${index}].title`, { required: true })}
+                className="form-input"
+              />
+            </label>
+            {errors[`Dimension1.AP7.guestLectureData[${index}].title`] && (
+              <p className="error">*This field is required</p>
+            )}
+          </div>
+
+          <div className="inputs">
+            <label className="form-label">
+              Speaker Name:
+              <input
+                type="text"
+                {...register(`Dimension1.AP7.guestLectureData[${index}].speakerName`, { required: true })}
+                className="form-input"
+              />
+            </label>
+            {errors[`Dimension1.AP7.guestLectureData[${index}].speakerName`] && (
+              <p className="error">*This field is required</p>
+            )}
+          </div>
+
+          <div className="inputs">
+            <label className="form-label">
+              Arranged for:
+              <select
+                defaultValue=""
+                {...register(`Dimension1.AP7.guestLectureData[${index}].arrangedFor`, { required: true })}
+                className="form-input">
+                <option value="">Select an option</option>
+                <option value="Students">Students</option>
+                <option value="Faculty">Faculty</option>
+              </select>
+            </label>
+            {errors[`Dimension1.AP7.guestLectureData[${index}].arrangedFor`] && (
+              <p className="error">*This field is required</p>
+            )}
+          </div>
+
+          <button type="button" className="btn btn-danger" onClick={() => removeGuest(index)}>
+            Remove Guest Lecture
+          </button>
+        </div>
+      ))}
+
       <div className='buttons'>
 
-      <button type="button" className="btn btn-success" onClick={() => appendCourse({})}>
-        Add Course
-      </button>
+        <button type="button" className="btn btn-success" onClick={() => appendCourse({})}>
+          Add Course
+        </button>
 
+        <button type="button" className="btn btn-success" onClick={() => appendMentee({})}>
+          Add Mentee
+        </button>
+
+        <button type="button" className="btn btn-success" onClick={() => appendGuest({})}>
+          Add Guest Lecture
+        </button>
+
+      </div>
 
       <button className="btn btn-primary submit-btn" type="submit">
         Submit
       </button>
-
-      </div>
     </form>
   );
 };

@@ -45,9 +45,16 @@ const DateCalendar = () => {
     const handleAddEvent = async () => {
         console.log(newEvent)
         if (newEvent.title === "" || newEvent.start === "" || newEvent.end === "") {
-            toast("Please enter all the Event Fields", {
-                position: 'top-center',
-            });
+            toast.error('Please enter all the Event Fields!', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
             return;
         }
         // await axios.post()
@@ -83,7 +90,19 @@ const DateCalendar = () => {
                 <EditIcon sx={{ mr: 1 }} />
                 Add Event
             </Fab>
-            <ToastContainer />
+            <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                limit={1}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover={false}
+                theme="light"
+            />
             <Modal className="modal-main" isOpen={modal} toggle={toggle} >
                 <ModalHeader toggle={toggle} className="modal-title">Event Details</ModalHeader>
                 <ModalBody>
@@ -103,10 +122,10 @@ const DateCalendar = () => {
                     <div>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoItem label="Start Date">
-                                <MobileDateTimePicker  value={newEvent.start} onChange={(date) => setNewEvent({ ...newEvent, start: date.$d })} />
+                                <MobileDateTimePicker value={newEvent.start} onChange={(date) => setNewEvent({ ...newEvent, start: date.$d })} />
                             </DemoItem>
                             <DemoItem label="End Date">
-                                <MobileDateTimePicker  value={newEvent.end} onChange={(date) => setNewEvent({ ...newEvent, end: date.$d })} />
+                                <MobileDateTimePicker value={newEvent.end} onChange={(date) => setNewEvent({ ...newEvent, end: date.$d })} />
                             </DemoItem>
                         </LocalizationProvider>
                     </div>
