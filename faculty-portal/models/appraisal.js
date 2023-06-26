@@ -135,22 +135,22 @@ const appraisalSchema = new mongoose.Schema({
 
         },
 
-        AP9: {
-            activityData: [{
-                semester: {
-                    type: String
-                },
-                subject: {
-                    type: String
-                },
-                activityDetails: {
-                    type: String
-                }
-            }],
-            average: {
-                type: Number
-            }
-        },
+        // AP9: {
+        //     activityData: [{
+        //         semester: {
+        //             type: String
+        //         },
+        //         subject: {
+        //             type: String
+        //         },
+        //         activityDetails: {
+        //             type: String
+        //         }
+        //     }],
+        //     average: {
+        //         type: Number
+        //     }
+        // },
         // AP10: {
         //     paper: [{
         //         course: {
