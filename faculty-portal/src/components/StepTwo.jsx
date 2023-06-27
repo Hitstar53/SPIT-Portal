@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import Table from "react-bootstrap/Table";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function StepTwo() {
   const [dimension2, setDimension2] = useState([{}]);
@@ -103,7 +104,7 @@ function StepTwo() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1>RP1: Publications</h1>
 
-        <Table striped bordered hover>
+        <Table striped bordered>
           <thead>
             <tr>
               <th>Paper Title</th>
@@ -111,140 +112,195 @@ function StepTwo() {
               <th>Authors</th>
               <th>Publisher</th>
               <th>Paper Link</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             {paperFields.map((field, index) => (
-              <tr>
-              {/* <div key={field.id}> */}
-                <td>
-                <label className="form-label">
-                  <input
-                    {...register(`RP1.papers[${index}].title`)}
-                    className="form-input"
-                  />
-                </label>
+              <tr key={field.id}>
+                {/* <div key={field.id}> */}
+                <td className="text-center align-middle">
+                  <label className="form-label">
+                    <input
+                      {...register(`RP1.papers[${index}].title`)}
+                      className="form-input"
+                    />
+                  </label>
                 </td>
-                <td>
-                <label className="form-label">
-                  <input
-                    {...register(`RP1.papers[${index}].journal`)}
-                    className="form-input"
-                  />
-                </label>
-                </td>
-
-                <td>
-                <label className="form-label">
-                  <input
-                    {...register(`RP1.papers[${index}].author`)}
-                    className="form-input"
-                  />
-                </label>
+                <td className="text-center align-middle">
+                  <label className="form-label">
+                    <input
+                      {...register(`RP1.papers[${index}].journal`)}
+                      className="form-input"
+                    />
+                  </label>
                 </td>
 
-                <td>
-                <label className="form-label">
-                  <input
-                    {...register(`RP1.papers[${index}].publisher`)}
-                    className="form-input"
-                  />
-                </label>
+                <td className="text-center align-middle">
+                  <label className="form-label">
+                    <input
+                      {...register(`RP1.papers[${index}].author`)}
+                      className="form-input"
+                    />
+                  </label>
                 </td>
 
-                <td>
-                <label className="form-label">
-                  <input
-                    {...register(`RP1.papers[${index}].paperLink`)}
-                    className="form-input"
-                  />
-                </label>
+                <td className="text-center align-middle">
+                  <label className="form-label">
+                    <input
+                      {...register(`RP1.papers[${index}].publisher`)}
+                      className="form-input"
+                    />
+                  </label>
                 </td>
 
-                <button type="button" onClick={() => removePaper(index)}>
-                </button>
-              {/* </div> */}
+                <td className="text-center align-middle">
+                  <label className="form-label">
+                    <input
+                      {...register(`RP1.papers[${index}].paperLink`)}
+                      className="form-input"
+                    />
+                  </label>
+                </td>
+                <td className="text-center align-middle">
+                  <button type="button" onClick={() => removePaper(index)}>
+                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                  </button>
+                </td>
+                {/* </div> */}
               </tr>
             ))}
           </tbody>
         </Table>
 
-        <button type="button" onClick={() => appendPaper({})}>
+        <button
+          className="btn btn-success"
+          type="button"
+          onClick={() => appendPaper({})}
+          style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
+        >
           Add Paper
         </button>
 
         <h1> RP 2: -Patent/books/Monograms/ MOOC (30 marks)</h1>
-        {patentFields.map((field, index) => (
-          <div key={field.id}>
-            <label className="form-label">
-              Patent Obtained {index + 1}
-              <input
-                type="text"
-                {...register(`RP2.patents[${index}].name`)}
-                className="form-input"
-              />
-            </label>
-            <label className="form-label">
-              Patent details
-              <input
-                type="text"
-                {...register(`RP2.patents[${index}].details`)}
-                className="form-input"
-              />
-            </label>
-
-            <button type="button" onClick={() => removePatent(index)}>
-              Remove
-            </button>
-          </div>
-        ))}
-
-        <button type="button" onClick={() => appendPatent({})}>
+        <Table striped bordered>
+          <thead>
+            <tr>
+              <th>Patent Obtained</th>
+              <th>Details</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {patentFields.map((field, index) => (
+              <tr key={field.id}>
+                <td>
+                  <label className="form-label">
+                    <input
+                      type="text"
+                      {...register(`RP2.patents[${index}].name`)}
+                      className="form-input"
+                    />
+                  </label>
+                </td>
+                <td>
+                  <label className="form-label">
+                    <input
+                      type="text"
+                      {...register(`RP2.patents[${index}].details`)}
+                      className="form-input"
+                    />
+                  </label>
+                </td>
+                <td className="text-center align-middle">
+                  <button type="button" onClick={() => removePatent(index)}>
+                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+        <button
+          className="btn btn-success"
+          type="button"
+          onClick={() => appendPatent({})}
+          style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
+        >
           Add Patent
         </button>
-        {bookFields.map((field, index) => (
-          <div key={field.id}>
-            <h3>Book #{index + 1}</h3>
-            <label className="form-label">
-              Title
-              <input
-                type="text"
-                {...register(`RP2.books[${index}].title`)}
-                className="form-input"
-              />
-            </label>
 
-            <label className="form-label">
-              Author
-              <input
-                type="text"
-                {...register(`RP2.books[${index}].author`)}
-                className="form-input"
-              />
-            </label>
-
-            <label className="form-label">
-              Publisher
-              <input
-                type="text"
-                {...register(`RP2.books[${index}].publisher`)}
-                className="form-input"
-              />
-            </label>
-
-            <button type="button" onClick={() => removeBook(index)}>
-              Remove Book
-            </button>
-          </div>
-        ))}
-
-        <button type="button" onClick={() => appendBook({})}>
+        <Table striped bordered>
+          <thead>
+            <tr>
+              <th>Books published</th>
+              <th>Authors</th>
+              <th>Publisher</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {bookFields.map((field, index) => (
+              <tr key={field.id}>
+                <td>
+                  <label className="form-label">
+                    <input
+                      type="text"
+                      {...register(`RP2.books[${index}].title`)}
+                      className="form-input"
+                    />
+                  </label>
+                </td>
+                <td>
+                  <label className="form-label">
+                    <input
+                      type="text"
+                      {...register(`RP2.books[${index}].author`)}
+                      className="form-input"
+                    />
+                  </label>
+                </td>
+                <td>
+                  <label className="form-label">
+                    <input
+                      type="text"
+                      {...register(`RP2.books[${index}].publisher`)}
+                      className="form-input"
+                    />
+                  </label>
+                </td>
+                <td className="text-center align-middle">
+                  <button type="button" onClick={() => removeBook(index)}>
+                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+        
+        <button
+          className="btn btn-success"
+          type="button"
+          onClick={() => appendBook({})}
+          style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
+        >
           Add Book
         </button>
 
+        <Table striped bordered>
+          <thead>
+            <tr>
+              <th>Books published</th>
+              <th>Authors</th>
+              <th>Publisher</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
         {moocFields.map((field, index) => (
-          <div key={field.id}>
-            <h3>MOOC #{index + 1}</h3>
+          <tr key={field.id}>
+            <td>
             <label className="form-label">
               Name
               <input
@@ -253,7 +309,9 @@ function StepTwo() {
                 className="form-input"
               />
             </label>
+            </td>
 
+            <td>
             <label className="form-label">
               Duration
               <input
@@ -262,7 +320,9 @@ function StepTwo() {
                 className="form-input"
               />
             </label>
+            </td>
 
+            <td>
             <label className="form-label">
               Details
               <input
@@ -271,14 +331,23 @@ function StepTwo() {
                 className="form-input"
               />
             </label>
-
-            <button type="button" onClick={() => removeMOOC(index)}>
-              Remove MOOC
-            </button>
-          </div>
+            </td>
+            <td className="text-center align-middle">
+                  <button type="button" onClick={() => removeMOOC(index)}>
+                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                  </button>
+                </td>
+          </tr>
         ))}
+        </tbody>
+        </Table>
 
-        <button type="button" onClick={() => appendMOOC({})}>
+        <button
+          className="btn btn-success"
+          type="button"
+          onClick={() => appendMOOC({})}
+          style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
+        >
           Add MOOC
         </button>
 
@@ -336,8 +405,12 @@ function StepTwo() {
             </button>
           </div>
         ))}
-
-        <button type="button" onClick={() => appendSponsored({})}>
+        <button
+          className="btn btn-success"
+          type="button"
+          onClick={() => appendSponsored({})}
+          style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
+        >
           Add Sponsored
         </button>
 
@@ -399,7 +472,12 @@ function StepTwo() {
           </div>
         ))}
 
-        <button type="button" onClick={() => appendDevelopment({})}>
+        <button
+          className="btn btn-success"
+          type="button"
+          onClick={() => appendDevelopment({})}
+          style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
+        >
           Add Development
         </button>
 
@@ -440,7 +518,12 @@ function StepTwo() {
           </div>
         ))}
 
-        <button type="button" onClick={() => appendSoftHardDev({})}>
+        <button
+          className="btn btn-success"
+          type="button"
+          onClick={() => appendSoftHardDev({})}
+          style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
+        >
           Add Soft/Hard Dev
         </button>
 
@@ -472,7 +555,12 @@ function StepTwo() {
           </div>
         ))}
 
-        <button type="button" onClick={() => appendExtras({})}>
+        <button
+          className="btn btn-success"
+          type="button"
+          onClick={() => appendExtras({})}
+          style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
+        >
           Add Extra
         </button>
 
