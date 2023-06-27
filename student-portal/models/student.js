@@ -19,22 +19,24 @@ const studentSchema = mongoose.Schema({
             type:mongoose.Schema.Types.ObjectId
         },
     ],
-    parent:[
-        {
-            role:{
-                type:String
+    motherName:{
+        type:String
             },
-            name:{
-                type:String
+    motherPhoneNo:{
+        type:String
             },
-            phoneNo:{
-                type:String
+    motherEmailID:{
+        type:String
             },
-            emailID:{
-                type:String
-            }
-        },
-    ],
+    fatherName:{
+        type:String
+            },
+    fatherPhoneNo:{
+        type:String
+            },
+    fatherEmailID:{
+        type:String
+            },
     exams:[
         {
             date:{ type : Date, required:true},

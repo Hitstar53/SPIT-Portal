@@ -22,8 +22,28 @@ exports.updateProfilePic = asyncHandler(async(req,res) => {
         const photo = req.body.photo;
         try {
             await Photo.findOneAndUpdate({emailID:email},{$set:{photoURI:photo}},{upsert:true})
-            res.status(200).json(' Personal Profile updated Succesfully')
+            res.status(200).json('Profile Picture updated Succesfully')
         } catch (error) {
             console.error(error)
         }
+})
+
+exports.updateParentalInfo = asyncHandler(async(req,res) =>{
+    const fatherName = req.body.fatherName;
+    const motherName = req.body.motherName;
+    const fatherPhoneNo = req.body.fatherPhoneNo;
+    const motherPhoneNo = req.body.motherPhoneNo;
+    const fatherEmailID = req.body.fatherEmailID;
+    const motherEmailID = req.body.motherEmailID;
+    const email = req.body.email;
+    if (!email) {
+        res.status(404).send("Send email")
+        return;
+    }
+    try {
+        await Profile.findOneAndUpdate({emailID:email},{$set: {fatherName:fatherName,motherName:motherName,fatherPhoneNo:fatherPhoneNo,motherPhoneNo:motherPhoneNo,fatherEmailID:fatherEmailID,motherEmailID:motherEmailID}},{upsert:true})
+        res.status(200).json(' Parental Profile updated Succesfully')
+    } catch (error) {
+        console.error(error)
+    }
 })
