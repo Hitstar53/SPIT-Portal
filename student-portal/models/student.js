@@ -16,7 +16,7 @@ const studentSchema = mongoose.Schema({
     batch:{type:String,requried:true},
     announcements:[
         {
-            type:mongoose.Schema.Types.ObjectId
+            type:String
         },
     ],
     motherName:{
@@ -39,7 +39,7 @@ const studentSchema = mongoose.Schema({
             },
     exams:[
         {
-            date:{ type : Date, required:true},
+            date:{ type : String, required:true},
             syllabus:{ type : String, required:true},
             type:{ type : String, required:true},
             courseName:{ type : String, required:true},
@@ -88,11 +88,11 @@ const studentSchema = mongoose.Schema({
             semesterNumber:{ type : Number, required:true},
             courses:[
                 {
-                    courseInfo:{type:mongoose.Schema.Types.ObjectId,required:true},
+                    courseInfo:{type:String,required:true},
                     exams:[
                         {
                             type:{type:String,required:true},
-                            date:{type:Date,required:true},
+                            date:{type:String,required:true},
                             maxScore:{type:Number,required:true},
                             obtainedScore:{type:Number,required:true}
                         }
@@ -103,9 +103,9 @@ const studentSchema = mongoose.Schema({
             status:{ type : String, required:true},
         },
     ],
-    committees:[
+    committee:[
         {
-            committeeDetails:{ type: mongoose.Schema.Types.ObjectId,required:true },
+            committeeDetails:{ type: String,required:true },
             tenure:{ type:String,required:true },
             position:{ type : String, required:true},
         },
@@ -113,7 +113,7 @@ const studentSchema = mongoose.Schema({
     participation:[
         {
             eventName:{ type : String, required:true},
-            date:{ type : Date, required:true},
+            date:{ type : String, required:true},
             organization:{ type : String, required:true},
             description:{ type : String, required:true},
         }
@@ -121,7 +121,7 @@ const studentSchema = mongoose.Schema({
     volunteerWork:[
         {
             eventName:{ type : String, required:true},
-            date:{ type : Date, required:true},
+            date:{ type : String, required:true},
             organization:{ type : String, required:true},
             description:{ type : String, required:true},   
         }
@@ -180,7 +180,7 @@ const studentSchema = mongoose.Schema({
     ],
     placement:
         {
-            type:mongoose.Schema.Types.ObjectId
+            type:String
         }
     
 },

@@ -8,6 +8,9 @@ const committeeSchema = mongoose.Schema({
         position:{ type : String, required:true},},
     ],
     logo:{type:mongoose.Schema.Types.Mixed,required:true},
+}
+,{
+    collection:"committee"
 })
 
 module.exports = mongoose.model("committee",committeeSchema)

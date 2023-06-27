@@ -52,7 +52,9 @@ exports.updateEducationalInfo = asyncHandler(async(req,res) =>{
     const eduInfo = req.body.eduInfo
     const email = req.body.email;
     try {
-        await Profile.findOneAndUpdate({emailID:email},{$set:{eduInfo:eduInfo}},{upsert:true})
+        await Profile.findOneAndUpdate({emailID:email},{$set:{educationalInfo:eduInfo}},{upsert:true})
+        console.log("hello")
+        res.status(200).json("educational info submitted successfully")
     } catch (error) {
         console.log(error)
     }
