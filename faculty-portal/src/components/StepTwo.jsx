@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
-import "../styles/Appraisal2.css";
+import "../styles/StepTwo.css";
 
 function StepTwo() {
   const [dimension2, setDimension2] = useState([{}]);

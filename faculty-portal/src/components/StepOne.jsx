@@ -140,6 +140,8 @@ const StepOne = () => {
       </div>
       </div>
 
+
+
       {courseFields.map((field, index) => (
         <div key={field.id}>
           <h3>Course {index + 1}</h3>
