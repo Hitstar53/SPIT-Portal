@@ -5,7 +5,7 @@ const studentSchema = mongoose.Schema({
     emailID:{ type : String, required:true},
     phoneNo:{ type : String, required:true},
     address:{ type : String, required:true},
-    dob:{ type:Date, required:true},
+    dob:{ type:String, required:true},
     religion:{ type : String, required:true,default:"Not disclosed"},
     bloodGroup:{ type : String, required:true},
     gender:{ type : String, required:true,default:"Not disclosed"},
@@ -181,6 +181,9 @@ const studentSchema = mongoose.Schema({
             type:mongoose.Schema.Types.ObjectId
         }
     
+},
+{
+    collection: 'student'
 })
 
 module.exports = mongoose.model("student",studentSchema)
