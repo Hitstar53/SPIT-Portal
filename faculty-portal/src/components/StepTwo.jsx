@@ -278,7 +278,7 @@ function StepTwo() {
             ))}
           </tbody>
         </Table>
-        
+
         <button
           className="btn btn-success"
           type="button"
@@ -291,55 +291,52 @@ function StepTwo() {
         <Table striped bordered>
           <thead>
             <tr>
-              <th>Books published</th>
-              <th>Authors</th>
-              <th>Publisher</th>
+              <th>MOOC’s attended</th>
+              <th>Duration (days/weeks)</th>
+              <th>Details (Grade,certificate etc)</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-        {moocFields.map((field, index) => (
-          <tr key={field.id}>
-            <td>
-            <label className="form-label">
-              Name
-              <input
-                type="text"
-                {...register(`RP2.moocs[${index}].name`)}
-                className="form-input"
-              />
-            </label>
-            </td>
+            {moocFields.map((field, index) => (
+              <tr key={field.id}>
+                <td>
+                  <label className="form-label">
+                    <input
+                      type="text"
+                      {...register(`RP2.moocs[${index}].name`)}
+                      className="form-input"
+                    />
+                  </label>
+                </td>
 
-            <td>
-            <label className="form-label">
-              Duration
-              <input
-                type="text"
-                {...register(`RP2.moocs[${index}].duration`)}
-                className="form-input"
-              />
-            </label>
-            </td>
+                <td>
+                  <label className="form-label">
+                    <input
+                      type="text"
+                      {...register(`RP2.moocs[${index}].duration`)}
+                      className="form-input"
+                    />
+                  </label>
+                </td>
 
-            <td>
-            <label className="form-label">
-              Details
-              <input
-                type="text"
-                {...register(`RP2.moocs[${index}].details`)}
-                className="form-input"
-              />
-            </label>
-            </td>
-            <td className="text-center align-middle">
+                <td>
+                  <label className="form-label">
+                    <input
+                      type="text"
+                      {...register(`RP2.moocs[${index}].details`)}
+                      className="form-input"
+                    />
+                  </label>
+                </td>
+                <td className="text-center align-middle">
                   <button type="button" onClick={() => removeMOOC(index)}>
                     <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
                   </button>
                 </td>
-          </tr>
-        ))}
-        </tbody>
+              </tr>
+            ))}
+          </tbody>
         </Table>
 
         <button
