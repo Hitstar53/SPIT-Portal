@@ -104,74 +104,76 @@ function StepTwo() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1>RP1: Publications</h1>
 
-        <Table striped bordered>
-          <thead>
-            <tr>
-              <th>Paper Title</th>
-              <th>Journal/ Conference Name</th>
-              <th>Authors</th>
-              <th>Publisher</th>
-              <th>Paper Link</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {paperFields.map((field, index) => (
-              <tr key={field.id}>
-                {/* <div key={field.id}> */}
-                <td className="text-center align-middle">
-                  <label className="form-label">
-                    <input
-                      {...register(`RP1.papers[${index}].title`)}
-                      className="form-input"
-                    />
-                  </label>
-                </td>
-                <td className="text-center align-middle">
-                  <label className="form-label">
-                    <input
-                      {...register(`RP1.papers[${index}].journal`)}
-                      className="form-input"
-                    />
-                  </label>
-                </td>
-
-                <td className="text-center align-middle">
-                  <label className="form-label">
-                    <input
-                      {...register(`RP1.papers[${index}].author`)}
-                      className="form-input"
-                    />
-                  </label>
-                </td>
-
-                <td className="text-center align-middle">
-                  <label className="form-label">
-                    <input
-                      {...register(`RP1.papers[${index}].publisher`)}
-                      className="form-input"
-                    />
-                  </label>
-                </td>
-
-                <td className="text-center align-middle">
-                  <label className="form-label">
-                    <input
-                      {...register(`RP1.papers[${index}].paperLink`)}
-                      className="form-input"
-                    />
-                  </label>
-                </td>
-                <td className="text-center align-middle">
-                  <button type="button" onClick={() => removePaper(index)}>
-                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
-                  </button>
-                </td>
-                {/* </div> */}
+        {paperFields.length > 0 && (
+          <Table striped bordered>
+            <thead>
+              <tr>
+                <th>Paper Title</th>
+                <th>Journal/ Conference Name</th>
+                <th>Authors</th>
+                <th>Publisher</th>
+                <th>Paper Link</th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {paperFields.map((field, index) => (
+                <tr key={field.id}>
+                  {/* <div key={field.id}> */}
+                  <td className="text-center align-middle">
+                    <label className="form-label">
+                      <input
+                        {...register(`RP1.papers[${index}].title`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
+                  <td className="text-center align-middle">
+                    <label className="form-label">
+                      <input
+                        {...register(`RP1.papers[${index}].journal`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
+
+                  <td className="text-center align-middle">
+                    <label className="form-label">
+                      <input
+                        {...register(`RP1.papers[${index}].author`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
+
+                  <td className="text-center align-middle">
+                    <label className="form-label">
+                      <input
+                        {...register(`RP1.papers[${index}].publisher`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
+
+                  <td className="text-center align-middle">
+                    <label className="form-label">
+                      <input
+                        {...register(`RP1.papers[${index}].paperLink`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
+                  <td className="text-center align-middle">
+                    <button type="button" onClick={() => removePaper(index)}>
+                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    </button>
+                  </td>
+                  {/* </div> */}
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
 
         <button
           className="btn btn-success"
@@ -183,44 +185,46 @@ function StepTwo() {
         </button>
 
         <h1> RP 2: -Patent/books/Monograms/ MOOC (30 marks)</h1>
-        <Table striped bordered>
-          <thead>
-            <tr>
-              <th>Patent Obtained</th>
-              <th>Details</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {patentFields.map((field, index) => (
-              <tr key={field.id}>
-                <td>
-                  <label className="form-label">
-                    <input
-                      type="text"
-                      {...register(`RP2.patents[${index}].name`)}
-                      className="form-input"
-                    />
-                  </label>
-                </td>
-                <td>
-                  <label className="form-label">
-                    <input
-                      type="text"
-                      {...register(`RP2.patents[${index}].details`)}
-                      className="form-input"
-                    />
-                  </label>
-                </td>
-                <td className="text-center align-middle">
-                  <button type="button" onClick={() => removePatent(index)}>
-                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
-                  </button>
-                </td>
+        {patentFields.length > 0 && (
+          <Table striped bordered>
+            <thead>
+              <tr>
+                <th>Patent Obtained</th>
+                <th>Details</th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {patentFields.map((field, index) => (
+                <tr key={field.id}>
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP2.patents[${index}].name`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP2.patents[${index}].details`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
+                  <td className="text-center align-middle">
+                    <button type="button" onClick={() => removePatent(index)}>
+                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
         <button
           className="btn btn-success"
           type="button"
@@ -230,54 +234,56 @@ function StepTwo() {
           Add Patent
         </button>
 
-        <Table striped bordered>
-          <thead>
-            <tr>
-              <th>Books published</th>
-              <th>Authors</th>
-              <th>Publisher</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {bookFields.map((field, index) => (
-              <tr key={field.id}>
-                <td>
-                  <label className="form-label">
-                    <input
-                      type="text"
-                      {...register(`RP2.books[${index}].title`)}
-                      className="form-input"
-                    />
-                  </label>
-                </td>
-                <td>
-                  <label className="form-label">
-                    <input
-                      type="text"
-                      {...register(`RP2.books[${index}].author`)}
-                      className="form-input"
-                    />
-                  </label>
-                </td>
-                <td>
-                  <label className="form-label">
-                    <input
-                      type="text"
-                      {...register(`RP2.books[${index}].publisher`)}
-                      className="form-input"
-                    />
-                  </label>
-                </td>
-                <td className="text-center align-middle">
-                  <button type="button" onClick={() => removeBook(index)}>
-                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
-                  </button>
-                </td>
+        {bookFields.length > 0 && (
+          <Table striped bordered>
+            <thead>
+              <tr>
+                <th>Books published</th>
+                <th>Authors</th>
+                <th>Publisher</th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {bookFields.map((field, index) => (
+                <tr key={field.id}>
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP2.books[${index}].title`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP2.books[${index}].author`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP2.books[${index}].publisher`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
+                  <td className="text-center align-middle">
+                    <button type="button" onClick={() => removeBook(index)}>
+                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
 
         <button
           className="btn btn-success"
@@ -288,56 +294,58 @@ function StepTwo() {
           Add Book
         </button>
 
-        <Table striped bordered>
-          <thead>
-            <tr>
-              <th>MOOC’s attended</th>
-              <th>Duration (days/weeks)</th>
-              <th>Details (Grade,certificate etc)</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {moocFields.map((field, index) => (
-              <tr key={field.id}>
-                <td>
-                  <label className="form-label">
-                    <input
-                      type="text"
-                      {...register(`RP2.moocs[${index}].name`)}
-                      className="form-input"
-                    />
-                  </label>
-                </td>
-
-                <td>
-                  <label className="form-label">
-                    <input
-                      type="text"
-                      {...register(`RP2.moocs[${index}].duration`)}
-                      className="form-input"
-                    />
-                  </label>
-                </td>
-
-                <td>
-                  <label className="form-label">
-                    <input
-                      type="text"
-                      {...register(`RP2.moocs[${index}].details`)}
-                      className="form-input"
-                    />
-                  </label>
-                </td>
-                <td className="text-center align-middle">
-                  <button type="button" onClick={() => removeMOOC(index)}>
-                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
-                  </button>
-                </td>
+        {moocFields.length > 0 && (
+          <Table striped bordered>
+            <thead>
+              <tr>
+                <th>MOOC’s attended</th>
+                <th>Duration (days/weeks)</th>
+                <th>Details (Grade,certificate etc)</th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {moocFields.map((field, index) => (
+                <tr key={field.id}>
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP2.moocs[${index}].name`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
+
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP2.moocs[${index}].duration`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
+
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP2.moocs[${index}].details`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
+                  <td className="text-center align-middle">
+                    <button type="button" onClick={() => removeMOOC(index)}>
+                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
 
         <button
           className="btn btn-success"
@@ -349,59 +357,83 @@ function StepTwo() {
         </button>
 
         <h1>RP3: Sponsored Research and Consultancy</h1>
-        {sponsoredFields.map((field, index) => (
-          <div key={field.id}>
-            <h3>Sponsored #{index + 1}</h3>
-            <label className="form-label">
-              Date
-              <input
-                type="text"
-                {...register(`RP3.sponsored[${index}].date`)}
-                className="form-input"
-              />
-            </label>
+        {sponsoredFields.length > 0 && (
+          <Table striped bordered>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Project Title/Consultancy</th>
+                <th>Sponsoring Agency/Consultant</th>
+                <th>Details (Govt/ Non-Govt)</th>
+                <th>Funded Amount</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {sponsoredFields.map((field, index) => (
+                <tr key={field.id}>
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP3.sponsored[${index}].date`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
 
-            <label className="form-label">
-              Title
-              <input
-                type="text"
-                {...register(`RP3.sponsored[${index}].title`)}
-                className="form-input"
-              />
-            </label>
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP3.sponsored[${index}].title`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
 
-            <label className="form-label">
-              Agency
-              <input
-                type="text"
-                {...register(`RP3.sponsored[${index}].agency`)}
-                className="form-input"
-              />
-            </label>
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP3.sponsored[${index}].agency`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
 
-            <label className="form-label">
-              Details
-              <input
-                type="text"
-                {...register(`RP3.sponsored[${index}].details`)}
-                className="form-input"
-              />
-            </label>
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP3.sponsored[${index}].details`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
 
-            <label className="form-label">
-              Amount
-              <input
-                type="text"
-                {...register(`RP3.sponsored[${index}].amount`)}
-                className="form-input"
-              />
-            </label>
-
-            <button type="button" onClick={() => removeSponsored(index)}>
-              Remove Sponsored
-            </button>
-          </div>
-        ))}
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP3.sponsored[${index}].amount`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
+                  <td className="text-center align-middle">
+                    <button
+                      type="button"
+                      onClick={() => removeSponsored(index)}
+                    >
+                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
         <button
           className="btn btn-success"
           type="button"
@@ -424,50 +456,72 @@ function StepTwo() {
         </div>
 
         <h1>RP5: Self Development</h1>
-        {developmentFields.map((field, index) => (
-          <div key={field.id}>
-            <h3>Development #{index + 1}</h3>
-            <label className="form-label">
-              Title
-              <input
-                type="text"
-                {...register(`RP5.development[${index}].title`)}
-                className="form-input"
-              />
-            </label>
+        {developmentFields.length > 0 && (
+          <Table striped bordered>
+            <thead>
+              <tr>
+                <th>STTP/FDP/MOOC Courses/Industry Internship Title</th>
+                <th>Organization details </th>
+                <th>Dates</th>
+                <th>No. of days Participation</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {developmentFields.map((field, index) => (
+                <tr key={field.id}>
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP5.development[${index}].title`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
 
-            <label className="form-label">
-              Organization
-              <input
-                type="text"
-                {...register(`RP5.development[${index}].organization`)}
-                className="form-input"
-              />
-            </label>
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP5.development[${index}].organization`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
 
-            <label className="form-label">
-              Dates
-              <input
-                type="text"
-                {...register(`RP5.development[${index}].dates`)}
-                className="form-input"
-              />
-            </label>
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP5.development[${index}].dates`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
 
-            <label className="form-label">
-              Days
-              <input
-                type="text"
-                {...register(`RP5.development[${index}].days`)}
-                className="form-input"
-              />
-            </label>
-
-            <button type="button" onClick={() => removeDevelopment(index)}>
-              Remove Development
-            </button>
-          </div>
-        ))}
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP5.development[${index}].days`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
+                  <td className="text-center align-middle">
+                    <button
+                      type="button"
+                      onClick={() => removeDevelopment(index)}
+                    >
+                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
 
         <button
           className="btn btn-success"
@@ -479,41 +533,61 @@ function StepTwo() {
         </button>
 
         <h1>RP6: New Software development / Hardware lab setup development</h1>
-        {soft_hard_devFields.map((field, index) => (
-          <div key={field.id}>
-            <h3>Soft/Hard Dev #{index + 1}</h3>
-            <label className="form-label">
-              Type
-              <input
-                type="text"
-                {...register(`RP6.soft_hard_dev[${index}].type`)}
-                className="form-input"
-              />
-            </label>
+        {soft_hard_devFields.length > 0 && (
+          <Table striped bordered>
+            <thead>
+              <tr>
+                <th>Software Developed /Hardware lab setup</th>
+                <th>Model/ Portal</th>
+                <th>Details of the setup</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {soft_hard_devFields.map((field, index) => (
+                <tr key={field.id}>
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP6.soft_hard_dev[${index}].type`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
 
-            <label className="form-label">
-              Model
-              <input
-                type="text"
-                {...register(`RP6.soft_hard_dev[${index}].model`)}
-                className="form-input"
-              />
-            </label>
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP6.soft_hard_dev[${index}].model`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
 
-            <label className="form-label">
-              Details
-              <input
-                type="text"
-                {...register(`RP6.soft_hard_dev[${index}].details`)}
-                className="form-input"
-              />
-            </label>
-
-            <button type="button" onClick={() => removeSoftHardDev(index)}>
-              Remove Soft/Hard Dev
-            </button>
-          </div>
-        ))}
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP6.soft_hard_dev[${index}].details`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
+                  <td className="text-center align-middle">
+                    <button
+                      type="button"
+                      onClick={() => removeSoftHardDev(index)}
+                    >
+                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
 
         <button
           className="btn btn-success"
@@ -525,32 +599,47 @@ function StepTwo() {
         </button>
 
         <h1>RP7: Any activity not covered.</h1>
-        {extrasFields.map((field, index) => (
-          <div key={field.id}>
-            <h3>Extra #{index + 1}</h3>
-            <label className="form-label">
-              Date
-              <input
-                type="text"
-                {...register(`RP7.extras[${index}].date`)}
-                className="form-input"
-              />
-            </label>
+        {extrasFields.length > 0 && (
+          <Table striped bordered>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Details (Faculty claim needs to be approved by HOD /Senior most faculty)</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {extrasFields.map((field, index) => (
+                <tr key={field.id}>
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP7.extras[${index}].date`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
 
-            <label className="form-label">
-              Details
-              <input
-                type="text"
-                {...register(`RP7.extras[${index}].details`)}
-                className="form-input"
-              />
-            </label>
-
-            <button type="button" onClick={() => removeExtras(index)}>
-              Remove Extra
-            </button>
-          </div>
-        ))}
+                  <td>
+                    <label className="form-label">
+                      <input
+                        type="text"
+                        {...register(`RP7.extras[${index}].details`)}
+                        className="form-input"
+                      />
+                    </label>
+                  </td>
+                  <td className="text-center align-middle">
+                    <button type="button" onClick={() => removeExtras(index)}>
+                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
 
         <button
           className="btn btn-success"
@@ -561,7 +650,7 @@ function StepTwo() {
           Add Extra
         </button>
 
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" style={{display:'block',width:'100px'}} />
       </form>
     </>
   );
