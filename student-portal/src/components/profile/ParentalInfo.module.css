@@ -43,3 +43,20 @@
 .titleIcon:hover {
     opacity: 1;
 }
+
+@media (max-width: 768px) {
+    .header {
+        font-size: 1.25rem;
+    }
+    
+    .PartInfo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.625rem;
+    }
+
+    .twoColAddress,
+    .twoCol {
+        gap: 0.625rem;
+    }
+}

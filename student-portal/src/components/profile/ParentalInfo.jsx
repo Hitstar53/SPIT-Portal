@@ -106,6 +106,7 @@ const ParentalInfo = (props) => {
             )}
             {edit && (
               <TextField
+                required
                 name="mname"
                 id="outlined-required"
                 onChange={handleChange}
@@ -124,6 +125,7 @@ const ParentalInfo = (props) => {
             )}
             {edit && (
               <TextField
+                required
                 InputLabelProps={{
                   sx: {
                     color: "var(--text-color)",
@@ -145,6 +147,7 @@ const ParentalInfo = (props) => {
             )}
             {edit && (
               <TextField
+                required
                 name="mphone"
                 id="outlined-required"
                 onChange={handleChange}
@@ -163,11 +166,12 @@ const ParentalInfo = (props) => {
             )}
             {edit && (
               <TextField
+                required
                 name="femail"
                 id="outlined-required"
                 onChange={handleChange}
                 label="Father Email"
-                type="text"
+                type="email"
                 defaultValue={parentalInfo.femail}
               />
             )}
@@ -179,11 +183,12 @@ const ParentalInfo = (props) => {
             )}
             {edit && (
               <TextField
+                required
                 name="memail"
                 id="outlined-required"
                 onChange={handleChange}
                 label="Mother Phone Number"
-                type="text"
+                type="email"
                 defaultValue={parentalInfo.memail}
               />
             )}

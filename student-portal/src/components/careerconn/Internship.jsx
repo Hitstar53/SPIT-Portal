@@ -77,7 +77,7 @@ const Internship = () => {
   return (
     internships.length > 0 && (
       <div className={dashboard}>
-        <h1 className="text-4xl font-semibold pb-8 flex justify-between">
+        <h1 className="text-4xl text-center md:text-left font-semibold pb-8 flex flex-col gap-4 md:gap-0 md:flex-row justify-between">
           Internships 
           <AddButton
             onClick={handleClickOpenDialog}
@@ -90,11 +90,9 @@ const Internship = () => {
                     <div className={styles.heading}>
                       <div className={styles.org}>
                         <div>{info.inst}</div>
-                      
                           <DeleteIcon sx={{color:"var(--text-color)",cursor:"pointer"}}  onClick={()=>{
                               handleClickOpen(index)
                           }}/>
-                 
                       </div>
                       <div>{info.tenure}</div>
                     </div>

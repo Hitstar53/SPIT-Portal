@@ -30,7 +30,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import moodle from "../../assets/moodle.png";
 
-const drawerWidth = 275;
+let drawerWidth = 275;
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -175,9 +175,8 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function MiniDrawer() {
+export default function MiniDrawer({ open,setOpen }) {
   const theme = useTheme({ typography: { fontFamily: "Montserrat" } });
-  const [open, setOpen] = React.useState(true);
   const [openSub, setOpenSub] = React.useState([
     false,
     false,

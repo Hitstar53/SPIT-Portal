@@ -1,8 +1,6 @@
 import React from "react";
 import styles from "./VolunteerWork.module.css";
 
-
-
 const VolunteerWork = (props) => {
     return (
       <div className={styles.volCard}>
@@ -14,7 +12,7 @@ const VolunteerWork = (props) => {
           <div className={styles.position}>
             <div className={styles.instructor}>{props.instructor}</div>
           </div>
-          <div>{props.desc}</div>
+          <div className={styles.description}>{props.desc}</div>
         </div>
       </div>
     );

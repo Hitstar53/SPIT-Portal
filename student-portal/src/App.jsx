@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { Route, Routes, useMatch,useNavigate, createBrowserRouter, RouterProvider } from 'react-router-dom'
+import React, { useRef } from 'react'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Dashboard from './components/dashboard/Dashboard';
 import Profile from './components/profile/Profile';
 import Login from './components/login/Login';
@@ -8,11 +8,11 @@ import Courses from './components/academics/Courses/Courses';
 import Portfolio from './components/careerconn/Portfolio/Portfolio';
 import Internship from './components/careerconn/Internship';
 import Placement from './components/careerconn/Placement';
-import Events from './components/extracurr/Events';
+import Events from './components/extracurr/events/Events';
 import { Box } from '@mui/system';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Committees from "./components/extracurr/Committees";
-import ComAdmin from "./components/extracurr/ComAdmin";
+import Committees from "./components/extracurr/committees/Committees";
+import ComAdmin from "./components/extracurr/committees/ComAdmin";
 import RootLayout from './pages/RootLayout';
 import AdminLayout from './pages/AdminLayout';
 import ErrorPage from './pages/ErrorPage';

@@ -220,6 +220,7 @@ const EduCard = (props) => {
               {!edit && (<p><label>Percentage:&nbsp;&nbsp;</label>{props?.info?.percentage}</p>)}
             {edit && (
             <TextField
+              required
               id="outlined-required"
               label="Percentage"
               type="text"

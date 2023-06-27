@@ -1,4 +1,5 @@
 import React from "react";
+import AddButton from "../../UI/AddButton"
 import styles from "./Events.module.css";
 import EventsCard from "./EventsCard.jsx"
 
@@ -26,21 +27,24 @@ const eventinfo = [
 const Events = () => {
   return (
     <div className={styles.eventsPage}>
-      <h1 className={styles.heading}>Your Participation</h1>
+      <div className={styles.header}>
+        <h1 className={styles.heading}>Committee Work</h1>
+        <div>
+          <AddButton btntext="Add Committee" />
+        </div>
+      </div>
       <div className={styles.comGrid}>
-        {
-          eventinfo.map((event,index) => {
-            return (
-              <EventsCard
-                key={index}
-                eventname={event.eventname}
-                eventdate={event.eventdate}
-                orgname={event.orgname}
-                eventinfo={event.eventinfo}
-              />
-            );
-          })
-        }
+        {eventinfo.map((event, index) => {
+          return (
+            <EventsCard
+              key={index}
+              eventname={event.eventname}
+              eventdate={event.eventdate}
+              orgname={event.orgname}
+              eventinfo={event.eventinfo}
+            />
+          );
+        })}
       </div>
     </div>
   );

@@ -98,6 +98,7 @@ const PersonalInfo = (props) => {
           )}
           {edit && (
             <TextField
+              required
               name="phone"
               id="outlined-required"
               label="Mobile Number"
@@ -114,6 +115,7 @@ const PersonalInfo = (props) => {
           )}
           {edit && (
             <TextField
+              required
               name="email"
               id="outlined-required"
               label="Email"
@@ -131,6 +133,7 @@ const PersonalInfo = (props) => {
         )}
         {edit && (
           <TextField
+            required
             name="address"
             id="outlined-required"
             label="Address"
@@ -147,6 +150,7 @@ const PersonalInfo = (props) => {
           {edit && (
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateField
+                required
                 name="dob"
                 label="Date of Birth"
                 onChange={handleDateChange}
@@ -162,6 +166,7 @@ const PersonalInfo = (props) => {
           )}
           {edit && (
             <TextField
+              required
               name="gender"
               id="outlined-required"
               select
@@ -190,6 +195,7 @@ const PersonalInfo = (props) => {
           )}
           {edit && (
             <TextField
+              required
               name="blood"
               id="outlined-required"
               label="Blood Group"
@@ -206,6 +212,7 @@ const PersonalInfo = (props) => {
           )}
           {edit && (
             <TextField
+              required
               name="religion"
               id="outlined-required"
               label="Religion"
@@ -224,6 +231,7 @@ const PersonalInfo = (props) => {
           )}
           {edit && (
             <TextField
+              required
               name="linkedin"
               id="outlined-required"
               label="LinkedIn"
@@ -240,6 +248,7 @@ const PersonalInfo = (props) => {
           )}
           {edit && (
             <TextField
+              required
               name="github"
               id="outlined-required"
               label="Github"

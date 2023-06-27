@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./ComAdmin.module.css";
-import AddButton from "../UI/AddButton.jsx";
+import AddButton from "../../UI/AddButton.jsx";
 import AncmntCard from "./AncmntCard.jsx";
 import Members from "./Members.jsx";
-import AddEvent from "./AddEvent.jsx";
+import AddEvent from "../events/AddEvent.jsx";
 
 const announcement = [
   {

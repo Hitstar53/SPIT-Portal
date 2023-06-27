@@ -66,3 +66,24 @@ label {
 .titleIcon:hover {
     opacity: 1;
 }
+
+@media (max-width: 768px) {
+    .heading {
+        font-size: 1.25rem;
+    }
+
+    .row1,
+    .row2,
+    .row3 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .threeColMiddle {
+        justify-content: flex-start;
+    }
+
+    .twoColLast,
+    .threeColLast {
+        justify-content: flex-start;
+    }
+}

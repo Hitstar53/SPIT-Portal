@@ -31,9 +31,29 @@
     gap: 1rem;
 }
 
+.volGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
 .header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+    .comGrid {
+        grid-template-columns: 1fr;
+    }
+    .volGrid {
+        grid-template-columns: 1fr;
+    }
 }

@@ -26,16 +26,16 @@ const cominfo = [
   },
 ];
 
-function createCard(cominfo) {
-  return (
-    <CommitteeWorkCard
-      comlogo={cominfo.comlogo}
-      comname={cominfo.comname}
-      compos={cominfo.compos}
-      comyear={cominfo.comyear}
-    />
-  );
-}
+// function createCard(cominfo) {
+//   return (
+//     <CommitteeWorkCard
+//       comlogo={cominfo.comlogo}
+//       comname={cominfo.comname}
+//       compos={cominfo.compos}
+//       comyear={cominfo.comyear}
+//     />
+//   );
+// }
 
 const volinfo = [
   {
@@ -81,7 +81,17 @@ const Activities = () => {
             />
           </div>
         </div>
-        <div className={styles.comGrid}>{cominfo.map(createCard)}</div>
+        <div className={styles.comGrid}>
+          {cominfo.map((cominfo,index) => (
+            <CommitteeWorkCard
+              key={index}
+              comlogo={cominfo.comlogo}
+              comname={cominfo.comname}
+              compos={cominfo.compos}
+              comyear={cominfo.comyear}
+            />
+          ))}
+        </div>
       </div>
       <hr className={styles.divider} />
       <div className={styles.volunteer}>
@@ -93,7 +103,17 @@ const Activities = () => {
             />
           </div>
         </div>
-         <div className={styles.comGrid}>{volinfo.map(volCard)}</div> 
+         <div className={styles.volGrid}>
+            {volinfo.map((volinfo,index) => (
+              <VolunteerWork
+                key={index}
+                volname={volinfo.volname}
+                instructor={volinfo.instructor}
+                desc={volinfo.desc}
+                voldur={volinfo.voldur}
+              />
+            ))}
+          </div> 
       </div>
     </div>
   );
