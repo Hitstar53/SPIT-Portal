@@ -1,3 +1,4 @@
+
 const asyncHandler = require('express-async-handler');
 const Appraisal = require('../models/appraisal.js')
 const { error } = require("console");
@@ -296,7 +297,8 @@ const setAppraisal = asyncHandler(async (req, res) => {
             }
         }
         // ------------------------------------------------------
-        //OP
+        //OP1
+        //organised
         var OPMarks = 0;
         OPMarks = 3 * Dimension3.OP1.organized.length;
         if (OPMarks > 15) {
@@ -310,38 +312,6 @@ const setAppraisal = asyncHandler(async (req, res) => {
             invitedmarks = 15;
         }
 
-        // ------------------------------------------------------
-
-        var countCollab = Dimension3.collaboration.institutionDetails.length;
-        if (countCollab == 0) {
-            Dimension3.collaboration.totalMarks = 0;
-        } else if (countCollab <= 2) {
-            Dimension3.collaboration.totalMarks = 5 * countCollab;
-        } else {
-            Dimension3.collaboration.totalMarks = 10;
-        }
-
-        // ------------------------------------------------------------
-
-        var countCoGuide = Dimension3.coGuide.data.length;
-        if (countCoGuide == 0) {
-            Dimension3.coGuide.totalMarks = 0;
-        } else if (countCoGuide <= 2) {
-            Dimension3.coGuide.totalMarks = 5 * countCoGuide;
-        } else {
-            Dimension3.coGuide.totalMarks = 10;
-        }
-
-        // -----------------------------------------------
-
-        var countArticle = Dimension3.Article.articleDetails.length;
-        if (countArticle == 0) {
-            Dimension3.Article.totalMarks = 0;
-        } else if (countArticle <= 2) {
-            Dimension3.Article.totalMarks = 5 * countArticle;
-        } else {
-            Dimension3.Article.totalMarks = 10;
-        }
 
         // ----------------------------------------
 
@@ -355,11 +325,47 @@ const setAppraisal = asyncHandler(async (req, res) => {
             Dimension3.Partof.totalMarks = 10;
         }
 
+
+        // -----------------------------------------------
+
+        var countArticle = Dimension3.Article.articleDetails.length;
+        if (countArticle == 0) {
+            Dimension3.Article.totalMarks = 0;
+        } else if (countArticle <= 2) {
+            Dimension3.Article.totalMarks = 5 * countArticle;
+        } else {
+            Dimension3.Article.totalMarks = 10;
+        }
+        // ------------------------------------------------------------
+
+        var countCoGuide = Dimension3.coGuide.data.length;
+        if (countCoGuide == 0) {
+            Dimension3.coGuide.totalMarks = 0;
+        } else if (countCoGuide <= 2) {
+            Dimension3.coGuide.totalMarks = 5 * countCoGuide;
+        } else {
+            Dimension3.coGuide.totalMarks = 10;
+        }
+        // ------------------------------------------------------
+
+        var countCollab = Dimension3.collaboration.institutionDetails.length;
+        if (countCollab == 0) {
+            Dimension3.collaboration.totalMarks = 0;
+        } else if (countCollab <= 2) {
+            Dimension3.collaboration.totalMarks = 5 * countCollab;
+        } else {
+            Dimension3.collaboration.totalMarks = 10;
+        }
+
+
+
+
         //   ------------------------------------------
 
         Dimension3.totalIP1IP2DP1Marks = Dimension3Marks;
         Dimension3.OP1.totalMarks = OPMarks;
         Dimension3.Invited.totalMarks = invitedmarks;
+        // Dimension3.totalMarks = Dimension3.totalIP1IP2DP1Marks + Dimension3.OP1.totalMarks + Dimension3.Invited.totalMarks + Dimension3.Partof.totalMarks + Dimension3.Article.totalMarks + Dimension3.coGuide.totalMarks + Dimension3.collaboration.totalMarks;
 
         // --------------------------------------------------------------------
         //Dimension4 starts
@@ -371,8 +377,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
 
 
         Dimension4.confidentialReport.perceptionMarks =
-            Dimension4.confidentialReport.principalRemarks *
-            Dimension4.feedbackMarks.E;
+            Dimension4.confidentialReport.principalRemarks * Dimension4.feedbackMarks.E;
 
         // finalGrandTotal.GrandTotal =
         //     finalGrandTotal.dimension1.finalMarks +

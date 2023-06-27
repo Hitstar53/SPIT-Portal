@@ -54,16 +54,16 @@ const appraisalSchema = new mongoose.Schema({
                     type: String,
                     default: "Null"
                 },
-                AP10paperSet: [{
-                    paperSetForCourse: {
-                        type: String,
-                        default: "Null"
-                    },
-                    marks: {
-                        type: Number,
-                        default: 0
-                    }
-                }]
+                // AP10paperSet: [{
+                //     paperSetForCourse: {
+                //         type: String,
+                //         default: "Null"
+                //     },
+                //     marks: {
+                //         type: Number,
+                //         default: 0
+                //     }
+                // }]
             }
             ],
 
@@ -103,10 +103,10 @@ const appraisalSchema = new mongoose.Schema({
                 type: Number,
                 // max: 10
             },
-            AP10Marks: {
-                type: Number,
-                // max: 10
-            },
+            // AP10Marks: {
+            //     type: Number,
+            //     // max: 10
+            // },
         },
 
         AP6: {
@@ -155,19 +155,19 @@ const appraisalSchema = new mongoose.Schema({
         //         type: Number
         //     }
         // },
-        // AP10: {
-        //     paper: [{
-        //         course: {
-        //             type: String
-        //         },
-        //         marks: {
-        //             type: Number
-        //         }
-        //     }],
-        //     averageMarks: {
-        //         type: Number
-        //     }
-        // },
+        AP10: {
+            paper: [{
+                course: {
+                    type: String
+                },
+                marks: {
+                    type: Number
+                }
+            }],
+            averageMarks: {
+                type: Number
+            }
+        },
 
         totalMarks: {
             type: Number
@@ -410,7 +410,7 @@ const appraisalSchema = new mongoose.Schema({
                     name: {
                         type: String
                     },
-                    sponsored: {
+                    sponsorerName : {
                         type: String
                     },
                     fund: {
