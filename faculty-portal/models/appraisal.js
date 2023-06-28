@@ -69,7 +69,7 @@ const appraisalSchema = new mongoose.Schema({
 
             AP1Marks: {
                 type: Number,
-                max: 10
+                // max: 10
             },
             AP2Average: {
                 type: Number,
@@ -351,10 +351,10 @@ const appraisalSchema = new mongoose.Schema({
                     }
                 }
             ],
-            // marks: {
-            //     type: Number,
-            //     //max: 10
-            // }
+            totalMarks: {
+                type: Number,
+                //max: 10
+            }
         },
 
         totalMarks: {

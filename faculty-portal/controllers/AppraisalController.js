@@ -7,7 +7,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
     console.log("Inside setAppraisalDim1");
     try {
         const { Dimension1, Dimension2, Dimension3, Dimension4, finalGrandTotal } = req.body;
-
+        console.log(Dimension1);
         //Dimension1 starts
         var total = 0;
         var avgAP1Marks = 0;
@@ -203,7 +203,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
         Dimension1.info.AP9Marks = ap9average;
         Dimension1.AP10.averageMarks = averageAuditMarks;
         // ----------------------------------------------
-        Dimension1.totalMarks = Dimension1.info.AP1Marks + Dimension1.info.AP2Marks + Dimension1.info.AP3Marks + Dimension1.info.AP4Marks + Dimension1.info.AP5Marks + Dimension1.AP6.averageMarks + Dimension1.AP7.totalMarks + Dimension1.info.AP8Marks + Dimension1.info.AP9Marks + Dimension1.info.AP10Marks;
+        Dimension1.totalMarks = Dimension1.info.AP1Marks + Dimension1.info.AP2Marks + Dimension1.info.AP3Marks + Dimension1.info.AP4Marks + Dimension1.info.AP5Marks + Dimension1.AP6.averageMarks + Dimension1.AP7.totalMarks + Dimension1.info.AP8Marks + Dimension1.info.AP9Marks + Dimension1.AP10.averageMarks;
         if (Dimension1.totalMarks > 100) {
             Dimension1.totalMarks = 100;
         }
@@ -282,13 +282,13 @@ const setAppraisal = asyncHandler(async (req, res) => {
         //RP5
         var rp5marks = 0
         for (var i = 0; i < Dimension2.RP5.selfDevelopment.length; i++) {
-            if (Dimension2.RP5.selfDevelopment[i].type == "STTP" || Dimension2.RP5.selfDevelopment[i].type == "FDP") {
+            if (Dimension2.RP5.selfDevelopment[i].type === "STTP" || Dimension2.RP5.selfDevelopment[i].type === "FDP") {
                 rp5marks = rp5marks + (1 * Dimension2.RP5.selfDevelopment[i].duration);
             }
-            if (Dimension2.RP5.selfDevelopment[i].type == "MOOC") {
-                rp5marks = rp5marks + (1 * Dimension2.RP5.selfDevelopment[i].duration);
+            if (Dimension2.RP5.selfDevelopment[i].type === "MOOC") {
+                rp5marks = rp5marks + 1 * Dimension2.RP5.selfDevelopment[i].duration;
             }
-            if (Dimension2.RP5.selfDevelopment[i].type == "Industry Internship") {
+            if (Dimension2.RP5.selfDevelopment[i].type === "Industry Internship") {
                 rp5marks = rp5marks + (5 * Dimension2.RP5.selfDevelopment[i].duration);
             }
         }
@@ -314,8 +314,8 @@ const setAppraisal = asyncHandler(async (req, res) => {
         Dimension2.RP4.totalMarks = (Dimension2.RP4.number * 0.4) <= 25 ? (Dimension2.RP4.number * 0.4) : 25;
         Dimension2.RP5.totalMarks = rp5marks;
 
-
-        Dimension2.totalMarks = Dimension2.RP1.totalMarks + Dimension2.RP2.totalMarks + Dimension2.RP3.totalMarks + Dimension2.RP4.totalMarks + Dimension2.RP5.totalMarks + Dimension2.RP6.totalMarks + Dimension2.RP7.totalMarks;
+        //+ Dimension2.RP3.totalMarks
+        Dimension2.totalMarks = Dimension2.RP1.totalMarks + Dimension2.RP2.totalMarks  + Dimension2.RP4.totalMarks + Dimension2.RP5.totalMarks + Dimension2.RP6.totalMarks + Dimension2.RP7.totalMarks;
         Dimension2.totalMarks = (Dimension2.totalMarks / 150) * 100;
 
 
@@ -457,12 +457,12 @@ const setAppraisal = asyncHandler(async (req, res) => {
         finalGrandTotal.dimension1.totalMarks = Dimension1.totalMarks;
         finalGrandTotal.dimension2.totalMarks = Dimension2.totalMarks;
         finalGrandTotal.dimension3.totalMarks = Dimension3.totalMarks;
-        finalGrandTotal.dimension4.totalMarks = Dimension4.totalMarks;
+        finalGrandTotal.dimension4.totalMarks = Dimension4.confidentialReport.perceptionMarks;
 
-        finalGrandTotal.dimension1.finalMarks = Dimension1.totalMarks * 0.4;
-        finalGrandTotal.dimension2.finalMarks = Dimension2.totalMarks * 0.2;
-        finalGrandTotal.dimension3.finalMarks = Dimension3.totalMarks * 0.2;
-        finalGrandTotal.dimension4.finalMarks = Dimension4.totalMarks * 0.2;
+        finalGrandTotal.dimension1.finalMarks =  finalGrandTotal.dimension1.totalMarks* 0.4;
+        finalGrandTotal.dimension2.finalMarks = finalGrandTotal.dimension2.totalMarks * 0.2;
+        finalGrandTotal.dimension3.finalMarks = finalGrandTotal.dimension3.totalMarks * 0.2;
+        finalGrandTotal.dimension4.finalMarks = finalGrandTotal.dimension4.totalMarks * 0.2;
 
 
         finalGrandTotal.GrandTotal =
