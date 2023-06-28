@@ -1,0 +1,25 @@
+.comCard {
+  background-color: var(--secondary-color);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  padding: 2rem;
+  color: var(--text-dark);
+  align-items: center;
+  box-shadow: 0px 0px 5px 2px var(--scrollbar-track);
+  margin-bottom: 1rem;
+}
+
+.comname {
+  font-size: 1.2rem;
+  font-weight: 450;
+  text-align: center;
+}
+
+.commen {
+  font-size: 1.2rem;
+  font-weight: 450;
+}
+

@@ -1,0 +1,35 @@
+.eventsPage {
+  padding: 2rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: calc(100vh - 64px);
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 1rem 0;
+}
+
+.comGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+  }
+  .comGrid {
+    grid-template-columns: 1fr;
+  }
+}

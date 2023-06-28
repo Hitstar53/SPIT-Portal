@@ -1,0 +1,199 @@
+.card {
+    color: var(--text-light);
+    border-radius: 2rem;
+    background-color: var(--card-color);
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    overflow: hidden;
+}
+
+.inner {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid;
+}
+
+.row1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.team {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.teamIcon {
+    font-size: 1.5rem;
+}
+
+.teamHeading {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-right: 0.5rem;
+}
+
+.teamMember {
+    padding-right: 0.5rem;
+    border-right: 1px solid;
+}
+
+.teamMember:last-child {
+    padding-right: 0;
+    border-right: none;
+}
+
+.domain {
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.techStack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 0.75rem 0;
+}
+
+.tech {
+    padding: 0.5rem 1rem;
+    border-radius: 100vw;
+    border: 1px solid;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.tech:hover {
+    background-color: var(--pill-color);
+    color: var(--text-color);
+}
+
+.description {
+    font-size: 1rem;
+    line-height: 1.5;
+    opacity: 0.75;
+}
+
+@media (max-width: 1024px) {
+    .card {
+        border-radius: 1.5rem;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 1.25rem;
+    }
+
+    .row1 {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .teamHeading {
+        font-size: 1rem;
+    }
+
+    .teamMember {
+        font-size: 1rem;
+        padding-right: 0.5rem;
+    }
+
+    .domain {
+        font-size: 1rem;
+        gap: 1rem;
+    }
+
+    .techStack {
+        margin: 0.5rem 0;
+        gap: 1rem;
+    }
+
+    .tech {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+}
+
+.row3 {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .card {
+        border-radius: 1rem;
+    }
+
+    .header {
+        font-size: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+        padding-bottom: 1rem;
+    }
+
+    .row1 {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .team {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .teamHeading {
+        font-size: 0.75rem;
+    }
+
+    .teamMember {
+        font-size: 0.75rem;
+        padding-right: 0.5rem;
+    }
+
+    .domain {
+        font-size: 0.75rem;
+        gap: 0.5rem;
+    }
+
+    .techStack {
+        margin: 0.5rem 0;
+        gap: 0.5rem;
+    }
+
+    .tech {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.5rem;
+    }
+
+    .description {
+        font-size: 0.75rem;
+    }
+}

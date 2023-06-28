@@ -1,0 +1,59 @@
+.activitiesPage {
+  padding: 2rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 1rem 0;
+}
+
+.committees {
+  margin-bottom: 2rem;
+}
+
+.divider {
+  border: none;
+  background-color: grey;
+  height: 1px;
+  opacity: 0.5;
+}
+
+.volunteer {
+    margin-bottom: 2rem;
+  }
+
+.comGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.volGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+    .comGrid {
+        grid-template-columns: 1fr;
+    }
+    .volGrid {
+        grid-template-columns: 1fr;
+    }
+}

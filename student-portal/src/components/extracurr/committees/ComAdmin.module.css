@@ -1,0 +1,55 @@
+.comAdminPage {
+  padding: 2rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: calc(100vh - 64px);
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 1rem 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.subheading {
+  font-size: 1.7rem;
+  font-weight: 550;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.addEvent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.takeInput {
+  border: 0.05rem solid var(--pill-border-color);
+  padding: 0.3rem;
+  border-radius: 0.5rem;
+}
+
+.tableHeader {
+  display: grid;
+  font-size: 1.3rem;
+  font-weight: 550;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.divider {
+  border: none;
+  background-color: grey;
+  height: 1px;
+  opacity: 0.5;
+  margin-bottom: 1rem;
+}

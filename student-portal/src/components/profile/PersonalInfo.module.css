@@ -1,0 +1,75 @@
+.personalInfo {
+    padding-bottom: 1.5rem;
+    padding-left: 1rem;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.header {
+    margin-top: 2.5rem;
+    margin-bottom: 0.625rem;
+    font-weight: 600;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.titleIcon {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.titleIcon:hover {
+    opacity: 1;
+}
+
+.PersInfo {
+    width: 100%;
+    font-size: 1.125rem;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.625rem;
+    align-items: center;
+    gap: 1rem;
+}
+
+.twoColAddress {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    font-size: 1.125rem;
+    margin-bottom: 2.5rem;
+}
+
+.twoCol {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    width: 50%;
+}
+
+.twoCol i,
+.twoColAddress i {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+@media (max-width: 768px) {
+    .header {
+        font-size: 1.25rem;
+    }
+    .PersInfo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.625rem;
+    }
+
+    .twoColAddress,
+    .twoCol {
+        gap: 0.625rem;
+    }
+}
