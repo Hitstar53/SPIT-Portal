@@ -267,6 +267,10 @@ const StepOne = () => {
             </Table>
           </div>}
 
+          <button type="button" className="btn btn-success" onClick={() => appendCourse({})}>
+            Add Course
+          </button>
+
         {paperFields.length > 0 && <div>
           <h3>Question Papers</h3>
           <Table striped bordered hover style={{ width: "50rem" }}>
@@ -397,9 +401,7 @@ const StepOne = () => {
 
         <div className='buttons'>
 
-          <button type="button" className="btn btn-success" onClick={() => appendCourse({})}>
-            Add Course
-          </button>
+
 
           <button type='button' className='btn btn-success' onClick={() => appendPaper({})}>
             Add Question Paper
