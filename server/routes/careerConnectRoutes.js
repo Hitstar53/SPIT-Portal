@@ -1,0 +1,20 @@
+const express = require('express')
+const router = express.Router()
+
+const careerConnectController = require('../controllers/careerConnectController')
+router.put('/setInternship',careerConnectController.setInternship)
+router.put('/deleteInternship',careerConnectController.deleteInternships)
+router.get('/getInternship',careerConnectController.getInternships)
+router.put('/setProjects',careerConnectController.setProjects)
+router.put('/deleteProjects',careerConnectController.deleteProjects)
+router.get('/getProjects',careerConnectController.getProjects)
+router.put('/setResearch',careerConnectController.setResearch)
+router.put('/deleteResearch',careerConnectController.deleteResearch)
+router.get('/getResearch',careerConnectController.getResearch)
+router.put('/setSkills',careerConnectController.setSkills)
+router.put('/deleteSkills',careerConnectController.deleteSkills)
+router.get('/getSkills',careerConnectController.getSkills)
+router.put('/updatePlacement',careerConnectController.updatePlacement)
+router.get('/getPlacement',careerConnectController.getPlacement)
+
+module.exports = router
