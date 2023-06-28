@@ -8,7 +8,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import "../styles/Appraisal.css";
 
 const StepOne = () => {
-  const [Dimension1, setDimension1] = useState({});
+  const [dimension1, setDimension1] = useState({});
   const { user } = useContext(UserContext);
   const options = [
     { value: '', label: 'Select an option' },
@@ -27,8 +27,10 @@ const StepOne = () => {
     handleSubmit,
     formState: { errors },
     setValue,
-    control
-  } = useForm();
+    control,
+  } = useForm({
+    defaultValues: JSON.parse(localStorage.getItem('dim1Data')) || {},
+  });
 
   const {
     fields: courseFields,
@@ -81,6 +83,43 @@ const StepOne = () => {
     setDimension1(data)
     localStorage.setItem('dim1Data', JSON.stringify(data));
     toast.success('Form submitted successfully!');
+    setInfoVisible(true)
+  };
+
+  const handleRemoveCourse = (index) => {
+    removeCourse(index);
+    const storedData = JSON.parse(localStorage.getItem('dim1Data'));
+    if (storedData) {
+      storedData.Dimension1.info.courses.splice(index, 1);
+      localStorage.setItem('dim1Data', JSON.stringify(storedData));
+    }
+  };
+
+  const handleRemovePaper = (index) => {
+    removePaper(index);
+    const storedData = JSON.parse(localStorage.getItem('dim1Data'));
+    if (storedData) {
+      storedData.Dimension1.AP10.paper.splice(index, 1);
+      localStorage.setItem('dim1Data', JSON.stringify(storedData));
+    }
+  }
+
+  const handleRemoveMentee = (index) => {
+    removeMentee(index);
+    const storedData = JSON.parse(localStorage.getItem('dim1Data'));
+    if (storedData) {
+      storedData.Dimension1.AP6.menteeFeedback.splice(index, 1);
+      localStorage.setItem('dim1Data', JSON.stringify(storedData));
+    }
+  };
+
+  const handleRemoveGuest = (index) => {
+    removeGuest(index);
+    const storedData = JSON.parse(localStorage.getItem('dim1Data'));
+    if (storedData) {
+      storedData.Dimension1.AP7.guestLectureData.splice(index, 1);
+      localStorage.setItem('dim1Data', JSON.stringify(storedData));
+    }
   };
 
   return (
@@ -104,7 +143,6 @@ const StepOne = () => {
           <label className="form-label">
             Faculty Name:
             <input
-              // style={{width: "100%"}}
               type="text"
               {...register('facultyName', { required: true })}
               className="form-input"
@@ -146,6 +184,7 @@ const StepOne = () => {
 
       <div className='info-container'>
 
+        
 
         {courseFields.length > 0 &&
           <div>
@@ -256,7 +295,7 @@ const StepOne = () => {
                         {...register(`Dimension1.info.courses[${index}].AP9noteworthyDetails`, { required: false })} />
                     </td>
                     <td className='text-center align-middle'>
-                      <IconButton onClick={() => removeCourse(index)}>
+                      <IconButton onClick={() => handleRemoveCourse(index)}>
                         <DeleteIcon
                           sx={{ color: "red", fontSize: "40px" }} />
                       </IconButton>
@@ -287,19 +326,19 @@ const StepOne = () => {
                   <td className='text-center align-middle'>
                     <input
                       type="text"
-                      {...register(`Dimension1.info.courses.papers[${index}].paperSetForCourse`, { required: true })}
+                      {...register(`Dimension1.AP10.paper[${index}].course`, { required: true })}
                       className="form-input"
                     />
                   </td>
                   <td className='text-center align-middle'>
                     <input
                       type="number"
-                      {...register(`Dimension1.info.courses.papers[${index}].marksInAuditReport`, { required: true })}
+                      {...register(`Dimension1.AP10.paper[${index}].marks`, { required: true })}
                       className="form-input"
                     />
                   </td>
                   <td className='text-center align-middle'>
-                    <IconButton onClick={() => removePaper(index)}>
+                    <IconButton onClick={() => handleRemovePaper(index)}>
                       <DeleteIcon
                         sx={{ color: "red", fontSize: "40px" }} />
                     </IconButton>
@@ -309,6 +348,10 @@ const StepOne = () => {
             </tbody>
           </Table>
         </div>}
+
+        <button type='button' className='btn btn-success' onClick={() => appendPaper({})}>
+            Add Question Paper
+          </button>
 
         {menteeFields.length > 0 && <div>
           <h3>Mentee Feedback</h3>
@@ -330,7 +373,7 @@ const StepOne = () => {
                     />
                   </td>
                   <td className='text-center align-middle'>
-                    <IconButton onClick={() => removeMentee(index)}>
+                    <IconButton onClick={() => handleRemoveMentee(index)}>
                       <DeleteIcon
                         sx={{ color: "red", fontSize: "40px" }} />
                     </IconButton>
@@ -339,6 +382,10 @@ const StepOne = () => {
             </tbody>
           </Table>
         </div>}
+
+        <button type="button" className="btn btn-success" onClick={() => appendMentee({})}>
+            Add Mentee
+          </button>
 
         {guestFields.length > 0 && <div>
           <h3>Guest Lectures</h3>
@@ -388,7 +435,7 @@ const StepOne = () => {
                     </select>
                   </td>
                   <td className='text-center align-middle'>
-                    <IconButton onClick={() => removeGuest(index)}>
+                    <IconButton onClick={() => handleRemoveGuest(index)}>
                       <DeleteIcon
                         sx={{ color: "red", fontSize: "40px" }} />
                     </IconButton>
@@ -399,23 +446,9 @@ const StepOne = () => {
           </Table>
         </div>}
 
-        <div className='buttons'>
-
-
-
-          <button type='button' className='btn btn-success' onClick={() => appendPaper({})}>
-            Add Question Paper
-          </button>
-
-          <button type="button" className="btn btn-success" onClick={() => appendMentee({})}>
-            Add Mentee
-          </button>
-
           <button type="button" className="btn btn-success" onClick={() => appendGuest({})}>
             Add Guest Lecture
           </button>
-
-        </div>
       </div>
 
 
