@@ -185,261 +185,368 @@ function StepThree() {
         </div>
       </div>
       <h3>Organized</h3>
-      <Table striped bordered>
-        <thead>
-          <tr>
-            <th>FDP/Training Organised</th>
-            <th>Sr. No.	FDP/Training Organised Sponsoring Agency	Funds	No. of days</th>
-            <th>Funds</th>
-            <th>No. of days</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {organizedFields.map((item, index) => (
-            <tr key={item.id}>
-              <label className="form-label">Organised</label>
-              <input
-                type="text"
-                placeholder="Organised"
-                className="form-input"
-                {...register(`OP1.organized[${index}].organised`)}
-              />
-              <label className="form-label">Agency</label>
-              <input
-                type="text"
-                placeholder="Agency"
-                className="form-input"
-                {...register(`OP1.organized[${index}].agency`)}
-              />
-              <label className="form-label">Funds</label>
-              <input
-                type="text"
-                placeholder="Funds"
-                className="form-input"
-                {...register(`OP1.organized[${index}].funds`)}
-              />
-              <label className="form-label">Days</label>
-              <input
-                type="text"
-                placeholder="Days"
-                className="form-input"
-                {...register(`OP1.organized[${index}].days`)}
-              />
-              <button type="button" onClick={() => removeOrganized(index)}>
-                Delete
-              </button>
+      {organizedFields.length > 0 && (
+        <Table striped bordered>
+          <thead>
+            <tr>
+              <th>FDP/Training Organised</th>
+              <th>
+                Sr. No. FDP/Training Organised Sponsoring Agency Funds No. of
+                days
+              </th>
+              <th>Funds</th>
+              <th>No. of days</th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-      <button type="button" onClick={() => appendOrganized({})}>
+          </thead>
+          <tbody>
+            {organizedFields.map((item, index) => (
+              <tr key={item.id}>
+                {/* <label className="form-label">Organised</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Organised"
+                    className="form-input"
+                    {...register(`OP1.organized[${index}].organised`)}
+                  />
+                </td>
+                {/* <label className="form-label">Agency</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Agency"
+                    className="form-input"
+                    {...register(`OP1.organized[${index}].agency`)}
+                  />
+                </td>
+                {/* <label className="form-label">Funds</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Funds"
+                    className="form-input"
+                    {...register(`OP1.organized[${index}].funds`)}
+                  />
+                </td>
+                {/* <label className="form-label">Days</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Days"
+                    className="form-input"
+                    {...register(`OP1.organized[${index}].days`)}
+                  />
+                </td>
+                <td className="text-center align-middle">
+                    <button
+                      type="button"
+                      onClick={() => removeOrganized(index)}
+                    >
+                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    </button>
+                  </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
+      <button
+        className="btn btn-success"
+        type="button"
+        onClick={() => appendOrganized({})}
+        style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
+      >
         Add Organized
       </button>
 
       {/* Invited */}
       <h3>Invited</h3>
-      <Table striped bordered>
-        <thead>
-          <tr>
-            <th>Industry/ Institution Name</th>
-            <th>Dates</th>
-            <th>Details (No. of participants, affiliation)</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {invitedFields.map((item, index) => (
-            <tr key={item.id}>
-              <label className="form-label">Name</label>
-              <input
-                type="text"
-                placeholder="Name"
-                className="form-input"
-                {...register(`invited[${index}].name`)}
-              />
-              <label className="form-label">Dates</label>
-              <input
-                type="text"
-                placeholder="Dates"
-                className="form-input"
-                {...register(`invited[${index}].dates`)}
-              />
-              <label className="form-label">Details</label>
-              <input
-                type="text"
-                placeholder="Details"
-                className="form-input"
-                {...register(`invited[${index}].details`)}
-              />
-              <button type="button" onClick={() => removeInvited(index)}>
-                Delete
-              </button>
+      {invitedFields.length > 0 && (
+        <Table striped bordered>
+          <thead>
+            <tr>
+              <th>Industry/ Institution Name</th>
+              <th>Dates</th>
+              <th>Details (No. of participants, affiliation)</th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-      <button type="button" onClick={() => appendInvited({})}>
+          </thead>
+          <tbody>
+            {invitedFields.map((item, index) => (
+              <tr key={item.id}>
+                {/* <label className="form-label">Name</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    className="form-input"
+                    {...register(`invited[${index}].name`)}
+                  />
+                </td>
+                {/* <label className="form-label">Dates</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Dates"
+                    className="form-input"
+                    {...register(`invited[${index}].dates`)}
+                  />
+                </td>
+                {/* <label className="form-label">Details</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Details"
+                    className="form-input"
+                    {...register(`invited[${index}].details`)}
+                  />
+                </td>
+                <td className="text-center align-middle">
+                    <button
+                      type="button"
+                      onClick={() => removeInvited(index)}
+                    >
+                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    </button>
+                  </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
+      <button
+        className="btn btn-success"
+        type="button"
+        onClick={() => appendInvited({})}
+        style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
+      >
         Add Invited
       </button>
 
       {/* Selection Committee */}
       <h3>Selection Committee</h3>
-      <Table striped bordered>
-        <thead>
-          <tr>
-            <th>Part of any selection committee</th>
-            <th>Details (Nature of work)</th>
-            <th>Organization</th>
-            <th>Date</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {committeeFields.map((item, index) => (
-            <tr key={item.id}>
-              <label className="form-label">Committee</label>
-              <input
-                type="text"
-                placeholder="Committee"
-                className="form-input"
-                {...register(`selectionCommittee[${index}].committee`)}
-              />
-              <label className="form-label">Details</label>
-              <input
-                type="text"
-                placeholder="Details"
-                className="form-input"
-                {...register(`selectionCommittee[${index}].details`)}
-              />
-              <label className="form-label">Organization</label>
-              <input
-                type="text"
-                placeholder="Organization"
-                className="form-input"
-                {...register(`selectionCommittee[${index}].organization`)}
-              />
-              <label className="form-label">Date</label>
-              <input
-                type="text"
-                placeholder="Date"
-                className="form-input"
-                {...register(`selectionCommittee[${index}].date`)}
-              />
-              <button type="button" onClick={() => removeCommittee(index)}>
-                Delete
-              </button>
+      {committeeFields.length > 0 && (
+        <Table striped bordered>
+          <thead>
+            <tr>
+              <th>Part of any selection committee</th>
+              <th>Details (Nature of work)</th>
+              <th>Organization</th>
+              <th>Date</th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-      <button type="button" onClick={() => appendCommittee({})}>
+          </thead>
+          <tbody>
+            {committeeFields.map((item, index) => (
+              <tr key={item.id}>
+                {/* <label className="form-label">Committee</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Committee"
+                    className="form-input"
+                    {...register(`selectionCommittee[${index}].committee`)}
+                  />
+                </td>
+                {/* <label className="form-label">Details</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Details"
+                    className="form-input"
+                    {...register(`selectionCommittee[${index}].details`)}
+                  />
+                </td>
+                {/* <label className="form-label">Organization</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Organization"
+                    className="form-input"
+                    {...register(`selectionCommittee[${index}].organization`)}
+                  />
+                </td>
+                {/* <label className="form-label">Date</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Date"
+                    className="form-input"
+                    {...register(`selectionCommittee[${index}].date`)}
+                  />
+                </td>
+                <td className="text-center align-middle">
+                    <button
+                      type="button"
+                      onClick={() => removeCommittee(index)}
+                    >
+                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    </button>
+                  </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
+      <button
+        className="btn btn-success"
+        type="button"
+        onClick={() => appendCommittee({})}
+        style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
+      >
         Add Selection Committee
       </button>
 
       {/* Article */}
       <h3>Article</h3>
-      <Table striped bordered>
-        <thead>
-          <tr>
-            <th>Details</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {articleFields.map((item, index) => (
-            <tr key={item.id}>
-              <label className="form-label">Details</label>
-              <input
-                type="text"
-                placeholder="Details"
-                className="form-input"
-                {...register(`Article[${index}].details`)}
-              />
-              <button type="button" onClick={() => removeArticle(index)}>
-                Delete
-              </button>
+      {articleFields.length > 0 && (
+        <Table striped bordered>
+          <thead>
+            <tr>
+              <th>Details</th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-      <button type="button" onClick={() => appendArticle({})}>
+          </thead>
+          <tbody>
+            {articleFields.map((item, index) => (
+              <tr key={item.id}>
+                {/* <label className="form-label">Details</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Details"
+                    className="form-input"
+                    {...register(`Article[${index}].details`)}
+                  />
+                </td>
+                <td className="text-center align-middle">
+                    <button
+                      type="button"
+                      onClick={() => removeArticle(index)}
+                    >
+                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    </button>
+                  </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
+      <button
+        className="btn btn-success"
+        type="button"
+        onClick={() => appendArticle({})}
+        style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
+      >
         Add Article
       </button>
 
       {/* CoGuide */}
       <h3>CoGuide</h3>
-      <Table striped bordered>
-        <thead>
-          <tr>
-            <th>Peer Institution Name</th>
-            <th>Details (Program etc)</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {coGuideFields.map((item, index) => (
-            <tr key={item.id}>
-              <label className="form-label">Institute</label>
-              <input
-                type="text"
-                placeholder="Institute"
-                className="form-input"
-                {...register(`CoGuide[${index}].institute`)}
-              />
-              <label className="form-label">Details</label>
-              <input
-                type="text"
-                placeholder="Details"
-                className="form-input"
-                {...register(`CoGuide[${index}].details`)}
-              />
-              <button type="button" onClick={() => removeCoGuide(index)}>
-                Delete
-              </button>
+      {coGuideFields.length > 0 && (
+        <Table striped bordered>
+          <thead>
+            <tr>
+              <th>Peer Institution Name</th>
+              <th>Details (Program etc)</th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-      <button type="button" onClick={() => appendCoGuide({})}>
+          </thead>
+          <tbody>
+            {coGuideFields.map((item, index) => (
+              <tr key={item.id}>
+                {/* <label className="form-label">Institute</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Institute"
+                    className="form-input"
+                    {...register(`CoGuide[${index}].institute`)}
+                  />
+                </td>
+                {/* <label className="form-label">Details</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Details"
+                    className="form-input"
+                    {...register(`CoGuide[${index}].details`)}
+                  />
+                </td>
+                <td className="text-center align-middle">
+                    <button
+                      type="button"
+                      onClick={() => removeCoGuide(index)}
+                    >
+                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    </button>
+                  </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
+      <button
+        className="btn btn-success"
+        type="button"
+        onClick={() => appendCoGuide({})}
+        style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
+      >
         Add CoGuide
       </button>
 
       {/* Collaboration */}
       <h3>Collaboration</h3>
-      <Table striped bordered>
-        <thead>
-          <tr>
-            <th>Industry/ Institution Name</th>
-            <th>Details</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {collaborationFields.map((item, index) => (
-            <tr key={item.id}>
-              <label className="form-label">Name</label>
-              <input
-                type="text"
-                placeholder="Name"
-                className="form-input"
-                {...register(`collaboration[${index}].name`)}
-              />
-              <label className="form-label">Details</label>
-              <input
-                type="text"
-                placeholder="Details"
-                className="form-input"
-                {...register(`collaboration[${index}].details`)}
-              />
-              <button type="button" onClick={() => removeCollaboration(index)}>
-                Delete
-              </button>
+      {collaborationFields.length > 0 && (
+        <Table striped bordered>
+          <thead>
+            <tr>
+              <th>Industry/ Institution Name</th>
+              <th>Details</th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-      <button type="button" onClick={() => appendCollaboration({})}>
+          </thead>
+          <tbody>
+            {collaborationFields.map((item, index) => (
+              <tr key={item.id}>
+                {/* <label className="form-label">Name</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    className="form-input"
+                    {...register(`collaboration[${index}].name`)}
+                  />
+                </td>
+                {/* <label className="form-label">Details</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Details"
+                    className="form-input"
+                    {...register(`collaboration[${index}].details`)}
+                  />
+                </td>
+                <td className="text-center align-middle">
+                    <button
+                      type="button"
+                      onClick={() => removeCollaboration(index)}
+                    >
+                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    </button>
+                  </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
+      <button
+        className="btn btn-success"
+        type="button"
+        onClick={() => appendCollaboration({})}
+        style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
+      >
         Add Collaboration
       </button>
 

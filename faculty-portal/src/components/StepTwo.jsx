@@ -604,7 +604,10 @@ function StepTwo() {
             <thead>
               <tr>
                 <th>Date</th>
-                <th>Details (Faculty claim needs to be approved by HOD /Senior most faculty)</th>
+                <th>
+                  Details (Faculty claim needs to be approved by HOD /Senior
+                  most faculty)
+                </th>
                 <th></th>
               </tr>
             </thead>
@@ -650,7 +653,11 @@ function StepTwo() {
           Add Extra
         </button>
 
-        <input type="submit" value="Submit" style={{display:'block',width:'100px'}} />
+        <input
+          type="submit"
+          value="Submit"
+          style={{ display: "block", width: "100px" }}
+        />
       </form>
     </>
   );
