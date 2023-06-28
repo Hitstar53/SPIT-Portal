@@ -19,14 +19,18 @@ const setAppraisal = asyncHandler(async (req, res) => {
             avgAP1Marks = Dimension1.info.courses.length * 4;
         }
         // ----------------------------------------------------------------------------------------
-
+        //AP2
         for (var i = 0; i < Dimension1.info.courses.length; i++) {
             total = total + Dimension1.info.courses[i].AP2MarksObtained;
         }
-        avgAP2Marks = total / Dimension1.info.courses.length;
+        if (Dimension1.info.courses.length > 0) {
+            avgAP2Marks = total / Dimension1.info.courses.length;
+        }
 
         avgAP2Marks = avgAP2Marks > 10 ? 10 : avgAP2Marks;
 
+        // ---------------------------------------------------------------------
+        //AP3
         for (var i = 0; i < Dimension1.info.courses.length; i++) {
             var averagePercent =
                 (Dimension1.info.courses[i].AP3LectureConducted /
@@ -40,10 +44,13 @@ const setAppraisal = asyncHandler(async (req, res) => {
             totalTarget =
                 totalTarget + Dimension1.info.courses[i].AP3PercentAchieved;
         }
-        averagePercent = totalTarget / Dimension1.info.courses.length;
+        if (Dimension1.info.courses.length > 0) {
+            averagePercent = totalTarget / Dimension1.info.courses.length;
+        }
 
         if (averagePercent < 80) {
             //To be discussed
+            Dimension1.info.AP3Marks = 3;
         }
         if (averagePercent >= 80 && averagePercent < 90) {
             Dimension1.info.AP3Marks = 3;
@@ -55,14 +62,17 @@ const setAppraisal = asyncHandler(async (req, res) => {
             Dimension1.info.AP3Marks = 5;
         }
         // -----------------------------------------------------------------------------------
-
+        //AP4
         var totalpercentAP4 = 0;
         var averagePercentAP4 = 0;
         for (var i = 0; i < Dimension1.info.courses.length; i++) {
             totalpercentAP4 =
                 totalpercentAP4 + Dimension1.info.courses[i].AP4PercentFeedback;
         }
-        averagePercentAP4 = totalpercentAP4 / Dimension1.info.courses.length;
+        if (Dimension1.info.courses.length > 0) {
+            averagePercentAP4 = totalpercentAP4 / Dimension1.info.courses.length;
+        }
+
 
         if (averagePercentAP4 > 30) {
             averagePercentAP4 = 30;
@@ -97,16 +107,21 @@ const setAppraisal = asyncHandler(async (req, res) => {
             totalMenteeFeedback =
                 totalMenteeFeedback + Dimension1.AP6.menteeFeedback[i];
         }
-        averageMenteeFeedback =
-            totalMenteeFeedback / Dimension1.AP6.menteeFeedback.length;
-
+        if (Dimension1.AP6.menteeFeedback.length > 0) {
+            averageMenteeFeedback =
+                totalMenteeFeedback / Dimension1.AP6.menteeFeedback.length;
+        }
         if (averageMenteeFeedback > 5) {
             averageMenteeFeedback = 5;
         }
-
         //  ---------------------------------------------------------------
         //AP7
-        var totalpercentAP7 = Dimension1.AP7.guestLectureData.length == 1 ? 3 : 5;
+        if (Dimension1.AP7.guestLectureData.length > 0) {
+            var totalpercentAP7 = Dimension1.AP7.guestLectureData.length == 1 ? 3 : 5;
+        }
+        else {
+            var totalpercentAP7 = 0;
+        }
         //  ---------------------------------------------------------------
         //AP8
 
@@ -128,31 +143,51 @@ const setAppraisal = asyncHandler(async (req, res) => {
                 ap9totalmarks = ap9totalmarks + 10;
             }
         }
-        var ap9average = ap9totalmarks / Dimension1.info.courses.length;
-        if (ap9average > 10) {
-            ap9average = 10;
+        if (Dimension1.info.courses.length > 0) {
+            var ap9average = ap9totalmarks / Dimension1.info.courses.length;
+            if (ap9average > 10) {
+                ap9average = 10;
+            }
         }
+        else {
+            var ap9average = 0;
+        }
+
 
         //  ---------------------------------------------------------------
         //AP10
+        // var totalAuditMarks = 0;
+        // var averageAuditMarks = 0;
+        // var count = 0;
+        // for (var i = 0; i < Dimension1.info.courses.length; i++) {
+        //     for (var j = 0; j < Dimension1.info.courses[i].AP10paperSet.length; j++) {
+        //         totalAuditMarks = totalAuditMarks + Dimension1.info.courses[i].AP10paperSet[j].marks;
+        //         if (Dimension1.info.courses[i].AP10paperSet[j].marks != 0) {
+        //             count++;
+        //         }
+        //     }
+        // }
+
+        // if (count != 0) {
+        //     averageAuditMarks = totalAuditMarks / count;
+
+        //     if (averageAuditMarks > 10) {
+        //         averageAuditMarks = 10;
+        //     }
+        // }
+        // else {
+        //     averageAuditMarks = 0;
+        // }
+
         var totalAuditMarks = 0;
         var averageAuditMarks = 0;
-        var count = 0;
-        for (var i = 0; i < Dimension1.info.courses.length; i++) {
-            for (var j = 0; j < Dimension1.info.courses.AP10paperSet.length; j++) {
-                totalAuditMarks = totalAuditMarks + Dimension1.info.courses[i].AP10paperSet[j].marks;
-                if (Dimension1.info.courses[i].AP10paperSet[j].marks != 0) {
-                    count++;
-                }
-            }
+        for (var i = 0; i < Dimension1.AP10.paper.length; i++) {
+            totalAuditMarks = totalAuditMarks + Dimension1.AP10.paper[i].marks;
+
         }
-
-        averageAuditMarks = totalAuditMarks / count;
-
-        if (averageAuditMarks > 10) {
-            averageAuditMarks = 10;
+        if (Dimension1.AP10.paper.length > 0) {
+            averageAuditMarks = totalAuditMarks / Dimension1.AP10.paper.length;
         }
-
         // ---------------------------------------------------------------------------------
 
         Dimension1.info.AP1Marks = avgAP1Marks;
@@ -166,11 +201,16 @@ const setAppraisal = asyncHandler(async (req, res) => {
         Dimension1.AP7.totalMarks = totalpercentAP7;
         Dimension1.info.AP8Marks = ap8totalmarks;
         Dimension1.info.AP9Marks = ap9average;
-        Dimension1.info.AP10Marks = averageAuditMarks;
+        Dimension1.AP10.averageMarks = averageAuditMarks;
         // ----------------------------------------------
         Dimension1.totalMarks = Dimension1.info.AP1Marks + Dimension1.info.AP2Marks + Dimension1.info.AP3Marks + Dimension1.info.AP4Marks + Dimension1.info.AP5Marks + Dimension1.AP6.averageMarks + Dimension1.AP7.totalMarks + Dimension1.info.AP8Marks + Dimension1.info.AP9Marks + Dimension1.info.AP10Marks;
+        if (Dimension1.totalMarks > 100) {
+            Dimension1.totalMarks = 100;
+        }
 
-        // ==========================================================================================================
+        // ===========================================================================================================================
+        // ===========================================================================================================================
+
         //Dimension2 starts
 
         //RP1
@@ -216,21 +256,16 @@ const setAppraisal = asyncHandler(async (req, res) => {
             }
         }
         for (var i = 0; i < Dimension2.RP2.moocs.length; i++) {
-            if (Dimension2.RP2.moocs[i].duration >= 8 && Dimension2.RP2.moocs[i].duration < 12) {
+            if (Dimension2.RP2.moocs[i].duration >= 8 && Dimension2.RP2.moocs[i].duration < 24) {
                 rp2marks = rp2marks + 5;
             }
-            if (Dimension2.RP2.moocs[i].duration >= 12 && Dimension2.RP2.moocs[i].duration < 24) {
-                rp2marks = rp2marks + 10;
-            }
-            if (Dimension2.RP2.moocs[i].duration >= 24 && Dimension2.RP2.moocs[i].duration < 32) {
-                rp2marks = rp2marks + 15;
-            }
-            if (Dimension2.RP2.moocs[i].duration >= 32 && Dimension2.RP2.moocs[i].duration < 40) {
+            if (Dimension2.RP2.moocs[i].duration >= 24 && Dimension2.RP2.moocs[i].duration < 40) {
                 rp2marks = rp2marks + 15;
             }
             if (Dimension2.RP2.moocs[i].duration >= 40) {
                 rp2marks = rp2marks + 20;
             }
+
         }
 
         if (rp2marks > 30) {
@@ -239,6 +274,9 @@ const setAppraisal = asyncHandler(async (req, res) => {
 
         // ----------------------------------
         //RP3
+        //To be Discussed
+
+        //RP4
 
         // ----------------------------
         //RP5
@@ -278,9 +316,12 @@ const setAppraisal = asyncHandler(async (req, res) => {
 
 
         Dimension2.totalMarks = Dimension2.RP1.totalMarks + Dimension2.RP2.totalMarks + Dimension2.RP3.totalMarks + Dimension2.RP4.totalMarks + Dimension2.RP5.totalMarks + Dimension2.RP6.totalMarks + Dimension2.RP7.totalMarks;
+        Dimension2.totalMarks = (Dimension2.totalMarks / 150) * 100;
 
 
 
+
+        //=============================================================================================================
         // =============================================================================================================
         //Dimension3 starts
 
@@ -304,15 +345,34 @@ const setAppraisal = asyncHandler(async (req, res) => {
             Dimension3Marks = 60;
         }
         // ------------------------------------------------------
+
         //OP1
+
         //organised
         var OPMarks = 0;
-        OPMarks = 3 * Dimension3.OP1.organized.length;
-        if (OPMarks > 15) {
-            OPMarks = 15;
+        var trainingMarks = 0;
+        // OPMarks = 3 * Dimension3.OP1.organized.length;
+        // if (OPMarks > 15) {
+        //     OPMarks = 15;
+        // }
+        for (var i = 0; i < Dimension3.OP1.organized.length; i++) {
+            if (Dimension3.OP1.organized[i].type == "FDP") {
+                if (Dimension3.OP1.organized[i].days < 14) {
+                    OPMarks = OPMarks + 10;
+                }
+                if (Dimension3.OP1.organized[i].days >= 14) {
+                    OPMarks = OPMarks + 15;
+                }
+            }
+            if (Dimension3.OP1.organized[i].type == "Training Organised") {
+                trainingMarks = trainingMarks + (3 * Dimension3.OP1.organized[i].days);
+            }
+        }
+        if (trainingMarks > 15) {
+            trainingMarks = 15;
         }
 
-
+        OPMarks = OPMarks + trainingMarks;
 
         // ------------------------------------------------------
         //invited 
@@ -321,7 +381,6 @@ const setAppraisal = asyncHandler(async (req, res) => {
         if (invitedmarks > 15) {
             invitedmarks = 15;
         }
-
 
         // ----------------------------------------
 
@@ -382,6 +441,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
 
         // Dimension3.totalMarks = Dimension3.totalIP1IP2DP1Marks + Dimension3.OP1.totalMarks + Dimension3.Invited.totalMarks + Dimension3.Partof.totalMarks + Dimension3.Article.totalMarks + Dimension3.coGuide.totalMarks + Dimension3.collaboration.totalMarks;
 
+        // ===============================================================
         // --------------------------------------------------------------------
         //Dimension4 starts
         Dimension4.feedbackMarks.E =
@@ -394,12 +454,24 @@ const setAppraisal = asyncHandler(async (req, res) => {
         Dimension4.confidentialReport.perceptionMarks =
             Dimension4.confidentialReport.principalRemarks * Dimension4.feedbackMarks.E;
 
-        // finalGrandTotal.GrandTotal =
-        //     finalGrandTotal.dimension1.finalMarks +
-        //     finalGrandTotal.dimension2.finalMarks +
-        //     finalGrandTotal.dimension3.finalMarks +
-        //     finalGrandTotal.dimension4.finalMarks;
+        finalGrandTotal.dimension1.totalMarks = Dimension1.totalMarks;
+        finalGrandTotal.dimension2.totalMarks = Dimension2.totalMarks;
+        finalGrandTotal.dimension3.totalMarks = Dimension3.totalMarks;
+        finalGrandTotal.dimension4.totalMarks = Dimension4.totalMarks;
 
+        finalGrandTotal.dimension1.finalMarks = Dimension1.totalMarks * 0.4;
+        finalGrandTotal.dimension2.finalMarks = Dimension2.totalMarks * 0.2;
+        finalGrandTotal.dimension3.finalMarks = Dimension3.totalMarks * 0.2;
+        finalGrandTotal.dimension4.finalMarks = Dimension4.totalMarks * 0.2;
+
+
+        finalGrandTotal.GrandTotal =
+            finalGrandTotal.dimension1.finalMarks +
+            finalGrandTotal.dimension2.finalMarks +
+            finalGrandTotal.dimension3.finalMarks +
+            finalGrandTotal.dimension4.finalMarks;
+
+            
         // =============================================================================================================
         const newAppraisal = new Appraisal({
             Dimension1,

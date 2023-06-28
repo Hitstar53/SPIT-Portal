@@ -556,7 +556,8 @@ const appraisalSchema = new mongoose.Schema({
                 type: Number
             },
             multiplyingFactor: {
-                type: Number
+                type: Number,
+                default: 0.4
             },
             finalMarks: {
                 type: Number
@@ -567,7 +568,8 @@ const appraisalSchema = new mongoose.Schema({
                 type: Number
             },
             multiplyingFactor: {
-                type: Number
+                type: Number,
+                default: 0.2
             },
             finalMarks: {
                 type: Number
@@ -578,7 +580,8 @@ const appraisalSchema = new mongoose.Schema({
                 type: Number
             },
             multiplyingFactor: {
-                type: Number
+                type: Number,
+                default: 0.2
             },
             finalMarks: {
                 type: Number
@@ -589,7 +592,8 @@ const appraisalSchema = new mongoose.Schema({
                 type: Number
             },
             multiplyingFactor: {
-                type: Number
+                type: Number,
+                default: 0.2
             },
             finalMarks: {
                 type: Number
