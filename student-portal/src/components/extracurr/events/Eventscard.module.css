@@ -7,6 +7,7 @@
     color: var(--text-light);
     align-items: center;
     width: 100%;
+    align-items: start;
   }
   
   .eventname {

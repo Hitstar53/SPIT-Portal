@@ -1,15 +1,15 @@
 import React from "react";
 import { Box } from "@mui/system";
-import MiniDrawer from "../components/UI/MiniDrawer";
+import AdminMiniDrawer from "../components/Admin/AdminMiniDrawer";
 import { Outlet } from "react-router-dom";
 
 const AdminLayout = () => {
   return (
     <Box sx={{ display: "flex" }}>
-      <MiniDrawer />
+      <AdminMiniDrawer />
       <Box
         component="main"
-        sx={{ flexGrow: 1, marginTop: 8, overflow: "hidden" }}
+        sx={{ flexGrow: 1, marginTop: 8, overflowX: "hidden" }}
       >
         <Outlet />
       </Box>

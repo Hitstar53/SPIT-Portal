@@ -140,6 +140,11 @@
     }
 }
 
+.row3 {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 @media (max-width: 768px) {
     .card {
         border-radius: 1rem;

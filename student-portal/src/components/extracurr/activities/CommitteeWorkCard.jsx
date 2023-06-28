@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./CommitteeWorkCard.module.css";
-import logo from "../../assets/user.svg";
 
 const CommitteeWorkCard = (props) => {
   return (

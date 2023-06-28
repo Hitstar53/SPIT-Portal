@@ -17,15 +17,20 @@ const cominfo = [
   },
 ];
 
-function createCard(cominfo) {
-  return <CommitteesCard comname={cominfo.comname} commen={cominfo.commen} />;
-}
-
 const Committees = () => {
   return (
     <div className={styles.committeesPage}>
       <h1 className={styles.heading}>College Committees</h1>
-      <div className={styles.comGrid}>{cominfo.map(createCard)}</div>
+      <div className={styles.comGrid}>
+        {cominfo.map((com,index) => (
+          <CommitteesCard
+            key={index}
+            comname={com.comname} 
+            commen={com.commen}
+            
+          />
+        ))}
+      </div>
     </div>
   );
 };

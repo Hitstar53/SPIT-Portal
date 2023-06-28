@@ -1,9 +1,10 @@
 import React, { useRef } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Login from './components/login/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import Profile from './components/profile/Profile';
-import Login from './components/login/Login';
-import Activities from './components/extracurr/Activities';
+import Result from './components/academics/Result/Result';
+import Activities from './components/extracurr/activities/Activities';
 import Courses from './components/academics/Courses/Courses';
 import Portfolio from './components/careerconn/Portfolio/Portfolio';
 import Internship from './components/careerconn/Internship';
@@ -16,6 +17,7 @@ import ComAdmin from "./components/extracurr/committees/ComAdmin";
 import RootLayout from './pages/RootLayout';
 import AdminLayout from './pages/AdminLayout';
 import ErrorPage from './pages/ErrorPage';
+import Admin from './components/Admin/Admin';
 import './App.css';
 
 
@@ -31,6 +33,7 @@ const router = createBrowserRouter([
         children: [
           { path: 'home', element: <Dashboard /> },
           { path: 'profile', element: <Profile /> },
+          { path: 'result', element: <Result /> },
           { path: 'activities', element: <Activities /> },
           { path: 'courses', element: <Courses /> },
           { path: 'portfolio', element: <Portfolio /> },
@@ -38,14 +41,14 @@ const router = createBrowserRouter([
           { path: 'placements', element: <Placement /> },
           { path: 'events', element: <Events /> },
           { path: 'committees', element: <Committees /> },
-          { path: 'comadmin', element: <ComAdmin /> },
+          { path: 'committees/:comname', element: <ComAdmin /> },
         ],
       },
       {
         path: 'admin',
         element: <AdminLayout />,
         children: [
-          { index: true, element: <Dashboard /> },
+          { path: 'home', element: <Admin /> },
         ],
       },
     ],

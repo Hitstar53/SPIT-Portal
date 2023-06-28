@@ -1,0 +1,41 @@
+.event {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card {
+  background-color: var(--tertiary-color);
+  border-radius: 1rem;
+  margin: 0 0 1rem 0;
+  color: var(--text-light);
+  padding: 1rem 2rem;
+}
+
+.accordDivider {
+  margin: 0.5rem 0 0.5rem 0;
+  border: none;
+  background-color: grey;
+  height: 1px;
+  opacity: 0.5;
+}
+
+.name {
+  font-weight: 650;
+  font-size: 1.4rem;
+}
+
+.icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.icon:hover {
+  color: var(--secondary-color);
+}
+
+.description {
+  font-size: 1rem;
+  font-weight: 200;
+}

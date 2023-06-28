@@ -18,9 +18,10 @@ const RootLayout = () => {
         <Box
           component="main"
           sx={{
-            // display: isMobile && open ? "none" : "block",
+            display: isMobile && open ? "none" : "block",
             flexGrow: 1,
             marginTop: 8,
+            overflowX: "hidden",
             backgroundColor: "var(--bg-color)",
           }}
         >

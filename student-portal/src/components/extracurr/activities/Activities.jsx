@@ -2,8 +2,8 @@ import React from "react";
 import styles from "./Activities.module.css";
 import CommitteeWorkCard from "./CommitteeWorkCard";
 import VolunteerWork from "./VolunteerWork";
-import logo from "../../assets/user.svg";
-import AddButton from "../UI/AddButton.jsx";
+import logo from "../../../assets/user.svg";
+import AddButton from "../../UI/AddButton.jsx";
 
 const cominfo = [
   {
@@ -25,17 +25,6 @@ const cominfo = [
     comyear: "2021-22",
   },
 ];
-
-// function createCard(cominfo) {
-//   return (
-//     <CommitteeWorkCard
-//       comlogo={cominfo.comlogo}
-//       comname={cominfo.comname}
-//       compos={cominfo.compos}
-//       comyear={cominfo.comyear}
-//     />
-//   );
-// }
 
 const volinfo = [
   {

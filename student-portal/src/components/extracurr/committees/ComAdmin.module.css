@@ -25,13 +25,6 @@
   margin-bottom: 1rem;
 }
 
-.divider {
-  border: none;
-  background-color: grey;
-  height: 1px;
-  opacity: 0.5;
-}
-
 .addEvent {
   display: flex;
   flex-direction: row;

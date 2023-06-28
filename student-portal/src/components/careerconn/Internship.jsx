@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import AddButton from '../UI/AddButton';
+import styles from './Internship.module.css';
 import Fab from '@mui/material/Fab';
 import Chip from '@mui/material/Chip';
 import Button from '@mui/material/Button';
@@ -8,8 +10,6 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import styles from './Internship.module.css'
-import AddButton from '../UI/AddButton';
 import MultiFieldModal from '../UI/Modals/MultiFieldModal';
 import TextField from '@mui/material/TextField';
 import  MenuItem  from '@mui/material/MenuItem';
