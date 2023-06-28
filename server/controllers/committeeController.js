@@ -1,15 +1,15 @@
 const asyncHandler = require('express-async-handler')
-const extracurricular = require('../models/student');
-exports.setYourCommittee = asyncHandler(async(req,res) =>{
-        const committeeDetails = req.body.committeeDetails
-        const tenure = req.body.tenure
-        const position = req.body.position
-        const email = req.body.email
+const Committee = require('../models/commitee');
+exports.setCommittee = asyncHandler(async(req,res) =>{
+        const name = req.body.name;
+        const description = req.body.description;
+        const facultyMentor = req.body.facultyMentor;
+        const members = req.body.members;
+        const logo = req.body.logo;
         try {
-            const extracurricular = await Student.findOne({emailID:email})
-            extracurricular.committee.unshift({committeeDetails:committeeDetails,tenure:tenure,position:position})
-            await profile.save()
-            res.status(200).json('Your Committee Added Succesfully')
+            const committee = new Committee({name:name,description:description,facultyMentor:facultyMentor,members:members,logo:logo})
+            await committee.save()
+            res.status(200).json('Committee Added Succesfully')
         } catch (error) {
             console.error(error)
         }

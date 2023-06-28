@@ -147,7 +147,6 @@ const studentSchema = mongoose.Schema({
                 }
             ],
             description:{ type : String, required:true},
-            mentor:{ type : String, required:true},
         }
     ],
     research:[
@@ -156,11 +155,6 @@ const studentSchema = mongoose.Schema({
             duration:{ type : String, required:true},
             domain:{ type : String, required:true},
             techStack:[
-                {
-                    type:String
-                }
-            ],
-            team:[
                 {
                     type:String
                 }

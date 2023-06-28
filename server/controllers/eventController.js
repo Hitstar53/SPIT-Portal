@@ -1,6 +1,5 @@
 const asyncHandler = require('express-async-handler')
 const Event = require('../models/Event');
-const { ObjectId } = require('mongodb');
 exports.setEvent = asyncHandler(async(req,res) =>{
         const date = req.body.date;
         const name = req.body.name;

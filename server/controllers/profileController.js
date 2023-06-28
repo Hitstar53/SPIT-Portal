@@ -59,3 +59,53 @@ exports.updateEducationalInfo = asyncHandler(async(req,res) =>{
         console.log(error)
     }
 })
+
+exports.getPersonalInfo = asyncHandler(async(req,res)=>{
+    const email = req.body.email;
+    try {
+        const profile = await Profile.findOne({emailID:email}).select("phoneNo address dob religion bloodGroup gender linkedin github -_id")
+        res.status(200).json(profile)
+    } catch (error) {
+        console.error(error)
+    }
+})
+
+exports.getParentalInfo = asyncHandler(async(req,res)=>{
+    const email = req.body.email;
+    try {
+        const profile = await Profile.findOne({emailID:email}).select("fatherName motherName motherPhoneNo fatherPhoneNo motherEmailID fatherEmailID -_id")
+        res.status(200).json(profile)
+    } catch (error) {
+        console.error(error)
+    }
+})
+
+exports.getEduInfo = asyncHandler(async(req,res)=>{
+    const email = req.body.email;
+    try {
+        const profile = await Profile.findOne({emailID:email}).select("educationalInfo -_id")
+        res.status(200).json(profile)
+    } catch (error) {
+        console.error(error)
+    }
+})
+
+exports.getProfilePic = asyncHandler(async(req,res)=>{
+    const email = req.body.email;
+    try {
+        const photo = await Photo.findOne({emailID:email}).select("photoURI -_id")
+        res.status(200).json(photo)
+    } catch (error) {
+        console.error(error)
+    }
+})
+
+exports.getExams = asyncHandler(async(req,res)=>{
+    const email = req.body.email;
+    try {
+        const exams = await Profile.findOne({emailID:email}).select("exams -_id")
+        res.status(200).json(exams)
+    } catch (error) {
+        console.error(error)
+    }
+})
