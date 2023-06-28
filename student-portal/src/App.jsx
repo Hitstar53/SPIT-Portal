@@ -4,6 +4,7 @@ import Login from './components/login/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import Profile from './components/profile/Profile';
 import Result from './components/academics/Result/Result';
+import SemResult from './components/academics/Result/SemResult';
 import Activities from './components/extracurr/activities/Activities';
 import Courses from './components/academics/Courses/Courses';
 import Portfolio from './components/careerconn/Portfolio/Portfolio';
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
           { path: 'home', element: <Dashboard /> },
           { path: 'profile', element: <Profile /> },
           { path: 'result', element: <Result /> },
+          { path: 'result/:semester', element: <SemResult /> },
           { path: 'activities', element: <Activities /> },
           { path: 'courses', element: <Courses /> },
           { path: 'portfolio', element: <Portfolio /> },
