@@ -186,9 +186,9 @@ const StepOne = () => {
 
         
 
+        <h3>Courses</h3>
         {courseFields.length > 0 &&
           <div>
-            <h3>Courses</h3>
             <Table className='course-table' striped bordered hover >
               <thead>
                 <tr>
@@ -310,8 +310,8 @@ const StepOne = () => {
             Add Course
           </button>
 
-        {paperFields.length > 0 && <div>
           <h3>Question Papers</h3>
+        {paperFields.length > 0 && <div>
           <Table striped bordered hover style={{ width: "50rem" }}>
             <thead>
               <tr>
@@ -353,8 +353,8 @@ const StepOne = () => {
             Add Question Paper
           </button>
 
-        {menteeFields.length > 0 && <div>
           <h3>Mentee Feedback</h3>
+        {menteeFields.length > 0 && <div>
           <Table striped bordered hover style={{ width: "30rem" }}>
             <thead>
               <tr>
@@ -387,8 +387,8 @@ const StepOne = () => {
             Add Mentee
           </button>
 
-        {guestFields.length > 0 && <div>
           <h3>Guest Lectures</h3>
+        {guestFields.length > 0 && <div>
           <Table striped bordered hover style={{ width: "50rem" }}>
             <thead>
               <tr>
