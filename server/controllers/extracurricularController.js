@@ -84,7 +84,7 @@ exports.getYourCommittee = asyncHandler(async(req,res)=>{
     console.log("j")
     const email = req.body.email
     try {
-        const yourCommittees = await Extracurricular.findOne({emailID:email}).select('committee -_id')
+        const yourCommittees = await Extracurricular.find({emailID:email}).select('committee -_id')
         res.status(200).json(yourCommittees)    
     } catch (error) {
         console.error(error)

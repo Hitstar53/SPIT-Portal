@@ -1,4 +1,5 @@
 import * as React from "react";
+import axios from "axios";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import MediaQuery, { useMediaQuery } from "react-responsive";
 import { styled, useTheme } from "@mui/material/styles";
@@ -106,6 +107,7 @@ const sidebardata = [
     sub: [],
   },
 ];
+
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -244,7 +246,43 @@ export default function MiniDrawer({ open,setOpen }) {
   };
 
   const [name, setName] = React.useState("");
+  const [uid, setUid] = React.useState("");
   const [picture, setPicture] = React.useState("");
+
+  React.useEffect(() => {
+    fetchUserInfo();
+  }, []);
+
+  const fetchUserInfo = async () => {
+    console.log(JSON.parse(localStorage.getItem("userinfo")).email);
+    const response = await fetch(
+      "http://localhost:8000/api/student/getMiniDrawer",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: JSON.parse(localStorage.getItem("userinfo")).email,
+        }),
+      }
+    );
+    if (!response.ok) {
+        console.log("error");
+    }
+    if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        setName(data.name);
+        setUid(data.uid);
+        if (data.photo) {
+            setPicture(data.photo);
+        } else {
+            setPicture(profile);
+        }
+    }
+  }
+
   React.useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userinfo"));
     setName(userInfo?.name);
@@ -307,7 +345,7 @@ export default function MiniDrawer({ open,setOpen }) {
               {!isMobile && (
                 <>
                   <span style={{ fontSize: 24 }}>{name}</span>
-                  <span style={{ opacity: 0.5, fontSize: 16 }}>2021300108</span>
+                  <span style={{ opacity: 0.5, fontSize: 16 }}>{uid}</span>
                 </>
               )}
             </span>

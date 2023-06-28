@@ -2,17 +2,18 @@ const asyncHandler = require('express-async-handler')
 const Profile = require('../models/student');
 const Photo = require("../models/photo");
 exports.updatePersonalInfo = asyncHandler(async(req,res) =>{
-        const phoneNo = req.body.phoneNo;
+        const phone = req.body.phone;
         const address = req.body.address;
         const dob = req.body.dob;
         const gender = req.body.gender;
-        const bloodGroup = req.body.bloodGroup;
+        const blood = req.body.blood;
         const religion = req.body.religion;
         const linkedin = req.body.linkedin;
         const github = req.body.github;
         const email = req.body.email;
+        
         try {
-            await Profile.findOneAndUpdate({emailID:email},{$set: {phoneNo:phoneNo,address:address,dob:dob,gender:gender,bloodGroup:bloodGroup,religion:religion,linkedin:linkedin,github:github}},{upsert:true})
+            await Profile.findOneAndUpdate({emailID:email},{$set: {phone:phone,address:address,dob:dob,gender:gender,blood:blood,religion:religion,linkedin:linkedin,github:github}},{upsert:true})
             res.status(200).json(' Personal Profile updated Succesfully')
         } catch (error) {
             console.error(error)
@@ -53,7 +54,7 @@ exports.updateEducationalInfo = asyncHandler(async(req,res) =>{
     const email = req.body.email;
     try {
         await Profile.findOneAndUpdate({emailID:email},{$set:{educationalInfo:eduInfo}},{upsert:true})
-        console.log("hello")
+        
         res.status(200).json("educational info submitted successfully")
     } catch (error) {
         console.log(error)
@@ -63,7 +64,7 @@ exports.updateEducationalInfo = asyncHandler(async(req,res) =>{
 exports.getPersonalInfo = asyncHandler(async(req,res)=>{
     const email = req.body.email;
     try {
-        const profile = await Profile.findOne({emailID:email}).select("phoneNo address dob religion bloodGroup gender linkedin github -_id")
+        const profile = await Profile.findOne({emailID:email}).select("emailID phone address dob religion blood gender linkedin github -_id")
         res.status(200).json(profile)
     } catch (error) {
         console.error(error)
@@ -90,11 +91,12 @@ exports.getEduInfo = asyncHandler(async(req,res)=>{
     }
 })
 
-exports.getProfilePic = asyncHandler(async(req,res)=>{
+exports.getMiniDrawer = asyncHandler(async(req,res)=>{
     const email = req.body.email;
     try {
         const photo = await Photo.findOne({emailID:email}).select("photoURI -_id")
-        res.status(200).json(photo)
+        const {uid,name} = await Profile.findOne({emailID:email}).select("uid name -_id")
+        res.status(200).json({photo:photo.photoURI,uid:uid,name:name})
     } catch (error) {
         console.error(error)
     }
