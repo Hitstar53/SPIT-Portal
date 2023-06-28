@@ -239,6 +239,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
 
         // ----------------------------------
         //RP3
+
         // ----------------------------
         //RP5
         var rp5marks = 0
@@ -259,8 +260,11 @@ const setAppraisal = asyncHandler(async (req, res) => {
         }
         // -----------------------------------------------------
         //RP6
+        Dimension2.RP6.softHardDev.length >= 2 ? Dimension2.RP6.totalMarks = 10 : Dimension2.RP6.totalMarks = 5 * Dimension2.RP6.softHardDev.length;
+
         // ------------------------------------
         //RP7
+        Dimension2.RP7.activityNotCovered.length >= 2 ? Dimension2.RP7.totalMarks = 10 : Dimension2.RP7.totalMarks = 5 * Dimension2.RP7.activityNotCovered.length;
         // ------------------------------
 
 
@@ -296,6 +300,9 @@ const setAppraisal = asyncHandler(async (req, res) => {
                 Dimension3Marks = Dimension3Marks + 10;
             }
         }
+        if (Dimension3Marks >= 60) {
+            Dimension3Marks = 60;
+        }
         // ------------------------------------------------------
         //OP1
         //organised
@@ -304,6 +311,9 @@ const setAppraisal = asyncHandler(async (req, res) => {
         if (OPMarks > 15) {
             OPMarks = 15;
         }
+
+
+
         // ------------------------------------------------------
         //invited 
         var invitedmarks = 0;
@@ -365,6 +375,11 @@ const setAppraisal = asyncHandler(async (req, res) => {
         Dimension3.totalIP1IP2DP1Marks = Dimension3Marks;
         Dimension3.OP1.totalMarks = OPMarks;
         Dimension3.Invited.totalMarks = invitedmarks;
+
+        const tempOP = (Dimension3.OP1.totalMarks + Dimension3.Invited.totalMarks + Dimension3.Partof.totalMarks + Dimension3.Article.totalMarks + Dimension3.coGuide.totalMarks + Dimension3.collaboration.totalMarks) > 40 ? 40 : (Dimension3.OP1.totalMarks + Dimension3.Invited.totalMarks + Dimension3.Partof.totalMarks + Dimension3.Article.totalMarks + Dimension3.coGuide.totalMarks + Dimension3.collaboration.totalMarks);
+
+        Dimension3.totalMarks = Dimension3.totalIP1IP2DP1Marks + tempOP;
+
         // Dimension3.totalMarks = Dimension3.totalIP1IP2DP1Marks + Dimension3.OP1.totalMarks + Dimension3.Invited.totalMarks + Dimension3.Partof.totalMarks + Dimension3.Article.totalMarks + Dimension3.coGuide.totalMarks + Dimension3.collaboration.totalMarks;
 
         // --------------------------------------------------------------------

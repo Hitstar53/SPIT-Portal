@@ -351,10 +351,10 @@ const appraisalSchema = new mongoose.Schema({
                     }
                 }
             ],
-            marks: {
-                type: Number,
-                //max: 10
-            }
+            // marks: {
+            //     type: Number,
+            //     //max: 10
+            // }
         },
 
         totalMarks: {
@@ -410,7 +410,10 @@ const appraisalSchema = new mongoose.Schema({
                     name: {
                         type: String
                     },
-                    sponsorerName : {
+                    type: {
+                        type: String
+                    },
+                    sponsorerName: {
                         type: String
                     },
                     fund: {
