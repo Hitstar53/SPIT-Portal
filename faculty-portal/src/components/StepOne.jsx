@@ -83,7 +83,6 @@ const StepOne = () => {
     setDimension1(data)
     localStorage.setItem('dim1Data', JSON.stringify(data));
     toast.success('Form submitted successfully!');
-    setInfoVisible(true)
   };
 
   const handleRemoveCourse = (index) => {
