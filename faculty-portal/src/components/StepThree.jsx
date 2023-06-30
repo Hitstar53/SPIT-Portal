@@ -6,8 +6,8 @@ import Table from "react-bootstrap/Table";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 function StepThree() {
-  const [dimension3, setDimension3] = useState([{}]);
-  const { register, control, handleSubmit } = useForm();
+  const [dimension3, setDimension3] = useState({});
+    const { register, control, handleSubmit } = useForm();
   const {
     fields: organizedFields,
     append: appendOrganized,
@@ -22,7 +22,7 @@ function StepThree() {
     remove: removeInvited,
   } = useFieldArray({
     control,
-    name: "OP1.invited",
+    name: "Invited.invitedAt",
   });
   const {
     fields: committeeFields,
@@ -30,7 +30,7 @@ function StepThree() {
     remove: removeCommittee,
   } = useFieldArray({
     control,
-    name: "OP1.selectionCommittee",
+    name: "Partof.committee",
   });
   const {
     fields: articleFields,
@@ -38,7 +38,7 @@ function StepThree() {
     remove: removeArticle,
   } = useFieldArray({
     control,
-    name: "OP1.Article",
+    name: "Article.articleDetails",
   });
   const {
     fields: coGuideFields,
@@ -46,7 +46,7 @@ function StepThree() {
     remove: removeCoGuide,
   } = useFieldArray({
     control,
-    name: "OP1.CoGuide",
+    name: "coGuide.data",
   });
   const {
     fields: collaborationFields,
@@ -54,17 +54,21 @@ function StepThree() {
     remove: removeCollaboration,
   } = useFieldArray({
     control,
-    name: "OP1.collaboration",
+    name: "collaboration.institutionDetails",
   });
 
   const onSubmit = (data) => {
     console.log(data);
-    setDimension3(data);
+    setDimension3(data)
   };
+  
 
   useEffect(() => {
     console.log(dimension3);
   }, [dimension3]);
+
+
+  
 
   return (
     <form className="stepThree" onSubmit={handleSubmit(onSubmit)}>
@@ -189,11 +193,9 @@ function StepThree() {
         <Table striped bordered>
           <thead>
             <tr>
-              <th>FDP/Training Organised</th>
-              <th>
-                Sr. No. FDP/Training Organised Sponsoring Agency Funds No. of
-                days
-              </th>
+              <th>FDP/Training Organised(Name)</th>
+              <th>Type</th>
+              <th>Sponser name</th>
               <th>Funds</th>
               <th>No. of days</th>
               <th></th>
@@ -208,25 +210,33 @@ function StepThree() {
                     type="text"
                     placeholder="Organised"
                     className="form-input"
-                    {...register(`OP1.organized[${index}].organised`)}
+                    {...register(`OP1.organized[${index}].name`)}
                   />
                 </td>
                 {/* <label className="form-label">Agency</label> */}
                 <td>
-                  <input
-                    type="text"
-                    placeholder="Agency"
-                    className="form-input"
-                    {...register(`OP1.organized[${index}].agency`)}
-                  />
+                  <select {...register(`OP1.organized[${index}].type`)}>
+                    <option value="FDP">FDP</option>
+                    <option value="Training Organised">
+                      Training Organised
+                    </option>
+                  </select>
                 </td>
                 {/* <label className="form-label">Funds</label> */}
                 <td>
                   <input
                     type="text"
+                    placeholder="sponsorer name"
+                    className="form-input"
+                    {...register(`OP1.organized[${index}].sponsorerName`)}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
                     placeholder="Funds"
                     className="form-input"
-                    {...register(`OP1.organized[${index}].funds`)}
+                    {...register(`OP1.organized[${index}].fund`)}
                   />
                 </td>
                 {/* <label className="form-label">Days</label> */}
@@ -266,6 +276,8 @@ function StepThree() {
               <th>Industry/ Institution Name</th>
               <th>Dates</th>
               <th>Details (No. of participants, affiliation)</th>
+              <th>Type</th>
+              <th>Duration</th>
               <th></th>
             </tr>
           </thead>
@@ -278,7 +290,7 @@ function StepThree() {
                     type="text"
                     placeholder="Name"
                     className="form-input"
-                    {...register(`invited[${index}].name`)}
+                    {...register(`Invited.invitedAt[${index}].industryName`)}
                   />
                 </td>
                 {/* <label className="form-label">Dates</label> */}
@@ -287,7 +299,7 @@ function StepThree() {
                     type="text"
                     placeholder="Dates"
                     className="form-input"
-                    {...register(`invited[${index}].dates`)}
+                    {...register(`Invited.invitedAt[${index}].dates`)}
                   />
                 </td>
                 {/* <label className="form-label">Details</label> */}
@@ -296,7 +308,23 @@ function StepThree() {
                     type="text"
                     placeholder="Details"
                     className="form-input"
-                    {...register(`invited[${index}].details`)}
+                    {...register(`Invited.invitedAt[${index}].details`)}
+                  />
+                </td>
+                <td>
+                  <select {...register(`Invited.invitedAt[${index}].type`)}>
+                    <option value="Guest Faculty">Guest Faculty</option>
+                    <option value="Visiting Professor">
+                      Visiting Professor
+                    </option>
+                  </select>
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Duration"
+                    className="form-input"
+                    {...register(`Invited.invitedAt[${index}].duration`)}
                   />
                 </td>
                 <td className="text-center align-middle">
@@ -324,7 +352,7 @@ function StepThree() {
         <Table striped bordered>
           <thead>
             <tr>
-              <th>Part of any selection committee</th>
+              <th>Name of selection committee</th>
               <th>Details (Nature of work)</th>
               <th>Organization</th>
               <th>Date</th>
@@ -340,7 +368,7 @@ function StepThree() {
                     type="text"
                     placeholder="Committee"
                     className="form-input"
-                    {...register(`selectionCommittee[${index}].committee`)}
+                    {...register(`Partof.committee[${index}].name`)}
                   />
                 </td>
                 {/* <label className="form-label">Details</label> */}
@@ -349,7 +377,7 @@ function StepThree() {
                     type="text"
                     placeholder="Details"
                     className="form-input"
-                    {...register(`selectionCommittee[${index}].details`)}
+                    {...register(`Partof.committee[${index}].details`)}
                   />
                 </td>
                 {/* <label className="form-label">Organization</label> */}
@@ -358,7 +386,7 @@ function StepThree() {
                     type="text"
                     placeholder="Organization"
                     className="form-input"
-                    {...register(`selectionCommittee[${index}].organization`)}
+                    {...register(`Partof.committee[${index}].organization`)}
                   />
                 </td>
                 {/* <label className="form-label">Date</label> */}
@@ -367,7 +395,7 @@ function StepThree() {
                     type="text"
                     placeholder="Date"
                     className="form-input"
-                    {...register(`selectionCommittee[${index}].date`)}
+                    {...register(`Partof.committee[${index}].date`)}
                   />
                 </td>
                 <td className="text-center align-middle">
@@ -408,8 +436,8 @@ function StepThree() {
                     type="text"
                     placeholder="Details"
                     className="form-input"
-                    {...register(`Article[${index}].details`)}
-                  />
+                    {...register(`Article.articleDetails[${index}]`)}
+                    />
                 </td>
                 <td className="text-center align-middle">
                   <button type="button" onClick={() => removeArticle(index)}>
@@ -450,7 +478,7 @@ function StepThree() {
                     type="text"
                     placeholder="Institute"
                     className="form-input"
-                    {...register(`CoGuide[${index}].institute`)}
+                    {...register(`CoGuide.data[${index}].institutionName`)}
                   />
                 </td>
                 {/* <label className="form-label">Details</label> */}
@@ -459,7 +487,7 @@ function StepThree() {
                     type="text"
                     placeholder="Details"
                     className="form-input"
-                    {...register(`CoGuide[${index}].details`)}
+                    {...register(`CoGuide.data[${index}].details`)}
                   />
                 </td>
                 <td className="text-center align-middle">
@@ -501,7 +529,7 @@ function StepThree() {
                     type="text"
                     placeholder="Name"
                     className="form-input"
-                    {...register(`collaboration[${index}].name`)}
+                    {...register(`collaboration.institutionDetails[${index}].name`)}
                   />
                 </td>
                 {/* <label className="form-label">Details</label> */}
@@ -510,7 +538,7 @@ function StepThree() {
                     type="text"
                     placeholder="Details"
                     className="form-input"
-                    {...register(`collaboration[${index}].details`)}
+                    {...register(`collaboration.institutionDetails[${index}].details`)}
                   />
                 </td>
                 <td className="text-center align-middle">
