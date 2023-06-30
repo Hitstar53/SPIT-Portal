@@ -6,7 +6,7 @@ const { error } = require("console");
 const setAppraisal = asyncHandler(async (req, res) => {
     console.log("Inside setAppraisalDim1");
     try {
-        const { Dimension1, Dimension2, Dimension3, Dimension4, finalGrandTotal } = req.body;
+        var { Dimension1, Dimension2, Dimension3, Dimension4, finalGrandTotal } = req.body;
         console.log(Dimension1);
         //Dimension1 starts
         var total = 0;
@@ -491,6 +491,26 @@ const setAppraisal = asyncHandler(async (req, res) => {
 
         Dimension4.confidentialReport.perceptionMarks =
             Dimension4.confidentialReport.principalRemarks * Dimension4.feedbackMarks.E;
+
+
+        finalGrandTotal = {
+            dimension1: {
+                totalMarks: 0,
+                finalMarks: 0
+            },
+            dimension2: {
+                totalMarks: 0,
+                finalMarks: 0
+            },
+            dimension3: {
+                totalMarks: 0,
+                finalMarks: 0
+            },
+            dimension4: {
+                totalMarks: 0,
+                finalMarks: 0
+            },
+        }
 
         finalGrandTotal.dimension1.totalMarks = Dimension1.totalMarks;
         finalGrandTotal.dimension2.totalMarks = Dimension2.totalMarks;
