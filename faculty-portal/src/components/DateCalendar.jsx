@@ -10,11 +10,11 @@ import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-datepicker/dist/react-datepicker.css";
-import DatePicker from "react-datepicker";
 import enUS from "date-fns/locale/en-US";
 import Fab from '@mui/material/Fab';
 import EditIcon from '@mui/icons-material/Add';
-import dayjs from 'dayjs';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ViewEvent from './ViewEvent';
 import { TextField } from "@mui/material";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -39,12 +39,13 @@ const localizer = dateFnsLocalizer({
 const DateCalendar = () => {
     const [newEvent, setNewEvent] = useState({ title: "", startDate: "", endDate: "" });
     const [allEvents, setAllEvents] = useState([]);
-    const [modal, setModal] = useState(false);
+    const [modal1, setModal1] = useState(false);
+    const [modal2, setModal2] = useState(false);
     const { user } = useContext(UserContext);
-    
-    useEffect( () => {
-        const fetchEvents = async() => {
-                await axios.post('http://localhost:5000/api/faculty/get/event', { email: user.email })
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            await axios.post('http://localhost:5000/api/faculty/get/event', { email: user.email })
                 .then((res) => {
                     console.log(res.data);
                     setAllEvents(res.data);
@@ -56,8 +57,14 @@ const DateCalendar = () => {
         fetchEvents();
     }, []);
 
+    const style = {
+        width: '100%',
+        maxWidth: 360,
+        bgcolor: 'background.paper',
+    };
 
-    const toggle = () => setModal(!modal);
+    const toggle1 = () => setModal1(!modal1);
+    const toggle2 = () => setModal2(!modal2);
 
     const handleAddEvent = async () => {
         console.log(newEvent)
@@ -71,22 +78,24 @@ const DateCalendar = () => {
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-                });
+            });
             return;
         }
-        // await axios.post()
-        // setAllEvents([...allEvents, newEvent]);
         await axios.post('http://localhost:5000/api/faculty/add/event', { email: user.email, events: newEvent })
-        .then((res) => {
-            console.log(res.data);
-            setAllEvents([...allEvents, newEvent]);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+            .then((res) => {
+                console.log(res.data);
+                setAllEvents(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
         setNewEvent({ title: "", startDate: "", endDate: "" });
-        toggle();
+        toggle1();
     };
+
+    const displayEvents = allEvents.map((event) => {
+        return <ViewEvent key={event._id} id={event._id} title={event.title} start={event.startDate} end={event.endDate} />
+    })
 
     return (
         <div className="calendar-container">
@@ -97,27 +106,49 @@ const DateCalendar = () => {
                 startAccessor="startDate"
                 endAccessor="endDate"
                 style={{ height: 480, width: "100%", margin: "50px", padding: "0 1rem" }} />
-            <Fab variant="extended"
-                onClick={toggle}
-                sx={{
-                    backgroundColor: '#301683',
-                    color: '#FFFFFF',
-                    fontWeight: 700,
-                    fontSize: '1rem',
-                    marginTop: "-1.5rem",
-                    transition: 'all 0.3s',
-                    ':hover': {
-                        backgroundColor: '#452B99',
-                        boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.3)',
-                        transform: 'scale(1.05)',
-                    }
-                }}
-            >
-                <EditIcon sx={{ mr: 1 }} />
-                Add Event
-            </Fab>
-            <Modal className="modal-main" isOpen={modal} toggle={toggle} >
-                <ModalHeader toggle={toggle} className="modal-title">Event Details</ModalHeader>
+            <div className='button-container'>
+
+                <Fab variant="extended"
+                    onClick={toggle1}
+                    sx={{
+                        backgroundColor: '#301683',
+                        color: '#FFFFFF',
+                        fontWeight: 700,
+                        fontSize: '1rem',
+                        marginTop: "-1.5rem",
+                        transition: 'all 0.3s',
+                        ':hover': {
+                            backgroundColor: '#452B99',
+                            boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.3)',
+                            transform: 'scale(1.05)',
+                        }
+                    }}
+                >
+                    <EditIcon sx={{ mr: 1 }} />
+                    Add Event
+                </Fab>
+                <Fab variant="extended"
+                    onClick={toggle2}
+                    sx={{
+                        backgroundColor: '#B22222',
+                        color: '#FFFFFF',
+                        fontWeight: 700,
+                        fontSize: '1rem',
+                        marginTop: "-1.5rem",
+                        transition: 'all 0.3s',
+                        ':hover': {
+                            backgroundColor: '#DC143C',
+                            boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.3)',
+                            transform: 'scale(1.05)',
+                        }
+                    }}
+                >
+                    <DeleteIcon sx={{ mr: 1 }} />
+                    Delete Event
+                </Fab>
+            </div>
+            <Modal className="modal-main" isOpen={modal1} toggle={toggle1} >
+                <ModalHeader toggle1={toggle1} className="modal-title">Event Details</ModalHeader>
                 <ModalBody>
                     <div>
                         <TextField
@@ -147,7 +178,19 @@ const DateCalendar = () => {
                     <Button color="success" onClick={handleAddEvent}>
                         Add Event
                     </Button>{' '}
-                    <Button color="danger" onClick={toggle}>
+                    <Button color="danger" onClick={toggle1}>
+                        Cancel
+                    </Button>
+                </ModalFooter>
+            </Modal>
+            <Modal className="modal-main" isOpen={modal2} toggle={toggle2} >
+                <ModalHeader toggle1={toggle1} className="modal-title">Event Details</ModalHeader>
+                <ModalBody>
+            <hr style={{margin: 0, padding: 0, border: "1px solid black", width: "100%"}}/>
+                        {displayEvents}
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="danger" onClick={toggle2}>
                         Cancel
                     </Button>
                 </ModalFooter>

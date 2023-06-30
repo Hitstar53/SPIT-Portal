@@ -109,3 +109,45 @@ button.rbc-active {
     font-weight: 700;
 }
 
+.button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.strip, .strip-foot {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-top: 5px;
+}
+
+
+.view-title {
+    word-wrap: break-word;
+    max-width: 18rem;
+    margin: 0 1rem;
+    font-size: 1.5rem;
+}
+
+.modal-main {
+    min-width: 25rem;
+}
+
+.strip-foot {
+    margin: 0 1rem;
+    flex-direction: column;
+    /* gap: 0; */
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-bottom: 5px;
+}
+
+.view-dates {
+    margin: 0;
+}
+
