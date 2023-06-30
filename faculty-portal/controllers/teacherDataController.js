@@ -68,8 +68,26 @@ exports.loginFaculty = async (req, res) => {
     }
 }
 
+exports.getEvent = asyncHandler(async (req, res) => {
+    const { email } = req.body;
+    try {
+        const det = await Faculty.findOne({ email: email })
+        if (!det) {
+            return res.status(404).send('User not found');
+        }
+        const events = det.events
+
+        console.log(events);
+        res.status(200).send(events);
+    } catch (err) {
+        console.log(err);
+        res.status(504).send("Internal Server Error");
+    }
+})  
+
 exports.addEvent = asyncHandler(async (req, res) => {
     const { email, events } = req.body;
+    console.log(req.body)
     try {
         const det = await Faculty.updateOne({ email: email }, {
             $push: {
