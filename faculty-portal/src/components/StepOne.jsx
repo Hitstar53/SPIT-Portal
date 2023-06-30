@@ -7,8 +7,7 @@ import { IconButton } from '@mui/material';
 import DeleteIcon from "@mui/icons-material/Delete";
 import "../styles/Appraisal.css";
 
-const StepOne = () => {
-  const [dimension1, setDimension1] = useState({});
+const StepOne = ({ setDimension1 }) => {
   const { user } = useContext(UserContext);
   const options = [
     { value: '', label: 'Select an option' },

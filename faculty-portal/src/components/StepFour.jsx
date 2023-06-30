@@ -3,8 +3,7 @@ import { useForm } from 'react-hook-form';
 import Table from "react-bootstrap/Table";
 import { Toaster, toast } from "react-hot-toast";
 
-function StepFour() {
-  const [dimension4, setDimension4] = useState({});
+function StepFour({ setDimension4 }) {
   const {
     register,
     handleSubmit,
