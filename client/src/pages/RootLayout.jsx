@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import Protected from './Protected';
 import { Box } from "@mui/system";
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "react-responsive";

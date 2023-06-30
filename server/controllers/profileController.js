@@ -11,7 +11,6 @@ exports.updatePersonalInfo = asyncHandler(async(req,res) =>{
         const linkedin = req.body.linkedin;
         const github = req.body.github;
         const email = req.body.email;
-        
         try {
             await Profile.findOneAndUpdate({emailID:email},{$set: {phone:phone,address:address,dob:dob,gender:gender,blood:blood,religion:religion,linkedin:linkedin,github:github}},{upsert:true})
             res.status(200).json(' Personal Profile updated Succesfully')
@@ -21,6 +20,7 @@ exports.updatePersonalInfo = asyncHandler(async(req,res) =>{
 })
 exports.updateProfilePic = asyncHandler(async(req,res) => {
         const photo = req.body.photo;
+        const email = req.body.email;
         try {
             await Photo.findOneAndUpdate({emailID:email},{$set:{photoURI:photo}},{upsert:true})
             res.status(200).json('Profile Picture updated Succesfully')
@@ -30,19 +30,20 @@ exports.updateProfilePic = asyncHandler(async(req,res) => {
 })
 
 exports.updateParentalInfo = asyncHandler(async(req,res) =>{
-    const fatherName = req.body.fatherName;
-    const motherName = req.body.motherName;
-    const fatherPhoneNo = req.body.fatherPhoneNo;
-    const motherPhoneNo = req.body.motherPhoneNo;
-    const fatherEmailID = req.body.fatherEmailID;
-    const motherEmailID = req.body.motherEmailID;
+    console.log(req.body)
+    const fatherName = req.body.fname;
+    const motherName = req.body.mname;
+    const fatherPhoneNo = req.body.fphone;
+    const motherPhoneNo = req.body.mphone;
+    const fatherEmailID = req.body.femail;
+    const motherEmailID = req.body.memail;
     const email = req.body.email;
     if (!email) {
         res.status(404).send("Send email")
         return;
     }
     try {
-        await Profile.findOneAndUpdate({emailID:email},{$set: {fatherName:fatherName,motherName:motherName,fatherPhoneNo:fatherPhoneNo,motherPhoneNo:motherPhoneNo,fatherEmailID:fatherEmailID,motherEmailID:motherEmailID}},{upsert:true})
+        await Profile.findOneAndUpdate({emailID:email},{$set: {fname:fatherName,mname:motherName,fphone:fatherPhoneNo,mphone:motherPhoneNo,femail:fatherEmailID,memail:motherEmailID}},{upsert:true})
         res.status(200).json(' Parental Profile updated Succesfully')
     } catch (error) {
         console.error(error)
@@ -73,8 +74,9 @@ exports.getPersonalInfo = asyncHandler(async(req,res)=>{
 
 exports.getParentalInfo = asyncHandler(async(req,res)=>{
     const email = req.body.email;
+    
     try {
-        const profile = await Profile.findOne({emailID:email}).select("fatherName motherName motherPhoneNo fatherPhoneNo motherEmailID fatherEmailID -_id")
+        const profile = await Profile.findOne({emailID:email}).select("fname mname mphone fphone memail femail -_id")
         res.status(200).json(profile)
     } catch (error) {
         console.error(error)

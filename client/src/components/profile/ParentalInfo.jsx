@@ -14,7 +14,6 @@ const ParentalInfo = (props) => {
     } else {
       setEdit(false);
     }
-
   };
   useEffect(() => {
     setParentalInfo({
@@ -26,11 +25,69 @@ const ParentalInfo = (props) => {
       memail: props.info.memail,
     })
   },[])
+
+  React.useEffect(() => {
+    fetchParentalInfo();
+  }, []);
+
+  const fetchParentalInfo = async () => {
+    console.log(JSON.parse(localStorage.getItem("userinfo")).email);
+    const response = await fetch(
+      "http://localhost:8000/api/student/getParental",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: JSON.parse(localStorage.getItem("userinfo")).email,
+        }),
+      }
+    );
+    if (!response.ok) {
+      console.log("error");
+    }
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      setParentalInfo(data);
+    }
+  };
   const handleChange = (e) => {
     setParentalInfo({...parentalInfo,[e.target.name]:e.target.value})
   }
   const handleSubmit = (event) => {
     event.preventDefault();
+    const updateParentalInfo = async () => {
+      const response = await fetch(
+        "http://localhost:8000/api/student/parental",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: JSON.parse(localStorage.getItem("userinfo")).email,
+            fname:parentalInfo.fname,
+            mname:parentalInfo.mname,
+            fphone:parentalInfo.fphone,
+            mphone:parentalInfo.mphone,
+            femail:parentalInfo.femail,
+            memail:parentalInfo.memail
+          }),
+        }
+      );
+      if (!response.ok) {
+        console.log("error");
+      }
+      if (response.ok) {
+        const data = await response.json();
+        alert("Parental Information Updated");
+        fetchParentalInfo();
+        console.log(data);
+      }
+    };
+    updateParentalInfo();
     setEdit(false)
   };
   return (

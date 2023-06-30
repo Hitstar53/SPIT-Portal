@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Login from './components/login/Login';
 import Dashboard from './components/dashboard/Dashboard';
@@ -11,7 +11,6 @@ import Portfolio from './components/careerconn/Portfolio/Portfolio';
 import Internship from './components/careerconn/Internship';
 import Placement from './components/careerconn/Placement';
 import Events from './components/extracurr/events/Events';
-import { Box } from '@mui/system';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Committees from "./components/extracurr/committees/Committees";
 import ComAdmin from "./components/extracurr/committees/ComAdmin";
@@ -58,7 +57,6 @@ const router = createBrowserRouter([
 ])
 
 const App = () => {
-  const initialRender = useRef(true)
   const theme = createTheme({
     typography: {
       fontFamily: [

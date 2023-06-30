@@ -19,22 +19,22 @@ const studentSchema = mongoose.Schema({
             type:String
         },
     ],
-    motherName:{
+    mname:{
         type:String
             },
-    motherPhoneNo:{
+    mphone:{
         type:String
             },
-    motherEmailID:{
+    memail:{
         type:String
             },
-    fatherName:{
+    fname:{
         type:String
             },
-    fatherPhoneNo:{
+    fphone:{
         type:String
             },
-    fatherEmailID:{
+    femail:{
         type:String
             },
     exams:[
@@ -172,11 +172,6 @@ const studentSchema = mongoose.Schema({
             description:{ type : String, required:true},
         },
     ],
-    placement:
-        {
-            type:String
-        }
-    
 },
 {
     collection: 'student'
