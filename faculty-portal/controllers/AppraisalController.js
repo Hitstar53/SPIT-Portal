@@ -256,6 +256,9 @@ const setAppraisal = asyncHandler(async (req, res) => {
             }
         }
         for (var i = 0; i < Dimension2.RP2.moocs.length; i++) {
+            if (Dimension2.RP2.moocs[i].duration < 8) {
+                rp2marks = rp2marks + 0;
+            }
             if (Dimension2.RP2.moocs[i].duration >= 8 && Dimension2.RP2.moocs[i].duration < 24) {
                 rp2marks = rp2marks + 5;
             }
