@@ -69,9 +69,9 @@ exports.loginFaculty = async (req, res) => {
 }
 
 exports.addEvent = asyncHandler(async (req, res) => {
-    const {email, events} = req.body;
+    const { email, events } = req.body;
     try {
-        const det = await Faculty.updateOne({email:email},{
+        const det = await Faculty.updateOne({ email: email }, {
             $push: {
                 events: events
             }

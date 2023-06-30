@@ -276,7 +276,12 @@ const appraisalSchema = new mongoose.Schema({
                         type: String
                     },
                     amount: {
-                        type: Number
+                        type: Number,
+                        default: 0
+                    },
+                    status:{
+                        type: String,
+                        default: "Null"
                     }
 
                 }
@@ -438,6 +443,12 @@ const appraisalSchema = new mongoose.Schema({
                 },
                 details: {
                     type: String
+                },
+                type:{
+                    type: String
+                },
+                duration:{
+                    type: Number
                 }
             }],
             totalMarks: {

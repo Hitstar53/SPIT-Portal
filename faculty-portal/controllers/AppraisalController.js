@@ -50,7 +50,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
 
         if (averagePercent < 80) {
             //To be discussed
-            Dimension1.info.AP3Marks = 3;
+            Dimension1.info.AP3Marks = 0;
         }
         if (averagePercent >= 80 && averagePercent < 90) {
             Dimension1.info.AP3Marks = 3;
@@ -275,7 +275,29 @@ const setAppraisal = asyncHandler(async (req, res) => {
         // ----------------------------------
         //RP3
         //To be Discussed
-
+        var rp3marks = 0;
+        for (var i = 0; i < Dimension2.RP3.sponsored.length; i++) {
+            if (Dimension2.RP3.sponsored[i].status == "Submitted") {
+                rp3marks = rp3marks + 2;
+            }
+            if (Dimension2.RP3.sponsored[i].status == "Submitted and Approved") {
+                if (Dimension2.RP3.sponsored[i].amount < 100000) {
+                    rp3marks = rp3marks + 3 + 2;
+                }
+                else if (Dimension2.RP3.sponsored[i].amount >= 100000 && Dimension2.RP3.sponsored[i].amount < 500000) {
+                    rp3marks = rp3marks + 5 + 2;
+                }
+                else if (Dimension2.RP3.sponsored[i].amount >= 500000 && Dimension2.RP3.sponsored[i].amount < 1000000) {
+                    rp3marks = rp3marks + 7 + 2;
+                }
+                else {
+                    rp3marks = rp3marks + 13 + 2;
+                }
+            }
+        }
+        if (rp3marks > 30) {
+            rp3marks = 30;
+        }
         //RP4
 
         // ----------------------------
@@ -311,11 +333,12 @@ const setAppraisal = asyncHandler(async (req, res) => {
 
         Dimension2.RP1.totalMarks = rp1marks;
         Dimension2.RP2.totalMarks = rp2marks;
+        Dimension2.RP3.totalMarks = rp3marks;
         Dimension2.RP4.totalMarks = (Dimension2.RP4.number * 0.4) <= 25 ? (Dimension2.RP4.number * 0.4) : 25;
         Dimension2.RP5.totalMarks = rp5marks;
 
         //+ Dimension2.RP3.totalMarks
-        Dimension2.totalMarks = Dimension2.RP1.totalMarks + Dimension2.RP2.totalMarks  + Dimension2.RP4.totalMarks + Dimension2.RP5.totalMarks + Dimension2.RP6.totalMarks + Dimension2.RP7.totalMarks;
+        Dimension2.totalMarks = Dimension2.RP1.totalMarks + Dimension2.RP2.totalMarks + Dimension2.RP2.totalMarks + Dimension2.RP4.totalMarks + Dimension2.RP5.totalMarks + Dimension2.RP6.totalMarks + Dimension2.RP7.totalMarks;
         Dimension2.totalMarks = (Dimension2.totalMarks / 150) * 100;
 
 
@@ -377,10 +400,25 @@ const setAppraisal = asyncHandler(async (req, res) => {
         // ------------------------------------------------------
         //invited 
         var invitedmarks = 0;
-        invitedmarks = 3 * Dimension3.Invited.invitedAt.length;
+        var guestmarks = 0;
+        var invitedfinalmarks = 0;
+        for (var i = 0; i < Dimension3.Invited.invitedAt.length; i++) {
+            if (Dimension3.Invited.invitedAt[i].type == "Guest Faculty") {
+                guestmarks = guestmarks + 3;
+            }
+            if (Dimension3.Invited.invitedAt[i].type == "Visiting Professor") {
+                invitedmarks = invitedmarks + 5;
+
+            }
+        }
+
         if (invitedmarks > 15) {
             invitedmarks = 15;
         }
+        if (guestmarks > 10) {
+            guestmarks = 10;
+        }
+        invitedfinalmarks = (invitedmarks + guestmarks) > 15 ? 15 : (invitedmarks + guestmarks);
 
         // ----------------------------------------
 
@@ -433,13 +471,10 @@ const setAppraisal = asyncHandler(async (req, res) => {
 
         Dimension3.totalIP1IP2DP1Marks = Dimension3Marks;
         Dimension3.OP1.totalMarks = OPMarks;
-        Dimension3.Invited.totalMarks = invitedmarks;
-
+        Dimension3.Invited.totalMarks = invitedfinalmarks;
         const tempOP = (Dimension3.OP1.totalMarks + Dimension3.Invited.totalMarks + Dimension3.Partof.totalMarks + Dimension3.Article.totalMarks + Dimension3.coGuide.totalMarks + Dimension3.collaboration.totalMarks) > 40 ? 40 : (Dimension3.OP1.totalMarks + Dimension3.Invited.totalMarks + Dimension3.Partof.totalMarks + Dimension3.Article.totalMarks + Dimension3.coGuide.totalMarks + Dimension3.collaboration.totalMarks);
 
         Dimension3.totalMarks = Dimension3.totalIP1IP2DP1Marks + tempOP;
-
-        // Dimension3.totalMarks = Dimension3.totalIP1IP2DP1Marks + Dimension3.OP1.totalMarks + Dimension3.Invited.totalMarks + Dimension3.Partof.totalMarks + Dimension3.Article.totalMarks + Dimension3.coGuide.totalMarks + Dimension3.collaboration.totalMarks;
 
         // ===============================================================
         // --------------------------------------------------------------------
@@ -459,7 +494,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
         finalGrandTotal.dimension3.totalMarks = Dimension3.totalMarks;
         finalGrandTotal.dimension4.totalMarks = Dimension4.confidentialReport.perceptionMarks;
 
-        finalGrandTotal.dimension1.finalMarks =  finalGrandTotal.dimension1.totalMarks* 0.4;
+        finalGrandTotal.dimension1.finalMarks = finalGrandTotal.dimension1.totalMarks * 0.4;
         finalGrandTotal.dimension2.finalMarks = finalGrandTotal.dimension2.totalMarks * 0.2;
         finalGrandTotal.dimension3.finalMarks = finalGrandTotal.dimension3.totalMarks * 0.2;
         finalGrandTotal.dimension4.finalMarks = finalGrandTotal.dimension4.totalMarks * 0.2;
@@ -471,7 +506,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
             finalGrandTotal.dimension3.finalMarks +
             finalGrandTotal.dimension4.finalMarks;
 
-            
+
         // =============================================================================================================
         const newAppraisal = new Appraisal({
             Dimension1,
