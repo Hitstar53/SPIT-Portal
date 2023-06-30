@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../context/UserContext';
+import axios from 'axios';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import format from "date-fns/format";
 import getDay from "date-fns/getDay";
@@ -20,7 +22,6 @@ import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from "axios";
 import "../styles/DateCalendar.css"
 
 const locales = {
@@ -36,15 +37,31 @@ const localizer = dateFnsLocalizer({
 });
 
 const DateCalendar = () => {
-    const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
+    const [newEvent, setNewEvent] = useState({ title: "", startDate: "", endDate: "" });
     const [allEvents, setAllEvents] = useState([]);
     const [modal, setModal] = useState(false);
+    const { user } = useContext(UserContext);
+    
+    useEffect( () => {
+        const fetchEvents = async() => {
+                await axios.post('http://localhost:5000/api/faculty/get/event', { email: user.email })
+                .then((res) => {
+                    console.log(res.data);
+                    setAllEvents(res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+        fetchEvents();
+    }, []);
+
 
     const toggle = () => setModal(!modal);
 
     const handleAddEvent = async () => {
         console.log(newEvent)
-        if (newEvent.title === "" || newEvent.start === "" || newEvent.end === "") {
+        if (newEvent.title === "" || newEvent.startDate === "" || newEvent.endDate === "") {
             toast.error('Please enter all the Event Fields!', {
                 position: "top-center",
                 autoClose: 2000,
@@ -58,8 +75,17 @@ const DateCalendar = () => {
             return;
         }
         // await axios.post()
-        setAllEvents([...allEvents, newEvent]);
-        setNewEvent({ title: "", start: "", end: "" });
+        // setAllEvents([...allEvents, newEvent]);
+        await axios.post('http://localhost:5000/api/faculty/add/event', { email: user.email, events: newEvent })
+        .then((res) => {
+            console.log(res.data);
+            setAllEvents([...allEvents, newEvent]);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+        setNewEvent({ title: "", startDate: "", endDate: "" });
+        toggle();
     };
 
     return (
@@ -68,8 +94,8 @@ const DateCalendar = () => {
                 className="calendar"
                 localizer={localizer}
                 events={allEvents}
-                startAccessor="start"
-                endAccessor="end"
+                startAccessor="startDate"
+                endAccessor="endDate"
                 style={{ height: 480, width: "100%", margin: "50px", padding: "0 1rem" }} />
             <Fab variant="extended"
                 onClick={toggle}
@@ -109,10 +135,10 @@ const DateCalendar = () => {
                     <div>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoItem label="Start Date">
-                                <MobileDateTimePicker value={newEvent.start} onChange={(date) => setNewEvent({ ...newEvent, start: date.$d })} />
+                                <MobileDateTimePicker value={newEvent.startDate} onChange={(date) => setNewEvent({ ...newEvent, startDate: date.$d })} />
                             </DemoItem>
                             <DemoItem label="End Date">
-                                <MobileDateTimePicker value={newEvent.end} onChange={(date) => setNewEvent({ ...newEvent, end: date.$d })} />
+                                <MobileDateTimePicker value={newEvent.endDate} onChange={(date) => setNewEvent({ ...newEvent, endDate: date.$d })} />
                             </DemoItem>
                         </LocalizationProvider>
                     </div>
