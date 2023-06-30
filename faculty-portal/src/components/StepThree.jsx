@@ -5,9 +5,8 @@ import "../styles/Appraisal3.css";
 import Table from "react-bootstrap/Table";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function StepThree() {
-  const [dimension3, setDimension3] = useState({});
-    const { register, control, handleSubmit } = useForm();
+function StepThree({setDimension3}) {
+  const { register, control, handleSubmit } = useForm();
   const {
     fields: organizedFields,
     append: appendOrganized,
@@ -63,9 +62,9 @@ function StepThree() {
   };
   
 
-  useEffect(() => {
-    console.log(dimension3);
-  }, [dimension3]);
+  // useEffect(() => {
+  //   console.log(dimension3);
+  // }, [dimension3]);
 
 
   
