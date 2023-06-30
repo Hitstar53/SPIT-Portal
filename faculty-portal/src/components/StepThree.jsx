@@ -67,7 +67,7 @@ function StepThree() {
   }, [dimension3]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="stepThree" onSubmit={handleSubmit(onSubmit)}>
       <h2 className="table-title">Administrative role executed</h2>
       <div className="dim3-table">
         <div className="tab">
@@ -239,13 +239,10 @@ function StepThree() {
                   />
                 </td>
                 <td className="text-center align-middle">
-                    <button
-                      type="button"
-                      onClick={() => removeOrganized(index)}
-                    >
-                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
-                    </button>
-                  </td>
+                  <button type="button" onClick={() => removeOrganized(index)}>
+                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -303,13 +300,10 @@ function StepThree() {
                   />
                 </td>
                 <td className="text-center align-middle">
-                    <button
-                      type="button"
-                      onClick={() => removeInvited(index)}
-                    >
-                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
-                    </button>
-                  </td>
+                  <button type="button" onClick={() => removeInvited(index)}>
+                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -377,13 +371,10 @@ function StepThree() {
                   />
                 </td>
                 <td className="text-center align-middle">
-                    <button
-                      type="button"
-                      onClick={() => removeCommittee(index)}
-                    >
-                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
-                    </button>
-                  </td>
+                  <button type="button" onClick={() => removeCommittee(index)}>
+                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -421,13 +412,10 @@ function StepThree() {
                   />
                 </td>
                 <td className="text-center align-middle">
-                    <button
-                      type="button"
-                      onClick={() => removeArticle(index)}
-                    >
-                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
-                    </button>
-                  </td>
+                  <button type="button" onClick={() => removeArticle(index)}>
+                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -475,13 +463,10 @@ function StepThree() {
                   />
                 </td>
                 <td className="text-center align-middle">
-                    <button
-                      type="button"
-                      onClick={() => removeCoGuide(index)}
-                    >
-                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
-                    </button>
-                  </td>
+                  <button type="button" onClick={() => removeCoGuide(index)}>
+                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -529,13 +514,13 @@ function StepThree() {
                   />
                 </td>
                 <td className="text-center align-middle">
-                    <button
-                      type="button"
-                      onClick={() => removeCollaboration(index)}
-                    >
-                      <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
-                    </button>
-                  </td>
+                  <button
+                    type="button"
+                    onClick={() => removeCollaboration(index)}
+                  >
+                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -550,7 +535,12 @@ function StepThree() {
         Add Collaboration
       </button>
 
-      <button type="submit">Submit</button>
+      <input
+        className="btn btn-primary"
+        type="submit"
+        value="Save"
+        style={{ display: "block", width: "100px" }}
+      />
     </form>
   );
 }
