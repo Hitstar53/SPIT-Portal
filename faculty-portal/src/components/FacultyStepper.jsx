@@ -28,6 +28,19 @@ export default function FacultyStepper() {
         console.log(activeStep);
     }, [activeStep])
 
+    React.useEffect(()=>{
+        console.log("Dimension1=",Dimension1)
+    },[Dimension1])
+    React.useEffect(()=>{
+        console.log("Dimension2=",Dimension2)
+    },[Dimension2])
+    React.useEffect(()=>{
+        console.log("Dimension3=",Dimension3)
+    },[Dimension3])
+    React.useEffect(()=>{
+        console.log("Dimension4=",Dimension4)
+    },[Dimension4])
+
 
     return (
         <React.Fragment>
@@ -41,8 +54,8 @@ export default function FacultyStepper() {
                 {/* render different pages depending upon activeStep */}
                 {activeStep === 0 && <StepOne setDimension1={setDimension1}/>}
                 {activeStep === 1 && <StepTwo setDimension2={setDimension2}/>}
-                {activeStep === 2 && <StepThree setDimension3={setDimension3} handleBack={handleBack} />}
-                {activeStep === 3 && <StepFour setDimension4={setDimension4} handleBack={handleBack} />}
+                {activeStep === 2 && <StepThree setDimension3={setDimension3}/>}
+                {activeStep === 3 && <StepFour setDimension4={setDimension4}/>}
                 {/* {activeStep === 4 && <StepFour handleBack={handleBack} submitted={true} />} */}
 
                 {/* show footer only if all steps are not completed */}

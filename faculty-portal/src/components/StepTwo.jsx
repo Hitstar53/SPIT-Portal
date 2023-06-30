@@ -3,8 +3,7 @@ import { useForm, useFieldArray } from "react-hook-form";
 import Table from "react-bootstrap/Table";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function StepTwo() {
-  const [dimension2, setDimension2] = useState([{}]);
+function StepTwo({setDimension2}) {
   const { register, control, handleSubmit, setValue, getValues } = useForm({
     defaultValues: JSON.parse(localStorage.getItem("dim2Data")) || {},
   });
@@ -93,9 +92,9 @@ function StepTwo() {
     setDimension2(getValues());
   }, [paperFields]);
 
-  useEffect(() => {
-    console.log("dimension2=", dimension2);
-  }, [dimension2]);
+  // useEffect(() => {
+  //   console.log("dimension2=", dimension2);
+  // }, [dimension2]);
 
   return (
     <>
