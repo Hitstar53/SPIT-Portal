@@ -185,9 +185,9 @@ const DateCalendar = () => {
             </Modal>
             <Modal className="modal-main" isOpen={modal2} toggle={toggle2} >
                 <ModalHeader toggle1={toggle1} className="modal-title">Event Details</ModalHeader>
-                <ModalBody>
-            <hr style={{margin: 0, padding: 0, border: "1px solid black", width: "100%"}}/>
-                        {displayEvents}
+                <ModalBody style={{ overflowY: "scroll", maxHeight: "400px" }}>                      
+                    <hr style={{ margin: 0, padding: 0, border: "1px solid black", width: "100%" }} />
+                    {displayEvents}
                 </ModalBody>
                 <ModalFooter>
                     <Button color="danger" onClick={toggle2}>
