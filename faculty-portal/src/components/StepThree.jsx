@@ -436,7 +436,7 @@ function StepThree() {
                     type="text"
                     placeholder="Details"
                     className="form-input"
-                    {...register(`Article.articleDetails[${index}]`)}
+                    {...register(`Article.articleDetails[${index}].name`)}
                     />
                 </td>
                 <td className="text-center align-middle">
@@ -478,7 +478,7 @@ function StepThree() {
                     type="text"
                     placeholder="Institute"
                     className="form-input"
-                    {...register(`CoGuide.data[${index}].institutionName`)}
+                    {...register(`CoGuide[${index}].institutionName`)}
                   />
                 </td>
                 {/* <label className="form-label">Details</label> */}
@@ -487,7 +487,7 @@ function StepThree() {
                     type="text"
                     placeholder="Details"
                     className="form-input"
-                    {...register(`CoGuide.data[${index}].details`)}
+                    {...register(`CoGuide[${index}].details`)}
                   />
                 </td>
                 <td className="text-center align-middle">
