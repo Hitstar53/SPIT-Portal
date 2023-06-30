@@ -5,7 +5,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 function StepTwo() {
   const [dimension2, setDimension2] = useState([{}]);
-  const { register, control, handleSubmit, setValue } = useForm();
+  const { register, control, handleSubmit, setValue, getValues } = useForm({
+    defaultValues: JSON.parse(localStorage.getItem("dim2Data")) || {},
+  });
   const {
     fields: paperFields,
     append: appendPaper,
@@ -52,7 +54,7 @@ function StepTwo() {
     remove: removeCitations,
   } = useFieldArray({
     control,
-    name: "RP4.citations",
+    name: "RP4",
   });
   const {
     fields: developmentFields,
@@ -60,7 +62,7 @@ function StepTwo() {
     remove: removeDevelopment,
   } = useFieldArray({
     control,
-    name: "RP5.development",
+    name: "RP5.selfDevelopment",
   });
   const {
     fields: soft_hard_devFields,
@@ -68,7 +70,7 @@ function StepTwo() {
     remove: removeSoftHardDev,
   } = useFieldArray({
     control,
-    name: "RP6.soft_hard_dev",
+    name: "RP6.softHardDev",
   });
   const {
     fields: extrasFields,
@@ -76,7 +78,7 @@ function StepTwo() {
     remove: removeExtras,
   } = useFieldArray({
     control,
-    name: "RP7.extras",
+    name: "RP7.activityNotCovered",
   });
 
   const onSubmit = (data) => {
@@ -86,22 +88,18 @@ function StepTwo() {
   };
 
   useEffect(() => {
+    console.log("changed");
+    localStorage.setItem("dim2Data", JSON.stringify(getValues()));
+    setDimension2(getValues());
+  }, [paperFields]);
+
+  useEffect(() => {
     console.log("dimension2=", dimension2);
   }, [dimension2]);
 
-  useEffect(() => {
-    const storedData = localStorage.getItem("dim2Data");
-    if (storedData) {
-      const parsedData = JSON.parse(storedData);
-      Object.keys(parsedData).forEach((key) => {
-        setValue(key, parsedData[key]);
-      });
-    }
-  }, []);
-
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="stepTwo" onSubmit={handleSubmit(onSubmit)}>
         <h1>RP1: Publications</h1>
 
         {paperFields.length > 0 && (
@@ -112,6 +110,8 @@ function StepTwo() {
                 <th>Journal/ Conference Name</th>
                 <th>Authors</th>
                 <th>Publisher</th>
+                <th>Reputation</th>
+                <th>type</th>
                 <th>Paper Link</th>
                 <th></th>
               </tr>
@@ -131,10 +131,22 @@ function StepTwo() {
                   <td className="text-center align-middle">
                     <label className="form-label">
                       <input
-                        {...register(`RP1.papers[${index}].journal`)}
+                        {...register(
+                          `RP1.papers[${index}].conferenceOrJournal.name`
+                        )}
                         className="form-input"
                       />
                     </label>
+                  </td>
+                  <td>
+                    <select
+                      {...register(
+                        `RP1.papers[${index}].conferenceOrJournal.type`
+                      )}
+                    >
+                      <option value="Conference">Conference</option>
+                      <option value="Journal">Journal</option>
+                    </select>
                   </td>
 
                   <td className="text-center align-middle">
@@ -154,6 +166,17 @@ function StepTwo() {
                       />
                     </label>
                   </td>
+                  <td>
+                    <select
+                      {...register(
+                        `RP1.papers[${index}].conferenceOrJournal.reputation`
+                      )}
+                    >
+                      <option value="High">High</option>
+                      <option value="Medium">Medium</option>
+                      <option value="None ">None </option>
+                    </select>
+                  </td>
 
                   <td className="text-center align-middle">
                     <label className="form-label">
@@ -164,7 +187,12 @@ function StepTwo() {
                     </label>
                   </td>
                   <td className="text-center align-middle">
-                    <button type="button" onClick={() => removePaper(index)}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        removePaper(index);
+                      }}
+                    >
                       <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
                     </button>
                   </td>
@@ -214,6 +242,12 @@ function StepTwo() {
                         className="form-input"
                       />
                     </label>
+                  </td>
+                  <td>
+                    <select {...register(`RP2.patents[${index}].status`)}>
+                      <option value="Obtained">Obtained</option>
+                      <option value="Published">Published</option>
+                    </select>
                   </td>
                   <td className="text-center align-middle">
                     <button type="button" onClick={() => removePatent(index)}>
@@ -273,6 +307,14 @@ function StepTwo() {
                         className="form-input"
                       />
                     </label>
+                  </td>
+                  <td>
+                    <select {...register(`RP2.books[${index}].status`)}>
+                      <option value="Published">Published</option>
+                      <option value="Book Chapter/Monograms/Copyright">
+                        Book Chapter/Monograms/Copyright
+                      </option>
+                    </select>
                   </td>
                   <td className="text-center align-middle">
                     <button type="button" onClick={() => removeBook(index)}>
@@ -421,6 +463,14 @@ function StepTwo() {
                       />
                     </label>
                   </td>
+                  <td>
+                    <select {...register(`RP3.sponsored[${index}].status`)}>
+                      <option value="Submitted">Submitted</option>
+                      <option value="Submitted and Approved">
+                        Submitted and Approved
+                      </option>
+                    </select>
+                  </td>
                   <td className="text-center align-middle">
                     <button
                       type="button"
@@ -449,7 +499,7 @@ function StepTwo() {
             Number of citations in the previous calendar year
             <input
               type="text"
-              {...register(`RP4.citations.number`)}
+              {...register(`RP4.number`)}
               className="form-input"
             />
           </label>
@@ -471,10 +521,19 @@ function StepTwo() {
               {developmentFields.map((field, index) => (
                 <tr key={field.id}>
                   <td>
+                    <select {...register(`RP5.selfDevelopment[${index}].type`)}>
+                      <option value="STTP">STTP</option>
+                      <option value="FDP">FDP</option>
+                      <option value="MOOC">MOOC</option>
+                      <option value="Industry ">Industry </option>
+                      <option value="nternship">nternship</option>
+                    </select>
+                  </td>
+                  <td>
                     <label className="form-label">
                       <input
                         type="text"
-                        {...register(`RP5.development[${index}].title`)}
+                        {...register(`RP5.selfDevelopment[${index}].title`)}
                         className="form-input"
                       />
                     </label>
@@ -484,7 +543,9 @@ function StepTwo() {
                     <label className="form-label">
                       <input
                         type="text"
-                        {...register(`RP5.development[${index}].organization`)}
+                        {...register(
+                          `RP5.selfDevelopment[${index}].organization`
+                        )}
                         className="form-input"
                       />
                     </label>
@@ -494,7 +555,7 @@ function StepTwo() {
                     <label className="form-label">
                       <input
                         type="text"
-                        {...register(`RP5.development[${index}].dates`)}
+                        {...register(`RP5.selfDevelopment[${index}].dates`)}
                         className="form-input"
                       />
                     </label>
@@ -504,7 +565,7 @@ function StepTwo() {
                     <label className="form-label">
                       <input
                         type="text"
-                        {...register(`RP5.development[${index}].days`)}
+                        {...register(`RP5.selfDevelopment[${index}].duration`)}
                         className="form-input"
                       />
                     </label>
@@ -550,7 +611,7 @@ function StepTwo() {
                     <label className="form-label">
                       <input
                         type="text"
-                        {...register(`RP6.soft_hard_dev[${index}].type`)}
+                        {...register(`RP6.softHardDev[${index}].type`)}
                         className="form-input"
                       />
                     </label>
@@ -560,7 +621,7 @@ function StepTwo() {
                     <label className="form-label">
                       <input
                         type="text"
-                        {...register(`RP6.soft_hard_dev[${index}].model`)}
+                        {...register(`RP6.softHardDev[${index}].model`)}
                         className="form-input"
                       />
                     </label>
@@ -570,7 +631,7 @@ function StepTwo() {
                     <label className="form-label">
                       <input
                         type="text"
-                        {...register(`RP6.soft_hard_dev[${index}].details`)}
+                        {...register(`RP6.softHardDev[${index}].details`)}
                         className="form-input"
                       />
                     </label>
@@ -618,7 +679,7 @@ function StepTwo() {
                     <label className="form-label">
                       <input
                         type="text"
-                        {...register(`RP7.extras[${index}].date`)}
+                        {...register(`RP7.activityNotCovered[${index}].date`)}
                         className="form-input"
                       />
                     </label>
@@ -628,7 +689,7 @@ function StepTwo() {
                     <label className="form-label">
                       <input
                         type="text"
-                        {...register(`RP7.extras[${index}].details`)}
+                        {...register(`RP7.activityNotCovered[${index}].details`)}
                         className="form-input"
                       />
                     </label>
@@ -654,8 +715,9 @@ function StepTwo() {
         </button>
 
         <input
+          className="btn btn-primary"
           type="submit"
-          value="Submit"
+          value="Save"
           style={{ display: "block", width: "100px" }}
         />
       </form>

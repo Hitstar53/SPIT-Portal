@@ -196,3 +196,16 @@ body {
 .class-name {
     width: 10rem;
 }
+.btn{
+    margin: 1rem 25px !important;
+}
+
+.stepTwo,.stepThree{
+    text-align: left !important;
+    /* background-color: aliceblue;
+    padding: 2rem;
+    border-radius: 1rem; */
+}
+.stepTwo h1,.stepThree h1{
+    margin-top: 2rem;
+}
