@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import {useNavigate, useParams} from "react-router-dom";
 import AddButton from "../../UI/AddButton"
 import styles from "./Events.module.css";
 import EventsCard from "./EventsCard.jsx";
@@ -37,12 +38,42 @@ const eventinfo = [
 ]
 
 const Events = () => {
+
+
+  /**********************/
+  const navigate = useNavigate();
+  const params = useParams();
+  const [events, setEvents] = useState(eventinfo);
+  const [openEventDialog, setOpenEventDialog] = useState(false);
+
+  const handleEventClickOpenDialog = () => {
+    setOpenEventDialog(true);
+  };
+  const handleEventCloseDialog = () => {
+    setOpenEventDialog(false);
+  };
+  
+  const [newEventData, setEventNewData] = useState({});
+
+  const handleEventDataChange = (e) => {
+    setEventNewData({ ...newEventData, [e.target.name]: e.target.value });
+  };
+
+  const handleEventSubmit = (e) => {
+    e.preventDefault();
+    const arr = [...events];
+    arr.unshift(newEventData);
+    setEvents(arr);
+    setOpen(false);
+  };
+
+/************************/
   return (
     <div className={styles.eventsPage}>
       <div className={styles.header}>
         <h1 className={styles.heading}>Your Participation</h1>
         <div>
-          <AddButton btntext="Add Event" />
+          <AddButton onClick={handleEventClickOpenDialog} btntext="Add Event" />
         </div>
       </div>
       <div className={styles.comGrid}>
@@ -58,28 +89,65 @@ const Events = () => {
           );
         })}
       </div>
+      <MultiFieldModal
+        handleDataSubmit={handleEventSubmit}
+        openDialog={openEventDialog}
+        handleClickOpenDialog={handleEventClickOpenDialog}
+        handleCloseDialog={handleEventCloseDialog}
+        title="Add new Event"
+      >
+        <TextField
+          required
+          autoFocus
+          margin="dense"
+          name="EventName"
+          label="Event Name"
+          autoComplete="off"
+          type="text"
+          fullWidth
+          variant="standard"
+          onChange={handleEventDataChange}
+        />
+        <TextField
+          required
+          margin="dense"
+          name="date"
+          label="Date"
+          autoComplete="off"
+          type="text"
+          fullWidth
+          variant="standard"
+          onChange={handleEventDataChange}
+        />
+        <TextField
+          required
+          margin="dense"
+          name="organization"
+          label="Organization"
+          autoComplete="off"
+          type="text"
+          fullWidth
+          variant="standard"
+          onChange={handleEventDataChange}
+        />
+        <TextField
+          required
+          margin="dense"
+          name="desc"
+          label="Description"
+          autoComplete="off"
+          type="text"
+          fullWidth
+          variant="standard"
+          onChange={handleEventDataChange}
+        />
+        </MultiFieldModal>
+
     </div>
+    /**********
+     
+     */
   );
 };
-
-/*******************************
-const [openDialog, setOpenDialog] = React.useState(false);
-  const handleClickOpenDialog = () => {
-    setOpenDialog(true);
-  };
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-  };
-  const [newData, setNewData] = React.useState({})
-  const handleDataChange = (e) => {
-    setNewData({...newData,[e.target.name]:e.target.value})
-  }
-  const handleDataSubmit = (e) => {
-    e.preventDefault();
-    const arr = [...internships]
-    arr.unshift(newData)
-    setInternships(arr)
-  }
-****************************/
 
 export default Events;

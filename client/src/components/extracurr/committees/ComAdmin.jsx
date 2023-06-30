@@ -9,7 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import MultiFieldModal from "../../UI/Modals/MultiFieldModal";
 
 const announcement = [
-  {
+  {//hitstar sir error sahi karo yeh kya hai kuch nahi chal raha
     title: "Change in venue for Pixel Paranoia",
     date: "24/10/23",
     ancmnt:
@@ -46,20 +46,17 @@ function createMember(members) {
 }
 
 const ComAdmin = () => {
-  const navigate = useNavigate();
   const params = useParams();
   const [events, setEvents] = useState(eventData);
   const [ancmnts, setAncmnts] = useState(announcement);
   const [openEventDialog, setOpenEventDialog] = useState(false);
   const [openAncmntDialog, setOpenAncmntDialog] = useState(false);
-
   const handleEventClickOpenDialog = () => {
     setOpenEventDialog(true);
   };
   const handleEventCloseDialog = () => {
     setOpenEventDialog(false);
   };
-
   const handleAncmntClickOpenDialog = () => {
     setOpenAncmntDialog(true);
   };
@@ -170,6 +167,7 @@ const ComAdmin = () => {
       </div>
       <hr className={styles.divider} />
       {members.map(createMember)}
+
       <MultiFieldModal
         handleDataSubmit={handleEventSubmit}
         openDialog={openEventDialog}

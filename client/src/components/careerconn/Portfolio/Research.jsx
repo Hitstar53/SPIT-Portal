@@ -5,30 +5,36 @@ import MultiFieldModal from '../../UI/Modals/MultiFieldModal'
 import TextField from '@mui/material/TextField'
 import styles from "./Projects.module.css";
 
-const ResearchData = [
-  {
-    title: "ReviewScope - AI Product Reviewer",
-    duration: "3 months",
-    mentor: "Prof. Anand Godbole",
-    domain: "Machine Learning",
-    techStack: ["React", "Node", "MongoDB", "Express", "HTML", "CSS", "JS"],
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-  },
-  {
-    title: "ReviewScope - AI Product Reviewer",
-    duration: "2 months",
-    mentor: "Prof. Anand Godbole",
-    domain: "Web Development",
-    techStack: ["React", "Node", "MongoDB", "Express", "HTML", "CSS", "JS"],
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-  },
-];
-
 const Research = () => {
-  const [research, setResearch] = useState(ResearchData);
+  const [research, setResearch] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
+  React.useEffect(() => {
+    fetchResearch();
+  }, []);
+
+  const fetchResearch = async () => {
+    console.log(JSON.parse(localStorage.getItem("userinfo")).email);
+    const response = await fetch(
+      "http://localhost:8000/api/student/getResearch",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: JSON.parse(localStorage.getItem("userinfo")).email,
+        }),
+      }
+    );
+    if (!response.ok) {
+      console.log("error");
+    }
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      setResearch(data.research);
+    }
+  };
   const handleClickOpenDialog = () => {
     setOpenDialog(true);
   };
@@ -46,6 +52,35 @@ const Research = () => {
     const updatedData = { ...newData, techStack: techArray };
     const arr = [updatedData, ...research];
     setResearch(arr);
+    const updateResearch = async () => {
+      const response = await fetch(
+        "http://localhost:8000/api/student/setResearch",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: JSON.parse(localStorage.getItem("userinfo")).email,
+            name:arr[0].name,
+            duration:arr[0].duration,
+            domain:arr[0].domain,
+            techStack:arr[0].techStack,
+            description:arr[0].description,
+            mentor:arr[0].mentor
+          }),
+        }
+        );
+        if (!response.ok) {
+          console.log("error");
+        }
+        if (response.ok) {
+          const data = await response.json();
+          alert("Research Updated");
+          fetchResearch()
+        }
+      };
+      updateResearch();
   };
   return (
     <>
@@ -57,13 +92,12 @@ const Research = () => {
         />
       </h1>
       <div className={styles.projects}>
-        {research.map((project, index) => {
+        {research?research.map((project, index) => {
           return (
             <PortfolioCard
               key={index}
-              title={project.title}
+              name={project.name}
               duration={project.duration}
-              team={project.team}
               mentor={project.mentor}
               domain={project.domain}
               techStack={project.techStack}
@@ -75,7 +109,7 @@ const Research = () => {
               }}
             />
           );
-        })}
+        }):""}
         <MultiFieldModal
           handleDataSubmit={handleDataSubmit}
           openDialog={openDialog}
@@ -87,7 +121,7 @@ const Research = () => {
             required
             autoFocus
             margin="dense"
-            name="title"
+            name="name"
             label="Title"
             type="text"
             fullWidth

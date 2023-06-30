@@ -8,7 +8,7 @@ const ProjectCard = (props) => {
     <div className={styles.card} style={{backgroundColor: `${props.style.bg}`, color: `${props.style.font}`, borderColor: `${props.style.border}`}}>
       <div className={styles.inner}>
         <div className={styles.header}>
-          <h3>{props.title}</h3>
+          <h3>{props.name}</h3>
           <h3>{props.duration}</h3>
         </div>
         <div className={styles.row1}>

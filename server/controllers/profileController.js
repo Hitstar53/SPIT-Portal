@@ -30,7 +30,6 @@ exports.updateProfilePic = asyncHandler(async(req,res) => {
 })
 
 exports.updateParentalInfo = asyncHandler(async(req,res) =>{
-    console.log(req.body)
     const fatherName = req.body.fname;
     const motherName = req.body.mname;
     const fatherPhoneNo = req.body.fphone;

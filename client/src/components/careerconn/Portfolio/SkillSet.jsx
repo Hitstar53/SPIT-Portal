@@ -5,15 +5,7 @@ import AddButton from "../../UI/AddButton";
 import FormModal from "../../UI/Modals/FormModal";
 import styles from './SkillSet.module.css'
 
-const skills = [
-  "Java", 
-  "Python", 
-  "HTML", 
-  "CSS", 
-  "JavaScript", 
-  "React", 
-  "Node.js"
-];
+
 
 const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.5),
@@ -21,9 +13,7 @@ const ListItem = styled("li")(({ theme }) => ({
 
 export default function SkillSet() {
   const [chipData, setChipData] = React.useState(
-    skills.map((skill) => {
-      return { key: skill, label: skill };
-    })
+    []
   );
 
   const [open, setOpen] = React.useState(false);
@@ -42,6 +32,35 @@ export default function SkillSet() {
     );
   };
 
+  React.useEffect(() => {
+    fetchSkills();
+  }, []);
+
+  const fetchSkills = async () => {
+    console.log(JSON.parse(localStorage.getItem("userinfo")).email);
+    const response = await fetch(
+      "http://localhost:8000/api/student/getSkills",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: JSON.parse(localStorage.getItem("userinfo")).email,
+        }),
+      }
+    );
+    if (!response.ok) {
+      console.log("error");
+    }
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      setChipData(data.skills.map((skill) => {
+        return { key: skill, label: skill };
+      }));
+    }
+  };
   const addHandler = (newSkill) => {
     if (newSkill) {
       setChipData((chips) => [
@@ -49,6 +68,30 @@ export default function SkillSet() {
         { key: newSkill, label: newSkill },
       ]);
     }
+    const updateSkills = async () => {
+      const response = await fetch(
+        "http://localhost:8000/api/student/setSkills",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: JSON.parse(localStorage.getItem("userinfo")).email,
+            skill:newSkill
+          }),
+        }
+      );
+      if (!response.ok) {
+        console.log("error");
+      }
+      if (response.ok) {
+        const data = await response.json();
+        alert("Skills Updated");
+        fetchSkills()
+      }
+    };
+    updateSkills();
   };
 
   return (

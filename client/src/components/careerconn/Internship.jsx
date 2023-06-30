@@ -14,31 +14,11 @@ import MultiFieldModal from '../UI/Modals/MultiFieldModal';
 import TextField from '@mui/material/TextField';
 import  MenuItem  from '@mui/material/MenuItem';
 
-const internshipsDummy = [
-  {
-    inst: "Sardar Patel Institute of Technology",
-    tenure: "June - July 2024",
-    position: "Software Developer",
-    financed: "Paid",
-    mode: "Offline",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc",
-  },
-  {
-    inst: "Sardar Patel Institute of Technology",
-    tenure: "June - July 2023",
-    position: "Software Developer",
-    financed: "Unpaid",
-    mode: "Online",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc",
-  },
-];
 
 const Internship = () => {
   const [open, setOpen] = React.useState(false);
   const [index,setIndex] = React.useState(0);
-  const [internships, setInternships] = React.useState(internshipsDummy);
+  const [internships, setInternships] = React.useState({});
   function handleClickOpen(index) {
     setIndex(index);
     setOpen(true);
@@ -47,10 +27,35 @@ const Internship = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleChange = () => {
+  const handleChange = async ()=> {
     const arr = [...internships];
     arr.splice(index, 1);
-    setInternships(arr);
+    
+    const deleteInternship = async () => {
+      const response = await fetch(
+        "http://localhost:8000/api/student/deleteInternship",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: JSON.parse(localStorage.getItem("userinfo")).email,
+            internships:arr
+          }),
+        }
+      );
+      if (!response.ok) {
+        console.log("error");
+      }
+      if (response.ok) {
+        const data = await response.json();
+        alert("Deleted Internship");
+        getInternships();
+      }
+    };
+    deleteInternship();
+
     setOpen(false);
   };
   // Functions for dialog (copy from here )
@@ -70,12 +75,72 @@ const Internship = () => {
     const arr = [...internships]
     arr.unshift(newData)
     setInternships(arr)
+
+    const updateInternship = async () => {
+      const response = await fetch(
+        "http://localhost:8000/api/student/setInternship",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: JSON.parse(localStorage.getItem("userinfo")).email,
+            organization:newData.organization,
+            duration:newData.duration,
+            position:newData.position,
+            financed:newData.financed,
+            mode:newData.mode,
+            description:newData.description
+          }),
+        }
+      );
+      if (!response.ok) {
+        console.log("error");
+      }
+      if (response.ok) {
+        const data = await response.json();
+        alert("Internship Information Updated");
+        fetchPersonalInfo();
+        console.log(data);
+      }
+    };
+    updateInternship();
   }
   // Functions for dialog (copy till here )
   const dashboard = styles.dashboard + " flex flex-col p-8"
   
+  React.useEffect(() => {
+    getInternships();
+  }, []);
+
+  const getInternships = async () => {
+    console.log(JSON.parse(localStorage.getItem("userinfo")).email);
+    const response = await fetch(
+      "http://localhost:8000/api/student/getInternship",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: JSON.parse(localStorage.getItem("userinfo")).email,
+        }),
+      }
+    );
+    if (!response.ok) {
+      console.log("error");
+    }
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      setInternships(data.internship);
+    }
+  };
+
+
   return (
-    internships.length > 0 && (
+    internships.length >= 0 && (
       <div className={dashboard}>
         <h1 className="text-4xl text-center md:text-left font-semibold pb-8 flex flex-col gap-4 md:gap-0 md:flex-row justify-between">
           Internships 
@@ -89,12 +154,12 @@ const Internship = () => {
             return<div key={index} style={index==0?{borderTop:"1px solid var(--text-color)"}:{}} className={styles.internshipCard}>
                     <div className={styles.heading}>
                       <div className={styles.org}>
-                        <div>{info.inst}</div>
+                        <div>{info.organization}</div>
                           <DeleteIcon sx={{color:"var(--text-color)",cursor:"pointer"}}  onClick={()=>{
                               handleClickOpen(index)
                           }}/>
                       </div>
-                      <div>{info.tenure}</div>
+                      <div>{info.duration}</div>
                     </div>
                     <div className={styles.details}>
                       <div>
@@ -118,7 +183,7 @@ const Internship = () => {
               required
               autoFocus
               margin="dense"
-              name="inst"
+              name="organization"
               label="Organization"
               autoComplete="off"
               type="text"
@@ -129,7 +194,7 @@ const Internship = () => {
           <TextField
               required
               margin="dense"
-              name="tenure"
+              name="duration"
               label="Duration"
               autoComplete="off"
               type="text"

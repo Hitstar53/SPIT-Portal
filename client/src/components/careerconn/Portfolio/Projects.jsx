@@ -5,28 +5,37 @@ import MultiFieldModal from '../../UI/Modals/MultiFieldModal'
 import AddButton from '../../UI/AddButton'
 import styles from './Projects.module.css'
 
-const ProjectData = [
-  {
-    title: "ReviewScope - AI Product Reviewer",
-    duration: "3 months",
-    team: ["Hatim", "Omkar", "Udit"],
-    domain: "Web Development",
-    techStack: ["React", "Node", "MongoDB", "Express", "HTML", "CSS", "JS"],
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-  },
-  {
-    title: "ReviewScope - AI Product Reviewer",
-    duration: "2 months",
-    team: ["Hatim", "Omkar", "Udit"],
-    domain: "Web Development",
-    techStack: ["React", "Node", "MongoDB", "Express", "HTML", "CSS", "JS"],
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-  },
-]
 
 const Projects = (props) => {
-  const [projects, setProjects] = useState(ProjectData);
+  const [projects, setProjects] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
+  React.useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  const fetchProjects = async () => {
+    console.log(JSON.parse(localStorage.getItem("userinfo")).email);
+    const response = await fetch(
+      "http://localhost:8000/api/student/getProjects",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: JSON.parse(localStorage.getItem("userinfo")).email,
+        }),
+      }
+    );
+    if (!response.ok) {
+      console.log("error");
+    }
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      setProjects(data.projects);
+    }
+  };
   const handleClickOpenDialog = () => {
     setOpenDialog(true);
   };
@@ -44,9 +53,41 @@ const Projects = (props) => {
     let techArray = newData.techStack.split(",");
     const updatedData = { ...newData, team: teamArray , techStack: techArray};
     const arr = [updatedData, ...projects];
-    setProjects(arr);
+    const updateProjects = async () => {
+      console.log(arr)    
+      const response = await fetch(
+        "http://localhost:8000/api/student/setProjects",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: JSON.parse(localStorage.getItem("userinfo")).email,
+            name:arr[0].name,
+            duration:arr[0].duration,
+            domain:arr[0].domain,
+            techStack:arr[0].techStack,
+            team:arr[0].team,
+            description:arr[0].description,
+
+          }),
+        }
+      );
+      if (!response.ok) {
+        console.log("error");
+      }
+      if (response.ok) {
+        const data = await response.json();
+        alert("Project Information Added");
+        fetchProjects();
+        console.log(data);
+      }
+    };
+    updateProjects();
   };
   
+
   return (
     <>
       <h1 className="flex gap-4 items-center text-xl p-1 font-semibold heading">
@@ -54,11 +95,12 @@ const Projects = (props) => {
         <AddButton onClick={handleClickOpenDialog} btntext="Add Project" />
       </h1>
       <div className={styles.projects}>
-        {projects.map((project, index) => {
+        {
+        projects?projects.map((project, index) => {
           return (
             <PortfolioCard
               key={index}
-              title={project.title}
+              name={project.name}
               duration={project.duration}
               team={project.team}
               domain={project.domain}
@@ -67,7 +109,7 @@ const Projects = (props) => {
               style={""}
             />
           );
-        })}
+        }):""}
         <MultiFieldModal
           handleDataSubmit={handleDataSubmit}
           openDialog={openDialog}
@@ -79,8 +121,8 @@ const Projects = (props) => {
             required
             autoFocus
             margin="dense"
-            name="title"
-            label="Title"
+            name="name"
+            label="Name"
             type="text"
             fullWidth
             variant="standard"

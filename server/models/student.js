@@ -169,6 +169,7 @@ const studentSchema = mongoose.Schema({
             position:{ type : String, required:true},
             duration:{ type : String, required:true},
             mode:{ type : String, required:true},
+            financed:{ type : String, required:true},
             description:{ type : String, required:true},
         },
     ],

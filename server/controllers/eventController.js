@@ -9,7 +9,6 @@ exports.setEvent = asyncHandler(async(req,res) =>{
         try {
             const event = new Event({date:date,name:name,organizedBy:organizedBy,description:description})
             await event.save()
-            console.log('hello')
             res.status(200).json('Event Added Succesfully')
         } catch (error) {
             console.error(error)
@@ -17,7 +16,6 @@ exports.setEvent = asyncHandler(async(req,res) =>{
 })
 
 exports.getEvent = asyncHandler(async(req,res) =>{
-    console.log('hello')
     try {
         const allEvents = await Event.find()
         res.status(200).json(allEvents)    

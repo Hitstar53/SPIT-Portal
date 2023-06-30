@@ -4,7 +4,8 @@ import styles from './Placement.module.css';
 import Fab from "@mui/material/Fab";
 import { useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";import dayjs from 'dayjs';
+import Box from "@mui/material/Box";
+import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateField } from "@mui/x-date-pickers/DateField";
@@ -27,9 +28,9 @@ const companyinfo = {
 };
 const roleinfo = {
   role: "Software Developer Engineer (S.D.E)",
-  jobDescription:
+  description:
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-  joinDate: "28/01/2003",
+  doj: "28/01/2003",
   ctc: "19 LPA",
 };
 
@@ -48,11 +49,38 @@ const Placement = () => {
           setEdit(false);
         }
       };
+      React.useEffect(() => {
+        fetchPlacementInfo();
+      }, []);
+    
+      const fetchPlacementInfo = async () => {
+        console.log(JSON.parse(localStorage.getItem("userinfo")).email);
+        const response = await fetch(
+          "http://localhost:8000/api/student/getPlacement",
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: JSON.parse(localStorage.getItem("userinfo")).email,
+            }),
+          }
+        );
+        if (!response.ok) {
+          console.log("error");
+        }
+        if (response.ok) {
+          const data = await response.json();
+          setRoleInfo(data);
+          setCompanyInfo(data);
+        }
+      };
     useEffect(() => {
         setRoleInfo({
             role: roleinfo.role,
-            jobDescription: roleinfo.jobDescription,
-            joinDate: roleinfo.joinDate,
+            description: roleinfo.description,
+            doj: roleinfo.doj,
             ctc: roleinfo.ctc,
         })
         setCompanyInfo({
@@ -69,10 +97,41 @@ const Placement = () => {
         setCompanyInfo({ ...companyInfo, [event.target.name]: event.target.value});
     }
     const handleChangeDate = (event) => {
-      setRoleInfo({ ...roleInfo, "joinDate": `${(event.$M)+1}/${event.$D}/${event.$y}`});
+      setRoleInfo({ ...roleInfo, "doj": `${(event.$M)+1}/${event.$D}/${event.$y}`});
     };
     const handleSubmit = (event) => {
-        event.preventDefault();
+        event.preventDefault(); 
+        const updatePlacementInfo = async () => {
+          const response = await fetch(
+            "http://localhost:8000/api/student/updatePlacement",
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: JSON.parse(localStorage.getItem("userinfo")).email,
+                companyName:companyInfo.companyName,
+                contactNo:companyInfo.contactNo,
+                address:companyInfo.address,
+                role:roleInfo.role,
+                description:roleInfo.description,
+                doj:roleInfo.doj,
+                ctc:roleInfo.ctc,
+              }),
+            }
+          );
+          if (!response.ok) {
+            console.log("error");
+          }
+          if (response.ok) {
+            const data = await response.json();
+            alert("Placement Information Updated");
+            fetchPlacementInfo();
+            console.log(data);
+          }
+        };
+        updatePlacementInfo();       
         setEdit(false)
     };
   return (
@@ -213,15 +272,15 @@ const Placement = () => {
                   {!edit && (
                     <span className="flex flex-row gap-2 items-center">
                       <FaCalendarAlt className="text-xl" />
-                      Joining Date:&nbsp;&nbsp;{roleInfo.joinDate}
+                      Joining Date:&nbsp;&nbsp;{roleInfo.doj}
                     </span>
                   )}
                   {edit && (
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DateField
-                        name="joinDate"
+                        name="doj"
                         label="Date Of Joining"
-                        value={dayjs(roleInfo.joinDate)}
+                        value={dayjs(roleInfo.doj)}
                         onChange={handleChangeDate}
                       />
                     </LocalizationProvider>
@@ -254,7 +313,7 @@ const Placement = () => {
                       Job Description:
                     </span>
                     <p className="flex-1 text-justify">
-                      {roleInfo.jobDescription}
+                      {roleInfo.description}
                     </p>
                   </span>
                 )}
@@ -262,17 +321,17 @@ const Placement = () => {
                   <span className="flex flex-row gap-2 items-center">
                     <RiInformationLine className="text-xl" />
                     <p className="flex-1 text-justify">
-                      Job Description:&nbsp;&nbsp;{roleInfo.jobDescription}
+                      Job Description:&nbsp;&nbsp;{roleInfo.description}
                     </p>
                   </span>
                 )}
                 {edit && (
                   <TextField
-                    name="jobDescription"
+                    name="description"
                     id="outlined-required"
                     label="Job Description"
                     type="text"
-                    defaultValue={roleInfo.jobDescription}
+                    defaultValue={roleInfo.description}
                     onChange={handleChangeRole}
                   />
                 )}

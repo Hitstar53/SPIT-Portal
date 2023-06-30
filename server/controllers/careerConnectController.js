@@ -5,12 +5,13 @@ exports.setInternship = asyncHandler(async(req,res) =>{
     const organization = req.body.organization
     const position = req.body.position
     const duration = req.body.duration
+    const financed = req.body.financed
     const mode = req.body.mode
     const description = req.body.description
     const email = req.body.email
     try {
         const profile = await Student.findOne({emailID:email})
-        profile.internship.unshift({organization:organization,position:position,duration:duration,mode:mode,description:description})
+        profile.internship.unshift({organization:organization,position:position,duration:duration,mode:mode,description:description,financed:financed})
         await profile.save()
         res.status(200).json("Internship added succesfully")
     }catch (error) {
@@ -148,7 +149,6 @@ exports.getSkills = asyncHandler(async(req,res)=>{
 })
 
 exports.updatePlacement = asyncHandler(async(req,res)=>{
-    const uid = req.body.uid
     const companyName = req.body.companyName
     const contactNo = req.body.contactNo
     const address = req.body.address
@@ -158,9 +158,8 @@ exports.updatePlacement = asyncHandler(async(req,res)=>{
     const ctc = req.body.ctc
     const email = req.body.email
     try{
-        await Placement.findOneAndUpdate({uid:uid},{
+        await Placement.findOneAndUpdate({emailID:email},{
             $set:{
-                uid:uid,
                 companyName:companyName,
                 contactNo:contactNo,
                 address:address,
@@ -180,8 +179,8 @@ exports.updatePlacement = asyncHandler(async(req,res)=>{
 exports.getPlacement = asyncHandler(async(req,res)=>{
     const email = req.body.email
     try {
-        const skills  = await Student.findOne({emailID:email}).select('placement -_id')
-        res.status(200).json(skills)    
+        const placement  = await Placement.findOne({emailID:email}).select('-_id')
+        res.status(200).json(placement)   
     } catch (error) {
         console.error(error)
     }
