@@ -11,6 +11,18 @@ const RootLayout = () => {
     const theme = useTheme();
     const extractedQuery = theme.breakpoints.down("sm").substring(7);
     const isMobile = useMediaQuery({ query: extractedQuery });
+    const [isLoggedIn, setIsLoggedIn] = React.useState(localStorage.getItem("isLoggedIn"));
+
+    React.useEffect(() => {
+      const flag = localStorage.getItem("isLoggedIn");
+      console.log(flag);
+      if (flag === "true") {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    }, []);
+
     return (
       <Box
         sx={{ display: "flex", height: "100vh", background: "var(--bg-color)" }}
@@ -26,7 +38,9 @@ const RootLayout = () => {
             backgroundColor: "var(--bg-color)",
           }}
         >
-          <Outlet />
+          <Protected isLoggedIn={isLoggedIn} >
+            <Outlet />
+          </Protected>
         </Box>
       </Box>
     );

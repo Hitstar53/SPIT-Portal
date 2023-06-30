@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect } from "react";
 import styles from "./Activities.module.css";
 import CommitteeWorkCard from "./CommitteeWorkCard";
 import VolunteerWork from "./VolunteerWork";
@@ -59,6 +59,82 @@ function volCard(volinfo) {
   }
 
 const Activities = () => {
+  const [edit, setEdit] = useState(false);
+  const [committeeWork, setCommitteeWork] = useState([]);
+  const [volunteerWork, setVolunteerWork] = useState([]);
+
+  useEffect(() => {
+    fetchVolunteerInfo();
+  }, []);
+
+  const fetchVolunteerInfo = async () => {
+    console.log(JSON.parse(localStorage.getItem("userinfo")).email);
+    const response = await fetch(
+      "http://localhost:8000/api/student/getYourVolunteerWork",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: JSON.parse(localStorage.getItem("userinfo")).email,
+        }),
+      }
+    );
+    if (!response.ok) {
+      console.log("error");
+    }
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      setVolunteerWork(data);
+    }
+  };
+
+  const handleClickEdit = () => {
+    if (!edit) {
+      setEdit(true);
+    } else {
+      setEdit(false);
+    }
+  };
+
+  const handleChange = (e) => {
+    setVolunteerWork({ ...volunteerWork, [e.target.name]: e.target.value});
+    setCommitteeWork({ ...CommitteeWork, [e.target.name]: e.target.value});
+  };
+  
+
+  const handleVolunteerSubmit = (event) => {
+    event.preventDefault();
+    console.log(JSON.stringify(personalInfo))
+    const updateVolunteerInfo = async () => {
+      const response = await fetch(
+        "http://localhost:8000/api/student/personal",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: JSON.parse(localStorage.getItem("userinfo")).email,
+          }),
+        }
+      );
+      if (!response.ok) {
+        console.log("error");
+      }
+      if (response.ok) {
+        const data = await response.json();
+        alert("Personal Information Updated");
+        fetchVolunteerInfo();
+        console.log(data);
+      }
+    };
+    updateVolunteerInfo();
+    setEdit(false);
+  };
+
   return (
     <div className={styles.activitiesPage}>
       <div className={styles.committees}>

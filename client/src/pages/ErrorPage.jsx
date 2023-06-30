@@ -18,6 +18,9 @@ const ErrorPage = () => {
   } else if (error?.status === 500) {
     title = "500 Internal Server Error";
     message = error.error.message || "Something went wrong";
+  } else if (error?.status === 422) {
+    title = "422 Unprocessable Entity";
+    message = error.data.message || "Something went wrong";
   }
   return (
     <div className="flex flex-col gap-4 h-screen items-center justify-center">

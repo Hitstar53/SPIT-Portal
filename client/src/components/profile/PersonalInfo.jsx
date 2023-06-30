@@ -1,47 +1,48 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import { json, useLoaderData } from "react-router-dom";
 import { FaEdit, FaSave } from "react-icons/fa";
 import TextField from "@mui/material/TextField";
 import Fab from "@mui/material/Fab";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
-// import CustDatePicker from "../UI/CustDatePicker";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateField } from "@mui/x-date-pickers/DateField";
 import styles from "./PersonalInfo.module.css";
 
-const PersonalInfo = () => {
+const PersonalInfo = (props) => {
   const [edit, setEdit] = useState(false);
-  const [personalInfo, setPersonalInfo] = useState({});
 
-  React.useEffect(() => {
-    fetchPersonalInfo();
-  }, []);
+  const [personalInfo, setPersonalInfo] = useState(
+    props.info ? props.info : {}
+  );
 
-  const fetchPersonalInfo = async () => {
-    console.log(JSON.parse(localStorage.getItem("userinfo")).email);
-    const response = await fetch(
-      "http://localhost:8000/api/student/getPersonal",
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: JSON.parse(localStorage.getItem("userinfo")).email,
-        }),
-      }
-    );
-    if (!response.ok) {
-      console.log("error");
-    }
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-      setPersonalInfo(data);
-    }
-  };
+  // useEffect(() => {
+  //   fetchPersonalInfo();
+  // }, []);
+
+  // const fetchPersonalInfo = async () => {
+  //   const response = await fetch(
+  //     "http://localhost:8000/api/student/getPersonal",
+  //     {
+  //       method: "PUT",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         email: JSON.parse(localStorage.getItem("userinfo")).email,
+  //       }),
+  //     }
+  //   );
+  //   if (!response.ok) {
+  //     alert("error");
+  //   }
+  //   if (response.ok) {
+  //     const data = await response.json();
+  //     setPersonalInfo(data);
+  //   }
+  // };
 
   const handleClickEdit = () => {
     if (!edit) {
@@ -50,29 +51,17 @@ const PersonalInfo = () => {
       setEdit(false);
     }
   };
-  // useEffect(() => {
-  //   setPersonalInfo({
-  //     phone: props.info.phone,
-  //     email: props.info.email,
-  //     address: props.info.address,
-  //     dob: props.info.dob,
-  //     gender: props.info.gender,
-  //     blood: props.info.blood,
-  //     religion: props.info.religion,
-  //     linkedin: props.info.linkedin,
-  //     github: props.info.github,
-  //   });
-  // }, []);
+
   const handleDateChange = (e) => {
     setPersonalInfo({ ...personalInfo, "dob": `${(e.$M)+1}/${e.$D}/${e.$y}`});
   };
+  
   const handleChange = (e) => {
     setPersonalInfo({ ...personalInfo, [e.target.name]: e.target.value});
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(JSON.stringify(personalInfo))
     const updatePersonalInfo = async () => {
       const response = await fetch(
         "http://localhost:8000/api/student/personal",
@@ -95,13 +84,10 @@ const PersonalInfo = () => {
         }
       );
       if (!response.ok) {
-        console.log("error");
+        alert("error");
       }
       if (response.ok) {
         const data = await response.json();
-        alert("Personal Information Updated");
-        fetchPersonalInfo();
-        console.log(data);
       }
     };
     updatePersonalInfo();

@@ -26,10 +26,36 @@ export default function SkillSet() {
     setOpen(false);
   };
 
-  const handleDelete = (chipToDelete) => () => {
+  const handleDelete = (chipToDelete) => async () => {
     setChipData((chips) =>
         chips.filter((chip) => chip.key !== chipToDelete.key)
     );
+
+    const response = await fetch(
+      "http://localhost:8000/api/student/deleteSkills",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: JSON.parse(localStorage.getItem("userinfo")).email,
+          skill:chipData.map(skill=>{
+            if(skill.key!==chipToDelete.key){
+              return skill.key
+            }
+          })
+        }),
+      }
+    );
+    if (!response.ok) {
+      console.log("error");
+    }
+    if (response.ok) {
+      const data = await response.json();
+      alert("Skills Deleted");
+      fetchSkills()
+    }
   };
 
   React.useEffect(() => {

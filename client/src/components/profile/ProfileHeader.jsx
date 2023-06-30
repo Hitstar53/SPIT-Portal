@@ -1,13 +1,20 @@
-import React,{useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { LuEdit2 } from "react-icons/lu";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import profile from "../../assets/user.svg";
 import styles from './ProfileHeader.module.css'
 
-const ProfileHeader = (props) => {
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+const ProfileHeader = () => {
   const [profilePic, setProfilePic] = useState("")
   const [name, setName] = useState("")
   const [uid, setUid] = useState("")
-  React.useEffect(() => {
+
+  useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userinfo"));
     setName(userInfo?.name);
     if (userInfo?.photo) {
@@ -17,7 +24,7 @@ const ProfileHeader = (props) => {
     }
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchUserInfo();
   }, []);
 
@@ -40,7 +47,6 @@ const ProfileHeader = (props) => {
     }
     if (response.ok) {
         const data = await response.json();
-        console.log(data);
         setName(data.name);
         setUid(data.uid);
         if (data.photo) {
@@ -50,10 +56,25 @@ const ProfileHeader = (props) => {
         }
     }
   }
+
+  const [state, setState] = useState({
+    open: false,
+    vertical: "bottom",
+    horizontal: "right",
+  });
+
+  const { vertical, horizontal, open } = state;
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setState({ ...state, open: false });
+  };
+
   const handleFileUpload = async(e) =>{
     const file = e.target.files[0]
     const base64 = await convertToBase64(file);
-    console.log(base64)
     setProfilePic(base64)
     const updateProfilePic = async () => {
       const response = await fetch(
@@ -74,30 +95,53 @@ const ProfileHeader = (props) => {
       }
       if (response.ok) {
         const data = await response.json();
-        alert("Profile Picture Updated");
         fetchUserInfo();
-        console.log(data);
+        setState({ ...state, open: true });
       }
     };
     updateProfilePic();
   }
-    return (
-      <div className={styles.header}>
-        <div className={styles.img}>
-            <img src={profilePic||props.info.picture} alt="profile photo" className={styles.profilePic} />
-            <div className={styles.edit}>
-              <input type="file" id="profile_photo_input" style={{display:"none"}} onChange={handleFileUpload}/>
-              <LuEdit2 onClick={()=>{
-                document.getElementById('profile_photo_input').click();
-              }} className={styles.editIcon} />
-            </div>
-        </div>
-        <div className={styles.title}>
-          <h1> {name} </h1>
-          <h2> UID: {uid} </h2>
+  
+  return (
+    <div className={styles.header}>
+      <div className={styles.img}>
+        <img
+          src={profilePic}
+          alt="profile photo"
+          className={styles.profilePic}
+        />
+        <div className={styles.edit}>
+          <input
+            type="file"
+            id="profile_photo_input"
+            style={{ display: "none" }}
+            onChange={handleFileUpload}
+          />
+          <LuEdit2
+            onClick={() => {
+              document.getElementById("profile_photo_input").click();
+            }}
+            className={styles.editIcon}
+          />
         </div>
       </div>
-    );
+      <div className={styles.title}>
+        <h1> {name} </h1>
+        <h2> UID: {uid} </h2>
+      </div>
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        autoHideDuration={5000}
+        key={vertical + horizontal}
+      >
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Profile Photo Updated Successfully
+        </Alert>
+      </Snackbar>
+    </div>
+  );
 }
 
 function convertToBase64(file){
@@ -110,7 +154,6 @@ function convertToBase64(file){
     fileReader.onerror = () =>{
       reject(error)
     }
-    
   })
 }
 

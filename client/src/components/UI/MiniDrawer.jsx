@@ -21,6 +21,8 @@ import ListItemText from "@mui/material/ListItemText";
 import logo from "../../assets/logo.png";
 import profile from "../../assets/user.svg";
 import "./MiniDrawer.css";
+import Badge from "@mui/material/Badge";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Collapse } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
@@ -306,6 +308,7 @@ export default function MiniDrawer({ open,setOpen }) {
   const profileHandler = () => {
     navigate("/student/profile");
   };
+  
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -349,17 +352,39 @@ export default function MiniDrawer({ open,setOpen }) {
                 </>
               )}
             </span>
-            <img
-              onClick={profileHandler}
-              src={picture}
-              alt="logo"
+            <span
               style={{
-                width: 50,
-                height: 50,
-                borderRadius: "50%",
-                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.5rem",
               }}
-            />
+            >
+              <img
+                onClick={profileHandler}
+                src={picture}
+                alt="logo"
+                style={{
+                  width: 50,
+                  height: 50,
+                  borderRadius: "50%",
+                  cursor: "pointer",
+                }}
+              />
+              <Badge badgeContent={3} color="primary">
+                <NotificationsIcon
+                  sx={{ 
+                    cursor: "pointer",
+                    color: "var(--text-light)",
+                    opacity: 0.75,
+                    width: 25,
+                    height: 25,
+                    "&:hover": {
+                      opacity: 1,
+                    },
+                  }}
+                />
+              </Badge>
+            </span>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -533,7 +558,7 @@ export default function MiniDrawer({ open,setOpen }) {
                     ":hover": {
                       borderColor: "var(--text-light)",
                       background: "var(--bg-light)",
-                      color: "var(x`--text-dark)",
+                      color: "var(--text-dark)",
                     },
                   }}
                   disableElevation

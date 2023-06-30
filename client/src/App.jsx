@@ -2,7 +2,7 @@ import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Login from './components/login/Login';
 import Dashboard from './components/dashboard/Dashboard';
-import Profile from './components/profile/Profile';
+import Profile, { loader as PersonalLoader } from './components/profile/Profile';
 import Result from './components/academics/Result/Result';
 import SemResult from './components/academics/Result/SemResult';
 import Activities from './components/extracurr/activities/Activities';
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         element: <RootLayout />,
         children: [
           { path: 'home', element: <Dashboard /> },
-          { path: 'profile', element: <Profile /> },
+          { path: 'profile', element: <Profile />, loader: PersonalLoader },
           { path: 'result', element: <Result /> },
           { path: 'result/:semester', element: <SemResult /> },
           { path: 'activities', element: <Activities /> },

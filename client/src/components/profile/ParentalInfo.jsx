@@ -5,7 +5,7 @@ import Fab from '@mui/material/Fab';
 import { Box } from "@mui/material";
 import styles from "./ParentalInfo.module.css";
 
-const ParentalInfo = (props) => {
+const ParentalInfo = () => {
   const [parentalInfo, setParentalInfo] = useState({})
   const [edit, setEdit] = useState(false);
   const handleClickEdit = () => {
@@ -15,18 +15,8 @@ const ParentalInfo = (props) => {
       setEdit(false);
     }
   };
-  useEffect(() => {
-    setParentalInfo({
-      fname: props.info.fname,
-      mname: props.info.mname,
-      fphone: props.info.fphone,
-      mphone: props.info.mphone,
-      femail: props.info.femail,
-      memail: props.info.memail,
-    })
-  },[])
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchParentalInfo();
   }, []);
 
