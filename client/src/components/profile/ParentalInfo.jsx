@@ -5,42 +5,14 @@ import Fab from '@mui/material/Fab';
 import { Box } from "@mui/material";
 import styles from "./ParentalInfo.module.css";
 
-const ParentalInfo = () => {
-  const [parentalInfo, setParentalInfo] = useState({})
+const ParentalInfo = (props) => {
+  const [parentalInfo, setParentalInfo] = useState(props.info);
   const [edit, setEdit] = useState(false);
   const handleClickEdit = () => {
     if (!edit) {
       setEdit(true);
     } else {
       setEdit(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchParentalInfo();
-  }, []);
-
-  const fetchParentalInfo = async () => {
-    console.log(JSON.parse(localStorage.getItem("userinfo")).email);
-    const response = await fetch(
-      "http://localhost:8000/api/student/getParental",
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: JSON.parse(localStorage.getItem("userinfo")).email,
-        }),
-      }
-    );
-    if (!response.ok) {
-      console.log("error");
-    }
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-      setParentalInfo(data);
     }
   };
   const handleChange = (e) => {
@@ -73,7 +45,6 @@ const ParentalInfo = () => {
       if (response.ok) {
         const data = await response.json();
         alert("Parental Information Updated");
-        fetchParentalInfo();
         console.log(data);
       }
     };

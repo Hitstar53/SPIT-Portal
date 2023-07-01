@@ -2,7 +2,7 @@ import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Login from './components/login/Login';
 import Dashboard from './components/dashboard/Dashboard';
-import Profile, { loader as PersonalLoader } from './components/profile/Profile';
+import Profile, { loader as ProfileLoader } from './components/profile/Profile';
 import Result from './components/academics/Result/Result';
 import SemResult from './components/academics/Result/SemResult';
 import Activities from './components/extracurr/activities/Activities';
@@ -32,17 +32,17 @@ const router = createBrowserRouter([
         element: <RootLayout />,
         children: [
           { path: 'home', element: <Dashboard /> },
-          { path: 'profile', element: <Profile />, loader: PersonalLoader },
+          { path: 'profile', element: <Profile />, loader: ProfileLoader },
+          { path: 'courses', element: <Courses /> },
           { path: 'result', element: <Result /> },
           { path: 'result/:semester', element: <SemResult /> },
           { path: 'activities', element: <Activities /> },
-          { path: 'courses', element: <Courses /> },
-          { path: 'portfolio', element: <Portfolio /> },
-          { path: 'internships', element: <Internship /> },
-          { path: 'placements', element: <Placement /> },
           { path: 'events', element: <Events /> },
           { path: 'committees', element: <Committees /> },
           { path: 'committees/:comname', element: <ComAdmin /> },
+          { path: 'portfolio', element: <Portfolio /> },
+          { path: 'internships', element: <Internship /> },
+          { path: 'placements', element: <Placement /> },
         ],
       },
       {

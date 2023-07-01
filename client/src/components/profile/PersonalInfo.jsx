@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { json, useLoaderData } from "react-router-dom";
 import { FaEdit, FaSave } from "react-icons/fa";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
 import Fab from "@mui/material/Fab";
 import MenuItem from "@mui/material/MenuItem";
@@ -11,38 +13,31 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateField } from "@mui/x-date-pickers/DateField";
 import styles from "./PersonalInfo.module.css";
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 const PersonalInfo = (props) => {
+  const [state, setState] = useState({
+    open: false,
+    vertical: "bottom",
+    horizontal: "right",
+  });
+
+  const { vertical, horizontal, open } = state;
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setState({ ...state, open: false });
+  };
+
   const [edit, setEdit] = useState(false);
 
   const [personalInfo, setPersonalInfo] = useState(
     props.info ? props.info : {}
   );
-
-  // useEffect(() => {
-  //   fetchPersonalInfo();
-  // }, []);
-
-  // const fetchPersonalInfo = async () => {
-  //   const response = await fetch(
-  //     "http://localhost:8000/api/student/getPersonal",
-  //     {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         email: JSON.parse(localStorage.getItem("userinfo")).email,
-  //       }),
-  //     }
-  //   );
-  //   if (!response.ok) {
-  //     alert("error");
-  //   }
-  //   if (response.ok) {
-  //     const data = await response.json();
-  //     setPersonalInfo(data);
-  //   }
-  // };
 
   const handleClickEdit = () => {
     if (!edit) {
@@ -92,7 +87,9 @@ const PersonalInfo = (props) => {
     };
     updatePersonalInfo();
     setEdit(false);
+    setState((prev) => ({ ...prev, open: true }));
   };
+
   return (
     <Box
       className={styles.personalInfo}
@@ -108,7 +105,7 @@ const PersonalInfo = (props) => {
       }}
       noValidate
       onSubmit={handleSubmit}
-      autoComplete="off"
+      autoComplete="on"
     >
       <h3 className={styles.header}>
         Personal Information
@@ -308,6 +305,17 @@ const PersonalInfo = (props) => {
           )}
         </div>
       </div>
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        autoHideDuration={5000}
+        key={vertical + horizontal}
+      >
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Personal Info Updated Successfully
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

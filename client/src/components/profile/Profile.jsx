@@ -10,9 +10,9 @@ const Profile = () => {
   const data = useLoaderData();
   return (
     <div className={styles.profile}>
-      <ProfileHeader />
-      <PersonalInfo info={data} />
-      <ParentalInfo />
+      <ProfileHeader info={data.profileHeaderData} />
+      <PersonalInfo info={data.personalData} />
+      <ParentalInfo info={data.parentalData} />
       <EduInfo />
     </div>
   )
@@ -21,7 +21,7 @@ const Profile = () => {
 export default Profile;
 
 export async function loader() {
-  const response = await fetch(
+  const response1 = await fetch(
     "http://localhost:8000/api/student/getPersonal",
     {
       method: "PUT",
@@ -33,9 +33,37 @@ export async function loader() {
       }),
     }
   );
-  if (!response.ok) {
-    throw json({ message: "Could not fetch Info" }, { status: 422 });
-  } else {
-    return response;
+  const response2 = await fetch(
+    "http://localhost:8000/api/student/getParental",
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: JSON.parse(localStorage.getItem("userinfo")).email,
+      }),
+    }
+  );
+  const response3 = await fetch(
+    "http://localhost:8000/api/student/getMiniDrawer",
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: JSON.parse(localStorage.getItem("userinfo")).email,
+      }),
+    }
+  );
+  if (!response1.ok || !response2.ok || !response3.ok) {
+    throw json({ message: "Could not fetch profile information" }, {status: 422});
+  }
+  if (response1.ok && response2.ok && response3.ok) {
+    const personalData = await response1.json();
+    const parentalData = await response2.json();
+    const profileHeaderData = await response3.json();
+    return { profileHeaderData, personalData, parentalData };
   }
 }

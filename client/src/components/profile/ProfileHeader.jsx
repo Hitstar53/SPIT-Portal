@@ -9,53 +9,18 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const ProfileHeader = () => {
-  const [profilePic, setProfilePic] = useState("")
-  const [name, setName] = useState("")
-  const [uid, setUid] = useState("")
+const ProfileHeader = (props) => {
+  const [profileInfo, setProfileInfo] = useState(props.info);
 
-  useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem("userinfo"));
-    setName(userInfo?.name);
-    if (userInfo?.photo) {
-      setProfilePic(userInfo?.photo);
-    } else {
-      setProfilePic(profilePic);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchUserInfo();
-  }, []);
-
-  const fetchUserInfo = async () => {
-    console.log(JSON.parse(localStorage.getItem("userinfo")).email);
-    const response = await fetch(
-      "http://localhost:8000/api/student/getMiniDrawer",
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: JSON.parse(localStorage.getItem("userinfo")).email,
-        }),
-      }
-    );
-    if (!response.ok) {
-        console.log("error");
-    }
-    if (response.ok) {
-        const data = await response.json();
-        setName(data.name);
-        setUid(data.uid);
-        if (data.photo) {
-            setProfilePic(data.photo);
-        } else {
-            setProfilePic(profile);
-        }
-    }
-  }
+  // useEffect(() => {
+  //   const userInfo = JSON.parse(localStorage.getItem("userinfo"));
+  //   setName(userInfo?.name);
+  //   if (userInfo?.photo) {
+  //     setProfilePic(userInfo?.photo);
+  //   } else {
+  //     setProfilePic(profilePic);
+  //   }
+  // }, []);
 
   const [state, setState] = useState({
     open: false,
@@ -75,7 +40,7 @@ const ProfileHeader = () => {
   const handleFileUpload = async(e) =>{
     const file = e.target.files[0]
     const base64 = await convertToBase64(file);
-    setProfilePic(base64)
+    setProfileInfo((prev)=>({...prev,photo:base64}))
     const updateProfilePic = async () => {
       const response = await fetch(
         "http://localhost:8000/api/student/photo",
@@ -95,8 +60,7 @@ const ProfileHeader = () => {
       }
       if (response.ok) {
         const data = await response.json();
-        fetchUserInfo();
-        setState({ ...state, open: true });
+        setState((prev) => ({ ...prev, open: true }));
       }
     };
     updateProfilePic();
@@ -106,7 +70,7 @@ const ProfileHeader = () => {
     <div className={styles.header}>
       <div className={styles.img}>
         <img
-          src={profilePic}
+          src={profileInfo?.photo}
           alt="profile photo"
           className={styles.profilePic}
         />
@@ -126,8 +90,8 @@ const ProfileHeader = () => {
         </div>
       </div>
       <div className={styles.title}>
-        <h1> {name} </h1>
-        <h2> UID: {uid} </h2>
+        <h1> {profileInfo.name} </h1>
+        <h2> UID: {profileInfo.uid} </h2>
       </div>
       <Snackbar
         anchorOrigin={{ vertical, horizontal }}
