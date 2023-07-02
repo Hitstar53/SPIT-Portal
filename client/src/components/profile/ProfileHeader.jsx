@@ -1,16 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import CustAlert from '../UI/CustAlert'
 import { LuEdit2 } from "react-icons/lu";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
-import profile from "../../assets/user.svg";
 import styles from './ProfileHeader.module.css'
-
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
 
 const ProfileHeader = (props) => {
   const [profileInfo, setProfileInfo] = useState(props.info);
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState("");
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+    navigate(0);
+  };
 
   // useEffect(() => {
   //   const userInfo = JSON.parse(localStorage.getItem("userinfo"));
@@ -21,21 +28,6 @@ const ProfileHeader = (props) => {
   //     setProfilePic(profilePic);
   //   }
   // }, []);
-
-  const [state, setState] = useState({
-    open: false,
-    vertical: "bottom",
-    horizontal: "right",
-  });
-
-  const { vertical, horizontal, open } = state;
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setState({ ...state, open: false });
-  };
 
   const handleFileUpload = async(e) =>{
     const file = e.target.files[0]
@@ -56,11 +48,15 @@ const ProfileHeader = (props) => {
         }
       );
       if (!response.ok) {
-        console.log("error");
+        setOpen(true);
+        setSeverity("error");
+        setMessage("Something went wrong, please try again later");
       }
       if (response.ok) {
         const data = await response.json();
-        setState((prev) => ({ ...prev, open: true }));
+        setOpen(true);
+        setSeverity("success");
+        setMessage("Profile Photo Updated Successfully");
       }
     };
     updateProfilePic();
@@ -93,17 +89,12 @@ const ProfileHeader = (props) => {
         <h1> {profileInfo.name} </h1>
         <h2> UID: {profileInfo.uid} </h2>
       </div>
-      <Snackbar
-        anchorOrigin={{ vertical, horizontal }}
+      <CustAlert
         open={open}
         onClose={handleClose}
-        autoHideDuration={5000}
-        key={vertical + horizontal}
-      >
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          Profile Photo Updated Successfully
-        </Alert>
-      </Snackbar>
+        severity={severity}
+        message={message}
+      />
     </div>
   );
 }

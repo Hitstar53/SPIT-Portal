@@ -3,9 +3,22 @@ import { FaEdit,FaSave } from "react-icons/fa";
 import { TextField } from "@mui/material";
 import Fab from '@mui/material/Fab';
 import { Box } from "@mui/material";
+import CustAlert from "../UI/CustAlert";
 import styles from "./ParentalInfo.module.css";
 
 const ParentalInfo = (props) => {
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+    navigate(0);
+  };
+
   const [parentalInfo, setParentalInfo] = useState(props.info);
   const [edit, setEdit] = useState(false);
   const handleClickEdit = () => {
@@ -40,12 +53,15 @@ const ParentalInfo = (props) => {
         }
       );
       if (!response.ok) {
-        console.log("error");
+        setOpen(true);
+        setSeverity("error");
+        setMessage("Something went wrong, please try again later");
       }
       if (response.ok) {
         const data = await response.json();
-        alert("Parental Information Updated");
-        console.log(data);
+        setOpen(true);
+        setSeverity("success");
+        setMessage("Personal Information Updated Successfully");
       }
     };
     updateParentalInfo();
@@ -213,6 +229,12 @@ const ParentalInfo = (props) => {
           </div>
         </div>
       </div>
+      <CustAlert
+        open={open}
+        onClose={handleClose}
+        severity={severity}
+        message={message}
+      />
     </Box>
   );
 };

@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { json, useLoaderData } from "react-router-dom";
+import React, { useState } from "react";
+import { Form, useActionData, json, redirect, useNavigation, useNavigate, useSubmit } from "react-router-dom";
 import { FaEdit, FaSave } from "react-icons/fa";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
 import Fab from "@mui/material/Fab";
 import MenuItem from "@mui/material/MenuItem";
@@ -11,26 +9,36 @@ import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateField } from "@mui/x-date-pickers/DateField";
+import CustAlert from "../UI/CustAlert";
 import styles from "./PersonalInfo.module.css";
 
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
 const PersonalInfo = (props) => {
-  const [state, setState] = useState({
-    open: false,
-    vertical: "bottom",
-    horizontal: "right",
-  });
-
-  const { vertical, horizontal, open } = state;
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState("");
+  const [message, setMessage] = useState("");
+  
+  // const submit = useSubmit();
+  const navigate = useNavigate();
+  // const actionData = useActionData();
+  // useEffect(() => {
+  //   if (actionData !== undefined) {
+  //     setOpen(actionData.open);
+  //     setSeverity(actionData.severity);
+  //     setMessage(actionData.message);
+  //     setTimeout(() => {
+  //       if (actionData.severity === "error") {
+  //         navigate(0);
+  //       }
+  //     }, 500);
+  //   }
+  // }, [actionData]);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-    setState({ ...state, open: false });
+    setOpen(false);
+    navigate(0);
   };
 
   const [edit, setEdit] = useState(false);
@@ -54,6 +62,14 @@ const PersonalInfo = (props) => {
   const handleChange = (e) => {
     setPersonalInfo({ ...personalInfo, [e.target.name]: e.target.value});
   }
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   submit(personalInfo, {
+  //     method: "PUT",
+  //   });
+  //   setEdit(false);
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -79,15 +95,19 @@ const PersonalInfo = (props) => {
         }
       );
       if (!response.ok) {
-        alert("error");
+        setOpen(true);
+        setSeverity("error");
+        setMessage("Something went wrong, please try again later");
       }
       if (response.ok) {
         const data = await response.json();
+        setOpen(true);
+        setSeverity("success");
+        setMessage("Personal Information Updated Successfully");
       }
     };
     updatePersonalInfo();
     setEdit(false);
-    setState((prev) => ({ ...prev, open: true }));
   };
 
   return (
@@ -96,7 +116,9 @@ const PersonalInfo = (props) => {
       component="form"
       sx={{
         "& .MuiTextField-root": { m: 1, width: "100%" },
-        "& .MuiOutlinedInput-input": { color: "var(--text-color) !important" },
+        "& .MuiOutlinedInput-input": {
+          color: "var(--text-color) !important",
+        },
         "& .MuiOutlinedInput-notchedOutline": {
           borderColor: "var(--dark-override-color) !important",
         },
@@ -105,6 +127,7 @@ const PersonalInfo = (props) => {
       }}
       noValidate
       onSubmit={handleSubmit}
+      method="PUT"
       autoComplete="on"
     >
       <h3 className={styles.header}>
@@ -192,7 +215,9 @@ const PersonalInfo = (props) => {
       <div className={styles.PersInfo}>
         <div className={styles.twoCol}>
           <i className="fa-solid fa-calendar-days"></i>
-          {!edit && <span className={styles.iconInfo}>{personalInfo.dob}</span>}
+          {!edit && (
+            <span className={styles.iconInfo}>{personalInfo.dob}</span>
+          )}
           {edit && (
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateField
@@ -305,19 +330,48 @@ const PersonalInfo = (props) => {
           )}
         </div>
       </div>
-      <Snackbar
-        anchorOrigin={{ vertical, horizontal }}
+      <CustAlert
         open={open}
         onClose={handleClose}
-        autoHideDuration={5000}
-        key={vertical + horizontal}
-      >
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          Personal Info Updated Successfully
-        </Alert>
-      </Snackbar>
+        severity={severity}
+        message={message}
+      />
     </Box>
   );
 };
 
 export default PersonalInfo;
+
+// export async function action({ request, params }) {
+//   const data = await request.formData();
+//   const personalData = {
+//     email: JSON.parse(localStorage.getItem("userinfo")).email,
+//     phone: data.get("phone"),
+//     address: data.get("address"),
+//     dob: data.get("dob"),
+//     gender: data.get("gender"),
+//     blood: data.get("blood"),
+//     religion: data.get("religion"),
+//     linkedin: data.get("linkedin"),
+//     github: data.get("github"),
+//   };
+//   const response = await fetch("http://localhost:8000/api/student/personal", {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(personalData),
+//   });
+//   if (!response.ok) {
+//     return {
+//       open: true,
+//       severity: "error",
+//       message: "Something went wrong",
+//     }
+//   }
+//   return {
+//     open: true,
+//     severity: "success",
+//     message: "Personal Information Updated Successfully",
+//   }
+// }

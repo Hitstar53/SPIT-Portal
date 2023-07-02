@@ -40,7 +40,7 @@ const Schlinfo = {
     percentage: 95.6, 
 }
 
-  function Carousel() {
+const Carousel = (props) => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const [currInfo,setCurrInfo] = React.useState();

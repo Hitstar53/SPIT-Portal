@@ -6,13 +6,13 @@ import styles from "./EduInfo.module.css";
 import { Box } from "@mui/material";
 
 
-const EduInfo = () => {
+const EduInfo = (props) => {
     return (
       <Box className={styles.eduInfo}>
         <h3 className={styles.header}>
           Educational Information
         </h3>
-        <Carousel />
+        <Carousel info={props.info} />
       </Box>
     );
 }

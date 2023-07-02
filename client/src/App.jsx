@@ -3,13 +3,14 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Login from './components/login/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import Profile, { loader as ProfileLoader } from './components/profile/Profile';
+// import {action as ProfileAction} from './components/profile/PersonalInfo';
 import Result from './components/academics/Result/Result';
 import SemResult from './components/academics/Result/SemResult';
 import Activities from './components/extracurr/activities/Activities';
 import Courses from './components/academics/Courses/Courses';
-import Portfolio from './components/careerconn/Portfolio/Portfolio';
-import Internship from './components/careerconn/Internship';
-import Placement from './components/careerconn/Placement';
+import Portfolio, { loader as PortfolioLoader } from './components/careerconn/Portfolio/Portfolio';
+import Internship, { loader as InternLoader } from './components/careerconn/Internship';
+import Placement, { loader as PlacementLoader } from './components/careerconn/Placement';
 import Events from './components/extracurr/events/Events';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Committees from "./components/extracurr/committees/Committees";
@@ -32,7 +33,11 @@ const router = createBrowserRouter([
         element: <RootLayout />,
         children: [
           { path: 'home', element: <Dashboard /> },
-          { path: 'profile', element: <Profile />, loader: ProfileLoader },
+          { path: 'profile', 
+            element: <Profile />, 
+            loader: ProfileLoader, 
+            // action: ProfileAction, 
+          },
           { path: 'courses', element: <Courses /> },
           { path: 'result', element: <Result /> },
           { path: 'result/:semester', element: <SemResult /> },
@@ -40,9 +45,9 @@ const router = createBrowserRouter([
           { path: 'events', element: <Events /> },
           { path: 'committees', element: <Committees /> },
           { path: 'committees/:comname', element: <ComAdmin /> },
-          { path: 'portfolio', element: <Portfolio /> },
-          { path: 'internships', element: <Internship /> },
-          { path: 'placements', element: <Placement /> },
+          { path: 'portfolio', element: <Portfolio />, loader: PortfolioLoader },
+          { path: 'internships', element: <Internship />, loader: InternLoader },
+          { path: 'placement', element: <Placement />, loader: PlacementLoader },
         ],
       },
       {

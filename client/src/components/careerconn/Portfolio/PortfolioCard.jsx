@@ -1,28 +1,42 @@
 import React from 'react'
+import DeleteIcon from '@mui/icons-material/Delete';
 import { FiUsers } from 'react-icons/fi'
 import styles from './PortfolioCard.module.css'
 
 const ProjectCard = (props) => {
   const flag = props.team !== undefined
   return (
-    <div className={styles.card} style={{backgroundColor: `${props.style.bg}`, color: `${props.style.font}`, borderColor: `${props.style.border}`}}>
+    <div
+      className={styles.card}
+      style={{
+        backgroundColor: `${props.style.bg}`,
+        color: `${props.style.font}`,
+        borderColor: `${props.style.border}`,
+      }}
+    >
       <div className={styles.inner}>
         <div className={styles.header}>
           <h3>{props.name}</h3>
-          <h3>{props.duration}</h3>
+          <div className='flex flex-row gap-3 justify-center items-center'>
+            <h3>{props.duration}</h3>
+            <DeleteIcon
+              sx={{ color: `${props.style.font}`, cursor: "pointer" }}
+              onClick={() => props.handleDelete(props.key)}
+            />
+          </div>
         </div>
         <div className={styles.row1}>
           {flag && (
             <div className={styles.team}>
               <FiUsers className={styles.teamIcon} />
               <h3 className={styles.teamHeading}>Team: </h3>
-              {
-                props.team.map((member, index) => {
-                  return (
-                    <h3 className={styles.teamMember} key={index}>{member}</h3>
-                  )
-                })
-              }
+              {props.team.map((member, index) => {
+                return (
+                  <h3 className={styles.teamMember} key={index}>
+                    {member}
+                  </h3>
+                );
+              })}
             </div>
           )}
           {!flag && (
@@ -39,13 +53,13 @@ const ProjectCard = (props) => {
         </div>
         <div className={styles.row2}>
           <div className={styles.techStack}>
-            {
-              props.techStack.map((tech, index) => {
-                return (
-                  <h3 style={{}} className={styles.tech} key={index}>{tech}</h3>
-                )
-              })
-            }
+            {props.techStack.map((tech, index) => {
+              return (
+                <h3 style={{}} className={styles.tech} key={index}>
+                  {tech}
+                </h3>
+              );
+            })}
           </div>
         </div>
         <div className={styles.row3}>

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ReactDOM from "react-dom";
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -50,7 +51,8 @@ BootstrapDialogTitle.propTypes = {
 
 export default function Modal(props) {
     return (
-      <div>
+      <React.Fragment>
+        {ReactDOM.createPortal(
         <BootstrapDialog
           onClose={props.onClose}
           aria-labelledby="customized-dialog-title"
@@ -105,7 +107,8 @@ export default function Modal(props) {
               {props.action}
             </Button>
           </DialogActions>
-        </BootstrapDialog>
-      </div>
+        </BootstrapDialog>, document.getElementById("overlays")
+        )}
+      </React.Fragment>
     );
 }

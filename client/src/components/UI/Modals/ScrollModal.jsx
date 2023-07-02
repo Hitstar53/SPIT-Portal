@@ -1,4 +1,5 @@
 import * as React from "react";
+import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
@@ -50,64 +51,66 @@ export default function ScrollModal(props) {
   }, [open]);
 
   return (
-    <div>
-      <Dialog
-        open={props.open}
-        onClose={props.handleClose}
-        scroll="paper"
-        aria-labelledby="scroll-dialog-title"
-        aria-describedby="scroll-dialog-description"
-      >
-        <BootstrapDialogTitle
-          id="scroll-dialog-title"
-          onClose={props.onClose}
-          sx={{
-            fontSize: "1.5rem",
-            fontWeight: "bold",
-            color: "var(--text-color)",
-            backgroundColor: "var(--bg-color)",
-          }}
+    <React.Fragment>
+      {ReactDOM.createPortal(
+        <Dialog
+          open={props.open}
+          onClose={props.handleClose}
+          scroll="paper"
+          aria-labelledby="scroll-dialog-title"
+          aria-describedby="scroll-dialog-description"
         >
-          {props.title}
-        </BootstrapDialogTitle>
-        <DialogContent
-          dividers
-          sx={{
-            color: "var(--text-color)",
-            backgroundColor: "var(--bg-color)",
-          }}
-        >
-          <DialogContentText
-            id="scroll-dialog-description"
-            ref={descriptionElementRef}
-            tabIndex={-1}
+          <BootstrapDialogTitle
+            id="scroll-dialog-title"
+            onClose={props.onClose}
             sx={{
-              color: "var(--text-color)",
-            }}
-          >
-            {[...new Array(15)].map(() => `${props.content}`).join("\n")}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions
-          sx={{
-            color: "var(--text-color)",
-            backgroundColor: "var(--bg-color)",
-          }}
-        >
-          <Button
-            onClick={props.onClose}
-            sx={{
-              color: "var(--text-color)",
+              fontSize: "1.5rem",
               fontWeight: "bold",
-              "&:hover": {
-                backgroundColor: "var(--secondary-color)",
-              },
+              color: "var(--text-color)",
+              backgroundColor: "var(--bg-color)",
             }}
           >
-            {props.action}
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+            {props.title}
+          </BootstrapDialogTitle>
+          <DialogContent
+            dividers
+            sx={{
+              color: "var(--text-color)",
+              backgroundColor: "var(--bg-color)",
+            }}
+          >
+            <DialogContentText
+              id="scroll-dialog-description"
+              ref={descriptionElementRef}
+              tabIndex={-1}
+              sx={{
+                color: "var(--text-color)",
+              }}
+            >
+              {[...new Array(15)].map(() => `${props.content}`).join("\n")}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions
+            sx={{
+              color: "var(--text-color)",
+              backgroundColor: "var(--bg-color)",
+            }}
+          >
+            <Button
+              onClick={props.onClose}
+              sx={{
+                color: "var(--text-color)",
+                fontWeight: "bold",
+                "&:hover": {
+                  backgroundColor: "var(--secondary-color)",
+                },
+              }}
+            >
+              {props.action}
+            </Button>
+          </DialogActions>
+        </Dialog>, document.getElementById("overlays")
+      )}
+    </React.Fragment>
   );
 }
