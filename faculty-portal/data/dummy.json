@@ -290,9 +290,12 @@
         },
         "Article": {
             "articleDetails": [
-                "Article 1",
-                "Article 2",
-                "Article 3"
+              {
+              "name":"Article 1"
+              },
+              {
+                "name":"Article 2"
+              }
             ]
         },
         "coGuide": {

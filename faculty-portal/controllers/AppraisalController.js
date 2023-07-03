@@ -6,7 +6,7 @@ const { error } = require("console");
 const setAppraisal = asyncHandler(async (req, res) => {
     console.log("Inside setAppraisalDim1");
     try {
-        var {yearofAssesment,facultyName,department,designation, Dimension1, Dimension2, Dimension3, Dimension4, finalGrandTotal } = req.body;
+        var { yearofAssesment, facultyName, department, designation, Dimension1, Dimension2, Dimension3, Dimension4, finalGrandTotal } = req.body;
         console.log(Dimension1);
         //Dimension1 starts
         var total = 0;
