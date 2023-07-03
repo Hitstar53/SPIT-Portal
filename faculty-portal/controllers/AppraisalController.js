@@ -482,15 +482,15 @@ const setAppraisal = asyncHandler(async (req, res) => {
         // ===============================================================
         // --------------------------------------------------------------------
         //Dimension4 starts
-        Dimension4.feedbackMarks.E =
-            Dimension4.feedbackMarks.A +
-            Dimension4.feedbackMarks.B +
-            Dimension4.feedbackMarks.C +
-            Dimension4.feedbackMarks.D;
+        // Dimension4.feedbackMarks.E =
+        //     Dimension4.feedbackMarks.A +
+        //     Dimension4.feedbackMarks.B +
+        //     Dimension4.feedbackMarks.C +
+        //     Dimension4.feedbackMarks.D;
 
 
-        Dimension4.confidentialReport.perceptionMarks =
-            Dimension4.confidentialReport.principalRemarks * Dimension4.feedbackMarks.E;
+        // Dimension4.confidentialReport.perceptionMarks =
+        //     Dimension4.confidentialReport.principalRemarks * Dimension4.feedbackMarks.E;
 
 
         finalGrandTotal = {
@@ -515,7 +515,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
         finalGrandTotal.dimension1.totalMarks = Dimension1.totalMarks;
         finalGrandTotal.dimension2.totalMarks = Dimension2.totalMarks;
         finalGrandTotal.dimension3.totalMarks = Dimension3.totalMarks;
-        finalGrandTotal.dimension4.totalMarks = Dimension4.confidentialReport.perceptionMarks;
+        //finalGrandTotal.dimension4.totalMarks = Dimension4.confidentialReport.perceptionMarks;
 
         finalGrandTotal.dimension1.finalMarks = finalGrandTotal.dimension1.totalMarks * 0.4;
         finalGrandTotal.dimension2.finalMarks = finalGrandTotal.dimension2.totalMarks * 0.2;
