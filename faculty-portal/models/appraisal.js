@@ -276,7 +276,7 @@ const appraisalSchema = new mongoose.Schema({
             sponsored: [
                 {
                     date: {
-                        type: Date,
+                        type: String,
                     },
                     title: {
                         type: String,
