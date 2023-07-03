@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import Table from "react-bootstrap/Table";
 import { Toaster, toast } from "react-hot-toast";
 
-function StepFour({ setDimension4 }) {
+function StepFour({ setDimension4, handleNext }) {
   const {
     register,
     handleSubmit,
@@ -24,9 +24,11 @@ function StepFour({ setDimension4 }) {
   }, []);
 
   const onSubmit = (data) => {
-    console.log(data)
+    // console.log(data)
     setDimension4(data)
     localStorage.setItem('dim4Data', JSON.stringify(data));
+    // sendToServer()
+    handleNext()
     toast.success('Form submitted successfully!');
   };
 

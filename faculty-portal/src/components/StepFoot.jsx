@@ -15,9 +15,9 @@ export default function StepFoot({ activeStep, handleBack, handleNext, steps }) 
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
 
-            <Button onClick={handleNext} sx={{ background: activeStep === steps.length - 1 ? '#10A44B' : '#2F7EC7', borderRadius: '8px', padding: '5px 32px', color: '#fff', fontWeight: '500', '&:hover': { background: activeStep === steps.length - 1 ? '#38ba6c' : '#4295e2' } }}>
-                {activeStep === steps.length - 1 ? 'Save' : 'Next'}
-            </Button>
+            {activeStep !== steps.length - 1 &&<Button onClick={handleNext} sx={{ background: '#2F7EC7', borderRadius: '8px', padding: '5px 32px', color: '#fff', fontWeight: '500', '&:hover': { background: activeStep === steps.length - 1 ? '#38ba6c' : '#4295e2' } }}>
+                Next
+            </Button>}
         </Box>
     )
 }

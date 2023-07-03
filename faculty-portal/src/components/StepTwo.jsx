@@ -107,10 +107,10 @@ function StepTwo({setDimension2}) {
               <tr>
                 <th>Paper Title</th>
                 <th>Journal/ Conference Name</th>
+                <th>Type</th>
                 <th>Authors</th>
                 <th>Publisher</th>
                 <th>Reputation</th>
-                <th>type</th>
                 <th>Paper Link</th>
                 <th></th>
               </tr>
@@ -218,6 +218,7 @@ function StepTwo({setDimension2}) {
               <tr>
                 <th>Patent Obtained</th>
                 <th>Details</th>
+                <th>Status</th>
                 <th></th>
               </tr>
             </thead>
@@ -274,6 +275,7 @@ function StepTwo({setDimension2}) {
                 <th>Books published</th>
                 <th>Authors</th>
                 <th>Publisher</th>
+                <th>Status</th>
                 <th></th>
               </tr>
             </thead>
@@ -407,6 +409,7 @@ function StepTwo({setDimension2}) {
                 <th>Sponsoring Agency/Consultant</th>
                 <th>Details (Govt/ Non-Govt)</th>
                 <th>Funded Amount</th>
+                <th>Status</th>
                 <th></th>
               </tr>
             </thead>
@@ -509,6 +512,7 @@ function StepTwo({setDimension2}) {
           <Table striped bordered>
             <thead>
               <tr>
+              <th>Type</th>
                 <th>STTP/FDP/MOOC Courses/Industry Internship Title</th>
                 <th>Organization details </th>
                 <th>Dates</th>
