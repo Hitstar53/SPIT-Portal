@@ -3,9 +3,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material';
 import { UserContext } from '../context/UserContext';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
-const ViewEvent = ({ id, title, start, end }) => {
+const ViewEvent = ({ title, start, end }) => {
     const options = {
         year: 'numeric',
         month: 'short',
@@ -17,20 +19,31 @@ const ViewEvent = ({ id, title, start, end }) => {
     const startDate = sdate.toLocaleString('en-US', options)
     const edate = new Date(end)
     const endDate = edate.toLocaleString('en-US', options)
-    console.log(startDate)
-    console.log(endDate)
     const { user } = useContext(UserContext);
-    // console.log(id)
+
+    const delay = (ms) => 
+        new Promise((resolve) => setTimeout(resolve, ms));
 
     const handleDelete = async () => {
-        await axios.post('http://localhost:5000/api/faculty/delete/event', { email: user.email, id: id })
-            .then((res) => {
-                console.log(res.data);
-                window.location.reload()
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        // await axios.post('http://localhost:5000/api/faculty/delete/event', { email: user.email, id: id })
+        //     .then(async (res) => {
+        //         console.log(res.data);
+        //         toast.success('Event Deleted Successfully!', {
+        //             position: "top-center",
+        //             autoClose: 2000,
+        //             hideProgressBar: false,
+        //             closeOnClick: true,
+        //             pauseOnHover: false,
+        //             draggable: true,
+        //             progress: undefined,
+        //             theme: "light",
+        //         });
+        //         await delay(2100)
+        //         window.location.reload()
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     });
     }
 
 
