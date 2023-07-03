@@ -237,14 +237,14 @@ const StepOne = ({ setDimension1 }) => {
                     <td className='text-center align-middle'>
                       <input
                         type="number"
-                        {...register(`Dimension1.info.courses[${index}].lectureTarget`, { required: true })}
+                        {...register(`Dimension1.info.courses[${index}].AP3LecturesTarget`, { required: true })}
                         className="form-input"
                       />
                     </td>
                     <td className='text-center align-middle'>
                       <input
                         type="number"
-                        {...register(`Dimension1.info.courses[${index}].totalLecturesTaken`, { required: true })}
+                        {...register(`Dimension1.info.courses[${index}].AP3LectureConducted`, { required: true })}
                         className="form-input"
                       />
                     </td>
