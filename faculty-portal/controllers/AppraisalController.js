@@ -428,7 +428,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
 
         var countCommittee = Dimension3.Partof.committee.length;
         if (countCommittee == 0) {
-            Dimension3.Article.totalMarks = 0;
+            Dimension3.Partof.totalMarks = 0;
         } else if (countCommittee <= 3) {
             Dimension3.Partof.totalMarks = 3 * countCommittee;
         } else {
