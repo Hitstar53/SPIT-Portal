@@ -14,6 +14,13 @@
   margin-bottom: 0.5rem;
 }
 
+.dur {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  gap: 0.5rem;
+}
+
 .volname {
   font-size: 1.25rem;
   font-weight: 600;

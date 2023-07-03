@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const Extracurricular = require('../models/student');
 exports.setYourCommittee = asyncHandler(async(req,res) =>{
-        const committeeDetails = req.body.committeeDetails
+        const name = req.body.name
         const tenure = req.body.tenure
         const position = req.body.position
         const email = req.body.email

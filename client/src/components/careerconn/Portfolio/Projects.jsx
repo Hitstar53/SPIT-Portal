@@ -70,7 +70,6 @@ const Projects = (props) => {
     setOpen(false);
   };
 
-
   const [openDialog, setOpenDialog] = useState(false);
   const handleClickOpenDialog = () => {
     setOpenDialog(true);

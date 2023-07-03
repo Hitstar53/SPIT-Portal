@@ -16,6 +16,14 @@
     display: flex;
     align-items: center;
   }
+
+  .eventcontrol {
+    font-size: 1.25rem;
+    font-weight: 500;
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+  }
   
   .position {
       display: flex;

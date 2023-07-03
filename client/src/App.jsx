@@ -6,12 +6,12 @@ import Profile, { loader as ProfileLoader } from './components/profile/Profile';
 // import {action as ProfileAction} from './components/profile/PersonalInfo';
 import Result from './components/academics/Result/Result';
 import SemResult from './components/academics/Result/SemResult';
-import Activities from './components/extracurr/activities/Activities';
+import Activities, { loader as ActivityLoader } from './components/extracurr/activities/Activities';
 import Courses from './components/academics/Courses/Courses';
 import Portfolio, { loader as PortfolioLoader } from './components/careerconn/Portfolio/Portfolio';
 import Internship, { loader as InternLoader } from './components/careerconn/Internship';
 import Placement, { loader as PlacementLoader } from './components/careerconn/Placement';
-import Events from './components/extracurr/events/Events';
+import Events, { loader as EventsLoader } from './components/extracurr/events/Events';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Committees from "./components/extracurr/committees/Committees";
 import ComAdmin from "./components/extracurr/committees/ComAdmin";
@@ -41,8 +41,8 @@ const router = createBrowserRouter([
           { path: 'courses', element: <Courses /> },
           { path: 'result', element: <Result /> },
           { path: 'result/:semester', element: <SemResult /> },
-          { path: 'activities', element: <Activities /> },
-          { path: 'events', element: <Events /> },
+          { path: 'activities', element: <Activities />, loader: ActivityLoader },
+          { path: 'events', element: <Events />, loader: EventsLoader },
           { path: 'committees', element: <Committees /> },
           { path: 'committees/:comname', element: <ComAdmin /> },
           { path: 'portfolio', element: <Portfolio />, loader: PortfolioLoader },

@@ -101,7 +101,7 @@ const sidebardata = [
   {
     text: "CareerConnect",
     icon: <i className="fas fa-users"></i>,
-    sub: ["Portfolio", "Internships", "Placements"],
+    sub: ["Portfolio", "Internships", "Placement"],
   },
   {
     text: "Faculty",

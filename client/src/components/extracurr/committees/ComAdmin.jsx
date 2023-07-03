@@ -9,7 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import MultiFieldModal from "../../UI/Modals/MultiFieldModal";
 
 const announcement = [
-  {//hitstar sir error sahi karo yeh kya hai kuch nahi chal raha
+  {
     title: "Change in venue for Pixel Paranoia",
     date: "24/10/23",
     ancmnt:

@@ -105,7 +105,7 @@ const studentSchema = mongoose.Schema({
     ],
     committee:[
         {
-            committeeDetails:{ type: String,required:true },
+            committeeDetails:{ type: mongoose.Schema.Types.ObjectId,required:true,ref:'committee' },
             tenure:{ type:String,required:true },
             position:{ type : String, required:true},
         },
