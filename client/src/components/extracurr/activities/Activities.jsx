@@ -129,43 +129,13 @@ const Activities = () => {
     setOpen(false);
   };
 
-  const handleChange = (e) => {
+  const handleChangeVolunteer = (e) => {
     setVolunteerWork({ ...volunteerWork, [e.target.name]: e.target.value });
+  };
+  
+  const handleChangeCommittee = (e) => {
     setCommitteeWork({ ...committeeWork, [e.target.name]: e.target.value });
   };
-
-  const handleVolunteerSubmit = (event) => {
-    event.preventDefault();
-    const arr = [...volunteerWork];
-    arr.unshift(volunteerWork);
-    const updateVolunteerInfo = async () => {
-      const response = await fetch(
-        "http://localhost:8000/api/student/setVolunteerWork",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: JSON.parse(localStorage.getItem("userinfo")).email,
-            
-          }),
-        }
-      );
-      if (!response.ok) {
-        console.log("error");
-      }
-      if (response.ok) {
-        const data = await response.json();
-        alert("Personal Information Updated");
-        fetchVolunteerInfo();
-        console.log(data);
-      }
-    };
-    updateVolunteerInfo();
-    setEdit(false);
-  };
-
   const [coms, setCom] = useState(cominfo);
   const [openComDialog, setOpenComDialog] = useState(false);
   const handleComClickOpenDialog = () => {
@@ -232,7 +202,37 @@ const Activities = () => {
     e.preventDefault();
     const arr = [...vols];
     arr.unshift(newVolData);
-    setVolunteerWork(arr);
+    const updateVolunteerWork = async () => {
+      const response = await fetch(
+        "http://localhost:8000/api/student/setVolunteerWork",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: JSON.parse(localStorage.getItem("userinfo")).email,
+            volname : newVolData.volname,
+            instructor : newVolData.instructor,
+            desc : newVolData.desc,
+            voldur : newVolData.voldurr
+          }),
+        }
+      );
+      
+      if (!response.ok) {
+        setAlertOpen(true);
+        setSeverity("error");
+        setMessage("Something went wrong, please try again later");
+      }
+      if (response.ok) {
+        const data = await response.json();
+        setAlertOpen(true);
+        setSeverity("success");
+        setMessage("Event added successfully");
+      }
+    };
+    updateVolunteerWork();
     setOpen(false);
   };
   
