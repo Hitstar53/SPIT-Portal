@@ -559,15 +559,19 @@ const appraisalSchema = new mongoose.Schema({
         feedbackMarks: {
             A: {
                 type: Number,
+                default: 0,
             },
             B: {
                 type: Number,
+                default: 0,
             },
             C: {
                 type: Number,
+                default: 0,
             },
             D: {
                 type: Number,
+                default: 0,
             },
             E: {
                 type: Number,
@@ -581,9 +585,11 @@ const appraisalSchema = new mongoose.Schema({
 
             principalRemarks: {
                 type: Number,
+                default: 0,
             },
             perceptionMarks: {
                 type: Number,
+                default: 0,
             },
             // grandTotal: {
             //     type: Number
