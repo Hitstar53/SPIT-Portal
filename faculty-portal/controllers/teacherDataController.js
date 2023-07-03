@@ -75,9 +75,13 @@ exports.getEvent = asyncHandler(async (req, res) => {
         if (!det) {
             return res.status(404).send('User not found');
         }
+        // const events = {
+        //     title: det.events.title,
+        //     startDate: det.events.startDate,
+        //     endDate: det.events.endDate
+        // }
         const events = det.events
-
-        console.log(events);
+        // console.log(events);
         res.status(200).send(events);
     } catch (err) {
         console.log(err);
@@ -94,8 +98,29 @@ exports.addEvent = asyncHandler(async (req, res) => {
                 events: events
             }
         })
-        console.log(det);
-        res.status(200).send(det);
+        const faculty = await Faculty.findOne({ email: email });
+        console.log(faculty.events);
+        res.status(200).send(faculty.events);
+    } catch (err) {
+        console.log(err);
+        res.status(504).send("Internal Server Error");
+    }
+})  
+
+exports.deleteEvent = asyncHandler(async (req, res) => {
+    const { email, id} = req.body;
+    console.log(req.body)
+    try {
+        const det = await Faculty.updateOne({ email: email }, {
+            $pull: {
+                events: {
+                    _id: id
+                }
+            }
+        })
+        const faculty = await Faculty.findOne({ email: email });
+        console.log(faculty.events);
+        res.send("Deleted");
     } catch (err) {
         console.log(err);
         res.status(504).send("Internal Server Error");

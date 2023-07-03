@@ -9,4 +9,5 @@ router.delete('/retrieve/course', teacherDataController.retrieveFacultyCourses);
 router.post('/login', teacherDataController.loginFaculty)
 router.post('/get/event', teacherDataController.getEvent)
 router.post('/add/event', teacherDataController.addEvent)
+router.post('/delete/event', teacherDataController.deleteEvent)
 module.exports = router; 
