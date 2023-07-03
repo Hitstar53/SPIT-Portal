@@ -54,11 +54,11 @@ export default function FacultyStepper() {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            // ...Dimension1,
-            Dimension1: Dimension1.Dimension1,
+            ...Dimension1,
+            // Dimension1: Dimension1.Dimension1,
             Dimension2: Dimension2,
             Dimension3: Dimension3,
-            Dimension4: Dimension4.Dimension4,
+            ...Dimension4,
         }),
     });
   }
