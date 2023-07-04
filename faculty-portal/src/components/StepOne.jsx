@@ -130,11 +130,11 @@ const StepOne = ({ setDimension1 }) => {
             Year of Assessment:
             <input
               type="text"
-              {...register('yearOfAssessment', { required: true })}
+              {...register('yearofAssesment', { required: true })}
               className="form-input"
             />
           </label>
-          {errors.yearOfAssessment && <p className="error">*This field is required</p>}
+          {errors.yearofAssesment && <p className="error">*This field is required</p>}
         </div>
 
         <div className="inputs">
