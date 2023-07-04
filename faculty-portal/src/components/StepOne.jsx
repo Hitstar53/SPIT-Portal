@@ -121,8 +121,7 @@ const StepOne = ({ setDimension1 ,yr }) => {
   };
 
   return (
-    <form className="container" onSubmit={handleSubmit(onSubmit)}>
-      <Toaster />
+    <>
       <div className='basic-info'>
 
         <div className="inputs">
@@ -132,7 +131,7 @@ const StepOne = ({ setDimension1 ,yr }) => {
             readOnly
             value={yr}
               type="text"
-              {...register('yearofAssesment', { required: true })}
+              // {...register('yearofAssesment', { required: true })}
               className="form-input"
             />
           </label>
@@ -144,7 +143,7 @@ const StepOne = ({ setDimension1 ,yr }) => {
             Faculty Name:
             <input
               type="text"
-              {...register('facultyName', { required: true })}
+              // {...register('facultyName', { required: true })}
               className="form-input"
               readOnly
               value={user.fullName}
@@ -158,7 +157,7 @@ const StepOne = ({ setDimension1 ,yr }) => {
             Department:
             <input
               type="text"
-              {...register('department', { required: true })}
+              // {...register('department', { required: true })}
               className="form-input"
               readOnly
               value={user.department}
@@ -172,7 +171,7 @@ const StepOne = ({ setDimension1 ,yr }) => {
             Designation:
             <input
               type="text"
-              {...register('designation', { required: true })}
+              // {...register('designation', { required: true })}
               className="form-input"
               readOnly
               value={user.designation}
@@ -181,6 +180,8 @@ const StepOne = ({ setDimension1 ,yr }) => {
           {errors.designation && <p className="error">*This field is required</p>}
         </div>
       </div>
+    <form className="container" onSubmit={handleSubmit(onSubmit)}>
+      <Toaster />
 
       <div className='info-container'>
 
@@ -456,6 +457,7 @@ const StepOne = ({ setDimension1 ,yr }) => {
         Submit
       </button>
     </form>
+    </>
   );
 };
 
