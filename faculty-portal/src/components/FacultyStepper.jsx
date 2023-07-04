@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import Box from "@mui/material/Box";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
@@ -6,6 +6,8 @@ import StepThree from "./StepThree";
 import StepFour from "./StepFour";
 import StepHead from "./StepHead";
 import StepFoot from "./StepFoot";
+import { UserContext } from '../context/UserContext';
+
 // import Header from './Header';
 
 const steps = [
@@ -16,6 +18,8 @@ const steps = [
 ];
 
 export default function FacultyStepper() {
+  const { user } = useContext(UserContext);
+
   const [Dimension1, setDimension1] = useState({});
   const [Dimension2, setDimension2] = useState({});
   const [Dimension3, setDimension3] = useState({});
@@ -73,7 +77,10 @@ var yr=getDate()
         Dimension2: Dimension2,
         Dimension3: Dimension3,
         ...Dimension4,
-        yearOfAssessment: getDate(),
+        yearOfAssessment: yr,
+        facultyName:user.fullName,
+        department:user.department,
+        designation:user.designation,
       }),
     });
   }
