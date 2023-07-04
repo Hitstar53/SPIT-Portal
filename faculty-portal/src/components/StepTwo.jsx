@@ -3,7 +3,7 @@ import { useForm, useFieldArray } from "react-hook-form";
 import Table from "react-bootstrap/Table";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function StepTwo({setDimension2}) {
+function StepTwo({setDimension2,sendToServer}) {
   const { register, control, handleSubmit, setValue, getValues } = useForm({
     defaultValues: JSON.parse(localStorage.getItem("dim2Data")) || {},
   });
@@ -80,10 +80,11 @@ function StepTwo({setDimension2}) {
     name: "RP7.activityNotCovered",
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
     localStorage.setItem("dim2Data", JSON.stringify(data));
-    setDimension2(data);
+    await setDimension2(data);
+    await sendToServer()
   };
 
   useEffect(() => {
