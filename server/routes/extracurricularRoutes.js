@@ -11,4 +11,5 @@ router.put('/getYourVolunteerWork',extracurricularController.getYourVolunteerWor
 router.put('/setParticipation',extracurricularController.setParticipation)
 router.put('/deleteParticipation',extracurricularController.deleteParticipation)
 router.put('/getParticipation',extracurricularController.getParticipation)
+router.put('/getResults',extracurricularController.getResults)
 module.exports = router

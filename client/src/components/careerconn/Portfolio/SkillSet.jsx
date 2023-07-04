@@ -41,9 +41,13 @@ export default function SkillSet(props) {
   };
 
   const handleDelete = (chipToDelete) => async () => {
+    let arr = [...chipData]
     setChipData((chips) =>
         chips.filter((chip) => chip.key !== chipToDelete.key)
     );
+    let updatedArr = arr.filter(skill=>{
+      return (skill.key !== chipToDelete.key)
+      }).map(skill => {return skill.key})
     const response = await fetch(
       "http://localhost:8000/api/student/deleteSkills",
       {
@@ -53,11 +57,7 @@ export default function SkillSet(props) {
         },
         body: JSON.stringify({
           email: JSON.parse(localStorage.getItem("userinfo")).email,
-          skill:chipData.map(skill=>{
-            if(skill.key!==chipToDelete.key){
-              return skill.key
-            }
-          })
+          skill:updatedArr
         }),
       }
     );
@@ -65,8 +65,7 @@ export default function SkillSet(props) {
       setAlertOpen(true);
       setSeverity("error");
       setMessage("Something went wrong, please try again later");
-    }
-    if (response.ok) {
+    } else {
       const data = await response.json();
       setAlertOpen(true);
       setSeverity("success");

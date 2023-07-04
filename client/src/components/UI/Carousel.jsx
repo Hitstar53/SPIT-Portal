@@ -7,53 +7,16 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views-react-18-fix'
 import EduCard from '../profile/EduCard';
-import './Carousel.css';
+import './Carousel.css';  
 
-const Currinfo = {
-    edulevel: "Current Degree",
-    inst: "Sardar Patel Institute of Technology",
-    degree: "Bachelors in Technology",
-    branch: "Computer Science",
-    div: "B",
-    sem: 4,
-    admyear: 2021,
-    passyear: 2025,
-    cgpa: 9.1,
-}
-
-const junclginfo = {
-    edulevel: "Junior College",
-    inst: "Nirmala Memorial Foundation and Junior College",
-    qualification: "Higher Secondary Certificate",
-    admyear: 2019,
-    passyear: 2021,
-    score: "467/500",
-    percentage: 94.8,
-}
-
-const Schlinfo = {
-    edulevel: "School",
-    inst: "Swami Vivekanand International School",
-    qualification: "Secondary School Certificate",
-    passyear: 2019,
-    score: "285/300",
-    percentage: 95.6, 
-}
 
 const Carousel = (props) => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const [currInfo,setCurrInfo] = React.useState();
-  const [junClgInfo,setJunClgInfo] = React.useState();
-  const [schlInfo,setSchlInfo] = React.useState();
-  const  setEverything = async ()=>{
-    setCurrInfo(Currinfo);
-    setJunClgInfo(junclginfo);
-    setSchlInfo(Schlinfo);
-  }
-  React.useEffect(() => {
-    setEverything()
-  }, [])
+  const [currInfo,setCurrInfo] = React.useState(props.info[0]);
+  const [junClgInfo,setJunClgInfo] = React.useState(props.info[1]);
+  const [schlInfo,setSchlInfo] = React.useState(props.info[2]);
+  
   
   const maxSteps = 3;
   const handleNext = () => {

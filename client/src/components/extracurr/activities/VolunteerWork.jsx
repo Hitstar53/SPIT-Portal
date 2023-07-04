@@ -23,7 +23,7 @@ const VolunteerWork = (props) => {
                   cursor: "pointer" 
                 }}
                 onClick={() => {
-                  handleClickOpen(index);
+                  props.handleDelete(props.key);
                 }}
               />
             </div>

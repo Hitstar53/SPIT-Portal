@@ -14,7 +14,7 @@ const CommitteeWorkCard = (props) => {
             <DeleteIcon
               sx={{ color: "var(--text-light)", cursor: "pointer" }}
               onClick={() => {
-                handleClickOpen(index);
+                props.handleDelete(props.key);
               }}
             />
           </div>

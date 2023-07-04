@@ -8,74 +8,21 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
-import logo from "../../../assets/user.svg";
 import AddButton from "../../UI/AddButton.jsx";
 import MultiFieldModal from "../../UI/Modals/MultiFieldModal";
 import TextField from "@mui/material/TextField";
-import { json, useLoaderData, useNavigate } from "react-router-dom";
-
-const cominfo = [
-  {
-    comlogo: logo,
-    comname: "Computer Society of India (C.S.I. S.P.I.T.)",
-    compos: "Technical Head",
-    comyear: "2022-23",
-  },
-  {
-    comlogo: logo,
-    comname: "Oculus S.P.I.T.",
-    compos: "Technical Head",
-    comyear: "2021-22",
-  },
-  {
-    comlogo: logo,
-    comname: "Entrepreneurship Cell (E.Cell S.P.I.T.)",
-    compos: "Technical Head",
-    comyear: "2021-22",
-  },
-];
-
-const volinfo = [
-  {
-    volname: "Abhyudaya",
-    instructor: "Dr. Y.S. Rao",
-    desc: "Teaching underprivedgled school students.",
-    voldur: "30 hrs, 2023",
-  },
-  {
-    volname: "Abhyudaya",
-    instructor: "Dr. Y.S. Rao",
-    desc: "Teaching underprivedgled school students.",
-    voldur: "30 hrs, 2023",
-  },
-  {
-    volname: "Abhyudaya",
-    instructor: "Dr. Y.S. Rao",
-    desc: "Teaching underprivedgled school students.",
-    voldur: "30 hrs, 2023",
-  },
-];
-
-function volCard(volinfo) {
-  return (
-    <VolunteerWork
-      volname={volinfo.volname}
-      instructor={volinfo.instructor}
-      desc={volinfo.desc}
-      voldur={volinfo.voldur}
-    />
-  );
-}
+import MenuItem from "@mui/material/MenuItem";
+import { json, useLoaderData, useNavigate,useRouteLoaderData } from "react-router-dom";
 
 const Activities = () => {
   const data = useLoaderData();
+  const comNames = data.comNames;
   const [committeeWork, setCommitteeWork] = useState(
     data.comData.committee ? data.comData.committee : []
   );
   const [volunteerWork, setVolunteerWork] = useState(
     data.volData.volunteerWork ? data.volData.volunteerWork : []
   );
-  
   const navigate = useNavigate();
   const [alertOpen, setAlertOpen] = useState(false);
   const [severity, setSeverity] = useState("");
@@ -87,16 +34,24 @@ const Activities = () => {
     setAlertOpen(false);
     navigate(0);
   };
-  const [open, setOpen] = React.useState(false);
+  const [volOpen, setVolOpen] = React.useState(false);
+  const [comOpen, setComOpen] = React.useState(false);
   const [index, setIndex] = React.useState(0);
-  function handleClickOpen(index) {
+  function handleVolClickOpen(index) {
     setIndex(index);
-    setOpen(true);
+    setVolOpen(true);
   }
-  const handleClose = () => {
-    setOpen(false);
+  function handleComClickOpen(index) {
+    setIndex(index);
+    setComOpen(true);
+  }
+  const handleVolClose = () => {
+    setVolOpen(false);
   };
-  const handleCommitteeChange = async () => {
+  const handleComClose = () => {
+    setComOpen(false);
+  };
+  const handleComChange = async () => {
     const arr = [...committeeWork];
     arr.splice(index, 1);
     const deleteCommittee = async () => {
@@ -122,21 +77,45 @@ const Activities = () => {
         const data = await response.json();
         setAlertOpen(true);
         setSeverity("success");
-        setMessage("Project deleted successfully");
+        setMessage("Committee Work deleted successfully");
       }
     };
     deleteCommittee();
-    setOpen(false);
+    setComOpen(false);
   };
-
-  const handleChangeVolunteer = (e) => {
-    setVolunteerWork({ ...volunteerWork, [e.target.name]: e.target.value });
+  const handleVolChange = async () => {
+    const arr = [...volunteerWork];
+    arr.splice(index, 1);
+    const deleteVolunteerWork = async () => {
+      const response = await fetch(
+        "http://localhost:8000/api/student/deleteYourVolunteerWork",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: JSON.parse(localStorage.getItem("userinfo")).email,
+            volunteerWork: arr,
+          }),
+        }
+      );
+      if (!response.ok) {
+        setAlertOpen(true);
+        setSeverity("error");
+        setMessage("Something went wrong, please try again later");
+      }
+      if (response.ok) {
+        const data = await response.json();
+        setAlertOpen(true);
+        setSeverity("success");
+        setMessage("Volunteer Work deleted successfully");
+      }
+    };
+    deleteVolunteerWork();
+    setVolOpen(false);
   };
   
-  const handleChangeCommittee = (e) => {
-    setCommitteeWork({ ...committeeWork, [e.target.name]: e.target.value });
-  };
-  const [coms, setCom] = useState(cominfo);
   const [openComDialog, setOpenComDialog] = useState(false);
   const handleComClickOpenDialog = () => {
     setOpenComDialog(true);
@@ -148,44 +127,6 @@ const Activities = () => {
   const [newComData, setNewComData] = useState({});
   const handleComDataChange = (e) => {
     setNewComData({ ...newComData, [e.target.name]: e.target.value });
-  };
-  const handleComSubmit = (e) => {
-    e.preventDefault();
-    const arr = [...coms];
-    arr.unshift(newComData);
-    setCom(arr);
-    const updateParticipation = async () => {
-      const response = await fetch(
-        "http://localhost:8000/api/student/setParticipation",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: JSON.parse(localStorage.getItem("userinfo")).email,
-            eventName: newEventData.eventname,
-            date: newEventData.eventdate,
-            organization: newEventData.orgname,
-            description: newEventData.description,
-          }),
-        }
-      );
-      
-      if (!response.ok) {
-        setAlertOpen(true);
-        setSeverity("error");
-        setMessage("Something went wrong, please try again later");
-      }
-      if (response.ok) {
-        const data = await response.json();
-        setAlertOpen(true);
-        setSeverity("success");
-        setMessage("Project added successfully");
-      }
-    };
-    updateParticipation();
-    setOpen(false);
   };
   const [openVolDialog, setOpenVolDialog] = useState(false);
   const handleVolClickOpenDialog = () => {
@@ -200,7 +141,7 @@ const Activities = () => {
   };
   const handleVolSubmit = (e) => {
     e.preventDefault();
-    const arr = [...vols];
+    const arr = [...volunteerWork];
     arr.unshift(newVolData);
     const updateVolunteerWork = async () => {
       const response = await fetch(
@@ -212,10 +153,10 @@ const Activities = () => {
           },
           body: JSON.stringify({
             email: JSON.parse(localStorage.getItem("userinfo")).email,
-            volname : newVolData.volname,
-            instructor : newVolData.instructor,
-            desc : newVolData.desc,
-            voldur : newVolData.voldurr
+            eventName: newVolData.volname,
+            date: newVolData.voldur,
+            organization: newVolData.instructor,
+            description: newVolData.desc
           }),
         }
       );
@@ -229,11 +170,47 @@ const Activities = () => {
         const data = await response.json();
         setAlertOpen(true);
         setSeverity("success");
-        setMessage("Event added successfully");
+        setMessage("Activity added successfully");
       }
     };
     updateVolunteerWork();
-    setOpen(false);
+    setVolOpen(false);
+  };
+
+  const handleComSubmit = (e) => {
+    e.preventDefault();
+    const arr = [...committeeWork];
+    arr.unshift(newComData);
+    const updateCommitteeWork = async () => {
+      const response = await fetch(
+        "http://localhost:8000/api/student/setYourCommittee",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: JSON.parse(localStorage.getItem("userinfo")).email,
+            committeeDetails: newComData.comname,
+            tenure:newComData.comyear,
+            position:newComData.compos
+          }),
+        }
+      );
+      if (!response.ok) {
+        setAlertOpen(true);
+        setSeverity("error");
+        setMessage("Something went wrong, please try again later");
+      }
+      if (response.ok) {
+        const data = await response.json();
+        setAlertOpen(true);
+        setSeverity("success");
+        setMessage("Committee Work added successfully");
+      }
+    };
+    updateCommitteeWork();
+    setComOpen(false);
   };
   
 
@@ -250,13 +227,13 @@ const Activities = () => {
           </div>
         </div>
         <div className={styles.comGrid}>
-          {committeeWork.map((com, index) => (
+          {committeeWork.map((cominfo, index) => (
             <CommitteeWorkCard
               key={index}
-              comlogo={com.comlogo}
-              comname={com.comname}
-              compos={com.compos}
-              comyear={com.comyear}
+              comname={cominfo.committeeDetails}
+              compos={cominfo.position}
+              comyear={cominfo.tenure}
+              handleDelete={() => handleComClickOpen(index)}
             />
           ))}
           <MultiFieldModal
@@ -273,11 +250,18 @@ const Activities = () => {
               name="comname"
               label="Committee Name"
               autoComplete="off"
-              type="text"
+              select
               fullWidth
+              sx={{ margin: "1rem 0 0 0" }}
               variant="standard"
               onChange={handleComDataChange}
-            />
+            >
+              {comNames.map((option, index) => (
+                <MenuItem key={index} value={option.name}>
+                  {option.name}
+                </MenuItem>
+              ))}
+            </TextField>
             <TextField
               required
               margin="dense"
@@ -293,7 +277,7 @@ const Activities = () => {
               required
               margin="dense"
               name="comyear"
-              label="Year of Tenure"
+              label="Tenure"
               autoComplete="off"
               type="text"
               fullWidth
@@ -316,10 +300,11 @@ const Activities = () => {
           {volunteerWork.map((volinfo, index) => (
             <VolunteerWork
               key={index}
-              volname={volinfo.volname}
-              instructor={volinfo.instructor}
-              desc={volinfo.desc}
-              voldur={volinfo.voldur}
+              volname={volinfo.eventName}
+              instructor={volinfo.organization}
+              desc={volinfo.description}
+              voldur={volinfo.date}
+              handleDelete={() => handleVolClickOpen(index)}
             />
           ))}
           <MultiFieldModal
@@ -377,6 +362,56 @@ const Activities = () => {
           </MultiFieldModal>
         </div>
       </div>
+      <Dialog
+        open={volOpen}
+        onClose={handleVolClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent sx={{ background: "var(--bg-color)", pb: 0 }}>
+          <DialogContentText
+            sx={{ color: "var(--text-color)" }}
+            id="alert-dialog-description"
+          >
+            Do you want to delete this record?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions
+          sx={{ background: "var(--bg-color)", color: "var(--text-color)" }}
+        >
+          <Button sx={{ color: "var(--text-color)" }} onClick={handleVolClose}>
+            No
+          </Button>
+          <Button sx={{ color: "var(--text-color)" }} onClick={handleVolChange}>
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={comOpen}
+        onClose={handleComClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent sx={{ background: "var(--bg-color)", pb: 0 }}>
+          <DialogContentText
+            sx={{ color: "var(--text-color)" }}
+            id="alert-dialog-description"
+          >
+            Do you want to delete this record?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions
+          sx={{ background: "var(--bg-color)", color: "var(--text-color)" }}
+        >
+          <Button sx={{ color: "var(--text-color)" }} onClick={handleComClose}>
+            No
+          </Button>
+          <Button sx={{ color: "var(--text-color)" }} onClick={handleComChange}>
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
       <CustAlert
         open={alertOpen}
         onClose={handleAlertClose}
@@ -414,13 +449,22 @@ export async function loader() {
       }),
     }
   );
-  if(!response1.ok && !response2.ok) {
+  const response3 = await fetch(
+    "http://localhost:8000/api/student/getCommitteeNames",
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  if(!response1.ok && !response2.ok && !response3.ok) {
     throw json({ message: "Error fetching activity details"}, 422);
   }
-  if (response1.ok && response2.ok) {
+  if (response1.ok && response2.ok && response3.ok) {
     const volData = await response1.json();
     const comData = await response2.json();
-    console.log(volData);
-    return { comData, volData };
+    const comNames = await response3.json();
+    return { comData, volData, comNames };
   }
 }

@@ -91,7 +91,7 @@ const sidebardata = [
   {
     text: "Academics",
     icon: <i className="fas fa-graduation-cap"></i>,
-    sub: ["Courses", "Timetable", "Result"],
+    sub: ["Courses","Timetable","Result"],
   },
   {
     text: "Extra-Curricular",
@@ -102,11 +102,6 @@ const sidebardata = [
     text: "CareerConnect",
     icon: <i className="fas fa-users"></i>,
     sub: ["Portfolio", "Internships", "Placement"],
-  },
-  {
-    text: "Faculty",
-    icon: <i className="fas fa-chalkboard-user"></i>,
-    sub: [],
   },
 ];
 

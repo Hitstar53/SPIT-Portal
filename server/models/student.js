@@ -46,42 +46,7 @@ const studentSchema = mongoose.Schema({
         }
     ],
     educationalInfo:[
-        {
-            type:{
-                type:String,
-                required:true
-            },
-            insName:{
-                type:String,
-                required:true
-            },
-            degree:{
-                type:String,
-                required:true
-            },
-            branch:{
-                type:String,
-            },
-            division:{
-                type:String,
-            }
-            ,
-            semester:{
-                type:String,
-            },
-            admissionYear:{
-                type:Number,
-                required:true
-            },
-            passingYear:{
-                type:Number,
-                required:true
-            },
-            score:{
-                type:Number,
-                required:true
-            }
-        }
+
     ],
     semester:[
         {
@@ -105,7 +70,7 @@ const studentSchema = mongoose.Schema({
     ],
     committee:[
         {
-            committeeDetails:{ type: mongoose.Schema.Types.ObjectId,required:true,ref:'committee' },
+            committeeDetails:{ type: String,required:true,ref:'committee' },
             tenure:{ type:String,required:true },
             position:{ type : String, required:true},
         },

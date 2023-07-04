@@ -50,7 +50,7 @@ exports.updateCommittee = asyncHandler(async(req,res) => {
 
 exports.getCommitteeNames = asyncHandler(async(req,res) =>{
     try {
-        const committeeNames = await Committee.find().select('name -_id')
+        const committeeNames = await Committee.find().select('name facultyMentor -_id')
         res.status(200).json(committeeNames)
     } catch (error) {
         console.error(error)

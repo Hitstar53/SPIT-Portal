@@ -7,7 +7,7 @@ import { Box } from "@mui/material";
 
 
 const EduInfo = (props) => {
-    return (
+  return (
       <Box className={styles.eduInfo}>
         <h3 className={styles.header}>
           Educational Information

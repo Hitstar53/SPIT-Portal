@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const Extracurricular = require('../models/student');
 exports.setYourCommittee = asyncHandler(async(req,res) =>{
-        const name = req.body.name
+        const committeeDetails = req.body.committeeDetails
         const tenure = req.body.tenure
         const position = req.body.position
         const email = req.body.email
@@ -81,10 +81,9 @@ exports.deleteParticipation = asyncHandler(async(req,res)=>{
 })
 
 exports.getYourCommittee = asyncHandler(async(req,res)=>{
-    console.log("j")
     const email = req.body.email
     try {
-        const yourCommittees = await Extracurricular.find({emailID:email}).select('committee -_id')
+        const yourCommittees = await Extracurricular.findOne({emailID:email}).select('committee -_id')
         res.status(200).json(yourCommittees)    
     } catch (error) {
         console.error(error)
@@ -107,4 +106,16 @@ exports.getParticipation = asyncHandler(async(req,res)=>{
     } catch (error) {
         console.error(error)
     }
+})
+
+exports.getResults = asyncHandler(async(req,res)=>{
+    const email = req.body.email
+    try {
+        const results = await Extracurricular.findOne({emailID:email}).select('semester onGoingSemester -_id')
+        res.status(200).json(results)
+    }
+    catch(error){
+        console.error(error)
+    }
+
 })

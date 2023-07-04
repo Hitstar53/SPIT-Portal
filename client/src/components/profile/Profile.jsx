@@ -13,7 +13,7 @@ const Profile = () => {
       <ProfileHeader info={data.profileHeaderData} />
       <PersonalInfo info={data.personalData} />
       <ParentalInfo info={data.parentalData} />
-      <EduInfo info={data.eduData} />
+      <EduInfo info={data.eduData.educationalInfo} />
     </div>
   )
 }
@@ -77,6 +77,7 @@ export async function loader() {
     const parentalData = await response2.json();
     const profileHeaderData = await response3.json();
     const eduData = await response4.json();
+    console.log(eduData)
     return { profileHeaderData, personalData, parentalData, eduData };
   }
 }

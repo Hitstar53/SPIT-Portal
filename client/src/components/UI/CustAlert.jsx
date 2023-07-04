@@ -24,7 +24,7 @@ const CustAlert = (props) => {
         open={props.open}
         onClose={props.onClose}
         TransitionComponent={SlideTransition}
-        autoHideDuration={5000}
+        autoHideDuration={2000}
       >
         <Alert
           onClose={props.onClose}

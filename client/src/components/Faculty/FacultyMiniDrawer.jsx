@@ -19,7 +19,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import logo from "../../assets/logo.png";
 import profile from "../../assets/user.svg";
-import "./AdminMiniDrawer.css";
+import "./FacultyMiniDrawer.css";
 import { Collapse } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";

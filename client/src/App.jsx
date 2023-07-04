@@ -13,53 +13,72 @@ import Internship, { loader as InternLoader } from './components/careerconn/Inte
 import Placement, { loader as PlacementLoader } from './components/careerconn/Placement';
 import Events, { loader as EventsLoader } from './components/extracurr/events/Events';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Committees from "./components/extracurr/committees/Committees";
+import Committees, { loader as CommitteesLoader } from "./components/extracurr/committees/Committees";
 import ComAdmin from "./components/extracurr/committees/ComAdmin";
 import RootLayout from './pages/RootLayout';
-import AdminLayout from './pages/AdminLayout';
+import FacultyLayout from './pages/FacultyLayout';
 import ErrorPage from './pages/ErrorPage';
-import Admin from './components/Admin/Admin';
+import Faculty from './components/Faculty/Faculty';
 import './App.css';
 
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     errorElement: <ErrorPage />,
     children: [
-      {index: true, element: <Login />},
+      { index: true, element: <Login /> },
       {
-        path: 'student',
+        path: "student",
         element: <RootLayout />,
         children: [
-          { path: 'home', element: <Dashboard /> },
-          { path: 'profile', 
-            element: <Profile />, 
-            loader: ProfileLoader, 
-            // action: ProfileAction, 
+          { path: "home", element: <Dashboard /> },
+          {
+            path: "profile",
+            element: <Profile />,
+            loader: ProfileLoader,
+            // action: ProfileAction,
           },
-          { path: 'courses', element: <Courses /> },
-          { path: 'result', element: <Result /> },
-          { path: 'result/:semester', element: <SemResult /> },
-          { path: 'activities', element: <Activities />, loader: ActivityLoader },
-          { path: 'events', element: <Events />, loader: EventsLoader },
-          { path: 'committees', element: <Committees /> },
-          { path: 'committees/:comname', element: <ComAdmin /> },
-          { path: 'portfolio', element: <Portfolio />, loader: PortfolioLoader },
-          { path: 'internships', element: <Internship />, loader: InternLoader },
-          { path: 'placement', element: <Placement />, loader: PlacementLoader },
+          { path: "courses", element: <Courses /> },
+          { path: "result", element: <Result /> },
+          { path: "result/:semester", element: <SemResult /> },
+          {
+            path: "activities",
+            element: <Activities />,
+            loader: ActivityLoader,
+          },
+          { path: "events", element: <Events />, loader: EventsLoader },
+          {
+            path: "committees",
+            element: <Committees />,
+            loader: CommitteesLoader,
+          },
+          { path: "committees/:comname", element: <ComAdmin /> },
+          {
+            path: "portfolio",
+            element: <Portfolio />,
+            loader: PortfolioLoader,
+          },
+          {
+            path: "internships",
+            element: <Internship />,
+            loader: InternLoader,
+          },
+          {
+            path: "placement",
+            element: <Placement />,
+            loader: PlacementLoader,
+          },
         ],
       },
       {
-        path: 'admin',
-        element: <AdminLayout />,
-        children: [
-          { path: 'home', element: <Admin /> },
-        ],
+        path: "faculty",
+        element: <FacultyLayout />,
+        children: [{ path: "home", element: <Faculty /> }],
       },
     ],
   },
-])
+]);
 
 const App = () => {
   const theme = createTheme({
