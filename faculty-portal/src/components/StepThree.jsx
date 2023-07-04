@@ -60,7 +60,25 @@ function StepThree({setDimension3}) {
     console.log(data);
     setDimension3(data)
   };
-  
+
+  useEffect(() => {
+    const getData = async () => {
+      await axios.post('http://localhost:5000/api/faculty/appraisal/get/dim3',
+        { name: user.fullName, yearofAssesment: yr }
+      ).then((res) => {
+        console.log(res.data)
+        const storedData = res.data
+        if (storedData) {
+          Object.keys(storedData).forEach((key) => {
+            setValue(key, storedData[key]);
+          });
+        }
+      }).catch((err) => {
+        console.log(err)
+      })
+    }
+    getData()
+  }, []);
 
   // useEffect(() => {
   //   console.log(dimension3);

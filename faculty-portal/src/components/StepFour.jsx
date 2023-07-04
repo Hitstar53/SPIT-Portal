@@ -13,16 +13,6 @@ function StepFour({ setDimension4, handleNext }) {
     defaultValues: JSON.parse(localStorage.getItem('dim4Data')) || {},
   });
 
-  useEffect(() => {
-    const storedData = localStorage.getItem('dim4Data');
-    if (storedData) {
-      const parsedData = JSON.parse(storedData);
-      Object.keys(parsedData).forEach((key) => {
-        setValue(key, parsedData[key]);
-      });
-    }
-  }, []);
-
   const onSubmit = (data) => {
     // console.log(data)
     setDimension4(data)
@@ -31,6 +21,25 @@ function StepFour({ setDimension4, handleNext }) {
     handleNext()
     toast.success('Form submitted successfully!');
   };
+
+  useEffect(() => {
+    const getData = async () => {
+      await axios.post('http://localhost:5000/api/faculty/appraisal/get/dim4',
+        { name: user.fullName, yearofAssesment: yr }
+      ).then((res) => {
+        console.log(res.data)
+        const storedData = res.data
+        if (storedData) {
+          Object.keys(storedData).forEach((key) => {
+            setValue(key, storedData[key]);
+          });
+        }
+      }).catch((err) => {
+        console.log(err)
+      })
+    }
+    getData()
+  }, []);
 
   return (
     <div>

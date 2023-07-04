@@ -103,9 +103,9 @@ var yr=getDate()
         {/* render different pages depending upon activeStep */}
         {activeStep === 0 && <StepOne setDimension1={setDimension1} yr={yr}/>}
         {activeStep === 1 && (
-          <StepTwo setDimension2={setDimension2} sendToServer={sendToServer} />
+          <StepTwo setDimension2={setDimension2} yr={yr} sendToServer={sendToServer} />
         )}
-        {activeStep === 2 && <StepThree setDimension3={setDimension3} />}
+        {activeStep === 2 && <StepThree yr={yr} setDimension3={setDimension3} />}
         {activeStep === 3 && (
           <StepFour setDimension4={setDimension4} handleNext={handleNext} />
         )}

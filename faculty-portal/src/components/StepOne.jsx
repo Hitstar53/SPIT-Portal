@@ -5,10 +5,12 @@ import { UserContext } from '../context/UserContext';
 import Table from "react-bootstrap/Table";
 import { IconButton } from '@mui/material';
 import DeleteIcon from "@mui/icons-material/Delete";
+import axios from 'axios';
 import "../styles/Appraisal.css";
 
-const StepOne = ({ setDimension1 ,yr }) => {
+const StepOne = ({ setDimension1, yr }) => {
   const { user } = useContext(UserContext);
+  const [defValue, setDefValue] = useState({})
   const options = [
     { value: '', label: 'Select an option' },
     { value: '1', label: 'I' },
@@ -28,7 +30,7 @@ const StepOne = ({ setDimension1 ,yr }) => {
     setValue,
     control,
   } = useForm({
-    defaultValues: JSON.parse(localStorage.getItem('dim1Data')) || {},
+    defaultValues: defValue || {},
   });
 
   const {
@@ -37,7 +39,7 @@ const StepOne = ({ setDimension1 ,yr }) => {
     remove: removeCourse,
   } = useFieldArray({
     control,
-    name: 'Dimension1.info.courses',
+    name: 'info.courses',
   });
 
   const {
@@ -46,7 +48,7 @@ const StepOne = ({ setDimension1 ,yr }) => {
     remove: removePaper,
   } = useFieldArray({
     control,
-    name: 'Dimension1.AP10.paper',
+    name: 'AP10.paper',
   });
 
   const {
@@ -55,7 +57,7 @@ const StepOne = ({ setDimension1 ,yr }) => {
     remove: removeMentee,
   } = useFieldArray({
     control,
-    name: 'Dimension1.AP6.menteeFeedback',
+    name: 'AP6.menteeFeedback',
   });
 
   const {
@@ -64,22 +66,21 @@ const StepOne = ({ setDimension1 ,yr }) => {
     remove: removeGuest,
   } = useFieldArray({
     control,
-    name: 'Dimension1.AP7.guestLectureData',
+    name: 'AP7.guestLectureData',
   });
 
-  useEffect(() => {
-    const storedData = localStorage.getItem('dim1Data');
-    if (storedData) {
-      const parsedData = JSON.parse(storedData);
-      Object.keys(parsedData).forEach((key) => {
-        setValue(key, parsedData[key]);
-      });
-    }
-  }, []);
+
 
   const onSubmit = (data) => {
     console.log(data)
     setDimension1(data)
+    axios.post('http://localhost:5000/api/faculty/appraisal/dim1',
+      { yearofAssesment: yr, faculty: user, Dimension1: data }
+    ).then((res) => {
+      console.log(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
     localStorage.setItem('dim1Data', JSON.stringify(data));
     toast.success('Form submitted successfully!');
   };
@@ -88,7 +89,7 @@ const StepOne = ({ setDimension1 ,yr }) => {
     removeCourse(index);
     const storedData = JSON.parse(localStorage.getItem('dim1Data'));
     if (storedData) {
-      storedData.Dimension1.info.courses.splice(index, 1);
+      storedData.info.courses.splice(index, 1);
       localStorage.setItem('dim1Data', JSON.stringify(storedData));
     }
   };
@@ -97,7 +98,7 @@ const StepOne = ({ setDimension1 ,yr }) => {
     removePaper(index);
     const storedData = JSON.parse(localStorage.getItem('dim1Data'));
     if (storedData) {
-      storedData.Dimension1.AP10.paper.splice(index, 1);
+      storedData.AP10.paper.splice(index, 1);
       localStorage.setItem('dim1Data', JSON.stringify(storedData));
     }
   }
@@ -106,7 +107,7 @@ const StepOne = ({ setDimension1 ,yr }) => {
     removeMentee(index);
     const storedData = JSON.parse(localStorage.getItem('dim1Data'));
     if (storedData) {
-      storedData.Dimension1.AP6.menteeFeedback.splice(index, 1);
+      storedData.AP6.menteeFeedback.splice(index, 1);
       localStorage.setItem('dim1Data', JSON.stringify(storedData));
     }
   };
@@ -115,7 +116,7 @@ const StepOne = ({ setDimension1 ,yr }) => {
     removeGuest(index);
     const storedData = JSON.parse(localStorage.getItem('dim1Data'));
     if (storedData) {
-      storedData.Dimension1.AP7.guestLectureData.splice(index, 1);
+      storedData.AP7.guestLectureData.splice(index, 1);
       localStorage.setItem('dim1Data', JSON.stringify(storedData));
     }
   };
@@ -128,8 +129,8 @@ const StepOne = ({ setDimension1 ,yr }) => {
           <label className="form-label">
             Year of Assessment:
             <input
-            readOnly
-            value={yr}
+              readOnly
+              value={yr}
               type="text"
               // {...register('yearofAssesment', { required: true })}
               className="form-input"
@@ -180,123 +181,166 @@ const StepOne = ({ setDimension1 ,yr }) => {
           {errors.designation && <p className="error">*This field is required</p>}
         </div>
       </div>
-    <form className="container" onSubmit={handleSubmit(onSubmit)}>
-      <Toaster />
+      <form className="container" onSubmit={handleSubmit(onSubmit)}>
+        <Toaster />
 
-      <div className='info-container'>
+        <div className='info-container'>
 
-        
 
-        <h3>Courses</h3>
-        {courseFields.length > 0 &&
-          <div>
-            <Table className='course-table' striped bordered hover >
-              <thead>
-                <tr>
-                  <th className='table-header text-center align-middle'>Course Name</th>
-                  <th className='table-header text-center align-middle'>Class Name</th>
-                  <th className='table-header text-center align-middle'>Sem</th>
-                  <th className='table-header text-center align-middle'>Marks Obtained</th>
-                  <th className='table-header text-center align-middle'>Lecture Target</th>
-                  <th className='table-header text-center align-middle'>Total Lecture Taken</th>
-                  <th className='table-header text-center align-middle'>Percentage Feedback</th>
-                  <th className='table-header text-center align-middle'>Attendance of the Students</th>
-                </tr>
-              </thead>
-              <tbody>
-                {courseFields.map((field, index) => (
-                  <tr key={field.id}>
-                    <td className='text-center align-middle course-title'>
-                      <input
-                        type="text"
-                        {...register(`Dimension1.info.courses[${index}].name`, { required: true })}
-                        className="form-input"
-                      />
-                    </td>
-                    <td className='text-center align-middle class-name'>
-                      <input
-                        type="text"
-                        {...register(`Dimension1.info.courses[${index}].class`, { required: true })}
-                        className="form-input"
-                      />
-                    </td>
-                    <td className='text-center align-middle'>
-                      <select
-                        defaultValue=''
-                        className='form-input'
-                        {...register(`Dimension1.info.courses[${index}].sem`)}>
-                        {options.map((option) => (
-                          <option key={option.value} value={option.value}>{option.label}</option>
-                        ))}
-                      </select>
-                    </td>
-                    <td className='text-center align-middle'>
-                      <input
-                        type="number"
-                        {...register(`Dimension1.info.courses[${index}].AP2MarksObtained`, { required: true })}
-                        className="form-input"
-                      />
-                    </td>
-                    <td className='text-center align-middle'>
-                      <input
-                        type="number"
-                        {...register(`Dimension1.info.courses[${index}].AP3LecturesTarget`, { required: true })}
-                        className="form-input"
-                      />
-                    </td>
-                    <td className='text-center align-middle'>
-                      <input
-                        type="number"
-                        {...register(`Dimension1.info.courses[${index}].AP3LectureConducted`, { required: true })}
-                        className="form-input"
-                      />
-                    </td>
-                    <td className='text-center align-middle'>
-                      <input
-                        type="number"
-                        {...register(`Dimension1.info.courses[${index}].AP4PercentFeedback`, { required: true })}
-                        className="form-input"
-                      />
-                    </td>
-                    <td className='text-center align-middle'>
-                      <input
-                        type="number"
-                        {...register(`Dimension1.info.courses[${index}].AP5AttendanceStudent`, { required: true })}
-                        className="form-input"
-                      />
-                    </td>
+
+          <h3>Courses</h3>
+          {courseFields.length > 0 &&
+            <div>
+              <Table className='course-table' striped bordered hover >
+                <thead>
+                  <tr>
+                    <th className='table-header text-center align-middle'>Course Name</th>
+                    <th className='table-header text-center align-middle'>Class Name</th>
+                    <th className='table-header text-center align-middle'>Sem</th>
+                    <th className='table-header text-center align-middle'>Marks Obtained</th>
+                    <th className='table-header text-center align-middle'>Lecture Target</th>
+                    <th className='table-header text-center align-middle'>Total Lecture Taken</th>
+                    <th className='table-header text-center align-middle'>Percentage Feedback</th>
+                    <th className='table-header text-center align-middle'>Attendance of the Students</th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
+                </thead>
+                <tbody>
+                  {courseFields.map((field, index) => (
+                    <tr key={field.id}>
+                      <td className='text-center align-middle course-title'>
+                        <input
+                          type="text"
+                          {...register(`info.courses[${index}].name`, { required: true })}
+                          className="form-input"
+                        />
+                      </td>
+                      <td className='text-center align-middle class-name'>
+                        <input
+                          type="text"
+                          {...register(`info.courses[${index}].class`, { required: true })}
+                          className="form-input"
+                        />
+                      </td>
+                      <td className='text-center align-middle'>
+                        <select
+                          defaultValue=''
+                          className='form-input'
+                          {...register(`info.courses[${index}].sem`)}>
+                          {options.map((option) => (
+                            <option key={option.value} value={option.value}>{option.label}</option>
+                          ))}
+                        </select>
+                      </td>
+                      <td className='text-center align-middle'>
+                        <input
+                          type="number"
+                          {...register(`info.courses[${index}].AP2MarksObtained`, { required: true })}
+                          className="form-input"
+                        />
+                      </td>
+                      <td className='text-center align-middle'>
+                        <input
+                          type="number"
+                          {...register(`info.courses[${index}].AP3LecturesTarget`, { required: true })}
+                          className="form-input"
+                        />
+                      </td>
+                      <td className='text-center align-middle'>
+                        <input
+                          type="number"
+                          {...register(`info.courses[${index}].AP3LectureConducted`, { required: true })}
+                          className="form-input"
+                        />
+                      </td>
+                      <td className='text-center align-middle'>
+                        <input
+                          type="number"
+                          {...register(`info.courses[${index}].AP4PercentFeedback`, { required: true })}
+                          className="form-input"
+                        />
+                      </td>
+                      <td className='text-center align-middle'>
+                        <input
+                          type="number"
+                          {...register(`info.courses[${index}].AP5AttendanceStudent`, { required: true })}
+                          className="form-input"
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
 
-            <Table striped bordered hover>
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th className='table-header text-center align-middle'>Activity done for Remedial teaching</th>
+                    <th className='table-header text-center align-middle'>Noteworthy efforts towards enriching the learning experience / innovation in TLE methods</th>
+                    <th className='table-header text-center align-middle'></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {courseFields.map((field, index) => (
+                    <tr key={field.id}>
+                      <td className='text-center align-middle'>
+                        <textarea
+                          style={{ width: "100%" }}
+                          placeholder='Activity Details....'
+                          className="form-textarea"
+                          {...register(`info.courses[${index}].AP8ActivityRemedial`, { required: false })} />
+                      </td>
+                      <td className='text-center align-middle'>
+                        <textarea
+                          style={{ width: "100%" }}
+                          placeholder='Activity Details....'
+                          className="form-textarea"
+                          {...register(`info.courses[${index}].AP9noteworthyDetails`, { required: false })} />
+                      </td>
+                      <td className='text-center align-middle'>
+                        <IconButton onClick={() => handleRemoveCourse(index)}>
+                          <DeleteIcon
+                            sx={{ color: "red", fontSize: "40px" }} />
+                        </IconButton>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>}
+
+          <button type="button" className="btn btn-success" onClick={() => appendCourse({})}>
+            Add Course
+          </button>
+
+          <h3>Question Papers</h3>
+          {paperFields.length > 0 && <div>
+            <Table striped bordered hover style={{ width: "50rem" }}>
               <thead>
                 <tr>
-                  <th className='table-header text-center align-middle'>Activity done for Remedial teaching</th>
-                  <th className='table-header text-center align-middle'>Noteworthy efforts towards enriching the learning experience / innovation in TLE methods</th>
+                  <th className='table-header text-center align-middle'>Paper Set for Course</th>
+                  <th className='table-header text-center align-middle'>Marks in audit report</th>
                   <th className='table-header text-center align-middle'></th>
                 </tr>
               </thead>
               <tbody>
-                {courseFields.map((field, index) => (
+                {paperFields.map((field, index) => (
                   <tr key={field.id}>
                     <td className='text-center align-middle'>
-                      <textarea
-                        style={{ width: "100%" }}
-                        placeholder='Activity Details....'
-                        className="form-textarea"
-                        {...register(`Dimension1.info.courses[${index}].AP8ActivityRemedial`, { required: false })} />
+                      <input
+                        type="text"
+                        {...register(`AP10.paper[${index}].course`, { required: true })}
+                        className="form-input"
+                      />
                     </td>
                     <td className='text-center align-middle'>
-                      <textarea
-                        style={{ width: "100%" }}
-                        placeholder='Activity Details....'
-                        className="form-textarea"
-                        {...register(`Dimension1.info.courses[${index}].AP9noteworthyDetails`, { required: false })} />
+                      <input
+                        type="number"
+                        {...register(`AP10.paper[${index}].marks`, { required: true })}
+                        className="form-input"
+                      />
                     </td>
                     <td className='text-center align-middle'>
-                      <IconButton onClick={() => handleRemoveCourse(index)}>
+                      <IconButton onClick={() => handleRemovePaper(index)}>
                         <DeleteIcon
                           sx={{ color: "red", fontSize: "40px" }} />
                       </IconButton>
@@ -307,156 +351,113 @@ const StepOne = ({ setDimension1 ,yr }) => {
             </Table>
           </div>}
 
-          <button type="button" className="btn btn-success" onClick={() => appendCourse({})}>
-            Add Course
-          </button>
-
-          <h3>Question Papers</h3>
-        {paperFields.length > 0 && <div>
-          <Table striped bordered hover style={{ width: "50rem" }}>
-            <thead>
-              <tr>
-                <th className='table-header text-center align-middle'>Paper Set for Course</th>
-                <th className='table-header text-center align-middle'>Marks in audit report</th>
-                <th className='table-header text-center align-middle'></th>
-              </tr>
-            </thead>
-            <tbody>
-              {paperFields.map((field, index) => (
-                <tr key={field.id}>
-                  <td className='text-center align-middle'>
-                    <input
-                      type="text"
-                      {...register(`Dimension1.AP10.paper[${index}].course`, { required: true })}
-                      className="form-input"
-                    />
-                  </td>
-                  <td className='text-center align-middle'>
-                    <input
-                      type="number"
-                      {...register(`Dimension1.AP10.paper[${index}].marks`, { required: true })}
-                      className="form-input"
-                    />
-                  </td>
-                  <td className='text-center align-middle'>
-                    <IconButton onClick={() => handleRemovePaper(index)}>
-                      <DeleteIcon
-                        sx={{ color: "red", fontSize: "40px" }} />
-                    </IconButton>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>}
-
-        <button type='button' className='btn btn-success' onClick={() => appendPaper({})}>
+          <button type='button' className='btn btn-success' onClick={() => appendPaper({})}>
             Add Question Paper
           </button>
 
           <h3>Mentee Feedback</h3>
-        {menteeFields.length > 0 && <div>
-          <Table striped bordered hover style={{ width: "30rem" }}>
-            <thead>
-              <tr>
-                <th className='table-header text-center align-middle'>Mentee Feedback</th>
-                <th className='table-header text-center align-middle'></th>
-              </tr>
-            </thead>
-            <tbody>
-              {menteeFields.map((field, index) => (
-                <tr key={field.id}>
-                  <td className='text-center align-middle'>
-                    <input
-                      type="number"
-                      {...register(`Dimension1.AP6.menteeFeedback[${index}]`, { required: true })}
-                      className="form-input"
-                    />
-                  </td>
-                  <td className='text-center align-middle'>
-                    <IconButton onClick={() => handleRemoveMentee(index)}>
-                      <DeleteIcon
-                        sx={{ color: "red", fontSize: "40px" }} />
-                    </IconButton>
-                  </td>
-                </tr>))}
-            </tbody>
-          </Table>
-        </div>}
+          {menteeFields.length > 0 && <div>
+            <Table striped bordered hover style={{ width: "30rem" }}>
+              <thead>
+                <tr>
+                  <th className='table-header text-center align-middle'>Mentee Feedback</th>
+                  <th className='table-header text-center align-middle'></th>
+                </tr>
+              </thead>
+              <tbody>
+                {menteeFields.map((field, index) => (
+                  <tr key={field.id}>
+                    <td className='text-center align-middle'>
+                      <input
+                        type="number"
+                        {...register(`AP6.menteeFeedback[${index}]`, { required: true })}
+                        className="form-input"
+                      />
+                    </td>
+                    <td className='text-center align-middle'>
+                      <IconButton onClick={() => handleRemoveMentee(index)}>
+                        <DeleteIcon
+                          sx={{ color: "red", fontSize: "40px" }} />
+                      </IconButton>
+                    </td>
+                  </tr>))}
+              </tbody>
+            </Table>
+          </div>}
 
-        <button type="button" className="btn btn-success" onClick={() => appendMentee({})}>
+          <button type="button" className="btn btn-success" onClick={() => appendMentee({})}>
             Add Mentee
           </button>
 
           <h3>Guest Lectures</h3>
-        {guestFields.length > 0 && <div>
-          <Table striped bordered hover style={{ width: "50rem" }}>
-            <thead>
-              <tr>
-                <th className='table-header text-center align-middle'>Lecture Date</th>
-                <th className='table-header text-center align-middle'>Lecture Title</th>
-                <th className='table-header text-center align-middle'>Speaker Name</th>
-                <th className='table-header text-center align-middle'>Arranged for</th>
-                <th className='table-header text-center align-middle'></th>
-              </tr>
-            </thead>
-            <tbody>
-              {guestFields.map((field, index) => (
-                <tr key={field.id}>
-                  <td className='text-center align-middle'>
-                    <input
-                      type="datetime-local"
-                      placeholder="date local"
-                      {...register(`Dimension1.AP7.guestLectureData[${index}].date`, { required: true })}
-                      className="form-input"
-                    />
-                  </td>
-                  <td className='text-center align-middle'>
-                    <input
-                      type="text"
-                      {...register(`Dimension1.AP7.guestLectureData[${index}].title`, { required: true })}
-                      className="form-input"
-                    />
-                  </td>
-                  <td className='text-center align-middle'>
-                    <input
-                      type="text"
-                      {...register(`Dimension1.AP7.guestLectureData[${index}].speakerName`, { required: true })}
-                      className="form-input"
-                    />
-                  </td>
-                  <td className='text-center align-middle'>
-                    <select
-                      defaultValue=""
-                      {...register(`Dimension1.AP7.guestLectureData[${index}].arrangedFor`, { required: true })}
-                      className="form-input">
-                      <option value="">Select an option</option>
-                      <option value="Students">Students</option>
-                      <option value="Faculty">Faculty</option>
-                    </select>
-                  </td>
-                  <td className='text-center align-middle'>
-                    <IconButton onClick={() => handleRemoveGuest(index)}>
-                      <DeleteIcon
-                        sx={{ color: "red", fontSize: "40px" }} />
-                    </IconButton>
-                  </td>
+          {guestFields.length > 0 && <div>
+            <Table striped bordered hover style={{ width: "50rem" }}>
+              <thead>
+                <tr>
+                  <th className='table-header text-center align-middle'>Lecture Date</th>
+                  <th className='table-header text-center align-middle'>Lecture Title</th>
+                  <th className='table-header text-center align-middle'>Speaker Name</th>
+                  <th className='table-header text-center align-middle'>Arranged for</th>
+                  <th className='table-header text-center align-middle'></th>
                 </tr>
-              ))}
+              </thead>
+              <tbody>
+                {guestFields.map((field, index) => (
+                  <tr key={field.id}>
+                    <td className='text-center align-middle'>
+                      <input
+                        type="datetime-local"
+                        placeholder="date local"
+                        {...register(`AP7.guestLectureData[${index}].date`, { required: true })}
+                        className="form-input"
+                      />
+                    </td>
+                    <td className='text-center align-middle'>
+                      <input
+                        type="text"
+                        {...register(`AP7.guestLectureData[${index}].title`, { required: true })}
+                        className="form-input"
+                      />
+                    </td>
+                    <td className='text-center align-middle'>
+                      <input
+                        type="text"
+                        {...register(`AP7.guestLectureData[${index}].speakerName`, { required: true })}
+                        className="form-input"
+                      />
+                    </td>
+                    <td className='text-center align-middle'>
+                      <select
+                        defaultValue=""
+                        {...register(`AP7.guestLectureData[${index}].arrangedFor`, { required: true })}
+                        className="form-input">
+                        <option value="">Select an option</option>
+                        <option value="Students">Students</option>
+                        <option value="Faculty">Faculty</option>
+                      </select>
+                    </td>
+                    <td className='text-center align-middle'>
+                      <IconButton onClick={() => handleRemoveGuest(index)}>
+                        <DeleteIcon
+                          sx={{ color: "red", fontSize: "40px" }} />
+                      </IconButton>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
-          </Table>
-        </div>}
+            </Table>
+          </div>}
 
           <button type="button" className="btn btn-success" onClick={() => appendGuest({})}>
             Add Guest Lecture
           </button>
-      </div>
+        </div>
 
 
-      <button className="btn btn-primary submit-btn" type="submit">
-        Submit
-      </button>
-    </form>
+        <button className="btn btn-primary submit-btn" type="submit">
+          Submit
+        </button>
+      </form>
     </>
   );
 };

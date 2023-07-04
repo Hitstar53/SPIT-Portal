@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
+import { UserContext } from '../context/UserContext';
 import Table from "react-bootstrap/Table";
 import DeleteIcon from "@mui/icons-material/Delete";
+import axios from "axios";
 
-function StepTwo({setDimension2,sendToServer}) {
+function StepTwo({setDimension2,sendToServer, yr}) {
+  const { user } = useContext(UserContext);
   const { register, control, handleSubmit, setValue, getValues } = useForm({
     defaultValues: JSON.parse(localStorage.getItem("dim2Data")) || {},
   });
@@ -83,15 +86,37 @@ function StepTwo({setDimension2,sendToServer}) {
   const onSubmit = async (data) => {
     console.log(data);
     localStorage.setItem("dim2Data", JSON.stringify(data));
+    axios.post('http://localhost:5000/api/faculty/appraisal/dim2',
+    { yearofAssesment: yr, faculty: user,  Dimension2: data }
+    ).then((res) => {
+      console.log(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+
     await setDimension2(data);
-    await sendToServer()
+    // await sendToServer()
   };
 
   useEffect(() => {
-    console.log("changed");
-    localStorage.setItem("dim2Data", JSON.stringify(getValues()));
-    setDimension2(getValues());
-  }, [paperFields]);
+    const getData = async () => {
+      await axios.post('http://localhost:5000/api/faculty/appraisal/get/dim2',
+        { name: user.fullName, yearofAssesment: yr }
+      ).then((res) => {
+        console.log(res.data)
+        localStorage.setItem("dim2Data", JSON.stringify(res.data))
+      }).catch((err) => {
+        console.log(err)
+      })
+    }
+    getData()
+  }, []);
+
+  // useEffect(() => {
+  //   console.log("changed");
+  //   localStorage.setItem("dim2Data", JSON.stringify(getValues()));
+  //   setDimension2(getValues());
+  // }, [paperFields]);
 
   // useEffect(() => {
   //   console.log("dimension2=", dimension2);
