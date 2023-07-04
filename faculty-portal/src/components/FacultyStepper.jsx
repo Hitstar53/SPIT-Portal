@@ -85,11 +85,11 @@ var yr=getDate()
     });
   }
 
-  React.useEffect(() => {
-    if (activeStep === 4) {
-      sendToServer();
+  React.useEffect(()=>{
+    if(activeStep === 4){
+      sendToServer()
     }
-  }, [activeStep]);
+  },[activeStep])
 
   return (
     <React.Fragment>
@@ -110,7 +110,7 @@ var yr=getDate()
           <StepFour setDimension4={setDimension4} handleNext={handleNext} />
         )}
         {/* {activeStep === 4 && <StepFour handleBack={handleBack} submitted={true} />} */}
-        {activeStep === 4 && <h1>Submitted the form</h1>}
+            {activeStep === 4 && <h1>Submitted the form</h1>}
         {/* show footer only if all steps are not completed */}
         {
           <StepFoot
