@@ -550,6 +550,83 @@ const setAppraisal = asyncHandler(async (req, res) => {
     }
 })
 
+const setDim1 = asyncHandler(async (req, res) => {
+    try {
+      const { yearofAssesment, faculty, Dimension1 } = req.body;
+      var updatedApp = null;
+  
+      const existingFaculty = await Appraisal.findOne({
+        facultyName: faculty.fullName,
+        yearofAssesment: yearofAssesment,
+      });
+  
+      if (existingFaculty) {
+         updatedApp = await Appraisal.findOneAndUpdate(
+          { _id: existingFaculty._id },
+          { $set: { Dimension1: Dimension1 } }
+        );
+      } else {
+        updatedApp = await Appraisal.create({
+          facultyName: faculty.fullName,
+          department: faculty.department,
+          designation: faculty.designation,
+          yearofAssesment: yearofAssesment,
+          Dimension1: Dimension1,
+        });
+      }
+  
+      res.status(200).json(updatedApp);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  
+
+const setDim2 = asyncHandler(async (req, res) => {
+    try {
+        const { yearofAssesment, faculty, Dimension2 } = req.body;
+        var updatedApp = null;
+    
+        const existingFaculty = await Appraisal.findOne({
+          facultyName: faculty.fullName,
+          yearofAssesment: yearofAssesment,
+        });
+    
+        if (existingFaculty) {
+           updatedApp = await Appraisal.findOneAndUpdate(
+            { _id: existingFaculty._id },
+            { $set: { Dimension2: Dimension2 } }
+          );
+        } else {
+          updatedApp = await Appraisal.create({
+            facultyName: faculty.fullName,
+            department: faculty.department,
+            designation: faculty.designation,
+            yearofAssesment: yearofAssesment,
+            Dimension2: Dimension2,
+          });
+        }
+    
+        res.status(200).json(updatedApp);
+      } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
+})
+
+const setDim3 = asyncHandler(async (req, res) => {
+
+})
+
+const setDim4 = asyncHandler(async (req, res) => {
+
+})
+
 module.exports = {
-    setAppraisal
+    setAppraisal,
+    setDim1,
+    setDim2,
+    setDim3,
+    setDim4,
 }
