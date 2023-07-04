@@ -19,21 +19,28 @@ const appraisalSchema = new mongoose.Schema({
                 {
                     name: {
                         type: String,
+                        default: null
                     },
                     class: {
                         type: String,
+                        default: null
                     },
                     sem: {
                         type: String,
+                        default: null
                     },
                     AP2MarksObtained: {
                         type: Number,
+                        default: 0
                     },
                     AP3LecturesTarget: {
                         type: Number,
+                        default: 0
                     },
                     AP3LectureConducted: {
                         type: Number,
+                        default: 0
+
                     },
                     AP3PercentAchieved: {
                         type: Number,
@@ -45,6 +52,7 @@ const appraisalSchema = new mongoose.Schema({
                     },
                     AP5AttendanceStudent: {
                         type: Number,
+                        default: 0
                     },
                     AP8ActivityRemedial: {
                         type: String,
@@ -69,39 +77,55 @@ const appraisalSchema = new mongoose.Schema({
 
             AP1Marks: {
                 type: Number,
+                default: null,
                 // max: 10
             },
             AP2Average: {
                 type: Number,
                 //max: 10
+                default: null
             },
             AP2Marks: {
                 type: Number,
+                //max: 10   
+                default: null
             },
             AP3Average: {
                 type: Number,
+                //max: 30
+                default: null
             },
             AP3Marks: {
                 type: Number,
+                //max: 30
+                default: null
+
             },
             AP4Marks: {
                 type: Number,
                 //max: 30
+                default: null
+
             },
             AP5Average: {
                 type: Number,
+                //max: 5
+                default: null
             },
             AP5Marks: {
                 type: Number,
                 // max: 5
+                default: null
             },
             AP8Marks: {
                 type: Number,
                 // max: 5
+                default: null
             },
             AP9Marks: {
                 type: Number,
                 // max: 10
+                default: null
             },
             // AP10Marks: {
             //     type: Number,
@@ -117,6 +141,7 @@ const appraisalSchema = new mongoose.Schema({
             ],
             averageMarks: {
                 type: Number,
+                default: null,
             },
         },
         AP7: {
@@ -139,6 +164,7 @@ const appraisalSchema = new mongoose.Schema({
 
             totalMarks: {
                 type: Number,
+                default: null,
             },
         },
 
@@ -307,6 +333,7 @@ const appraisalSchema = new mongoose.Schema({
         RP4: {
             number: {
                 type: Number,
+                default:null
             },
             totalMarks: {
                 type: Number,
@@ -581,6 +608,7 @@ const appraisalSchema = new mongoose.Schema({
         confidentialReport: {
             HODRemarks: {
                 type: String,
+                default: null,
             },
 
             principalRemarks: {
@@ -601,6 +629,7 @@ const appraisalSchema = new mongoose.Schema({
         dimension1: {
             totalMarks: {
                 type: Number,
+                default: 0,
             },
             multiplyingFactor: {
                 type: Number,
@@ -613,6 +642,7 @@ const appraisalSchema = new mongoose.Schema({
         dimension2: {
             totalMarks: {
                 type: Number,
+                default: 0,
             },
             multiplyingFactor: {
                 type: Number,
@@ -625,6 +655,7 @@ const appraisalSchema = new mongoose.Schema({
         dimension3: {
             totalMarks: {
                 type: Number,
+                default: 0,
             },
             multiplyingFactor: {
                 type: Number,
@@ -637,6 +668,7 @@ const appraisalSchema = new mongoose.Schema({
         dimension4: {
             totalMarks: {
                 type: Number,
+                default: 0, 
             },
             multiplyingFactor: {
                 type: Number,
@@ -649,6 +681,7 @@ const appraisalSchema = new mongoose.Schema({
 
         GrandTotal: {
             type: Number,
+            default: 0,
         },
     },
 });

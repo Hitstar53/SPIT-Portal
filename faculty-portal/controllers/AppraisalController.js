@@ -3,6 +3,35 @@ const asyncHandler = require('express-async-handler');
 const Appraisal = require('../models/appraisal.js')
 const { error } = require("console");
 
+const getAppraisal = asyncHandler(async (req, res) => {
+    console.log("Inside getAppraisal");
+    try {
+        var { yearofAssesment, facultyName, department, designation } = req.body;
+        console.log(yearofAssesment);
+        console.log(facultyName);
+        console.log(department);
+        console.log(designation);
+        const appraisal = await Appraisal.findOne({ yearofAssesment, facultyName });
+        console.log(appraisal);
+        if (appraisal) {
+            res.json(appraisal);
+        } else {
+            // res.status(404).json({ message: "Appraisal not found" });
+            const newAppraisal = await Appraisal.create({
+                yearofAssesment,
+                facultyName,
+                department,
+                designation,
+            })
+            res.json(newAppraisal);
+
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Server Error" });
+    }
+})
+
+
 const setAppraisal = asyncHandler(async (req, res) => {
     console.log("Inside setAppraisalDim1");
     try {
@@ -531,19 +560,35 @@ const setAppraisal = asyncHandler(async (req, res) => {
 
 
         // =============================================================================================================
-        const newAppraisal = new Appraisal({
-            yearofAssesment,
-            facultyName,
-            department,
-            designation,
-            Dimension1,
-            Dimension2,
-            Dimension3,
-            Dimension4,
-            finalGrandTotal,
-        });
-        const savedAppraisal = await newAppraisal.save();
-        res.status(200).json(savedAppraisal);
+        // const newAppraisal = new Appraisal({
+        //     yearofAssesment,
+        //     facultyName,
+        //     department,
+        //     designation,
+        //     Dimension1,
+        //     Dimension2,
+        //     Dimension3,
+        //     Dimension4,
+        //     finalGrandTotal,
+        // });
+        // const savedAppraisal = await newAppraisal.save();
+
+        const appraisal = await Appraisal.findOne({ facultyName: facultyName, yearofAssesment: yearofAssesment });
+        if (appraisal) {
+            appraisal.yearofAssesment = yearofAssesment;
+            appraisal.facultyName = facultyName;
+            appraisal.department = department;
+            appraisal.designation = designation;
+            appraisal.Dimension1 = Dimension1;
+            appraisal.Dimension2 = Dimension2;
+            appraisal.Dimension3 = Dimension3;
+            appraisal.Dimension4 = Dimension4;
+            appraisal.finalGrandTotal = finalGrandTotal;
+        } else {
+            res.status(404).send('🤦‍♂️🤦‍♂️🤦‍♂️🙅‍♂️🙅‍♂️🙅‍♂️');
+        }
+
+        res.status(200).json(appraisal);
     } catch (error) {
         console.error('Error saving appraisal:', error);
         throw error;
