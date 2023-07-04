@@ -87,7 +87,7 @@ exports.getEvent = asyncHandler(async (req, res) => {
         console.log(err);
         res.status(504).send("Internal Server Error");
     }
-})  
+})
 
 exports.addEvent = asyncHandler(async (req, res) => {
     const { email, events } = req.body;
@@ -105,10 +105,10 @@ exports.addEvent = asyncHandler(async (req, res) => {
         console.log(err);
         res.status(504).send("Internal Server Error");
     }
-})  
+})
 
 exports.deleteEvent = asyncHandler(async (req, res) => {
-    const { email, id} = req.body;
+    const { email, id } = req.body;
     console.log(req.body)
     try {
         const det = await Faculty.updateOne({ email: email }, {
