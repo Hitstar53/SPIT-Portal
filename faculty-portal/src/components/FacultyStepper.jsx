@@ -46,6 +46,7 @@ export default function FacultyStepper() {
     console.log("Dimension4=", Dimension4);
   }, [Dimension4]);
 
+var yr=getDate()
   function getDate() {
     const year = new Date().getFullYear();
     const month = new Date().getMonth() + 1;
@@ -93,7 +94,7 @@ export default function FacultyStepper() {
         <StepHead activeStep={activeStep} steps={steps} />
 
         {/* render different pages depending upon activeStep */}
-        {activeStep === 0 && <StepOne setDimension1={setDimension1} getDate={getDate}/>}
+        {activeStep === 0 && <StepOne setDimension1={setDimension1} yr={yr}/>}
         {activeStep === 1 && (
           <StepTwo setDimension2={setDimension2} sendToServer={sendToServer} />
         )}

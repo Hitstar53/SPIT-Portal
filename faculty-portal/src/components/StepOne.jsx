@@ -7,7 +7,7 @@ import { IconButton } from '@mui/material';
 import DeleteIcon from "@mui/icons-material/Delete";
 import "../styles/Appraisal.css";
 
-const StepOne = ({ setDimension1 ,getDate }) => {
+const StepOne = ({ setDimension1 ,yr }) => {
   const { user } = useContext(UserContext);
   const options = [
     { value: '', label: 'Select an option' },
@@ -130,7 +130,7 @@ const StepOne = ({ setDimension1 ,getDate }) => {
             Year of Assessment:
             <input
             readOnly
-            value={getDate}
+            value={yr}
               type="text"
               {...register('yearofAssesment', { required: true })}
               className="form-input"
