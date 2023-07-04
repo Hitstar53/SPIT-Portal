@@ -46,7 +46,7 @@ const ViewProfile = () => {
               <h1 className="bigger">Name : {user.fullName} </h1>
               <h1 className="big">Designation : {user.designation}</h1>
               <h1 className="big">Department : {user.department}</h1>
-              <h1 className="big">ID : 2021300079</h1>
+              <h1 className="big">ID : {user.id}</h1>
             </div>
           </div>
           <hr id="hr" />
