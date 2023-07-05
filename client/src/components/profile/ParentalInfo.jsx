@@ -4,6 +4,7 @@ import { TextField } from "@mui/material";
 import Fab from '@mui/material/Fab';
 import { Box } from "@mui/material";
 import CustAlert from "../UI/CustAlert";
+import ServerUrl from "../../constants";
 import styles from "./ParentalInfo.module.css";
 
 const ParentalInfo = (props) => {
@@ -35,7 +36,7 @@ const ParentalInfo = (props) => {
     event.preventDefault();
     const updateParentalInfo = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/student/parental",
+        `${ServerUrl}/api/student/parental`,
         {
           method: "PUT",
           headers: {
@@ -221,7 +222,7 @@ const ParentalInfo = (props) => {
                 name="memail"
                 id="outlined-required"
                 onChange={handleChange}
-                label="Mother Phone Number"
+                label="Mother Email"
                 type="email"
                 defaultValue={parentalInfo.memail}
               />

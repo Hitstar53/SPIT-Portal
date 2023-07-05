@@ -11,6 +11,7 @@ import PortfolioCard from './PortfolioCard'
 import MultiFieldModal from '../../UI/Modals/MultiFieldModal'
 import TextField from '@mui/material/TextField'
 import styles from "./Projects.module.css";
+import ServerUrl from "../../../constants";
 
 const Research = (props) => {
   const [research, setResearch] = useState(props.research.research || []);
@@ -42,7 +43,7 @@ const Research = (props) => {
     arr.splice(index, 1);
     const deleteResearch = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/student/deleteResearch",
+        `${ServerUrl}/api/student/deleteResearch`,
         {
           method: "PUT",
           headers: {
@@ -90,7 +91,7 @@ const Research = (props) => {
     setResearch(arr);
     const updateResearch = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/student/setResearch",
+        `${ServerUrl}/api/student/setResearch`,
         {
           method: "PUT",
           headers: {

@@ -5,6 +5,7 @@ import styles from "./EduCard.module.css";
 import { TextField } from "@mui/material";
 import { FaEdit, FaSave } from "react-icons/fa";
 import { Fab, Box } from "@mui/material";
+import ServerUrl from "../../constants";
 
 const EduCard = (props) => {
   const [alertOpen, setAlertOpen] = useState(false);
@@ -33,7 +34,7 @@ const EduCard = (props) => {
     e.preventDefault();
     const updateEduInfo = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/student/educational",
+        `${ServerUrl}/api/student/educational`,
         {
           method: "PUT",
           headers: {

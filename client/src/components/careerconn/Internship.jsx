@@ -13,6 +13,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import MultiFieldModal from '../UI/Modals/MultiFieldModal';
 import TextField from '@mui/material/TextField';
 import MenuItem  from '@mui/material/MenuItem';
+import ServerUrl from '../../constants';
 
 const Internship = () => {
   const [open, setOpen] = React.useState(false);
@@ -46,7 +47,7 @@ const Internship = () => {
     arr.splice(index, 1);
     const deleteInternship = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/student/deleteInternship",
+        `${ServerUrl}/api/student/deleteInternship`,
         {
           method: "PUT",
           headers: {
@@ -92,7 +93,7 @@ const Internship = () => {
     setInternships(arr)
     const updateInternship = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/student/setInternship",
+        `${ServerUrl}/api/student/setInternship`,
         {
           method: "PUT",
           headers: {
@@ -319,7 +320,7 @@ export default Internship
 
 export async function loader() {
   const response = await fetch(
-    "http://localhost:8000/api/student/getInternship",
+    `${ServerUrl}/api/student/getInternship`,
     {
       method: "PUT",
       headers: {

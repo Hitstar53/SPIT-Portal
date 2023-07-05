@@ -11,6 +11,7 @@ import PortfolioCard from "./PortfolioCard"
 import MultiFieldModal from '../../UI/Modals/MultiFieldModal'
 import AddButton from '../../UI/AddButton'
 import styles from './Projects.module.css'
+import ServerUrl from '../../../constants';
 
 
 const Projects = (props) => {
@@ -42,7 +43,7 @@ const Projects = (props) => {
     arr.splice(index, 1);
     const deleteProject = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/student/deleteProjects",
+        `${ServerUrl}/api/student/deleteProjects`,
         {
           method: "PUT",
           headers: {
@@ -89,7 +90,7 @@ const Projects = (props) => {
     const arr = [updatedData, ...projects];
     const updateProjects = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/student/setProjects",
+        `${ServerUrl}/api/student/setProjects`,
         {
           method: "PUT",
           headers: {

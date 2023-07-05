@@ -10,28 +10,14 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateField } from "@mui/x-date-pickers/DateField";
 import CustAlert from "../UI/CustAlert";
+import ServerUrl from "../../constants";
 import styles from "./PersonalInfo.module.css";
 
 const PersonalInfo = (props) => {
   const [open, setOpen] = useState(false);
   const [severity, setSeverity] = useState("");
   const [message, setMessage] = useState("");
-  
-  // const submit = useSubmit();
   const navigate = useNavigate();
-  // const actionData = useActionData();
-  // useEffect(() => {
-  //   if (actionData !== undefined) {
-  //     setOpen(actionData.open);
-  //     setSeverity(actionData.severity);
-  //     setMessage(actionData.message);
-  //     setTimeout(() => {
-  //       if (actionData.severity === "error") {
-  //         navigate(0);
-  //       }
-  //     }, 500);
-  //   }
-  // }, [actionData]);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -63,19 +49,11 @@ const PersonalInfo = (props) => {
     setPersonalInfo({ ...personalInfo, [e.target.name]: e.target.value});
   }
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   submit(personalInfo, {
-  //     method: "PUT",
-  //   });
-  //   setEdit(false);
-  // };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const updatePersonalInfo = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/student/personal",
+        `${ServerUrl}/api/student/personal`,
         {
           method: "PUT",
           headers: {
@@ -184,7 +162,7 @@ const PersonalInfo = (props) => {
           )}
           {edit && (
             <TextField
-              required
+              disabled
               name="emailID"
               id="outlined-required"
               label="Email"
@@ -341,37 +319,3 @@ const PersonalInfo = (props) => {
 };
 
 export default PersonalInfo;
-
-// export async function action({ request, params }) {
-//   const data = await request.formData();
-//   const personalData = {
-//     email: JSON.parse(localStorage.getItem("userinfo")).email,
-//     phone: data.get("phone"),
-//     address: data.get("address"),
-//     dob: data.get("dob"),
-//     gender: data.get("gender"),
-//     blood: data.get("blood"),
-//     religion: data.get("religion"),
-//     linkedin: data.get("linkedin"),
-//     github: data.get("github"),
-//   };
-//   const response = await fetch("http://localhost:8000/api/student/personal", {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(personalData),
-//   });
-//   if (!response.ok) {
-//     return {
-//       open: true,
-//       severity: "error",
-//       message: "Something went wrong",
-//     }
-//   }
-//   return {
-//     open: true,
-//     severity: "success",
-//     message: "Personal Information Updated Successfully",
-//   }
-// }

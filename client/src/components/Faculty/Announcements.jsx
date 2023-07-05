@@ -1,13 +1,13 @@
 import React from 'react'
-import styles from './Faculty.module.css'
+import styles from './Announcements.module.css'
 
-const Faculty = () => {
+const Announcements = () => {
   const container = styles.container + " flex flex-col gap-8 p-8";
   return (
     <div className={container}>
-      Faculty Home Page
+      Announcements Page
     </div>
   )
 }
 
-export default Faculty
+export default Announcements

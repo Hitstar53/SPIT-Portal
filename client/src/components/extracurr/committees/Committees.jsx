@@ -2,21 +2,7 @@ import React from "react";
 import styles from "./Committees.module.css";
 import CommitteesCard from "./CommitteesCard.jsx";
 import { json, useLoaderData } from "react-router-dom";
-
-const cominfo = [
-  {
-    comname: "Computer Society of India (C.S.I. S.P.I.T.)",
-    commen: "Dr. Kailas Devadkar",
-  },
-  {
-    comname: "Entrepreneurship Cell (E-Cell S.P.I.T.) ",
-    commen: "Proff. Kaisar Katchi",
-  },
-  {
-    comname: "Mudra",
-    commen: "Proff. Kaisar Katchi",
-  },
-];
+import ServerUrl from "../../../constants";
 
 const Committees = () => {
   const data = useLoaderData();
@@ -40,7 +26,7 @@ export default Committees;
 
 export async function loader() {
   const response = await fetch(
-    "http://localhost:8000/api/student/getCommitteeNames",
+    `${ServerUrl}/api/student/getCommitteeNames`,
     {
       method: "GET",
       headers: {

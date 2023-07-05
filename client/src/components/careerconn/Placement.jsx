@@ -22,6 +22,7 @@ import {
 } from "react-icons/fa";
 import { GrContact } from "react-icons/gr";
 import { RiInformationLine } from "react-icons/ri";
+import ServerUrl from "../../constants";
 
 const Placement = () => {
   const container = styles.container + " flex flex-col gap-8 p-8";
@@ -71,7 +72,7 @@ const Placement = () => {
     event.preventDefault();
     const updatePlacementInfo = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/student/updatePlacement",
+        `${ServerUrl}/api/student/updatePlacement`,
         {
           method: "PUT",
           headers: {
@@ -328,7 +329,7 @@ export default Placement;
 
 export async function loader() {
   const response = await fetch(
-    "http://localhost:8000/api/student/getPlacement",
+    `${ServerUrl}/api/student/getPlacement`,
     {
       method: "PUT",
       headers: {

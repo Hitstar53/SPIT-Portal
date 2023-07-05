@@ -15,6 +15,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import MultiFieldModal from '../../UI/Modals/MultiFieldModal';
 import TextField from '@mui/material/TextField';
+import ServerUrl from "../../../constants";
 import MenuItem  from '@mui/material/MenuItem';
 
 const eventinfo = [
@@ -78,7 +79,7 @@ const Events = () => {
     arr.splice(index, 1);
     const deleteEvent = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/student/deleteParticipation",
+        `${ServerUrl}/api/student/deleteParticipation`,
         {
           method: "PUT",
           headers: {
@@ -133,7 +134,7 @@ const Events = () => {
     arr.unshift(newEventData);
     const updateParticipation = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/student/setParticipation",
+        `${ServerUrl}/api/student/setParticipation`,
         {
           method: "PUT",
           headers: {
@@ -278,7 +279,7 @@ const Events = () => {
 export default Events;
 
 export async function loader() {
-  const response = await fetch("http://localhost:8000/api/student/getParticipation", {
+  const response = await fetch(`${ServerUrl}/api/student/getParticipation`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

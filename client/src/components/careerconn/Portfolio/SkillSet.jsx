@@ -6,6 +6,7 @@ import Chip from "@mui/material/Chip";
 import AddButton from "../../UI/AddButton";
 import FormModal from "../../UI/Modals/FormModal";
 import styles from './SkillSet.module.css'
+import ServerUrl from "../../../constants";
 
 const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.5),
@@ -49,7 +50,7 @@ export default function SkillSet(props) {
       return (skill.key !== chipToDelete.key)
       }).map(skill => {return skill.key})
     const response = await fetch(
-      "http://localhost:8000/api/student/deleteSkills",
+      `${ServerUrl}/api/student/deleteSkills`,
       {
         method: "PUT",
         headers: {
@@ -84,7 +85,7 @@ export default function SkillSet(props) {
 
     const updateSkills = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/student/setSkills",
+        `${ServerUrl}/api/student/setSkills`,
         {
           method: "PUT",
           headers: {

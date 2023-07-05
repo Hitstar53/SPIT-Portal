@@ -1,13 +1,13 @@
 import React from 'react'
-import styles from './Faculty.module.css'
+import styles from './FilterLayout.module.css'
 
-const Faculty = () => {
+const Project = () => {
   const container = styles.container + " flex flex-col gap-8 p-8";
   return (
     <div className={container}>
-      Faculty Home Page
+      Project Filter Page
     </div>
   )
 }
 
-export default Faculty
+export default Project

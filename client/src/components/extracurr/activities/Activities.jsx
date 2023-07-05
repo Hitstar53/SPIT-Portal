@@ -13,6 +13,7 @@ import MultiFieldModal from "../../UI/Modals/MultiFieldModal";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import { json, useLoaderData, useNavigate,useRouteLoaderData } from "react-router-dom";
+import ServerUrl from "../../../constants";
 
 const Activities = () => {
   const data = useLoaderData();
@@ -56,7 +57,7 @@ const Activities = () => {
     arr.splice(index, 1);
     const deleteCommittee = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/student/deleteYourCommittee",
+        `${ServerUrl}/api/student/deleteYourCommittee`,
         {
           method: "PUT",
           headers: {
@@ -88,7 +89,7 @@ const Activities = () => {
     arr.splice(index, 1);
     const deleteVolunteerWork = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/student/deleteYourVolunteerWork",
+        `${ServerUrl}/api/student/deleteYourVolunteerWork`,
         {
           method: "PUT",
           headers: {
@@ -145,7 +146,7 @@ const Activities = () => {
     arr.unshift(newVolData);
     const updateVolunteerWork = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/student/setVolunteerWork",
+        `${ServerUrl}/api/student/setVolunteerWork`,
         {
           method: "PUT",
           headers: {
@@ -183,7 +184,7 @@ const Activities = () => {
     arr.unshift(newComData);
     const updateCommitteeWork = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/student/setYourCommittee",
+        `${ServerUrl}/api/student/setYourCommittee`,
         {
           method: "PUT",
           headers: {
@@ -426,7 +427,7 @@ export default Activities;
 
 export async function loader() {
   const response1 = await fetch(
-    "http://localhost:8000/api/student/getYourVolunteerWork",
+    `${ServerUrl}/api/student/getYourVolunteerWork`,
     {
       method: "PUT",
       headers: {
@@ -438,7 +439,7 @@ export async function loader() {
     }
   );
   const response2 = await fetch(
-    "http://localhost:8000/api/student/getYourCommittee",
+    `${ServerUrl}/api/student/getYourCommittee`,
     {
       method: "PUT",
       headers: {
@@ -450,7 +451,7 @@ export async function loader() {
     }
   );
   const response3 = await fetch(
-    "http://localhost:8000/api/student/getCommitteeNames",
+    `${ServerUrl}/api/student/getCommitteeNames`,
     {
       method: "GET",
       headers: {

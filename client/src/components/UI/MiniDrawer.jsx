@@ -1,5 +1,4 @@
 import * as React from "react";
-import axios from "axios";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import MediaQuery, { useMediaQuery } from "react-responsive";
 import { styled, useTheme } from "@mui/material/styles";
@@ -32,6 +31,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import moodle from "../../assets/moodle.png";
+import ServerUrl from "../../constants";
 
 let drawerWidth = 275;
 
@@ -253,7 +253,7 @@ export default function MiniDrawer({ open,setOpen }) {
   const fetchUserInfo = async () => {
     console.log(JSON.parse(localStorage.getItem("userinfo")).email);
     const response = await fetch(
-      "http://localhost:8000/api/student/getMiniDrawer",
+      `${ServerUrl}/api/student/getMiniDrawer`,
       {
         method: "PUT",
         headers: {
@@ -269,7 +269,6 @@ export default function MiniDrawer({ open,setOpen }) {
     }
     if (response.ok) {
         const data = await response.json();
-        console.log(data);
         setName(data.name);
         setUid(data.uid);
         if (data.photo) {

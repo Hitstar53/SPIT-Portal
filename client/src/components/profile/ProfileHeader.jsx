@@ -35,7 +35,7 @@ const ProfileHeader = (props) => {
     setProfileInfo((prev)=>({...prev,photo:base64}))
     const updateProfilePic = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/student/photo",
+        `${ServerUrl}/api/student/photo`,
         {
           method: "PUT",
           headers: {

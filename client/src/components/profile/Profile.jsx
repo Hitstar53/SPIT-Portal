@@ -5,6 +5,7 @@ import ProfileHeader from "./ProfileHeader";
 import PersonalInfo from "./PersonalInfo";
 import ParentalInfo from "./ParentalInfo";
 import EduInfo from "./EduInfo";
+import ServerUrl from "../../constants";
 
 const Profile = () => {
   const data = useLoaderData();
@@ -22,7 +23,7 @@ export default Profile;
 
 export async function loader() {
   const response1 = await fetch(
-    "http://localhost:8000/api/student/getPersonal",
+    `${ServerUrl}/api/student/getPersonal`,
     {
       method: "PUT",
       headers: {
@@ -34,7 +35,7 @@ export async function loader() {
     }
   );
   const response2 = await fetch(
-    "http://localhost:8000/api/student/getParental",
+    `${ServerUrl}/api/student/getParental`,
     {
       method: "PUT",
       headers: {
@@ -46,7 +47,7 @@ export async function loader() {
     }
   );
   const response3 = await fetch(
-    "http://localhost:8000/api/student/getMiniDrawer",
+    `${ServerUrl}/api/student/getMiniDrawer`,
     {
       method: "PUT",
       headers: {
@@ -58,7 +59,7 @@ export async function loader() {
     }
   );
   const response4 = await fetch(
-    "http://localhost:8000/api/student/getEdu",
+    `${ServerUrl}/api/student/getEdu`,
     {
       method: "PUT",
       headers: {

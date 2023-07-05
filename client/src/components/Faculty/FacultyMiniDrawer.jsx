@@ -85,6 +85,16 @@ const sidebardata = [
     icon: <i className="fas fa-house"></i>,
     sub: [],
   },
+  {
+    text: "Announcements",
+    icon: <i className="fas fa-bullhorn"></i>,
+    sub: [],
+  },
+  {
+    text: "Search Filters",
+    icon: <i className="fas fa-filter"></i>,
+    sub: ["Academic", "Project", "Professional", "Informational"],
+  },
 ];
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -285,7 +295,7 @@ export default function AdminMiniDrawer() {
               }}
             >
               {!isMobile && (
-                <span style={{ fontSize: 24 }}>Admin Dashboard</span>
+                <span style={{ fontSize: 24 }}>Faculty Name</span>
               )}
             </span>
             <img
@@ -321,7 +331,7 @@ export default function AdminMiniDrawer() {
               <span style={{ fontSize: 18 }}>SPIT</span>
               <br />
               <span style={{ fontSize: 14, marginRight: 20 }}>
-                Student Portal
+                Faculty Portal
               </span>
             </span>
           </h1>
@@ -373,7 +383,7 @@ export default function AdminMiniDrawer() {
                     </ListItemIcon>
                     <Link
                       to={
-                        index == 0 || index == 4
+                        index == 0 || index == 1
                           ? data.text.toLowerCase()
                           : location.pathname
                       }
@@ -388,7 +398,7 @@ export default function AdminMiniDrawer() {
                       )}
                     </Link>
                     {open ? (
-                      index != 0 && index != 4 ? (
+                      index != 0 && index != 1 ? (
                         openSub[index] ? (
                           <ExpandLess />
                         ) : (
@@ -407,7 +417,7 @@ export default function AdminMiniDrawer() {
                     {data.sub.map((heading, index2) => {
                       return (
                         <ListItemButton sx={{ pl: 8 }} key={index2}>
-                          <Link to={"/student/" + heading.toLowerCase()}>
+                          <Link to={"/faculty/" + heading.toLowerCase()}>
                             <ListItemText
                               sx={{ pl: 1, color: "var(--text-light)" }}
                               primary={heading}

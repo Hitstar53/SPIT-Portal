@@ -4,6 +4,7 @@ import SkillSet from './SkillSet'
 import Projects from './Projects'
 import Research from './Research'
 import styles from './Portfolio.module.css'
+import ServerUrl from '../../../constants'
 
 const Portfolio = () => {
   const container = styles.container + " flex flex-col gap-8 p-8"
@@ -28,7 +29,7 @@ const Portfolio = () => {
 export default Portfolio
 
 export async function loader() {
-  const response1 = await fetch("http://localhost:8000/api/student/getSkills", {
+  const response1 = await fetch(`${ServerUrl}/api/student/getSkills`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -38,7 +39,7 @@ export async function loader() {
     }),
   });
   const response2 = await fetch(
-    "http://localhost:8000/api/student/getProjects",
+    `${ServerUrl}/api/student/getProjects`,
     {
       method: "PUT",
       headers: {
@@ -50,7 +51,7 @@ export async function loader() {
     }
   );
   const response3 = await fetch(
-    "http://localhost:8000/api/student/getResearch",
+    `${ServerUrl}/api/student/getResearch`,
     {
       method: "PUT",
       headers: {

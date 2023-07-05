@@ -19,8 +19,11 @@ import RootLayout from './pages/RootLayout';
 import FacultyLayout from './pages/FacultyLayout';
 import ErrorPage from './pages/ErrorPage';
 import Faculty from './components/Faculty/Faculty';
+import Announcements from './components/Faculty/Announcements';
+import Info from './components/Faculty/SearchFilters/Info';
+import Professional from './components/Faculty/SearchFilters/Professional';
+import Project from './components/Faculty/SearchFilters/Project';
 import './App.css';
-
 
 const router = createBrowserRouter([
   {
@@ -74,7 +77,13 @@ const router = createBrowserRouter([
       {
         path: "faculty",
         element: <FacultyLayout />,
-        children: [{ path: "home", element: <Faculty /> }],
+        children: [
+          { path: "home", element: <Faculty /> },
+          { path: "announcements", element: <Announcements /> },
+          { path: "informational", element: <Info /> },
+          { path: "professional", element: <Professional /> },
+          { path: "project", element: <Project /> },
+        ],
       },
     ],
   },
