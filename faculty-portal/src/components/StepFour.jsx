@@ -1,9 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from '../context/UserContext';
 import { useForm } from 'react-hook-form';
 import Table from "react-bootstrap/Table";
 import { Toaster, toast } from "react-hot-toast";
+import axios from "axios";
+import CircularProgress from '@mui/material/CircularProgress';
 
-function StepFour({ setDimension4, handleNext }) {
+function StepFour({ setDimension4, handleNext, yr }) {
+  const { user } = useContext(UserContext);
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const getData = async () => {
+      await axios.post('http://localhost:5000/api/faculty/appraisal/get/dim4',
+        { name: user.fullName, yearofAssesment: yr }
+      ).then((res) => {
+        console.log(res.data)
+        localStorage.setItem("dim4Data", JSON.stringify(res.data))
+        const storedData = localStorage.getItem("dim4Data")
+        console.log(storedData)
+        if(storedData) {
+          Object.keys(JSON.parse(storedData)).map((key) => {
+            setValue(key, JSON.parse(storedData)[key])
+          })
+        }
+        setLoading(false)
+      }).catch((err) => {
+        console.log(err)
+      })
+    }
+    getData()
+  }, []);
+
+
   const {
     register,
     handleSubmit,
@@ -14,35 +43,26 @@ function StepFour({ setDimension4, handleNext }) {
   });
 
   const onSubmit = (data) => {
-    // console.log(data)
+    console.log(data);
     setDimension4(data)
     localStorage.setItem('dim4Data', JSON.stringify(data));
-    // sendToServer()
-    handleNext()
+    axios.post('http://localhost:5000/api/faculty/appraisal/dim4',
+      { yearofAssesment: yr, faculty: user, Dimension4: data }
+    ).then((res) => {
+      console.log(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
     toast.success('Form submitted successfully!');
+    // handleNext()
   };
 
-  useEffect(() => {
-    const getData = async () => {
-      await axios.post('http://localhost:5000/api/faculty/appraisal/get/dim4',
-        { name: user.fullName, yearofAssesment: yr }
-      ).then((res) => {
-        console.log(res.data)
-        const storedData = res.data
-        if (storedData) {
-          Object.keys(storedData).forEach((key) => {
-            setValue(key, storedData[key]);
-          });
-        }
-      }).catch((err) => {
-        console.log(err)
-      })
-    }
-    getData()
-  }, []);
 
   return (
-    <div>
+    <>
+    {loading ? <CircularProgress color="success"/> : 
+    (
+      <div>
       <h1>StepFour</h1>
       <div>
         <Toaster />
@@ -71,37 +91,37 @@ function StepFour({ setDimension4, handleNext }) {
                   <input
                     className="form-input"
                     type="number"
-                    {...register("Dimension4.feedbackMarks.A", { required: true, max: 25 })}
+                    {...register("feedbackMarks.A", { required: true, max: 25 })}
                   />
-                  {errors.Dimension4?.feedbackMarks?.A?.type === "required" && "Marks is required"}
-                  {errors.Dimension4?.feedbackMarks?.A?.type === "max" && "Marks should be less than or equal to 25"}
+                  {errors.feedbackMarks?.A?.type === "required" && "Marks is required"}
+                  {errors.feedbackMarks?.A?.type === "max" && "Marks should be less than or equal to 25"}
                 </td>
                 <td className='table-header text-center align-middle'>
                   <input
                     className="form-input"
                     type="number"
-                    {...register("Dimension4.feedbackMarks.B", { required: true, max: 25 })}
+                    {...register("feedbackMarks.B", { required: true, max: 25 })}
                   />
-                  {errors.Dimension4?.feedbackMarks?.B?.type === "required" && "Marks is required"}
-                  {errors.Dimension4?.feedbackMarks?.B?.type === "max" && "Marks should be less than or equal to 25"}
+                  {errors.feedbackMarks?.B?.type === "required" && "Marks is required"}
+                  {errors.feedbackMarks?.B?.type === "max" && "Marks should be less than or equal to 25"}
                 </td>
                 <td className='table-header text-center align-middle'>
                   <input
                     className="form-input"
                     type="number"
-                    {...register("Dimension4.feedbackMarks.C", { required: true, max: 25 })}
+                    {...register("feedbackMarks.C", { required: true, max: 25 })}
                   />
-                  {errors.Dimension4?.feedbackMarks?.C?.type === "required" && "Marks is required"}
-                  {errors.Dimension4?.feedbackMarks?.C?.type === "max" && "Marks should be less than or equal to 25"}
+                  {errors.feedbackMarks?.C?.type === "required" && "Marks is required"}
+                  {errors.feedbackMarks?.C?.type === "max" && "Marks should be less than or equal to 25"}
                 </td>
                 <td className='table-header text-center align-middle'>
                   <input
                     className="form-input"
                     type="number"
-                    {...register("Dimension4.feedbackMarks.D", { required: true, max: 25 })}
+                    {...register("feedbackMarks.D", { required: true, max: 25 })}
                   />
-                  {errors.Dimension4?.feedbackMarks?.D?.type === "required" && "Marks is required"}
-                  {errors.Dimension4?.feedbackMarks?.D?.type === "max" && "Marks should be less than or equal to 25"}
+                  {errors.feedbackMarks?.D?.type === "required" && "Marks is required"}
+                  {errors.feedbackMarks?.D?.type === "max" && "Marks should be less than or equal to 25"}
                 </td>
               </tr>
             </tbody>
@@ -112,6 +132,8 @@ function StepFour({ setDimension4, handleNext }) {
         </form>
       </div>
     </div>
+    )}
+    </>
   );
 }
 

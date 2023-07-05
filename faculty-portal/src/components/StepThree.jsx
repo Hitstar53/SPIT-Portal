@@ -1,12 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
+import { UserContext } from '../context/UserContext';
 import { ip1, ip2, dp1 } from "../data/Dim3";
 import "../styles/Appraisal3.css";
 import Table from "react-bootstrap/Table";
 import DeleteIcon from "@mui/icons-material/Delete";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import CircularProgress from '@mui/material/CircularProgress';
 
-function StepThree({setDimension3}) {
-  const { register, control, handleSubmit } = useForm();
+function StepThree({setDimension3, yr}) {
+  const { user } = useContext(UserContext);
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const getData = async () => {
+      await axios.post('http://localhost:5000/api/faculty/appraisal/get/dim3',
+        { name: user.fullName, yearofAssesment: yr }
+      ).then((res) => {
+        console.log(res.data)
+        localStorage.setItem("dim3Data", JSON.stringify(res.data))
+        const storedData = localStorage.getItem("dim3Data")
+        console.log(storedData)
+        if(storedData) {
+          Object.keys(JSON.parse(storedData)).map((key) => {
+            setValue(key, JSON.parse(storedData)[key])
+          })
+        }
+        setLoading(false)
+      }).catch((err) => {
+        console.log(err)
+      })
+    }
+    getData()
+  }, []);
+
+  const { register, control, handleSubmit, setValue } = useForm({
+    defaultValues: JSON.parse(localStorage.getItem("dim3Data")) || {},
+  });
+
   const {
     fields: organizedFields,
     append: appendOrganized,
@@ -59,26 +91,18 @@ function StepThree({setDimension3}) {
   const onSubmit = (data) => {
     console.log(data);
     setDimension3(data)
+    localStorage.setItem('dim3Data', JSON.stringify(data));
+    axios.post('http://localhost:5000/api/faculty/appraisal/dim3',
+      { yearofAssesment: yr, faculty: user, Dimension3: data }
+    ).then((res) => {
+      console.log(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
+    toast.success('Form submitted successfully!');
   };
 
-  useEffect(() => {
-    const getData = async () => {
-      await axios.post('http://localhost:5000/api/faculty/appraisal/get/dim3',
-        { name: user.fullName, yearofAssesment: yr }
-      ).then((res) => {
-        console.log(res.data)
-        const storedData = res.data
-        if (storedData) {
-          Object.keys(storedData).forEach((key) => {
-            setValue(key, storedData[key]);
-          });
-        }
-      }).catch((err) => {
-        console.log(err)
-      })
-    }
-    getData()
-  }, []);
+
 
   // useEffect(() => {
   //   console.log(dimension3);
@@ -88,7 +112,10 @@ function StepThree({setDimension3}) {
   
 
   return (
-    <form className="stepThree" onSubmit={handleSubmit(onSubmit)}>
+    <>
+    {loading ? <CircularProgress color="success"/> : 
+    (
+      <form className="stepThree" onSubmit={handleSubmit(onSubmit)}>
       <h2 className="table-title">Administrative role executed</h2>
       <div className="dim3-table">
         <div className="tab">
@@ -587,6 +614,8 @@ function StepThree({setDimension3}) {
         style={{ display: "block", width: "100px" }}
       />
     </form>
+    )}
+    </>
   );
 }
 
