@@ -684,6 +684,10 @@ const appraisalSchema = new mongoose.Schema({
             default: 0,
         },
     },
+    isSubmitted: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const Appraisal = mongoose.model('Appraisal', appraisalSchema);

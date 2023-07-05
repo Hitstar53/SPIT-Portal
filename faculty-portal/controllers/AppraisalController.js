@@ -597,44 +597,44 @@ const setAppraisal = asyncHandler(async (req, res) => {
 
 const setDim1 = asyncHandler(async (req, res) => {
     try {
-      const { yearofAssesment, faculty, Dimension1 } = req.body;
-      var updatedApp = null;
-  
-      const existingFaculty = await Appraisal.findOne({
-        facultyName: faculty.fullName,
-        yearofAssesment: yearofAssesment,
-      });
-  
-      if (existingFaculty) {
-         updatedApp = await Appraisal.findOneAndUpdate(
-          { _id: existingFaculty._id },
-          { $set: { Dimension1: Dimension1 } }
-        );
-      } else {
-        updatedApp = await Appraisal.create({
-          facultyName: faculty.fullName,
-          department: faculty.department,
-          designation: faculty.designation,
-          yearofAssesment: yearofAssesment,
-          Dimension1: Dimension1,
+        const { yearofAssesment, faculty, Dimension1 } = req.body;
+        var updatedApp = null;
+
+        const existingFaculty = await Appraisal.findOne({
+            facultyName: faculty.fullName,
+            yearofAssesment: yearofAssesment,
         });
-      }
-  
-      res.status(200).json(updatedApp);
+
+        if (existingFaculty) {
+            updatedApp = await Appraisal.findOneAndUpdate(
+                { _id: existingFaculty._id },
+                { $set: { Dimension1: Dimension1 } }
+            );
+        } else {
+            updatedApp = await Appraisal.create({
+                facultyName: faculty.fullName,
+                department: faculty.department,
+                designation: faculty.designation,
+                yearofAssesment: yearofAssesment,
+                Dimension1: Dimension1,
+            });
+        }
+
+        res.status(200).json(updatedApp);
     } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: 'Internal Server Error' });
+        console.log(error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-  });
-  
-const getDim1 = asyncHandler(async(req,res) => {
+});
+
+const getDim1 = asyncHandler(async (req, res) => {
     try {
         const { name, yearofAssesment } = req.body
         const facultyInfo = await Appraisal.findOne({
             facultyName: name,
             yearofAssesment: yearofAssesment,
         })
-        if(facultyInfo) {
+        if (facultyInfo) {
             res.status(200).json(facultyInfo.Dimension1)
         }
         else {
@@ -649,42 +649,42 @@ const setDim2 = asyncHandler(async (req, res) => {
     try {
         const { yearofAssesment, faculty, Dimension2 } = req.body;
         var updatedApp = null;
-    
+
         const existingFaculty = await Appraisal.findOne({
-          facultyName: faculty.fullName,
-          yearofAssesment: yearofAssesment,
-        });
-    
-        if (existingFaculty) {
-           updatedApp = await Appraisal.findOneAndUpdate(
-            { _id: existingFaculty._id },
-            { $set: { Dimension2: Dimension2 } }
-          );
-        } else {
-          updatedApp = await Appraisal.create({
             facultyName: faculty.fullName,
-            department: faculty.department,
-            designation: faculty.designation,
             yearofAssesment: yearofAssesment,
-            Dimension2: Dimension2,
-          });
+        });
+
+        if (existingFaculty) {
+            updatedApp = await Appraisal.findOneAndUpdate(
+                { _id: existingFaculty._id },
+                { $set: { Dimension2: Dimension2 } }
+            );
+        } else {
+            updatedApp = await Appraisal.create({
+                facultyName: faculty.fullName,
+                department: faculty.department,
+                designation: faculty.designation,
+                yearofAssesment: yearofAssesment,
+                Dimension2: Dimension2,
+            });
         }
-    
+
         res.status(200).json(updatedApp);
-      } catch (error) {
+    } catch (error) {
         console.log(error);
         res.status(500).json({ error: 'Internal Server Error' });
-      }
+    }
 })
 
-const getDim2 = asyncHandler(async(req,res) => {
+const getDim2 = asyncHandler(async (req, res) => {
     try {
         const { name, yearofAssesment } = req.body
         const facultyInfo = await Appraisal.findOne({
             facultyName: name,
             yearofAssesment: yearofAssesment,
         })
-        if(facultyInfo) {
+        if (facultyInfo) {
             res.status(200).json(facultyInfo.Dimension2)
         }
         else {
@@ -699,42 +699,42 @@ const setDim3 = asyncHandler(async (req, res) => {
     try {
         const { yearofAssesment, faculty, Dimension3 } = req.body;
         var updatedApp = null;
-    
+
         const existingFaculty = await Appraisal.findOne({
-          facultyName: faculty.fullName,
-          yearofAssesment: yearofAssesment,
-        });
-    
-        if (existingFaculty) {
-           updatedApp = await Appraisal.findOneAndUpdate(
-            { _id: existingFaculty._id },
-            { $set: { Dimension3: Dimension3 } }
-          );
-        } else {
-          updatedApp = await Appraisal.create({
             facultyName: faculty.fullName,
-            department: faculty.department,
-            designation: faculty.designation,
             yearofAssesment: yearofAssesment,
-            Dimension3: Dimension3,
-          });
+        });
+
+        if (existingFaculty) {
+            updatedApp = await Appraisal.findOneAndUpdate(
+                { _id: existingFaculty._id },
+                { $set: { Dimension3: Dimension3 } }
+            );
+        } else {
+            updatedApp = await Appraisal.create({
+                facultyName: faculty.fullName,
+                department: faculty.department,
+                designation: faculty.designation,
+                yearofAssesment: yearofAssesment,
+                Dimension3: Dimension3,
+            });
         }
-    
+
         res.status(200).json(updatedApp);
-      } catch (error) {
+    } catch (error) {
         console.log(error);
         res.status(500).json({ error: 'Internal Server Error' });
-      }
+    }
 })
 
-const getDim3 = asyncHandler(async(req,res) => {
+const getDim3 = asyncHandler(async (req, res) => {
     try {
         const { name, yearofAssesment } = req.body
         const facultyInfo = await Appraisal.findOne({
             facultyName: name,
             yearofAssesment: yearofAssesment,
         })
-        if(facultyInfo) {
+        if (facultyInfo) {
             res.status(200).json(facultyInfo.Dimension3)
         }
         else {
@@ -749,42 +749,42 @@ const setDim4 = asyncHandler(async (req, res) => {
     try {
         const { yearofAssesment, faculty, Dimension4 } = req.body;
         var updatedApp = null;
-    
+
         const existingFaculty = await Appraisal.findOne({
-          facultyName: faculty.fullName,
-          yearofAssesment: yearofAssesment,
-        });
-    
-        if (existingFaculty) {
-           updatedApp = await Appraisal.findOneAndUpdate(
-            { _id: existingFaculty._id },
-            { $set: { Dimension4: Dimension4 } }
-          );
-        } else {
-          updatedApp = await Appraisal.create({
             facultyName: faculty.fullName,
-            department: faculty.department,
-            designation: faculty.designation,
             yearofAssesment: yearofAssesment,
-            Dimension4: Dimension4,
-          });
+        });
+
+        if (existingFaculty) {
+            updatedApp = await Appraisal.findOneAndUpdate(
+                { _id: existingFaculty._id },
+                { $set: { Dimension4: Dimension4 } }
+            );
+        } else {
+            updatedApp = await Appraisal.create({
+                facultyName: faculty.fullName,
+                department: faculty.department,
+                designation: faculty.designation,
+                yearofAssesment: yearofAssesment,
+                Dimension4: Dimension4,
+            });
         }
-    
+
         res.status(200).json(updatedApp);
-      } catch (error) {
+    } catch (error) {
         console.log(error);
         res.status(500).json({ error: 'Internal Server Error' });
-      }
+    }
 })
 
-const getDim4 = asyncHandler(async(req,res) => {
+const getDim4 = asyncHandler(async (req, res) => {
     try {
         const { name, yearofAssesment } = req.body
         const facultyInfo = await Appraisal.findOne({
             facultyName: name,
             yearofAssesment: yearofAssesment,
         })
-        if(facultyInfo) {
+        if (facultyInfo) {
             res.status(200).json(facultyInfo.Dimension4)
         }
         else {
