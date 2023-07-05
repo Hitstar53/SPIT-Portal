@@ -25,6 +25,17 @@ const StepOne = ({ setDimension1, yr }) => {
     { value: '8', label: 'VIII' },
   ];
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    control,
+    reset
+  } = useForm({
+    defaultValues: JSON.parse(localStorage.getItem("dim1Data")) || {},
+  });
+
   useEffect(() => {
     const getData = async () => {
       await axios.post('http://localhost:5000/api/faculty/appraisal/get/dim1',
@@ -32,6 +43,7 @@ const StepOne = ({ setDimension1, yr }) => {
       ).then((res) => {
         console.log(res.data)
         localStorage.setItem("dim1Data", JSON.stringify(res.data))
+        reset(JSON.parse(localStorage.getItem("dim1Data")))
         const storedData = localStorage.getItem("dim1Data")
         console.log(storedData)
         if(storedData) {
@@ -47,15 +59,6 @@ const StepOne = ({ setDimension1, yr }) => {
     getData()
   }, []);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    control,
-  } = useForm({
-    defaultValues: JSON.parse(localStorage.getItem("dim1Data")) || {},
-  });
 
   const {
     fields: courseFields,

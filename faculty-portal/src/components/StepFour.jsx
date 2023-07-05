@@ -17,6 +17,7 @@ function StepFour({ setDimension4, handleNext, yr }) {
       ).then((res) => {
         console.log(res.data)
         localStorage.setItem("dim4Data", JSON.stringify(res.data))
+        reset(JSON.parse(localStorage.getItem('dim4Data')))
         const storedData = localStorage.getItem("dim4Data")
         console.log(storedData)
         if(storedData) {
@@ -38,6 +39,7 @@ function StepFour({ setDimension4, handleNext, yr }) {
     handleSubmit,
     formState: { errors },
     setValue,
+    reset
   } = useForm({
     defaultValues: JSON.parse(localStorage.getItem('dim4Data')) || {},
   });

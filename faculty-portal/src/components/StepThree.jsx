@@ -12,6 +12,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 function StepThree({setDimension3, yr}) {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(true)
+  const { register, control, handleSubmit, setValue, reset } = useForm({
+    defaultValues: JSON.parse(localStorage.getItem("dim3Data")) || {},
+  });
 
   useEffect(() => {
     const getData = async () => {
@@ -20,6 +23,7 @@ function StepThree({setDimension3, yr}) {
       ).then((res) => {
         console.log(res.data)
         localStorage.setItem("dim3Data", JSON.stringify(res.data))
+        reset(JSON.parse(localStorage.getItem("dim3Data")))
         const storedData = localStorage.getItem("dim3Data")
         console.log(storedData)
         if(storedData) {
@@ -35,9 +39,6 @@ function StepThree({setDimension3, yr}) {
     getData()
   }, []);
 
-  const { register, control, handleSubmit, setValue } = useForm({
-    defaultValues: JSON.parse(localStorage.getItem("dim3Data")) || {},
-  });
 
   const {
     fields: organizedFields,

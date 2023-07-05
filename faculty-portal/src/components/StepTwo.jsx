@@ -11,6 +11,10 @@ function StepTwo({setDimension2, yr}) {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(true)
 
+  const { register, control, handleSubmit, setValue, getValues, reset } = useForm({
+    defaultValues: JSON.parse(localStorage.getItem("dim2Data")) || {},
+  });
+
   useEffect(() => {
     const getData = async () => {
       await axios.post('http://localhost:5000/api/faculty/appraisal/get/dim2',
@@ -18,6 +22,7 @@ function StepTwo({setDimension2, yr}) {
       ).then((res) => {
         console.log(res.data)
         localStorage.setItem("dim2Data", JSON.stringify(res.data))
+        reset(JSON.parse(localStorage.getItem("dim2Data")))
         const storedData = localStorage.getItem("dim2Data")
         console.log(storedData)
         if(storedData) {
@@ -33,9 +38,6 @@ function StepTwo({setDimension2, yr}) {
     getData()
   }, []);
 
-  const { register, control, handleSubmit, setValue, getValues } = useForm({
-    defaultValues: JSON.parse(localStorage.getItem("dim2Data")) || {},
-  });
 
   const {
     fields: paperFields,
