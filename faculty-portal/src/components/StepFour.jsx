@@ -127,7 +127,7 @@ function StepFour({ setDimension4, handleNext, yr }) {
             </tbody>
           </Table>
           <button className="btn btn-primary submit-btn" type="submit">
-            Submit
+          Save Changes
           </button>
         </form>
       </div>
