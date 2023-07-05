@@ -15,17 +15,18 @@ const getAppraisal = asyncHandler(async (req, res) => {
         console.log(appraisal);
         if (appraisal) {
             res.json(appraisal);
-        } else {
-            // res.status(404).json({ message: "Appraisal not found" });
-            const newAppraisal = await Appraisal.create({
-                yearofAssesment,
-                facultyName,
-                department,
-                designation,
-            })
-            res.json(newAppraisal);
+        } 
+        // else {
+        //     // res.status(404).json({ message: "Appraisal not found" });
+        //     const newAppraisal = await Appraisal.create({
+        //         yearofAssesment,
+        //         facultyName,
+        //         department,
+        //         designation,
+        //     })
+        //     res.json(newAppraisal);
 
-        }
+        // }
     } catch (error) {
         res.status(500).json({ message: "Server Error" });
     }
@@ -573,20 +574,20 @@ const setAppraisal = asyncHandler(async (req, res) => {
         // });
         // const savedAppraisal = await newAppraisal.save();
 
-        const appraisal = await Appraisal.findOne({ facultyName: facultyName, yearofAssesment: yearofAssesment });
-        if (appraisal) {
-            appraisal.yearofAssesment = yearofAssesment;
-            appraisal.facultyName = facultyName;
-            appraisal.department = department;
-            appraisal.designation = designation;
-            appraisal.Dimension1 = Dimension1;
-            appraisal.Dimension2 = Dimension2;
-            appraisal.Dimension3 = Dimension3;
-            appraisal.Dimension4 = Dimension4;
-            appraisal.finalGrandTotal = finalGrandTotal;
-        } else {
-            res.status(404).send('🤦‍♂️🤦‍♂️🤦‍♂️🙅‍♂️🙅‍♂️🙅‍♂️');
-        }
+        // const appraisal = await Appraisal.findOne({ facultyName: facultyName, yearofAssesment: yearofAssesment });
+        // if (appraisal) {
+        //     appraisal.yearofAssesment = yearofAssesment;
+        //     appraisal.facultyName = facultyName;
+        //     appraisal.department = department;
+        //     appraisal.designation = designation;
+        //     appraisal.Dimension1 = Dimension1;
+        //     appraisal.Dimension2 = Dimension2;
+        //     appraisal.Dimension3 = Dimension3;
+        //     appraisal.Dimension4 = Dimension4;
+        //     appraisal.finalGrandTotal = finalGrandTotal;
+        // } else {
+        //     res.status(404).send('🤦‍♂️🤦‍♂️🤦‍♂️🙅‍♂️🙅‍♂️🙅‍♂️');
+        // }
 
         res.status(200).json(appraisal);
     } catch (error) {
