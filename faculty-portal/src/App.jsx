@@ -52,7 +52,7 @@ const App = () => {
                 <Route path="/edit-profile" element={<ProfileForm />} />
                 <Route path="/history" element={<History />} />
                 <Route path="/view-history/:id" element={<ViewHistory/>} />
-                <Route path="*" element={<h1>Page Not Found </h1>} />
+                <Route path="*" element={<h1>Page Not Found</h1>} />
               </Routes>
             </Router>
           </Box>
