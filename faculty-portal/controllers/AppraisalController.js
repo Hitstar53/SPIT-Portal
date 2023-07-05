@@ -6,16 +6,14 @@ const { error } = require("console");
 const getAppraisal = asyncHandler(async (req, res) => {
     console.log("Inside getAppraisal");
     try {
-        var { yearofAssesment, facultyName, department, designation } = req.body;
+        var { yearofAssesment, facultyName } = req.body;
         console.log(yearofAssesment);
         console.log(facultyName);
-        console.log(department);
-        console.log(designation);
         const appraisal = await Appraisal.findOne({ yearofAssesment, facultyName });
         console.log(appraisal);
         if (appraisal) {
             res.json(appraisal);
-        } 
+        }
         // else {
         //     // res.status(404).json({ message: "Appraisal not found" });
         //     const newAppraisal = await Appraisal.create({
@@ -29,6 +27,20 @@ const getAppraisal = asyncHandler(async (req, res) => {
         // }
     } catch (error) {
         res.status(500).json({ message: "Server Error" });
+    }
+})
+const getAllAppraisal = asyncHandler(async (req, res) => {
+    console.log("Inside getAllAppraisal");
+    try {
+        var { facultyName } = req.body;
+        console.log(facultyName);
+        const appraisals = await Appraisal.find({ facultyName }, { yearofAssesment: 1 });
+        console.log(appraisals);
+        if (appraisals) {
+            res.json(appraisals);
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Server Error in getAllAppraisals" });
     }
 })
 
@@ -806,4 +818,6 @@ module.exports = {
     getDim3,
     setDim4,
     getDim4,
+    getAppraisal,
+    getAllAppraisal,
 }
