@@ -608,12 +608,15 @@ function StepThree({setDimension3, yr}) {
         Add Collaboration
       </button>
 
-      <input
+      {/* <input
         className="btn btn-primary"
         type="submit"
         value="Save Changes"
         style={{ display: "block", width: "100px" }}
-      />
+      /> */}
+      <button style={{display:'block'}} className="btn btn-primary submit-btn" type="submit">
+          Save Changes
+          </button>
     </form>
     )}
     </>
