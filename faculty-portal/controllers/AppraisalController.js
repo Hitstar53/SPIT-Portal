@@ -627,6 +627,23 @@ const setDim1 = asyncHandler(async (req, res) => {
     }
   });
   
+const getDim1 = asyncHandler(async(req,res) => {
+    try {
+        const { name, yearofAssesment } = req.body
+        const facultyInfo = await Appraisal.findOne({
+            facultyName: name,
+            yearofAssesment: yearofAssesment,
+        })
+        if(facultyInfo) {
+            res.status(200).json(facultyInfo.Dimension1)
+        }
+        else {
+            res.status(404)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 const setDim2 = asyncHandler(async (req, res) => {
     try {
@@ -660,18 +677,132 @@ const setDim2 = asyncHandler(async (req, res) => {
       }
 })
 
-const setDim3 = asyncHandler(async (req, res) => {
+const getDim2 = asyncHandler(async(req,res) => {
+    try {
+        const { name, yearofAssesment } = req.body
+        const facultyInfo = await Appraisal.findOne({
+            facultyName: name,
+            yearofAssesment: yearofAssesment,
+        })
+        if(facultyInfo) {
+            res.status(200).json(facultyInfo.Dimension2)
+        }
+        else {
+            res.status(404)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+})
 
+const setDim3 = asyncHandler(async (req, res) => {
+    try {
+        const { yearofAssesment, faculty, Dimension3 } = req.body;
+        var updatedApp = null;
+    
+        const existingFaculty = await Appraisal.findOne({
+          facultyName: faculty.fullName,
+          yearofAssesment: yearofAssesment,
+        });
+    
+        if (existingFaculty) {
+           updatedApp = await Appraisal.findOneAndUpdate(
+            { _id: existingFaculty._id },
+            { $set: { Dimension3: Dimension3 } }
+          );
+        } else {
+          updatedApp = await Appraisal.create({
+            facultyName: faculty.fullName,
+            department: faculty.department,
+            designation: faculty.designation,
+            yearofAssesment: yearofAssesment,
+            Dimension3: Dimension3,
+          });
+        }
+    
+        res.status(200).json(updatedApp);
+      } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
+})
+
+const getDim3 = asyncHandler(async(req,res) => {
+    try {
+        const { name, yearofAssesment } = req.body
+        const facultyInfo = await Appraisal.findOne({
+            facultyName: name,
+            yearofAssesment: yearofAssesment,
+        })
+        if(facultyInfo) {
+            res.status(200).json(facultyInfo.Dimension3)
+        }
+        else {
+            res.status(404)
+        }
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 const setDim4 = asyncHandler(async (req, res) => {
+    try {
+        const { yearofAssesment, faculty, Dimension4 } = req.body;
+        var updatedApp = null;
+    
+        const existingFaculty = await Appraisal.findOne({
+          facultyName: faculty.fullName,
+          yearofAssesment: yearofAssesment,
+        });
+    
+        if (existingFaculty) {
+           updatedApp = await Appraisal.findOneAndUpdate(
+            { _id: existingFaculty._id },
+            { $set: { Dimension4: Dimension4 } }
+          );
+        } else {
+          updatedApp = await Appraisal.create({
+            facultyName: faculty.fullName,
+            department: faculty.department,
+            designation: faculty.designation,
+            yearofAssesment: yearofAssesment,
+            Dimension4: Dimension4,
+          });
+        }
+    
+        res.status(200).json(updatedApp);
+      } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
+})
 
+const getDim4 = asyncHandler(async(req,res) => {
+    try {
+        const { name, yearofAssesment } = req.body
+        const facultyInfo = await Appraisal.findOne({
+            facultyName: name,
+            yearofAssesment: yearofAssesment,
+        })
+        if(facultyInfo) {
+            res.status(200).json(facultyInfo.Dimension4)
+        }
+        else {
+            res.status(404)
+        }
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 module.exports = {
     setAppraisal,
     setDim1,
+    getDim1,
     setDim2,
+    getDim2,
     setDim3,
+    getDim3,
     setDim4,
+    getDim4,
 }
