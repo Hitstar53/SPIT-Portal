@@ -600,7 +600,6 @@ const setAppraisal = asyncHandler(async (req, res) => {
         // } else {
         //     res.status(404).send('🤦‍♂️🤦‍♂️🤦‍♂️🙅‍♂️🙅‍♂️🙅‍♂️');
         // }
-
         res.status(200).json(appraisal);
     } catch (error) {
         console.error('Error saving appraisal:', error);
