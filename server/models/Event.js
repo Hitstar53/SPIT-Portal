@@ -9,8 +9,6 @@ const eventSchema = mongoose.Schema({
 {
     collection: 'Event'
 })
-
-
 const Event = mongoose.model('Event', eventSchema);
 
 module.exports = Event;
