@@ -10,7 +10,7 @@ import "../styles/Appraisal.css";
 
 const StepOne = ({ setDimension1, yr }) => {
   const { user } = useContext(UserContext);
-  const [defValue, setDefValue] = useState({})
+  // const [defValue, setDefValue] = useState({})
   const options = [
     { value: '', label: 'Select an option' },
     { value: '1', label: 'I' },
@@ -23,6 +23,27 @@ const StepOne = ({ setDimension1, yr }) => {
     { value: '8', label: 'VIII' },
   ];
 
+  useEffect(() => {
+    const getData = async () => {
+      await axios.post('http://localhost:5000/api/faculty/appraisal/get/dim1',
+        { name: user.fullName, yearofAssesment: yr }
+      ).then((res) => {
+        console.log(res.data)
+        localStorage.setItem("dim1Data", JSON.stringify(res.data))
+        const storedData = localStorage.getItem("dim1Data")
+        console.log(storedData)
+        if(storedData) {
+          Object.keys(JSON.parse(storedData)).map((key) => {
+            setValue(key, JSON.parse(storedData)[key])
+          })
+        }
+      }).catch((err) => {
+        console.log(err)
+      })
+    }
+    getData()
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -30,7 +51,7 @@ const StepOne = ({ setDimension1, yr }) => {
     setValue,
     control,
   } = useForm({
-    defaultValues: defValue || {},
+    defaultValues: JSON.parse(localStorage.getItem("dim1Data")) || {},
   });
 
   const {
