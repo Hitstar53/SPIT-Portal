@@ -52,6 +52,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
         console.log(facultyName);
         const appraisal = await Appraisal.findOne({ yearofAssesment, facultyName });
         console.log(appraisal);
+        appraisal.isSubmitted = true;
         var Dimension1 = appraisal.Dimension1;
         var Dimension2 = appraisal.Dimension2;
         var Dimension3 = appraisal.Dimension3;
@@ -607,6 +608,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
         // } else {
         //     res.status(404).send('🤦‍♂️🤦‍♂️🤦‍♂️🙅‍♂️🙅‍♂️🙅‍♂️');
         // }
+        await appraisal.save();
         res.status(200).json(appraisal);
     } catch (error) {
         console.error('Error saving appraisal:', error);
@@ -657,7 +659,7 @@ const getDim1 = asyncHandler(async (req, res) => {
             res.status(200).json(facultyInfo.Dimension1)
         }
         else {
-            res.status(404)
+            res.status(404).json("Not FOund")
         }
     } catch (error) {
         console.log(error)
