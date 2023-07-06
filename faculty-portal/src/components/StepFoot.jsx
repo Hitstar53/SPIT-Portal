@@ -18,7 +18,6 @@ export default function StepFoot({
     return (
         <Box
             sx={{
-                backgroundColor: "#f5f5f5",
                 display: "flex",
                 flexDirection: "row",
                 pt: 2,
