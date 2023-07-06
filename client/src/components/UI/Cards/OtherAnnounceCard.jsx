@@ -7,25 +7,33 @@ import OtherAnnouncement from "./OtherAnnouncement";
 const data = [
   {
     logo: logo,
-    title: "CSI, S.P.I.T",
+    date: "23/6/2023",
+    title: "Placement Drive 2023",
+    by: "TPO, S.P.I.T",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc",
+  },
+  {
+    logo: logo,
+    date: "3/5/2023",
+    title: "SE Hackathon dates",
+    by: "CSI, S.P.I.T",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc",
   },
   {
     logo: logo,
-    title: "Student Council",
+    date: "15/3/2023",
+    title: "General Championship 2023",
+    by: "Student Council",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc",
   },
   {
     logo: logo,
-    title: "TPO, S.P.I.T",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc",
-  },
-  {
-    logo: logo,
-    title: "E-Cell, S.P.I.T",
+    date: "25/4/2023",
+    title: "E-Cell Encalve 2023",
+    by: "E-Cell, S.P.I.T",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc",
   },

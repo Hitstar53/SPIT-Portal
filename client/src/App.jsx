@@ -19,7 +19,7 @@ import RootLayout from './pages/RootLayout';
 import FacultyLayout from './pages/FacultyLayout';
 import ErrorPage from './pages/ErrorPage';
 import Faculty from './components/Faculty/Faculty';
-import Announcements from './components/Faculty/Announcements';
+import Announcements from './components/Faculty/Announcements/Announcements';
 import Info from './components/Faculty/SearchFilters/Info';
 import Professional from './components/Faculty/SearchFilters/Professional';
 import Project from './components/Faculty/SearchFilters/Project';

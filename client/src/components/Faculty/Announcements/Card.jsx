@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Card.module.css";
-import ScrollModal from '../UI/Modals/ScrollModal'
+import ScrollModal from '../../UI/Modals/ScrollModal'
 
 const AncmntExam = (props) => {
     const [open, setOpen] = useState(false);

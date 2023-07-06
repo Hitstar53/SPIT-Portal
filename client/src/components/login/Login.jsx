@@ -37,7 +37,7 @@ const Login = () => {
         <div className={styles.header}>
           <h1 className={styles.title}>Welcome to the S.P.I.T. Portal</h1>
         </div>
-        <button className={styles.loginButt} onClick={() => login()} disabled>
+        <button className={styles.loginButt} onClick={() => login()} >
           <i
             className="fa-brands fa-google"
             style={{ marginRight: "10px" }}

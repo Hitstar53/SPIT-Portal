@@ -1,6 +1,6 @@
 .card {
     color: var(--text-light);
-    height: 350px;
+    height: 420px;
     border-radius: 2rem;
     background-color: var(--primary-color);
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
@@ -20,10 +20,11 @@
 
 .cardItem {
     display: grid;
+    row-gap: 0.5rem;
     grid-template-columns: 1fr 10fr;
     cursor: pointer;
     border-radius: 2rem;
-    padding: 1rem;
+    padding: 1rem 1.5rem 1rem 1rem;
 }
 
 .cardItem:hover {
@@ -35,20 +36,38 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    grid-row: 1 / 3;
+    grid-row: 1 / 4;
 }
 
 .cardItemHeader {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: 600;
     grid-column: 2 / 3;
     grid-row: 1 / 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cardItemSubHeader {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cardItemSubHeader p {
+    font-size: 1rem;
+    font-weight: 500;
+    opacity: 0.5;
 }
 
 .cardItemContent {
     font-size: 1rem;
     font-weight: 300;
     grid-column: 2 / 3;
+    text-align: justify;
 }
 
 .inner::-webkit-scrollbar {

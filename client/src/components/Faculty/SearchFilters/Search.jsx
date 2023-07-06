@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '@mui/material/Button'
 import styles from './Search.module.css'
 
-const Search = () => {
+const Search = (props) => {
   return (
     <React.Fragment>
       <div className={styles.searchContainer}>
@@ -17,7 +17,11 @@ const Search = () => {
             fontSize: "1rem",
             fontWeight: "bold",
             textTransform: "none",
+            "&:hover": {
+              backgroundColor: "var(--secondary-color)",
+            },
           }}
+          onClick={props.filterHandler}
         >
           filters
         </Button>

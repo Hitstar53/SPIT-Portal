@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaEdit,FaSave } from "react-icons/fa";
 import { TextField } from "@mui/material";
 import Fab from '@mui/material/Fab';
@@ -11,7 +12,7 @@ const ParentalInfo = (props) => {
   const [open, setOpen] = useState(false);
   const [severity, setSeverity] = useState("");
   const [message, setMessage] = useState("");
-
+  const navigate = useNavigate();
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -225,6 +226,40 @@ const ParentalInfo = (props) => {
                 label="Mother Email"
                 type="email"
                 defaultValue={parentalInfo.memail}
+              />
+            )}
+          </div>
+        </div>
+        <div className={styles.PartInfo}>
+          <div className={styles.twoCol}>
+            <i class="fa-solid fa-briefcase"></i>
+            {!edit && (
+              <span className={styles.iconInfo}>{parentalInfo.fprofession}</span>
+            )}
+            {edit && (
+              <TextField
+                name="fprofession"
+                id="outlined-required"
+                onChange={handleChange}
+                label="Father's Profession"
+                type="text"
+                defaultValue={parentalInfo.fprofession}
+              />
+            )}
+          </div>
+          <div className={styles.twoCol}>
+            <i class="fa-solid fa-briefcase"></i>
+            {!edit && (
+              <span className={styles.iconInfo}>{parentalInfo.fprofession}</span>
+            )}
+            {edit && (
+              <TextField
+                name="fprofession"
+                id="outlined-required"
+                onChange={handleChange}
+                label="Father's Profession"
+                type="text"
+                defaultValue={parentalInfo.fprofession}
               />
             )}
           </div>
