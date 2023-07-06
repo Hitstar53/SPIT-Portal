@@ -279,7 +279,7 @@ function StepTwo({ setDimension2, yr }) {
               Add Paper
             </button>
 
-            <h1> RP 2: -Patent/books/Monograms/ MOOC (30 marks)</h1>
+            <h1> RP 2: Patent/books/Monograms/ MOOC (30 marks)</h1>
             {patentFields.length > 0 && (
               <Table striped bordered>
                 <thead>
@@ -585,11 +585,11 @@ function StepTwo({ setDimension2, yr }) {
             <div>
               <h1>RP4: Citations</h1>
               <label className="form-label">
-                Number of citations in the previous calendar year
+                Number of citations in the previous calendar year:
                 <input
                   type="number"
                   {...register(`RP4.number`)}
-                  className="form-input"
+                  className="form-input citation"
                 />
               </label>
             </div>
