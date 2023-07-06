@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from '../context/UserContext';
 import { useForm } from 'react-hook-form';
 import Table from "react-bootstrap/Table";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from 'react-toastify';
 import axios from "axios";
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -52,10 +52,19 @@ function StepFour({ setDimension4, handleNext, yr }) {
       { yearofAssesment: yr, faculty: user, Dimension4: data }
     ).then((res) => {
       console.log(res.data)
+      toast.success('Step Four Saved!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }).catch((err) => {
       console.log(err)
     })
-    toast.success('Form submitted successfully!');
     // handleNext()
   };
 
@@ -67,7 +76,6 @@ function StepFour({ setDimension4, handleNext, yr }) {
       <div>
       <h1>StepFour</h1>
       <div>
-        <Toaster />
         <form className="container" onSubmit={handleSubmit(onSubmit)}>
           <Table striped bordered hover style={{marginTop: "2rem"}}>
             <thead>
