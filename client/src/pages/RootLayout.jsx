@@ -46,11 +46,16 @@ const RootLayout = () => {
               <Backdrop
                 sx={{
                   color: "#fff",
-                  // zIndex: (theme) => theme.zIndex.drawer + 1,
+                  // zIndex: (theme) => theme.zIndex.drawer+1,
+                  marginLeft: open ? "240px" : "0px",
+                  marginTop: "64px",
                 }}
                 open={true}
               >
-                <CircularProgress color="inherit" />
+                <div className='flex flex-col items-center justify-center gap-3'>
+                  <CircularProgress color="inherit" />
+                  Have patience, we are loading your data...
+                </div>
               </Backdrop>
             ) : (
               <Outlet />
