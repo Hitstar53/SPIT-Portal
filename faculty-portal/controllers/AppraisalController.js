@@ -659,7 +659,12 @@ const getDim1 = asyncHandler(async (req, res) => {
             res.status(200).json(facultyInfo.Dimension1)
         }
         else {
-            res.status(404).json("Not FOund")
+            const newappraisal = await Appraisal.create({
+                facultyName: name,
+                yearofAssesment: yearofAssesment,
+
+            })
+            res.json(newappraisal.Dimension1);
         }
     } catch (error) {
         console.log(error)
