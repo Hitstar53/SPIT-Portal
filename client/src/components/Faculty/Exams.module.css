@@ -1,0 +1,14 @@
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.subheading {
+    font-size: 1.7rem;
+    font-weight: 500;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
