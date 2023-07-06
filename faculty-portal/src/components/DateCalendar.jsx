@@ -229,7 +229,7 @@ const DateCalendar = () => {
                 </ModalFooter>
             </Modal>
             <Modal className="modal-main" isOpen={modal2} toggle={toggle2}>
-                <ModalHeader toggle1={toggle1} className="modal-title">
+                <ModalHeader className="modal-title">
                     Event Details
                 </ModalHeader>
                 <ModalBody style={{ overflowY: "scroll", maxHeight: "400px" }}>

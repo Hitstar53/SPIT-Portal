@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { Modal, ModalBody, ModalFooter } from 'reactstrap';
 
-export default function StepFoot({ activeStep, handleBack, handleNext, steps }) {
+export default function StepFoot({ activeStep, handleBack, handleNext, steps , sendToServer }) {
     const [modal, setModal] = useState(false);
 
     const toggle = () => setModal(!modal);
@@ -39,7 +39,7 @@ export default function StepFoot({ activeStep, handleBack, handleNext, steps }) 
                             </div>
                         </ModalBody>
                         <ModalFooter>
-                            <Button sx={{margin: "0 1rem"}} variant="contained" color="success" onClick={toggle}>
+                            <Button sx={{margin: "0 1rem"}} variant="contained" color="success" onClick={sendToServer}>
                                 Submit
                             </Button>{' '}
                             <Button variant="contained" color="error" onClick={toggle}>
