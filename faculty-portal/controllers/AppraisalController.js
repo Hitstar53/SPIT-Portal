@@ -34,7 +34,7 @@ const getAllAppraisal = asyncHandler(async (req, res) => {
     try {
         var { facultyName } = req.body;
         console.log(facultyName);
-        const appraisals = await Appraisal.find({ facultyName }, { yearofAssesment: 1 });
+        const appraisals = await Appraisal.find({ facultyName, isSubmitted: true }, { yearofAssesment: 1 });
         console.log(appraisals);
         if (appraisals) {
             res.json(appraisals);
@@ -48,9 +48,16 @@ const getAllAppraisal = asyncHandler(async (req, res) => {
 const setAppraisal = asyncHandler(async (req, res) => {
     console.log("Inside setAppraisalDim1");
     try {
-        var { yearofAssesment, facultyName, department, designation, Dimension1, Dimension2, Dimension3, Dimension4, finalGrandTotal } = req.body;
-        console.log(Dimension1);
-        //Dimension1 starts
+        var { yearofAssesment, facultyName, department, designation } = req.body;
+        console.log(facultyName);
+        const appraisal = await Appraisal.findOne({ yearofAssesment, facultyName });
+        console.log(appraisal);
+        var Dimension1 = appraisal.Dimension1;
+        var Dimension2 = appraisal.Dimension2;
+        var Dimension3 = appraisal.Dimension3;
+        var Dimension4 = appraisal.Dimension4;
+        var finalGrandTotal = appraisal.finalGrandTotal;
+        //Dimension1 starts 
         var total = 0;
         var avgAP1Marks = 0;
         var avgAP2Marks = 0;
