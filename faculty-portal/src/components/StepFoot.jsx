@@ -39,7 +39,10 @@ export default function StepFoot({ activeStep, handleBack, handleNext, steps , s
                             </div>
                         </ModalBody>
                         <ModalFooter>
-                            <Button sx={{margin: "0 1rem"}} variant="contained" color="success" onClick={sendToServer}>
+                            <Button sx={{margin: "0 1rem"}} variant="contained" color="success" onClick={()=>{
+                                sendToServer()
+                                toggle()
+                                }}>
                                 Submit
                             </Button>{' '}
                             <Button variant="contained" color="error" onClick={toggle}>

@@ -102,7 +102,7 @@ const StepOne = ({ setDimension1, yr }) => {
     console.log(data)
     setDimension1(data)
     axios.post('http://localhost:5000/api/faculty/appraisal/dim1',
-      { yearofAssesment: yr, faculty: user, Dimension1: data }
+      { yearofAssesment: yr, faculty: user, Dimension1: data, department:user.department,designation:user.designation }
     ).then((res) => {
       console.log(res.data)
     }).catch((err) => {
