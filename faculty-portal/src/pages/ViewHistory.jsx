@@ -323,13 +323,14 @@ const ViewHistory = () => {
 
               <table>
                 <thead>
-                  AP8: Remedial teaching for weak students / efforts towards
-                  bright students
+                  AP9:Noteworthy efforts towards enriching the learning
+                  experience / innovation in TLE methods
                   <tr>
                     <th>Sr.No</th>
                     <th>Sem</th>
                     <th>Subject</th>
-                    <th>Activity done for remedial </th>
+                    <th>Activity details </th>
+                    <th>Average of all courses (filled by auditor)</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -339,12 +340,23 @@ const ViewHistory = () => {
                         <td>{index + 1}</td>
                         <td>{course.sem}</td>
                         <td>{course.name}</td>
-                        <td>{course.AP8ActivityRemedial}</td>
+                        <td>{course.AP9noteworthyDetails}</td>
+                        {index === 0 && (
+                          <td
+                            rowSpan={
+                              course.length
+                            }
+                          >
+                            {history.Dimension1.info.AP9Marks}
+                          </td>
+                        )}
                       </tr>
                     );
                   })}
 
-                  <tr>Totals Marks: {history.Dimension1.info.AP8Marks}</tr>
+                  
+
+                  
                 </tbody>
               </table>
             </div>
