@@ -5,6 +5,8 @@ import styles from "./Login.module.css";
 import moodle from "../../assets/moodle.png";
 import logo from "../../assets/spitlogo.jpg";
 import axios from "axios";
+import ServerUrl from "../../constants.js"
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,15 +20,16 @@ const Login = () => {
       })
       .then(res => res.data);
       localStorage.setItem('userinfo', JSON.stringify(userInfo));
-      //Error to be resolved: A faculty can login as a student and vice versa by changing the route in the url
-      const role = await axios.put('http://localhost:8000/api/users/getUsers', {email: userInfo.email}).then(res => res.data.role);
+      const role = await axios.put(`${ServerUrl}/api/users/getUsers`, {email: userInfo.email}).then(res => res.data.role);
       if (role === 'Faculty') {
         navigate('faculty/home');
         localStorage.setItem('isLoggedIn', true);
+        localStorage.setItem('role', role);
       }
       else if (role === 'Student') {
         navigate('student/home');
         localStorage.setItem('isLoggedIn', true);
+        localStorage.setItem('role', role);
       } 
     }
   });

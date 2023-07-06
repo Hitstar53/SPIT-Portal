@@ -38,11 +38,11 @@ const data = [
   },
 ]
 
-const AnnounceCard = () => {
+const AnnounceCard = (props) => {
   return (
     <div className={styles.card}>
       <div className={styles.inner}>
-        {data.map((item, index) => (
+        {props.data.map((item, index) => (
           <Announcement key={index} item={item} />
         ))}
       </div>

@@ -468,7 +468,7 @@ export default function MiniDrawer({ open,setOpen }) {
                       )}
                     </Link>
                     {open ? (
-                      index != 0 && index != 4 ? (
+                      index != 0 && index!=1 && index != 4 ? (
                         openSub[index] ? (
                           <ExpandLess />
                         ) : (

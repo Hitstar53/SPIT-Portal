@@ -42,7 +42,7 @@ exports.intitializeStudent = asyncHandler(async (req, res) => {
         await photo.save();
         const student = await new Student({
             emailID: email, uid: uid, name: name, phone: '-', address: '-', dob: '-/-/-', religion: '-', blood: '-', gender: '-', linkedin: '-', github: '-', onGoingSemester: 1, cgpa: 0, batch: '-', announcements: [],
-            mname: '-', mphone: '-', memail: '-', fname: '-', fphone: '-', femail: '-', class: '-', exams: [], educationalInfo: [{ type: "Current Degree", insName: "-", degree: "-", branch: "-", division: "-", semester: "-", admissionYear: 0, passingYear: 0, score: "0" }, { type: "Junior College", insName: "-", degree: "-", passingYear: 0, score: "0" }, { type: "School", insName: "-", degree: "-", passingYear: 0, score: "0" }], semester: [], committee: [], participation: [], volunteerWork: [],
+            mname: '-', mphone: '-', memail: '-', fname: '-', fphone: '-', femail: '-', class: '-', exams: [], educationalInfo: [{ type: "Current Degree", insName: "-", year: "-" , degree: "-", branch: "-", division: "-", semester: "-", admissionYear: 0, passingYear: 0, score: "0" }, { type: "Junior College", insName: "-", degree: "-", passingYear: 0, score: "0" }, { type: "School", insName: "-", degree: "-", passingYear: 0, score: "0" }], semester: [], committee: [], participation: [], volunteerWork: [],
             skills: [], projects: [], research: [], internship: [],
         })
         await student.save();

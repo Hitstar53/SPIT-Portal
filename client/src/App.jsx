@@ -1,7 +1,7 @@
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Login from './components/login/Login';
-import Dashboard from './components/dashboard/Dashboard';
+import Dashboard, {loader as DashboardLoader} from './components/dashboard/Dashboard';
 import Profile, { loader as ProfileLoader } from './components/profile/Profile';
 // import {action as ProfileAction} from './components/profile/PersonalInfo';
 import Result from './components/academics/Result/Result';
@@ -35,12 +35,11 @@ const router = createBrowserRouter([
         path: "student",
         element: <RootLayout />,
         children: [
-          { path: "home", element: <Dashboard /> },
+          { path: "home", element: <Dashboard />, loader: DashboardLoader },
           {
             path: "profile",
             element: <Profile />,
             loader: ProfileLoader,
-            // action: ProfileAction,
           },
           { path: "courses", element: <Courses /> },
           { path: "result", element: <Result /> },

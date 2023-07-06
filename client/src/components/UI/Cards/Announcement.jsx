@@ -15,14 +15,14 @@ const Announcement = (props) => {
         <>
             <div className={styles.cardItem} onClick={handleClickOpen}>
                 <div className={styles.cardItemLogo}>
-                    <img src={props.item.logo} alt="logo" />
+                    <img src={props.item.senderPhoto} alt="logo" />
                 </div>
                 <div className={styles.cardItemHeader}>
                     <h1>{props.item.title}</h1>
-                    <p>{props.item.date}</p>
+                    <p>{props.item.postDate}</p>
                 </div>
                 <div className={styles.cardItemSubHeader}>
-                    <p>From: {props.item.by}</p>
+                    <p>From: {props.item.sender}</p>
                     <p>Type: {props.item.type}</p>
                 </div>
                 <p className={styles.cardItemContent}>{props.item.description}</p>

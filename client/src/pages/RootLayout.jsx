@@ -1,5 +1,5 @@
 import React from 'react';
-import Protected from './Protected';
+import StudentProtected from './StudentProtected';
 import { Box } from "@mui/system";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -41,12 +41,11 @@ const RootLayout = () => {
             backgroundColor: "var(--bg-color)",
           }}
         >
-          <Protected isLoggedIn={isLoggedIn}>
+          <StudentProtected isLoggedIn={isLoggedIn}>
             {navigation.state === "loading" ? (
               <Backdrop
                 sx={{
                   color: "#fff",
-                  // zIndex: (theme) => theme.zIndex.drawer+1,
                   marginLeft: open ? "240px" : "0px",
                   marginTop: "64px",
                 }}
@@ -60,7 +59,7 @@ const RootLayout = () => {
             ) : (
               <Outlet />
             )}
-          </Protected>
+          </StudentProtected>
         </Box>
       </Box>
     );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ScrollModal from "../Modals/ScrollModal";
 import styles from "./AnnounceCard.module.css";
 

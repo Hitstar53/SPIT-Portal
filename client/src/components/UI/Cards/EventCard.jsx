@@ -30,22 +30,11 @@ const data = [
     },
 ]
 
-const EventCard = () => {
+const EventCard = (props) => {
     return (
         <div className={styles.card}>
             <div className={styles.inner}>
-                {/* {data.map((item, index) => (
-                    <div className={styles.cardItem} key={index}>
-                        <div className={styles.cardItemLogo}>
-                            <img src={item.logo} alt="logo" />
-                        </div>
-                        <div className={styles.cardItemContent}>
-                            <h1>{item.title}</h1>
-                            <p>{item.description}</p>
-                        </div>
-                    </div>
-                ))} */}
-                <EventAccordion data={data} />
+                <EventAccordion data={props.data} />
             </div>
         </div>
     )

@@ -39,6 +39,12 @@ const studentSchema = mongoose.Schema({
     femail:{
         type:String
             },
+    fprofession:{
+        type: String
+    },
+    mprofession:{
+        type: String
+    },
     exams:[
         {
             date:{ type : String, required:true},

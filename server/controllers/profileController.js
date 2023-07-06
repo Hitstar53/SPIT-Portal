@@ -36,13 +36,15 @@ exports.updateParentalInfo = asyncHandler(async(req,res) =>{
     const motherPhoneNo = req.body.mphone;
     const fatherEmailID = req.body.femail;
     const motherEmailID = req.body.memail;
+    const fprofession = req.body.fprofession;
+    const mprofession = req.body.mprofession;
     const email = req.body.email;
     if (!email) {
         res.status(404).send("Send email")
         return;
     }
     try {
-        await Profile.findOneAndUpdate({emailID:email},{$set: {fname:fatherName,mname:motherName,fphone:fatherPhoneNo,mphone:motherPhoneNo,femail:fatherEmailID,memail:motherEmailID}},{upsert:true})
+        await Profile.findOneAndUpdate({emailID:email},{$set: {fname:fatherName,mname:motherName,fphone:fatherPhoneNo,mphone:motherPhoneNo,femail:fatherEmailID,memail:motherEmailID,fprofession:fprofession,mprofession:mprofession}},{upsert:true})
         res.status(200).json(' Parental Profile updated Succesfully')
     } catch (error) {
         console.error(error)
@@ -77,7 +79,7 @@ exports.getParentalInfo = asyncHandler(async(req,res)=>{
     const email = req.body.email;
     
     try {
-        const profile = await Profile.findOne({emailID:email}).select("fname mname mphone fphone memail femail -_id")
+        const profile = await Profile.findOne({emailID:email}).select("fname mname mphone fphone memail femail fprofession mprofession -_id")
         res.status(200).json(profile)
     } catch (error) {
         console.error(error)

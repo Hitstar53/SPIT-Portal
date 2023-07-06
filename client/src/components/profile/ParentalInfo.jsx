@@ -50,7 +50,9 @@ const ParentalInfo = (props) => {
             fphone:parentalInfo.fphone,
             mphone:parentalInfo.mphone,
             femail:parentalInfo.femail,
-            memail:parentalInfo.memail
+            memail:parentalInfo.memail,
+            fprofession:parentalInfo.fprofession,
+            mprofession:parentalInfo.mprofession,
           }),
         }
       );
@@ -250,16 +252,16 @@ const ParentalInfo = (props) => {
           <div className={styles.twoCol}>
             <i class="fa-solid fa-briefcase"></i>
             {!edit && (
-              <span className={styles.iconInfo}>{parentalInfo.fprofession}</span>
+              <span className={styles.iconInfo}>{parentalInfo.mprofession}</span>
             )}
             {edit && (
               <TextField
-                name="fprofession"
+                name="mprofession"
                 id="outlined-required"
                 onChange={handleChange}
-                label="Father's Profession"
+                label="Mother's Profession"
                 type="text"
-                defaultValue={parentalInfo.fprofession}
+                defaultValue={parentalInfo.mprofession}
               />
             )}
           </div>

@@ -5,7 +5,6 @@ import Carousel from "../UI/Carousel";
 import styles from "./EduInfo.module.css";
 import { Box } from "@mui/material";
 
-
 const EduInfo = (props) => {
   return (
       <Box className={styles.eduInfo}>

@@ -45,14 +45,14 @@ export default function EventAccordion(props) {
                                 fontWeight: "bold",
                                 fontSize: "1.3rem",
                                 }}>
-                                {item.title}
+                                {item.name}, {item.date}
                             </Typography>
                             <Typography sx={{
                                 color: "var(--text-light)",
                                 fontSize: "1rem",
                                 opacity: 0.7
                                 }}>
-                                {item.club}
+                                {item.organizedBy}
                             </Typography>
                         </Box>
                     </AccordionSummary>

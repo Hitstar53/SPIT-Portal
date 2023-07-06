@@ -521,7 +521,7 @@ export default function AdminMiniDrawer() {
                   variant="outlined"
                   sx={{
                     borderColor: "var(--text-light)",
-                    color: "var(--text-light)",
+                    color: "var(--text-color)",
                     ":hover": {
                       borderColor: "var(--text-light)",
                       background: "var(--bg-light)",

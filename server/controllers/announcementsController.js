@@ -11,7 +11,8 @@ exports.setAnnouncementsAllStudents = asyncHandler(async (req, res) => {
     const senderPhoto = req.body.senderPhoto || "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
     const type = req.body.type
     const postDate = req.body.postDate
-
+    const endDate = req.body.endDate
+    
     try {
         const announcement = await Announcement.create({
             title:title,
@@ -23,7 +24,7 @@ exports.setAnnouncementsAllStudents = asyncHandler(async (req, res) => {
         })
         await Student.updateMany({},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
         await Faculty.updateOne({name:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
-
+        
         res.status(200).json(announcement)
     }  catch (error) {
         console.error(error)
@@ -40,7 +41,7 @@ exports.setAnnouncementsGroupStudents = asyncHandler(async (req, res) => {
     const senderPhoto = req.body.senderPhoto || "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
     const type = req.body.type
     const postDate = req.body.postDate
-
+    const endDate = req.body.endDate
     if(batch)
     {
         try {
@@ -54,14 +55,14 @@ exports.setAnnouncementsGroupStudents = asyncHandler(async (req, res) => {
             })
             await Student.updateMany({class:classname, batch: batch},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
             await Faculty.updateOne({name:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
-
+            
             res.status(200).json(announcement)
         }  catch (error) {
             console.error(error)
         }
-
+        
     }
-
+    
     else{
         try {
             const announcement = await Announcement.create({
@@ -74,13 +75,13 @@ exports.setAnnouncementsGroupStudents = asyncHandler(async (req, res) => {
             })
             await Student.updateMany({class:classname},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
             await Faculty.updateOne({name:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
-
+            
             res.status(200).json(announcement)
         }  catch (error) {
             console.error(error)
         }
     }
-
+    
 })
 
 
@@ -93,6 +94,7 @@ exports.setAnnouncementsSpecificStudents = asyncHandler(async (req, res) => {
     const type = req.body.type
     const postDate = req.body.postDate
     const students = req.body.students
+    const endDate = req.body.endDate
     try {
         const announcement = await Announcement.create({
             title:title,

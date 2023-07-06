@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CustAlert from "../UI/CustAlert";
 import styles from "./EduCard.module.css";
-import { TextField } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
 import { FaEdit, FaSave } from "react-icons/fa";
-import { Fab, Box } from "@mui/material";
+import { Fab, Box, Menu } from "@mui/material";
 import ServerUrl from "../../constants";
 
 const EduCard = (props) => {
@@ -101,27 +102,27 @@ const EduCard = (props) => {
             </Fab>
           )}
         </div>
-        <div className={styles.row1}>
-          <div className={styles.twoCol}>
-            {!edit && (
-              <p>
-                <label className={styles.label}>Institute:&nbsp;&nbsp;</label>
-                {props?.info?.insName}
-              </p>
-            )}
-            {edit && (
-              <TextField
-                id="outlined-required"
-                label="Institute"
-                type="text"
-                name="insName"
-                defaultValue={props?.info?.insName}
-                onChange={props?.handleChange}
-              />
-            )}
-          </div>
-          {key === 0 && (
-            <div className={styles.twoColLast}>
+        {key === 0 && (
+          <div className={styles.row0}>
+            <div className={styles.threeCol}>
+              {!edit && (
+                <p>
+                  <label className={styles.label}>Institute:&nbsp;&nbsp;</label>
+                  {props?.info?.insName}
+                </p>
+              )}
+              {edit && (
+                <TextField
+                  id="outlined-required"
+                  label="Institute"
+                  type="text"
+                  name="insName"
+                  defaultValue={props?.info?.insName}
+                  onChange={props?.handleChange}
+                />
+              )}
+            </div>
+            <div className={styles.threeColMiddle}>
               {!edit && (
                 <p>
                   <label>Degree:&nbsp;&nbsp;</label>
@@ -135,66 +136,6 @@ const EduCard = (props) => {
                   type="text"
                   name="degree"
                   defaultValue={props?.info?.degree}
-                  onChange={props?.handleChange}
-                />
-              )}
-            </div>
-          )}
-          {(key === 1 || key === 2) && (
-            <div className={styles.twoColLast}>
-              {!edit && (
-                <p>
-                  <label>Qualification:&nbsp;&nbsp;</label>
-                  {props.info.degree}
-                </p>
-              )}
-              {edit && (
-                <TextField
-                  id="outlined-required"
-                  label="Qualification"
-                  type="text"
-                  name="degree"
-                  defaultValue={props?.info?.degree}
-                  onChange={props?.handleChange}
-                />
-              )}
-            </div>
-          )}
-        </div>
-        {key === 0 && (
-          <div className={styles.row2}>
-            <div className={styles.threeCol}>
-              {!edit && (
-                <p>
-                  <label>Branch:&nbsp;&nbsp;</label>
-                  {props?.info?.branch}
-                </p>
-              )}
-              {edit && (
-                <TextField
-                  id="outlined-required"
-                  label="Branch"
-                  type="text"
-                  name="branch"
-                  defaultValue={props?.info?.branch}
-                  onChange={props?.handleChange}
-                />
-              )}
-            </div>
-            <div className={styles.threeColMiddle}>
-              {!edit && (
-                <p>
-                  <label>Division:&nbsp;&nbsp;</label>
-                  {props?.info?.division}
-                </p>
-              )}
-              {edit && (
-                <TextField
-                  id="outlined-required"
-                  label="Division"
-                  type="text"
-                  name="division"
-                  defaultValue={props?.info?.division}
                   onChange={props?.handleChange}
                 />
               )}
@@ -215,6 +156,129 @@ const EduCard = (props) => {
                   defaultValue={props?.info?.semester}
                   onChange={props?.handleChange}
                 />
+              )}
+            </div>
+          </div>
+        )}
+        {(key === 1 || key === 2) && (
+          <div className={styles.row1}>
+            <div className={styles.twoCol}>
+              {!edit && (
+                <p>
+                  <label className={styles.label}>Institute:&nbsp;&nbsp;</label>
+                  {props?.info?.insName}
+                </p>
+              )}
+              {edit && (
+                <TextField
+                  id="outlined-required"
+                  label="Institute"
+                  type="text"
+                  name="insName"
+                  defaultValue={props?.info?.insName}
+                  onChange={props?.handleChange}
+                />
+              )}
+            </div>
+            <div className={styles.twoColLast}>
+              {!edit && (
+                <p>
+                  <label>Qualification:&nbsp;&nbsp;</label>
+                  {props.info.degree}
+                </p>
+              )}
+              {edit && (
+                <TextField
+                  id="outlined-required"
+                  label="Qualification"
+                  type="text"
+                  name="degree"
+                  defaultValue={props?.info?.degree}
+                  onChange={props?.handleChange}
+                />
+              )}
+            </div>
+          </div>
+        )}
+        {key === 0 && (
+          <div className={styles.row2}>
+            <div className={styles.threeCol}>
+              {!edit && (
+                <p>
+                  <label>Year:&nbsp;&nbsp;</label>
+                  {props?.info?.year}
+                </p>
+              )}
+              {edit && (
+                <TextField
+                  select
+                  id="outlined-required"
+                  label="Year"
+                  type="text"
+                  name="year"
+                  defaultValue={props?.info?.year}
+                  onChange={props?.handleChange}
+                >
+                  <MenuItem value="FE">F.E.</MenuItem>
+                  <MenuItem value="SE">S.E.</MenuItem>
+                  <MenuItem value="TE">T.E.</MenuItem>
+                  <MenuItem value="BE">B.E.</MenuItem>
+                </TextField>
+              )}
+            </div>
+            <div className={styles.threeColMiddle}>
+              {!edit && (
+                <p>
+                  <label>Branch:&nbsp;&nbsp;</label>
+                  {props?.info?.branch}
+                </p>
+              )}
+              {edit && (
+                <TextField
+                  id="outlined-required"
+                  select
+                  label="Branch"
+                  type="text"
+                  name="branch"
+                  defaultValue={props?.info?.branch}
+                  onChange={props?.handleChange}
+                >
+                  <MenuItem value="Comps">Comps</MenuItem>
+                  <MenuItem value="AIML">AIML</MenuItem>
+                  <MenuItem value="DS">DS</MenuItem>
+                  <MenuItem value="ETRX">ETRX</MenuItem>
+                  <MenuItem value="EXTC">EXTC</MenuItem>
+                  <MenuItem value="IT">IT</MenuItem>
+                </TextField>
+              )}
+            </div>
+            <div className={styles.threeColLast}>
+              {!edit && (
+                <p>
+                  <label>Division:&nbsp;&nbsp;</label>
+                  {props?.info?.division}
+                </p>
+              )}
+              {edit && (
+                <TextField
+                  select
+                  id="outlined-required"
+                  label="Division"
+                  type="text"
+                  name="division"
+                  defaultValue={props?.info?.division}
+                  onChange={props?.handleChange}
+                >
+                  <MenuItem value="">None</MenuItem>
+                  <MenuItem value="A">A</MenuItem>
+                  <MenuItem value="B">B</MenuItem>
+                  <MenuItem value="C">C</MenuItem>
+                  <MenuItem value="D">D</MenuItem>
+                  <MenuItem value="E">E</MenuItem>
+                  <MenuItem value="F">F</MenuItem>
+                  <MenuItem value="G">G</MenuItem>
+                  <MenuItem value="H">H</MenuItem>
+                </TextField>
               )}
             </div>
           </div>

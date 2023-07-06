@@ -16,6 +16,7 @@ label {
     gap: 1rem;
 }
 
+.row0,
 .row1,
 .row2,
 .row3 {
@@ -29,6 +30,7 @@ label {
     grid-template-columns: repeat(2, 1fr);
 }
 
+.row0,
 .row2,
 .row3 {
     grid-template-columns: repeat(3, 1fr);
