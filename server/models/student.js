@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const studentSchema = mongoose.Schema({
     uid:{ type : Number, required:true},
     name:{ type : String, required:true},
+    class:{ type : String, required:true},
     emailID:{ type : String, required:true},
     phone:{ type : String, required:true},
     address:{ type : String, required:true},
@@ -16,7 +17,8 @@ const studentSchema = mongoose.Schema({
     batch:{type:String,requried:true},
     announcements:[
         {
-            type:String
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Announcements'
         },
     ],
     mname:{

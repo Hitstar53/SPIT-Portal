@@ -18,8 +18,16 @@ const Login = () => {
       })
       .then(res => res.data);
       localStorage.setItem('userinfo', JSON.stringify(userInfo));
-      localStorage.setItem('isLoggedIn', true);
-      navigate('student/home')
+      //Error to be resolved: A faculty can login as a student and vice versa by changing the route in the url
+      const role = await axios.put('http://localhost:8000/api/users/getUsers', {email: userInfo.email}).then(res => res.data.role);
+      if (role === 'Faculty') {
+        navigate('faculty/home');
+        localStorage.setItem('isLoggedIn', true);
+      }
+      else if (role === 'Student') {
+        navigate('student/home');
+        localStorage.setItem('isLoggedIn', true);
+      } 
     }
   });
 
