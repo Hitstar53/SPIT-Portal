@@ -287,7 +287,7 @@ function StepThree({setDimension3, yr}) {
                 </td>
                 <td>
                   <input
-                    type="text"
+                    type="number"
                     placeholder="Funds"
                     className="form-input"
                     {...register(`OP1.organized[${index}].fund`)}
@@ -296,7 +296,7 @@ function StepThree({setDimension3, yr}) {
                 {/* <label className="form-label">Days</label> */}
                 <td>
                   <input
-                    type="text"
+                    type="number"
                     placeholder="Days"
                     className="form-input"
                     {...register(`OP1.organized[${index}].days`)}
@@ -375,7 +375,7 @@ function StepThree({setDimension3, yr}) {
                 </td>
                 <td>
                   <input
-                    type="text"
+                    type="number"
                     placeholder="Duration"
                     className="form-input"
                     {...register(`Invited.invitedAt[${index}].duration`)}

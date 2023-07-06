@@ -442,7 +442,7 @@ function StepTwo({ setDimension2, yr }) {
                       <td>
                         <label className="form-label">
                           <input
-                            type="text"
+                            type="number"
                             {...register(`RP2.moocs[${index}].duration`)}
                             className="form-input"
                           />
@@ -542,7 +542,7 @@ function StepTwo({ setDimension2, yr }) {
                       <td>
                         <label className="form-label">
                           <input
-                            type="text"
+                            type="number"
                             {...register(`RP3.sponsored[${index}].amount`)}
                             className="form-input"
                           />
@@ -587,7 +587,7 @@ function StepTwo({ setDimension2, yr }) {
               <label className="form-label">
                 Number of citations in the previous calendar year
                 <input
-                  type="text"
+                  type="number"
                   {...register(`RP4.number`)}
                   className="form-input"
                 />
@@ -657,7 +657,7 @@ function StepTwo({ setDimension2, yr }) {
                       <td>
                         <label className="form-label">
                           <input
-                            type="text"
+                            type="number"
                             {...register(
                               `RP5.selfDevelopment[${index}].duration`
                             )}
