@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const ViewEvent = ({ title, start, end }) => {
+const ViewEvent = ({ title, start, end, id, fetchEvents, toggle2 }) => {
     const options = {
         year: 'numeric',
         month: 'short',
@@ -21,47 +21,46 @@ const ViewEvent = ({ title, start, end }) => {
     const endDate = edate.toLocaleString('en-US', options)
     const { user } = useContext(UserContext);
 
-    const delay = (ms) => 
-        new Promise((resolve) => setTimeout(resolve, ms));
-
     const handleDelete = async () => {
-        // await axios.post('http://localhost:5000/api/faculty/delete/event', { email: user.email, id: id })
-        //     .then(async (res) => {
-        //         console.log(res.data);
-        //         toast.success('Event Deleted Successfully!', {
-        //             position: "top-center",
-        //             autoClose: 2000,
-        //             hideProgressBar: false,
-        //             closeOnClick: true,
-        //             pauseOnHover: false,
-        //             draggable: true,
-        //             progress: undefined,
-        //             theme: "light",
-        //         });
-        //         await delay(2100)
-        //         window.location.reload()
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //     });
+        await axios.post('http://localhost:5000/api/faculty/delete/event', { email: user.email, id: id })
+            .then(async (res) => {
+                console.log(res.data);
+                toast.success('Event Deleted Successfully!', {
+                    position: "top-center",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            })
+            .then(() => {
+                fetchEvents()
+                toggle2()
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
 
-    return ( 
+    return (
         <div className='full-event'>
             <div className='strip'>
                 <div>
-            <h3 className='view-title'>{title}</h3>
+                    <h3 className='view-title'>{title}</h3>
                 </div>
-            <IconButton onClick={handleDelete}>
-                <DeleteIcon sx={{fontSize: "2rem", color: "red"}}/>
-            </IconButton>
+                <IconButton onClick={handleDelete}>
+                    <DeleteIcon sx={{ fontSize: "2rem", color: "red" }} />
+                </IconButton>
             </div>
             <div className='strip-foot'>
                 <p className='view-dates'>Start: {startDate}</p>
                 <p className='view-dates'>End: {endDate}</p>
             </div>
-            <hr style={{margin: 0, padding: 0, border: "1px solid black", width: "100%"}}/>
+            <hr style={{ margin: 0, padding: 0, border: "1px solid black", width: "100%" }} />
         </div>
     );
 };

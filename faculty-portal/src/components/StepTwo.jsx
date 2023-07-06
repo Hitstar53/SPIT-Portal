@@ -603,8 +603,7 @@ function StepTwo({ setDimension2, yr }) {
                           <option value="STTP">STTP</option>
                           <option value="FDP">FDP</option>
                           <option value="MOOC">MOOC</option>
-                          <option value="Industry ">Industry </option>
-                          <option value="nternship">nternship</option>
+                          <option value="Industry_Internship">Industry Internship</option>
                         </select>
                       </td>
                       <td>
