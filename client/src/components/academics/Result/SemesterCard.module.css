@@ -15,6 +15,10 @@
     transform: translateY(-0.75rem);
 }
 
+.ongoing {
+    pointer-events: none;
+}
+
 .disabled {
     opacity: 0.65;
     pointer-events: none;

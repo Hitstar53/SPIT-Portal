@@ -33,9 +33,26 @@ const data = [
 const EventCard = (props) => {
     return (
         <div className={styles.card}>
-            <div className={styles.inner}>
-                <EventAccordion data={props.data} />
-            </div>
+            {props.data.length === 0 ? 
+                <div className={styles.inner}
+                    style={{
+                        padding: "1rem 0",
+                    }}
+                >
+                    <p
+                    style={{
+                        gridColumn: "1 / 3",
+                        fontSize: "1rem",
+                        fontWeight: "500",
+                        textAlign: "center",
+                    }}
+                    >
+                    No Upcoming Events</p>
+                </div> : (
+                    <div className={styles.inner}>
+                        <EventAccordion data={props.data} />
+                    </div>
+                )}
         </div>
     )
 }

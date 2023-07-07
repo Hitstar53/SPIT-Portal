@@ -41,11 +41,24 @@ const data = [
 const AnnounceCard = (props) => {
   return (
     <div className={styles.card}>
-      <div className={styles.inner}>
-        {props.data.map((item, index) => (
-          <Announcement key={index} item={item} />
-        ))}
-      </div>
+      {props.data.length === 0 ? 
+      <div className={styles.cardItem}>
+        <p
+          style={{
+            gridColumn: "1 / 3",
+            fontSize: "1rem",
+            fontWeight: "500",
+            textAlign: "center",
+          }}
+        >
+          No Announcements Yet</p>
+      </div> : (
+        <div className={styles.inner}>
+          {props.data.map((item, index) => (
+            <Announcement key={index} item={item} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

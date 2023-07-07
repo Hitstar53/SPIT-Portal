@@ -1,6 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { json, useLoaderData } from 'react-router-dom'
 import SemesterCard from './SemesterCard'
+import ServerUrl from '../../../constants'
 import styles from './Result.module.css'
 
 const semesters = [
@@ -56,15 +57,17 @@ const semesters = [
 
 const Result = () => {
     const container = styles.container + " flex flex-col gap-8 p-8"
+    const data = useLoaderData()
+    
     return (
         <div className={container}>
             <h1 className="text-4xl font-semibold">Result Information</h1>
             <div className="flex flex-col gap-4">
                 <div className={styles.semGrid}>
-                    {semesters.map((semester, index) => (
+                    {data.semester.map((semester, index) => (
                         <SemesterCard 
                             key={index} 
-                            semester={semester.semesterNumber}
+                            semesterNumber={semester.semesterNumber}
                             year={semester.year}
                             status={semester.status} 
                             sgpa={semester.sgpa} 
@@ -77,3 +80,27 @@ const Result = () => {
 }
 
 export default Result
+
+export async function loader() {
+    const response = await fetch(
+      `${ServerUrl}/api/student/getSemesters`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: JSON.parse(localStorage.getItem("userinfo")).email,
+        }),
+      }
+    );
+    if(!response.ok) {
+        return json(
+          { message: "Could not fetch Semester information" },
+          { status: 422 }
+        );
+    } else {
+        const semData = await response.json()
+        return semData;
+    }
+}

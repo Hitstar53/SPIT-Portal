@@ -15,7 +15,7 @@ export default function EventAccordion(props) {
     };
 
     return (
-        <div>
+        <div className={styles.cardItem}>
             {props.data.map((item, index) => (
                 <Accordion key={index} disableGutters expanded={expanded === `panel${index}`} onChange={handleChange(`panel${index}`)}
                 sx={{

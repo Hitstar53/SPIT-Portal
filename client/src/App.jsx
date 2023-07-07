@@ -4,8 +4,8 @@ import Login from './components/login/Login';
 import Dashboard, {loader as DashboardLoader} from './components/dashboard/Dashboard';
 import Profile, { loader as ProfileLoader } from './components/profile/Profile';
 // import {action as ProfileAction} from './components/profile/PersonalInfo';
-import Result from './components/academics/Result/Result';
-import SemResult from './components/academics/Result/SemResult';
+import Result, {loader as SemesterLoader} from './components/academics/Result/Result';
+import SemResult, {loader as SemResultLoader} from './components/academics/Result/SemResult';
 import Activities, { loader as ActivityLoader } from './components/extracurr/activities/Activities';
 import Courses from './components/academics/Courses/Courses';
 import Portfolio, { loader as PortfolioLoader } from './components/careerconn/Portfolio/Portfolio';
@@ -42,8 +42,8 @@ const router = createBrowserRouter([
             loader: ProfileLoader,
           },
           { path: "courses", element: <Courses /> },
-          { path: "result", element: <Result /> },
-          { path: "result/:semester", element: <SemResult /> },
+          { path: "result", element: <Result />, loader: SemesterLoader },
+          { path: "result/:semester", element: <SemResult />, loader: SemResultLoader },
           {
             path: "activities",
             element: <Activities />,

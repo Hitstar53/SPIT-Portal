@@ -10,13 +10,16 @@ import ServerUrl from '../../constants'
 
 const Dashboard = () => {
     const data = useLoaderData()
+    const announcements = data.announceData
+    const academic = announcements.filter((item) => item.type === "Academic").reverse()
+    const other = announcements.filter((item) => item.type === "General").reverse()
     const dashboard = styles.dashboard + " flex flex-col gap-8 p-8"
     return (
         <div className={dashboard}>
             <h1 className="text-4xl font-semibold">Dashboard</h1>
             <div className="flex flex-col gap-4">
-                <h1 className="text-xl p-1 font-semibold heading">Announcements</h1>
-                <AnnounceCard data={data.announceData} />
+                <h1 className="text-xl p-1 font-semibold heading">Academic Announcements</h1>
+                <AnnounceCard data={academic} />
             </div>
             {/* <div className="flex flex-col gap-4">
                 <h1 className="text-xl p-1 font-semibold heading">Attendance</h1>
@@ -28,7 +31,7 @@ const Dashboard = () => {
             </div>
             <div className="flex flex-col gap-4 mt-6">
                 <h1 className="text-xl p-1 font-semibold heading">Other Announcements</h1>
-                <OtherAnnounceCard />
+                <OtherAnnounceCard data={other} />
             </div>
             <div className="flex flex-col gap-4 mt-2">
                 <h1 className="text-xl p-1 font-semibold heading">Upcoming Events</h1>

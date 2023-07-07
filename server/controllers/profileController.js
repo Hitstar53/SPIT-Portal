@@ -136,7 +136,9 @@ exports.getExams = asyncHandler(async(req,res)=>{
 exports.getSemesters = asyncHandler(async(req,res)=>{
     const email = req.body.email;
     try {
-        const semesters = await Profile.findOne({emailID:email}).select("semester.semesterNumber semester.sgpa -_id")
+        const semesters = await Profile.findOne({ emailID: email }).select(
+          "semester.semesterNumber semester.sgpa semester.status -_id"
+        );
         res.status(200).json(semesters)
     } catch (error) {
         console.error(error)

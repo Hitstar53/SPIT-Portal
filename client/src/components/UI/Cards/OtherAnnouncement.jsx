@@ -33,15 +33,14 @@ const OtherAnnouncement = (props) => {
         }}
       >
         <div className={styles.cardItemLogo}>
-          <img src={props.item.logo} alt="logo" />
+          <img src={props.item.senderPhoto} alt="logo" />
         </div>
         <div className={styles.cardItemHeader}>
           <h1>{props.item.title}</h1>
-          <p>{props.item.date}</p>
+          <p>{props.item.postDate}</p>
         </div>
         <div className={styles.cardItemSubHeader}>
-          <p>From: {props.item.by}</p>
-          <p>Type: {props.item.type}</p>
+          <p>From: {props.item.sender}</p>
         </div>
         <p className={styles.cardItemContent}>{props.item.description}</p>
       </div>

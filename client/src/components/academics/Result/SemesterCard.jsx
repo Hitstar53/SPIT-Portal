@@ -8,12 +8,24 @@ const SemesterCard = (props) => {
   let backgroundColor = ""
   let color = ""
 
+  let year = ""
+  if (props.semesterNumber === 1 || props.semesterNumber === 2) {
+    year = "F.Y.B.Tech"
+  } else if (props.semesterNumber === 3 || props.semesterNumber === 4) {
+    year = "S.Y.B.Tech"
+  } else if (props.semesterNumber === 5 || props.semesterNumber === 6) {
+    year = "T.Y.B.Tech"
+  } else if (props.semesterNumber === 7 || props.semesterNumber === 8) {
+    year = "B.Tech"
+  }
+
   if (props.status === "Completed") {
     backgroundColor = "var(--tertiary-color)"
     color = "var(--text-light)"
   } else if (props.status === "Ongoing") {
     backgroundColor = "var(--primary-color)"
     color = "var(--text-light)"
+    classes.push(styles.ongoing)
   } else if (props.status === "Not Started") {
     backgroundColor = "var(--secondary-color)"
     color = "var(--text-color)"
@@ -21,7 +33,7 @@ const SemesterCard = (props) => {
   }
   return (
     <NavLink
-      to={`/student/result/${props.semester}`}
+      to={`/student/result/${props.semesterNumber}`}
       className={classes.join(" ")}
       style={{
         backgroundColor: backgroundColor,
@@ -29,11 +41,11 @@ const SemesterCard = (props) => {
       }}
     >
       <div className={styles.title}>
-        Semester {props.semester}
+        Semester {props.semesterNumber}
       </div>
       <div className={styles.status}>
         <Chip 
-          label={props.year}
+          label={year}
           sx={{
             backgroundColor: "var(--secondary-color)",
             color: "var(--text-color)",
@@ -46,7 +58,7 @@ const SemesterCard = (props) => {
         {props.status}
       </div>
       {
-        props.sgpa && (
+        props.status === "Completed" && (
           <div className={styles.sgpa}>
             SGPA: {props.sgpa}
           </div>
