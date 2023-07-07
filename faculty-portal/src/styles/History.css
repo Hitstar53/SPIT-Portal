@@ -75,15 +75,20 @@
   background-color: #298e46;
   box-shadow: rgba(20, 70, 32, 0.2) 0 1px 0 inset;
 }
+.outertablediv {
+  border: 2px solid red;
+  padding: 2em;
+}
 table {
   border: 1px solid #b3adad;
   border-collapse: collapse;
   padding: 5px;
   margin: 1em;
+  letter-spacing: 0.7px;
 }
 table th {
   border: 1px solid #b3adad;
-  padding: 5px;
+  padding: 10px;
   background: #f0f0f0;
   color: #313030;
   text-align: center;
@@ -94,7 +99,25 @@ table td {
   padding: 5px;
   background: #ffffff;
   color: #313030;
+  font-weight: 600;
 }
 .table-heading {
+  text-align: left;
+}
+.dropdown {
+  /* border: 2px solid red; */
+  display: flex;
+  padding: 1em;
+  font-weight: 600;
+}
+.dropdown div {
+  font-weight: 600;
+  padding: 0 1em 0 0;
+}
+option {
+  font-weight: 600;
+}
+
+.lefty {
   text-align: left;
 }
