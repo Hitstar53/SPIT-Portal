@@ -6,7 +6,15 @@ const facultySchema = new Schema({
     announcements: [ {
         type:mongoose.Schema.Types.ObjectId,
         ref:'Announcements'
-    },]
+    },],
+    exams:[
+        {
+            date:{ type : String, required:true},
+            syllabus:{ type : String, required:true},
+            type:{ type : String, required:true},
+            courseName:{ type : String, required:true},
+        }
+    ]
 },
 {collection: 'Faculty'});
 

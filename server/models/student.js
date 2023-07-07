@@ -47,6 +47,7 @@ const studentSchema = mongoose.Schema({
     },
     exams:[
         {
+            name:{type: String, required:true},
             date:{ type : String, required:true},
             syllabus:{ type : String, required:true},
             type:{ type : String, required:true},

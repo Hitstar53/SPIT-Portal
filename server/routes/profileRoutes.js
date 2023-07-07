@@ -13,4 +13,6 @@ router.put('/getExams',profileController.getExams)
 router.put('/getMiniDrawer',profileController.getMiniDrawer)
 router.put('/getSemesters',profileController.getSemesters)
 router.put('/getResults',profileController.getResults)
+router.put('/updateUpcomingExams',profileController.updateUpcomingExams)
+router.put('/updateGroupUpcomingExams',profileController.updateGroupUpcomingExams)
 module.exports = router

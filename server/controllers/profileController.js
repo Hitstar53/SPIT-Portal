@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const Profile = require('../models/student');
 const Photo = require("../models/photo");
+const Faculty = require('../models/faculty')
 exports.updatePersonalInfo = asyncHandler(async(req,res) =>{
         const phone = req.body.phone;
         const address = req.body.address;
@@ -152,6 +153,44 @@ exports.getResults = asyncHandler(async(req,res)=>{
         res.status(200).json(results)
     }
     catch (error){
+        console.error(error)
+    }
+})
+
+exports.updateUpcomingExams = asyncHandler(async(req,res) =>{
+    const email = req.body.email;
+    const date = req.body.date;
+    const type = req.body.type;
+    const syllabus = req.body.syllabus;
+    const courseName = req.body.courseName;
+    const name = req.body.name;
+
+    try {
+        
+        await Profile.updateMany({},{$push:{exams:{date:date,type:type,syllabus:syllabus,courseName:courseName,name:name}}})
+        // await Faculty.updateOne({name:name},{$push:{}})
+        res.status(200).json("exam announcements updated")
+    }  catch (error) {
+        console.error(error)
+    }
+})
+
+exports.updateGroupUpcomingExams = asyncHandler(async(req,res) =>{
+    const email = req.body.email;
+    const year = req.body.year;
+    const division = req.body.division;
+    const branch = req.body.branch;
+    const date = req.body.date;
+    const type = req.body.type;
+    const syllabus = req.body.syllabus;
+    const courseName = req.body.courseName;
+    const name = req.body.name;
+    try {
+        
+        await Profile.updateMany({"educationalInfo.0.year":year,"educationalInfo.0.branch":branch,"educationalInfo.0.division":division},{$push:{exams:{date:date,type:type,syllabus:syllabus,courseName:courseName,name:name}}})
+        // await Faculty.updateOne({name:name},{$push:{exams:{date:date,type:type,syllabus:syllabus,courseName:courseName}}})
+        res.status(200).json("exam announcements updated")
+    }  catch (error) {
         console.error(error)
     }
 })
