@@ -21,9 +21,8 @@ const Search = (props) => {
               backgroundColor: "var(--secondary-color)",
             },
           }}
-          onClick={props.filterHandler}
         >
-          filters
+          Go
         </Button>
       </div>
     </React.Fragment>

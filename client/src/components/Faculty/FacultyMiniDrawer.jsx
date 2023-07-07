@@ -482,7 +482,7 @@ export default function AdminMiniDrawer() {
                     ":hover": {
                       borderColor: "var(--text-light)",
                       background: "var(--bg-light)",
-                      color: "var(x`--text-dark)",
+                      color: "var(--text-dark)",
                     },
                   }}
                   disableElevation
@@ -521,7 +521,7 @@ export default function AdminMiniDrawer() {
                   variant="outlined"
                   sx={{
                     borderColor: "var(--text-light)",
-                    color: "var(--text-color)",
+                    color: "var(--text-light)",
                     ":hover": {
                       borderColor: "var(--text-light)",
                       background: "var(--bg-light)",

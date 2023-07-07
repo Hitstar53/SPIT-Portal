@@ -1,6 +1,6 @@
 .card {
     color: var(--text-light);
-    height: 420px;
+    max-height: 420px;
     border-radius: 2rem;
     background-color: var(--primary-color);
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);

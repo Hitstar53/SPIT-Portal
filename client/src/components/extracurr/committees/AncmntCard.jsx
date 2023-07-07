@@ -7,7 +7,7 @@ const AncmntCard = (props) => {
       <div className={styles.content}>
         <h2 className={styles.title}>{props.title}</h2>
         <h3 className={styles.date}>{props.date}</h3>
-        <div>
+        <div className={styles.paragraph}>
           {props.ancmnt}
         </div>
       </div>

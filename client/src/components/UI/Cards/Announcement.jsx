@@ -12,21 +12,27 @@ const Announcement = (props) => {
       setOpen(false);
     };
     return (
-        <>
-            <div className={styles.cardItem} onClick={handleClickOpen}>
-                <div className={styles.cardItemLogo}>
-                    <img src={props.item.senderPhoto} alt="logo" />
+        <React.Fragment>
+            {props.item.length === 0 ? (
+                <div className={styles.cardItem} onClick={handleClickOpen}>
+                    <div className={styles.cardItemLogo}>
+                        <img src={props.item.senderPhoto} alt="logo" />
+                    </div>
+                    <div className={styles.cardItemHeader}>
+                        <h1>{props.item.title}</h1>
+                        <p>{props.item.postDate}</p>
+                    </div>
+                    <div className={styles.cardItemSubHeader}>
+                        <p>From: {props.item.sender}</p>
+                        <p>Type: {props.item.type}</p>
+                    </div>
+                    <p className={styles.cardItemContent}>{props.item.description}</p>
                 </div>
-                <div className={styles.cardItemHeader}>
-                    <h1>{props.item.title}</h1>
-                    <p>{props.item.postDate}</p>
+            ) : (
+                <div className={styles.cardItem}>
+                    <p>No announcements yet</p>
                 </div>
-                <div className={styles.cardItemSubHeader}>
-                    <p>From: {props.item.sender}</p>
-                    <p>Type: {props.item.type}</p>
-                </div>
-                <p className={styles.cardItemContent}>{props.item.description}</p>
-            </div>
+            )}
             {open && (
                 <ScrollModal
                     open={open}
@@ -36,7 +42,7 @@ const Announcement = (props) => {
                     onClose={handleClose}
                 />
             )}
-        </>
+        </React.Fragment>
     );
 }
 

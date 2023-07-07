@@ -5,49 +5,49 @@ import styles from './Result.module.css'
 
 const semesters = [
     {
-        semester: "1",
+        semesterNumber: "1",
         year: "F.Y.B.Tech",
         status: "Completed",
         sgpa: "9.5",
     },
     {
-        semester: "2",
+        semesterNumber: "2",
         year: "F.Y.B.Tech",
         status: "Completed",
         sgpa: "9.5",
     },
     {
-        semester: "3",
+        semesterNumber: "3",
         year: "S.Y.B.Tech",
         status: "Completed",
         sgpa: "9.5",
     },
     {
-        semester: "4",
+        semesterNumber: "4",
         year: "S.Y.B.Tech",
         status: "Ongoing",
         sgpa: null,
     },
     {
-        semester: "5",
+        semesterNumber: "5",
         year: "T.Y.B.Tech",
         status: "Not Started",
         sgpa: null,
     },
     {
-        semester: "6",
+        semesterNumber: "6",
         year: "T.Y.B.Tech",
         status: "Not Started",
         sgpa: null,
     },
     {
-        semester: "7",
+        semesterNumber: "7",
         year: "B.Tech",
         status: "Not Started",
         sgpa: null,
     },
     {
-        semester: "8",
+        semesterNumber: "8",
         year: "B.Tech",
         status: "Not Started",
         sgpa: null,
@@ -64,7 +64,7 @@ const Result = () => {
                     {semesters.map((semester, index) => (
                         <SemesterCard 
                             key={index} 
-                            semester={semester.semester}
+                            semester={semester.semesterNumber}
                             year={semester.year}
                             status={semester.status} 
                             sgpa={semester.sgpa} 

@@ -1,3 +1,36 @@
+.card {
+    color: var(--text-light);
+    max-height: 420px;
+    border-radius: 0.5rem;
+    background-color: var(--tertiary-color);
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow: hidden;
+}
+
+.card .inner {
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow: auto;
+}
+
+.inner::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.inner::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-track);
+    border-radius: 1rem;
+}
+
+.inner::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: 1rem;
+}
 
 .header {
     display: flex;
@@ -11,4 +44,15 @@
     font-weight: 500;
     margin-top: 3rem;
     margin-bottom: 1rem;
+}
+
+.classSelection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dropdown {
+    width: 11rem;
 }

@@ -63,7 +63,7 @@ const ComAdmin = () => {
   const handleAncmntCloseDialog = () => {
     setOpenAncmntDialog(false);
   };
-  
+
   const [newEventData, setEventNewData] = useState({});
   const [newAncmntData, setAncmntNewData] = useState({});
 
@@ -96,14 +96,18 @@ const ComAdmin = () => {
         <h2 className={styles.subheading}>Announcements</h2>
         <AddButton onClick={handleAncmntClickOpenDialog} btntext="ADD" />
       </div>
-      {ancmnts.map((ancmnt,index) => (
-        <AncmntCard
-          key={index}
-          title={ancmnt.title}
-          date={ancmnt.date}
-          ancmnt={ancmnt.ancmnt}
-        />
-      ))}
+      <div className={styles.card}>
+        <div className={styles.inner}>
+          {ancmnts.map((ancmnt, index) => (
+            <AncmntCard
+              key={index}
+              title={ancmnt.title}
+              date={ancmnt.date}
+              ancmnt={ancmnt.ancmnt}
+            />
+          ))}
+        </div>
+      </div>
       <MultiFieldModal
         handleDataSubmit={handleAncmntSubmit}
         openDialog={openAncmntDialog}
@@ -151,7 +155,7 @@ const ComAdmin = () => {
         <h2 className={styles.subheading}>Events</h2>
         <AddButton onClick={handleEventClickOpenDialog} btntext="ADD" />
       </div>
-      {events.map((event,index) => (
+      {events.map((event, index) => (
         <AddEvent
           key={index}
           date={event.date}

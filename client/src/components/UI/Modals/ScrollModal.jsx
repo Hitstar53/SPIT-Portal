@@ -87,7 +87,7 @@ export default function ScrollModal(props) {
                 color: "var(--text-color)",
               }}
             >
-              {[...new Array(15)].map(() => `${props.content}`).join("\n")}
+              {props.content}
             </DialogContentText>
           </DialogContent>
           <DialogActions
