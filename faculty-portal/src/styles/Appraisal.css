@@ -212,7 +212,7 @@ body {
 
 .stepTwo,.stepThree{
     text-align: left !important;
-    /* background-color: #8a6bef;
+    /* background-color: #2C5784;
     padding: 2rem;
     border-radius: 1rem;
     color: whitesmoke; */
@@ -244,4 +244,28 @@ th{
     border-radius: .5rem;
     font-size: 1rem;
     border: 1px solid #ccc;
+}
+
+.add-btn{
+    margin: 1rem;
+    border: 1px solid #ccc;
+    font-size: .75rem;
+    padding: 10px;
+    border-radius:8px;
+    background-color: #10A44B;
+    color: white;
+    width: 190px;
+    margin-left: 0rem;
+    /* border: 1px solid #000; */
+}
+.center{
+    text-align: center;
+}
+.save-btn{
+    background-color: #4B3F72;
+    color: white;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    padding: 15px;
+    border-radius:8px;
 }

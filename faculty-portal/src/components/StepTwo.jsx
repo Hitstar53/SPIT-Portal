@@ -17,6 +17,16 @@ function StepTwo({ setDimension2, yr }) {
     });
 
   useEffect(() => {
+    toast.info('Please Save Changes Before Leaving!', {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
     const getData = async () => {
       await axios
         .post("http://localhost:5000/api/faculty/appraisal/get/dim2", {
@@ -267,14 +277,14 @@ function StepTwo({ setDimension2, yr }) {
             )}
 
             <button
-              className="btn btn-success"
+              className="add-btn"
               type="button"
               onClick={() => appendPaper({})}
-              style={{
-                padding: "10px 25px",
-                borderRadius: "10px",
-                margin: "0px",
-              }}
+              // style={{
+              //   padding: "10px 25px",
+              //   borderRadius: "10px",
+              //   margin: "0px",
+              // }}
             >
               Add Paper
             </button>
@@ -331,14 +341,14 @@ function StepTwo({ setDimension2, yr }) {
               </Table>
             )}
             <button
-              className="btn btn-success"
+              className="add-btn"
               type="button"
               onClick={() => appendPatent({})}
-              style={{
-                padding: "10px 25px",
-                borderRadius: "10px",
-                margin: "0px",
-              }}
+              // style={{
+              //   padding: "10px 25px",
+              //   borderRadius: "10px",
+              //   margin: "0px",
+              // }}
             >
               Add Patent
             </button>
@@ -404,14 +414,14 @@ function StepTwo({ setDimension2, yr }) {
             )}
 
             <button
-              className="btn btn-success"
+              className="add-btn"
               type="button"
               onClick={() => appendBook({})}
-              style={{
-                padding: "10px 25px",
-                borderRadius: "10px",
-                margin: "0px",
-              }}
+              // style={{
+              //   padding: "10px 25px",
+              //   borderRadius: "10px",
+              //   margin: "0px",
+              // }}
             >
               Add Book
             </button>
@@ -471,14 +481,14 @@ function StepTwo({ setDimension2, yr }) {
             )}
 
             <button
-              className="btn btn-success"
+              className="add-btn"
               type="button"
               onClick={() => appendMOOC({})}
-              style={{
-                padding: "10px 25px",
-                borderRadius: "10px",
-                margin: "0px",
-              }}
+              // style={{
+              //   padding: "10px 25px",
+              //   borderRadius: "10px",
+              //   margin: "0px",
+              // }}
             >
               Add MOOC
             </button>
@@ -572,14 +582,14 @@ function StepTwo({ setDimension2, yr }) {
               </Table>
             )}
             <button
-              className="btn btn-success"
+              className="add-btn"
               type="button"
               onClick={() => appendSponsored({})}
-              style={{
-                padding: "10px 25px",
-                borderRadius: "10px",
-                margin: "0px",
-              }}
+              // style={{
+              //   padding: "10px 25px",
+              //   borderRadius: "10px",
+              //   margin: "0px",
+              // }}
             >
               Add Sponsored
             </button>
@@ -684,14 +694,14 @@ function StepTwo({ setDimension2, yr }) {
             )}
 
             <button
-              className="btn btn-success"
+              className="add-btn"
               type="button"
               onClick={() => appendDevelopment({})}
-              style={{
-                padding: "10px 25px",
-                borderRadius: "10px",
-                margin: "0px",
-              }}
+              // style={{
+              //   padding: "10px 25px",
+              //   borderRadius: "10px",
+              //   margin: "0px",
+              // }}
             >
               Add Development
             </button>
@@ -756,14 +766,14 @@ function StepTwo({ setDimension2, yr }) {
             )}
 
             <button
-              className="btn btn-success"
+              className="add-btn"
               type="button"
               onClick={() => appendSoftHardDev({})}
-              style={{
-                padding: "10px 25px",
-                borderRadius: "10px",
-                margin: "0px",
-              }}
+              // style={{
+              //   padding: "10px 25px",
+              //   borderRadius: "10px",
+              //   margin: "0px",
+              // }}
             >
               Add Soft/Hard Dev
             </button>
@@ -822,14 +832,14 @@ function StepTwo({ setDimension2, yr }) {
             )}
 
             <button
-              className="btn btn-success"
+              className="add-btn"
               type="button"
               onClick={() => appendExtras({})}
-              style={{
-                padding: "10px 25px",
-                borderRadius: "10px",
-                margin: "0px",
-              }}
+              // style={{
+              //   padding: "10px 25px",
+              //   borderRadius: "10px",
+              //   margin: "0px",
+              // }}
             >
               Add Extra
             </button>
@@ -840,13 +850,15 @@ function StepTwo({ setDimension2, yr }) {
         value="Save Changes"
         style={{ display: "block", width: "100px" }}
       /> */}
+      <div className="center">
+
             <button
-              style={{ display: "block" }}
-              className="btn btn-primary submit-btn"
+              className="save-btn"
               type="submit"
             >
               Save Changes
             </button>
+      </div>
           </form>
         </>
       )}

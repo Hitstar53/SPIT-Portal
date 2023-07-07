@@ -242,7 +242,7 @@ function StepThree({setDimension3, yr}) {
           ))}
         </div>
       </div>
-      <h3>Organized</h3>
+      <h1>Organized</h1>
       {organizedFields.length > 0 && (
         <Table striped bordered>
           <thead>
@@ -315,7 +315,7 @@ function StepThree({setDimension3, yr}) {
         </Table>
       )}
       <button
-        className="btn btn-success"
+        className="add-btn"
         type="button"
         onClick={() => appendOrganized({})}
         style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
@@ -324,7 +324,7 @@ function StepThree({setDimension3, yr}) {
       </button>
 
       {/* Invited */}
-      <h3>Invited</h3>
+      <h1>Invited</h1>
       {invitedFields.length > 0 && (
         <Table striped bordered>
           <thead>
@@ -395,7 +395,7 @@ function StepThree({setDimension3, yr}) {
         </Table>
       )}
       <button
-        className="btn btn-success"
+        className="add-btn"
         type="button"
         onClick={() => appendInvited({})}
         style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
@@ -404,7 +404,7 @@ function StepThree({setDimension3, yr}) {
       </button>
 
       {/* Selection Committee */}
-      <h3>Selection Committee</h3>
+      <h1>Selection Committee</h1>
       {committeeFields.length > 0 && (
         <Table striped bordered>
           <thead>
@@ -466,7 +466,7 @@ function StepThree({setDimension3, yr}) {
         </Table>
       )}
       <button
-        className="btn btn-success"
+        className="add-btn"
         type="button"
         onClick={() => appendCommittee({})}
         style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
@@ -475,7 +475,7 @@ function StepThree({setDimension3, yr}) {
       </button>
 
       {/* Article */}
-      <h3>Article</h3>
+      <h1>Article</h1>
       {articleFields.length > 0 && (
         <Table striped bordered>
           <thead>
@@ -507,7 +507,7 @@ function StepThree({setDimension3, yr}) {
         </Table>
       )}
       <button
-        className="btn btn-success"
+        className="add-btn"
         type="button"
         onClick={() => appendArticle({})}
         style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
@@ -516,7 +516,7 @@ function StepThree({setDimension3, yr}) {
       </button>
 
       {/* CoGuide */}
-      <h3>CoGuide</h3>
+      <h1>CoGuide</h1>
       {coGuideFields.length > 0 && (
         <Table striped bordered>
           <thead>
@@ -558,7 +558,7 @@ function StepThree({setDimension3, yr}) {
         </Table>
       )}
       <button
-        className="btn btn-success"
+        className="add-btn"
         type="button"
         onClick={() => appendCoGuide({})}
         style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
@@ -567,7 +567,7 @@ function StepThree({setDimension3, yr}) {
       </button>
 
       {/* Collaboration */}
-      <h3>Collaboration</h3>
+      <h1>Collaboration</h1>
       {collaborationFields.length > 0 && (
         <Table striped bordered>
           <thead>
@@ -612,7 +612,7 @@ function StepThree({setDimension3, yr}) {
         </Table>
       )}
       <button
-        className="btn btn-success"
+        className="add-btn"
         type="button"
         onClick={() => appendCollaboration({})}
         style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
@@ -626,9 +626,12 @@ function StepThree({setDimension3, yr}) {
         value="Save Changes"
         style={{ display: "block", width: "100px" }}
       /> */}
-      <button style={{display:'block'}} className="btn btn-primary submit-btn" type="submit">
+      <div className="center">
+
+      <button className="save-btn" type="submit">
           Save Changes
           </button>
+      </div>
     </form>
     )}
     </>

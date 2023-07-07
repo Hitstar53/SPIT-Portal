@@ -14,7 +14,7 @@ const steps = [
   `Dimension 1: Academics`,
   `Dimension 2: Research and Development`,
   `Dimension 3: Administration and Outreach `,
-  `Dimension 4: Perception/ 360 degree feedback`,
+  // `Dimension 4: Perception/ 360 degree feedback`,
 ];
 
 export default function FacultyStepper() {

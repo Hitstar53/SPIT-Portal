@@ -36,11 +36,11 @@ const ViewProfile = () => {
             <div className="img-wrapper">
               <img src={userInfo.picture} alt="profile" />
             </div>
-            <div className="info-wrapper">
-              <h1 className="bigger">Name : {user.fullName} </h1>
-              <h1 className="big">Designation : {user.designation}</h1>
-              <h1 className="big">Department : {user.department}</h1>
-              <h1 className="big">ID : {user.id}</h1>
+            <div className="info-head-wrapper">
+              <h1 className="info-head">{user.fullName} </h1>
+              <h1 className="info-subhead">{user.designation}, {user.department}</h1>
+              {/* <h1 className="big">Department : </h1> */}
+              <h1 className="info-subhead">ID : {user.id}</h1>
             </div>
           </div>
           <hr id="hr" />
@@ -51,27 +51,32 @@ const ViewProfile = () => {
                 <h1 className="bigger">Personal</h1>
                 <div className="info-wrapper">
                   <h1 className="bigg">
+                  
                     <CalendarMonthIcon
-                      sx={{ marginRight: 2.5, marginTop: 0.2 }}
+                      sx={{ marginRight: 2.5 }}
                     />
                     Date of Birth : {user.dateOfBirth}
                   </h1>
                   <h1 className="bigg">
+                  
                     <CalendarTodayIcon
-                      sx={{ marginRight: 2.5, marginTop: 0.2 }}
+                      sx={{ marginRight: 2.5 }}
                     />
                     Date of Joining :{user.dateOfJoining}
                   </h1>
                   <h1 className="bigg">
-                    <WcIcon sx={{ marginRight: 2.5, marginTop: 0.2 }} />
+                  
+                    <WcIcon sx={{ marginRight: 2.5 }} />
                     Gender : {user.gender}
                   </h1>
                   <h1 className="bigg">
-                    <BloodtypeIcon sx={{ marginRight: 2.5, marginTop: 0.2 }} />
+                  
+                    <BloodtypeIcon sx={{ marginRight: 2.5 }} />
                     Blood Group : {user.bloodGroup}
                   </h1>
                   <h1 className="bigg">
-                    <MergeTypeIcon sx={{ marginRight: 2.5, marginTop: 0.2 }} />
+                  
+                    <MergeTypeIcon sx={{ marginRight: 2.5 }} />
                     Type : {user.type}
                   </h1>
                 </div>
@@ -80,23 +85,28 @@ const ViewProfile = () => {
                 <h1 className="bigger">Contact</h1>
                 <div className="info-wrapper">
                   <h1 className="bigg">
-                    <EmailIcon sx={{ marginRight: 2.5, marginTop: 0.2 }} />
+                  
+                    <EmailIcon sx={{ marginRight: 2.5 }} />
                     Email : {user.email}
                   </h1>
                   <h1 className="bigg">
-                    <PhoneIcon sx={{ marginRight: 2.5, marginTop: 0.2 }} />
+                  
+                    <PhoneIcon sx={{ marginRight: 2.5 }} />
                     Phone No. : {user.mobileNumber}
                   </h1>
                   <h1 className="bigg">
-                    <BusinessIcon sx={{ marginRight: 2.5, marginTop: 0.2 }} />
+                  
+                    <BusinessIcon sx={{ marginRight: 2.5 }} />
                     Address : {user.address}
                   </h1>
                   <h1 className="bigg">
-                    <GitHubIcon sx={{ marginRight: 2.5, marginTop: 0.2 }} />
+                  
+                    <GitHubIcon sx={{ marginRight: 2.5 }} />
                     GitHub : {user.gitHubProfile}
                   </h1>
                   <h1 className="bigg">
-                    <LinkedInIcon sx={{ marginRight: 2.5, marginTop: 0.2 }} />
+                  
+                    <LinkedInIcon sx={{ marginRight: 2.5 }} />
                     LinkedIn : {user.linkedinProfile}
                   </h1>
                 </div>
@@ -112,18 +122,21 @@ const ViewProfile = () => {
                 <h1 className="bigger">Academics</h1>
                 <div className="info-wrapper">
                   <h1 className="bigg">
-                    <SchoolIcon sx={{ marginRight: 2.5, marginTop: 0.2 }} />
+                  
+                    <SchoolIcon sx={{ marginRight: 2.5 }} />
                     Qualification: {user.qualification}
                   </h1>
                   <h1 className="bigg">
+                  
                     <AutoAwesomeIcon
-                      sx={{ marginRight: 2.5, marginTop: 0.2 }}
+                      sx={{ marginRight: 2.5 }}
                     />
                     Specialisation:{" "} {user.specialization}
                   </h1>
                   <h1 className="bigg">
+                  
                     <LeaderboardIcon
-                      sx={{ marginRight: 2.5, marginTop: 0.2 }}
+                      sx={{ marginRight: 2.5 }}
                     />
                     Class Incharge: {user.classIncharge}
                   </h1>
@@ -133,14 +146,16 @@ const ViewProfile = () => {
                 <h1 className="bigger">Documents</h1>
                 <div className="info-wrapper">
                   <h1 className="bigg">
+                  
                     <FingerprintIcon
-                      sx={{ marginRight: 2.5, marginTop: 0.2 }}
+                      sx={{ marginRight: 2.5 }}
                     />
                     Aadhar Card Number: {user.aadharCardNumber}
                   </h1>
                   <h1 className="bigg">
+                  
                     <AccountBalanceIcon
-                      sx={{ marginRight: 2.5, marginTop: 0.2 }}
+                      sx={{ marginRight: 2.5 }}
                     />
                     PAN Card Number: {user.panCardNumber}
                   </h1>
@@ -151,7 +166,6 @@ const ViewProfile = () => {
           <div className="profile-toolbar">
             <Link to="/edit-profile">
               <EditIcon />
-              Edit profile
             </Link>
           </div>
         </div>

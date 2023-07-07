@@ -7,6 +7,11 @@
 *{
   /* font-family: "Poppins"; */
   font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.75px;
+}
+.Toastify{
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bolder;
 }
 h1{
   font-size: 1.5rem;
@@ -21,7 +26,7 @@ form h1{
   text-align: center;
 }
 :root {
-  --primary-color: #8a6bef;
+  --primary-color: #2C5784;
   --secondary-color: #b6c3f1;
   --tertiary-color: #301683;
   --danger-color: #f44336;

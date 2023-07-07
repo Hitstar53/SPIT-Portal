@@ -22,7 +22,7 @@ export default function StepFoot({
                 flexDirection: "row",
                 pt: 2,
                 borderRadius: "8px",
-                padding: "7.5px 15px",
+                // padding: "7.5px 15px",
                 marginTop: "10px",
             }}
         >
@@ -60,9 +60,9 @@ export default function StepFoot({
                     Next
                 </Button>
             )}
-            {activeStep === 3 && (
+            {activeStep === steps.length-1 && (
                 <div>
-                    <Button variant="contained" onClick={toggle}>
+                    <Button sx={{background:"#38ba6c","&:hover":{background:'#38ba6c'}}} variant="contained" onClick={toggle}>
                         Submit Form
                     </Button>
                     <Modal isOpen={modal} toggle={toggle}>

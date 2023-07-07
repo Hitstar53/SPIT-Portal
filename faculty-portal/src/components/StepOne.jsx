@@ -37,6 +37,16 @@ const StepOne = ({ setDimension1, yr }) => {
   });
 
   useEffect(() => {
+    toast.info('Please Save Changes Before Leaving!', {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
     const getData = async () => {
       await axios.post('http://localhost:5000/api/faculty/appraisal/get/dim1',
         { name: user.fullName, yearofAssesment: yr }
@@ -349,7 +359,7 @@ const StepOne = ({ setDimension1, yr }) => {
                 </Table>
               </div>}
   
-            <button type="button" className="btn btn-success" onClick={() => appendCourse({})}>
+            <button type="button" className="add-btn" onClick={() => appendCourse({})}>
               Add Course
             </button>
   
@@ -393,7 +403,7 @@ const StepOne = ({ setDimension1, yr }) => {
               </Table>
             </div>}
   
-            <button type='button' className='btn btn-success' onClick={() => appendPaper({})}>
+            <button type='button' className='add-btn' onClick={() => appendPaper({})}>
               Add Question Paper
             </button>
   
@@ -428,7 +438,7 @@ const StepOne = ({ setDimension1, yr }) => {
               </Table>
             </div>}
   
-            <button type="button" className="btn btn-success" onClick={() => appendMentee({})}>
+            <button type="button" className="add-btn" onClick={() => appendMentee({})}>
               Add Mentee
             </button>
   
@@ -491,13 +501,13 @@ const StepOne = ({ setDimension1, yr }) => {
               </Table>
             </div>}
   
-            <button type="button" className="btn btn-success" onClick={() => appendGuest({})}>
+            <button type="button" className="add-btn" onClick={() => appendGuest({})}>
               Add Guest Lecture
             </button>
           </div>
   
   
-          <button className="btn btn-primary submit-btn" type="submit">
+          <button className="save-btn" type="submit">
             Save Changes
           </button>
         </form>
