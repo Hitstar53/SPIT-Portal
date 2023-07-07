@@ -242,7 +242,7 @@ function StepThree({setDimension3, yr}) {
           ))}
         </div>
       </div>
-      <h1>Organized</h1>
+      <h1>OP1: Organized training for Industry/External learners</h1>
       {organizedFields.length > 0 && (
         <Table striped bordered>
           <thead>
@@ -324,7 +324,7 @@ function StepThree({setDimension3, yr}) {
       </button>
 
       {/* Invited */}
-      <h1>Invited</h1>
+      <h1>Invited as visiting /Guest faculty for delivering a course in industry/ institute</h1>
       {invitedFields.length > 0 && (
         <Table striped bordered>
           <thead>
@@ -404,7 +404,9 @@ function StepThree({setDimension3, yr}) {
       </button>
 
       {/* Selection Committee */}
-      <h1>Selection Committee</h1>
+      <h1>Part of selection committee / inquiry/ academic audit / examiner panel/ 
+		BOS /AC/LIC/ RRC meetings/ external Auditor
+</h1>
       {committeeFields.length > 0 && (
         <Table striped bordered>
           <thead>
@@ -475,7 +477,7 @@ function StepThree({setDimension3, yr}) {
       </button>
 
       {/* Article */}
-      <h1>Article</h1>
+      <h1>Article in media/ newspaper to boost Institution’s Image</h1>
       {articleFields.length > 0 && (
         <Table striped bordered>
           <thead>
@@ -516,7 +518,7 @@ function StepThree({setDimension3, yr}) {
       </button>
 
       {/* CoGuide */}
-      <h1>CoGuide</h1>
+      <h1>Co-guide for student projects and dissertations in the peer institutions </h1>
       {coGuideFields.length > 0 && (
         <Table striped bordered>
           <thead>
@@ -567,7 +569,7 @@ function StepThree({setDimension3, yr}) {
       </button>
 
       {/* Collaboration */}
-      <h1>Collaboration</h1>
+      <h1>Any academic collaboration with the other institutions</h1>
       {collaborationFields.length > 0 && (
         <Table striped bordered>
           <thead>
