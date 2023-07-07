@@ -86,6 +86,7 @@ table th {
   padding: 5px;
   background: #f0f0f0;
   color: #313030;
+  text-align: center;
 }
 table td {
   border: 1px solid #b3adad;
@@ -93,4 +94,7 @@ table td {
   padding: 5px;
   background: #ffffff;
   color: #313030;
+}
+.table-heading {
+  text-align: left;
 }

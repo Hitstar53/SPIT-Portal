@@ -1,18 +1,31 @@
 import React, { useEffect, useContext, useState } from 'react'
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
-import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
 import { useRef } from 'react';
 import "../styles/History.css"
+import { drawDOM, exportPDF } from "@progress/kendo-drawing";
+import { saveAs } from "@progress/kendo-file-saver";
+
 const ViewHistory = () => {
     const { user } = useContext(UserContext);
     const [history, setHistory] = useState();
-    const pdfExportComponent = useRef(null);
-
+    // const pdfExportComponent = useRef(null);
+    const elementRef = useRef(null);
+    const exportElement = (element, options) => {
+        drawDOM(element, options)
+            .then((group) => {
+                return exportPDF(group);
+            })
+            .then((dataUri) => {
+                saveAs(dataUri, "export.pdf");
+            });
+    }
     const handleExportPDF = () => {
-        if (pdfExportComponent.current) {
-            pdfExportComponent.current.save();
-        }
+        exportElement(elementRef.current, {
+            // forcePageBreak: ".page-break",
+            paperSize: "A4",
+            margin:"2mm"
+        });
     };
 
     useEffect(() => {
@@ -32,10 +45,15 @@ const ViewHistory = () => {
         fetchData();
     }, [])
     return (
+
+
+
+
+
         <div>
             <button onClick={handleExportPDF}>Export to PDF</button>
             {history ? (
-                <PDFExport ref={pdfExportComponent}>
+                <div ref={elementRef}>
                     <div>
                         <table>
                             <thead>
@@ -62,7 +80,10 @@ const ViewHistory = () => {
                         >
                             <table>
                                 <thead>
-                                    AP1: Courses conducted
+                                    <th colSpan={5} className='table-heading'>AP1: Courses Conducted</th>
+
+                                </thead>
+                                <thead>
                                     <tr>
                                         <th>Sr. No.</th>
                                         <th>Course Name</th>
@@ -246,7 +267,7 @@ const ViewHistory = () => {
                         </table>
                         {/* ----------------------------------------------------------------------------- */}
                         {/* ----------------------------------------------------------------------------AP7- */}
-                        <table>
+                        <table className="page-break">
                             <thead>
                                 AP7:Arrange Guest Lectures / co-teaching from industry
                                 (eminent resource person from the respective domain industry)
@@ -573,30 +594,35 @@ const ViewHistory = () => {
                         </thead>
                         <tr>
                             <th>Sr No.</th>
-                            <th><font color="#313030">Software Developed /Hardware lab setup</font><br /></th>
-                            <th><font color="#313030">Model/ Portal&nbsp;</font><br /></th>
-                            <th><font color="#313030">Details of the setup</font><br /></th>
+                            <th>
+                                <font color="#313030">
+                                    Software Developed /Hardware lab setup
+                                </font>
+                                <br />
+                            </th>
+                            <th>
+                                <font color="#313030">Model/ Portal&nbsp;</font>
+                                <br />
+                            </th>
+                            <th>
+                                <font color="#313030">Details of the setup</font>
+                                <br />
+                            </th>
                         </tr>
                         <tbody>
-                            {
-                                history.Dimension2.RP6.softHardDev.map((sw, index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <td>{index + 1}</td>
-                                            <td>{sw.type}</td>
-                                            <td>{sw.model}</td>
-                                            <td>{sw.details}</td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                            <tr>
-                                Total Marks: {history.Dimension2.RP6.totalMarks}
-                            </tr>
-
+                            {history.Dimension2.RP6.softHardDev.map((sw, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>{index + 1}</td>
+                                        <td>{sw.type}</td>
+                                        <td>{sw.model}</td>
+                                        <td>{sw.details}</td>
+                                    </tr>
+                                );
+                            })}
+                            <tr>Total Marks: {history.Dimension2.RP6.totalMarks}</tr>
                         </tbody>
                     </table>
-
 
                     {/* 
                     RP7 */}
@@ -606,8 +632,9 @@ const ViewHistory = () => {
                             <tr>
                                 <th>Sr No.</th>
                                 <th>Date</th>
-                                <th>Details &nbsp;
-                                    (Faculty claim needs to be approved by HOD /Senior most faculty)
+                                <th>
+                                    Details &nbsp; (Faculty claim needs to be approved by HOD
+                                    /Senior most faculty)
                                 </th>
                             </tr>
                             {history.Dimension2.RP7.activityNotCovered.map((sd, index) => {
@@ -617,13 +644,15 @@ const ViewHistory = () => {
                                         <td>{sd.date}</td>
                                         <td>{sd.details}</td>
                                     </tr>
-                                )
+                                );
                             })}
                             <tr>Total Marks: {history.Dimension2.RP7.totalMarks}</tr>
                         </tbody>
                     </table>
 
-                </PDFExport>
+                    {/* Dimension 3 starts */}
+
+                </div>
             ) : (
                 "Nahi Aaya"
             )}
