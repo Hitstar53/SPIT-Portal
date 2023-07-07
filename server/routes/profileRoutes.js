@@ -11,4 +11,6 @@ router.put('/getParental',profileController.getParentalInfo)
 router.put('/getEdu',profileController.getEduInfo)
 router.put('/getExams',profileController.getExams)
 router.put('/getMiniDrawer',profileController.getMiniDrawer)
+router.put('/getSemesters',profileController.getSemesters)
+router.put('/getResults',profileController.getResults)
 module.exports = router

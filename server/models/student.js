@@ -61,7 +61,7 @@ const studentSchema = mongoose.Schema({
             semesterNumber:{ type : Number, required:true},
             courses:[
                 {
-                    courseInfo:{type:String,required:true},
+                    courseName:{type:String,required:true},
                     exams:[
                         {
                             type:{type:String,required:true},

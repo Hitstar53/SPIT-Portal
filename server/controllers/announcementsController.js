@@ -33,7 +33,9 @@ exports.setAnnouncementsAllStudents = asyncHandler(async (req, res) => {
 
 
 exports.setAnnouncementsGroupStudents = asyncHandler(async (req, res) => { 
-    const classname = req.body.class
+    const year = req.body.year
+    const branch = req.body.branch
+    const division = req.body.division
     const batch = req.body.batch
     const title = req.body.title
     const description = req.body.description
@@ -51,9 +53,10 @@ exports.setAnnouncementsGroupStudents = asyncHandler(async (req, res) => {
                 sender:sender,
                 senderPhoto:senderPhoto,
                 type:type,
-                postDate:postDate
+                postDate:postDate,
+                endDate:endDate
             })
-            await Student.updateMany({class:classname, batch: batch},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
+            await Student.updateMany({"educationalInfo.0.year":year,"educationalInfo.0.branch":branch,"educationalInfo.0.division":division, batch: batch},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
             await Faculty.updateOne({name:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
             
             res.status(200).json(announcement)
@@ -71,9 +74,10 @@ exports.setAnnouncementsGroupStudents = asyncHandler(async (req, res) => {
                 sender:sender,
                 senderPhoto:senderPhoto,
                 type:type,
-                postDate:postDate
+                postDate:postDate,
+                endDate:endDate
             })
-            await Student.updateMany({class:classname},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
+            await Student.updateMany({"educationalInfo.0.year":year,"educationalInfo.0.branch":branch,"educationalInfo.0.division":division},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
             await Faculty.updateOne({name:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
             
             res.status(200).json(announcement)

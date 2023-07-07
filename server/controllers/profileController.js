@@ -57,6 +57,21 @@ exports.updateEducationalInfo = asyncHandler(async(req,res) =>{
     const email = req.body.email;
     try {
         const student = await Profile.findOne({emailID:email})
+        if (index===0) {
+            const onGoingSemester = eduInfo.semester
+            const semester = student.semester
+            semester.forEach(element => {
+                if (element.semesterNumber < onGoingSemester) {
+                    element.status = "Completed"
+                }
+                else if(element.semesterNumber > onGoingSemester){
+                    element.status = "Not Started"
+                }
+                else{
+                    element.status = "Ongoing"
+                }
+            });
+        }
         student.educationalInfo[index] = eduInfo
         await student.save()
         res.status(200).json("educational info submitted successfully")
@@ -113,6 +128,30 @@ exports.getExams = asyncHandler(async(req,res)=>{
         const exams = await Profile.findOne({emailID:email}).select("exams -_id")
         res.status(200).json(exams)
     } catch (error) {
+        console.error(error)
+    }
+})
+
+exports.getSemesters = asyncHandler(async(req,res)=>{
+    const email = req.body.email;
+    try {
+        const semesters = await Profile.findOne({emailID:email}).select("semester.semesterNumber semester.sgpa -_id")
+        res.status(200).json(semesters)
+    } catch (error) {
+        console.error(error)
+    }
+}
+)
+
+exports.getResults = asyncHandler(async(req,res)=>{
+    const email = req.body.email;
+    const semesterNumber = req.body.semesterNumber;
+    try {
+        const sem = await Profile.findOne({emailID:email}).select('semester -_id')
+        const results = (sem.semester[semesterNumber-1].courses)
+        res.status(200).json(results)
+    }
+    catch (error){
         console.error(error)
     }
 })
