@@ -333,7 +333,7 @@ const appraisalSchema = new mongoose.Schema({
         RP4: {
             number: {
                 type: Number,
-                default:null
+                default: null
             },
             totalMarks: {
                 type: Number,
@@ -668,7 +668,7 @@ const appraisalSchema = new mongoose.Schema({
         dimension4: {
             totalMarks: {
                 type: Number,
-                default: 0, 
+                default: 0,
             },
             multiplyingFactor: {
                 type: Number,
