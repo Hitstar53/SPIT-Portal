@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
-import { Toaster, toast } from 'react-hot-toast';
+import {toast} from 'react-toastify'
 import { UserContext } from '../context/UserContext';
 import Table from "react-bootstrap/Table";
 import { IconButton } from '@mui/material';
@@ -102,14 +102,23 @@ const StepOne = ({ setDimension1, yr }) => {
     console.log(data)
     setDimension1(data)
     axios.post('http://localhost:5000/api/faculty/appraisal/dim1',
-      { yearofAssesment: yr, faculty: user, Dimension1: data }
+      { yearofAssesment: yr, faculty: user, Dimension1: data, department:user.department,designation:user.designation }
     ).then((res) => {
       console.log(res.data)
+      toast.success('Step One Saved!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }).catch((err) => {
       console.log(err)
     })
     localStorage.setItem('dim1Data', JSON.stringify(data));
-    toast.success('Form submitted successfully!');
   };
 
   const handleRemoveCourse = (index) => {
@@ -212,12 +221,8 @@ const StepOne = ({ setDimension1, yr }) => {
             {errors.designation && <p className="error">*This field is required</p>}
           </div>
         </div>
-        <form className="container" onSubmit={handleSubmit(onSubmit)}>
-          <Toaster />
-  
+        <form className="container" onSubmit={handleSubmit(onSubmit)}>  
           <div className='info-container'>
-  
-  
   
             <h3>Courses</h3>
             {courseFields.length > 0 &&

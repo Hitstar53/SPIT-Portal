@@ -72,12 +72,7 @@ var yr=getDate()
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        ...Dimension1,
-        // Dimension1: Dimension1.Dimension1,
-        Dimension2: Dimension2,
-        Dimension3: Dimension3,
-        ...Dimension4,
-        yearOfAssessment: yr,
+        yearofAssesment: yr,
         facultyName:user.fullName,
         department:user.department,
         designation:user.designation,
@@ -85,11 +80,11 @@ var yr=getDate()
     });
   }
 
-  React.useEffect(()=>{
-    if(activeStep === 4){
-      sendToServer()
-    }
-  },[activeStep])
+  // React.useEffect(()=>{
+  //   if(activeStep === 4){
+  //     sendToServer()
+  //   }
+  // },[activeStep])
 
   return (
     <React.Fragment>
@@ -118,6 +113,7 @@ var yr=getDate()
             handleBack={handleBack}
             handleNext={handleNext}
             steps={steps}
+            sendToServer={sendToServer}
           />
         }
       </Box>

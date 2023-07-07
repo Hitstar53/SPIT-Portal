@@ -202,10 +202,16 @@ body {
 
 .stepTwo,.stepThree{
     text-align: left !important;
-    /* background-color: aliceblue;
+    /* background-color: #411CBA;
     padding: 2rem;
-    border-radius: 1rem; */
+    border-radius: 1rem;
+    color: whitesmoke; */
 }
 .stepTwo h1,.stepThree h1{
     margin-top: 2rem;
+}
+
+.citation{
+    width: 100px;
+    margin: 0 1rem;
 }

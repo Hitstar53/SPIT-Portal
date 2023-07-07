@@ -9,11 +9,17 @@ const History = () => {
     const { user } = useContext(UserContext);
 
     useEffect(() => {
+        console.log(user);
+    }, []
+
+    )
+
+    useEffect(() => {
         const fetchHistory = async () => {
             const endpoint = 'http://localhost:5000/api/faculty/appraisal/getallappraisal';
             // const payload = JSON.parse(localStorage.getItem('user'));
             await axios.post(endpoint, {
-                facultyName: user.fullName,
+                facultyName: "Mahesh Patil",
             }).then((response) => {
                 setHistory(response.data);
             });

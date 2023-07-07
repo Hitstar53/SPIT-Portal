@@ -4,40 +4,44 @@ import { UserContext } from "../context/UserContext";
 import Table from "react-bootstrap/Table";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import CircularProgress from "@mui/material/CircularProgress";
 
 function StepTwo({ setDimension2, yr }) {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
 
-  const { register, control, handleSubmit, setValue, getValues, reset } = useForm({
-    defaultValues: JSON.parse(localStorage.getItem("dim2Data")) || {},
-  });
+  const { register, control, handleSubmit, setValue, getValues, reset } =
+    useForm({
+      defaultValues: JSON.parse(localStorage.getItem("dim2Data")) || {},
+    });
 
   useEffect(() => {
     const getData = async () => {
-      await axios.post('http://localhost:5000/api/faculty/appraisal/get/dim2',
-        { name: user.fullName, yearofAssesment: yr }
-      ).then((res) => {
-        console.log(res.data)
-        localStorage.setItem("dim2Data", JSON.stringify(res.data))
-        reset(JSON.parse(localStorage.getItem("dim2Data")))
-        const storedData = localStorage.getItem("dim2Data")
-        console.log(storedData)
-        if(storedData) {
-          Object.keys(JSON.parse(storedData)).map((key) => {
-            setValue(key, JSON.parse(storedData)[key])
-          })
-        }
-        setLoading(false)
-      }).catch((err) => {
-        console.log(err)
-      })
-    }
-    getData()
+      await axios
+        .post("http://localhost:5000/api/faculty/appraisal/get/dim2", {
+          name: user.fullName,
+          yearofAssesment: yr,
+        })
+        .then((res) => {
+          console.log(res.data);
+          localStorage.setItem("dim2Data", JSON.stringify(res.data));
+          reset(JSON.parse(localStorage.getItem("dim2Data")));
+          const storedData = localStorage.getItem("dim2Data");
+          console.log(storedData);
+          if (storedData) {
+            Object.keys(JSON.parse(storedData)).map((key) => {
+              setValue(key, JSON.parse(storedData)[key]);
+            });
+          }
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getData();
   }, []);
-
 
   const {
     fields: paperFields,
@@ -124,11 +128,21 @@ function StepTwo({ setDimension2, yr }) {
       })
       .then((res) => {
         console.log(res.data);
+        toast.success("Step Two Saved", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       })
       .catch((err) => {
         console.log(err);
       });
-    toast.success("Form submitted successfully!");
+    // toast.success("Form submitted successfully!");
     // await sendToServer()
   };
 
@@ -265,7 +279,7 @@ function StepTwo({ setDimension2, yr }) {
               Add Paper
             </button>
 
-            <h1> RP 2: -Patent/books/Monograms/ MOOC (30 marks)</h1>
+            <h1> RP 2: Patent/books/Monograms/ MOOC (30 marks)</h1>
             {patentFields.length > 0 && (
               <Table striped bordered>
                 <thead>
@@ -428,7 +442,7 @@ function StepTwo({ setDimension2, yr }) {
                       <td>
                         <label className="form-label">
                           <input
-                            type="text"
+                            type="number"
                             {...register(`RP2.moocs[${index}].duration`)}
                             className="form-input"
                           />
@@ -528,7 +542,7 @@ function StepTwo({ setDimension2, yr }) {
                       <td>
                         <label className="form-label">
                           <input
-                            type="text"
+                            type="number"
                             {...register(`RP3.sponsored[${index}].amount`)}
                             className="form-input"
                           />
@@ -571,11 +585,11 @@ function StepTwo({ setDimension2, yr }) {
             <div>
               <h1>RP4: Citations</h1>
               <label className="form-label">
-                Number of citations in the previous calendar year
+                Number of citations in the previous calendar year:
                 <input
-                  type="text"
+                  type="number"
                   {...register(`RP4.number`)}
-                  className="form-input"
+                  className="form-input citation"
                 />
               </label>
             </div>
@@ -603,8 +617,9 @@ function StepTwo({ setDimension2, yr }) {
                           <option value="STTP">STTP</option>
                           <option value="FDP">FDP</option>
                           <option value="MOOC">MOOC</option>
-                          <option value="Industry ">Industry </option>
-                          <option value="nternship">nternship</option>
+                          <option value="Industry_Internship">
+                            Industry Internship
+                          </option>
                         </select>
                       </td>
                       <td>
@@ -642,7 +657,7 @@ function StepTwo({ setDimension2, yr }) {
                       <td>
                         <label className="form-label">
                           <input
-                            type="text"
+                            type="number"
                             {...register(
                               `RP5.selfDevelopment[${index}].duration`
                             )}
@@ -821,7 +836,11 @@ function StepTwo({ setDimension2, yr }) {
         value="Save Changes"
         style={{ display: "block", width: "100px" }}
       /> */}
-            <button style={{display:'block'}} className="btn btn-primary submit-btn" type="submit">
+            <button
+              style={{ display: "block" }}
+              className="btn btn-primary submit-btn"
+              type="submit"
+            >
               Save Changes
             </button>
           </form>

@@ -6,7 +6,7 @@ import "../styles/Appraisal3.css";
 import Table from "react-bootstrap/Table";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 import CircularProgress from '@mui/material/CircularProgress';
 
 function StepThree({setDimension3, yr}) {
@@ -97,10 +97,19 @@ function StepThree({setDimension3, yr}) {
       { yearofAssesment: yr, faculty: user, Dimension3: data }
     ).then((res) => {
       console.log(res.data)
+      toast.success('Step Three Saved!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }).catch((err) => {
       console.log(err)
     })
-    toast.success('Form submitted successfully!');
   };
 
 
@@ -278,7 +287,7 @@ function StepThree({setDimension3, yr}) {
                 </td>
                 <td>
                   <input
-                    type="text"
+                    type="number"
                     placeholder="Funds"
                     className="form-input"
                     {...register(`OP1.organized[${index}].fund`)}
@@ -287,7 +296,7 @@ function StepThree({setDimension3, yr}) {
                 {/* <label className="form-label">Days</label> */}
                 <td>
                   <input
-                    type="text"
+                    type="number"
                     placeholder="Days"
                     className="form-input"
                     {...register(`OP1.organized[${index}].days`)}
@@ -366,7 +375,7 @@ function StepThree({setDimension3, yr}) {
                 </td>
                 <td>
                   <input
-                    type="text"
+                    type="number"
                     placeholder="Duration"
                     className="form-input"
                     {...register(`Invited.invitedAt[${index}].duration`)}
