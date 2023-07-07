@@ -623,6 +623,96 @@ const ViewHistory = () => {
                         </tbody>
                     </table>
 
+                    {/* 
+                    Dimension 3 starts */}
+                    <table>
+                        <thead>Dimension 3 </thead>
+                        <tbody>
+                            <tr>
+                                <th>Sr No.</th>
+                                <th>Administrative role executed</th>
+                                <th>Tick
+                                </th>
+                                <th>Marks</th>
+                            </tr>
+                             <thead>IP1</thead>
+                            {history.Dimension3.IP1.map((sd, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>{index + 1}</td>
+                                        <td>{sd.role}</td>
+                                        <td>{sd.tick}</td>
+                                        <td>20</td>
+                                    </tr>
+                                )
+                            })}
+                           
+                        </tbody>
+                         <thead>IP2</thead>
+                        <tbody>
+                            
+                            {history.Dimension3.IP2.map((sd, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>{index + 1}</td>
+                                        <td>{sd.role}</td>
+                                        <td>{sd.tick}</td>
+                                        <td>10</td>
+                                    </tr>
+                                )
+                            })}
+                           
+                        </tbody>
+                         <thead>DP1</thead>
+                        <tbody>
+                            
+                            {history.Dimension3.DP1.map((sd, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>{index + 1}</td>
+                                        <td>{sd.role}</td>
+                                        <td>{sd.tick}</td>
+                                        <td>10</td>
+                                    </tr>
+                                )
+                            })}
+                           
+                        </tbody>
+                        <tr>Total of IP1,IP2,DP1:{history.Dimension3.totalIP1IP2DP1Marks}</tr>
+                    </table>
+                     {/* 
+                    Dimension 3 OP1*/}
+                     <table>
+                        <thead>OP1: Organized training for Industry/External learners</thead>
+                        <tbody>
+                            <tr>
+                                <th>Sr No.</th>
+                                <th>FDP/Training Organised</th>
+                                <th>Sponsoring Agency
+                                </th>
+                                <th>Funds</th>
+                                <th>No. of days</th>
+
+                            </tr>
+                            {history.Dimension3.OP1.organized.map((sd, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>{index + 1}</td>
+                                        <td>{sd.name}</td>
+                                        <td>{sd.type}</td>
+                                        <td>{sd.sponsorerName}</td>
+                                        <td>{sd.fund}</td>
+                                        <td>{sd.days}</td>
+
+                                    </tr>
+                                )
+                            })}
+                            <tr>TotalMarks:{history.Dimension3.OP1.totalMarks}</tr>
+                        </tbody>
+                    </table>
+
+
+
                 </PDFExport>
             ) : (
                 "Nahi Aaya"
