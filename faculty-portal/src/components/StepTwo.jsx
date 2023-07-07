@@ -169,14 +169,14 @@ function StepTwo({ setDimension2, yr }) {
               <Table striped bordered>
                 <thead>
                   <tr>
-                    <th>Paper Title</th>
-                    <th>Journal/ Conference Name</th>
-                    <th>Type</th>
-                    <th>Authors</th>
-                    <th>Publisher</th>
-                    <th>Reputation</th>
-                    <th>Paper Link</th>
-                    <th></th>
+                    <th className='table-header text-center align-middle'>Paper Title</th>
+                    <th className='table-header text-center align-middle'>Journal/ Conference Name</th>
+                    <th className='table-header text-center align-middle'>Type</th>
+                    <th className='table-header text-center align-middle'>Authors</th>
+                    <th className='table-header text-center align-middle'>Publisher</th>
+                    <th className='table-header text-center align-middle'>Reputation</th>
+                    <th className='table-header text-center align-middle'>Paper Link</th>
+                    <th className='table-header text-center align-middle'></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -256,7 +256,7 @@ function StepTwo({ setDimension2, yr }) {
                             removePaper(index);
                           }}
                         >
-                          <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                          <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
                         </button>
                       </td>
                       {/* </div> */}
@@ -284,10 +284,10 @@ function StepTwo({ setDimension2, yr }) {
               <Table striped bordered>
                 <thead>
                   <tr>
-                    <th>Patent Obtained</th>
-                    <th>Details</th>
-                    <th>Status</th>
-                    <th></th>
+                    <th className='table-header text-center align-middle'>Patent Obtained</th>
+                    <th className='table-header text-center align-middle'>Details</th>
+                    <th className='table-header text-center align-middle'>Status</th>
+                    <th className='table-header text-center align-middle'></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -322,7 +322,7 @@ function StepTwo({ setDimension2, yr }) {
                           type="button"
                           onClick={() => removePatent(index)}
                         >
-                          <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                          <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
                         </button>
                       </td>
                     </tr>
@@ -347,11 +347,11 @@ function StepTwo({ setDimension2, yr }) {
               <Table striped bordered>
                 <thead>
                   <tr>
-                    <th>Books published</th>
-                    <th>Authors</th>
-                    <th>Publisher</th>
-                    <th>Status</th>
-                    <th></th>
+                    <th className='table-header text-center align-middle'>Books published</th>
+                    <th className='table-header text-center align-middle'>Authors</th>
+                    <th className='table-header text-center align-middle'>Publisher</th>
+                    <th className='table-header text-center align-middle'>Status</th>
+                    <th className='table-header text-center align-middle'></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -394,7 +394,7 @@ function StepTwo({ setDimension2, yr }) {
                       </td>
                       <td className="text-center align-middle">
                         <button type="button" onClick={() => removeBook(index)}>
-                          <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                          <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
                         </button>
                       </td>
                     </tr>
@@ -420,10 +420,10 @@ function StepTwo({ setDimension2, yr }) {
               <Table striped bordered>
                 <thead>
                   <tr>
-                    <th>MOOC’s attended</th>
-                    <th>Duration (days/weeks)</th>
-                    <th>Details (Grade,certificate etc)</th>
-                    <th></th>
+                    <th className='table-header text-center align-middle'>MOOC’s attended</th>
+                    <th className='table-header text-center align-middle'>Duration (days/weeks)</th>
+                    <th className='table-header text-center align-middle'>Details (Grade,certificate etc)</th>
+                    <th className='table-header text-center align-middle'></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -443,6 +443,7 @@ function StepTwo({ setDimension2, yr }) {
                         <label className="form-label">
                           <input
                             type="number"
+                  onWheel={(e) => e.target.blur()}
                             {...register(`RP2.moocs[${index}].duration`)}
                             className="form-input"
                           />
@@ -460,7 +461,7 @@ function StepTwo({ setDimension2, yr }) {
                       </td>
                       <td className="text-center align-middle">
                         <button type="button" onClick={() => removeMOOC(index)}>
-                          <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                          <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
                         </button>
                       </td>
                     </tr>
@@ -487,13 +488,13 @@ function StepTwo({ setDimension2, yr }) {
               <Table striped bordered>
                 <thead>
                   <tr>
-                    <th>Date</th>
-                    <th>Project Title/Consultancy</th>
-                    <th>Sponsoring Agency/Consultant</th>
-                    <th>Details (Govt/ Non-Govt)</th>
-                    <th>Funded Amount</th>
-                    <th>Status</th>
-                    <th></th>
+                    <th className='table-header text-center align-middle'>Date</th>
+                    <th className='table-header text-center align-middle'>Project Title/Consultancy</th>
+                    <th className='table-header text-center align-middle'>Sponsoring Agency/Consultant</th>
+                    <th className='table-header text-center align-middle'>Details (Govt/ Non-Govt)</th>
+                    <th className='table-header text-center align-middle'>Funded Amount</th>
+                    <th className='table-header text-center align-middle'>Status</th>
+                    <th className='table-header text-center align-middle'></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -543,6 +544,7 @@ function StepTwo({ setDimension2, yr }) {
                         <label className="form-label">
                           <input
                             type="number"
+                  onWheel={(e) => e.target.blur()}
                             {...register(`RP3.sponsored[${index}].amount`)}
                             className="form-input"
                           />
@@ -561,7 +563,7 @@ function StepTwo({ setDimension2, yr }) {
                           type="button"
                           onClick={() => removeSponsored(index)}
                         >
-                          <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                          <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
                         </button>
                       </td>
                     </tr>
@@ -588,6 +590,7 @@ function StepTwo({ setDimension2, yr }) {
                 Number of citations in the previous calendar year:
                 <input
                   type="number"
+                  onWheel={(e) => e.target.blur()}
                   {...register(`RP4.number`)}
                   className="form-input citation"
                 />
@@ -599,12 +602,12 @@ function StepTwo({ setDimension2, yr }) {
               <Table striped bordered>
                 <thead>
                   <tr>
-                    <th>Type</th>
-                    <th>STTP/FDP/MOOC Courses/Industry Internship Title</th>
-                    <th>Organization details </th>
-                    <th>Dates</th>
-                    <th>No. of days Participation</th>
-                    <th></th>
+                    <th className='table-header text-center align-middle'>Type</th>
+                    <th className='table-header text-center align-middle'>STTP/FDP/MOOC Courses/Industry Internship Title</th>
+                    <th className='table-header text-center align-middle'>Organization details </th>
+                    <th className='table-header text-center align-middle'>Dates</th>
+                    <th className='table-header text-center align-middle'>No. of days Participation</th>
+                    <th className='table-header text-center align-middle'></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -658,6 +661,7 @@ function StepTwo({ setDimension2, yr }) {
                         <label className="form-label">
                           <input
                             type="number"
+                  onWheel={(e) => e.target.blur()}
                             {...register(
                               `RP5.selfDevelopment[${index}].duration`
                             )}
@@ -670,7 +674,7 @@ function StepTwo({ setDimension2, yr }) {
                           type="button"
                           onClick={() => removeDevelopment(index)}
                         >
-                          <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                          <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
                         </button>
                       </td>
                     </tr>
@@ -699,10 +703,10 @@ function StepTwo({ setDimension2, yr }) {
               <Table striped bordered>
                 <thead>
                   <tr>
-                    <th>Software Developed /Hardware lab setup</th>
-                    <th>Model/ Portal</th>
-                    <th>Details of the setup</th>
-                    <th></th>
+                    <th className='table-header text-center align-middle'>Software Developed /Hardware lab setup</th>
+                    <th className='table-header text-center align-middle'>Model/ Portal</th>
+                    <th className='table-header text-center align-middle'>Details of the setup</th>
+                    <th className='table-header text-center align-middle'></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -742,7 +746,7 @@ function StepTwo({ setDimension2, yr }) {
                           type="button"
                           onClick={() => removeSoftHardDev(index)}
                         >
-                          <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                          <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
                         </button>
                       </td>
                     </tr>
@@ -769,12 +773,12 @@ function StepTwo({ setDimension2, yr }) {
               <Table striped bordered>
                 <thead>
                   <tr>
-                    <th>Date</th>
-                    <th>
+                    <th className='table-header text-center align-middle'>Date</th>
+                    <th className='table-header text-center align-middle'>
                       Details (Faculty claim needs to be approved by HOD /Senior
                       most faculty)
                     </th>
-                    <th></th>
+                    <th className='table-header text-center align-middle'></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -808,7 +812,7 @@ function StepTwo({ setDimension2, yr }) {
                           type="button"
                           onClick={() => removeExtras(index)}
                         >
-                          <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                          <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
                         </button>
                       </td>
                     </tr>

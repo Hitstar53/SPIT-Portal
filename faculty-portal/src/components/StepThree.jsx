@@ -247,12 +247,12 @@ function StepThree({setDimension3, yr}) {
         <Table striped bordered>
           <thead>
             <tr>
-              <th>FDP/Training Organised(Name)</th>
-              <th>Type</th>
-              <th>Sponser name</th>
-              <th>Funds</th>
-              <th>No. of days</th>
-              <th></th>
+              <th className='table-header text-center align-middle'>FDP/Training Organised(Name)</th>
+              <th className='table-header text-center align-middle'>Type</th>
+              <th className='table-header text-center align-middle'>Sponser name</th>
+              <th className='table-header text-center align-middle'>Funds</th>
+              <th className='table-header text-center align-middle'>No. of days</th>
+              <th className='table-header text-center align-middle'></th>
             </tr>
           </thead>
           <tbody>
@@ -288,6 +288,7 @@ function StepThree({setDimension3, yr}) {
                 <td>
                   <input
                     type="number"
+                  onWheel={(e) => e.target.blur()}
                     placeholder="Funds"
                     className="form-input"
                     {...register(`OP1.organized[${index}].fund`)}
@@ -297,6 +298,7 @@ function StepThree({setDimension3, yr}) {
                 <td>
                   <input
                     type="number"
+                  onWheel={(e) => e.target.blur()}
                     placeholder="Days"
                     className="form-input"
                     {...register(`OP1.organized[${index}].days`)}
@@ -304,7 +306,7 @@ function StepThree({setDimension3, yr}) {
                 </td>
                 <td className="text-center align-middle">
                   <button type="button" onClick={() => removeOrganized(index)}>
-                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
                   </button>
                 </td>
               </tr>
@@ -327,12 +329,12 @@ function StepThree({setDimension3, yr}) {
         <Table striped bordered>
           <thead>
             <tr>
-              <th>Industry/ Institution Name</th>
-              <th>Dates</th>
-              <th>Details (No. of participants, affiliation)</th>
-              <th>Type</th>
-              <th>Duration</th>
-              <th></th>
+              <th className='table-header text-center align-middle'>Industry/ Institution Name</th>
+              <th className='table-header text-center align-middle'>Dates</th>
+              <th className='table-header text-center align-middle'>Details (No. of participants, affiliation)</th>
+              <th className='table-header text-center align-middle'>Type</th>
+              <th className='table-header text-center align-middle'>Duration</th>
+              <th className='table-header text-center align-middle'></th>
             </tr>
           </thead>
           <tbody>
@@ -376,6 +378,7 @@ function StepThree({setDimension3, yr}) {
                 <td>
                   <input
                     type="number"
+                  onWheel={(e) => e.target.blur()}
                     placeholder="Duration"
                     className="form-input"
                     {...register(`Invited.invitedAt[${index}].duration`)}
@@ -383,7 +386,7 @@ function StepThree({setDimension3, yr}) {
                 </td>
                 <td className="text-center align-middle">
                   <button type="button" onClick={() => removeInvited(index)}>
-                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
                   </button>
                 </td>
               </tr>
@@ -406,11 +409,11 @@ function StepThree({setDimension3, yr}) {
         <Table striped bordered>
           <thead>
             <tr>
-              <th>Name of selection committee</th>
-              <th>Details (Nature of work)</th>
-              <th>Organization</th>
-              <th>Date</th>
-              <th></th>
+              <th className='table-header text-center align-middle'>Name of selection committee</th>
+              <th className='table-header text-center align-middle'>Details (Nature of work)</th>
+              <th className='table-header text-center align-middle'>Organization</th>
+              <th className='table-header text-center align-middle'>Date</th>
+              <th className='table-header text-center align-middle'></th>
             </tr>
           </thead>
           <tbody>
@@ -454,7 +457,7 @@ function StepThree({setDimension3, yr}) {
                 </td>
                 <td className="text-center align-middle">
                   <button type="button" onClick={() => removeCommittee(index)}>
-                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
                   </button>
                 </td>
               </tr>
@@ -477,8 +480,8 @@ function StepThree({setDimension3, yr}) {
         <Table striped bordered>
           <thead>
             <tr>
-              <th>Details</th>
-              <th></th>
+              <th className='table-header text-center align-middle'>Details</th>
+              <th className='table-header text-center align-middle'></th>
             </tr>
           </thead>
           <tbody>
@@ -495,7 +498,7 @@ function StepThree({setDimension3, yr}) {
                 </td>
                 <td className="text-center align-middle">
                   <button type="button" onClick={() => removeArticle(index)}>
-                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
                   </button>
                 </td>
               </tr>
@@ -518,9 +521,9 @@ function StepThree({setDimension3, yr}) {
         <Table striped bordered>
           <thead>
             <tr>
-              <th>Peer Institution Name</th>
-              <th>Details (Program etc)</th>
-              <th></th>
+              <th className='table-header text-center align-middle'>Peer Institution Name</th>
+              <th className='table-header text-center align-middle'>Details (Program etc)</th>
+              <th className='table-header text-center align-middle'></th>
             </tr>
           </thead>
           <tbody>
@@ -546,7 +549,7 @@ function StepThree({setDimension3, yr}) {
                 </td>
                 <td className="text-center align-middle">
                   <button type="button" onClick={() => removeCoGuide(index)}>
-                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
                   </button>
                 </td>
               </tr>
@@ -569,9 +572,9 @@ function StepThree({setDimension3, yr}) {
         <Table striped bordered>
           <thead>
             <tr>
-              <th>Industry/ Institution Name</th>
-              <th>Details</th>
-              <th></th>
+              <th className='table-header text-center align-middle'>Industry/ Institution Name</th>
+              <th className='table-header text-center align-middle'>Details</th>
+              <th className='table-header text-center align-middle'></th>
             </tr>
           </thead>
           <tbody>
@@ -600,7 +603,7 @@ function StepThree({setDimension3, yr}) {
                     type="button"
                     onClick={() => removeCollaboration(index)}
                   >
-                    <DeleteIcon sx={{ color: "red", fontSize: "2rem" }} />
+                    <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
                   </button>
                 </td>
               </tr>

@@ -6,12 +6,15 @@
     /* display: flex; */
     /* align-items: right; */
     text-align: right;
+    position: fixed;
+    bottom: 0;
+    right: 0;
 }
 .profile-toolbar a{
     /* justify-content: space-between; */
     /* align-items: center; */
     padding: 10px 20px;
-    background-color: rgb(38,91,190);
+    background-color: rgb(37,57,95);
     color: #fff;
     font-size: 1.75rem;
     text-decoration: none;
@@ -70,7 +73,7 @@ section{
 .section{
     margin: 15px;
     display: inline-block;
-    background-color: #411CBA;
+    background-color: #8a6bef;
     color: #fff;
     padding: 15px;
     border-radius: 10px;
@@ -80,6 +83,7 @@ section{
 .info-wrapper-2{
     display: flex;
     flex-wrap: wrap;
+    max-width: 90%;
 }
 #section-2,#section-3{
     flex:1;

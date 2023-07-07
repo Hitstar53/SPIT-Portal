@@ -270,6 +270,7 @@ const StepOne = ({ setDimension1, yr }) => {
                         <td className='text-center align-middle'>
                           <input
                             type="number"
+                  onWheel={(e) => e.target.blur()}
                             {...register(`info.courses[${index}].AP2MarksObtained`, { required: true })}
                             className="form-input"
                           />
@@ -277,6 +278,7 @@ const StepOne = ({ setDimension1, yr }) => {
                         <td className='text-center align-middle'>
                           <input
                             type="number"
+                  onWheel={(e) => e.target.blur()}
                             {...register(`info.courses[${index}].AP3LecturesTarget`, { required: true })}
                             className="form-input"
                           />
@@ -284,6 +286,7 @@ const StepOne = ({ setDimension1, yr }) => {
                         <td className='text-center align-middle'>
                           <input
                             type="number"
+                  onWheel={(e) => e.target.blur()}
                             {...register(`info.courses[${index}].AP3LectureConducted`, { required: true })}
                             className="form-input"
                           />
@@ -291,6 +294,7 @@ const StepOne = ({ setDimension1, yr }) => {
                         <td className='text-center align-middle'>
                           <input
                             type="number"
+                  onWheel={(e) => e.target.blur()}
                             {...register(`info.courses[${index}].AP4PercentFeedback`, { required: true })}
                             className="form-input"
                           />
@@ -298,6 +302,7 @@ const StepOne = ({ setDimension1, yr }) => {
                         <td className='text-center align-middle'>
                           <input
                             type="number"
+                  onWheel={(e) => e.target.blur()}
                             {...register(`info.courses[${index}].AP5AttendanceStudent`, { required: true })}
                             className="form-input"
                           />
@@ -335,7 +340,7 @@ const StepOne = ({ setDimension1, yr }) => {
                         <td className='text-center align-middle'>
                           <IconButton onClick={() => handleRemoveCourse(index)}>
                             <DeleteIcon
-                              sx={{ color: "red", fontSize: "40px" }} />
+                              sx={{ color: "red", fontSize: "25px" }} />
                           </IconButton>
                         </td>
                       </tr>
@@ -371,6 +376,7 @@ const StepOne = ({ setDimension1, yr }) => {
                       <td className='text-center align-middle'>
                         <input
                           type="number"
+                  onWheel={(e) => e.target.blur()}
                           {...register(`AP10.paper[${index}].marks`, { required: true })}
                           className="form-input"
                         />
@@ -378,7 +384,7 @@ const StepOne = ({ setDimension1, yr }) => {
                       <td className='text-center align-middle'>
                         <IconButton onClick={() => handleRemovePaper(index)}>
                           <DeleteIcon
-                            sx={{ color: "red", fontSize: "40px" }} />
+                              sx={{ color: "red", fontSize: "25px" }} />
                         </IconButton>
                       </td>
                     </tr>
@@ -406,6 +412,7 @@ const StepOne = ({ setDimension1, yr }) => {
                       <td className='text-center align-middle'>
                         <input
                           type="number"
+                  onWheel={(e) => e.target.blur()}
                           {...register(`AP6.menteeFeedback[${index}]`, { required: true })}
                           className="form-input"
                         />
@@ -413,7 +420,7 @@ const StepOne = ({ setDimension1, yr }) => {
                       <td className='text-center align-middle'>
                         <IconButton onClick={() => handleRemoveMentee(index)}>
                           <DeleteIcon
-                            sx={{ color: "red", fontSize: "40px" }} />
+                              sx={{ color: "red", fontSize: "25px" }} />
                         </IconButton>
                       </td>
                     </tr>))}
@@ -475,7 +482,7 @@ const StepOne = ({ setDimension1, yr }) => {
                       <td className='text-center align-middle'>
                         <IconButton onClick={() => handleRemoveGuest(index)}>
                           <DeleteIcon
-                            sx={{ color: "red", fontSize: "40px" }} />
+                              sx={{ color: "red", fontSize: "25px" }} />
                         </IconButton>
                       </td>
                     </tr>

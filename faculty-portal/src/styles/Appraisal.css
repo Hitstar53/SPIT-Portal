@@ -126,7 +126,7 @@ body {
     align-items: center;
     flex-wrap: wrap;
     font-size: 1.2rem;
-    font-weight: 500;
+    font-weight: bold;
     margin-bottom: 0;
 }
 
@@ -176,6 +176,12 @@ body {
     align-items: center;
     gap: 2rem;
 }
+.basic-info .input .form-label{
+    font-size: 2rem;
+}
+.table-header{
+    font-size: 1.1rem;
+}
 
 .info-container {
     display: flex;
@@ -184,9 +190,13 @@ body {
     align-items: center;
     margin: 1rem;
 }
-
+.info-container h3{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
 .table-header {
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .course-title {
@@ -202,7 +212,7 @@ body {
 
 .stepTwo,.stepThree{
     text-align: left !important;
-    /* background-color: #411CBA;
+    /* background-color: #8a6bef;
     padding: 2rem;
     border-radius: 1rem;
     color: whitesmoke; */
@@ -214,4 +224,24 @@ body {
 .citation{
     width: 100px;
     margin: 0 1rem;
+}
+
+th{
+    text-align: center;
+    justify-content: center;
+}
+
+.table{
+    margin: 0px;
+}
+.appraisal-page .btn{
+    margin-left: 0px !important;
+}
+
+.appraisal-page select{
+    width: 100%;
+    padding: .5rem;
+    border-radius: .5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
 }

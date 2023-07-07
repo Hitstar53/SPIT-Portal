@@ -32,12 +32,6 @@ const ViewProfile = () => {
         <h1>Loading...</h1>
       ) : (
         <div className="full-view">
-          <div className="profile-toolbar">
-            <Link to="/edit-profile">
-              <EditIcon />
-              Edit profile
-            </Link>
-          </div>
           <div className="profile-wrapper">
             <div className="img-wrapper">
               <img src={userInfo.picture} alt="profile" />
@@ -154,6 +148,12 @@ const ViewProfile = () => {
               </div>
             </div>
           </section>
+          <div className="profile-toolbar">
+            <Link to="/edit-profile">
+              <EditIcon />
+              Edit profile
+            </Link>
+          </div>
         </div>
       )}
     </>

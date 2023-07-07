@@ -101,6 +101,7 @@ function StepFour({ setDimension4, handleNext, yr }) {
                   <input
                     className="form-input"
                     type="number"
+                  onWheel={(e) => e.target.blur()}
                     {...register("feedbackMarks.A", { required: true, max: 25 })}
                   />
                   {errors.feedbackMarks?.A?.type === "required" && "Marks is required"}
@@ -110,6 +111,7 @@ function StepFour({ setDimension4, handleNext, yr }) {
                   <input
                     className="form-input"
                     type="number"
+                  onWheel={(e) => e.target.blur()}
                     {...register("feedbackMarks.B", { required: true, max: 25 })}
                   />
                   {errors.feedbackMarks?.B?.type === "required" && "Marks is required"}
@@ -119,6 +121,7 @@ function StepFour({ setDimension4, handleNext, yr }) {
                   <input
                     className="form-input"
                     type="number"
+                  onWheel={(e) => e.target.blur()}
                     {...register("feedbackMarks.C", { required: true, max: 25 })}
                   />
                   {errors.feedbackMarks?.C?.type === "required" && "Marks is required"}
@@ -128,6 +131,7 @@ function StepFour({ setDimension4, handleNext, yr }) {
                   <input
                     className="form-input"
                     type="number"
+                  onWheel={(e) => e.target.blur()}
                     {...register("feedbackMarks.D", { required: true, max: 25 })}
                   />
                   {errors.feedbackMarks?.D?.type === "required" && "Marks is required"}

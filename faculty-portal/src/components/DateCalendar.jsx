@@ -122,6 +122,14 @@ const DateCalendar = () => {
             />
         );
     });
+    
+    const events=[
+        {
+        title: "All Day Event very long title",
+        startDate: new Date(2023, 6, 6),
+        endDate: new Date(2023, 7, 7),
+        }
+    ]
 
     return (
         <div className="calendar-container">
