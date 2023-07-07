@@ -11,37 +11,37 @@ export const SideBarData = [
     {
         title: 'Home',
         icon: <HomeIcon />,
-        path: '/home'  
+        path: '/home'
     },
     {
         title: 'Classes',
         icon: <SchoolIcon />,
-        path: '/classes'  
+        path: '/classes'
     },
     {
         title: 'Attendance',
         icon: <AssignmentIndIcon />,
-        path: '/attendance'  
+        path: '/attendance'
     },
     {
         title: 'Leaves',
         icon: <LibraryBooksIcon />,
-        path: '/leaves'  
+        path: '/leaves'
     },
     {
         title: 'Mini Project',
         icon: <IntegrationInstructionsIcon />,
-        path: '/mini-proj'  
+        path: '/mini-proj'
     },
     {
         title: 'Appraisal',
         icon: <InsertDriveFileIcon />,
-        path: '/appraisal'  
+        path: '/appraisal'
     },
     {
         title: 'History',
         icon: <HistoryIcon />,
-        path: '/history'
+        path: '/view-history'
     }
 
 ]

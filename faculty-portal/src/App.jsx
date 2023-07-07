@@ -12,7 +12,7 @@ import Appraisal from "./pages/Appraisal";
 import ViewProfile from "./pages/ViewProfile";
 import Login from "./pages/Login";
 import ProfileForm from "./pages/ProfileForm";
-import History from "./pages/History";
+// import History from "./pages/History";
 import { ToastContainer } from "react-toastify";
 import ViewHistory from "./pages/ViewHistory";
 
@@ -50,8 +50,8 @@ const App = () => {
                 <Route path="/mini-proj" element={<MiniProj />} />
                 <Route path="/appraisal" element={<Appraisal />} />
                 <Route path="/edit-profile" element={<ProfileForm />} />
-                <Route path="/history" element={<History />} />
-                <Route path="/view-history/:id" element={<ViewHistory/>} />
+                {/* <Route path="/history" element={<History />} /> */}
+                <Route path="/view-history" element={<ViewHistory/>} />
                 <Route path="*" element={<h1>Page Not Found </h1>} />
               </Routes>
             </Router>
