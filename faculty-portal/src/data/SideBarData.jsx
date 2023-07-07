@@ -6,6 +6,7 @@ import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import HistoryIcon from '@mui/icons-material/History';
+import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
 
 export const SideBarData = [
     {
@@ -25,7 +26,7 @@ export const SideBarData = [
     },
     {
         title: 'Leaves',
-        icon: <LibraryBooksIcon />,
+        icon: <HolidayVillageIcon />,
         path: '/leaves'
     },
     {

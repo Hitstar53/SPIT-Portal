@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect,useContext } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -27,7 +27,8 @@ import { SideBarData } from '../data/SideBarData';
 import { Button } from '@mui/material';
 import '../styles/SideBar.css'
 import {toast} from 'react-toastify'
-
+import ArticleIcon from '@mui/icons-material/Article';
+import { UserContext } from '../context/UserContext';
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -100,6 +101,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer({setIsLoggedIn}) {
+    const {user}=useContext(UserContext)
     const userInfo=JSON.parse(localStorage.getItem("userInfo"))
     const [active, setActive] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
@@ -247,6 +249,48 @@ export default function MiniDrawer({setIsLoggedIn}) {
                             </ListItemButton>
                         </ListItem>
                     ))}
+                    {user.designation==="HOD"&&<ListItem key={"Department's Appraisal"} disablePadding sx={{ display: 'block' }}>
+                            <ListItemButton
+                                sx={{
+                                    minHeight: 48,
+                                    justifyContent: open ? 'initial' : 'center',
+                                    px: 2.5,
+                                    backgroundColor: active === "Department's Appraisal" ? '#333' : 'transparent',
+                                    transition: 'background-color 0.3s ease-in-out',
+                                    '&:hover': {
+                                        backgroundColor: active === "Department's Appraisal" ? '#333' : '#555',
+                                    },
+                                }}
+                                onClick={() => {
+                                    window.location.pathname = "/dept_appraisal";
+                                    setActive("Department's Appraisal");
+                                }}
+                            >
+                                {!open ? (<Tooltip title={"Department's Appraisal"} placement="right" arrow>
+                                    <ListItemIcon
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: open ? 3 : 'auto',
+                                            justifyContent: 'center',
+                                            color: 'white'
+                                        }}
+                                    >
+                                        {<ArticleIcon/>}
+                                    </ListItemIcon>
+                                </Tooltip>) :
+                                    (<ListItemIcon
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: open ? 3 : 'auto',
+                                            justifyContent: 'center',
+                                            color: 'white'
+                                        }}
+                                    >
+                                        {<ArticleIcon/>}
+                                    </ListItemIcon>)}
+                                <ListItemText primary={"Department's Appraisal"} sx={{ opacity: open ? 1 : 0, color: "white" }} />
+                            </ListItemButton>
+                        </ListItem>}
                 </List>
             </Drawer>
         </div>

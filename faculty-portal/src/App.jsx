@@ -15,6 +15,7 @@ import ProfileForm from "./pages/ProfileForm";
 // import History from "./pages/History";
 import { ToastContainer } from "react-toastify";
 import ViewHistory from "./pages/ViewHistory";
+import StepFour from "./components/StepFour";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -52,6 +53,7 @@ const App = () => {
                 <Route path="/edit-profile" element={<ProfileForm />} />
                 {/* <Route path="/history" element={<History />} /> */}
                 <Route path="/view-history" element={<ViewHistory/>} />
+                <Route path="/dept_appraisal" element={<StepFour/>} />
                 <Route path="*" element={<h1>Page Not Found </h1>} />
               </Routes>
             </Router>
