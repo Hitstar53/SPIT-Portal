@@ -1,25 +1,40 @@
 .comCard {
-  background-color: var(--secondary-color);
+  background-color: var(--tertiary-color);
   border-radius: 1rem;
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  justify-content: center;
-  padding: 2rem;
-  color: var(--text-dark);
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.75rem;
+  color: var(--text-light);
   box-shadow: 0px 0px 5px 2px var(--scrollbar-track);
-  margin-bottom: 1rem;
+  transition: all 0.2s ease-in-out;
 }
 
-.comname {
-  font-size: 1.2rem;
-  font-weight: 450;
-  text-align: center;
+.comCard:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 0px 5px 2px var(--scrollbar-thumb);
 }
 
-.commen {
-  font-size: 1.2rem;
-  font-weight: 450;
+.name {
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
+.mentor {
+  font-size: 1rem;
+  font-weight: 200;
+}
+
+@media screen and (max-width: 768px) {
+  .comCard {
+    gap: 1rem;
+  }
+  .name {
+    font-size: 1.25rem;
+  }
+  .mentor {
+    font-size: 0.75rem;
+  }
+}

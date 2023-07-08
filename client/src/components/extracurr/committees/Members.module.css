@@ -1,8 +1,0 @@
-.cols {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
-  font-weight: 400;
-}

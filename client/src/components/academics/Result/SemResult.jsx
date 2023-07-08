@@ -9,7 +9,6 @@ const SemResult = () => {
   const { semester } = useParams();
   const navigate = useNavigate();
   const data = useLoaderData();
-  console.log(data);
   const container = styles.container + " flex flex-col gap-8 p-8";
   return (
     <div className={container}>

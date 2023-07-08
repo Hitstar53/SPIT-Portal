@@ -15,12 +15,6 @@
   gap: 1rem;
 }
 
-.comLogo {
-  width: 5rem;
-  height: 5rem;
-  border-radius: 50%;
-}
-
 .title {
   display: flex;
   align-items: center;

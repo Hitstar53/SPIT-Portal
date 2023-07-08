@@ -3,10 +3,10 @@ import styles from "./ComAdmin.module.css";
 import AddButton from "../../UI/AddButton.jsx";
 import TextField from "@mui/material/TextField";
 import AncmntCard from "./AncmntCard.jsx";
-import Members from "./Members.jsx";
 import AddEvent from "./AddEvent.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 import MultiFieldModal from "../../UI/Modals/MultiFieldModal";
+import { FaArrowLeft } from "react-icons/fa";
 
 const announcement = [
   {
@@ -40,10 +40,6 @@ const members = [
     pos: "Vice Chairperson",
   },
 ];
-
-function createMember(members) {
-  return <Members name={members.name} pos={members.pos} />;
-}
 
 const ComAdmin = () => {
   const params = useParams();
@@ -89,11 +85,19 @@ const ComAdmin = () => {
     setOpen(false);
   };
 
+  const container = styles.container + " flex flex-col gap-6 p-8";
+  const navigate = useNavigate();
   return (
-    <div className={styles.comAdminPage}>
-      <h1 className={styles.heading}>{params.comname}</h1>
-      <div className={styles.header}>
-        <h2 className={styles.subheading}>Announcements</h2>
+    <div className={container}>
+      <h1 className="flex items-center gap-4 text-4xl font-semibold">
+        <FaArrowLeft
+          onClick={() => navigate(-1)}
+          className="text-2xl cursor-pointer"
+        />
+        {params.comname}
+      </h1>
+      <div className="flex justify-between items-center text-2xl p-1 font-semibold">
+        <h2>Announcements</h2>
         <AddButton onClick={handleAncmntClickOpenDialog} btntext="ADD" />
       </div>
       <div className={styles.card}>
@@ -151,27 +155,33 @@ const ComAdmin = () => {
         />
       </MultiFieldModal>
       <hr className={styles.divider} />
-      <div className={styles.header}>
-        <h2 className={styles.subheading}>Events</h2>
+      <div className="flex justify-between items-center text-2xl p-1 font-semibold">
+        <h2>Committee Events</h2>
         <AddButton onClick={handleEventClickOpenDialog} btntext="ADD" />
       </div>
-      {events.map((event, index) => (
-        <AddEvent
-          key={index}
-          date={event.date}
-          name={event.name}
-          description={event.description}
-        />
-      ))}
+      <div>
+        {events.map((event, index) => (
+          <AddEvent
+            key={index}
+            date={event.date}
+            name={event.name}
+            description={event.description}
+          />
+        ))}
+      </div>
       <hr className={styles.divider} />
-      <h2 className={styles.subheading}>Members</h2>
+      <h2 className="text-2xl p-1 font-semibold">Core Members</h2>
       <div className={styles.tableHeader}>
         <h3>Name</h3>
         <h3>Position</h3>
       </div>
       <hr className={styles.divider} />
-      {members.map(createMember)}
-
+      {members.map((member, index) => (
+        <div className={styles.cols}>
+          <h3>{member.name}</h3>
+          <h3>{member.pos}</h3>
+        </div>
+      ))}
       <MultiFieldModal
         handleDataSubmit={handleEventSubmit}
         openDialog={openEventDialog}

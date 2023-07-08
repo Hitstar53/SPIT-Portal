@@ -18,11 +18,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import logo from "../../assets/logo.png";
-import profile from "../../assets/user.svg";
 import "./MiniDrawer.css";
 import Badge from "@mui/material/Badge";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { Collapse } from "@mui/material";
+import { Avatar, Collapse } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
@@ -271,22 +270,14 @@ export default function MiniDrawer({ open,setOpen }) {
         const data = await response.json();
         setName(data.name);
         setUid(data.uid);
-        if (data.photo) {
-            setPicture(data.photo);
-        } else {
-            setPicture(profile);
-        }
+        setPicture(data.photo);
     }
   }
 
   React.useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userinfo"));
     setName(userInfo?.name);
-    if (userInfo?.picture) {
-      setPicture(userInfo?.picture);
-    } else {
-      setPicture(profile);
-    }
+    setPicture(userInfo?.photo);
   }, []);
 
   const toggleTheme = (event) => {
@@ -353,31 +344,28 @@ export default function MiniDrawer({ open,setOpen }) {
                 gap: "0.5rem",
               }}
             >
-              <img
+              <Avatar
                 onClick={profileHandler}
+                sx={{ width: 50, height: 50, cursor: "pointer" }}
+                alt={name}
                 src={picture}
-                alt="logo"
-                style={{
-                  width: 50,
-                  height: 50,
-                  borderRadius: "50%",
-                  cursor: "pointer",
-                }}
               />
-              <Badge badgeContent={3} color="primary">
-                <NotificationsIcon
-                  sx={{ 
-                    cursor: "pointer",
-                    color: "var(--text-light)",
-                    opacity: 0.75,
-                    width: 25,
-                    height: 25,
-                    "&:hover": {
-                      opacity: 1,
-                    },
-                  }}
-                />
-              </Badge>
+              <Link to="notifications">
+                <Badge badgeContent={3} color="primary">
+                  <NotificationsIcon
+                    sx={{
+                      cursor: "pointer",
+                      color: "var(--text-light)",
+                      opacity: 0.75,
+                      width: 25,
+                      height: 25,
+                      "&:hover": {
+                        opacity: 1,
+                      },
+                    }}
+                  />
+                </Badge>
+              </Link>
             </span>
           </Typography>
         </Toolbar>
@@ -396,7 +384,11 @@ export default function MiniDrawer({ open,setOpen }) {
               gap: "1rem",
             }}
           >
-            <img src={logo} alt="logo" style={{ width: 50, height: 50 }} />
+            <Avatar
+              sx={{ width: 50, height: 50 }}
+              alt="logo"
+              src={logo}
+            />
             <span>
               <span style={{ fontSize: 18 }}>SPIT</span>
               <br />
@@ -468,7 +460,7 @@ export default function MiniDrawer({ open,setOpen }) {
                       )}
                     </Link>
                     {open ? (
-                      index != 0 && index!=1 && index != 4 ? (
+                      index != 0 && index != 4 ? (
                         openSub[index] ? (
                           <ExpandLess />
                         ) : (

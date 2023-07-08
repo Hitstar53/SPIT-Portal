@@ -3,7 +3,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Login from './components/login/Login';
 import Dashboard, {loader as DashboardLoader} from './components/dashboard/Dashboard';
 import Profile, { loader as ProfileLoader } from './components/profile/Profile';
-// import {action as ProfileAction} from './components/profile/PersonalInfo';
 import Result, {loader as SemesterLoader} from './components/academics/Result/Result';
 import SemResult, {loader as SemResultLoader} from './components/academics/Result/SemResult';
 import Activities, { loader as ActivityLoader } from './components/extracurr/activities/Activities';
@@ -15,6 +14,7 @@ import Events, { loader as EventsLoader } from './components/extracurr/events/Ev
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Committees, { loader as CommitteesLoader } from "./components/extracurr/committees/Committees";
 import ComAdmin from "./components/extracurr/committees/ComAdmin";
+import Notification from './components/Notifications/Notification';
 import RootLayout from './pages/RootLayout';
 import FacultyLayout from './pages/FacultyLayout';
 import ErrorPage from './pages/ErrorPage';
@@ -36,41 +36,18 @@ const router = createBrowserRouter([
         element: <RootLayout />,
         children: [
           { path: "home", element: <Dashboard />, loader: DashboardLoader },
-          {
-            path: "profile",
-            element: <Profile />,
-            loader: ProfileLoader,
-          },
+          { path: "profile", element: <Profile />, loader: ProfileLoader },
+          { path: "notifications", element: <Notification /> },
           { path: "courses", element: <Courses /> },
           { path: "result", element: <Result />, loader: SemesterLoader },
           { path: "result/:semester", element: <SemResult />, loader: SemResultLoader },
-          {
-            path: "activities",
-            element: <Activities />,
-            loader: ActivityLoader,
-          },
+          { path: "activities", element: <Activities />, loader: ActivityLoader },
           { path: "events", element: <Events />, loader: EventsLoader },
-          {
-            path: "committees",
-            element: <Committees />,
-            loader: CommitteesLoader,
-          },
+          { path: "committees", element: <Committees />, loader: CommitteesLoader },
           { path: "committees/:comname", element: <ComAdmin /> },
-          {
-            path: "portfolio",
-            element: <Portfolio />,
-            loader: PortfolioLoader,
-          },
-          {
-            path: "internships",
-            element: <Internship />,
-            loader: InternLoader,
-          },
-          {
-            path: "placement",
-            element: <Placement />,
-            loader: PlacementLoader,
-          },
+          { path: "portfolio", element: <Portfolio />, loader: PortfolioLoader },
+          { path: "internships", element: <Internship />, loader: InternLoader },
+          { path: "placement", element: <Placement />, loader: PlacementLoader },
         ],
       },
       {

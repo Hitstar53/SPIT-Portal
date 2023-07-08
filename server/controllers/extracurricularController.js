@@ -5,7 +5,6 @@ exports.setYourCommittee = asyncHandler(async(req,res) =>{
         const tenure = req.body.tenure
         const position = req.body.position
         const email = req.body.email
-        console.log("hello")
         try {
             const extracurricular = await Extracurricular.findOne({emailID:email})
             extracurricular.committee.unshift({committeeDetails:committeeDetails,tenure:tenure,position:position})

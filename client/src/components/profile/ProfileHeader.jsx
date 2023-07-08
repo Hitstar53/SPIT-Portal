@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import CustAlert from '../UI/CustAlert'
+import Avatar from "@mui/material/Avatar";
+import { deepOrange } from '@mui/material/colors';
 import { LuEdit2 } from "react-icons/lu";
 import styles from './ProfileHeader.module.css'
 
@@ -65,10 +67,10 @@ const ProfileHeader = (props) => {
   return (
     <div className={styles.header}>
       <div className={styles.img}>
-        <img
-          src={profileInfo?.photo}
-          alt="profile photo"
-          className={styles.profilePic}
+        <Avatar
+          sx={{ width: 150, height: 150, bgcolor: deepOrange[500] }}
+          alt={profileInfo.name}
+          src={profileInfo.photo}
         />
         <div className={styles.edit}>
           <input
