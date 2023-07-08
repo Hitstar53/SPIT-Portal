@@ -7,7 +7,7 @@ const facultySchema = new Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'Announcements'
     },],
-    exams:[
+    upcomingExams:[
         {
             date:{ type : String, required:true},
             syllabus:{ type : String, required:true},

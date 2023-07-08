@@ -170,7 +170,7 @@ exports.updateUpcomingExams = asyncHandler(async(req,res) =>{
     try {
         
         await Profile.updateMany({},{$push:{exams:{date:date,type:type,syllabus:syllabus,courseName:courseName,name:name}}})
-        // await Faculty.updateOne({name:name},{$push:{}})
+        await Faculty.updateOne({name:name},{$push:{upcomingExams:{date:date,type:type,syllabus:syllabus,courseName:courseName}}})
         res.status(200).json("exam announcements updated")
     }  catch (error) {
         console.error(error)
@@ -190,9 +190,21 @@ exports.updateGroupUpcomingExams = asyncHandler(async(req,res) =>{
     try {
         
         await Profile.updateMany({"educationalInfo.0.year":year,"educationalInfo.0.branch":branch,"educationalInfo.0.division":division},{$push:{exams:{date:date,type:type,syllabus:syllabus,courseName:courseName,name:name}}})
-        // await Faculty.updateOne({name:name},{$push:{exams:{date:date,type:type,syllabus:syllabus,courseName:courseName}}})
+        await Faculty.updateOne({name:name},{$push:{upcomingExams:{date:date,type:type,syllabus:syllabus,courseName:courseName}}})
         res.status(200).json("exam announcements updated")
     }  catch (error) {
+        console.error(error)
+    }
+})
+exports.getUpcomingExams = asyncHandler(async(req,res) => {
+    const email = req.body.email;
+    const name = req.body.name;
+    try {
+        const examStudent = await Profile.findOne({emailID:email}).select('exams -_id')
+        const examFaculty = await Faculty.findOne({name:name}).select('upcomingExams -_id')
+        res.status(200).json(examStudent,examFaculty)
+    }
+    catch (error){
         console.error(error)
     }
 })
