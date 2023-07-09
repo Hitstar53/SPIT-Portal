@@ -1,0 +1,21 @@
+{
+  "name": "spit-portal",
+  "version": "1.0.0",
+  "description": "This is a portal for the students of Sardar Patel Institute of Technology to access their academic, extra-curricular and other information. It is a web application built using MERN stack.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server/server.js",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "dependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
