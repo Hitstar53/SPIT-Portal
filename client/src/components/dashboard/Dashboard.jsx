@@ -18,7 +18,7 @@ const Dashboard = () => {
         <div className={dashboard}>
             <h1 className="text-4xl font-semibold">Dashboard</h1>
             <div className="flex flex-col gap-4">
-                <h1 className="text-xl p-1 font-semibold heading">Academic Announcements</h1>
+                <h1 className="text-2xl p-1 font-semibold heading">Academic Announcements</h1>
                 <AnnounceCard data={academic} />
             </div>
             {/* <div className="flex flex-col gap-4">
@@ -26,15 +26,15 @@ const Dashboard = () => {
                 <AttendCard />
             </div> */}
             <div className="flex flex-col gap-6 mt-6">
-                <h1 className="text-xl p-1 font-semibold heading">Upcoming Exams</h1>
+                <h1 className="text-2xl p-1 font-semibold heading">Upcoming Exams</h1>
                 <UpcomingExams />
             </div>
             <div className="flex flex-col gap-4 mt-6">
-                <h1 className="text-xl p-1 font-semibold heading">Other Announcements</h1>
+                <h1 className="text-2xl p-1 font-semibold heading">Other Announcements</h1>
                 <OtherAnnounceCard data={other} />
             </div>
             <div className="flex flex-col gap-4 mt-2">
-                <h1 className="text-xl p-1 font-semibold heading">Upcoming Events</h1>
+                <h1 className="text-2xl p-1 font-semibold heading">Upcoming Events</h1>
                 <EventCard data={data.eventsData} />
             </div>
         </div>

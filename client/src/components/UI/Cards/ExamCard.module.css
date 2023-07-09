@@ -20,9 +20,9 @@
     cursor: pointer;
 }
 
-.card::before {
-    content: "15TH JUN";
+.date {
     display: flex;
+    justify-content: center;
     text-align: center;
     align-items: center;
     color: var(--text-light);

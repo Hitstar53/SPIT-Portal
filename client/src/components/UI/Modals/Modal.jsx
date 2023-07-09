@@ -12,6 +12,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+    '& .MuiDialogTitle-root': {
+        paddingRight: theme.spacing(1),
+    },
     '& .MuiDialogContent-root': {
         padding: theme.spacing(2),
     },
@@ -24,22 +27,22 @@ function BootstrapDialogTitle(props) {
     const { children, onClose, ...other } = props;
 
     return (
-        <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+        <DialogTitle 
+          sx={{ 
+            m: 0, 
+            p: 2,
+          }} {...other}
+        >
             {children}
-            {onClose ? (
-                <IconButton
-                    aria-label="close"
-                    onClick={onClose}
-                    sx={{
-                        position: 'absolute',
-                        right: 8,
-                        top: 12,
-                        color: (theme) => theme.palette.grey[500],
-                    }}
-                >
-                    <CloseIcon />
-                </IconButton>
-            ) : null}
+            <IconButton
+                aria-label="close"
+                onClick={onClose}
+                sx={{
+                    color: (theme) => theme.palette.grey[500],
+                }}
+            >
+                <CloseIcon />
+            </IconButton>
         </DialogTitle>
     );
 }
@@ -62,6 +65,10 @@ export default function Modal(props) {
             id="customized-dialog-title"
             onClose={props.onClose}
             sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "3rem",
               fontSize: "1.5rem",
               fontWeight: "bold",
               color: "var(--text-color)",

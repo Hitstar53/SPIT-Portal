@@ -8,13 +8,12 @@
   gap: 2rem;
   padding: 1.75rem;
   color: var(--text-light);
-  box-shadow: 0px 0px 5px 2px var(--scrollbar-track);
+  box-shadow: 0px 0px 5px 2px var(--pill-color);
   transition: all 0.2s ease-in-out;
 }
 
 .comCard:hover {
   transform: scale(1.02);
-  box-shadow: 0px 0px 5px 2px var(--scrollbar-thumb);
 }
 
 .name {

@@ -8,6 +8,7 @@
     --primary-color: #411cba;
     --secondary-color: #b6c3f1;
     --tertiary-color: #301683;
+    --tertiary2-color: #301683;
     --card-color: #301683;
     --card-alt-color: #b6c3f1;
     --danger-color: #f44336;
@@ -33,7 +34,8 @@
     --primary-color: #3a3a3a;
     --secondary-color: #5a5a5a;
     --tertiary-color: #1e1e1e;
-    --card-color: #2e2e2e;
+    --tertiary2-color: #3a3a3a;
+    --card-color: #3e3e3e;
     --card-alt-color: #2e2e2e;
     --danger-color: #f44336;
     --success-color: #4caf50;

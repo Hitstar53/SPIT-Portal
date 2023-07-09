@@ -40,32 +40,39 @@ const SemesterCard = (props) => {
         color: color,
       }}
     >
-      <div className={styles.title}>
-        Semester {props.semesterNumber}
-      </div>
+      <div className={styles.title}>Semester {props.semesterNumber}</div>
       <div className={styles.status}>
-        <Chip 
-          label={year}
-          sx={{
-            backgroundColor: "var(--secondary-color)",
-            color: "var(--text-color)",
-            cursor: "pointer",
-            "&:hover": {
-              filter: "brightness(0.7)",
-            }
-          }}
-        />
+        <div className='flex gap-5'>
+          <Chip
+            label={year}
+            sx={{
+              backgroundColor: "var(--secondary-color)",
+              color: "var(--text-color)",
+              cursor: "pointer",
+              "&:hover": {
+                filter: "brightness(0.7)",
+              },
+            }}
+          />
+          <Chip
+            label="2022-23"
+            sx={{
+              backgroundColor: "var(--secondary-color)",
+              color: "var(--text-color)",
+              cursor: "pointer",
+              "&:hover": {
+                filter: "brightness(0.7)",
+              },
+            }}
+          />
+        </div>
         {props.status}
       </div>
-      {
-        props.status === "Completed" && (
-          <div className={styles.sgpa}>
-            SGPA: {props.sgpa}
-          </div>
-        )
-      }
+      {props.status === "Completed" && (
+        <div className={styles.sgpa}>SGPA: {props.sgpa}</div>
+      )}
     </NavLink>
-  )
+  );
 }
 
 export default SemesterCard

@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import Modal from '../Modals/Modal'
 import Button from '@mui/material/Button'
+import dayjs from 'dayjs'
 import styles from './ExamCard.module.css'
 
 const ExamCard = (props) => {
     const title = "Syllabus for " + props.exam.subject + ", " + props.exam.examtype
     const content = props.exam.syllabus
-
+    const day = dayjs(props.exam.date).format("DD") + "TH"
+    const month = dayjs(props.exam.date).format("MMMM").substring(0, 3)
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -18,6 +20,11 @@ const ExamCard = (props) => {
 
     return (
       <div className={styles.card}>
+        <span className={styles.date}>
+          {day}
+          <br />
+          {month}
+        </span>
         <div className={styles.cardContent}>
           <h1>{props.exam.subject}</h1>
           <h1>{props.exam.examtype}</h1>

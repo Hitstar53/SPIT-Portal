@@ -14,7 +14,7 @@ import Events, { loader as EventsLoader } from './components/extracurr/events/Ev
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Committees, { loader as CommitteesLoader } from "./components/extracurr/committees/Committees";
 import ComAdmin from "./components/extracurr/committees/ComAdmin";
-import Notification from './components/Notifications/Notification';
+import Notification from './components/Notifications/Notifications';
 import RootLayout from './pages/RootLayout';
 import FacultyLayout from './pages/FacultyLayout';
 import ErrorPage from './pages/ErrorPage';

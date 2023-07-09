@@ -25,18 +25,6 @@ const eventinfo = [
     orgname : "S.P. Jain Institute of Management and Research",
     eventinfo: "A business case study competition is an exciting platform where aspiring entrepreneurs and business professionals can showcase their analytical and problem-solving skills by presenting solutions to real-world business challenges."
   },
-  {
-    eventname : "TechFest",
-    eventdate : "12/12/38",
-    orgname : "Indian Institute of Technology, Bombay",
-    eventinfo: "Techfest by IITB is an exhilarating annual techno-management festival organized by the Indian Institute of Technology Bombay, showcasing cutting-edge technological advancements and innovations."
-  },
-  {
-    eventname : "Hackathon",
-    eventdate : "12/12/38",
-    orgname : "Michigan State University",
-    eventinfo: "The hackathon at Michigan State University brings together students from diverse disciplines, fostering a collaborative environment for innovation and creativity in solving real-world challenges through technology."
-  },
 ]
 
 const Events = () => {
@@ -215,6 +203,7 @@ const Events = () => {
             name="eventdate"
             label="Date"
             variant="standard"
+            format="DD/MM/YYYY"
             onChange={handleChangeDate}
           />
         </LocalizationProvider>

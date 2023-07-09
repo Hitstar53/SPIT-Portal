@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import styles from "./ComAdmin.module.css";
 import AddButton from "../../UI/AddButton.jsx";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateField } from "@mui/x-date-pickers/DateField";
 import TextField from "@mui/material/TextField";
 import AncmntCard from "./AncmntCard.jsx";
 import AddEvent from "./AddEvent.jsx";
@@ -66,6 +69,12 @@ const ComAdmin = () => {
   const handleEventDataChange = (e) => {
     setEventNewData({ ...newEventData, [e.target.name]: e.target.value });
   };
+  const handleEventChangeDate = (event) => {
+    setEventNewData({
+      ...newEventData,
+      date: `${event.$D}/${event.$M + 1}/${event.$y}`,
+    });
+  };
   const handleEventSubmit = (e) => {
     e.preventDefault();
     const arr = [...events];
@@ -76,6 +85,12 @@ const ComAdmin = () => {
 
   const handleAncmntDataChange = (e) => {
     setAncmntNewData({ ...newAncmntData, [e.target.name]: e.target.value });
+  };
+  const handleAncmntChangeDate = (event) => {
+    setAncmntNewData({
+      ...newAncmntData,
+      date: `${event.$D}/${event.$M + 1}/${event.$y}`,
+    });
   };
   const handleAncmntSubmit = (e) => {
     e.preventDefault();
@@ -131,17 +146,18 @@ const ComAdmin = () => {
           variant="standard"
           onChange={handleAncmntDataChange}
         />
-        <TextField
-          required
-          margin="dense"
-          name="date"
-          label="Date"
-          autoComplete="off"
-          type="text"
-          fullWidth
-          variant="standard"
-          onChange={handleAncmntDataChange}
-        />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DateField
+            required
+            margin="dense"
+            fullWidth
+            name="date"
+            label="Date"
+            variant="standard"
+            format="DD/MM/YYYY"
+            onChange={handleAncmntChangeDate}
+          />
+        </LocalizationProvider>
         <TextField
           required
           margin="dense"
@@ -201,17 +217,18 @@ const ComAdmin = () => {
           variant="standard"
           onChange={handleEventDataChange}
         />
-        <TextField
-          required
-          margin="dense"
-          name="date"
-          label="Event Date"
-          autoComplete="off"
-          type="text"
-          fullWidth
-          variant="standard"
-          onChange={handleEventDataChange}
-        />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DateField
+            required
+            margin="dense"
+            fullWidth
+            name="date"
+            label="Date"
+            variant="standard"
+            format="DD/MM/YYYY"
+            onChange={handleEventChangeDate}
+          />
+        </LocalizationProvider>
         <TextField
           required
           margin="dense"

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { useNavigate, Link, useLocation, NavLink } from "react-router-dom";
 import MediaQuery, { useMediaQuery } from "react-responsive";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -350,13 +350,17 @@ export default function MiniDrawer({ open,setOpen }) {
                 alt={name}
                 src={picture}
               />
-              <Link to="notifications">
-                <Badge badgeContent={3} color="primary">
+              <Badge badgeContent={3} color="primary">
+                <NavLink
+                  to="notifications"
+                  className={({ isActive }) =>
+                    isActive ? "notifActive" : "notifInactive"
+                  }
+                >
                   <NotificationsIcon
                     sx={{
                       cursor: "pointer",
                       color: "var(--text-light)",
-                      opacity: 0.75,
                       width: 25,
                       height: 25,
                       "&:hover": {
@@ -364,8 +368,8 @@ export default function MiniDrawer({ open,setOpen }) {
                       },
                     }}
                   />
-                </Badge>
-              </Link>
+                </NavLink>
+              </Badge>
             </span>
           </Typography>
         </Toolbar>
@@ -384,11 +388,7 @@ export default function MiniDrawer({ open,setOpen }) {
               gap: "1rem",
             }}
           >
-            <Avatar
-              sx={{ width: 50, height: 50 }}
-              alt="logo"
-              src={logo}
-            />
+            <Avatar sx={{ width: 50, height: 50 }} alt="logo" src={logo} />
             <span>
               <span style={{ fontSize: 18 }}>SPIT</span>
               <br />
@@ -443,11 +443,14 @@ export default function MiniDrawer({ open,setOpen }) {
                     >
                       {data.icon}
                     </ListItemIcon>
-                    <Link
+                    <NavLink
                       to={
                         index == 0 || index == 4
                           ? data.text.toLowerCase()
                           : location.pathname
+                      }
+                      className={({ isActive }) =>
+                        isActive ? "drawerActive" : "drawerInactive"
                       }
                     >
                       {open ? (
@@ -458,7 +461,7 @@ export default function MiniDrawer({ open,setOpen }) {
                       ) : (
                         ""
                       )}
-                    </Link>
+                    </NavLink>
                     {open ? (
                       index != 0 && index != 4 ? (
                         openSub[index] ? (
@@ -479,12 +482,17 @@ export default function MiniDrawer({ open,setOpen }) {
                     {data.sub.map((heading, index2) => {
                       return (
                         <ListItemButton sx={{ pl: 8 }} key={index2}>
-                          <Link to={"/student/" + heading.toLowerCase()}>
+                          <NavLink
+                            to={"/student/" + heading.toLowerCase()}
+                            className={({ isActive }) =>
+                              isActive ? "drawerActive" : "drawerInactive"
+                            }
+                          >
                             <ListItemText
                               sx={{ pl: 1, color: "var(--text-light)" }}
                               primary={heading}
                             />
-                          </Link>
+                          </NavLink>
                         </ListItemButton>
                       );
                     })}
