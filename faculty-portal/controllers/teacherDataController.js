@@ -75,14 +75,24 @@ exports.getEvent = asyncHandler(async (req, res) => {
         if (!det) {
             return res.status(404).send('User not found');
         }
+        const events = det.events
         // const events = {
         //     title: det.events.title,
         //     startDate: det.events.startDate,
         //     endDate: det.events.endDate
         // }
-        const events = det.events
         // console.log(events);
-        res.status(200).send(events);
+        const allEvents = []
+        events.map((event) => {
+            allEvents.push({
+                title: event.title,
+                startDate: event.startDate,
+                endDate: event.endDate,
+                _id: event._id
+            })
+        }) 
+        console.log(allEvents)
+        res.status(200).send(allEvents);
     } catch (err) {
         console.log(err);
         res.status(504).send("Internal Server Error");
@@ -99,8 +109,18 @@ exports.addEvent = asyncHandler(async (req, res) => {
             }
         })
         const faculty = await Faculty.findOne({ email: email });
-        console.log(faculty.events);
-        res.status(200).send(faculty.events);
+        // console.log(faculty.events);
+        const allEvents = []
+        faculty.events.map((event) => {
+            allEvents.push({
+                title: event.title,
+                startDate: event.startDate,
+                endDate: event.endDate,
+                _id: event._id
+            })
+        }) 
+        console.log(allEvents)
+        res.status(200).send(allEvents);
     } catch (err) {
         console.log(err);
         res.status(504).send("Internal Server Error");
