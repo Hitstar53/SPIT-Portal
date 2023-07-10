@@ -85,6 +85,7 @@ table {
   padding: 5px;
   margin: 1em;
   letter-spacing: 0.7px;
+  min-width: 50%;
 }
 table th {
   border: 1px solid #b3adad;
@@ -99,7 +100,7 @@ table td {
   padding: 5px;
   background: #ffffff;
   color: #313030;
-  font-weight: 600;
+  font-weight: 500;
 }
 .table-heading {
   text-align: left;
@@ -120,4 +121,8 @@ option {
 
 .lefty {
   text-align: left;
+}
+.dimhead p{
+
+  font-weight: bol;
 }

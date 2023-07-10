@@ -4,27 +4,32 @@
 @tailwind utilities;
 
 /* variable for theme switching */
-*{
+* {
   /* font-family: "Poppins"; */
   font-family: 'Poppins', sans-serif;
   letter-spacing: 0.75px;
 }
-.Toastify{
+
+.Toastify {
   font-family: 'Courier New', Courier, monospace;
   font-weight: bolder;
 }
-h1{
+
+h1 {
   font-size: 1.5rem;
   font-weight: 500;
 }
-form h1{
+
+form h1 {
   /* color: green; */
   font-weight: 600;
   font-size: 1.5rem;
 }
-.section-form h1{
+
+.section-form h1 {
   text-align: center;
 }
+
 :root {
   --primary-color: #2C5784;
   --secondary-color: #b6c3f1;
