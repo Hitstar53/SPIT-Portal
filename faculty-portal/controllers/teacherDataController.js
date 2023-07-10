@@ -150,6 +150,31 @@ exports.deleteEvent = asyncHandler(async (req, res) => {
 
 exports.getFacultyByDept = asyncHandler(async (req, res) => {
     console.log("Inside for the HODappraisal")
+    const {name, year} = req.body
+    try {
+        const { department } = req.body
+        const facultyInfo = await Faculty.find({
+            department
+        }, { fullName: 1 })
+
+        if (facultyInfo) {
+            console.log(facultyInfo)
+            const faculty = []
+            facultyInfo.map((info) => {
+                faculty.push(
+                    info.fullName
+                )
+            })
+            console.log(faculty)
+            return res.status(200).json(faculty)
+        }
+        else {
+            return res.status(404)
+        }
+    } catch (error) {
+        console.log(error)
+    }})
+
 exports.getAllFaculty = asyncHandler(async (req, res) => {
         console.log("Inside for the HODappraisal")
         try {
@@ -175,33 +200,6 @@ exports.getAllFaculty = asyncHandler(async (req, res) => {
         }
 })
 
-exports.checkFaculty = async(req, res) => {
-    const {name, year} = req.body
-    try {
-
-        const { department } = req.body
-        const facultyInfo = await Faculty.find({
-            department
-        }, { fullName: 1 })
-
-        if (facultyInfo) {
-            console.log(facultyInfo)
-            const faculty = []
-            facultyInfo.map((info) => {
-                faculty.push(
-                    info.fullName
-                )
-            })
-            console.log(faculty)
-            return res.status(200).json(faculty)
-        }
-        else {
-            return res.status(404)
-        }
-    } catch (error) {
-        console.log(error)
-    }
-})
 
 exports.checkFaculty = async (req, res) => {
     const { name, year } = req.body
