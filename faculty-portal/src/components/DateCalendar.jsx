@@ -54,7 +54,13 @@ const DateCalendar = () => {
             })
             .then((res) => {
                 console.log(res.data);
-                setAllEvents(res.data);
+                const allEvents = res.data.map((event) => ({
+                    title: event.title,
+                    startDate: new Date(event.startDate),
+                    endDate: new Date(event.endDate),
+                    _id: event._id,
+                  }));
+                  setAllEvents(allEvents);
             })
             .catch((err) => {
                 console.log(err);
@@ -123,13 +129,13 @@ const DateCalendar = () => {
         );
     });
     
-    const events=[
-        {
-        title: "All Day Event very long title",
-        startDate: new Date(2023, 6, 6),
-        endDate: new Date(2023, 7, 7),
-        }
-    ]
+    // const events=[
+    //     {
+    //     title: "All Day Event very long title",
+    //     startDate: new Date(2023, 6, 6),
+    //     endDate: new Date(2023, 7, 7),
+    //     }
+    // ]
 
     return (
         <div className="calendar-container">
