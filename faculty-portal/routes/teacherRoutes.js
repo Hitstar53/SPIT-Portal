@@ -11,4 +11,5 @@ router.post('/get/event', teacherDataController.getEvent)
 router.post('/add/event', teacherDataController.addEvent)
 router.post('/delete/event', teacherDataController.deleteEvent)
 router.post('/get/faculty/by-dept', teacherDataController.getFacultyByDept)
+router.post('/get/faculty/all', teacherDataController.getAllFaculty)
 module.exports = router; 
