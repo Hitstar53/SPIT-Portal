@@ -49,7 +49,7 @@ function StepFour({ setDimension4, handleNext, yr }) {
     setDimension4(data)
     localStorage.setItem('dim4Data', JSON.stringify(data));
     axios.post('http://localhost:5000/api/faculty/appraisal/dim4',
-      { yearofAssesment: yr, faculty: user, Dimension4: data }
+      { yearofAssesment: yr, fullName: user, Dimension4: data }
     ).then((res) => {
       console.log(res.data)
       toast.success('Step Four Saved!', {
