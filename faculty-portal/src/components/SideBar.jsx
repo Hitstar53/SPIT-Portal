@@ -144,6 +144,12 @@ export default function MiniDrawer({setIsLoggedIn}) {
         if (activePage) {
             setActive(activePage.title);
         }
+        if (window.location.pathname === "/all_appraisal") {
+            setActive('View Appraisal')
+        }
+        if (window.location.pathname === "/dept_appraisal") {
+            setActive('Dept Appraisal')
+        }
     }, []);
 
     return (
