@@ -27,7 +27,7 @@ const Dashboard = () => {
             </div> */}
             <div className="flex flex-col gap-6 mt-6">
                 <h1 className="text-2xl p-1 font-semibold heading">Upcoming Exams</h1>
-                <UpcomingExams />
+                <UpcomingExams data={data.examData.examStudent.exams} />
             </div>
             <div className="flex flex-col gap-4 mt-6">
                 <h1 className="text-2xl p-1 font-semibold heading">Other Announcements</h1>
@@ -59,24 +59,25 @@ export async function loader() {
         "Content-Type": "application/json",
       },
     });
-    // const response3 = await fetch(`${ServerUrl}/api/student/getMiniDrawer`, {
-    //   method: "PUT",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     email: JSON.parse(localStorage.getItem("userinfo")).email,
-    //   }),
-    // });
-    if (!response1.ok || !response2.ok ) {
+    const response3 = await fetch(`${ServerUrl}/api/student/getUpcomingExams`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: JSON.parse(localStorage.getItem("userinfo")).email,
+      }),
+    });
+    if (!response1.ok || !response2.ok || !response3.ok) {
       throw json(
-        { message: "Could not fetch profile information" },
+        { message: "Could not fetch dashboard information" },
         { status: 422 }
       );
     }
-    if (response1.ok && response2.ok ) {
+    if (response1.ok && response2.ok && response3.ok) {
       const announceData = await response1.json();
       const eventsData = await response2.json();
-      return { announceData, eventsData };
+      const examData = await response3.json();
+      return { announceData, eventsData, examData };
     }
 }

@@ -56,65 +56,67 @@ export default function Modal(props) {
     return (
       <React.Fragment>
         {ReactDOM.createPortal(
-        <BootstrapDialog
-          onClose={props.onClose}
-          aria-labelledby="customized-dialog-title"
-          open={props.open}
-        >
-          <BootstrapDialogTitle
-            id="customized-dialog-title"
+          <BootstrapDialog
             onClose={props.onClose}
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: "3rem",
-              fontSize: "1.5rem",
-              fontWeight: "bold",
-              color: "var(--text-color)",
-              backgroundColor: "var(--bg-color)"
-            }}
+            aria-labelledby="customized-dialog-title"
+            open={props.open}
           >
-            {props.title}
-          </BootstrapDialogTitle>
-          <DialogContent 
-            dividers
-            sx={{
-                color: "var(--text-color)",
-                backgroundColor: "var(--bg-color)"
-            }}
-          >
-            <Typography
-              gutterBottom
+            <BootstrapDialogTitle
+              id="customized-dialog-title"
+              onClose={props.onClose}
               sx={{
-                padding: "0 0.75rem",
-              }}
-            >
-              {props.content}
-            </Typography>
-          </DialogContent>
-          <DialogActions
-            sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                gap: "3rem",
+                fontSize: "1.5rem",
+                fontWeight: "bold",
                 color: "var(--text-color)",
                 backgroundColor: "var(--bg-color)",
-            }}
-          >
-            <Button
-              type="submit"
-              autoFocus
-              onClick={props.onClose}
-              sx={{
-                color: "var(--text-color)",
-                fontWeight: "bold",
-                "&:hover": {
-                  backgroundColor: "var(--secondary-color)",
-                },
               }}
             >
-              {props.action}
-            </Button>
-          </DialogActions>
-        </BootstrapDialog>, document.getElementById("overlays")
+              {props.title}
+            </BootstrapDialogTitle>
+            <DialogContent
+              dividers
+              sx={{
+                color: "var(--text-color)",
+                backgroundColor: "var(--bg-color)",
+              }}
+            >
+              <Typography
+                gutterBottom
+                sx={{
+                  padding: "0 0.75rem",
+                  whiteSpace: "pre",
+                }}
+              >
+                {props.content}
+              </Typography>
+            </DialogContent>
+            <DialogActions
+              sx={{
+                color: "var(--text-color)",
+                backgroundColor: "var(--bg-color)",
+              }}
+            >
+              <Button
+                type="submit"
+                autoFocus
+                onClick={props.onClose}
+                sx={{
+                  color: "var(--text-color)",
+                  fontWeight: "bold",
+                  "&:hover": {
+                    backgroundColor: "var(--secondary-color)",
+                  },
+                }}
+              >
+                {props.action}
+              </Button>
+            </DialogActions>
+          </BootstrapDialog>,
+          document.getElementById("overlays")
         )}
       </React.Fragment>
     );

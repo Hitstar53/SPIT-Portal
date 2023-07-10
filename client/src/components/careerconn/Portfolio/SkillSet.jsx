@@ -150,6 +150,7 @@ export default function SkillSet(props) {
             onClose={handleClose}
             title="Add a New Skill"
             label="Skill"
+            helperText="Enter a skill Name, e.g. Java"
             onSubmit={addHandler}
           />
         )}

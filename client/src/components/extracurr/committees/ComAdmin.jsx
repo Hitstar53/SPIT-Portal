@@ -144,6 +144,7 @@ const ComAdmin = () => {
           type="text"
           fullWidth
           variant="standard"
+          helperText="Title of the announcement"
           onChange={handleAncmntDataChange}
         />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -167,6 +168,7 @@ const ComAdmin = () => {
           type="text"
           fullWidth
           variant="standard"
+          helperText="What is the announcement?"
           onChange={handleAncmntDataChange}
         />
       </MultiFieldModal>
@@ -215,6 +217,7 @@ const ComAdmin = () => {
           type="text"
           fullWidth
           variant="standard"
+          helperText="Name of the event"
           onChange={handleEventDataChange}
         />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -226,6 +229,7 @@ const ComAdmin = () => {
             label="Date"
             variant="standard"
             format="DD/MM/YYYY"
+            helperText="Date of the event"
             onChange={handleEventChangeDate}
           />
         </LocalizationProvider>
@@ -238,6 +242,7 @@ const ComAdmin = () => {
           type="text"
           fullWidth
           variant="standard"
+          helperText="Short Description of the event"
           onChange={handleEventDataChange}
         />
       </MultiFieldModal>

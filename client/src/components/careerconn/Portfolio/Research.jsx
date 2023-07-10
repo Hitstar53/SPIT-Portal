@@ -155,7 +155,7 @@ const Research = (props) => {
           openDialog={openDialog}
           handleClickOpenDialog={handleClickOpenDialog}
           handleCloseDialog={handleCloseDialog}
-          title="Add a Project"
+          title="Add new Research Work"
         >
           <TextField
             required
@@ -166,6 +166,7 @@ const Research = (props) => {
             type="text"
             fullWidth
             variant="standard"
+            helperText="Enter title of the research work"
             onChange={handleDataChange}
           />
           <TextField
@@ -176,6 +177,7 @@ const Research = (props) => {
             type="text"
             fullWidth
             variant="standard"
+            helperText="Enter duration of the research work, e.g. 2 months"
             onChange={handleDataChange}
           />
           <TextField
@@ -186,6 +188,7 @@ const Research = (props) => {
             type="text"
             fullWidth
             variant="standard"
+            helperText="Enter name of the mentor"
             onChange={handleDataChange}
           />
           <TextField
@@ -196,6 +199,7 @@ const Research = (props) => {
             type="text"
             fullWidth
             variant="standard"
+            helperText="Enter domain of research, e.g. neural networks"
             onChange={handleDataChange}
           />
           <TextField
@@ -218,6 +222,7 @@ const Research = (props) => {
             type="text"
             fullWidth
             variant="standard"
+            helperText="Briefly describe your research work"
             onChange={handleDataChange}
           />
         </MultiFieldModal>

@@ -12,7 +12,11 @@ export default function MultiFieldModal(props) {
     <React.Fragment>
       {ReactDOM.createPortal(
         <Dialog component="form" onSubmit={props.handleDataSubmit} open={props.openDialog} onClose={props.handleCloseDialog}>
-          <DialogTitle>{props.title}</DialogTitle>
+          <DialogTitle
+            sx={{ fontSize: "1.5rem", fontWeight: "bold", textAlign: "center" }}
+          >
+            {props.title}
+          </DialogTitle>
           <DialogContent>
             <DialogContentText>
               {props.content}

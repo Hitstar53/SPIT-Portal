@@ -5,9 +5,15 @@ import dayjs from 'dayjs'
 import styles from './ExamCard.module.css'
 
 const ExamCard = (props) => {
-    const title = "Syllabus for " + props.exam.subject + ", " + props.exam.examtype
+    const title = "Syllabus for " + props.exam.courseName + ", " + props.exam.type
     const content = props.exam.syllabus
-    const day = dayjs(props.exam.date).format("DD") + "TH"
+    let day = dayjs(props.exam.date).format("DD")
+    if (day[0] === "0") day = day.substring(1)
+    if (day.substring(day.length - 1) === "1") day = day + "st"
+    else if (day.substring(day.length - 1) === "2") day = day + "nd"
+    else if (day === "13") day = day + "th"
+    else if (day.substring(day.length - 1) === "3") day = day + "rd"
+    else day = day + "th"
     const month = dayjs(props.exam.date).format("MMMM").substring(0, 3)
     const [open, setOpen] = React.useState(false);
 
@@ -26,8 +32,8 @@ const ExamCard = (props) => {
           {month}
         </span>
         <div className={styles.cardContent}>
-          <h1>{props.exam.subject}</h1>
-          <h1>{props.exam.examtype}</h1>
+          <h1>{props.exam.courseName}</h1>
+          <h1>{props.exam.type}</h1>
         </div>
         <div className={styles.cardFooter}>
           <Button

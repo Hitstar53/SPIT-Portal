@@ -200,9 +200,11 @@ exports.getUpcomingExams = asyncHandler(async(req,res) => {
     const email = req.body.email;
     const name = req.body.name;
     try {
-        const examStudent = await Profile.findOne({emailID:email}).select('exams -_id')
-        const examFaculty = await Faculty.findOne({name:name}).select('upcomingExams -_id')
-        res.status(200).json(examStudent,examFaculty)
+        const examStudent = await Profile.findOne({emailID:email}).select('exams.name exams.date exams.syllabus exams.type exams.courseName -_id')
+        const examFaculty = await Faculty.findOne({ name: name }).select(
+          "upcomingExams.name upcomingExams.date upcomingExams.syllabus upcomingExams.type upcomingExams.courseName -_id"
+        );
+        res.status(200).json({examStudent,examFaculty})
     }
     catch (error){
         console.error(error)

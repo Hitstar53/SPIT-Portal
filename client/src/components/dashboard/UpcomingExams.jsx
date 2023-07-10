@@ -34,13 +34,23 @@ const data = [
         syllabus: "Lorem ipsum dolor sit amet consectetur adipisicing."
     },
 ]
-const UpcomingExams = () => {
+const UpcomingExams = (props) => {
     return (
-        <div className={styles.wrapper}>
-            {data.map((exam, index) => (
-                <ExamCard key={index} exam={exam} />
-            ))}
-        </div>
+        <React.Fragment>
+            {
+                props.data.length === 0 &&
+                <h1 className='text-center font-semibold'>
+                    No Upcoming Exams, Enjoy your day!
+                </h1>
+            }
+            { props.data.length > 0 && (
+                <div className={styles.wrapper}>
+                    {props.data.map((exam, index) => (
+                        <ExamCard key={index} exam={exam} />
+                    ))}
+                </div>
+            )}
+        </React.Fragment>
     )
 }
 

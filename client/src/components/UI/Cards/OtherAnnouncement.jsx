@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ScrollModal from "../Modals/ScrollModal";
 import styles from "./AnnounceCard.module.css";
+import { Avatar } from "@mui/material";
 
 const OtherAnnouncement = (props) => {
   const title = "Announcement from " + props.item.title;
@@ -33,7 +34,11 @@ const OtherAnnouncement = (props) => {
         }}
       >
         <div className={styles.cardItemLogo}>
-          <img src={props.item.senderPhoto} alt="logo" />
+          <Avatar
+            sx={{ width: 75, height: 75, fontSize: "3rem", margin: "0 auto" }}
+            alt={props.item.sender}
+            src={props.item.senderPhoto}
+          />
         </div>
         <div className={styles.cardItemHeader}>
           <h1>{props.item.title}</h1>

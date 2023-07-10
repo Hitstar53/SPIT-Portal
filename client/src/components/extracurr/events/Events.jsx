@@ -193,6 +193,7 @@ const Events = () => {
           type="text"
           fullWidth
           variant="standard"
+          helperText="Please enter the name of the event"
           onChange={handleEventDataChange}
         />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -204,6 +205,7 @@ const Events = () => {
             label="Date"
             variant="standard"
             format="DD/MM/YYYY"
+            helperText="Date of the event"
             onChange={handleChangeDate}
           />
         </LocalizationProvider>
@@ -216,6 +218,7 @@ const Events = () => {
           type="text"
           fullWidth
           variant="standard"
+          helperText="Organization who hosted the event"
           onChange={handleEventDataChange}
         />
         <TextField
@@ -227,6 +230,7 @@ const Events = () => {
           type="text"
           fullWidth
           variant="standard"
+          helperText="Short Description of the event & your experience"
           onChange={handleEventDataChange}
         />
       </MultiFieldModal>

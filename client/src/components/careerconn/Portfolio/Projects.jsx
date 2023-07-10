@@ -162,6 +162,7 @@ const Projects = (props) => {
             type="text"
             fullWidth
             variant="standard"
+            helperText="Title of the project"
             onChange={handleDataChange}
           />
           <TextField
@@ -172,6 +173,7 @@ const Projects = (props) => {
             type="text"
             fullWidth
             variant="standard"
+            helperText="Enter duration in months, e.g. 2 months"
             onChange={handleDataChange}
           />
           <TextField
@@ -193,6 +195,7 @@ const Projects = (props) => {
             type="text"
             fullWidth
             variant="standard"
+            helperText="Enter domain, e.g. web development"
             onChange={handleDataChange}
           />
           <TextField
@@ -215,6 +218,7 @@ const Projects = (props) => {
             type="text"
             fullWidth
             variant="standard"
+            helperText="Brief description of the project"
             onChange={handleDataChange}
           />
         </MultiFieldModal>

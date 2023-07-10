@@ -207,6 +207,7 @@ const Internship = () => {
               type="text"
               fullWidth
               variant="standard"
+              helperText="Enter name of the organization"
               onChange={handleDataChange}
             />
             <TextField
@@ -218,6 +219,7 @@ const Internship = () => {
               type="text"
               fullWidth
               variant="standard"
+              helperText="Enter duration of the internship, Eg: 2 months"
               onChange={handleDataChange}
             />
             <TextField
@@ -229,6 +231,7 @@ const Internship = () => {
               type="text"
               fullWidth
               variant="standard"
+              helperText="Enter your position, Eg: Software Developer"
               onChange={handleDataChange}
             />
             <TextField
@@ -239,6 +242,7 @@ const Internship = () => {
               autocomplete="off"
               sx={{ margin: "1rem 0 0 0" }}
               label="Paid or Unpaid"
+              helperText="Select if the internship is paid or unpaid"
               onChange={handleDataChange}
             >
               <MenuItem key="Paid" value="Paid">
@@ -255,6 +259,7 @@ const Internship = () => {
               fullWidth
               sx={{ margin: "1rem 0 0 0" }}
               label="Mode"
+              helperText="Select mode of work"
               onChange={handleDataChange}
             >
               <MenuItem key="Online" value="Online">
@@ -262,6 +267,9 @@ const Internship = () => {
               </MenuItem>
               <MenuItem key="Offline" value="Offline">
                 Offline
+              </MenuItem>
+              <MenuItem key="Hybrid" value="Hybrid">
+                Hybrid
               </MenuItem>
             </TextField>
             <TextField
@@ -274,6 +282,7 @@ const Internship = () => {
               type="text"
               fullWidth
               variant="standard"
+              helperText="Briefly describe your work, what tasks you performed, etc."
               onChange={handleDataChange}
             />
           </MultiFieldModal>

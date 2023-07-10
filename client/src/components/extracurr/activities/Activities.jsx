@@ -255,6 +255,7 @@ const Activities = () => {
               fullWidth
               sx={{ margin: "1rem 0 0 0" }}
               variant="standard"
+              helperText="Select a committee"
               onChange={handleComDataChange}
             >
               {comNames.map((option, index) => (
@@ -272,6 +273,7 @@ const Activities = () => {
               type="text"
               fullWidth
               variant="standard"
+              helperText="e.g. PR head"
               onChange={handleComDataChange}
             />
             <TextField
@@ -325,6 +327,7 @@ const Activities = () => {
               type="text"
               fullWidth
               variant="standard"
+              helperText="e.g. Abhyudaya"
               onChange={handleVolDataChange}
             />
             <TextField
@@ -336,28 +339,31 @@ const Activities = () => {
               type="text"
               fullWidth
               variant="standard"
+              helperText="e.g. 2 months"
               onChange={handleVolDataChange}
             />
             <TextField
               required
-              margin="instructor"
+              margin="dense"
               name="instructor"
               label="Instructor"
               autoComplete="off"
               type="text"
               fullWidth
               variant="standard"
+              helperText="Name of the instructor"
               onChange={handleVolDataChange}
             />
             <TextField
               required
-              margin="desc"
+              margin="dense"
               name="desc"
               label="description"
               autoComplete="off"
               type="text"
               fullWidth
               variant="standard"
+              helperText="e.g. Teaching underprivileged children"
               onChange={handleVolDataChange}
             />
           </MultiFieldModal>

@@ -85,6 +85,7 @@ export default function ScrollModal(props) {
               tabIndex={-1}
               sx={{
                 color: "var(--text-color)",
+                whiteSpace: "pre-wrap",
               }}
             >
               {props.content}

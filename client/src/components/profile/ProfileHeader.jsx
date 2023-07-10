@@ -5,6 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import { deepOrange } from '@mui/material/colors';
 import { LuEdit2 } from "react-icons/lu";
 import styles from './ProfileHeader.module.css'
+import ServerUrl from '../../constants';
 
 const ProfileHeader = (props) => {
   const [profileInfo, setProfileInfo] = useState(props.info);
