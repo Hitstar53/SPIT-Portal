@@ -76,6 +76,7 @@ var yr=getDate()
         facultyName:user.fullName,
         department:user.department,
         designation:user.designation,
+        isSubmitted:true,
       }),
     });
   }
