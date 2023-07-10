@@ -291,6 +291,48 @@ export default function MiniDrawer({setIsLoggedIn}) {
                                 <ListItemText primary={"Department's Appraisal"} sx={{ opacity: open ? 1 : 0, color: "white" }} />
                             </ListItemButton>
                         </ListItem>}
+                    {user.designation==="Principal"&&<ListItem key={"View Appraisal"} disablePadding sx={{ display: 'block' }}>
+                            <ListItemButton
+                                sx={{
+                                    minHeight: 48,
+                                    justifyContent: open ? 'initial' : 'center',
+                                    px: 2.5,
+                                    backgroundColor: active === "View Appraisal" ? '#333' : 'transparent',
+                                    transition: 'background-color 0.3s ease-in-out',
+                                    '&:hover': {
+                                        backgroundColor: active === "View Appraisal" ? '#333' : '#555',
+                                    },
+                                }}
+                                onClick={() => {
+                                    window.location.pathname = "/all_appraisal";
+                                    setActive("View Appraisal");
+                                }}
+                            >
+                                {!open ? (<Tooltip title={"View Appraisal"} placement="right" arrow>
+                                    <ListItemIcon
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: open ? 3 : 'auto',
+                                            justifyContent: 'center',
+                                            color: 'white'
+                                        }}
+                                    >
+                                        {<ArticleIcon/>}
+                                    </ListItemIcon>
+                                </Tooltip>) :
+                                    (<ListItemIcon
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: open ? 3 : 'auto',
+                                            justifyContent: 'center',
+                                            color: 'white'
+                                        }}
+                                    >
+                                        {<ArticleIcon/>}
+                                    </ListItemIcon>)}
+                                <ListItemText primary={"View Appraisal"} sx={{ opacity: open ? 1 : 0, color: "white" }} />
+                            </ListItemButton>
+                        </ListItem>}
                 </List>
             </Drawer>
         </div>
