@@ -6,7 +6,8 @@ const announcementSchema = mongoose.Schema({
     type:{type:String,required:true},
     postDate:{type:String,required:true},
     title:{type:String,required:true},
-    endDate:{type:String,required:true}
+    endDate:{type:String,required:true},
+    expireAt: { type: Date, expires: 0 } 
 },
 {
     collection:"Announcements"

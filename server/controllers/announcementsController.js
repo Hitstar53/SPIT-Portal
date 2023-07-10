@@ -3,6 +3,8 @@ const Announcement = require('../models/announcements')
 const Student = require('../models/student')
 const mongoose = require('mongoose')
 const Faculty = require('../models/faculty')
+const { format, addDays } = require('date-fns');
+const dayjs = require('dayjs')
 
 exports.setAnnouncementsAllStudents = asyncHandler(async (req, res) => { 
     const title = req.body.title
@@ -12,16 +14,22 @@ exports.setAnnouncementsAllStudents = asyncHandler(async (req, res) => {
     const type = req.body.type
     const postDate = req.body.postDate
     const endDate = req.body.endDate
-    
+
     try {
+        // Student.collection.createIndex({ expireAt: 1 }, { expireAfterSeconds: 0 });
+        // const date = new Date(endDate)
+        // const formattedDate = format(date, 'MM-dd-yyyy')
+        // console.log(date)
+        // console.log(typeof(date))
         const announcement = await Announcement.create({
             title:title,
             description:description,
             sender:sender,
             senderPhoto:senderPhoto,
             type:type,
-            postDate:postDate
-        })
+            postDate:postDate,
+            endDate: endDate
+        }) 
         await Student.updateMany({},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
         await Faculty.updateOne({name:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
         
@@ -106,7 +114,8 @@ exports.setAnnouncementsSpecificStudents = asyncHandler(async (req, res) => {
             sender:sender,
             senderPhoto:senderPhoto,
             type:type,
-            postDate:postDate
+            postDate:postDate,
+            endDate: endDate
         })
         await Student.updateMany({uid:{$in:students}},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
         await Faculty.updateOne({name:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
@@ -138,3 +147,4 @@ exports.getFacultyAnnouncements = asyncHandler(async (req, res) => {
         console.error(error)
     }
 })
+
