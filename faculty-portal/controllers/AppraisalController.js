@@ -821,29 +821,6 @@ const getDim4 = asyncHandler(async (req, res) => {
     }
 })
 
-const HOD = asyncHandler(async (req, res) => {
-    console.log("Inside for the HODappraisal")
-    try {
-        
-        const {name,department} = req.body
-        const facultyInfo = await Appraisal.find({
-            facultyName: name,
-            department: department,
-        })
-        if (facultyInfo) {
-            res.status(200).json(facultyInfo)
-            console.log(facultyInfo)
-        }
-        else {
-            res.status(404)
-        }
-    } catch (error) {
-        console.log(error)
-    }
-})
-
-
-
 
 module.exports = {
     setAppraisal,
@@ -857,5 +834,4 @@ module.exports = {
     getDim4,
     getAppraisal,
     getAllAppraisal,
-    HOD,
 }

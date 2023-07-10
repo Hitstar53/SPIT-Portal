@@ -26,6 +26,4 @@ router.post("/dim4", setDim4);
 router.post("/get/dim4", getDim4);
 router.post("/getappraisal", getAppraisal)
 router.post("/getallappraisal", getAllAppraisal)
-router.post("/qwerty",HOD)
-
 module.exports = router;

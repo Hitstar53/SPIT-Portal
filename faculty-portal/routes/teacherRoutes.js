@@ -10,4 +10,5 @@ router.post('/login', teacherDataController.loginFaculty)
 router.post('/get/event', teacherDataController.getEvent)
 router.post('/add/event', teacherDataController.addEvent)
 router.post('/delete/event', teacherDataController.deleteEvent)
+router.post('/get/faculty/by-dept', teacherDataController.getFacultyByDept)
 module.exports = router; 
