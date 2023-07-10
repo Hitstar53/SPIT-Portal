@@ -176,7 +176,6 @@ exports.getFacultyByDept = asyncHandler(async (req, res) => {
     }})
 
 exports.getAllFaculty = asyncHandler(async (req, res) => {
-        console.log("Inside for the HODappraisal")
         try {
             const facultyInfo = await Faculty.find({},{fullName:1})
             if (facultyInfo) {
