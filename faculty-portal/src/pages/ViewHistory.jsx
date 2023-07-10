@@ -4,9 +4,10 @@ import { UserContext } from '../context/UserContext';
 import { useRef } from 'react';
 import "../styles/History.css"
 import { drawDOM, exportPDF } from "@progress/kendo-drawing";
+import ReactToPrint, { useReactToPrint } from 'react-to-print';
 import { saveAs } from "@progress/kendo-file-saver";
 import DoneIcon from '@mui/icons-material/Done';
-import HeaderImage from '../assets/appraisal.png';
+import HeaderImage from '../assets/spit.png';
 
 const ViewHistory = () => {
     const { user } = useContext(UserContext);
@@ -15,24 +16,14 @@ const ViewHistory = () => {
     const [year, setYear] = useState("");
     const [years, setYears] = useState([])
     // const pdfExportComponent = useRef(null);
-    const elementRef = useRef(null);
-    const exportElement = (element, options) => {
-        console.log("iamhere");
-        drawDOM(element, options)
-            .then((group) => {
-                return exportPDF(group);
-            })
-            .then((dataUri) => {
-                saveAs(dataUri, "export.pdf");
-            });
-    }
-    const handleExportPDF = () => {
-        exportElement(elementRef.current, {
-            // forcePageBreak: ".page-break",
-            paperSize: "A2",
-            margin: "2mm"
-        });
-    };
+    //for adding print function
+    const elementRef = useRef();
+    const handleExportPDF = useReactToPrint({
+        content: () => elementRef.current,
+        documentTitle: "Appraisal_For_Teachers",
+        // onAfterPrint: alert("Printed Successfully"),
+
+    })
 
     useEffect(() => {
         const fetchHistory = async () => {
@@ -84,7 +75,6 @@ const ViewHistory = () => {
     }
     return (
         <>
-            {" "}
             {years ? (
                 <div className="dropdown">
                     <div>Select a Year:</div>
@@ -111,17 +101,29 @@ const ViewHistory = () => {
             )}
             <div>
                 {history ? (
-                    <div ref={elementRef}>
+                    <div ref={elementRef} style={{
+                        width: "95%",
+                        // padding:"0 0 2em 0",
+                        border: "1px solid black",
+                        margin: "1em auto",
+
+                    }}>
 
                         <img src={HeaderImage} style={
                             {
                                 marginLeft: "auto",
                                 marginRight: "auto",
+                                width: "70%"
                             }
                         } />
 
-                        <div>
-                            <table>
+                        <div >
+                            <table style={{
+                                // border:"2px solid red",
+                                margin: "0 auto",
+                                width: "85%"
+
+                            }}>
                                 <thead>
                                     <tr>
                                         <th>Year of Assessment:</th>
@@ -147,12 +149,27 @@ const ViewHistory = () => {
                             </table>
 
                             {/* ---------------------------------------------------------- */}
+                            <div className='dimhead' style={{
+                                backgroundColor: "#fabf8f",
+                                margin: "1em",
+                                padding: "0.4em 0.4em"
+
+                            }}>
+                                <strong> Dimension 1: Academics </strong>
+
+                            </div>
+
                             <div
                                 style={{
                                     display: "flex",
+                                    width: "90%",
+                                    flexDirection: "column"
                                 }}
                             >
-                                <table>
+                                <table style={{
+                                    margin: "0px 0px 0px 1em",
+                                    width: "60%"
+                                }}>
                                     <thead>
                                         <th colSpan={5} className="table-heading">
                                             AP1: Courses Conducted
@@ -187,7 +204,10 @@ const ViewHistory = () => {
 
                                 {/* ---------------------------------------------------------- */}
                                 {/* AP2 */}
-                                <table>
+                                <table style={{
+                                   margin: "1em 0px 0px 1em",
+                                    width: "60%"
+                                }}>
                                     <thead>
                                         <th colSpan={5} className="table-heading">
                                             AP2 : Course File
@@ -266,7 +286,7 @@ const ViewHistory = () => {
 
                             {/* ---------------------------------------------------------- AP4*/}
 
-                            <div style={{ display: "flex", gap: "1rem" }}>
+                            <div style={{ display: "flex", gap: "1rem", flexDirection: "column", width: "60%" }}>
                                 <table>
                                     <thead>
                                         <th colSpan={5} className="table-heading">
@@ -525,9 +545,27 @@ const ViewHistory = () => {
                             </table>
                         </div>
 
+                        <div className='dimhead' style={{
+                            backgroundColor: "#fabf8f",
+                            margin: "1em",
+                            padding: "0.4em 0.4em"
+
+                        }}>
+                            <strong>Total Marks of Dimension 1 : {history.Dimension1.totalMarks} </strong>
+
+                        </div>
                         {/* //Dimension2 Starts Here */}
 
                         {/* //RP1 */}
+                        <div className='dimhead' style={{
+                            backgroundColor: "#fabf8f",
+                            margin: "1em",
+                            padding: "0.4em 0.4em"
+
+                        }}>
+                            <strong>Dimension 2: Research and Development</strong>
+
+                        </div>
                         <table>
                             <thead>
                                 <th colSpan={10} className="table-heading">
@@ -829,6 +867,25 @@ const ViewHistory = () => {
                             </tbody>
                         </table>
 
+                        <div className='dimhead' style={{
+                            backgroundColor: "#fabf8f",
+                            margin: "1em",
+                            padding: "0.4em 0.4em"
+
+                        }}>
+                            <strong>Total Marks of Dimension 2 : {history.Dimension2.totalMarks} </strong>
+
+                        </div>
+
+                        <div className='dimhead' style={{
+                            backgroundColor: "#fabf8f",
+                            margin: "1em",
+                            padding: "0.4em 0.4em"
+
+                        }}>
+                            <strong>Dimension 3: Administration and Outreach</strong>
+
+                        </div>
                         {/* 
                     Dimension 3 starts */}
                         <table>
@@ -1111,10 +1168,39 @@ const ViewHistory = () => {
                                 <th colSpan={10} className="table-heading">
                                     Total Marks : {history.Dimension3.collaboration.totalMarks}
                                 </th>
-
-
                             </tbody>
                         </table>
+                           <div className='dimhead' style={{
+                            backgroundColor: "#fabf8f",
+                            margin: "1em",
+                            padding: "0.4em 0.4em"
+
+                        }}>
+                            <strong>Total Marks Dimension 3 : {history.Dimension3.totalMarks}</strong>
+
+                        </div>
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            margin: "7em 2em",
+                            marginBottom: "1em"
+                        }}>
+                            <div style={{
+                                borderTop: "1px solid black",
+                                width: "15%",
+                                textAlign: "center"
+                            }}>
+                                Signature
+                            </div>
+                            <div style={{
+                                borderTop: "1px solid black",
+                                width: "15%",
+                                textAlign: "center"
+                            }}>
+                                Date
+                            </div>
+                        </div>
                     </div>
                 ) : (
                     ""
@@ -1130,7 +1216,7 @@ const ViewHistory = () => {
                         // borderRadius: "5px",
                         border: "none",
                         width: "150px",
-                        margin: "0 auto",
+                        margin: "1em auto",
                         display: "block",
                     }}
                 >

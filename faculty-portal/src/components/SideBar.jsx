@@ -249,24 +249,24 @@ export default function MiniDrawer({setIsLoggedIn}) {
                             </ListItemButton>
                         </ListItem>
                     ))}
-                    {user.designation==="HOD"&&<ListItem key={"Department's Appraisal"} disablePadding sx={{ display: 'block' }}>
+                    {user.designation==="HOD"&&<ListItem key={"Dept Appraisal"} disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
                                     px: 2.5,
-                                    backgroundColor: active === "Department's Appraisal" ? '#333' : 'transparent',
+                                    backgroundColor: active === "Dept Appraisal" ? '#333' : 'transparent',
                                     transition: 'background-color 0.3s ease-in-out',
                                     '&:hover': {
-                                        backgroundColor: active === "Department's Appraisal" ? '#333' : '#555',
+                                        backgroundColor: active === "Dept Appraisal" ? '#333' : '#555',
                                     },
                                 }}
                                 onClick={() => {
                                     window.location.pathname = "/dept_appraisal";
-                                    setActive("Department's Appraisal");
+                                    setActive("Dept Appraisal");
                                 }}
                             >
-                                {!open ? (<Tooltip title={"Department's Appraisal"} placement="right" arrow>
+                                {!open ? (<Tooltip title={"Dept Appraisal"} placement="right" arrow>
                                     <ListItemIcon
                                         sx={{
                                             minWidth: 0,
@@ -288,7 +288,7 @@ export default function MiniDrawer({setIsLoggedIn}) {
                                     >
                                         {<ArticleIcon/>}
                                     </ListItemIcon>)}
-                                <ListItemText primary={"Department's Appraisal"} sx={{ opacity: open ? 1 : 0, color: "white" }} />
+                                <ListItemText primary={"Dept Appraisal"} sx={{ opacity: open ? 1 : 0, color: "white" }} />
                             </ListItemButton>
                         </ListItem>}
                     {user.designation==="Principal"&&<ListItem key={"View Appraisal"} disablePadding sx={{ display: 'block' }}>
