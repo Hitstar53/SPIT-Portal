@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Faculty = require('../models/faculty.js')
+const Appraisal = require('../models/appraisal.js')
 const { error } = require("console");
 
 exports.getFaculty = asyncHandler(async (req, res) => {
@@ -199,3 +200,21 @@ exports.getAllFaculty = asyncHandler(async (req, res) => {
             console.log(error)
         }
 })
+
+exports.checkFaculty = async(req, res) => {
+    const {name, year} = req.body
+    try {
+        const faculty = await Faculty.findOne({fullName: name})
+        if(faculty){
+            const appraisal = await Appraisal.findOne({facultyName: name, yearofAssesment: year})
+            if(appraisal.isSubmitted) return res.status(200)
+            else return res.status(400)
+        }
+        else{
+            return res.status(404)
+        }
+    } catch(err){
+        console.log(err)
+        return res.status(504)
+    }
+}
