@@ -773,11 +773,11 @@ const getDim3 = asyncHandler(async (req, res) => {
 
 const setDim4 = asyncHandler(async (req, res) => {
     try {
-        const { yearofAssesment, faculty, Dimension4 } = req.body;
+        const { yearofAssesment, fullName, Dimension4 } = req.body;
         var updatedApp = null;
 
         const existingFaculty = await Appraisal.findOne({
-            facultyName: faculty.fullName,
+            facultyName: fullName,
             yearofAssesment: yearofAssesment,
         });
 
@@ -787,13 +787,7 @@ const setDim4 = asyncHandler(async (req, res) => {
                 { $set: { Dimension4: Dimension4 } }
             );
         } else {
-            updatedApp = await Appraisal.create({
-                facultyName: faculty.fullName,
-                department: faculty.department,
-                designation: faculty.designation,
-                yearofAssesment: yearofAssesment,
-                Dimension4: Dimension4,
-            });
+            return res.status(404).json("Faculty Not Found In setDim4")
         }
 
         res.status(200).json(updatedApp);

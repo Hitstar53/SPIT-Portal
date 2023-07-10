@@ -91,7 +91,7 @@ exports.getEvent = asyncHandler(async (req, res) => {
                 endDate: event.endDate,
                 _id: event._id
             })
-        }) 
+        })
         console.log(allEvents)
         res.status(200).send(allEvents);
     } catch (err) {
@@ -119,7 +119,7 @@ exports.addEvent = asyncHandler(async (req, res) => {
                 endDate: event.endDate,
                 _id: event._id
             })
-        }) 
+        })
         console.log(allEvents)
         res.status(200).send(allEvents);
     } catch (err) {
@@ -146,49 +146,49 @@ exports.deleteEvent = asyncHandler(async (req, res) => {
         console.log(err);
         res.status(504).send("Internal Server Error");
     }
-})  
-
-exports.getFacultyByDept = asyncHandler(async (req, res) => {
-        console.log("Inside for the HODappraisal")
-        try {
-            
-            const {department} = req.body
-            const facultyInfo = await Faculty.find({
-                department
-            },{fullName:1})
-            
-            if (facultyInfo) {
-                console.log(facultyInfo)
-                const faculty = []
-                facultyInfo.map((info) => {
-                    faculty.push(
-                        info.fullName
-                    )
-                })
-                console.log(faculty)
-                return res.status(200).json(faculty)
-            }
-            else {
-                return res.status(404)
-            }
-        } catch (error) {
-            console.log(error)
-        }
 })
 
-exports.checkFaculty = async(req, res) => {
-    const {name, year} = req.body
+exports.getFacultyByDept = asyncHandler(async (req, res) => {
+    console.log("Inside for the HODappraisal")
     try {
-        const faculty = await Faculty.findOne({fullName: name})
-        if(faculty){
-            const appraisal = await Appraisal.findOne({facultyName: name, yearofAssesment: year})
-            if(appraisal.isSubmitted) return res.status(200)
-            else return res.status(400)
+
+        const { department } = req.body
+        const facultyInfo = await Faculty.find({
+            department
+        }, { fullName: 1 })
+
+        if (facultyInfo) {
+            console.log(facultyInfo)
+            const faculty = []
+            facultyInfo.map((info) => {
+                faculty.push(
+                    info.fullName
+                )
+            })
+            console.log(faculty)
+            return res.status(200).json(faculty)
         }
-        else{
+        else {
             return res.status(404)
         }
-    } catch(err){
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+exports.checkFaculty = async (req, res) => {
+    const { name, year } = req.body
+    try {
+        const faculty = await Faculty.findOne({ fullName: name })
+        if (faculty) {
+            const appraisal = await Appraisal.findOne({ facultyName: name, yearofAssesment: year })
+            if (appraisal.isSubmitted && !appraisal.HODReviewed ) return res.status(200).json("Faculty has submmitted the appraisal")
+            else return res.status(400).json("Faculty has not submmitted the appraisal")
+        }
+        else {
+            return res.status(404).json("Faculty has not found")
+        }
+    } catch (err) {
         console.log(err)
         return res.status(504)
     }
