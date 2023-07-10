@@ -10,28 +10,28 @@ function StepFour({ setDimension4, handleNext, yr }) {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const getData = async () => {
-      await axios.post('http://localhost:5000/api/faculty/appraisal/get/dim4',
-        { name: user.fullName, yearofAssesment: yr }
-      ).then((res) => {
-        console.log(res.data)
-        localStorage.setItem("dim4Data", JSON.stringify(res.data))
-        reset(JSON.parse(localStorage.getItem('dim4Data')))
-        const storedData = localStorage.getItem("dim4Data")
-        console.log(storedData)
-        if(storedData) {
-          Object.keys(JSON.parse(storedData)).map((key) => {
-            setValue(key, JSON.parse(storedData)[key])
-          })
-        }
-        setLoading(false)
-      }).catch((err) => {
-        console.log(err)
-      })
-    }
-    getData()
-  }, []);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     await axios.post('http://localhost:5000/api/faculty/appraisal/get/dim4',
+  //       { name: user.fullName, yearofAssesment: yr }
+  //     ).then((res) => {
+  //       console.log(res.data)
+  //       localStorage.setItem("dim4Data", JSON.stringify(res.data))
+  //       reset(JSON.parse(localStorage.getItem('dim4Data')))
+  //       const storedData = localStorage.getItem("dim4Data")
+  //       console.log(storedData)
+  //       if(storedData) {
+  //         Object.keys(JSON.parse(storedData)).map((key) => {
+  //           setValue(key, JSON.parse(storedData)[key])
+  //         })
+  //       }
+  //       setLoading(false)
+  //     }).catch((err) => {
+  //       console.log(err)
+  //     })
+  //   }
+  //   getData()
+  // }, []);
 
 
   const {
