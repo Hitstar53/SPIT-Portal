@@ -41,8 +41,11 @@ const PersonalInfo = (props) => {
     }
   };
 
-  const handleDateChange = (e) => {
-    setPersonalInfo({ ...personalInfo, "dob": `${(e.$M)+1}/${e.$D}/${e.$y}`});
+  const handleDateChange = (event) => {
+    setPersonalInfo({
+      ...personalInfo,
+      dob: dayjs(event).format("YYYY/MM/DD"),
+    });
   };
   
   const handleChange = (e) => {
@@ -194,7 +197,7 @@ const PersonalInfo = (props) => {
         <div className={styles.twoCol}>
           <i className="fa-solid fa-calendar-days"></i>
           {!edit && (
-            <span className={styles.iconInfo}>{personalInfo.dob}</span>
+            <span className={styles.iconInfo}>{personalInfo.dob.toLocaleString()}</span>
           )}
           {edit && (
             <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -203,7 +206,7 @@ const PersonalInfo = (props) => {
                 name="dob"
                 label="Date of Birth"
                 onChange={handleDateChange}
-                value={dayjs(personalInfo.dob)}
+                value={dayjs(personalInfo.dob.toLocaleString())}
               />
             </LocalizationProvider>
           )}

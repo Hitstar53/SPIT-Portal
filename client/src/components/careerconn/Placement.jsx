@@ -63,10 +63,9 @@ const Placement = () => {
     setCompanyInfo({ ...companyInfo, [event.target.name]: event.target.value });
   };
   const handleChangeDate = (event) => {
-    console.log(dayjs(event).format("DD-MM-YYYY"));
     setRoleInfo({
       ...roleInfo,
-      doj: `${event.$M + 1}/${event.$D}/${event.$y}`,
+      doj: dayjs(event).format("YYYY/MM/DD"),
     });
   };
   const handleSubmit = (event) => {

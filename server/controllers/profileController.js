@@ -5,7 +5,7 @@ const Faculty = require('../models/faculty')
 exports.updatePersonalInfo = asyncHandler(async(req,res) =>{
         const phone = req.body.phone;
         const address = req.body.address;
-        const dob = req.body.dob;
+        const dob = new Date(req.body.dob);
         const gender = req.body.gender;
         const blood = req.body.blood;
         const religion = req.body.religion;

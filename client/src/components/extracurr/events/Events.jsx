@@ -112,7 +112,7 @@ const Events = () => {
   const handleChangeDate = (event) => {
     setEventNewData({
       ...newEventData,
-      "eventdate": `${event.$M + 1}/${event.$D}/${event.$y}`,
+      eventdate: dayjs(event).format("YYYY/MM/DD"),
     });
   };
 

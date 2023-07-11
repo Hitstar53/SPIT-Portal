@@ -42,6 +42,14 @@ const Ancmnts = () => {
   const handleAncmntDataChange = (e) => {
     setAncmntNewData({ ...newAncmntData, [e.target.name]: e.target.value });
   };
+
+  const handleAncmntChangeDate = (event) => {
+    setAncmntNewData({
+      ...newAncmntData,
+      date: dayjs(event).format("YYYY/MM/DD"),
+    });
+  };
+
   const handleAncmntSubmit = (e) => {
     e.preventDefault();
     const arr = [...ancmnts];
@@ -119,7 +127,8 @@ const Ancmnts = () => {
           type="text"
           fullWidth
           variant="outlined"
-          onChange={handleAncmntDataChange}
+          helperText="End date of the announcement"
+          onChange={handleAncmntChangeDate}
         />
         <TextField
           required
@@ -183,9 +192,13 @@ const Ancmnts = () => {
                 onChange={handleAncmntDataChange}
               >
                 <MenuItem value="Comps">Comps</MenuItem>
+                <MenuItem value="CSE">CSE</MenuItem>
                 <MenuItem value="AIML">AIML</MenuItem>
-                <MenuItem value="Data Science">Data Science</MenuItem>
+                <MenuItem value="DS">DS</MenuItem>
                 <MenuItem value="EXTC">EXTC</MenuItem>
+                <MenuItem value="MCA">MCA</MenuItem>
+                <MenuItem value="ETRX">ETRX</MenuItem>
+                <MenuItem value="IT">IT</MenuItem>
               </Select>
             </div>
             <div className={styles.dropdown}>

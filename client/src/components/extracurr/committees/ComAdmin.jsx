@@ -72,7 +72,7 @@ const ComAdmin = () => {
   const handleEventChangeDate = (event) => {
     setEventNewData({
       ...newEventData,
-      date: `${event.$D}/${event.$M + 1}/${event.$y}`,
+      date: dayjs(event).format("YYYY/MM/DD"),
     });
   };
   const handleEventSubmit = (e) => {
@@ -89,7 +89,7 @@ const ComAdmin = () => {
   const handleAncmntChangeDate = (event) => {
     setAncmntNewData({
       ...newAncmntData,
-      date: `${event.$D}/${event.$M + 1}/${event.$y}`,
+      date: dayjs(event).format("YYYY/MM/DD"),
     });
   };
   const handleAncmntSubmit = (e) => {

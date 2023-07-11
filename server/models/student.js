@@ -6,7 +6,7 @@ const studentSchema = mongoose.Schema({
     emailID:{ type : String, required:true},
     phone:{ type : String, required:true},
     address:{ type : String, required:true},
-    dob:{ type:String, required:true},
+    dob:{ type: Date, required:true},
     religion:{ type : String, required:true,default:"Not disclosed"},
     blood:{ type : String, required:true},
     gender:{ type : String, required:true,default:"Not disclosed"},
