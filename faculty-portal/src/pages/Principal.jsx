@@ -15,7 +15,7 @@ const Principal = () => {
         axios.post("http://localhost:5000/api/faculty/get/faculty/all")
         .then((res) => {
             console.log(res.data)
-            setfacultyName(res.data);
+            setfacultyName(res.data.sort());
         })
         .catch((err) => {
             console.log(err);
