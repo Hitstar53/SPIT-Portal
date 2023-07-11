@@ -1,6 +1,5 @@
 import { React, useState, useEffect,useContext } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,7 +14,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Avatar from '@mui/material/Avatar';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -24,11 +22,11 @@ import MenuItem from '@mui/material/MenuItem';
 import Logo from '../assets/SPIT_Logo Colour.png';
 import Tooltip from '@mui/material/Tooltip';
 import { SideBarData } from '../data/SideBarData';
-import { Button } from '@mui/material';
-import '../styles/SideBar.css'
 import {toast} from 'react-toastify'
 import ArticleIcon from '@mui/icons-material/Article';
 import { UserContext } from '../context/UserContext';
+import '../styles/SideBar.css'
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -55,7 +53,7 @@ const closedMixin = (theme) => ({
 });
 
 const DrawerHeader = styled('div')(({ theme }) => ({
-    height: 68,
+    height: 55,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
@@ -106,10 +104,12 @@ export default function MiniDrawer({setIsLoggedIn}) {
     const [active, setActive] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
     const Open = Boolean(anchorEl)
+
     const handleClick = (event) => {
         setActive(null)
         setAnchorEl(event.currentTarget);
     };
+
     const handleLogOut = () => {
         setIsLoggedIn(false);
         toast.success('Logged Out Successfull!', {
@@ -124,10 +124,13 @@ export default function MiniDrawer({setIsLoggedIn}) {
             });
         localStorage.clear()
     }
+
     const handleClose = () => {
         setAnchorEl(null);
     };
+
     const theme = useTheme();
+
     const [open, setOpen] = useState(false);
 
     const handleDrawerOpen = () => {
@@ -202,14 +205,14 @@ export default function MiniDrawer({setIsLoggedIn}) {
                 </Toolbar>
             </AppBar>
             <Drawer variant="permanent" open={open} >
-                <DrawerHeader onClick={handleDrawerClose} sx={{ cursor: "pointer" }}>
+                <DrawerHeader onClick={handleDrawerClose} sx={{ cursor: "pointer", display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "centre" }}>
                     <img src={Logo} alt="Img here" width="40px" className='spit-logo' />
-                    <div style={{ color: "white", marginRight: "-10px", marginLeft: "5px" }}>S.P.I.T Faculty Portal </div>
+                    <div style={{ color: "white", marginLeft: "5px"}}>S.P.I.T Faculty Portal </div>
                     <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon sx={{ color: "white" }} /> : <ChevronLeftIcon sx={{ color: "white" }} />}
+                        {theme.direction === 'rtl' ? <ChevronRightIcon sx={{ color: "white" }} /> : <ChevronLeftIcon sx={{ color: "white", marginLeft: "-10px" }} />}
                     </IconButton>
                 </DrawerHeader>
-                <Divider />
+                <Divider sx={{width: "100%"}}/>
                 <List>
                     {SideBarData.map((val, index) => (
                         <ListItem key={val.title} disablePadding sx={{ display: 'block' }}>

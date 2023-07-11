@@ -14,8 +14,8 @@ const Principal = () => {
     const getAllFaculty = async () => {
         axios.post("http://localhost:5000/api/faculty/get/faculty/all")
         .then((res) => {
-            console.log(res.data.slice(0, 51))
-            setfacultyName(res.data.slice(0, 51));
+            console.log(res.data)
+            setfacultyName(res.data);
         })
         .catch((err) => {
             console.log(err);
