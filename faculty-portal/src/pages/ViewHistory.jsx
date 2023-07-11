@@ -16,6 +16,7 @@ const ViewHistory = () => {
     const [history, setHistory] = useState();
     const [selectedValue, setSelectedValue] = useState("");
     const [year, setYear] = useState("");
+    const [year2, setYear2] = useState("");
     const [years, setYears] = useState([])
     const [years2, setYears2] = useState([])
     const [facultyName, setfacultyName] = useState([]);
@@ -30,108 +31,112 @@ const ViewHistory = () => {
 
     })
 
-    useEffect(() => {
-        const fetchHistory = async () => {
-            const endpoint = 'http://localhost:5000/api/faculty/appraisal/getallappraisal';
-            // const payload = JSON.parse(localStorage.getItem('user'));
-            await axios.post(endpoint, {
-                facultyName: "Mahesh Patil",
-            }).then((response) => {
-                setYears(response.data);
-            });
-        };
-        fetchHistory();
+
+    if (user.designation == "HOD") {
+        useEffect(() => {
+            fetch("http://localhost:5000/api/faculty/get/faculty/by-dept", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    department: user.department,
+                }),
+            })
+                .then((res) => res.json())
+                .then((data) => setfacultyName(data.sort()));
+        }, [])
+
+        useEffect(() => {
+            console.log("name: ", name);
+        }, [name])
+        useEffect(() => {
+            console.log("Years of that teacher : ", years2);
+        }, [years2])
+
+    }
+    else {
+        useEffect(() => {
+            // fetch("http://localhost:5000/api/faculty/get/faculty/by-dept", {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify({
+            //         department: user.department,
+            //     }),
+            // })
+            //     .then((res) => res.json())
+            //     .then((data) => setfacultyName(data.sort()));
+
+            const fetchHistory = async () => {
+                const endpoint = 'http://localhost:5000/api/faculty/appraisal/getallappraisal';
+                // const payload = JSON.parse(localStorage.getItem('user'));
+                await axios.post(endpoint, {
+                    facultyName: "Mahesh Patil",
+                }).then((response) => {
+                    setYears(response.data);
+                });
+            };
+            fetchHistory();
+        }, [])
+    }
 
 
-        fetch("http://localhost:5000/api/faculty/get/faculty/by-dept", {
+
+    // useEffect(() => {
+    //     console.log(year);
+    //     handleOption();
+    // }, [year])
+    // useEffect(() => {
+    //     console.log("name: ", name);
+    // }, [name])
+
+
+    // const handleOption = () => {
+    //     const fetchData = async () => {
+    //         const endpoint = 'http://localhost:5000/api/faculty/appraisal/getappraisal';
+    //         await axios.post(endpoint, {
+    //             yearofAssesment: year,
+    //             facultyName: "Mahesh Patil",
+    //             // facultyName: "Mahesh Patil"
+    //         }).then((response) => {
+    //             console.log(response.data);
+    //             setHistory(response.data);
+    //             console.log(history);
+    //         });
+    //     }
+    //     fetchData();
+    // }
+
+
+    const getYears = async (name) => {
+        console.log("Inside GetYears")
+        console.log("Name on LIne 86", name)
+        await fetch("http://localhost:5000/api/faculty/appraisal/getallyears", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                department: user.department,
+                facultyName: name,
             }),
         })
             .then((res) => res.json())
-            .then((data) => setfacultyName(data));
-        // const id = window.location.pathname.split('view-history/:')[1];
-        // console.log(id);
-        // const fetchData = async () => {
-        //     const endpoint = 'http://localhost:5000/api/faculty/appraisal/getappraisal';
-        //     await axios.post(endpoint, {
-        //         yearofAssesment: id,
-        //         facultyName: "Mahesh Patil",
-        //         // facultyName: "Mahesh Patil"
-        //     }).then((response) => {
-        //         console.log(response.data);
-        //         setHistory(response.data);
-        //     });
-        // }
-        // fetchData();
-    }, [])
-
-    useEffect(() => {
-        console.log(year);
-        handleOption();
-    }, [year])
-
-    const handleOption = () => {
-        const fetchData = async () => {
-            const endpoint = 'http://localhost:5000/api/faculty/appraisal/getappraisal';
-            await axios.post(endpoint, {
-                yearofAssesment: year,
-                facultyName: "Mahesh Patil",
-                // facultyName: "Mahesh Patil"
-            }).then((response) => {
-                console.log(response.data);
-                setHistory(response.data);
-                console.log(history);
-            });
-        }
-        fetchData();
+            .then((data) => setYears2(data))
     }
-    var yr = getDate()
-    function getDate() {
-        const year = new Date().getFullYear();
-        const month = new Date().getMonth() + 1;
-        const day = new Date().getDate();
-        console.log(month);
-        console.log(year);
-        console.log(day);
-        // if(month<6)
-        return `${year}-${year + 1}`
-        // else
-        // return `${year+1}-${year+2}`
-    }
+
     function handleSubmit(e) {
         e.preventDefault();
+        console.log(e.target[0].value)
         setName(e.target[0].value)
-        console.log("You clicked submit.");
-        console.log(e.target[0].value);
-        fetch("http://localhost:5000/api/faculty/get/faculty/check-faculty", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                name: name,
-                year: yr,
-            }),
-        })
-            .then((res) => res.json())
-            .then((data) => console.log(data));
-
-        const fetchHistory2 = async () => {
-            const endpoint = 'http://localhost:5000/api/faculty/appraisal/getallappraisal';
-            // const payload = JSON.parse(localStorage.getItem('user'));
-            await axios.post(endpoint, {
-                facultyName: "e.target[0].value",
-            }).then((response) => {
-                setYears(response.data);
-            });
-        };
-        fetchHistory2();
+        getYears(e.target[0].value);
     }
+
+    useEffect(() => {
+        console.log(years2)
+    }, [years2])
+
     return (
         <>
             {user.designation == "HOD" ? (
@@ -162,11 +167,11 @@ const ViewHistory = () => {
                             <div>Select a Year:</div>
                             <select
                                 id="dropdown"
-                                value={year}
-                                onChange={(e) => setYear(e.target.value)}
+                                value={year2}
+                                onChange={(e) => setYear2(e.target.value)}
                             >
                                 <option value="">--Select Assessment year--</option>
-                                {years.map((item) => {
+                                {years2.map((item) => {
                                     return (
                                         <option value={item.yearofAssesment}>
                                             {item.yearofAssesment}
