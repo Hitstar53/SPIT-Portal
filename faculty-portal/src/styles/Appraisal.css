@@ -191,7 +191,7 @@ table,td,th,tr{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     margin: 1rem;
 }
 .info-container h3{
@@ -214,14 +214,14 @@ table,td,th,tr{
     margin: 1rem 25px !important;
 }
 
-.stepTwo,.stepThree{
+.stepTwo,.stepThree,.info-container{
     text-align: left !important;
     /* background-color: #2C5784;
     padding: 2rem;
     border-radius: 1rem;
     color: whitesmoke; */
 }
-.stepTwo h1,.stepThree h1{
+.stepTwo h1,.stepThree h1,.info-container h3{
     margin-top: 2rem;
 }
 
