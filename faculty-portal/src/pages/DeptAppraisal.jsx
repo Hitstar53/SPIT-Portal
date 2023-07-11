@@ -6,23 +6,24 @@ import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 
 // const facultyNames = ["CSE", "ECE", "EEE"];
-var yr=getDate()
-  function getDate() {
-    const year = new Date().getFullYear();
-    const month = new Date().getMonth() + 1;
-    const day = new Date().getDate();
-    console.log(month);
-    console.log(year);
-    console.log(day);
-    // if(month<6)
-    return `${year}-${year+1}`
-    // else
-    // return `${year+1}-${year+2}`
-  }
+var yr = getDate();
+function getDate() {
+  const year = new Date().getFullYear();
+  const month = new Date().getMonth() + 1;
+  const day = new Date().getDate();
+  console.log(month);
+  console.log(year);
+  console.log(day);
+  // if(month<6)
+  return `${year}-${year + 1}`;
+  // else
+  // return `${year+1}-${year+2}`
+}
 
 export default function DeptAppraisal() {
+  const [status,setStatus]=useState("Not searched");
   const { user } = useContext(UserContext);
-    const [name,setName]=useState("")
+  const [name, setName] = useState("");
   const [facultyName, setfacultyName] = useState([]);
   useEffect(() => {
     fetch("http://localhost:5000/api/faculty/get/faculty/by-dept", {
@@ -38,24 +39,36 @@ export default function DeptAppraisal() {
       .then((data) => setfacultyName(data.sort()));
   }, []);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    setName(e.target[0].value)
-    console.log("You clicked submit.");
-    console.log(e.target[0].value);
-    fetch("http://localhost:5000/api/faculty/get/faculty/check-faculty", {
+  async function checkFaculty(name) {
+    await fetch("http://localhost:5000/api/faculty/get/faculty/check-faculty", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name: name,
-        year:yr,
+        year: yr,
       }),
     })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((res) =>{
+        if(res.status===200) setStatus("Faculty found")
+        else if(res.status===404) setStatus("Faculty not found")
+      })
   }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setName(e.target[0].value);
+    checkFaculty(e.target[0].value)
+  }
+  useEffect(()=>{
+    console.log(name)
+  },[name])
+
+  useEffect(()=>{
+    console.log(status)
+  },[status])
+
   return (
     <div className="dept-appraisal">
       <form onSubmit={handleSubmit}>
@@ -74,6 +87,11 @@ export default function DeptAppraisal() {
           </button>
         </div>
       </form>
+      <div className="dept-appraisal-body">
+        {status==="Not searched"&&<h1>Click on Find Faculty to Enter their marks</h1>}
+        {status==="Faculty found"&&<h1>put step 4 here</h1>}
+        {status==="Faculty not found"&&<h1>Faculty not found</h1>}
+      </div>
     </div>
   );
 }
