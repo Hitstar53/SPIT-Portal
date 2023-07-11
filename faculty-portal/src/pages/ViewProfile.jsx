@@ -62,7 +62,7 @@ const ViewProfile = () => {
                     <CalendarTodayIcon
                       sx={{ marginRight: 2.5 }}
                     />
-                    Date of Joining :{user.dateOfJoining}
+                    Date of Joining : {user.dateOfJoining}
                   </h1>
                   <h1 className="bigg">
                   
