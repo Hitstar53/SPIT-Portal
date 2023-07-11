@@ -143,7 +143,7 @@ const teacherSchema = new mongoose.Schema({
         type: Number,
     },
     panCardNumber: {
-        type: Number,
+        type: String,
     },
 
     timetable: [{
