@@ -688,6 +688,14 @@ const appraisalSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    principalReviewed: {
+        type: Boolean,
+        default: false,
+    },
+    HODReviewed: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const Appraisal = mongoose.model('Appraisal', appraisalSchema);
