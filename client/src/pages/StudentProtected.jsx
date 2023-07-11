@@ -6,9 +6,9 @@ const Protected = (props) => {
     if (!props.isLoggedIn) {
         return <Navigate to="/" replace />;
     }
-    if (role !== "Student") {
-        return <Navigate to="/faculty/home" replace />;
-    }
+    // if (role !== "Student") {
+    //     return <Navigate to="/faculty/home" replace />;
+    // }
     return props.children;
 };
 

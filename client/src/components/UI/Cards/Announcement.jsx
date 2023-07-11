@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ScrollModal from '../Modals/ScrollModal'
 import styles from './AnnounceCard.module.css'
+import dayjs from "dayjs";
 import { Avatar } from '@mui/material'
 
 const Announcement = (props) => {

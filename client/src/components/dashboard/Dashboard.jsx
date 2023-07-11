@@ -27,7 +27,7 @@ const Dashboard = () => {
             </div> */}
             <div className="flex flex-col gap-6 mt-6">
                 <h1 className="text-2xl p-1 font-semibold heading">Upcoming Exams</h1>
-                <UpcomingExams data={data.examData.examStudent.exams} />
+                <UpcomingExams data={data.examData.exams} />
             </div>
             <div className="flex flex-col gap-4 mt-6">
                 <h1 className="text-2xl p-1 font-semibold heading">Other Announcements</h1>

@@ -9,7 +9,7 @@ const dayjs = require('dayjs')
 exports.setAnnouncementsAllStudents = asyncHandler(async (req, res) => { 
     const title = req.body.title
     const description = req.body.description
-    const sender = req.body.sender
+    const sender = req.body.email
     const senderPhoto = req.body.senderPhoto || "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
     const type = req.body.type
     const postDate = req.body.postDate
@@ -31,7 +31,7 @@ exports.setAnnouncementsAllStudents = asyncHandler(async (req, res) => {
             endDate: endDate
         }) 
         await Student.updateMany({},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
-        await Faculty.updateOne({name:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
+        await Faculty.updateOne({emailID:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
         
         res.status(200).json(announcement)
     }  catch (error) {
@@ -47,7 +47,7 @@ exports.setAnnouncementsGroupStudents = asyncHandler(async (req, res) => {
     const batch = req.body.batch
     const title = req.body.title
     const description = req.body.description
-    const sender = req.body.sender
+    const sender = req.body.email
     const senderPhoto = req.body.senderPhoto || "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
     const type = req.body.type
     const postDate = req.body.postDate
@@ -65,7 +65,7 @@ exports.setAnnouncementsGroupStudents = asyncHandler(async (req, res) => {
                 endDate:endDate
             })
             await Student.updateMany({"educationalInfo.0.year":year,"educationalInfo.0.branch":branch,"educationalInfo.0.division":division, batch: batch},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
-            await Faculty.updateOne({name:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
+            await Faculty.updateOne({emailID:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
             
             res.status(200).json(announcement)
         }  catch (error) {
@@ -86,7 +86,7 @@ exports.setAnnouncementsGroupStudents = asyncHandler(async (req, res) => {
                 endDate:endDate
             })
             await Student.updateMany({"educationalInfo.0.year":year,"educationalInfo.0.branch":branch,"educationalInfo.0.division":division},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
-            await Faculty.updateOne({name:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
+            await Faculty.updateOne({emailID:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
             
             res.status(200).json(announcement)
         }  catch (error) {
@@ -101,7 +101,7 @@ exports.setAnnouncementsGroupStudents = asyncHandler(async (req, res) => {
 exports.setAnnouncementsSpecificStudents = asyncHandler(async (req, res) => { 
     const title = req.body.title
     const description = req.body.description
-    const sender = req.body.sender
+    const sender = req.body.email
     const senderPhoto = req.body.senderPhoto || "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
     const type = req.body.type
     const postDate = req.body.postDate
@@ -118,7 +118,7 @@ exports.setAnnouncementsSpecificStudents = asyncHandler(async (req, res) => {
             endDate: endDate
         })
         await Student.updateMany({uid:{$in:students}},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
-        await Faculty.updateOne({name:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
+        await Faculty.updateOne({emailID:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
 
         res.status(200).json(announcement)
     }  catch (error) {

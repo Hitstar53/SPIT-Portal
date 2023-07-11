@@ -1,5 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Ancmnts.module.css";
+import CustAlert from "../../UI/CustAlert";
+import dayjs from "dayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateField } from "@mui/x-date-pickers/DateField";
 import AddButton from "../../UI/AddButton.jsx";
 import TextField from "@mui/material/TextField";
 import MultiFieldModal from "../../UI/Modals/MultiFieldModal";
@@ -7,6 +13,7 @@ import { InputLabel } from "@mui/material";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Card from "./Card";
+import ServerUrl from "../../../constants";
 
 const announcement = [
   {
@@ -25,6 +32,19 @@ const announcement = [
 ];
 
 const Ancmnts = () => {
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [severity, setSeverity] = useState("");
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+
+  const handleAlertClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setAlertOpen(false);
+    navigate(0);
+  };
+
   const [ancmnts, setAncmnts] = useState(announcement);
   const [openAncmntDialog, setOpenAncmntDialog] = useState(false);
 
@@ -54,8 +74,40 @@ const Ancmnts = () => {
     e.preventDefault();
     const arr = [...ancmnts];
     arr.unshift(newAncmntData);
-    setAncmnts(arr);
-    setOpen(false);
+    const makeAnnouncement = async () => {
+      const response = await fetch(
+        `${ServerUrl}/api/student/setAnnouncementsAllStudents`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: JSON.parse(localStorage.getItem("userinfo")).email,
+            title: newAncmntData.title,
+            type: newAncmntData.type,
+            postDate: new Date(),
+            endDate: newAncmntData.date,
+            description: newAncmntData.ancmnt,
+          }),
+        }
+      );
+      console.log(response)
+      if (!response.ok) {
+        console.log("yes")
+        setAlertOpen(true);
+        setSeverity("error");
+        setMessage("Something went wrong, please try again later");
+      }
+      if (response.ok) {
+        console.log("no")
+        const data = await response.json();
+        setAlertOpen(true);
+        setSeverity("success");
+        setMessage("Announcement sent successfully");
+      }
+    };
+    makeAnnouncement();
   };
 
   const allHandler = () => {
@@ -118,18 +170,19 @@ const Ancmnts = () => {
           variant="outlined"
           onChange={handleAncmntDataChange}
         />
-        <TextField
-          required
-          margin="dense"
-          name="date"
-          label="Date"
-          autoComplete="off"
-          type="text"
-          fullWidth
-          variant="outlined"
-          helperText="End date of the announcement"
-          onChange={handleAncmntChangeDate}
-        />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DateField
+            required
+            margin="dense"
+            fullWidth
+            name="date"
+            label="Date"
+            variant="standard"
+            format="DD/MM/YYYY"
+            helperText="End date of the announcement"
+            onChange={handleAncmntChangeDate}
+          />
+        </LocalizationProvider>
         <TextField
           required
           margin="dense"
@@ -251,6 +304,12 @@ const Ancmnts = () => {
           <MenuItem value="Academic">Academic</MenuItem>
         </Select>
       </MultiFieldModal>
+      <CustAlert
+        open={alertOpen}
+        onClose={handleAlertClose}
+        severity={severity}
+        message={message}
+      />
     </div>
   );
 };

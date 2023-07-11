@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const Faculty = require('../models/faculty');
 
-const getFaculty = asyncHandler(async (req, res) => {
+exports.getFaculty = asyncHandler(async (req, res) => {
     emailID = req.body.email;
     try {
         const faculty = await Faculty.findOne({emailID: emailID}).select('name announcements -_id');

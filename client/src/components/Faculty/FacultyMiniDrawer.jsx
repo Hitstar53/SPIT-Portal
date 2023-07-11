@@ -29,6 +29,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import moodle from "../../assets/moodle.png";
+import ServerUrl from "../../constants";
 
 let drawerWidth = 275;
 
@@ -236,15 +237,31 @@ export default function AdminMiniDrawer() {
 
   const [name, setName] = React.useState("");
   const [picture, setPicture] = React.useState("");
+
   React.useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem("userinfo"));
-    setName(userInfo?.name);
-    if (userInfo?.picture) {
-      setPicture(userInfo?.picture);
-    } else {
-      setPicture(profile);
-    }
+    fetchUserInfo();
   }, []);
+
+  const fetchUserInfo = async () => {
+    console.log(JSON.parse(localStorage.getItem("userinfo")).email);
+    const response = await fetch(`${ServerUrl}/api/faculty/getFaculty`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: JSON.parse(localStorage.getItem("userinfo")).email,
+      }),
+    });
+    if (!response.ok) {
+      console.log("error");
+    }
+    if (response.ok) {
+      const data = await response.json();
+      setName(data.name);
+      // setPicture(data.photo);
+    }
+  };
 
   const toggleTheme = (event) => {
     if (event.target.checked) {
@@ -295,7 +312,7 @@ export default function AdminMiniDrawer() {
               }}
             >
               {!isMobile && (
-                <span style={{ fontSize: 24 }}>Faculty Name</span>
+                <span style={{ fontSize: 24 }}>{name}</span>
               )}
             </span>
             <img
