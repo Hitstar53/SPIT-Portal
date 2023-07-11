@@ -29,6 +29,7 @@ const StepOne = ({ setDimension1, yr }) => {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
     setValue,
     control,
     reset
@@ -69,7 +70,6 @@ const StepOne = ({ setDimension1, yr }) => {
     getData()
   }, []);
 
-
   const {
     fields: courseFields,
     append: appendCourse,
@@ -77,6 +77,29 @@ const StepOne = ({ setDimension1, yr }) => {
   } = useFieldArray({
     control,
     name: 'info.courses',
+  });
+
+  useEffect(()=>{
+    console.log(getValues('info.courses'))
+  },[courseFields])
+
+
+  const {
+    fields: remedialFields,
+    append: appendRemedial,
+    remove: removeRemedial,
+  } = useFieldArray({
+    control,
+    name: 'info.courses.AP8ActivityRemedial',
+  });
+
+  const {
+    fields: noteFields,
+    append: appendNote,
+    remove: removeNote,
+  } = useFieldArray({
+    control,
+    name: 'info.courses.AP9noteworthyDetails',
   });
 
   const {
@@ -112,7 +135,7 @@ const StepOne = ({ setDimension1, yr }) => {
     console.log(data)
     setDimension1(data)
     axios.post('http://localhost:5000/api/faculty/appraisal/dim1',
-      { yearofAssesment: yr, faculty: user, Dimension1: data, department:user.department,designation:user.designation }
+      { yearofAssesment: yr, faculty: user, Dimension1: data }
     ).then((res) => {
       console.log(res.data)
       toast.success('Step One Saved!', {
@@ -240,6 +263,7 @@ const StepOne = ({ setDimension1, yr }) => {
                 <Table className='course-table' striped bordered hover >
                   <thead>
                     <tr>
+                      <th className='table-header text-center align-middle'>Sr No</th>
                       <th className='table-header text-center align-middle'>Course Name</th>
                       <th className='table-header text-center align-middle'>Class Name</th>
                       <th className='table-header text-center align-middle'>Sem</th>
@@ -248,22 +272,24 @@ const StepOne = ({ setDimension1, yr }) => {
                       <th className='table-header text-center align-middle'>Total Lecture Taken</th>
                       <th className='table-header text-center align-middle'>Percentage Feedback</th>
                       <th className='table-header text-center align-middle'>Attendance of the Students</th>
+                      <th className='table-header text-center align-middle'></th>
                     </tr>
                   </thead>
                   <tbody>
                     {courseFields.map((field, index) => (
                       <tr key={field.id}>
+                        <td className='text-center align-middle' style={{fontSize: "1.5rem", fontWeight: 600}}>{index+1}</td>
                         <td className='text-center align-middle course-title'>
                           <input
                             type="text"
-                            {...register(`info.courses[${index}].name`, { required: true })}
+                            {...register(`info.courses[${index}].name`, { required: false })}
                             className="form-input"
                           />
                         </td>
                         <td className='text-center align-middle class-name'>
                           <input
                             type="text"
-                            {...register(`info.courses[${index}].class`, { required: true })}
+                            {...register(`info.courses[${index}].class`, { required: false })}
                             className="form-input"
                           />
                         </td>
@@ -281,7 +307,7 @@ const StepOne = ({ setDimension1, yr }) => {
                           <input
                             type="number"
                   onWheel={(e) => e.target.blur()}
-                            {...register(`info.courses[${index}].AP2MarksObtained`, { required: true })}
+                            {...register(`info.courses[${index}].AP2MarksObtained`, { required: false })}
                             className="form-input"
                           />
                         </td>
@@ -289,7 +315,7 @@ const StepOne = ({ setDimension1, yr }) => {
                           <input
                             type="number"
                   onWheel={(e) => e.target.blur()}
-                            {...register(`info.courses[${index}].AP3LecturesTarget`, { required: true })}
+                            {...register(`info.courses[${index}].AP3LecturesTarget`, { required: false })}
                             className="form-input"
                           />
                         </td>
@@ -297,7 +323,7 @@ const StepOne = ({ setDimension1, yr }) => {
                           <input
                             type="number"
                   onWheel={(e) => e.target.blur()}
-                            {...register(`info.courses[${index}].AP3LectureConducted`, { required: true })}
+                            {...register(`info.courses[${index}].AP3LectureConducted`, { required: false })}
                             className="form-input"
                           />
                         </td>
@@ -305,7 +331,7 @@ const StepOne = ({ setDimension1, yr }) => {
                           <input
                             type="number"
                   onWheel={(e) => e.target.blur()}
-                            {...register(`info.courses[${index}].AP4PercentFeedback`, { required: true })}
+                            {...register(`info.courses[${index}].AP4PercentFeedback`, { required: false })}
                             className="form-input"
                           />
                         </td>
@@ -313,9 +339,15 @@ const StepOne = ({ setDimension1, yr }) => {
                           <input
                             type="number"
                   onWheel={(e) => e.target.blur()}
-                            {...register(`info.courses[${index}].AP5AttendanceStudent`, { required: true })}
+                            {...register(`info.courses[${index}].AP5AttendanceStudent`, { required: false })}
                             className="form-input"
                           />
+                        </td>
+                        <td className='text-center align-middle'>
+                          <IconButton onClick={() => handleRemoveCourse(index)}>
+                            <DeleteIcon
+                              sx={{ color: "red", fontSize: "25px" }} />
+                          </IconButton>
                         </td>
                       </tr>
                     ))}
@@ -325,6 +357,7 @@ const StepOne = ({ setDimension1, yr }) => {
                 <Table striped bordered hover>
                   <thead>
                     <tr>
+                      <th className='table-header text-center align-middle'>Sr No</th>
                       <th className='table-header text-center align-middle'>Activity done for Remedial teaching</th>
                       <th className='table-header text-center align-middle'>Noteworthy efforts towards enriching the learning experience / innovation in TLE methods</th>
                       <th className='table-header text-center align-middle'></th>
@@ -333,6 +366,7 @@ const StepOne = ({ setDimension1, yr }) => {
                   <tbody>
                     {courseFields.map((field, index) => (
                       <tr key={field.id}>
+                        <td className='text-center align-middle' style={{fontSize: "1.5rem", fontWeight: 600}}>{index+1}</td>
                         <td className='text-center align-middle'>
                           <textarea
                             style={{ width: "100%" }}
@@ -361,6 +395,16 @@ const StepOne = ({ setDimension1, yr }) => {
   
             <button type="button" className="add-btn" onClick={() => appendCourse({})}>
               Add Course
+            </button>
+
+            <h3>Remedial Activity</h3>
+            <button type="button" className="add-btn" onClick={() => appendRemedial({})}>
+              Add Remedial Activity
+            </button>
+
+            <h3>Noteworthy Efforts</h3>
+            <button type="button" className="add-btn" onClick={() => appendNote({})}>
+              Add Noteworthy Efforts
             </button>
   
             <h3>Question Papers</h3>
