@@ -6,6 +6,10 @@ body {
     font-size: 1.35rem;
 }
 
+table,td,th,tr{
+    border: 1px solid black !important;
+}
+
 /* step 3 */
 
 .form-input-cb, .form-input-tb, .form-input-title {
