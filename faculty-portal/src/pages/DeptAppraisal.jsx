@@ -35,7 +35,7 @@ export default function DeptAppraisal() {
       }),
     })
       .then((res) => res.json())
-      .then((data) => setfacultyName(data));
+      .then((data) => setfacultyName(data.sort()));
   }, []);
 
   function handleSubmit(e) {
