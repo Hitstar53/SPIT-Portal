@@ -176,7 +176,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
         //AP8
 
         var ap8totalmarks = 0
-        for (var i = 0; i < Dimension1.info.courses.length; i++) {
+        for (var i = 0; i < Dimension1.AP8.remedialData.length; i++) {
             if (Dimension1.info.courses[i].AP8ActivityRemedial != "Null") {
                 ap8totalmarks = ap8totalmarks + 2.5;
             }
@@ -188,12 +188,12 @@ const setAppraisal = asyncHandler(async (req, res) => {
         //AP9
 
         var ap9totalmarks = 0
-        for (var i = 0; i < Dimension1.info.courses.length; i++) {
-            if (Dimension1.info.courses[i].AP9noteworthyDetails != "Null") {
+        for (var i = 0; i < Dimension1.AP9.noteworthyData.length; i++) {
+            if (Dimension1.AP9.noteworthyData[i].activityDetails != "Null") {
                 ap9totalmarks = ap9totalmarks + 10;
             }
         }
-        if (Dimension1.info.courses.length > 0) {
+        if (Dimension1.AP9.noteworthyData.length > 0) {
             var ap9average = ap9totalmarks / Dimension1.info.courses.length;
             if (ap9average > 10) {
                 ap9average = 10;
@@ -249,11 +249,11 @@ const setAppraisal = asyncHandler(async (req, res) => {
         Dimension1.info.AP5Marks = AP5Marks;
         Dimension1.AP6.averageMarks = averageMenteeFeedback;
         Dimension1.AP7.totalMarks = totalpercentAP7;
-        Dimension1.info.AP8Marks = ap8totalmarks;
-        Dimension1.info.AP9Marks = ap9average;
+        Dimension1.AP8.totalMarks = ap8totalmarks;
+        Dimension1.AP9.average = ap9average;
         Dimension1.AP10.averageMarks = averageAuditMarks;
         // ----------------------------------------------
-        Dimension1.totalMarks = Dimension1.info.AP1Marks + Dimension1.info.AP2Marks + Dimension1.info.AP3Marks + Dimension1.info.AP4Marks + Dimension1.info.AP5Marks + Dimension1.AP6.averageMarks + Dimension1.AP7.totalMarks + Dimension1.info.AP8Marks + Dimension1.info.AP9Marks + Dimension1.AP10.averageMarks;
+        Dimension1.totalMarks = Dimension1.info.AP1Marks + Dimension1.info.AP2Marks + Dimension1.info.AP3Marks + Dimension1.info.AP4Marks + Dimension1.info.AP5Marks + Dimension1.AP6.averageMarks + Dimension1.AP7.totalMarks + Dimension1.AP8.totalMarks + Dimension1.AP9.average + Dimension1.AP10.averageMarks;
         if (Dimension1.totalMarks > 100) {
             Dimension1.totalMarks = 100;
         }
