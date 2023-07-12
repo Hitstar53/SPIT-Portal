@@ -771,7 +771,7 @@ const getDim3 = asyncHandler(async (req, res) => {
     }
 })
 
-const setDim4 = asyncHandler(async (req, res) => {
+const setDim4HOD = asyncHandler(async (req, res) => {
     try {
         const { yearofAssesment, fullName, Dimension4 } = req.body;
         var updatedApp = null;
@@ -790,6 +790,10 @@ const setDim4 = asyncHandler(async (req, res) => {
             return res.status(404).json("Faculty Not Found In setDim4")
         }
 
+        updatedApp = await Appraisal.findOne(
+            { _id: existingFaculty._id }
+            )
+        console.log(updatedApp)
         res.status(200).json(updatedApp);
     } catch (error) {
         console.log(error);
@@ -824,7 +828,7 @@ module.exports = {
     getDim2,
     setDim3,
     getDim3,
-    setDim4,
+    setDim4HOD,
     getDim4,
     getAppraisal,
     getAllAppraisal,
