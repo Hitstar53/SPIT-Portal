@@ -6,9 +6,9 @@ import { toast } from 'react-toastify';
 import axios from "axios";
 import CircularProgress from '@mui/material/CircularProgress';
 
-function StepFour({ setDimension4, handleNext, yr }) {
+function StepFour({ setDimension4, yr , fullName }) {
   const { user } = useContext(UserContext);
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
 
   // useEffect(() => {
   //   const getData = async () => {
@@ -48,8 +48,8 @@ function StepFour({ setDimension4, handleNext, yr }) {
     console.log(data);
     setDimension4(data)
     localStorage.setItem('dim4Data', JSON.stringify(data));
-    axios.post('http://localhost:5000/api/faculty/appraisal/dim4',
-      { yearofAssesment: yr, fullName: user, Dimension4: data }
+    axios.post('http://localhost:5000/api/faculty/appraisal/hodreview',
+      { yearofAssesment: yr, fullName: fullName, Dimension4: data }
     ).then((res) => {
       console.log(res.data)
       toast.success('Step Four Saved!', {
@@ -70,9 +70,6 @@ function StepFour({ setDimension4, handleNext, yr }) {
 
 
   return (
-    <>
-    {loading ? <CircularProgress color="success"/> : 
-    (
       <div>
       <h1>StepFour</h1>
       <div>
@@ -146,9 +143,8 @@ function StepFour({ setDimension4, handleNext, yr }) {
         </form>
       </div>
     </div>
-    )}
-    </>
-  );
+    
+  )
 }
 
 export default StepFour;

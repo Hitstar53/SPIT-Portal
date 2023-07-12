@@ -4,6 +4,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import "../styles/DeptAppraisal.css";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import StepFour from "../components/StepFour";
 
 // const facultyNames = ["CSE", "ECE", "EEE"];
 var yr = getDate();
@@ -89,7 +90,7 @@ export default function DeptAppraisal() {
       </form>
       <div className="dept-appraisal-body">
         {status==="Not searched"&&<h1>Click on Find Faculty to Enter their marks</h1>}
-        {status==="Faculty found"&&<h1>put step 4 here</h1>}
+        {status==="Faculty found"&&<h1><StepFour fullName={name}/></h1>}
         {status==="Faculty not found"&&<h1>Faculty not found</h1>}
       </div>
     </div>
