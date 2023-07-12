@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import Table from "react-bootstrap/Table";
 import { toast } from 'react-toastify';
 import axios from "axios";
+import { TextareaAutosize } from '@mui/base';
 import CircularProgress from '@mui/material/CircularProgress';
 
 function StepFour({ setDimension4, yr , fullName }) {
@@ -71,7 +72,7 @@ function StepFour({ setDimension4, yr , fullName }) {
 
   return (
       <div>
-      <h1>StepFour</h1>
+        <h1>Dimension 4: Perception/ 360 degree feedback</h1>
       <div>
         <form className="container" onSubmit={handleSubmit(onSubmit)}>
           <Table striped bordered hover style={{marginTop: "2rem"}}>
@@ -137,6 +138,12 @@ function StepFour({ setDimension4, yr , fullName }) {
               </tr>
             </tbody>
           </Table>
+          <div>
+            <label className="form-label">HOD Remarks:
+            {/* <TextareaAutosize/> */}
+            <textarea className="form-textarea" style={{ width: "100%" }}/>
+            </label>
+          </div>
           <button className="btn btn-primary submit-btn" type="submit">
           Save Changes
           </button>
