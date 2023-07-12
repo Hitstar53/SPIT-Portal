@@ -73,41 +73,46 @@ const ViewHistory = () => {
                 const endpoint = 'http://localhost:5000/api/faculty/appraisal/getallappraisal';
                 // const payload = JSON.parse(localStorage.getItem('user'));
                 await axios.post(endpoint, {
-                    facultyName: "Mahesh Patil",
+                    facultyName: "Sudhir Namdeorao Dhage",
                 }).then((response) => {
                     setYears(response.data);
                 });
             };
             fetchHistory();
+
+
         }, [])
     }
 
 
+    const handleOption = async () => {
+        const fetchData = async () => {
+            const endpoint = 'http://localhost:5000/api/faculty/appraisal/getappraisal';
+            await axios.post(endpoint, {
+                yearofAssesment: year,
+                facultyName: "Sudhir Namdeorao Dhage",
+                // facultyName: "Mahesh Patil"
+            }).then((response) => {
+                console.log(response.data);
+                setHistory(response.data);
+                console.log(history);
+            });
+        }
+        fetchData();
+    }
 
-    // useEffect(() => {
-    //     console.log(year);
-    //     handleOption();
-    // }, [year])
+
+
+    useEffect(() => {
+        console.log("FAculty Year :", year);
+        handleOption();
+    }, [year])
     // useEffect(() => {
     //     console.log("name: ", name);
     // }, [name])
 
 
-    // const handleOption = () => {
-    //     const fetchData = async () => {
-    //         const endpoint = 'http://localhost:5000/api/faculty/appraisal/getappraisal';
-    //         await axios.post(endpoint, {
-    //             yearofAssesment: year,
-    //             facultyName: "Mahesh Patil",
-    //             // facultyName: "Mahesh Patil"
-    //         }).then((response) => {
-    //             console.log(response.data);
-    //             setHistory(response.data);
-    //             console.log(history);
-    //         });
-    //     }
-    //     fetchData();
-    // }
+
 
 
     const getYears = async (name) => {
@@ -130,6 +135,7 @@ const ViewHistory = () => {
         e.preventDefault();
         console.log(e.target[0].value)
         setName(e.target[0].value)
+        setYear2(null)
         getYears(e.target[0].value);
     }
 
@@ -143,26 +149,37 @@ const ViewHistory = () => {
                 <>
                     {/* HOD VIEW */}
                     {console.log("Inside HOD")}
-                    <div className="dept-appraisal2">
-                        <form onSubmit={handleSubmit}>
-                            <div className="dept-appraisal-header">
-                                <Autocomplete
-                                    disablePortal
-                                    id="combo-box-demo"
-                                    options={facultyName}
-                                    sx={{ width: 300, display: "inline-block" }}
-                                    renderInput={(params) => (
-                                        <TextField {...params} label="Faculty Name" />
-                                    )}
-                                />
-                                <button type="submit" className="find-faculty-btn">
-                                    Find Faculty
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "space-around",
+                        alignItems: "center",
+                        width: "100%",
+                    }}>
+                        <div className="dept-appraisal2" >
+                            <form onSubmit={handleSubmit}>
+                                <div className="dept-appraisal-header" style={{
+                                    width: "100%",
+                                }}>
+                                    <Autocomplete
+                                        disablePortal
+                                        id="combo-box-demo"
+                                        options={facultyName}
+                                        sx={{ width: 300, display: "inline-block" }}
+                                        renderInput={(params) => (
+                                            <TextField {...params} label="Faculty Name" />
+                                        )}
+                                    />
+                                    <button type="submit" className="find-faculty-btn" style={{
+                                        display: "inline-block",
+                                        width: "200px",
+                                    }}>
+                                        Find Faculty
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
 
-                    {(
+                        {/* {( */}
                         <div className="dropdown">
                             <div>Select a Year:</div>
                             <select
@@ -178,15 +195,19 @@ const ViewHistory = () => {
                                         </option>
                                     );
                                 })}
-                                {/* // <option value="">-- Select Assessment Year --</option>
-                    // <option value="Existing Client">Existing Client</option>
-                    // <option value="Potential Client">Potential Client</option> */}
                             </select>
                         </div>
-                    )}
+                    </div>
+                    {/* )} */}
 
-                    <div>
-                        Hello HOD
+                    {!year2 || !name ? (<p style={{
+                        textAlign: "center",
+                        fontSize: "20px",
+                    }}>Please Select Faculty Name and the Year of Assessment.</p>) : ("")}
+                    < div >
+                        Hello HOD<br></br>
+                        Selected Faculty: {name}<br></br>
+                        Selected Year: {year2}
                     </div>
                 </>
             ) : (
@@ -1413,27 +1434,30 @@ const ViewHistory = () => {
                         )}
                     </div>
                 </>
-            )}
+            )
+            }
 
-            {history ? (
-                <button
-                    onClick={handleExportPDF}
-                    style={{
-                        backgroundColor: "#f32236",
-                        color: "white",
-                        padding: "10px",
-                        // borderRadius: "5px",
-                        border: "none",
-                        width: "150px",
-                        margin: "1em auto",
-                        display: "block",
-                    }}
-                >
-                    Export to PDF
-                </button>
-            ) : (
-                ""
-            )}
+            {
+                history ? (
+                    <button
+                        onClick={handleExportPDF}
+                        style={{
+                            backgroundColor: "#f32236",
+                            color: "white",
+                            padding: "10px",
+                            // borderRadius: "5px",
+                            border: "none",
+                            width: "150px",
+                            margin: "1em auto",
+                            display: "block",
+                        }}
+                    >
+                        Export to PDF
+                    </button>
+                ) : (
+                    ""
+                )
+            }
         </>
     );
 }
