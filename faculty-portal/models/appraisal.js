@@ -26,7 +26,7 @@ const appraisalSchema = new mongoose.Schema({
                         default: null
                     },
                     sem: {
-                        type: String,
+                        type: Number,
                         default: null
                     },
                     AP2MarksObtained: {
@@ -54,14 +54,14 @@ const appraisalSchema = new mongoose.Schema({
                         type: Number,
                         default: 0
                     },
-                    AP8ActivityRemedial: {
-                        type: String,
-                        default: "Null",
-                    },
-                    AP9noteworthyDetails: {
-                        type: String,
-                        default: "Null",
-                    },
+                    // AP8ActivityRemedial: {
+                    //     type: String,
+                    //     default: "Null",
+                    // },
+                    // AP9noteworthyDetails: {
+                    //     type: String,
+                    //     default: "Null",
+                    // },
                     // AP10paperSet: [{
                     //     paperSetForCourse: {
                     //         type: String,
@@ -117,16 +117,16 @@ const appraisalSchema = new mongoose.Schema({
                 // max: 5
                 default: null
             },
-            AP8Marks: {
-                type: Number,
-                // max: 5
-                default: null
-            },
-            AP9Marks: {
-                type: Number,
-                // max: 10
-                default: null
-            },
+            // AP8Marks: {
+            //     type: Number,
+            //     // max: 5
+            //     default: null
+            // },
+            // AP9Marks: {
+            //     type: Number,
+            //     // max: 10
+            //     default: null
+            // },
             // AP10Marks: {
             //     type: Number,
             //     // max: 10
@@ -168,22 +168,40 @@ const appraisalSchema = new mongoose.Schema({
             },
         },
 
-        // AP9: {
-        //     activityData: [{
-        //         semester: {
-        //             type: String
-        //         },
-        //         subject: {
-        //             type: String
-        //         },
-        //         activityDetails: {
-        //             type: String
-        //         }
-        //     }],
-        //     average: {
-        //         type: Number
-        //     }
-        // },
+        AP8: {
+            remedialData: [{
+                sem: {
+                    type: Number
+                },
+                subject: {
+                    type: String
+                },
+                activityDetails: {
+                    type: String
+                }
+            }],
+            totalMarks: {
+                type: Number,
+            }
+        },
+
+        AP9: {
+            noteworthyData: [{
+                sem: {
+                    type: Number
+                },
+                subject: {
+                    type: String
+                },
+                activityDetails: {
+                    type: String
+                }
+            }],
+            average: {
+                type: Number
+            }
+        },
+
         AP10: {
             paper: [
                 {
