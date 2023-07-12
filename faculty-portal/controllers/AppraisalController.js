@@ -620,18 +620,33 @@ const setDim1 = asyncHandler(async (req, res) => {
     try {
         const { yearofAssesment, faculty, Dimension1 } = req.body;
         var updatedApp = null;
+        console.log(yearofAssesment)
+        console.log(faculty)  
+        console.log(faculty.fullName)  
+        console.log(faculty.designation)  
+        console.log(faculty.department)  
 
         const existingFaculty = await Appraisal.findOne({
             facultyName: faculty.fullName,
             yearofAssesment: yearofAssesment,
         });
 
+        console.log(existingFaculty)
+
         if (existingFaculty) {
+            console.log("inside existing faculty")
             updatedApp = await Appraisal.findOneAndUpdate(
                 { _id: existingFaculty._id },
-                { $set: { Dimension1: Dimension1 } }
+                { $set: { 
+                    facultyName: faculty.fullName,
+                    department: faculty.department,
+                    designation: faculty.designation,
+                    yearofAssesment: yearofAssesment,
+                    Dimension1: Dimension1 } 
+                }
             );
         } else {
+            console.log("inside new faculty")
             updatedApp = await Appraisal.create({
                 facultyName: faculty.fullName,
                 department: faculty.department,
@@ -684,7 +699,13 @@ const setDim2 = asyncHandler(async (req, res) => {
         if (existingFaculty) {
             updatedApp = await Appraisal.findOneAndUpdate(
                 { _id: existingFaculty._id },
-                { $set: { Dimension2: Dimension2 } }
+                { $set: {
+                    facultyName: faculty.fullName,
+                    department: faculty.department,
+                    designation: faculty.designation,
+                    yearofAssesment: yearofAssesment, 
+                    Dimension2: Dimension2 } 
+                }
             );
         } else {
             updatedApp = await Appraisal.create({
@@ -734,7 +755,13 @@ const setDim3 = asyncHandler(async (req, res) => {
         if (existingFaculty) {
             updatedApp = await Appraisal.findOneAndUpdate(
                 { _id: existingFaculty._id },
-                { $set: { Dimension3: Dimension3 } }
+                { $set: { 
+                    facultyName: faculty.fullName,
+                    department: faculty.department,
+                    designation: faculty.designation,
+                    yearofAssesment: yearofAssesment, 
+                    Dimension3: Dimension3 } 
+                }
             );
         } else {
             updatedApp = await Appraisal.create({
