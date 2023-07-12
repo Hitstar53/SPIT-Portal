@@ -1,7 +1,11 @@
 import React from "react";
 import styles from "./AncmntCard.module.css";
+import { useLoaderData } from "react-router-dom";
+import ServerUrl from "../../../constants";
+import dayjs from 'dayjs';
 
 const AncmntCard = (props) => {
+  const data = useLoaderData();
   return (
     <div className={styles.ancmntCard}>
       <div className={styles.content}>

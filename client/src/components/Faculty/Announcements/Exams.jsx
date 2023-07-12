@@ -1,4 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import CustAlert from "../../UI/CustAlert";
+import dayjs from "dayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateField } from "@mui/x-date-pickers/DateField";
 import styles from "./Exams.module.css";
 import AddButton from "../../UI/AddButton.jsx";
 import TextField from "@mui/material/TextField";
@@ -7,6 +13,7 @@ import { InputLabel } from "@mui/material";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import AncmntExam from "./Card";
+import ServerUrl from "../../../constants";
 
 const exam = [
   {
@@ -23,8 +30,20 @@ const exam = [
   },
 ];
 
-const Exams = () => {
-  const [exams, setExams] = useState(exam);
+const Exams = (props) => {
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [severity, setSeverity] = useState("");
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+
+  const handleAlertClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setAlertOpen(false);
+    navigate(0);
+  };
+  const [exams, setExams] = useState(props.data || [])
   const [openExamDialog, setOpenExamDialog] = useState(false);
 
   const handleExamClickOpenDialog = () => {
@@ -41,29 +60,51 @@ const Exams = () => {
   const handleExamDataChange = (e) => {
     setExamNewData({ ...newExamData, [e.target.name]: e.target.value });
   };
+  const handleExamChangeDate = (event) => {
+    setExamNewData({
+      ...newExamData,
+      date: dayjs(event).format("YYYY/MM/DD"),
+    });
+  };
   const handleExamSubmit = (e) => {
     e.preventDefault();
     const arr = [...exams];
     arr.unshift(newExamData);
-    setExams(arr);
-    setOpen(false);
-  };
-
-  const allHandler = () => {
-    setYear(false);
-    setStudent(false);
-  };
-
-  const [year, setYear] = useState(false);
-  const yearHandler = () => {
-    setYear(true);
-    setStudent(false);
-  };
-
-  const [student, setStudent] = useState(false);
-  const studentHandler = () => {
-    setYear(false);
-    setStudent(true);
+    const makeExam = async () => {
+        console.log(newExamData);
+        const response = await fetch(
+          `${ServerUrl}/api/student/updateGroupUpcomingExams`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: JSON.parse(localStorage.getItem("userinfo")).email,
+              courseName: newExamData.courseName,
+              type: newExamData.type,
+              date: newExamData.date,
+              syllabus: newExamData.syllabus,
+              year: newExamData.year,
+              branch: newExamData.branch,
+              division: newExamData.division,
+              batch: newExamDate.batch,
+            }),
+          }
+        );
+        if (!response.ok) {
+        setAlertOpen(true);
+        setSeverity("error");
+        setMessage("Something went wrong, please try again later");
+      }
+      if (response.ok) {
+        const data = await response.json();
+        setAlertOpen(true);
+        setSeverity("success");
+        setMessage("Announcement sent successfully");
+      }
+    };
+    makeExam();
   };
 
   return (
@@ -77,7 +118,7 @@ const Exams = () => {
           {exams.map((exam, index) => (
             <AncmntExam
               key={index}
-              title={exam.subject}
+              title={exam.courseName}
               date={exam.date}
               ancmnt={exam.syllabus}
               type={exam.type}
@@ -85,7 +126,6 @@ const Exams = () => {
               year={exam.year}
               branch={exam.branch}
               division={exam.division}
-              uid={exam.uid}
             />
           ))}
         </div>
@@ -101,139 +141,137 @@ const Exams = () => {
           required
           autoFocus
           margin="dense"
-          name="subject"
+          name="courseName"
           label="Subject"
           autoComplete="off"
           type="text"
           fullWidth
-          variant="standard"
+          variant="outlined"
+          helperText="Enter subject name"
           onChange={handleExamDataChange}
         />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DateField
+            required
+            margin="dense"
+            fullWidth
+            name="date"
+            label="Date"
+            format="DD/MM/YYYY"
+            variant="outlined"
+            helperText="Enter date of exam"
+            onChange={handleExamChangeDate}
+          />
+        </LocalizationProvider>
         <TextField
           required
-          margin="dense"
-          name="date"
-          label="Date"
-          autoComplete="off"
-          type="text"
-          fullWidth
-          variant="standard"
-          onChange={handleExamDataChange}
-        />
-        <TextField
-          required
+          multiline
           margin="dense"
           name="syllabus"
           label="Syllabus"
           autoComplete="off"
           type="text"
           fullWidth
-          variant="standard"
+          variant="outlined"
+          helperText="Whats the syllabus?"
           onChange={handleExamDataChange}
         />
-        <InputLabel id="demo-simple-select-label">Send To</InputLabel>
-        <Select
-          required
-          name="sendTo"
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          fullWidth
-          label="Send To"
-          onChange={handleExamDataChange}
-        >
-          <MenuItem value="All" onClick={allHandler}>
-            All
-          </MenuItem>
-          <MenuItem value="Class" onClick={yearHandler}>
-            Year
-          </MenuItem>
-          <MenuItem value="Student" onClick={studentHandler}>
-            Student
-          </MenuItem>
-        </Select>
-        {year ? (
-          <div className={styles.classSelection}>
-            <span className={styles.dropdown}>
-              <InputLabel id="demo-simple-select-label">Year</InputLabel>
-              <Select
-                name="year"
-                required
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Year"
-                fullWidth
-                onChange={handleExamDataChange}
-              >
-                <MenuItem value="F.E.">F.E.</MenuItem>
-                <MenuItem value="S.E.">S.E.</MenuItem>
-                <MenuItem value="T.E.">T.E.</MenuItem>
-                <MenuItem value="B.E.">B.E.</MenuItem>
-              </Select>
-            </span>
-            <span className={styles.dropdown}>
-              <InputLabel id="demo-simple-select-label">Branch</InputLabel>
-              <Select
-                name="branch"
-                fullWidth
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Branch"
-                onChange={handleExamDataChange}
-              >
-                <MenuItem value="Comps">Comps</MenuItem>
-                <MenuItem value="AIML">AIML</MenuItem>
-                <MenuItem value="Data Science">Data Science</MenuItem>
-                <MenuItem value="EXTC">EXTC</MenuItem>
-              </Select>
-            </span>
-            <span className={styles.dropdown}>
-              <InputLabel id="demo-simple-select-label">Division</InputLabel>
-              <Select
-                name="division"
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Division"
-                fullWidth
-                onChange={handleExamDataChange}
-              >
-                <MenuItem value="A">A</MenuItem>
-                <MenuItem value="B">B</MenuItem>
-                <MenuItem value="C">C</MenuItem>
-                <MenuItem value="D">D</MenuItem>
-                <MenuItem value="E">E</MenuItem>
-                <MenuItem value="F">F</MenuItem>
-              </Select>
-            </span>
-          </div>
-        ) : null}
-        {student ? (
-          <div>
+        <div className={styles.classSelection}>
+          <div className={styles.dropdown}>
             <TextField
-              name="uid"
+              required
+              select
+              margin="dense"
+              name="year"
+              label="Year"
+              fullWidth
+              onChange={handleExamDataChange}
+            >
+              <MenuItem value="FE">FE</MenuItem>
+              <MenuItem value="SE">SE</MenuItem>
+              <MenuItem value="TE">TE</MenuItem>
+              <MenuItem value="BE">BE</MenuItem>
+            </TextField>
+          </div>
+          <div className={styles.dropdown}>
+            <TextField
+              required
+              select
+              margin="dense"
+              name="branch"
+              fullWidth
+              label="Branch"
+              onChange={handleExamDataChange}
+            >
+              <MenuItem value="Comps">Comps</MenuItem>
+              <MenuItem value="CSE">CSE</MenuItem>
+              <MenuItem value="AIML">AIML</MenuItem>
+              <MenuItem value="DS">DS</MenuItem>
+              <MenuItem value="EXTC">EXTC</MenuItem>
+              <MenuItem value="MCA">MCA</MenuItem>
+              <MenuItem value="ETRX">ETRX</MenuItem>
+              <MenuItem value="IT">IT</MenuItem>
+            </TextField>
+          </div>
+          <div className={styles.dropdown}>
+            <TextField
+              select
               required
               margin="dense"
-              label="Enter UID"
-              autoComplete="off"
-              type="text"
+              name="division"
+              label="Division"
               fullWidth
-              variant="standard"
               onChange={handleExamDataChange}
-            />
+            >
+              <MenuItem value="">None</MenuItem>
+              <MenuItem value="A">A</MenuItem>
+              <MenuItem value="B">B</MenuItem>
+              <MenuItem value="C">C</MenuItem>
+              <MenuItem value="D">D</MenuItem>
+              <MenuItem value="E">E</MenuItem>
+              <MenuItem value="F">F</MenuItem>
+              <MenuItem value="G">G</MenuItem>
+              <MenuItem value="H">H</MenuItem>
+            </TextField>
           </div>
-        ) : null}
-        <InputLabel id="demo-simple-select-label">Type</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          name="type"
+          <div className={styles.dropdown}>
+            <TextField
+              optional
+              select
+              margin="dense"
+              name="batch"
+              label="Batch"
+              fullWidth
+              onChange={handleExamDataChange}
+            >
+              <MenuItem value="A">A</MenuItem>
+              <MenuItem value="B">B</MenuItem>
+              <MenuItem value="C">C</MenuItem>
+              <MenuItem value="D">D</MenuItem>
+            </TextField>
+          </div>
+        </div>
+        <TextField
+          required
+          select
           fullWidth
+          margin="dense"
+          name="type"
           label="Type"
+          helperText="Select type of exam, Eg. ISE or MSE"
           onChange={handleExamDataChange}
         >
           <MenuItem value="ISE">ISE</MenuItem>
+          <MenuItem value="LABISE">Lab ISE</MenuItem>
           <MenuItem value="MSE">MSE</MenuItem>
-        </Select>
+        </TextField>
       </MultiFieldModal>
+      <CustAlert
+        open={alertOpen}
+        onClose={handleAlertClose}
+        severity={severity}
+        message={message}
+      />
     </div>
   );
 };

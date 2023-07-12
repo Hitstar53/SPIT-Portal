@@ -7,6 +7,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import logo from "../../assets/user.svg" 
 import Box from '@mui/material/Box';
 import { Avatar } from '@mui/material';
+import styles from "./Cards/EventCard.module.css"
 
 export default function EventAccordion(props) {
     const [expanded, setExpanded] = React.useState(false);

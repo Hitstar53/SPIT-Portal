@@ -26,7 +26,7 @@ const Announcement = (props) => {
           </div>
           <div className={styles.cardItemHeader}>
             <h1>{props.item.title}</h1>
-            <p>{props.item.postDate}</p>
+            <p>{dayjs(props.item.postDate).format('DD-MM-YYYY')}</p>
           </div>
           <div className={styles.cardItemSubHeader}>
             <p>From: {props.item.sender}</p>

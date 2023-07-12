@@ -6,25 +6,25 @@ import logo from "../../../assets/user.svg"
 const data = [
     {
         logo: logo,
-        title: "CSI Hackathon",
+        name: "CSI Hackathon",
         club: "Computer Society of India",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc"
     },
     {
         logo: logo,
-        title: "CSI Hackathon",
+        name: "CSI Hackathon",
         club: "Computer Society of India",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc"
     },
     {
         logo: logo,
-        title: "CSI Hackathon",
+        name: "CSI Hackathon",
         club: "Computer Society of India",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc"
     },
     {
         logo: logo,
-        title: "CSI Hackathon",
+        name: "CSI Hackathon",
         club: "Computer Society of India",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquet nunc, vitae aliquam nisl nunc"
     },

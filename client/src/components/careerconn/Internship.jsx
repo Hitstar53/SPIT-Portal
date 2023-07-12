@@ -34,7 +34,6 @@ const Internship = () => {
     setAlertOpen(false);
     navigate(0);
   };
-
   function handleClickOpen(index) {
     setIndex(index);
     setOpen(true);

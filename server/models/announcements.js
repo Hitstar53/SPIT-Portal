@@ -4,9 +4,10 @@ const announcementSchema = mongoose.Schema({
     description:{ type : String, required:true},
     senderPhoto:{type:String,required:true},
     type:{type:String,required:true},
-    postDate:{type:String,required:true},
+    postDate:{type:Date,required:true},
     title:{type:String,required:true},
-    endDate:{type:String,required:true},
+    endDate:{type:Date,required:true},
+    sendTo:{type:String,required:true}
 },
 {
     collection:"Announcements"

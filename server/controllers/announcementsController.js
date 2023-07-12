@@ -12,24 +12,27 @@ exports.setAnnouncementsAllStudents = asyncHandler(async (req, res) => {
     const sender = req.body.email
     const senderPhoto = req.body.senderPhoto || "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
     const type = req.body.type
-    const postDate = req.body.postDate
-    const endDate = req.body.endDate
+    const postDate = new Date()
+    const endDate = new Date(req.body.endDate)
 
     try {
         // Student.collection.createIndex({ expireAt: 1 }, { expireAfterSeconds: 0 });
-        // const date = new Date(endDate)
-        // const formattedDate = format(date, 'MM-dd-yyyy')
+        // const date = new Date(endDatyy')e)
+        // const formattedDate = format(date, 'MM-dd-yy
         // console.log(date)
         // console.log(typeof(date))
+        const senderName = await Faculty.findOne({emailID:sender}).select('name -_id')
         const announcement = await Announcement.create({
             title:title,
             description:description,
-            sender:sender,
+            sender:senderName.name,
             senderPhoto:senderPhoto,
             type:type,
             postDate:postDate,
-            endDate: endDate
+            endDate: endDate,
+            sendTo:"All"
         }) 
+        
         await Student.updateMany({},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
         await Faculty.updateOne({emailID:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
         
@@ -50,21 +53,23 @@ exports.setAnnouncementsGroupStudents = asyncHandler(async (req, res) => {
     const sender = req.body.email
     const senderPhoto = req.body.senderPhoto || "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
     const type = req.body.type
-    const postDate = req.body.postDate
-    const endDate = req.body.endDate
+    const postDate = new Date()
+    const endDate = new Date(req.body.endDate)
+    const senderName = await Faculty.findOne({emailID:sender}).select('name -_id')
     if(batch)
     {
         try {
             const announcement = await Announcement.create({
                 title:title,
                 description:description,
-                sender:sender,
+                sender:senderName.name,
                 senderPhoto:senderPhoto,
                 type:type,
                 postDate:postDate,
-                endDate:endDate
+                endDate:endDate,
+                sendTo:`${year} ${branch} ${division} Batch: ${batch}`
             })
-            await Student.updateMany({"educationalInfo.0.year":year,"educationalInfo.0.branch":branch,"educationalInfo.0.division":division, batch: batch},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
+            await Student.updateMany({"educationalInfo.0.year":year,"educationalInfo.0.branch":branch,"educationalInfo.0.division":division, "educationalInfo.0.batch": batch},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
             await Faculty.updateOne({emailID:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
             
             res.status(200).json(announcement)
@@ -79,11 +84,12 @@ exports.setAnnouncementsGroupStudents = asyncHandler(async (req, res) => {
             const announcement = await Announcement.create({
                 title:title,
                 description:description,
-                sender:sender,
+                sender:senderName.name,
                 senderPhoto:senderPhoto,
                 type:type,
                 postDate:postDate,
-                endDate:endDate
+                endDate:endDate,
+                sendTo:`${year} ${branch} ${division} ${batch}`
             })
             await Student.updateMany({"educationalInfo.0.year":year,"educationalInfo.0.branch":branch,"educationalInfo.0.division":division},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
             await Faculty.updateOne({emailID:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
@@ -104,18 +110,20 @@ exports.setAnnouncementsSpecificStudents = asyncHandler(async (req, res) => {
     const sender = req.body.email
     const senderPhoto = req.body.senderPhoto || "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
     const type = req.body.type
-    const postDate = req.body.postDate
+    const postDate = new Date()
     const students = req.body.students
-    const endDate = req.body.endDate
+    const endDate = new Date(req.body.endDate)
+    const senderName = await Faculty.findOne({emailID:sender}).select('name -_id')
     try {
         const announcement = await Announcement.create({
             title:title,
             description:description,
-            sender:sender,
+            sender:senderName.name,
             senderPhoto:senderPhoto,
             type:type,
             postDate:postDate,
-            endDate: endDate
+            endDate: endDate,
+            sendTo:"Specific Students"
         })
         await Student.updateMany({uid:{$in:students}},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
         await Faculty.updateOne({emailID:sender},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
@@ -140,11 +148,51 @@ exports.getStudentAnnouncements = asyncHandler(async (req, res) => {
 exports.getFacultyAnnouncements = asyncHandler(async (req, res) => {
     const email = req.body.email
     try {   
-        const faculty = await Faculty.findOne({emailID:email}).populate('announcements')
-        res.status(200).json(faculty.announcements)
+        const faculty = await Faculty.findOne({emailID:email}).select('announcements upcomingExams -_id').populate('announcements')
+        res.status(200).json(faculty)
     }
     catch (error) {
         console.error(error)
     }
 })
 
+exports.setCommitteeAnnouncements = asyncHandler(async(req,res) => {    const title = req.body.title
+    const description = req.body.description
+    const type = req.body.type
+    const sender = req.body.email
+    const senderPhoto = req.body.senderPhoto || "https://www.pngwing.com/en/free-png-zxlck"
+    const postDate = new Date()
+    const endDate = new Date(req.body.endDate)
+    const sendTo = req.body.sendTo
+    try{
+        const announcement = await Announcement.create({
+            title:title,
+            description:description,
+            sender:sender,
+            senderPhoto:senderPhoto,
+            type:type,
+            postDate:postDate,
+            endDate: endDate,
+            sendTo:sendTo
+        })
+        await Student.updateMany({},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
+        res.status(200).json("Announcement Set Successfully")
+    }
+    catch(error)
+    {
+        console.error(error)
+    }
+})
+
+// exports.setCommitteeEvents = asyncHandler(async(req,res) =>{
+//     const name = req.body.name;
+//     const endDate = new Date(req.body.endDate);
+//     const description = req.body.description;
+//     const organizedby = req.body.organizedby;
+//     try{
+        
+//     }
+//     catch{
+        
+//     }
+// })

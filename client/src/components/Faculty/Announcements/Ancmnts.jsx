@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLoaderData } from "react-router-dom";
 import styles from "./Ancmnts.module.css";
 import CustAlert from "../../UI/CustAlert";
 import dayjs from "dayjs";
@@ -9,29 +9,11 @@ import { DateField } from "@mui/x-date-pickers/DateField";
 import AddButton from "../../UI/AddButton.jsx";
 import TextField from "@mui/material/TextField";
 import MultiFieldModal from "../../UI/Modals/MultiFieldModal";
-import { InputLabel } from "@mui/material";
-import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Card from "./Card";
 import ServerUrl from "../../../constants";
 
-const announcement = [
-  {
-    by: "Dr. Y. S. Rao",
-    title: "Change in venue for Pixel Paranoia",
-    date: "23/6/23",
-    ancmnt:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-    type: "General",
-    sendTo: "All",
-    year: "",
-    branch: "",
-    division: "",
-    uid: "",
-  },
-];
-
-const Ancmnts = () => {
+const Ancmnts = (props) => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [severity, setSeverity] = useState("");
   const [message, setMessage] = useState("");
@@ -45,7 +27,8 @@ const Ancmnts = () => {
     navigate(0);
   };
 
-  const [ancmnts, setAncmnts] = useState(announcement);
+  const [ancmnts, setAncmnts] = useState(props.data || []);
+
   const [openAncmntDialog, setOpenAncmntDialog] = useState(false);
 
   const handleAncmntClickOpenDialog = () => {
@@ -72,35 +55,83 @@ const Ancmnts = () => {
 
   const handleAncmntSubmit = (e) => {
     e.preventDefault();
-    const arr = [...ancmnts];
-    arr.unshift(newAncmntData);
+    let updatedData = {}
+    if (newAncmntData.uid !== undefined) {
+      let uidList = newAncmntData.uid.split(",");
+      updatedData = {
+        ...newAncmntData,
+        uid: uidList,
+      }
+    } else {
+      updatedData = {
+        ...newAncmntData,
+      }
+    }
     const makeAnnouncement = async () => {
-      const response = await fetch(
-        `${ServerUrl}/api/student/setAnnouncementsAllStudents`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: JSON.parse(localStorage.getItem("userinfo")).email,
-            title: newAncmntData.title,
-            type: newAncmntData.type,
-            postDate: new Date(),
-            endDate: newAncmntData.date,
-            description: newAncmntData.ancmnt,
-          }),
-        }
-      );
-      console.log(response)
+      let response = {};
+      if (student) {
+        response = await fetch(
+          `${ServerUrl}/api/student/setAnnouncementsSpecificStudents`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: JSON.parse(localStorage.getItem("userinfo")).email,
+              title: updatedData.title,
+              type: updatedData.type,
+              endDate: updatedData.date,
+              description: updatedData.ancmnt,
+              students: updatedData.uid,
+            }),
+          }
+        );
+      } else if (year) {
+        response = await fetch(
+          `${ServerUrl}/api/student/setAnnouncementsGroupStudents`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: JSON.parse(localStorage.getItem("userinfo")).email,
+              title: updatedData.title,
+              type: updatedData.type,
+              endDate: updatedData.date,
+              description: updatedData.ancmnt,
+              year: updatedData.year,
+              branch: updatedData.branch,
+              division: updatedData.division,
+              batch: updatedData.batch,
+            }),
+          }
+        );
+      } else {
+        response = await fetch(
+          `${ServerUrl}/api/student/setAnnouncementsAllStudents`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: JSON.parse(localStorage.getItem("userinfo")).email,
+              title: updatedData.title,
+              type: updatedData.type,
+              endDate: updatedData.date,
+              description: updatedData.ancmnt,
+            }),
+          }
+        );
+      }
       if (!response.ok) {
-        console.log("yes")
         setAlertOpen(true);
         setSeverity("error");
         setMessage("Something went wrong, please try again later");
       }
       if (response.ok) {
-        console.log("no")
         const data = await response.json();
         setAlertOpen(true);
         setSeverity("success");
@@ -135,12 +166,12 @@ const Ancmnts = () => {
       </div>
       <div className={styles.card}>
         <div className={styles.inner}>
-          {ancmnts.map((ancmnt, index) => (
+          {ancmnts?.map((ancmnt, index) => (
             <Card
               key={index}
               title={ancmnt.title}
               date={ancmnt.date}
-              ancmnt={ancmnt.ancmnt}
+              ancmnt={ancmnt.description}
               type={ancmnt.type}
               sendTo={ancmnt.sendTo}
               year={ancmnt.year}
@@ -168,6 +199,7 @@ const Ancmnts = () => {
           type="text"
           fullWidth
           variant="outlined"
+          helperText="Title of the announcement"
           onChange={handleAncmntDataChange}
         />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -177,14 +209,15 @@ const Ancmnts = () => {
             fullWidth
             name="date"
             label="Date"
-            variant="standard"
             format="DD/MM/YYYY"
+            variant="outlined"
             helperText="End date of the announcement"
             onChange={handleAncmntChangeDate}
           />
         </LocalizationProvider>
         <TextField
           required
+          multiline
           margin="dense"
           name="ancmnt"
           label="Announcement"
@@ -192,17 +225,18 @@ const Ancmnts = () => {
           type="text"
           fullWidth
           variant="outlined"
+          helperText="Announcement Details"
           onChange={handleAncmntDataChange}
         />
-        <InputLabel id="demo-simple-select-label">Send To</InputLabel>
-        <Select
+        <TextField
+          select
           required
+          margin="dense"
           name="sendTo"
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
           fullWidth
           label="Send To"
           placeholder="Send To"
+          helperText="This announcement is for?"
           onChange={handleAncmntDataChange}
         >
           <MenuItem value="All" onClick={allHandler}>
@@ -214,33 +248,32 @@ const Ancmnts = () => {
           <MenuItem value="Student" onClick={studentHandler}>
             Student
           </MenuItem>
-        </Select>
+        </TextField>
         {year ? (
           <div className={styles.classSelection}>
             <div className={styles.dropdown}>
-              <InputLabel id="demo-simple-select-label">Year</InputLabel>
-              <Select
-                name="year"
+              <TextField
                 required
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                select
+                margin="dense"
+                name="year"
                 label="Year"
                 fullWidth
                 onChange={handleAncmntDataChange}
               >
-                <MenuItem value="F.E.">F.E.</MenuItem>
-                <MenuItem value="S.E.">S.E.</MenuItem>
-                <MenuItem value="T.E.">T.E.</MenuItem>
-                <MenuItem value="B.E.">B.E.</MenuItem>
-              </Select>
+                <MenuItem value="FE">FE</MenuItem>
+                <MenuItem value="SE">SE</MenuItem>
+                <MenuItem value="TE">TE</MenuItem>
+                <MenuItem value="BE">BE</MenuItem>
+              </TextField>
             </div>
             <div className={styles.dropdown}>
-              <InputLabel id="demo-simple-select-label">Branch</InputLabel>
-              <Select
+              <TextField
+                required
+                select
+                margin="dense"
                 name="branch"
                 fullWidth
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
                 label="Branch"
                 onChange={handleAncmntDataChange}
               >
@@ -252,18 +285,19 @@ const Ancmnts = () => {
                 <MenuItem value="MCA">MCA</MenuItem>
                 <MenuItem value="ETRX">ETRX</MenuItem>
                 <MenuItem value="IT">IT</MenuItem>
-              </Select>
+              </TextField>
             </div>
             <div className={styles.dropdown}>
-              <InputLabel id="demo-simple-select-label">Division</InputLabel>
-              <Select
+              <TextField
+                select
+                required
+                margin="dense"
                 name="division"
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
                 label="Division"
                 fullWidth
                 onChange={handleAncmntDataChange}
               >
+                <MenuItem value="">None</MenuItem>
                 <MenuItem value="A">A</MenuItem>
                 <MenuItem value="B">B</MenuItem>
                 <MenuItem value="C">C</MenuItem>
@@ -272,29 +306,46 @@ const Ancmnts = () => {
                 <MenuItem value="F">F</MenuItem>
                 <MenuItem value="G">G</MenuItem>
                 <MenuItem value="H">H</MenuItem>
-              </Select>
+              </TextField>
+            </div>
+            <div className={styles.dropdown}>
+              <TextField
+                optional
+                select
+                margin="dense"
+                name="batch"
+                label="Batch"
+                fullWidth
+                onChange={handleAncmntDataChange}
+              >
+                <MenuItem value="A">A</MenuItem>
+                <MenuItem value="B">B</MenuItem>
+                <MenuItem value="C">C</MenuItem>
+                <MenuItem value="D">D</MenuItem>
+              </TextField>
             </div>
           </div>
         ) : null}
         {student ? (
           <div>
             <TextField
-              name="uid"
               required
+              name="uid"
               margin="dense"
               label="Enter UID"
               autoComplete="off"
               type="text"
               fullWidth
-              variant="standard"
+              variant="outlined"
+              helperText="Enter UID of the students, seperate by comma (,) Eg: 2021300108,2021300110"
               onChange={handleAncmntDataChange}
             />
           </div>
         ) : null}
-        <InputLabel id="demo-simple-select-label">Type</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+        <TextField
+          required
+          select
+          margin="dense"
           name="type"
           fullWidth
           label="Type"
@@ -302,7 +353,7 @@ const Ancmnts = () => {
         >
           <MenuItem value="General">General</MenuItem>
           <MenuItem value="Academic">Academic</MenuItem>
-        </Select>
+        </TextField>
       </MultiFieldModal>
       <CustAlert
         open={alertOpen}

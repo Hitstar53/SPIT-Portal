@@ -10,20 +10,53 @@ const rows = [
     studentname: "Hatim Sawai",
     email: "hatim.sawai@spit.ac.in",
     Organization: "JP Morgan",
-    ctc: "10.5"
+    ctc: "10.5",
+    type: "placement",
   },
   {
     uid: 2021300109,
     studentname: "Kaif Sayyed",
     email: "kaif.sayyed@spit.ac.in",
     Organization: "Barclays",
-    ctc: "12.5"
+    ctc: "12.5",
+    type: "placement",
   },
+]
+
+const filters = [
+  {
+    id: "organization",
+    label: "Organization",
+  },
+  {
+    id: "ctc",
+    label: "C.T.C.",
+  },
+]
+
+const options = [
+  {
+    name: "All",
+    value: "All",
+  },
+  {
+    name: "Internship",
+    value: "Internship",
+  },
+  {
+    name: "Placement",
+    value: "Placement",
+  }
 ]
 
 
 const Professional = () => {
   const container = styles.container + " flex flex-col gap-8 p-8";
+
+  const [newRows, setNewRows] = useState(rows);
+  // setNewRows = () => {
+
+  // };
 
   return (
     <div className={container}>
@@ -32,14 +65,11 @@ const Professional = () => {
         <Search />
       </div>
       <Filter
-        placeholder="Select Professional Filters"
-        options={[
-          { title: "Organization" },
-          { title: "CTC" },
-        ]}
+        options={options}
+        filters={filters}
       />
       <div className="mt-6">
-        <CustTable rows={rows} />
+        <CustTable rows={newRows} />
       </div>
     </div>
   );

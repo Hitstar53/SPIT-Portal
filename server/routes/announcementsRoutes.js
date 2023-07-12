@@ -7,5 +7,5 @@ router.put('/setAnnouncementsGroupStudents',announcementRouter.setAnnouncementsG
 router.put('/setAnnouncementsSpecificStudents',announcementRouter.setAnnouncementsSpecificStudents);
 router.put('/getStudentAnnouncements',announcementRouter.getStudentAnnouncements);
 router.put('/getFacultyAnnouncements',announcementRouter.getFacultyAnnouncements);
-
+router.put('/setCommitteeAnnouncements',announcementRouter.setCommitteeAnnouncements)
 module.exports = router;

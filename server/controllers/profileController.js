@@ -176,22 +176,36 @@ exports.updateUpcomingExams = asyncHandler(async(req,res) =>{
 })
 
 exports.updateGroupUpcomingExams = asyncHandler(async(req,res) =>{
+    console.log(req.body)
     const email = req.body.email;
     const year = req.body.year;
     const division = req.body.division;
     const branch = req.body.branch;
-    const date = req.body.date;
+    const date = new Date(req.body.date);
     const type = req.body.type;
     const syllabus = req.body.syllabus;
     const courseName = req.body.courseName;
-    try {
-        
-        await Profile.updateMany({"educationalInfo.0.year":year,"educationalInfo.0.branch":branch,"educationalInfo.0.division":division},{$push:{exams:{date:date,type:type,syllabus:syllabus,courseName:courseName}}})
-        await Faculty.updateOne({emailID:email},{$push:{upcomingExams:{date:date,type:type,syllabus:syllabus,courseName:courseName}}})
-        res.status(200).json("exam announcements updated")
-    }  catch (error) {
-        console.error(error)
+    const batch = req.body.batch
+    if(batch)
+    {
+        try {
+            await Profile.updateMany({"educationalInfo.0.year":year,"educationalInfo.0.branch":branch,"educationalInfo.0.division":division,"educationalInfo.0.batch":batch},{$push:{exams:{date:date,type:type,syllabus:syllabus,courseName:courseName}}})
+            await Faculty.updateOne({emailID:email},{$push:{upcomingExams:{date:date,type:type,syllabus:syllabus,courseName:courseName}}})
+            res.status(200).json("exam announcements updated")
+        }  catch (error) {
+            console.error(error)
+        }
     }
+    else{
+        try {
+            await Profile.updateMany({"educationalInfo.0.year":year,"educationalInfo.0.branch":branch,"educationalInfo.0.division":division},{$push:{exams:{date:date,type:type,syllabus:syllabus,courseName:courseName}}})
+            await Faculty.updateOne({emailID:email},{$push:{upcomingExams:{date:date,type:type,syllabus:syllabus,courseName:courseName}}})
+            res.status(200).json("exam announcements updated")
+        }  catch (error) {
+            console.error(error)
+        }
+    }
+
 })
 exports.getUpcomingExams = asyncHandler(async(req,res) => {
     const email = req.body.email;

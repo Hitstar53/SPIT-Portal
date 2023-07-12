@@ -20,7 +20,7 @@ import ListItemText from "@mui/material/ListItemText";
 import logo from "../../assets/logo.png";
 import profile from "../../assets/user.svg";
 import "./FacultyMiniDrawer.css";
-import { Collapse } from "@mui/material";
+import { Avatar, Collapse } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
@@ -315,17 +315,12 @@ export default function AdminMiniDrawer() {
                 <span style={{ fontSize: 24 }}>{name}</span>
               )}
             </span>
-            <img
-              onClick={profileHandler}
-              src={picture}
-              alt="logo"
-              style={{
-                width: 50,
-                height: 50,
-                borderRadius: "50%",
-                cursor: "pointer",
-              }}
-            />
+            <Avatar
+                onClick={profileHandler}
+                sx={{ width: 50, height: 50, cursor: "pointer" }}
+                alt={name}
+                src={picture}
+              />
           </Typography>
         </Toolbar>
       </AppBar>

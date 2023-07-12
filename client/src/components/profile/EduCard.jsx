@@ -299,19 +299,25 @@ const EduCard = (props) => {
               <div className={styles.threeCol}>
                 {!edit && (
                   <p>
-                    <label>Admission Year:&nbsp;&nbsp;</label>
-                    {props?.info?.admissionYear}
+                    <label>Batch:&nbsp;&nbsp;</label>
+                    {props?.info?.batch}
                   </p>
                 )}
                 {edit && (
                   <TextField
+                    select
                     id="outlined-required"
-                    label="Admission Year"
+                    label="Batch"
                     type="text"
-                    name="admissionYear"
-                    defaultValue={props?.info?.admissionYear}
+                    name="batch"
+                    defaultValue={props?.info?.batch}
                     onChange={props?.handleChange}
-                  />
+                  >
+                    <MenuItem value="A">A</MenuItem>
+                    <MenuItem value="B">B</MenuItem>
+                    <MenuItem value="C">C</MenuItem>
+                    <MenuItem value="D">D</MenuItem>
+                  </TextField>
                 )}
               </div>
             )}

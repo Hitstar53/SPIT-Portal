@@ -33,3 +33,4 @@ exports.deleteEvent = asyncHandler(async(req,res)=>{
         console.error(error)
     }
 })
+

@@ -1,26 +1,23 @@
 import React from 'react'
 import { useLoaderData } from "react-router-dom";
-import styles from './Announcements.module.css'
-import Announcement from './Ancmnts.jsx'
-import Exams from './Exams'
+import styles from '../../Faculty/Announcements/Announcements.module.css'
+
 import ServerUrl from "../../../constants";
 
-const Announcements = () => {
+const committeeAnnouncements = () => {
   const data = useLoaderData();
   const container = styles.container + " flex flex-col gap-8 p-8";
   return (
     <div className={container}>
-      <Announcement data={data.announcements.reverse()} />
-      <Exams data={data.upcomingExams.reverse()} />
     </div>
   )
 }
 
-export default Announcements
+export default committeeAnnouncements
 
 export async function loader() {
   const response1 = await fetch(
-    `${ServerUrl}/api/student/getFacultyAnnouncements`,
+    `${ServerUrl}/api/student/getStudentAnnouncements`,
     {
       method: "PUT",
       headers: {

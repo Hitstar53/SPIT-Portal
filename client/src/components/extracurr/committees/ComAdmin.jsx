@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./ComAdmin.module.css";
 import AddButton from "../../UI/AddButton.jsx";
+import dayjs from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateField } from "@mui/x-date-pickers/DateField";
@@ -10,15 +11,9 @@ import AddEvent from "./AddEvent.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 import MultiFieldModal from "../../UI/Modals/MultiFieldModal";
 import { FaArrowLeft } from "react-icons/fa";
+import { useLoaderData } from "react-router-dom";
+import ServerUrl from "../../../constants";
 
-const announcement = [
-  {
-    title: "Change in venue for Pixel Paranoia",
-    date: "24/10/23",
-    ancmnt:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-  },
-];
 
 const eventData = [
   {
@@ -47,9 +42,20 @@ const members = [
 const ComAdmin = () => {
   const params = useParams();
   const [events, setEvents] = useState(eventData);
-  const [ancmnts, setAncmnts] = useState(announcement);
+  const [ancmnts, setAncmnts] = useState([]);
   const [openEventDialog, setOpenEventDialog] = useState(false);
   const [openAncmntDialog, setOpenAncmntDialog] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [severity, setSeverity] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleAlertClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setAlertOpen(false);
+    navigate(0);
+  };
   const handleEventClickOpenDialog = () => {
     setOpenEventDialog(true);
   };
@@ -89,17 +95,58 @@ const ComAdmin = () => {
   const handleAncmntChangeDate = (event) => {
     setAncmntNewData({
       ...newAncmntData,
-      date: dayjs(event).format("YYYY/MM/DD"),
+      ["endDate"]: dayjs(event).format("YYYY/MM/DD"),
     });
   };
-  const handleAncmntSubmit = (e) => {
+  const handleAncmntSubmit = async(e) => {
     e.preventDefault();
     const arr = [...ancmnts];
     arr.unshift(newAncmntData);
     setAncmnts(arr);
-    setOpen(false);
+    const setCommitteeAnnouncements = async () => {
+      console.log("Hi")
+      console.log(newAncmntData)
+      try {
+        const response = await fetch(
+          `${ServerUrl}/api/student/setCommitteeAnnouncements`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: JSON.parse(localStorage.getItem("userinfo")).email,
+              title: newAncmntData.title,
+              description: newAncmntData.description,
+              endDate: newAncmntData.endDate,
+              type: "General",
+              sendTo:"All"
+            }),
+          }
+          );
+          console.log(response)
+          if (response.ok) {
+            const data = await response.json();
+            setAlertOpen(true);
+            setSeverity("success");
+            setMessage("Announcement set successfully");
+          } else {
+            console.log("Error:", response.status);
+            setAlertOpen(true);
+            setSeverity("error");
+            setMessage("Something went wrong, please try again later");
+          }
+        } catch (error) {
+          console.log("Error:", error);
+          setAlertOpen(true);
+          setSeverity("error");
+          setMessage("Something went wrong, please try again later");
+        }
+      };
+      setCommitteeAnnouncements();
+      setOpenAncmntDialog(false);
   };
-
+  
   const container = styles.container + " flex flex-col gap-6 p-8";
   const navigate = useNavigate();
   return (
@@ -121,8 +168,8 @@ const ComAdmin = () => {
             <AncmntCard
               key={index}
               title={ancmnt.title}
-              date={ancmnt.date}
-              ancmnt={ancmnt.ancmnt}
+              date={ancmnt.endDate}
+              ancmnt={ancmnt.description}
             />
           ))}
         </div>
@@ -152,7 +199,7 @@ const ComAdmin = () => {
             required
             margin="dense"
             fullWidth
-            name="date"
+            name="endDate"
             label="Date"
             variant="standard"
             format="DD/MM/YYYY"
@@ -162,7 +209,7 @@ const ComAdmin = () => {
         <TextField
           required
           margin="dense"
-          name="ancmnt"
+          name="description"
           label="Announcement"
           autoComplete="off"
           type="text"
@@ -251,3 +298,28 @@ const ComAdmin = () => {
 };
 
 export default ComAdmin;
+
+export async function loader() {
+  const response1 = await fetch(
+    `${ServerUrl}/api/student/getStudentAnnouncements`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: JSON.parse(localStorage.getItem("userinfo")).email,
+      }),
+    }
+  );
+  if (!response1.ok) {
+    throw json(
+      { message: "Could not fetch announcement information" },
+      { status: 422 }
+    );
+  }
+  if (response1.ok) {
+    const data = await response1.json();
+    return data;
+  }
+}
