@@ -91,7 +91,7 @@ export default function DeptAppraisal() {
       </form>
       <div className="dept-appraisal-body">
         {status==="Not searched"&&<h1>Click on Find Faculty to Enter their marks</h1>}
-        {status==="Faculty found"&&<StepFour fullName={name}/>}
+        {status==="Faculty found"&&<StepFour yr={yr} fullName={name}/>}
         {status==="Faculty not found"&&<h1>Faculty not found</h1>}
       </div>
     </div>

@@ -9,7 +9,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 import { Modal, ModalBody, ModalFooter } from "reactstrap";
 
-function StepFour({ setDimension4, yr, fullName }) {
+function StepFour({ yr, fullName }) {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   // const [loading, setLoading] = useState(true)
@@ -48,40 +48,39 @@ function StepFour({ setDimension4, yr, fullName }) {
   });
 
   const onSubmit = (data) => {
-    console.log("line 51")
+    console.log("line 51");
     console.log(data);
-    // setDimension4(data);
-    // localStorage.setItem("dim4Data", JSON.stringify(data));
-    // axios
-    //   .post("http://localhost:5000/api/faculty/appraisal/hodreview", {
-    //     yearofAssesment: yr,
-    //     fullName: fullName,
-    //     Dimension4: data,
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     toast.success("Step Four Saved!", {
-    //       position: "top-center",
-    //       autoClose: 5000,
-    //       hideProgressBar: false,
-    //       closeOnClick: true,
-    //       pauseOnHover: true,
-    //       draggable: true,
-    //       progress: undefined,
-    //       theme: "light",
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    localStorage.setItem("dim4Data", JSON.stringify(data));
+    axios
+      .post("http://localhost:5000/api/faculty/appraisal/hodreview", {
+        yearofAssesment: yr,
+        fullName: fullName,
+        Dimension4: data,
+      })
+      .then((res) => {
+        console.log(res.data);
+        toast.success("Step Four Saved!", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     // handleNext()
   };
 
   return (
     <div>
-      <h1>Dimension 4: Perception/ 360 degree feedback</h1>
       <div>
         <form className="container" onSubmit={handleSubmit(onSubmit)}>
+          <h1>Dimension 4: Perception/ 360 degree feedback</h1>
           <Table striped bordered style={{ marginTop: "2rem" }}>
             <thead>
               <tr>
@@ -177,14 +176,22 @@ function StepFour({ setDimension4, yr, fullName }) {
               </tr>
             </tbody>
           </Table>
-          <div style={{margin:'2rem 0'}}>
+          <div style={{ margin: "2rem 0" }}>
             <label className="form-label">
               HOD Remarks:
               {/* <TextareaAutosize/> */}
-              <textarea {...register("confidentialReport.HODRemarks")} placeholder="Remarks..." className="form-textarea" style={{ width: "100%" }} />
+              <textarea
+                rows={4}
+                {...register("confidentialReport.HODRemarks")}
+                placeholder="Remarks..."
+                className="form-textarea"
+                style={{ width: "100%" }}
+              />
             </label>
           </div>
-          <input type="submit" className="btn btn-primary" />
+          <div style={{ textAlign: "center" }}>
+            <input type="submit" className="save-btn" />
+          </div>
           {/* <div style={{textAlign:'center'}}>
             <Button
               sx={{
