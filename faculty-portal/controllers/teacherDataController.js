@@ -176,6 +176,36 @@ exports.getFacultyByDept = asyncHandler(async (req, res) => {
     }
 })
 
+exports.getFacultyByDeptHOD = asyncHandler(async (req, res) => {
+    console.log("Inside for the HODappraisal")
+    try {
+        const { department,yearofAssesment } = req.body
+        const facultyInfo = await Appraisal.find({
+            yearofAssesment,
+            department,
+            isSubmitted:true
+        }, { facultyName: 1 })
+
+        if (facultyInfo) {
+            console.log(facultyInfo)
+            const faculty = []
+            facultyInfo.map((info) => {
+                // console.log(info)
+                faculty.push(
+                    info.facultyName
+                )
+            })
+            console.log(faculty)
+            return res.status(200).json(faculty)
+        }
+        else {
+            return res.status(404)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 exports.getAllFaculty = asyncHandler(async (req, res) => {
     try {
         const facultyInfo = await Faculty.find({}, { fullName: 1 })
