@@ -203,9 +203,9 @@ exports.getAllFaculty = asyncHandler(async (req, res) => {
 exports.getPrincipalFaculty = asyncHandler(async (req, res) => {
     try {
         const { year } = req.body
-        console.log(year)
+        // console.log(year)
         const appraisal = await Appraisal.find({ yearofAssesment: year, isSubmitted: true, HODReviewed: true })
-        console.log(appraisal)
+        // console.log(appraisal)
         if (appraisal) {
             const faculty = []
             appraisal.map((info) => {
@@ -250,12 +250,11 @@ exports.principalAppraisal = async (req, res) => {
         const faculty = await Faculty.findOne({ fullName: name })
         if (faculty) {
             const appraisal = await Appraisal.findOne({ facultyName: name, yearofAssesment: year })
-            console.log(appraisal)
-            if (appraisal.isSubmitted && appraisal.HODReviewed) return res.status(200).json("Faculty has submmitted the appraisal")
-            else return res.status(400).json("Faculty has not submmitted the appraisal")
+            // console.log(appraisal)
+            res.status(200).json(appraisal)
         }
         else {
-            return res.status(404).json("Faculty has not found")
+            return res.status(404).json(false)
         }
     } catch (err) {
         console.log(err)
