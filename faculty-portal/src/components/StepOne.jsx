@@ -271,7 +271,7 @@ const StepOne = ({ setDimension1, yr }) => {
             <h3>Courses</h3>
             {courseFields.length > 0 &&
               <div>
-                <Table className='course-table' striped bordered hover >
+                <Table className='course-table' striped bordered >
                   <thead>
                     <tr>
                       <th className='table-header text-center align-middle'>Sr No</th>
@@ -370,11 +370,11 @@ const StepOne = ({ setDimension1, yr }) => {
               Add Course
             </button>
 
-            <h3>Remedial Activity</h3>
+            <h3>Remedial activity for weak students / efforts towards bright students</h3>
 
             {remedialFields.length > 0 && 
             <div>
-               <Table striped bordered hover>
+               <Table striped bordered>
                   <thead>
                     <tr>
                       <th className='table-header text-center align-middle'>Sr No</th>
@@ -431,7 +431,7 @@ const StepOne = ({ setDimension1, yr }) => {
 
             {noteFields.length > 0 && 
             <div>
-               <Table striped bordered hover>
+               <Table striped bordered>
                   <thead>
                     <tr>
                       <th className='table-header text-center align-middle'>Sr No</th>
@@ -484,9 +484,9 @@ const StepOne = ({ setDimension1, yr }) => {
               Add Noteworthy Efforts
             </button>
   
-            <h3>Question Papers</h3>
+            <h3>Question Paper Auditing</h3>
             {paperFields.length > 0 && <div>
-              <Table striped bordered hover style={{ width: "50rem" }}>
+              <Table striped bordered style={{ width: "50rem" }}>
                 <thead>
                   <tr>
                     <th className='table-header text-center align-middle'>Paper Set for Course</th>
@@ -530,7 +530,7 @@ const StepOne = ({ setDimension1, yr }) => {
   
             <h3>Mentee Feedback</h3>
             {menteeFields.length > 0 && <div>
-              <Table striped bordered hover style={{ width: "30rem" }}>
+              <Table striped bordered style={{ width: "30rem" }}>
                 <thead>
                   <tr>
                     <th className='table-header text-center align-middle'>Mentee Feedback</th>
@@ -563,9 +563,9 @@ const StepOne = ({ setDimension1, yr }) => {
               Add Mentee
             </button>
   
-            <h3>Guest Lectures</h3>
+            <h3>Arranged Guest Lectures / co-teaching from industry </h3>
             {guestFields.length > 0 && <div>
-              <Table striped bordered hover style={{ width: "50rem" }}>
+              <Table striped bordered style={{ width: "50rem" }}>
                 <thead>
                   <tr>
                     <th className='table-header text-center align-middle'>Lecture Date</th>
