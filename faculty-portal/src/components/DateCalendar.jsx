@@ -113,6 +113,7 @@ const DateCalendar = () => {
             });
         setNewEvent({ title: "", startDate: "", endDate: "" });
         toggle1();
+        window.location.reload()
     };
 
     const displayEvents = allEvents.map((event) => {

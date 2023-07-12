@@ -78,19 +78,32 @@ const StepOne = ({ setDimension1, yr }) => {
     control,
     name: 'info.courses',
   });
-
-  useEffect(()=>{
-    console.log(getValues('info.courses'))
-  },[courseFields])
-
-
+  
+  const {
+    fields: menteeFields,
+    append: appendMentee,
+    remove: removeMentee,
+  } = useFieldArray({
+    control,
+    name: 'AP6.menteeFeedback',
+  });
+  
+  const {
+    fields: guestFields,
+    append: appendGuest,
+    remove: removeGuest,
+  } = useFieldArray({
+    control,
+    name: 'AP7.guestLectureData',
+  });
+  
   const {
     fields: remedialFields,
     append: appendRemedial,
     remove: removeRemedial,
   } = useFieldArray({
     control,
-    name: 'info.courses.AP8ActivityRemedial',
+    name: 'AP8.remedialData',
   });
 
   const {
@@ -99,7 +112,7 @@ const StepOne = ({ setDimension1, yr }) => {
     remove: removeNote,
   } = useFieldArray({
     control,
-    name: 'info.courses.AP9noteworthyDetails',
+    name: 'AP9.noteworthyData',
   });
 
   const {
@@ -110,27 +123,7 @@ const StepOne = ({ setDimension1, yr }) => {
     control,
     name: 'AP10.paper',
   });
-
-  const {
-    fields: menteeFields,
-    append: appendMentee,
-    remove: removeMentee,
-  } = useFieldArray({
-    control,
-    name: 'AP6.menteeFeedback',
-  });
-
-  const {
-    fields: guestFields,
-    append: appendGuest,
-    remove: removeGuest,
-  } = useFieldArray({
-    control,
-    name: 'AP7.guestLectureData',
-  });
-
-
-
+  
   const onSubmit = (data) => {
     console.log(data)
     setDimension1(data)
@@ -186,6 +179,24 @@ const StepOne = ({ setDimension1, yr }) => {
     const storedData = JSON.parse(localStorage.getItem('dim1Data'));
     if (storedData) {
       storedData.AP7.guestLectureData.splice(index, 1);
+      localStorage.setItem('dim1Data', JSON.stringify(storedData));
+    }
+  };
+
+  const handleRemoveRemedial = (index) => {
+    removeRemedial(index);
+    const storedData = JSON.parse(localStorage.getItem('dim1Data'));
+    if (storedData) {
+      storedData.AP8.remedialData.splice(index, 1);
+      localStorage.setItem('dim1Data', JSON.stringify(storedData));
+    }
+  };
+
+  const handleRemoveNote = (index) => {
+    removeNote(index);
+    const storedData = JSON.parse(localStorage.getItem('dim1Data'));
+    if (storedData) {
+      storedData.AP9.noteworthyData.splice(index, 1);
       localStorage.setItem('dim1Data', JSON.stringify(storedData));
     }
   };
@@ -353,36 +364,55 @@ const StepOne = ({ setDimension1, yr }) => {
                     ))}
                   </tbody>
                 </Table>
+              </div>}
   
-                <Table striped bordered hover>
+            <button type="button" className="add-btn" onClick={() => appendCourse({})}>
+              Add Course
+            </button>
+
+            <h3>Remedial Activity</h3>
+
+            {remedialFields.length > 0 && 
+            <div>
+               <Table striped bordered hover>
                   <thead>
                     <tr>
                       <th className='table-header text-center align-middle'>Sr No</th>
+                      <th className='table-header text-center align-middle'>Sem</th>
+                      <th className='table-header text-center align-middle'>Subject</th>
                       <th className='table-header text-center align-middle'>Activity done for Remedial teaching</th>
-                      <th className='table-header text-center align-middle'>Noteworthy efforts towards enriching the learning experience / innovation in TLE methods</th>
                       <th className='table-header text-center align-middle'></th>
                     </tr>
                   </thead>
                   <tbody>
-                    {courseFields.map((field, index) => (
+                    {remedialFields.map((field, index) => (
                       <tr key={field.id}>
                         <td className='text-center align-middle' style={{fontSize: "1.5rem", fontWeight: 600}}>{index+1}</td>
                         <td className='text-center align-middle'>
-                          <textarea
-                            style={{ width: "100%" }}
-                            placeholder='Activity Details....'
-                            className="form-textarea"
-                            {...register(`info.courses[${index}].AP8ActivityRemedial`, { required: false })} />
+                          <select
+                            defaultValue=''
+                            className='form-input'
+                            {...register(`AP8.remedialData[${index}].sem`)}>
+                            {options.map((option) => (
+                              <option key={option.value} value={option.value}>{option.label}</option>
+                            ))}
+                          </select>
+                        </td>
+                        <td className='text-center align-middle'>
+                          <input
+                            type='text'     
+                            className="form-input"
+                            {...register(`AP8.remedialData[${index}].subject`, { required: false })} />
                         </td>
                         <td className='text-center align-middle'>
                           <textarea
                             style={{ width: "100%" }}
                             placeholder='Activity Details....'
                             className="form-textarea"
-                            {...register(`info.courses[${index}].AP9noteworthyDetails`, { required: false })} />
+                            {...register(`AP8.remedialData[${index}].activityDetails`, { required: false })} />
                         </td>
                         <td className='text-center align-middle'>
-                          <IconButton onClick={() => handleRemoveCourse(index)}>
+                          <IconButton onClick={() => handleRemoveRemedial(index)}>
                             <DeleteIcon
                               sx={{ color: "red", fontSize: "25px" }} />
                           </IconButton>
@@ -391,18 +421,65 @@ const StepOne = ({ setDimension1, yr }) => {
                     ))}
                   </tbody>
                 </Table>
-              </div>}
-  
-            <button type="button" className="add-btn" onClick={() => appendCourse({})}>
-              Add Course
-            </button>
+              </div>}                  
 
-            <h3>Remedial Activity</h3>
             <button type="button" className="add-btn" onClick={() => appendRemedial({})}>
               Add Remedial Activity
             </button>
 
-            <h3>Noteworthy Efforts</h3>
+            <h3>Noteworthy efforts towards enriching the learning experience / innovation in TLE methods </h3>
+
+            {noteFields.length > 0 && 
+            <div>
+               <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th className='table-header text-center align-middle'>Sr No</th>
+                      <th className='table-header text-center align-middle'>Sem</th>
+                      <th className='table-header text-center align-middle'>Subject</th>
+                      <th className='table-header text-center align-middle'>Activity Details</th>
+                      <th className='table-header text-center align-middle'></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {noteFields.map((field, index) => (
+                      <tr key={field.id}>
+                        <td className='text-center align-middle' style={{fontSize: "1.5rem", fontWeight: 600}}>{index+1}</td>
+                        <td className='text-center align-middle'>
+                          <select
+                            defaultValue=''
+                            className='form-input'
+                            {...register(`AP9.noteworthyData[${index}].sem`)}>
+                            {options.map((option) => (
+                              <option key={option.value} value={option.value}>{option.label}</option>
+                            ))}
+                          </select>
+                        </td>
+                        <td className='text-center align-middle'>
+                          <input
+                            type='text'     
+                            className="form-input"
+                            {...register(`AP9.noteworthyData[${index}].subject`, { required: false })} />
+                        </td>
+                        <td className='text-center align-middle'>
+                          <textarea
+                            style={{ width: "100%" }}
+                            placeholder='Activity Details....'
+                            className="form-textarea"
+                            {...register(`AP9.noteworthyData[${index}].activityDetails`, { required: false })} />
+                        </td>
+                        <td className='text-center align-middle'>
+                          <IconButton onClick={() => handleRemoveNote(index)}>
+                            <DeleteIcon
+                              sx={{ color: "red", fontSize: "25px" }} />
+                          </IconButton>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </div>}        
+
             <button type="button" className="add-btn" onClick={() => appendNote({})}>
               Add Noteworthy Efforts
             </button>
