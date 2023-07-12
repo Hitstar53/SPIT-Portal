@@ -27,13 +27,14 @@ export default function DeptAppraisal() {
   const [name, setName] = useState("");
   const [facultyName, setfacultyName] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/api/faculty/get/faculty/by-dept", {
+    fetch("http://localhost:5000/api/faculty/get/faculty/by-dept-hod", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         department: user.department,
+        yearofAssesment:yr
       }),
     })
       .then((res) => res.json())
@@ -90,7 +91,7 @@ export default function DeptAppraisal() {
       </form>
       <div className="dept-appraisal-body">
         {status==="Not searched"&&<h1>Click on Find Faculty to Enter their marks</h1>}
-        {status==="Faculty found"&&<h1><StepFour fullName={name}/></h1>}
+        {status==="Faculty found"&&<StepFour fullName={name}/>}
         {status==="Faculty not found"&&<h1>Faculty not found</h1>}
       </div>
     </div>
