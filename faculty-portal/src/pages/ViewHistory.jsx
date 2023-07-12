@@ -20,7 +20,10 @@ const ViewHistory = () => {
     const [years, setYears] = useState([])
     //For HOD
     const [year2, setYear2] = useState("");
-    const [years2, setYears2] = useState([])
+    const [years2, setYears2] = useState([]);
+    const [Dim4,setDim4]=useState();
+
+
 
     const [facultyName, setfacultyName] = useState([]);
     // const pdfExportComponent = useRef(null);
@@ -57,34 +60,61 @@ const ViewHistory = () => {
             console.log("Years of that teacher : ", years2);
         }, [years2])
 
+        // const handleOption = async () => {
+        //     const fetchDim4 = async () => {
+        //         const endpoint = 'http://localhost:5000/api/faculty/appraisal/get/dim4';
+        //         await axios.post(endpoint, {
+        //             yearofAssesment: year2,
+        //             facultyName: "Sudhir Namdeorao Dhage",
+        //             // facultyName: "Mahesh Patil"
+        //         }).then((response) => {
+        //             console.log(response.data);
+        //             setDim4(response.data);
+        //             console.log(Dim4);
+        //         }).catch((err) => {
+        //             console.log(err);
+        //         });
+        //     }
+        //     fetchDim4();
+        // }
+        
+        
+
+
+
     }
     else {
         useEffect(() => {
-            // fetch("http://localhost:5000/api/faculty/get/faculty/by-dept", {
-            //     method: "POST",
-            //     headers: {
-            //         "Content-Type": "application/json",
-            //     },
-            //     body: JSON.stringify({
-            //         department: user.department,
-            //     }),
-            // })
-            //     .then((res) => res.json())
-            //     .then((data) => setfacultyName(data.sort()));
+            console.log("Inside UseEffect")
+            fetch("http://localhost:5000/api/faculty/appraisal/getallappraisal", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    facultyName: "Sudhir Namdeorao Dhage",
+                }),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                    setYears(data);
+                });
 
             const fetchHistory = async () => {
-                const endpoint = 'http://localhost:5000/api/faculty/appraisal/getallappraisal';
+                const endpoint = 'http://localhost:5000/api/faculty/appraisal/getappraisal';
                 // const payload = JSON.parse(localStorage.getItem('user'));
                 await axios.post(endpoint, {
                     facultyName: "Sudhir Namdeorao Dhage",
+                    yearofAssesment: year,
+
                 }).then((response) => {
-                    setYears(response.data);
+                    console.log(response.data);
+                    setHistory(response.data);
                 });
-            };
+            }
             fetchHistory();
-
-
-        }, [])
+        }, [year])
     }
 
 
@@ -92,36 +122,31 @@ const ViewHistory = () => {
         const fetchData = async () => {
             const endpoint = 'http://localhost:5000/api/faculty/appraisal/getappraisal';
             await axios.post(endpoint, {
-                yearofAssesment: year,
-                facultyName: "Sudhir Namdeorao Dhage",
+                yearofAssesment: year2,
+                facultyName: name,
                 // facultyName: "Mahesh Patil"
             }).then((response) => {
+                console.log("here");
                 console.log(response.data);
-                setHistory(response.data);
-                console.log(history);
+                setDim4(response.data.Dimension4);
+                console.log(Dim4);
             });
         }
         fetchData();
     }
-
-
-
     useEffect(() => {
-        console.log("FAculty Year :", year);
+        console.log("Faculty Year :", year);
         handleOption();
-    }, [year])
+    }, [year2])
     // useEffect(() => {
-    //     console.log("name: ", name);
-    // }, [name])
-
-
-
-
+    //     console.log("Faculty Year :", year);
+    //     handleOption();
+    // }, [year])
 
     const getYears = async (name) => {
         console.log("Inside GetYears")
         console.log("Name on LIne 86", name)
-        await fetch("http://localhost:5000/api/faculty/appraisal/getallyears", {
+        await fetch("http://localhost:5000/api/faculty/appraisal/getallappraisal", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -138,6 +163,7 @@ const ViewHistory = () => {
         e.preventDefault();
         console.log(e.target[0].value)
         setName(e.target[0].value)
+    
         setYear2(null)
         getYears(e.target[0].value);
     }
@@ -212,6 +238,112 @@ const ViewHistory = () => {
                         Selected Faculty: {name}<br></br>
                         Selected Year: {year2}
                     </div>
+
+
+
+                    {/* tables start here */}
+
+                    <div>
+                        {
+                            Dim4 ? (
+                            
+                                <div>
+                                    
+                                    <img
+                                        src={HeaderImage}
+                                        style={{
+                                            marginLeft: "auto",
+                                            marginRight: "auto",
+                                            width: "70%",
+                                        }}
+                                    />
+                                    <div
+                                        className="dimhead"
+                                        style={{
+                                            backgroundColor: "#fabf8f",
+                                            margin: "1em",
+                                            padding: "0.4em 0.4em",
+                                        }}
+                                    >
+                                        <strong> Dimension 4: Perception/ 360 degree feedback </strong>
+                                    </div>
+
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            width: "90%",
+                                            flexDirection: "column",
+                                        }}
+                                    >
+
+                                        <table>
+                                            
+                                            <thead>
+                                                <tr>
+                                                    <th>Perception 360 degree feedback</th>
+                                                        
+                                                    <th>Bright students’ feedback
+                                                        (A)</th>
+
+                                                    <th>Peer Feedback(B)</th>
+
+
+                                                    <th>Dean feedback
+                                                        ( C)
+                                                    </th>
+                                                    <th>HOD feedback
+                                                        (D)
+                                                    </th>
+                                                    <th>Total
+                                                        (E)
+                                                        E=A+B+C+D
+                                                    </th>
+                                                </tr>
+                                                
+                                            </thead>
+                                            
+                                            <thead>
+                                                <tr>
+                                                    <th>Max Marks</th>
+
+                                                    <th>25</th>
+
+                                                    <th>25</th>
+
+
+                                                    <th>25
+                                                    </th>
+                                                    <th>25
+                                                    </th>
+                                                    <th>100
+                                                    </th>
+                                                </tr>
+
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Marks</td>
+                                                    <td>{Dim4.feedbackMarks.A}</td>
+                                                    <td>{Dim4.feedbackMarks.B}</td>
+                                                    <td>{Dim4.feedbackMarks.C}</td>
+                                                    <td>{Dim4.feedbackMarks.D}</td>
+
+                                                    <td>{Dim4.feedbackMarks.E}</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+
+                                    
+                                      
+                                    
+                                    </div>
+                                    </div>
+
+
+                            ) : ("The Dim4 not parsed")
+                        }
+                        </div>
                 </>
             ) : (
                 <>
