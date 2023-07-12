@@ -15,10 +15,13 @@ const ViewHistory = () => {
     const [name, setName] = useState("")
     const [history, setHistory] = useState();
     const [selectedValue, setSelectedValue] = useState("");
+    //For faculty
     const [year, setYear] = useState("");
-    const [year2, setYear2] = useState("");
     const [years, setYears] = useState([])
+    //For HOD
+    const [year2, setYear2] = useState("");
     const [years2, setYears2] = useState([])
+
     const [facultyName, setfacultyName] = useState([]);
     // const pdfExportComponent = useRef(null);
     //for adding print function
