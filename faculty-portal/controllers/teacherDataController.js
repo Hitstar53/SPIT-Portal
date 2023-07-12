@@ -200,6 +200,30 @@ exports.getAllFaculty = asyncHandler(async (req, res) => {
     }
 })
 
+exports.getPrincipalFaculty = asyncHandler(async (req, res) => {
+    try {
+        const { year } = req.body
+        console.log(year)
+        const appraisal = await Appraisal.find({ yearofAssesment: year, isSubmitted: true, HODReviewed: true })
+        console.log(appraisal)
+        if (appraisal) {
+            const faculty = []
+            appraisal.map((info) => {
+                faculty.push(
+                    info.facultyName
+                )
+            })
+            console.log(faculty)
+            return res.status(200).json(faculty)
+        }
+        else {
+            return res.status(404).json("No faculty found")
+        }
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 
 exports.checkFaculty = async (req, res) => {
     const { name, year } = req.body
@@ -208,6 +232,26 @@ exports.checkFaculty = async (req, res) => {
         if (faculty) {
             const appraisal = await Appraisal.findOne({ facultyName: name, yearofAssesment: year })
             if (appraisal.isSubmitted && !appraisal.HODReviewed) return res.status(200).json("Faculty has submmitted the appraisal")
+            else return res.status(400).json("Faculty has not submmitted the appraisal")
+        }
+        else {
+            return res.status(404).json("Faculty has not found")
+        }
+    } catch (err) {
+        console.log(err)
+        return res.status(504)
+    }
+}
+
+exports.principalAppraisal = async (req, res) => {
+    const { name, year } = req.body
+    console.log(name, year)
+    try {
+        const faculty = await Faculty.findOne({ fullName: name })
+        if (faculty) {
+            const appraisal = await Appraisal.findOne({ facultyName: name, yearofAssesment: year })
+            console.log(appraisal)
+            if (appraisal.isSubmitted && appraisal.HODReviewed) return res.status(200).json("Faculty has submmitted the appraisal")
             else return res.status(400).json("Faculty has not submmitted the appraisal")
         }
         else {
