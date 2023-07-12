@@ -150,7 +150,7 @@ exports.deleteEvent = asyncHandler(async (req, res) => {
 
 exports.getFacultyByDept = asyncHandler(async (req, res) => {
     console.log("Inside for the HODappraisal")
-    const {name, year} = req.body
+    const { name, year } = req.body
     try {
         const { department } = req.body
         const facultyInfo = await Faculty.find({
@@ -173,30 +173,31 @@ exports.getFacultyByDept = asyncHandler(async (req, res) => {
         }
     } catch (error) {
         console.log(error)
-    }})
+    }
+})
 
 exports.getAllFaculty = asyncHandler(async (req, res) => {
-        try {
-            const facultyInfo = await Faculty.find({},{fullName:1})
-            if (facultyInfo) {
-                console.log(facultyInfo)
-                const faculty = []
-                facultyInfo.map((info) => {
-                    if(info.fullName || info.fullName === NaN) {
-                        faculty.push(
-                            info.fullName
-                        )
-                    }
-                })
-                console.log(faculty)
-                return res.status(200).json(faculty)
-            }
-            else{ 
-                return res.status(404)
-            }
-        } catch (error) {
-            console.log(error)
+    try {
+        const facultyInfo = await Faculty.find({}, { fullName: 1 })
+        if (facultyInfo) {
+            console.log(facultyInfo)
+            const faculty = []
+            facultyInfo.map((info) => {
+                if (info.fullName || info.fullName === NaN) {
+                    faculty.push(
+                        info.fullName
+                    )
+                }
+            })
+            console.log(faculty)
+            return res.status(200).json(faculty)
         }
+        else {
+            return res.status(404)
+        }
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 
@@ -206,7 +207,7 @@ exports.checkFaculty = async (req, res) => {
         const faculty = await Faculty.findOne({ fullName: name })
         if (faculty) {
             const appraisal = await Appraisal.findOne({ facultyName: name, yearofAssesment: year })
-            if (appraisal.isSubmitted && !appraisal.HODReviewed ) return res.status(200).json("Faculty has submmitted the appraisal")
+            if (appraisal.isSubmitted && !appraisal.HODReviewed) return res.status(200).json("Faculty has submmitted the appraisal")
             else return res.status(400).json("Faculty has not submmitted the appraisal")
         }
         else {
