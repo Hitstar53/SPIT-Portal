@@ -184,6 +184,10 @@ exports.setCommitteeAnnouncements = asyncHandler(async(req,res) => {    const ti
     }
 })
 
+exports.getCommitteeAnnouncement = asyncHandler(async(req,res) => {
+    const email = req.body.email;
+})
+
 // exports.setCommitteeEvents = asyncHandler(async(req,res) =>{
 //     const name = req.body.name;
 //     const endDate = new Date(req.body.endDate);

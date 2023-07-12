@@ -8,10 +8,9 @@ import { DateField } from "@mui/x-date-pickers/DateField";
 import TextField from "@mui/material/TextField";
 import AncmntCard from "./AncmntCard.jsx";
 import AddEvent from "./AddEvent.jsx";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLoaderData } from "react-router-dom";
 import MultiFieldModal from "../../UI/Modals/MultiFieldModal";
 import { FaArrowLeft } from "react-icons/fa";
-import { useLoaderData } from "react-router-dom";
 import ServerUrl from "../../../constants";
 
 
@@ -40,9 +39,10 @@ const members = [
 ];
 
 const ComAdmin = () => {
+  const data = useLoaderData();
   const params = useParams();
   const [events, setEvents] = useState(eventData);
-  const [ancmnts, setAncmnts] = useState([]);
+  const [ancmnts, setAncmnts] = useState(data ? data.data : []);
   const [openEventDialog, setOpenEventDialog] = useState(false);
   const [openAncmntDialog, setOpenAncmntDialog] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -308,7 +308,7 @@ export async function loader() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: JSON.parse(localStorage.getItem("userinfo")).email,
+        email: JSON.parse(localStorage.getItem("userinfo")).email
       }),
     }
   );
@@ -320,6 +320,7 @@ export async function loader() {
   }
   if (response1.ok) {
     const data = await response1.json();
+    console.log(data);
     return data;
   }
 }
