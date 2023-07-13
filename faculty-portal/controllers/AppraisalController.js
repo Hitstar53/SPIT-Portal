@@ -857,10 +857,11 @@ const setDim4Principal = asyncHandler(async (req, res) => {
             { _id: existingFaculty._id }
             )
         console.log(updatedApp.finalGrandTotal)
+        console.log(updatedApp.Dimension4.totalMarks)
         updatedApp.finalGrandTotal.dimension1.totalMarks = updatedApp.Dimension1.totalMarks;
         updatedApp.finalGrandTotal.dimension2.totalMarks = updatedApp.Dimension2.totalMarks;
         updatedApp.finalGrandTotal.dimension3.totalMarks = updatedApp.Dimension3.totalMarks;
-        updatedApp.finalGrandTotal.dimension4.totalMarks = updatedApp.Dimension4.totalMarks;
+        updatedApp.finalGrandTotal.dimension4.totalMarks = updatedApp.Dimension4.confidentialReport.perceptionMarks;
         
         updatedApp.finalGrandTotal.dimension1.finalMarks = updatedApp.finalGrandTotal.dimension1.totalMarks*updatedApp.finalGrandTotal.dimension1.multiplyingFactor;
         updatedApp.finalGrandTotal.dimension2.finalMarks = updatedApp.finalGrandTotal.dimension2.totalMarks*updatedApp.finalGrandTotal.dimension2.multiplyingFactor;
