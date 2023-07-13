@@ -22,13 +22,13 @@ function getDate() {
 }
 
 export default function DeptAppraisal() {
-  if (user.designation !== "HOD") {
-    window.location.href = "/home";
-}
-  const [status,setStatus]=useState("Not searched");
+  const [status, setStatus] = useState("Not searched");
   const { user } = useContext(UserContext);
   const [name, setName] = useState("");
   const [facultyName, setfacultyName] = useState([]);
+  if (user.designation !== "HOD") {
+    window.location.href = "/home";
+  }
   useEffect(() => {
     fetch("http://localhost:5000/api/faculty/get/faculty/by-dept-hod", {
       method: "POST",
@@ -37,7 +37,7 @@ export default function DeptAppraisal() {
       },
       body: JSON.stringify({
         department: user.department,
-        yearofAssesment:yr
+        yearofAssesment: yr,
       }),
     })
       .then((res) => res.json())
@@ -54,25 +54,24 @@ export default function DeptAppraisal() {
         name: name,
         year: yr,
       }),
-    })
-      .then((res) =>{
-        if(res.status===200) setStatus("Faculty found")
-        else if(res.status===404) setStatus("Faculty not found")
-      })
+    }).then((res) => {
+      if (res.status === 200) setStatus("Faculty found");
+      else if (res.status === 404) setStatus("Faculty not found");
+    });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
     setName(e.target[0].value);
-    checkFaculty(e.target[0].value)
+    checkFaculty(e.target[0].value);
   }
-  useEffect(()=>{
-    console.log(name)
-  },[name])
+  useEffect(() => {
+    console.log(name);
+  }, [name]);
 
-  useEffect(()=>{
-    console.log(status)
-  },[status])
+  useEffect(() => {
+    console.log(status);
+  }, [status]);
 
   return (
     <div className="dept-appraisal">
@@ -93,9 +92,11 @@ export default function DeptAppraisal() {
         </div>
       </form>
       <div className="dept-appraisal-body">
-        {status==="Not searched"&&<h1>Click on Find Faculty to Enter their marks</h1>}
-        {status==="Faculty found"&&<StepFour yr={yr} fullName={name}/>}
-        {status==="Faculty not found"&&<h1>Faculty not found</h1>}
+        {status === "Not searched" && (
+          <h1>Click on Find Faculty to Enter their marks</h1>
+        )}
+        {status === "Faculty found" && <StepFour yr={yr} fullName={name} />}
+        {status === "Faculty not found" && <h1>Faculty not found</h1>}
       </div>
     </div>
   );
