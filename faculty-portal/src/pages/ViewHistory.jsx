@@ -533,16 +533,13 @@ const ViewHistory = () => {
 
 
                                     <table style={{
-                                        width: "95%",
+                                        maxWidth: "95%",
                                         margin: "0em auto",
                                         marginTop: "1em",
                                     }}>
                                         <thead>
                                             <tr>
-                                                <th className='table-header text-center align-middle' colSpan={4}>Confidential Report</th>
-                                            </tr>
-                                            <tr>
-                                                <th className='table-header text-center align-middle'>HOD Remarks</th>
+                                                <th className='table-header text-center align-middle' style={{overflowWrap: "anywhere",}}>HOD Remarks</th>
                                                 <th className='table-header text-left align-middle' colSpan={3}>{report.Dimension4.confidentialReport.HODRemarks}</th>
                                             </tr>
                                             <tr>
