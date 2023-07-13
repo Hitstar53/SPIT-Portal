@@ -32,7 +32,7 @@ const Appraisal = () => {
   }, []);
 
   return (
-    <div style={{ height: "100%" }}>
+    <div>
       {loading ? (
         <div
           style={{
