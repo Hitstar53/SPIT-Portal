@@ -7,6 +7,7 @@ import { UserContext } from "../context/UserContext";
 import StepFour from "../components/StepFour";
 import NotFound from "../assets/404-not-found.png";
 import SelectFaculty from "../assets/select-faculty.png";
+import Done from "../assets/done.png";
 
 // const facultyNames = ["CSE", "ECE", "EEE"];
 var yr = getDate();
@@ -94,7 +95,13 @@ export default function DeptAppraisal() {
         </div>
       </form>
       <div className="dept-appraisal-body">
-        {status === "Faculty found" && <StepFour yr={yr} fullName={name} />}
+        {status === "Faculty found" && <StepFour yr={yr} fullName={name} setStatus={setStatus} />}
+        {status==="Step Four Saved"&&(
+          <div className="dept-appraisal-vertical">
+            <h1>Step Four Saved</h1>
+            <img src={Done} alt="not found" />
+          </div>
+        )}
         {status === "Not searched" && (
           <div className="dept-appraisal-vertical">
             <h1>Select Faculty Name To Enter Their Marks</h1>

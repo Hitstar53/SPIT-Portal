@@ -9,7 +9,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 import { Modal, ModalBody, ModalFooter } from "reactstrap";
 
-function StepFour({ yr, fullName }) {
+function StepFour({ yr, fullName,setStatus }) {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   // const [loading, setLoading] = useState(true)
@@ -59,6 +59,7 @@ function StepFour({ yr, fullName }) {
       })
       .then((res) => {
         console.log(res.data);
+        setStatus("Step Four Saved");
         toast.success("Step Four Saved!", {
           position: "top-center",
           autoClose: 5000,
