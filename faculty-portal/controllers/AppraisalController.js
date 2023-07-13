@@ -666,9 +666,9 @@ const setDim1 = asyncHandler(async (req, res) => {
 
 const getDim1 = asyncHandler(async (req, res) => {
     try {
-        const { name, yearofAssesment } = req.body
+        const { faculty, yearofAssesment } = req.body
         const facultyInfo = await Appraisal.findOne({
-            facultyName: name,
+            facultyName: faculty.fullName,
             yearofAssesment: yearofAssesment,
         })
         if (facultyInfo) {
@@ -676,9 +676,10 @@ const getDim1 = asyncHandler(async (req, res) => {
         }
         else {
             const newappraisal = await Appraisal.create({
-                facultyName: name,
+                facultyName: faculty.fullName,
                 yearofAssesment: yearofAssesment,
-
+                designation: faculty.designation,
+                department: faculty.department,
             })
             res.json(newappraisal);
         }
