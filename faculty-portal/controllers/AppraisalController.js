@@ -671,7 +671,7 @@ const getDim1 = asyncHandler(async (req, res) => {
             yearofAssesment: yearofAssesment,
         })
         if (facultyInfo) {
-            res.status(200).json(facultyInfo.Dimension1)
+            res.status(200).json(facultyInfo)
         }
         else {
             const newappraisal = await Appraisal.create({
@@ -679,7 +679,7 @@ const getDim1 = asyncHandler(async (req, res) => {
                 yearofAssesment: yearofAssesment,
 
             })
-            res.json(newappraisal.Dimension1);
+            res.json(newappraisal);
         }
     } catch (error) {
         console.log(error)
