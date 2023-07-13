@@ -22,6 +22,9 @@ function getDate() {
 }
 
 export default function DeptAppraisal() {
+  if (user.designation !== "HOD") {
+    window.location.href = "/home";
+}
   const [status,setStatus]=useState("Not searched");
   const { user } = useContext(UserContext);
   const [name, setName] = useState("");
