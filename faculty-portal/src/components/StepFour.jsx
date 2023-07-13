@@ -44,13 +44,13 @@ function StepFour({ yr, fullName }) {
     setValue,
     reset,
   } = useForm({
-    defaultValues: JSON.parse(localStorage.getItem("dim4Data")) || {},
+    defaultValues: {},
   });
 
   const onSubmit = (data) => {
     console.log("line 51");
     console.log(data);
-    localStorage.setItem("dim4Data", JSON.stringify(data));
+    // localStorage.setItem("dim4Data", JSON.stringify(data));
     axios
       .post("http://localhost:5000/api/faculty/appraisal/hodreview", {
         yearofAssesment: yr,

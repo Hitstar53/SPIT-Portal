@@ -18,7 +18,7 @@ const Report = ({ facultyData, name }) => {
 
     const sendMarks = async (dim4) => {
         console.log(dim4)
-        await axios.post("http://localhost:5000/api/faculty/appraisal/hodreview", {
+        await axios.post("http://localhost:5000/api/faculty/appraisal/principal-review", {
             yearofAssesment: facultyData.yearofAssesment,
             fullName: facultyData.facultyName,
             Dimension4: dim4,
@@ -44,6 +44,7 @@ const Report = ({ facultyData, name }) => {
         };
         // await setDim4(updatedDim4);
         sendMarks(updatedDim4);
+        window.location.reload();
     }
     
     
