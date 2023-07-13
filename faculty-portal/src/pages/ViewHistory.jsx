@@ -281,9 +281,11 @@ const ViewHistory = () => {
                         </div>
 
                         {/* {( */}
-                        {selectedFaculty && (<div className="dropdown">
+                        {selectedFaculty && (<div className="dropdown flex items-center">
                             <div>Select a Year:</div>
                             <select
+                                className='p-1 rounded-md'
+                                style={{border: "1px solid gray"}}
                                 id="dropdown"
                                 value={year2}
                                 onChange={(e) => setYear2(e.target.value)}
@@ -468,7 +470,7 @@ const ViewHistory = () => {
                     {/* Principal content */}
                     {/* {/* <h1>Principal</h1> */}
                     {/* <p>Welcome, Principal!</p> */}
-                    <div className='flex items-center justify-evenly m-4'>
+                    <div className='flex flex-col items-center justify-evenly m-4'>
 
                         <form className='flex items-center justify-center' onSubmit={handlePrincipalSubmit}>
                             <Autocomplete
@@ -485,9 +487,11 @@ const ViewHistory = () => {
                             </button>
                         </form>
                         {selectedFaculty &&
-                            <div className="dropdown">
+                            <div className="dropdown flex items-center">
                                 <div>Select a Year:</div>
                                 <select
+                                    className='p-1 rounded-md'
+                                    style={{border: "1px solid gray"}}
                                     id="dropdown"
                                     value={year3}
                                     onChange={(e) => setYear3(e.target.value)}
@@ -694,9 +698,11 @@ const ViewHistory = () => {
                     </div>
                     {years ? (
 
-                        <div className="dropdown">
+                        <div className="dropdown flex items-center">
                             <div>Select a Year:</div>
                             <select
+                                className='p-1 rounded-md'
+                                style={{border: "1px solid gray"}}
                                 id="dropdown"
                                 value={year}
                                 onChange={(e) => setYear(e.target.value)}

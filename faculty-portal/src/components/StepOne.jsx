@@ -50,7 +50,7 @@ const StepOne = ({ setDimension1, yr }) => {
     const getData = async () => {
       await axios
         .post("http://localhost:5000/api/faculty/appraisal/get/dim1", {
-          name: user.fullName,
+          faculty: user,
           yearofAssesment: yr,
         })
         .then((res) => {
