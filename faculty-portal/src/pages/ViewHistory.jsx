@@ -255,14 +255,19 @@ const ViewHistory = () => {
                         {
                             Dim4 ? (
                                 <>
-                                    <div ref={elementRef}>
+                                    <div ref={elementRef} style={{
+                                        width: "95%",
+                                        // padding:"0 0 2em 0",
+                                        border: "1px solid black",
+                                        margin: "1em auto",
+                                    }}>
 
                                         <img
                                             src={HeaderImage}
                                             style={{
                                                 marginLeft: "auto",
                                                 marginRight: "auto",
-                                                width: "80%",
+                                                width: "70%",
                                             }}
                                         />
                                         <div
@@ -279,13 +284,12 @@ const ViewHistory = () => {
                                         <div
                                             style={{
                                                 display: "flex",
-                                                width: "90%",
+                                                width: "100%",
                                                 flexDirection: "column",
                                             }}
                                         >
 
                                             <table>
-
                                                 <thead>
                                                     <tr>
                                                         <th>Perception 360 degree feedback</th>
@@ -341,10 +345,34 @@ const ViewHistory = () => {
 
                                                 </tbody>
                                             </table>
-
-
-
-
+                                        </div>
+                                        <div
+                                            style={{
+                                                display: "flex",
+                                                justifyContent: "space-around",
+                                                alignItems: "center",
+                                                margin: "7em 2em",
+                                                marginBottom: "1em",
+                                            }}
+                                        >
+                                            <div
+                                                style={{
+                                                    borderTop: "1px solid black",
+                                                    width: "15%",
+                                                    textAlign: "center",
+                                                }}
+                                            >
+                                                Signature
+                                            </div>
+                                            <div
+                                                style={{
+                                                    borderTop: "1px solid black",
+                                                    width: "15%",
+                                                    textAlign: "center",
+                                                }}
+                                            >
+                                                Date
+                                            </div>
                                         </div>
                                     </div>
                                     <button
@@ -1577,7 +1605,7 @@ const ViewHistory = () => {
                                 <div
                                     style={{
                                         display: "flex",
-                                        justifyContent: "space-between",
+                                        justifyContent: "space-around",
                                         alignItems: "center",
                                         margin: "7em 2em",
                                         marginBottom: "1em",
