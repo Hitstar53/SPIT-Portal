@@ -21,7 +21,7 @@ const ViewHistory = () => {
     //For HOD
     const [year2, setYear2] = useState("");
     const [years2, setYears2] = useState([]);
-    const [Dim4,setDim4]=useState();
+    const [Dim4, setDim4] = useState();
 
 
 
@@ -77,8 +77,8 @@ const ViewHistory = () => {
         //     }
         //     fetchDim4();
         // }
-        
-        
+
+
 
 
 
@@ -163,7 +163,7 @@ const ViewHistory = () => {
         e.preventDefault();
         console.log(e.target[0].value)
         setName(e.target[0].value)
-    
+
         setYear2(null)
         getYears(e.target[0].value);
     }
@@ -174,6 +174,34 @@ const ViewHistory = () => {
 
     return (
         <>
+            {/* {if(user.designation == "HOD"){
+                
+            }
+            } */}
+            {user.designation === "HOD" && (
+                <div>
+                    {/* HOD content */}
+                    <h1>Head of Department</h1>
+                    <p>Welcome, HOD!</p>
+                </div>
+            )}
+
+            {user.designation === "Principal" && (
+                <div>
+                    {/* Principal content */}
+                    <h1>Principal</h1>
+                    <p>Welcome, Principal!</p>
+                </div>
+            )}
+
+            {user.designation != "HOD" && user.designation != "Principal" && (
+                <div>
+                    {/* Faculty content */}
+                    <h1>Faculty</h1>
+                    <p>Welcome, Faculty!</p>
+                </div>
+            )}
+
             {user.designation == "HOD" ? (
                 <>
                     {/* HOD VIEW */}
@@ -246,104 +274,120 @@ const ViewHistory = () => {
                     <div>
                         {
                             Dim4 ? (
-                            
-                                <div>
-                                    
-                                    <img
-                                        src={HeaderImage}
+                                <>
+                                    <div ref={elementRef}>
+
+                                        <img
+                                            src={HeaderImage}
+                                            style={{
+                                                marginLeft: "auto",
+                                                marginRight: "auto",
+                                                width: "80%",
+                                            }}
+                                        />
+                                        <div
+                                            className="dimhead"
+                                            style={{
+                                                backgroundColor: "#fabf8f",
+                                                margin: "1em",
+                                                padding: "0.4em 0.4em",
+                                            }}
+                                        >
+                                            <strong> Dimension 4: Perception/ 360 degree feedback </strong>
+                                        </div>
+
+                                        <div
+                                            style={{
+                                                display: "flex",
+                                                width: "90%",
+                                                flexDirection: "column",
+                                            }}
+                                        >
+
+                                            <table>
+
+                                                <thead>
+                                                    <tr>
+                                                        <th>Perception 360 degree feedback</th>
+
+                                                        <th>Bright students’ feedback
+                                                            (A)</th>
+
+                                                        <th>Peer Feedback(B)</th>
+
+
+                                                        <th>Dean feedback
+                                                            ( C)
+                                                        </th>
+                                                        <th>HOD feedback
+                                                            (D)
+                                                        </th>
+                                                        <th>Total
+                                                            (E)
+                                                            E=A+B+C+D
+                                                        </th>
+                                                    </tr>
+
+                                                </thead>
+
+                                                <thead>
+                                                    <tr>
+                                                        <th>Max Marks</th>
+
+                                                        <th>25</th>
+
+                                                        <th>25</th>
+
+
+                                                        <th>25
+                                                        </th>
+                                                        <th>25
+                                                        </th>
+                                                        <th>100
+                                                        </th>
+                                                    </tr>
+
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Marks</td>
+                                                        <td>{Dim4.feedbackMarks.A}</td>
+                                                        <td>{Dim4.feedbackMarks.B}</td>
+                                                        <td>{Dim4.feedbackMarks.C}</td>
+                                                        <td>{Dim4.feedbackMarks.D}</td>
+
+                                                        <td>{Dim4.feedbackMarks.E}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+
+
+
+                                        </div>
+                                    </div>
+                                    <button
+                                        onClick={handleExportPDF}
                                         style={{
-                                            marginLeft: "auto",
-                                            marginRight: "auto",
-                                            width: "70%",
-                                        }}
-                                    />
-                                    <div
-                                        className="dimhead"
-                                        style={{
-                                            backgroundColor: "#fabf8f",
-                                            margin: "1em",
-                                            padding: "0.4em 0.4em",
+                                            backgroundColor: "#f32236",
+                                            color: "white",
+                                            padding: "10px",
+                                            // borderRadius: "5px",
+                                            border: "none",
+                                            width: "150px",
+                                            margin: "1em auto",
+                                            display: "block",
                                         }}
                                     >
-                                        <strong> Dimension 4: Perception/ 360 degree feedback </strong>
-                                    </div>
-
-                                    <div
-                                        style={{
-                                            display: "flex",
-                                            width: "90%",
-                                            flexDirection: "column",
-                                        }}
-                                    >
-
-                                        <table>
-                                            
-                                            <thead>
-                                                <tr>
-                                                    <th>Perception 360 degree feedback</th>
-                                                        
-                                                    <th>Bright students’ feedback
-                                                        (A)</th>
-
-                                                    <th>Peer Feedback(B)</th>
-
-
-                                                    <th>Dean feedback
-                                                        ( C)
-                                                    </th>
-                                                    <th>HOD feedback
-                                                        (D)
-                                                    </th>
-                                                    <th>Total
-                                                        (E)
-                                                        E=A+B+C+D
-                                                    </th>
-                                                </tr>
-                                                
-                                            </thead>
-                                            
-                                            <thead>
-                                                <tr>
-                                                    <th>Max Marks</th>
-
-                                                    <th>25</th>
-
-                                                    <th>25</th>
-
-
-                                                    <th>25
-                                                    </th>
-                                                    <th>25
-                                                    </th>
-                                                    <th>100
-                                                    </th>
-                                                </tr>
-
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Marks</td>
-                                                    <td>{Dim4.feedbackMarks.A}</td>
-                                                    <td>{Dim4.feedbackMarks.B}</td>
-                                                    <td>{Dim4.feedbackMarks.C}</td>
-                                                    <td>{Dim4.feedbackMarks.D}</td>
-
-                                                    <td>{Dim4.feedbackMarks.E}</td>
-                                                </tr>
-                                                
-                                            </tbody>
-                                        </table>
-
-                                    
-                                      
-                                    
-                                    </div>
-                                    </div>
+                                        Export to PDF
+                                    </button>
+                                </>
 
 
                             ) : ("The Dim4 not parsed")
                         }
-                        </div>
+                    </div>
                 </>
             ) : (
                 <>
