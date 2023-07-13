@@ -96,6 +96,7 @@ table,td,th,tr{
     align-items: flex-start;
     min-height: 100vh;
     margin: 1rem;
+    justify-content: center;
 }
 
 .app-title {
@@ -273,4 +274,14 @@ th{
     font-size: 1rem;
     padding: 15px;
     border-radius:8px;
+}
+.appraisal-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100%;
+}
+.appraisal-center img{
+    height: 500px;
 }
