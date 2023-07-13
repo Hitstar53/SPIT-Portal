@@ -10,6 +10,7 @@ import { saveAs } from "@progress/kendo-file-saver";
 import DoneIcon from '@mui/icons-material/Done';
 import HeaderImage from '../assets/spit.png';
 import Autocomplete from "@mui/material/Autocomplete";
+
 const ViewHistory = () => {
     const { user } = useContext(UserContext);
     const [name, setName] = useState("")
@@ -22,8 +23,11 @@ const ViewHistory = () => {
     const [year2, setYear2] = useState("");
     const [years2, setYears2] = useState([]);
     const [Dim4, setDim4] = useState();
-
-
+    // For Principal
+    const [faculty, setFaculty] = useState([]);
+    const [selectedFaculty, setSelectedFaculty] = useState(false);
+    const [year3, setYear3] = useState("");
+    const [years3, setYears3] = useState([]);
 
     const [facultyName, setfacultyName] = useState([]);
     // const pdfExportComponent = useRef(null);
@@ -143,6 +147,23 @@ const ViewHistory = () => {
     //     handleOption();
     // }, [year])
 
+    // For Principal Select Box 
+    if(user.designation === "Principal") {
+        useEffect(() => {
+            fetch("http://localhost:5000/api/faculty/get/faculty/by-dept", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    department: user.department,
+                }),
+            })
+                .then((res) => res.json())
+                .then((data) => setFaculty(data.sort()));
+        })
+    }
+
     const getYears = async (name) => {
         console.log("Inside GetYears")
         console.log("Name on LIne 86", name)
@@ -166,6 +187,12 @@ const ViewHistory = () => {
 
         setYear2(null)
         getYears(e.target[0].value);
+    }
+
+    const handlePrincipalSubmit = (e) => {
+        e.preventDefault();
+        console.log("You clicked submit.");
+        console.log(e.target[0].value);
     }
 
     useEffect(() => {
@@ -376,6 +403,20 @@ const ViewHistory = () => {
                     {/* Principal content */}
                     <h1>Principal</h1>
                     <p>Welcome, Principal!</p>
+                    <form className='marks-sec' onSubmit={handlePrincipalSubmit}>
+                    <Autocomplete
+                        disablePortal
+                        id="combo-box-demo"
+                        options={faculty}
+                        sx={{ width: 300, display: "inline-block" }}
+                        renderInput={(params) => (
+                            <TextField {...params} label="Enter Marks" />
+                        )}
+                    />
+                    <button type="submit" className="marks-btn btn btn-primary">
+                        View Faculty
+                    </button>
+                </form>
                 </div>
             )}
 
