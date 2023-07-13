@@ -5,6 +5,8 @@ import "../styles/DeptAppraisal.css";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import StepFour from "../components/StepFour";
+import NotFound from "../assets/404-not-found.png";
+import SelectFaculty from "../assets/select-faculty.png";
 
 // const facultyNames = ["CSE", "ECE", "EEE"];
 var yr = getDate();
@@ -22,13 +24,13 @@ function getDate() {
 }
 
 export default function DeptAppraisal() {
-  if (user.designation !== "HOD") {
-    window.location.href = "/home";
-}
-  const [status,setStatus]=useState("Not searched");
+  const [status, setStatus] = useState("Not searched");
   const { user } = useContext(UserContext);
   const [name, setName] = useState("");
   const [facultyName, setfacultyName] = useState([]);
+  if (user.designation !== "HOD") {
+    window.location.href = "/home";
+  }
   useEffect(() => {
     fetch("http://localhost:5000/api/faculty/get/faculty/by-dept-hod", {
       method: "POST",
@@ -37,7 +39,7 @@ export default function DeptAppraisal() {
       },
       body: JSON.stringify({
         department: user.department,
-        yearofAssesment:yr
+        yearofAssesment: yr,
       }),
     })
       .then((res) => res.json())
@@ -54,25 +56,24 @@ export default function DeptAppraisal() {
         name: name,
         year: yr,
       }),
-    })
-      .then((res) =>{
-        if(res.status===200) setStatus("Faculty found")
-        else if(res.status===404) setStatus("Faculty not found")
-      })
+    }).then((res) => {
+      if (res.status === 200) setStatus("Faculty found");
+      else if (res.status === 404) setStatus("Faculty not found");
+    });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
     setName(e.target[0].value);
-    checkFaculty(e.target[0].value)
+    checkFaculty(e.target[0].value);
   }
-  useEffect(()=>{
-    console.log(name)
-  },[name])
+  useEffect(() => {
+    console.log(name);
+  }, [name]);
 
-  useEffect(()=>{
-    console.log(status)
-  },[status])
+  useEffect(() => {
+    console.log(status);
+  }, [status]);
 
   return (
     <div className="dept-appraisal">
@@ -93,9 +94,19 @@ export default function DeptAppraisal() {
         </div>
       </form>
       <div className="dept-appraisal-body">
-        {status==="Not searched"&&<h1>Click on Find Faculty to Enter their marks</h1>}
-        {status==="Faculty found"&&<StepFour yr={yr} fullName={name}/>}
-        {status==="Faculty not found"&&<h1>Faculty not found</h1>}
+        {status === "Faculty found" && <StepFour yr={yr} fullName={name} />}
+        {status === "Not searched" && (
+          <div className="dept-appraisal-vertical">
+            <h1>Select Faculty Name To Enter Their Marks</h1>
+            <img src={SelectFaculty} alt="not found" />
+          </div>
+        )}
+        {status === "Faculty not found" && (
+          <div className="dept-appraisal-vertical">
+            <h1>{name} not found in {user.department} department</h1>
+            <img src={NotFound} alt="not found" />
+          </div>
+        )}
       </div>
     </div>
   );

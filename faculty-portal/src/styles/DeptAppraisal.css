@@ -24,3 +24,14 @@
     align-items: center;
     justify-content: center;
 }
+.dept-appraisal-vertical{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 750px;
+}
+.dept-appraisal-vertical img{
+    width: 500px;
+}
