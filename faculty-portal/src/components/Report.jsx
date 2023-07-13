@@ -60,7 +60,7 @@ const Report = ({ facultyData, name }) => {
                         </tr>
                         <tr>
                             <th className='table-header text-center align-middle'>HOD Remarks</th>
-                            <th className='table-header text-center align-middle' colSpan={3}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis veniam consectetur nostrum quidem? Blanditiis atque optio corrupti voluptates, deleniti dolorem.</th>
+                            <th className='table-header text-center align-middle' colSpan={3}>{dim4.confidentialReport.HODRemarks}</th>
                         </tr>
                         <tr>
                             <th className='table-header text-center align-middle' rowSpan={6}>Principal Remarks</th>
