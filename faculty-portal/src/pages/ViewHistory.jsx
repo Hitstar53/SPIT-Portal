@@ -4,9 +4,8 @@ import { UserContext } from '../context/UserContext';
 import TextField from "@mui/material/TextField";
 import { useRef } from 'react';
 import "../styles/History.css"
-import { drawDOM, exportPDF } from "@progress/kendo-drawing";
+import Table from "react-bootstrap/Table";
 import ReactToPrint, { useReactToPrint } from 'react-to-print';
-import { saveAs } from "@progress/kendo-file-saver";
 import DoneIcon from '@mui/icons-material/Done';
 import HeaderImage from '../assets/spit.png';
 import Autocomplete from "@mui/material/Autocomplete";
@@ -25,7 +24,9 @@ const ViewHistory = () => {
     const [Dim4, setDim4] = useState();
     // For Principal
     const [faculty, setFaculty] = useState([]);
+    const [report, setReport] = useState();
     const [selectedFaculty, setSelectedFaculty] = useState(false);
+    const [nameForPrincipal, setNameForPrincipal] = useState("");
     const [year3, setYear3] = useState("");
     const [years3, setYears3] = useState([]);
 
@@ -123,7 +124,8 @@ const ViewHistory = () => {
 
 
     const handleOption = async () => {
-        const fetchData = async () => {
+        console.log(year3)
+        const fetchHODData = async () => {
             const endpoint = 'http://localhost:5000/api/faculty/appraisal/getappraisal';
             await axios.post(endpoint, {
                 yearofAssesment: year2,
@@ -136,32 +138,51 @@ const ViewHistory = () => {
                 console.log(Dim4);
             });
         }
-        fetchData();
+
+        const fetchPrincipalData = async () => {
+            const endpoint = 'http://localhost:5000/api/faculty/appraisal/getappraisal';
+            await axios.post(endpoint, {
+                yearofAssesment: year3,
+                facultyName: nameForPrincipal,
+                // facultyName: "Mahesh Patil"
+            }).then((response) => {
+                console.log("here");
+                console.log(response.data);
+                setReport(response.data);
+                console.log(Dim4);
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
+        if (user.designation === "HOD") {
+            fetchHODData();
+        }
+        if (user.designation === "Principal") {
+            fetchPrincipalData();
+        }
     }
     useEffect(() => {
         console.log("Faculty Year :", year);
         handleOption();
-    }, [year2])
+    }, [year2, year3])
+
     // useEffect(() => {
     //     console.log("Faculty Year :", year);
     //     handleOption();
     // }, [year])
 
     // For Principal Select Box 
-    if(user.designation === "Principal") {
+    if (user.designation === "Principal") {
         useEffect(() => {
-            fetch("http://localhost:5000/api/faculty/get/faculty/by-dept", {
-                method: "POST",
+            fetch("http://localhost:5000/api/faculty/get/faculty/submitted", {
+                method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({
-                    department: user.department,
-                }),
             })
                 .then((res) => res.json())
                 .then((data) => setFaculty(data.sort()));
-        })
+        }, [])
     }
 
     const getYears = async (name) => {
@@ -180,11 +201,26 @@ const ViewHistory = () => {
             .then((data) => setYears2(data))
     }
 
+    const getPrincipalYears = async (name) => {
+        console.log("Inside GetYears")
+        console.log("Name on LIne 86", name)
+        await fetch("http://localhost:5000/api/faculty/appraisal/getallappraisal", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                facultyName: name,
+            }),
+        })
+            .then((res) => res.json())
+            .then((data) => setYears3(data))
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
         console.log(e.target[0].value)
         setName(e.target[0].value)
-
         setYear2(null)
         getYears(e.target[0].value);
     }
@@ -193,6 +229,10 @@ const ViewHistory = () => {
         e.preventDefault();
         console.log("You clicked submit.");
         console.log(e.target[0].value);
+        setYear3(null)
+        setNameForPrincipal(e.target[0].value)
+        getPrincipalYears(e.target[0].value);
+        setSelectedFaculty(true);
     }
 
     useEffect(() => {
@@ -429,22 +469,125 @@ const ViewHistory = () => {
             {user.designation === "Principal" && (
                 <div>
                     {/* Principal content */}
-                    <h1>Principal</h1>
-                    <p>Welcome, Principal!</p>
-                    <form className='marks-sec' onSubmit={handlePrincipalSubmit}>
-                    <Autocomplete
-                        disablePortal
-                        id="combo-box-demo"
-                        options={faculty}
-                        sx={{ width: 300, display: "inline-block" }}
-                        renderInput={(params) => (
-                            <TextField {...params} label="Enter Marks" />
-                        )}
-                    />
-                    <button type="submit" className="marks-btn btn btn-primary">
-                        View Faculty
-                    </button>
-                </form>
+                    {/* <h1>Principal</h1>
+                    <p>Welcome, Principal!</p> */}
+                    <div className='flex items-center justify-evenly m-4'>
+
+                    <form className='flex items-center justify-center' onSubmit={handlePrincipalSubmit}>
+                        <Autocomplete
+                            disablePortal
+                            id="combo-box-demo"
+                            options={faculty}
+                            sx={{ width: 300, display: "inline-block" }}
+                            renderInput={(params) => (
+                                <TextField {...params} label="Enter Faculty Name" />
+                            )}
+                        />
+                        <button type="submit" className="marks-btn btn btn-primary">
+                            View Faculty
+                        </button>
+                    </form>
+                    {selectedFaculty &&
+                        <div className="dropdown">
+                            <div>Select a Year:</div>
+                            <select
+                                id="dropdown"
+                                value={year3}
+                                onChange={(e) => setYear3(e.target.value)}
+                            >
+                                <option value="">--Select Assessment year--</option>
+                                {years3.map((item) => {
+                                    return (
+                                        <option value={item.yearofAssesment}>
+                                            {item.yearofAssesment}
+                                        </option>
+                                    );
+                                })}
+                            </select>
+                        </div>}
+                    </div>
+                    {report && (
+                        <div className='flex flex-col items-center justify-center'>
+                            <h1 className='text-3xl font-extrabold'>Confidential Report for {report.facultyName} ({report.yearofAssesment})</h1>
+                            <Table striped bordered style={{ margin: "1rem", width: "95%" }}>
+                                <thead>
+                                    <tr>
+                                        <th className='table-header text-center align-middle' colSpan={4}>Confidential Report</th>
+                                    </tr>
+                                    <tr>
+                                        <th className='table-header text-center align-middle'>HOD Remarks</th>
+                                        <th className='table-header text-center align-middle' colSpan={3}>{report.Dimension4.confidentialReport.HODRemarks}</th>
+                                    </tr>
+                                    <tr>
+                                        <th className='table-header text-center align-middle' rowSpan={6}>Principal Remarks</th>
+                                        <th className='table-header text-center align-middle'>Multiplier factor (F)</th>
+                                        <th className='table-header text-center align-middle'>Details</th>
+                                        <th className='table-header text-center align-middle' rowSpan={6}>Marks E * F</th>
+                                    </tr>
+                                    <tr>
+                                        <td className='table-content table-data text-center align-middle'>1</td>
+                                        <td className='table-content table-data text-center align-middle'>Strongly agree: Contributor/ motivate others</td>
+                                    </tr>
+                                    <tr>
+                                        <td className='table-content table-data text-center align-middle'>0.95</td>
+                                        <td className='table-content table-data text-center align-middle'>Agree: performer / self-motivated</td>
+                                    </tr>
+                                    <tr>
+                                        <td className='table-content table-data text-center align-middle'>0.90</td>
+                                        <td className='table-content table-data text-center align-middle'>Neutral: committed / complete the tasks</td>
+                                    </tr>
+                                    <tr>
+                                        <td className='table-content table-data text-center align-middle'>0.85</td>
+                                        <td className='table-content table-data text-center align-middle'>Disagree: low commitments/ needs follow ups </td>
+                                    </tr>
+                                    <tr>
+                                        <td className='table-content table-data text-center align-middle'>0.80</td>
+                                        <td className='table-content table-data text-center align-middle'>Strongly disagree: not committed / needs frequent follow up</td>
+                                    </tr>
+                                </thead>
+                            </Table>
+                            <Table bordered style={{ margin: "1rem", width: "95%" }}>
+                            <thead>
+                                <tr>
+                                    <th className='table-header text-center align-middle'>Dimension</th>
+                                    <th className='table-header text-center align-middle'>Total Marks</th>
+                                    <th className='table-header text-center align-middle'>Multiplying factor as per cadre</th>
+                                    <th className='table-header text-center align-middle'>Total Marks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className='table-content table-data text-center align-middle'>Dimension 1</td>
+                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension1.totalMarks.toFixed(2)}</td>
+                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension1.multiplyingFactor.toFixed(2)}</td>
+                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension1.finalMarks.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className='table-content table-data text-center align-middle'>Dimension 2</td>
+                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension2.totalMarks.toFixed(2)}</td>
+                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension2.multiplyingFactor.toFixed(2)}</td>
+                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension2.finalMarks.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className='table-content table-data text-center align-middle'>Dimension 3</td>
+                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension3.totalMarks.toFixed(2)}</td>
+                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension3.multiplyingFactor.toFixed(2)}</td>
+                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension3.finalMarks.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className='table-content table-data text-center align-middle'>Dimension 4</td>
+                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension4.totalMarks.toFixed(2)}</td>
+                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension4.multiplyingFactor.toFixed(2)}</td>
+                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension4.finalMarks.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className='table-content table-data text-center align-middle' colSpan={3}>Grand Total (Faculty rating out of 100)</td>
+                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.GrandTotal.toFixed(2)}</td> 
+                                    </tr>
+                                </tbody>
+                                </Table>
+                        </div>
+                    )}
                 </div>
             )}
 
