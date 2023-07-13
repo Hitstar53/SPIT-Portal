@@ -5,6 +5,8 @@ import "../styles/DeptAppraisal.css";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import StepFour from "../components/StepFour";
+import NotFound from "../assets/404-not-found.png";
+import SelectFaculty from "../assets/select-faculty.png";
 
 // const facultyNames = ["CSE", "ECE", "EEE"];
 var yr = getDate();
@@ -92,11 +94,19 @@ export default function DeptAppraisal() {
         </div>
       </form>
       <div className="dept-appraisal-body">
-        {status === "Not searched" && (
-          <h1>Click on Find Faculty to Enter their marks</h1>
-        )}
         {status === "Faculty found" && <StepFour yr={yr} fullName={name} />}
-        {status === "Faculty not found" && <h1>Faculty not found</h1>}
+        {status === "Not searched" && (
+          <div className="dept-appraisal-vertical">
+            <h1>Select Faculty Name To Enter Their Marks</h1>
+            <img src={SelectFaculty} alt="not found" />
+          </div>
+        )}
+        {status === "Faculty not found" && (
+          <div className="dept-appraisal-vertical">
+            <h1>{name} not found in {user.department} department</h1>
+            <img src={NotFound} alt="not found" />
+          </div>
+        )}
       </div>
     </div>
   );
