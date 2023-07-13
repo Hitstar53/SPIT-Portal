@@ -179,32 +179,12 @@ const ViewHistory = () => {
             }
             } */}
             {user.designation === "HOD" && (
-                <div>
-                    {/* HOD content */}
-                    <h1>Head of Department</h1>
-                    <p>Welcome, HOD!</p>
-                </div>
-            )}
-
-            {user.designation === "Principal" && (
-                <div>
-                    {/* Principal content */}
-                    <h1>Principal</h1>
-                    <p>Welcome, Principal!</p>
-                </div>
-            )}
-
-            {user.designation != "HOD" && user.designation != "Principal" && (
-                <div>
-                    {/* Faculty content */}
-                    <h1>Faculty</h1>
-                    <p>Welcome, Faculty!</p>
-                </div>
-            )}
-
-            {user.designation == "HOD" ? (
                 <>
-                    {/* HOD VIEW */}
+                    <div>
+                        {/* HOD content */}
+                        <h1>Head of Department</h1>
+                        <p>Welcome, HOD!</p>
+                    </div>
                     {console.log("Inside HOD")}
                     <div style={{
                         display: "flex",
@@ -389,10 +369,25 @@ const ViewHistory = () => {
                         }
                     </div>
                 </>
-            ) : (
+            )}
+
+            {user.designation === "Principal" && (
+                <div>
+                    {/* Principal content */}
+                    <h1>Principal</h1>
+                    <p>Welcome, Principal!</p>
+                </div>
+            )}
+
+            {user.designation != "HOD" && user.designation != "Principal" && (
                 <>
-                    {/* FACULTY VIEW */}
+                    <div>
+                        {/* Faculty content */}
+                        <h1>Faculty</h1>
+                        <p>Welcome, Faculty!</p>
+                    </div>
                     {years ? (
+
                         <div className="dropdown">
                             <div>Select a Year:</div>
                             <select
@@ -1613,9 +1608,7 @@ const ViewHistory = () => {
                         )}
                     </div>
                 </>
-            )
-            }
-
+            )}
             {
                 history ? (
                     <button
