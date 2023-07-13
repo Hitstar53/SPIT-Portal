@@ -183,7 +183,8 @@ exports.getFacultyByDeptHOD = asyncHandler(async (req, res) => {
         const facultyInfo = await Appraisal.find({
             yearofAssesment,
             department,
-            isSubmitted:true
+            isSubmitted:true,
+            HODReviewed:false
         }, { facultyName: 1 })
 
         if (facultyInfo) {
