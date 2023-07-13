@@ -846,7 +846,7 @@ const setDim4Principal = asyncHandler(async (req, res) => {
         if (existingFaculty) {
             updatedApp = await Appraisal.findOneAndUpdate(
                 { _id: existingFaculty._id },
-                { $set: { Dimension4: Dimension4, principalReviewed: false } }
+                { $set: { Dimension4: Dimension4, principalReviewed: true } }
             );
         } else {
             return res.status(404).json("Faculty Not Found In setDim4")
