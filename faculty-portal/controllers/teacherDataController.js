@@ -234,7 +234,7 @@ exports.getPrincipalFaculty = asyncHandler(async (req, res) => {
     try {
         const { year } = req.body
         // console.log(year)
-        const appraisal = await Appraisal.find({ yearofAssesment: year, isSubmitted: true, HODReviewed: true })
+        const appraisal = await Appraisal.find({ yearofAssesment: year, isSubmitted: true, HODReviewed: true, principalReviewed: false })
         // console.log(appraisal)
         if (appraisal) {
             const faculty = []
