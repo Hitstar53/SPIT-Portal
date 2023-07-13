@@ -861,14 +861,18 @@ const setDim4Principal = asyncHandler(async (req, res) => {
         updatedApp.finalGrandTotal.dimension3.totalMarks = updatedApp.Dimension3.totalMarks;
         updatedApp.finalGrandTotal.dimension4.totalMarks = updatedApp.Dimension4.totalMarks;
         
-        updatedApp.finalGrandTotal.dimension1.finalMarks = updatedApp.Dimension1.finalGrandTotal.dimension1.totalMarks*updatedApp.Dimension1.finalGrandTotal.dimension1.multiplyingFactor;
-        updatedApp.finalGrandTotal.dimension2.finalMarks = updatedApp.Dimension2.finalGrandTotal.dimension2.totalMarks*updatedApp.Dimension2.finalGrandTotal.dimension2.multiplyingFactor;
-        updatedApp.finalGrandTotal.dimension3.finalMarks = updatedApp.Dimension3.finalGrandTotal.dimension3.totalMarks*updatedApp.Dimension3.finalGrandTotal.dimension3.multiplyingFactor;
-        updatedApp.finalGrandTotal.dimension4.finalMarks = updatedApp.Dimension4.finalGrandTotal.dimension4.totalMarks*updatedApp.Dimension4.finalGrandTotal.dimension4.multiplyingFactor;
+        updatedApp.finalGrandTotal.dimension1.finalMarks = updatedApp.finalGrandTotal.dimension1.totalMarks*updatedApp.finalGrandTotal.dimension1.multiplyingFactor;
+        updatedApp.finalGrandTotal.dimension2.finalMarks = updatedApp.finalGrandTotal.dimension2.totalMarks*updatedApp.finalGrandTotal.dimension2.multiplyingFactor;
+        updatedApp.finalGrandTotal.dimension3.finalMarks = updatedApp.finalGrandTotal.dimension3.totalMarks*updatedApp.finalGrandTotal.dimension3.multiplyingFactor;
+        updatedApp.finalGrandTotal.dimension4.finalMarks = updatedApp.finalGrandTotal.dimension4.totalMarks*updatedApp.finalGrandTotal.dimension4.multiplyingFactor;
 
         updatedApp.finalGrandTotal.GrandTotal = updatedApp.finalGrandTotal.dimension1.finalMarks + updatedApp.finalGrandTotal.dimension2.finalMarks + updatedApp.finalGrandTotal.dimension3.finalMarks + updatedApp.finalGrandTotal.dimension4.finalMarks;
 
-        console.log(updatedApp)
+        //console.log(updatedApp)
+        updatedApp = await Appraisal.findOneAndUpdate(
+            { _id: existingFaculty._id },
+            { $set: { finalGrandTotal: updatedApp.finalGrandTotal } }
+        );
         res.status(200).json(updatedApp);
     } catch (error) {
         console.log(error);
