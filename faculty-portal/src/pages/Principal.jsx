@@ -16,6 +16,10 @@ const Principal = () => {
     const [facultyName, setfacultyName] = useState([]);
     const [facultyData , setfacultyData] = useState([]);
 
+    if (user.designation !== "Principal") {
+        window.location.href = "/home";
+    }
+
     function getDate() {
       const year = new Date().getFullYear();
       const month = new Date().getMonth() + 1;
