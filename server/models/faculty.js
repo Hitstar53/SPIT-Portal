@@ -13,6 +13,7 @@ const facultySchema = new Schema({
             syllabus:{ type : String, required:true},
             type:{ type : String, required:true},
             courseName:{ type : String, required:true},
+            sendTo:{ type : String, required:true},
         }
     ]
 },

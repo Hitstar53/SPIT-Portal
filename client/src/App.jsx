@@ -14,7 +14,7 @@ import Placement, { loader as PlacementLoader } from './components/careerconn/Pl
 import Events, { loader as EventsLoader } from './components/extracurr/events/Events';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Committees, { loader as CommitteesLoader } from "./components/extracurr/committees/Committees";
-import ComAdmin from "./components/extracurr/committees/ComAdmin";
+import ComAdmin, {loader as ComAdminLoader} from "./components/extracurr/committees/ComAdmin";
 import Notification from './components/Notifications/Notifications';
 import RootLayout from './pages/RootLayout';
 import FacultyLayout from './pages/FacultyLayout';
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
           { path: "activities", element: <Activities />, loader: ActivityLoader },
           { path: "events", element: <Events />, loader: EventsLoader },
           { path: "committees", element: <Committees />, loader: CommitteesLoader },
-          { path: "committees/:comname", element: <ComAdmin /> },
+          { path: "committees/:comname", element: <ComAdmin />, loader: ComAdminLoader},
           { path: "portfolio", element: <Portfolio />, loader: PortfolioLoader },
           { path: "internships", element: <Internship />, loader: InternLoader },
           { path: "placement", element: <Placement />, loader: PlacementLoader },

@@ -7,7 +7,7 @@ const AddButton = (props) => {
     <Button
       size="medium"
       variant="outlined"
-      startIcon={<AddIcon />}
+      startIcon={props.icon !== undefined ? props.icon : <AddIcon />}
       onClick={props.onClick}
       sx={{
         ...{":hover": {

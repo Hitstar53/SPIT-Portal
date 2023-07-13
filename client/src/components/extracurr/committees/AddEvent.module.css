@@ -8,6 +8,7 @@
 .eventTitle {
   font-size: 1.1rem;
   font-weight: 300;
+  width: 100%;  
 }
 
 .card {
@@ -39,4 +40,8 @@
 .description {
   font-size: 1rem;
   font-weight: 200;
+}
+.date{
+  font-weight: 400;
+  font-size: 1rem;
 }

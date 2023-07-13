@@ -7,7 +7,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import logo from "../../assets/user.svg" 
 import Box from '@mui/material/Box';
 import { Avatar } from '@mui/material';
-import styles from "./Cards/EventCard.module.css"
+import styles from "./Cards/EventCard.module.css";
+import dayjs from "dayjs";
 
 export default function EventAccordion(props) {
     const [expanded, setExpanded] = React.useState(false);
@@ -48,13 +49,24 @@ export default function EventAccordion(props) {
             >
               {/* <img src={logo} alt="pic" width={50} /> */}
               <Avatar
-                sx={{ width: 50, height: 50 }}
+                sx={{ width: 75, height:75}}
                 alt="logo"
                 src={logo}
+                
               />
               <Box
-                sx={{ display: "flex", flexDirection: "column", pl: "1rem" }}
+                sx={{ display: "flex", flexDirection: "column", pl: "1rem"}}
               >
+                <Typography
+                  sx={{
+                    flexShrink: 0,
+                    fontWeight: "bold",
+                    fontSize: "1.3rem",
+                    width: "calc(81vw - 200px)"
+                  }}
+                >
+                  {item.name}
+                </Typography>
                 <Typography
                   sx={{
                     flexShrink: 0,
@@ -62,13 +74,14 @@ export default function EventAccordion(props) {
                     fontSize: "1.3rem",
                   }}
                 >
-                  {item.name}, {item.date}
+                {dayjs(item.endDate).format("DD-MM-YYYY")}
                 </Typography>
                 <Typography
                   sx={{
                     color: "var(--text-light)",
                     fontSize: "1rem",
                     opacity: 0.7,
+                    fontWeight: "bold"
                   }}
                 >
                   {item.organizedBy}
@@ -79,7 +92,7 @@ export default function EventAccordion(props) {
               <Typography
                 sx={{
                   color: "var(--text-light)",
-                  fontSize: "1rem",
+                  fontSize: "1.2rem",
                   opacity: 0.75,
                   pl: "1.5rem",
                 }}

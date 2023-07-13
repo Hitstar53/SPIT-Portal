@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const Announcement = require('../models/announcements')
 const Student = require('../models/student')
+const Committee = require('../models/commitee')
 const mongoose = require('mongoose')
 const Faculty = require('../models/faculty')
 const { format, addDays } = require('date-fns');
@@ -159,7 +160,7 @@ exports.getFacultyAnnouncements = asyncHandler(async (req, res) => {
 exports.setCommitteeAnnouncements = asyncHandler(async(req,res) => {    const title = req.body.title
     const description = req.body.description
     const type = req.body.type
-    const sender = req.body.email
+    const sender = req.body.comname
     const senderPhoto = req.body.senderPhoto || "https://www.pngwing.com/en/free-png-zxlck"
     const postDate = new Date()
     const endDate = new Date(req.body.endDate)
@@ -176,6 +177,7 @@ exports.setCommitteeAnnouncements = asyncHandler(async(req,res) => {    const ti
             sendTo:sendTo
         })
         await Student.updateMany({},{$push:{announcements:new mongoose.Types.ObjectId(announcement._id)}})
+        await Committee.updateOne({name:sender},{$push:{comAnnouncements:new mongoose.Types.ObjectId(announcement._id)}})
         res.status(200).json("Announcement Set Successfully")
     }
     catch(error)
@@ -184,19 +186,14 @@ exports.setCommitteeAnnouncements = asyncHandler(async(req,res) => {    const ti
     }
 })
 
-exports.getCommitteeAnnouncement = asyncHandler(async(req,res) => {
-    const email = req.body.email;
-})
+exports.getCommitteeAnnouncements = asyncHandler(async(req,res) => {
+    const comname = req.body.comname;
+    try{
+        const committee = await Committee.findOne({name : comname}).select('name comAnnouncements -_id').populate('comAnnouncements')
+        res.status(200).json(committee.comAnnouncements)
+    }
+    catch(error){
+        console.error(error)
+    }
 
-// exports.setCommitteeEvents = asyncHandler(async(req,res) =>{
-//     const name = req.body.name;
-//     const endDate = new Date(req.body.endDate);
-//     const description = req.body.description;
-//     const organizedby = req.body.organizedby;
-//     try{
-        
-//     }
-//     catch{
-        
-//     }
-// })
+})

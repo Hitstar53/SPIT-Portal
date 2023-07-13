@@ -21,6 +21,10 @@ const studentSchema = mongoose.Schema({
             ref:'Announcements'
         },
     ],
+    role:{
+        type:String,
+        
+    },
     mname:{
         type:String
             },

@@ -60,7 +60,7 @@
   font-size: 1.3rem;
   font-weight: 550;
   padding-left: 0.3rem;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .divider {
@@ -72,7 +72,7 @@
 
 .cols {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   font-size: 1.2rem;
   font-weight: 400;
   padding-left: 0.3rem;

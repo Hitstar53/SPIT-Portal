@@ -10,8 +10,7 @@ export default function CustDatePicker(props) {
   console.log(value);
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DateField
-        name={props.name}
+      <DatePicker
         label={props.label}
         value={value}
         onChange={props.onChange}

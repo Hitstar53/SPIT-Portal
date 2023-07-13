@@ -6,11 +6,11 @@ const AncmntCard = (props) => {
   return (
     <div className={styles.ancmntCard}>
       <div className={styles.content}>
-        <h2 className={styles.title}>{props.data.title}</h2>
+        <h2 className={styles.title}>{props.title}</h2>
         <h3 className={styles.date}>
-          {dayjs(props.data.date).format("DD/MM/YYYY")}
+          {dayjs(props.date).format("DD/MM/YYYY")}
         </h3>
-        <div className={styles.paragraph}>{props.data.ancmnt}</div>
+        <div className={styles.paragraph}>{props.ancmnt}</div>
       </div>
     </div>
   );

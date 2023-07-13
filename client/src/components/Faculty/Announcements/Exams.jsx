@@ -88,7 +88,7 @@ const Exams = (props) => {
               year: newExamData.year,
               branch: newExamData.branch,
               division: newExamData.division,
-              batch: newExamDate.batch,
+              batch: newExamData.batch,
             }),
           }
         );

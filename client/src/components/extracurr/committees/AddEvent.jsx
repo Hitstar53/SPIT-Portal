@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import styles from "./AddEvent.module.css";
+import dayjs from 'dayjs';
 
 const AddEvent = (props) => {
   const [isActive, setIsActive] = useState(false);
@@ -8,9 +9,10 @@ const AddEvent = (props) => {
   return (
     <div className={styles.card} onClick={() => setIsActive(!isActive)}>
       <div className={styles.event}>
-        <span className={styles.eventTitle}>
-          <span className={styles.name}>{props.name}</span>, {props.date}
-        </span>
+        <div className={styles.eventTitle}>
+          <div className={styles.name}>{props.name}</div>
+          <div className={styles.date}>{dayjs(props.endDate).format("DD/MM/YYYY")}</div>
+        </div>
         <span className={styles.icon}>
           {isActive ? <ExpandLess /> : <ExpandMore />}
         </span>

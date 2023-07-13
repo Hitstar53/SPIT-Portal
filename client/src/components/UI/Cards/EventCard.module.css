@@ -1,5 +1,5 @@
 .card {
-    max-height: 350px;
+    max-height: 420px;
     border-radius: 2rem;
     color: var(--text-light);
     background-color: var(--primary-color);
@@ -21,12 +21,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
     gap: 1rem;
+    width: 100%;
 }
 
 .cardItemLogo {
-    width: 5rem;
+    width: 10rem;
 }
 
 .cardItemContent {

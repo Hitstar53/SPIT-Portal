@@ -8,6 +8,14 @@ const committeeSchema = mongoose.Schema({
         position:{ type : String, required:true},},
     ],
     logo:{type:mongoose.Schema.Types.Mixed,required:true},
+    comAnnouncements:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Announcements'
+    }],
+    comEvents:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Announcements'
+    }]
 }
 ,{
     collection:"committee"

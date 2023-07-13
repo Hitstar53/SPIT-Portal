@@ -24,8 +24,7 @@ const AncmntExam = (props) => {
             <div className={styles.sub}>
               <h4>{props.type}</h4>
               <h4 className={styles.sentTo}>
-                Sent to: {props.sendTo} {props.year} {props.branch}{" "}
-                {props.division} {props.uid}
+                Sent to: {props.sendTo}
               </h4>
             </div>
             <div className={styles.paragraph}>{props.ancmnt}</div>
