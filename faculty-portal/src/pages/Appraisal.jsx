@@ -1,12 +1,16 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { PDFExport } from '@progress/kendo-react-pdf';
-import Content from '../data/Content';
 import FacultyStepper from '../components/FacultyStepper';
 import '../styles/Appraisal.css';
+import { useContext,useEffect } from 'react';
+import { UserContext } from '../context/UserContext';
 
 const Appraisal = () => {
-  const pdfExportComponent = React.useRef(null);
+  const { user } = useContext(UserContext);
+  useEffect(() => {
+    
+  }
+  , [user])
+
   return (
     <div className='appraisal-page'>
       <div className='app-title'> 
