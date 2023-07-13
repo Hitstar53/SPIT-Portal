@@ -831,6 +831,36 @@ const setDim4HOD = asyncHandler(async (req, res) => {
     }
 })
 
+const setDim4Principal = asyncHandler(async (req, res) => {
+    try {
+        const { yearofAssesment, fullName, Dimension4 } = req.body;
+        var updatedApp = null;
+
+        const existingFaculty = await Appraisal.findOne({
+            facultyName: fullName,
+            yearofAssesment: yearofAssesment,
+        });
+
+        if (existingFaculty) {
+            updatedApp = await Appraisal.findOneAndUpdate(
+                { _id: existingFaculty._id },
+                { $set: { Dimension4: Dimension4, principalReviewed: true } }
+            );
+        } else {
+            return res.status(404).json("Faculty Not Found In setDim4")
+        }
+
+        updatedApp = await Appraisal.findOne(
+            { _id: existingFaculty._id }
+            )
+        console.log(updatedApp)
+        res.status(200).json(updatedApp);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+
 const getDim4 = asyncHandler(async (req, res) => {
     try {
         const { name, yearofAssesment } = req.body
@@ -859,6 +889,7 @@ module.exports = {
     setDim3,
     getDim3,
     setDim4HOD,
+    setDim4Principal,
     getDim4,
     getAppraisal,
     getAllAppraisal,

@@ -9,6 +9,7 @@ const {
   setDim3,
   getDim3,
   setDim4HOD,
+  setDim4Principal,
   getDim4,
   getAppraisal,
   getAllAppraisal,
@@ -23,6 +24,7 @@ router.post("/get/dim2", getDim2);
 router.post("/dim3", setDim3);
 router.post("/get/dim3", getDim3);
 router.post("/hodreview", setDim4HOD);
+router.post("/principal-review", setDim4Principal);
 router.post("/get/dim4", getDim4);
 router.post("/getappraisal", getAppraisal);
 router.post("/getallappraisal", getAllAppraisal);
