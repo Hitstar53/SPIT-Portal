@@ -6,6 +6,20 @@ export default function UserContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [picture, setPicture] = useState("");
 
+  var yr=getDate()
+  function getDate() {
+    const year = new Date().getFullYear();
+    const month = new Date().getMonth() + 1;
+    const day = new Date().getDate();
+    console.log(month);
+    console.log(year);
+    console.log(day);
+    // if(month<6)
+    return `${year}-${year+1}`
+    // else
+    // return `${year+1}-${year+2}`
+  }
+
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -21,7 +35,7 @@ export default function UserContextProvider({ children }) {
   }, [user]);
 
   return (
-    <UserContext.Provider value={{ user, setUser,picture,setPicture }}>
+    <UserContext.Provider value={{ user, setUser,picture,setPicture,yr }}>
       {children}
     </UserContext.Provider>
   );
