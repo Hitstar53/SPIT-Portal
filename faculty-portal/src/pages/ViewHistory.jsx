@@ -97,7 +97,7 @@ const ViewHistory = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    facultyName: "Sudhir Namdeorao Dhage",
+                    facultyName: user.fullName,
                 }),
             })
                 .then((res) => res.json())
@@ -110,7 +110,7 @@ const ViewHistory = () => {
                 const endpoint = 'http://localhost:5000/api/faculty/appraisal/getappraisal';
                 // const payload = JSON.parse(localStorage.getItem('user'));
                 await axios.post(endpoint, {
-                    facultyName: "Sudhir Namdeorao Dhage",
+                    facultyName: user.fullName,
                     yearofAssesment: year,
 
                 }).then((response) => {
@@ -223,6 +223,7 @@ const ViewHistory = () => {
         setName(e.target[0].value)
         setYear2(null)
         getYears(e.target[0].value);
+        setSelectedFaculty(true);
     }
 
     const handlePrincipalSubmit = (e) => {
@@ -247,11 +248,7 @@ const ViewHistory = () => {
             } */}
             {user.designation === "HOD" && (
                 <>
-                    <div>
-                        {/* HOD content */}
-                        <h1>Head of Department</h1>
-                        <p>Welcome, HOD!</p>
-                    </div>
+
                     {console.log("Inside HOD")}
                     <div style={{
                         display: "flex",
@@ -284,7 +281,7 @@ const ViewHistory = () => {
                         </div>
 
                         {/* {( */}
-                        <div className="dropdown">
+                        {selectedFaculty && (<div className="dropdown">
                             <div>Select a Year:</div>
                             <select
                                 id="dropdown"
@@ -300,7 +297,7 @@ const ViewHistory = () => {
                                     );
                                 })}
                             </select>
-                        </div>
+                        </div>)}
                     </div>
                     {/* )} */}
 
@@ -308,13 +305,6 @@ const ViewHistory = () => {
                         textAlign: "center",
                         fontSize: "20px",
                     }}>Please Select Faculty Name and the Year of Assessment.</p>) : ("")}
-                    < div >
-                        Hello HOD<br></br>
-                        Selected Faculty: {name}<br></br>
-                        Selected Year: {year2}
-                    </div>
-
-
 
                     {/* tables start here */}
 
@@ -337,6 +327,13 @@ const ViewHistory = () => {
                                                 width: "70%",
                                             }}
                                         />
+
+                                        <h1 className='text-xl font-extrabold mt-3' style={
+                                            {
+                                                textAlign: "center",
+                                            }
+                                        }>Feedback Marks for {name} ({year2})</h1>
+                                        {/* <Table striped bordered style={{ margin: "1rem", width: "95%" }}> */}
                                         <div
                                             className="dimhead"
                                             style={{
@@ -460,7 +457,7 @@ const ViewHistory = () => {
                                 </>
 
 
-                            ) : ("The Dim4 not parsed")
+                            ) : ("")
                         }
                     </div>
                 </>
@@ -469,124 +466,221 @@ const ViewHistory = () => {
             {user.designation === "Principal" && (
                 <div>
                     {/* Principal content */}
-                    {/* <h1>Principal</h1>
-                    <p>Welcome, Principal!</p> */}
+                    {/* {/* <h1>Principal</h1> */}
+                    {/* <p>Welcome, Principal!</p> */}
                     <div className='flex items-center justify-evenly m-4'>
 
-                    <form className='flex items-center justify-center' onSubmit={handlePrincipalSubmit}>
-                        <Autocomplete
-                            disablePortal
-                            id="combo-box-demo"
-                            options={faculty}
-                            sx={{ width: 300, display: "inline-block" }}
-                            renderInput={(params) => (
-                                <TextField {...params} label="Enter Faculty Name" />
-                            )}
-                        />
-                        <button type="submit" className="marks-btn btn btn-primary">
-                            View Faculty
-                        </button>
-                    </form>
-                    {selectedFaculty &&
-                        <div className="dropdown">
-                            <div>Select a Year:</div>
-                            <select
-                                id="dropdown"
-                                value={year3}
-                                onChange={(e) => setYear3(e.target.value)}
-                            >
-                                <option value="">--Select Assessment year--</option>
-                                {years3.map((item) => {
-                                    return (
-                                        <option value={item.yearofAssesment}>
-                                            {item.yearofAssesment}
-                                        </option>
-                                    );
-                                })}
-                            </select>
-                        </div>}
+                        <form className='flex items-center justify-center' onSubmit={handlePrincipalSubmit}>
+                            <Autocomplete
+                                disablePortal
+                                id="combo-box-demo"
+                                options={faculty}
+                                sx={{ width: 300, display: "inline-block" }}
+                                renderInput={(params) => (
+                                    <TextField {...params} label="Enter Faculty Name" />
+                                )}
+                            />
+                            <button type="submit" className="marks-btn btn btn-primary">
+                                View Faculty
+                            </button>
+                        </form>
+                        {selectedFaculty &&
+                            <div className="dropdown">
+                                <div>Select a Year:</div>
+                                <select
+                                    id="dropdown"
+                                    value={year3}
+                                    onChange={(e) => setYear3(e.target.value)}
+                                >
+                                    <option value="">--Select Assessment year--</option>
+                                    {years3.map((item) => {
+                                        return (
+                                            <option value={item.yearofAssesment}>
+                                                {item.yearofAssesment}
+                                            </option>
+                                        );
+                                    })}
+                                </select>
+                            </div>}
                     </div>
+
                     {report && (
-                        <div className='flex flex-col items-center justify-center'>
-                            <h1 className='text-3xl font-extrabold'>Confidential Report for {report.facultyName} ({report.yearofAssesment})</h1>
-                            <Table striped bordered style={{ margin: "1rem", width: "95%" }}>
-                                <thead>
-                                    <tr>
-                                        <th className='table-header text-center align-middle' colSpan={4}>Confidential Report</th>
-                                    </tr>
-                                    <tr>
-                                        <th className='table-header text-center align-middle'>HOD Remarks</th>
-                                        <th className='table-header text-center align-middle' colSpan={3}>{report.Dimension4.confidentialReport.HODRemarks}</th>
-                                    </tr>
-                                    <tr>
-                                        <th className='table-header text-center align-middle' rowSpan={6}>Principal Remarks</th>
-                                        <th className='table-header text-center align-middle'>Multiplier factor (F)</th>
-                                        <th className='table-header text-center align-middle'>Details</th>
-                                        <th className='table-header text-center align-middle' rowSpan={6}>Marks E * F</th>
-                                    </tr>
-                                    <tr>
-                                        <td className='table-content table-data text-center align-middle'>1</td>
-                                        <td className='table-content table-data text-center align-middle'>Strongly agree: Contributor/ motivate others</td>
-                                    </tr>
-                                    <tr>
-                                        <td className='table-content table-data text-center align-middle'>0.95</td>
-                                        <td className='table-content table-data text-center align-middle'>Agree: performer / self-motivated</td>
-                                    </tr>
-                                    <tr>
-                                        <td className='table-content table-data text-center align-middle'>0.90</td>
-                                        <td className='table-content table-data text-center align-middle'>Neutral: committed / complete the tasks</td>
-                                    </tr>
-                                    <tr>
-                                        <td className='table-content table-data text-center align-middle'>0.85</td>
-                                        <td className='table-content table-data text-center align-middle'>Disagree: low commitments/ needs follow ups </td>
-                                    </tr>
-                                    <tr>
-                                        <td className='table-content table-data text-center align-middle'>0.80</td>
-                                        <td className='table-content table-data text-center align-middle'>Strongly disagree: not committed / needs frequent follow up</td>
-                                    </tr>
-                                </thead>
-                            </Table>
-                            <Table bordered style={{ margin: "1rem", width: "95%" }}>
-                            <thead>
-                                <tr>
-                                    <th className='table-header text-center align-middle'>Dimension</th>
-                                    <th className='table-header text-center align-middle'>Total Marks</th>
-                                    <th className='table-header text-center align-middle'>Multiplying factor as per cadre</th>
-                                    <th className='table-header text-center align-middle'>Total Marks</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td className='table-content table-data text-center align-middle'>Dimension 1</td>
-                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension1.totalMarks.toFixed(2)}</td>
-                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension1.multiplyingFactor.toFixed(2)}</td>
-                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension1.finalMarks.toFixed(2)}</td>
-                                    </tr>
-                                    <tr>
-                                        <td className='table-content table-data text-center align-middle'>Dimension 2</td>
-                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension2.totalMarks.toFixed(2)}</td>
-                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension2.multiplyingFactor.toFixed(2)}</td>
-                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension2.finalMarks.toFixed(2)}</td>
-                                    </tr>
-                                    <tr>
-                                        <td className='table-content table-data text-center align-middle'>Dimension 3</td>
-                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension3.totalMarks.toFixed(2)}</td>
-                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension3.multiplyingFactor.toFixed(2)}</td>
-                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension3.finalMarks.toFixed(2)}</td>
-                                    </tr>
-                                    <tr>
-                                        <td className='table-content table-data text-center align-middle'>Dimension 4</td>
-                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension4.totalMarks.toFixed(2)}</td>
-                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension4.multiplyingFactor.toFixed(2)}</td>
-                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension4.finalMarks.toFixed(2)}</td>
-                                    </tr>
-                                    <tr>
-                                        <td className='table-content table-data text-center align-middle' colSpan={3}>Grand Total (Faculty rating out of 100)</td>
-                                        <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.GrandTotal.toFixed(2)}</td> 
-                                    </tr>
-                                </tbody>
-                                </Table>
-                        </div>
+                        <>
+                            <div
+                                ref={elementRef}
+                                style={{
+                                    width: "95%",
+                                    // padding:"0 0 2em 0",
+                                    border: "1px solid black",
+                                    margin: "1em auto",
+                                }}
+                            >
+                                <img
+                                    src={HeaderImage}
+                                    style={{
+                                        marginLeft: "auto",
+                                        marginRight: "auto",
+                                        width: "70%",
+                                    }}
+                                />
+                                <div className='flex flex-col items-center justify-center'>
+                                    <h1 className='text-xl font-extrabold mt-3'>Confidential Report for {report.facultyName} ({report.yearofAssesment})</h1>
+                                    {/* <Table striped bordered style={{ margin: "1rem", width: "95%" }}> */}
+
+
+                                    <table style={{
+                                        width: "95%",
+                                        margin: "0em auto",
+                                        marginTop: "1em",
+                                    }}>
+                                        <thead>
+                                            <tr>
+                                                <th className='table-header text-center align-middle' colSpan={4}>Confidential Report</th>
+                                            </tr>
+                                            <tr>
+                                                <th className='table-header text-center align-middle'>HOD Remarks</th>
+                                                <th className='table-header text-left align-middle' colSpan={3}>{report.Dimension4.confidentialReport.HODRemarks}</th>
+                                            </tr>
+                                            <tr>
+                                                <th className='table-header text-center align-middle' rowSpan={6}>Principal Remarks</th>
+                                                <th className='table-header text-center align-middle'>Multiplier factor (F)</th>
+                                                <th className='table-header text-center align-middle'>Details</th>
+                                                <th className='table-header text-center align-middle' rowSpan={6}>Marks E * F</th>
+                                            </tr>
+                                            <tr>
+                                                <td className='table-content table-data text-center align-middle'>1</td>
+                                                <td className='table-content table-data text-center align-middle'>Strongly agree: Contributor/ motivate others</td>
+                                            </tr>
+                                            <tr>
+                                                <td className='table-content table-data text-center align-middle'>0.95</td>
+                                                <td className='table-content table-data text-center align-middle'>Agree: performer / self-motivated</td>
+                                            </tr>
+                                            <tr>
+                                                <td className='table-content table-data text-center align-middle'>0.90</td>
+                                                <td className='table-content table-data text-center align-middle'>Neutral: committed / complete the tasks</td>
+                                            </tr>
+                                            <tr>
+                                                <td className='table-content table-data text-center align-middle'>0.85</td>
+                                                <td className='table-content table-data text-center align-middle'>Disagree: low commitments/ needs follow ups </td>
+                                            </tr>
+                                            <tr>
+                                                <td className='table-content table-data text-center align-middle'>0.80</td>
+                                                <td className='table-content table-data text-center align-middle'>Strongly disagree: not committed / needs frequent follow up</td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    {/* </Table> */}
+                                    <div
+                                        className="dimhead"
+                                        style={{
+                                            backgroundColor: "#fabf8f",
+                                            margin: "0em auto",
+                                            padding: "0.4em 0.4em",
+                                            width: "95%",
+                                        }}
+                                    >
+                                        <strong> Perception Marks out of 100 (G) : {report.Dimension4.confidentialReport.perceptionMarks} </strong>
+                                    </div>
+                                    <table style={{
+                                        width: "95%",
+                                        margin: "0em auto",
+                                    }}>
+                                        {/* <Table bordered style={{ margin: "1rem", width: "95%" }}> */}
+                                        <thead>
+                                            <tr>
+                                                <th className='table-header text-center align-middle'>Dimension</th>
+                                                <th className='table-header text-center align-middle'>Total Marks</th>
+                                                <th className='table-header text-center align-middle'>Multiplying factor as per cadre</th>
+                                                <th className='table-header text-center align-middle'>Total Marks</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td className='table-content table-data text-center align-middle'>Dimension 1</td>
+                                                <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension1.totalMarks.toFixed(2)}</td>
+                                                <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension1.multiplyingFactor.toFixed(2)}</td>
+                                                <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension1.finalMarks.toFixed(2)}</td>
+                                            </tr>
+                                            <tr>
+                                                <td className='table-content table-data text-center align-middle'>Dimension 2</td>
+                                                <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension2.totalMarks.toFixed(2)}</td>
+                                                <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension2.multiplyingFactor.toFixed(2)}</td>
+                                                <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension2.finalMarks.toFixed(2)}</td>
+                                            </tr>
+                                            <tr>
+                                                <td className='table-content table-data text-center align-middle'>Dimension 3</td>
+                                                <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension3.totalMarks.toFixed(2)}</td>
+                                                <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension3.multiplyingFactor.toFixed(2)}</td>
+                                                <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension3.finalMarks.toFixed(2)}</td>
+                                            </tr>
+                                            <tr>
+                                                <td className='table-content table-data text-center align-middle'>Dimension 4</td>
+                                                <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension4.totalMarks.toFixed(2)}</td>
+                                                <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension4.multiplyingFactor.toFixed(2)}</td>
+                                                <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.dimension4.finalMarks.toFixed(2)}</td>
+                                            </tr>
+                                            <tr>
+                                                <td className='table-content table-data text-center align-middle' colSpan={3}>Grand Total (Faculty rating out of 100)</td>
+                                                <td className='table-content table-data text-center align-middle'>{report.finalGrandTotal.GrandTotal.toFixed(2)}</td>
+                                            </tr>
+                                        </tbody>
+                                        {/* </Table> */}
+                                    </table>
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            justifyContent: "space-around",
+                                            alignItems: "center",
+                                            margin: "7em 2em",
+                                            marginBottom: "1em",
+                                            width: "95%",
+                                        }}
+                                    >
+                                        <div
+                                            style={{
+                                                borderTop: "1px solid black",
+                                                width: "15%",
+                                                textAlign: "center",
+                                            }}
+                                        >
+                                            Signature
+                                        </div>
+                                        <div
+                                            style={{
+                                                borderTop: "1px solid black",
+                                                width: "15%",
+                                                textAlign: "center",
+                                            }}
+                                        >
+                                            Date
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            {
+                                report ? (
+                                    <button
+                                        onClick={handleExportPDF}
+                                        style={{
+                                            backgroundColor: "#f32236",
+                                            color: "white",
+                                            padding: "10px",
+                                            // borderRadius: "5px",
+                                            border: "none",
+                                            width: "150px",
+                                            margin: "1em auto",
+                                            display: "block",
+                                        }}
+                                    >
+                                        Export to PDF
+                                    </button>
+                                ) : (
+                                    ""
+                                )
+                            }
+                        </>
                     )}
                 </div>
             )}
