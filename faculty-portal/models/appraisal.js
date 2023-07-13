@@ -655,6 +655,7 @@ const appraisalSchema = new mongoose.Schema({
             },
             finalMarks: {
                 type: Number,
+                default: 0,
             },
         },
         dimension2: {
@@ -668,6 +669,7 @@ const appraisalSchema = new mongoose.Schema({
             },
             finalMarks: {
                 type: Number,
+                default: 0,
             },
         },
         dimension3: {
@@ -681,6 +683,7 @@ const appraisalSchema = new mongoose.Schema({
             },
             finalMarks: {
                 type: Number,
+                default: 0,
             },
         },
         dimension4: {
@@ -694,6 +697,7 @@ const appraisalSchema = new mongoose.Schema({
             },
             finalMarks: {
                 type: Number,
+                default: 0,
             },
         },
 

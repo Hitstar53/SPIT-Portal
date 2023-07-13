@@ -13,6 +13,7 @@ const {
   getDim4,
   getAppraisal,
   getAllAppraisal,
+  isSubmittedTeacher,
   HOD
 } = require("../controllers/AppraisalController");
 
@@ -28,5 +29,6 @@ router.post("/principal-review", setDim4Principal);
 router.post("/get/dim4", getDim4);
 router.post("/getappraisal", getAppraisal);
 router.post("/getallappraisal", getAllAppraisal);
+router.post("/isSubmitted-teacher", isSubmittedTeacher);
 
 module.exports = router;
