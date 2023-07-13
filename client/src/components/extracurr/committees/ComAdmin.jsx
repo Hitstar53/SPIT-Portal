@@ -26,6 +26,7 @@ const ComAdmin = () => {
   const [events, setEvents] = useState(data.eventData || []);
   const [ancmnts, setAncmnts] = useState(data.ancmntData || []);
   const [members, setMembers] = useState(data.comData.members || []);
+  const [openCpDialog, setOpenCpDialog] = useState(false);
   const [openMemberDialog, setOpenMemberDialog] = useState(false);
   const [openEventDialog, setOpenEventDialog] = useState(false);
   const [openAncmntDialog, setOpenAncmntDialog] = useState(false);
@@ -39,6 +40,12 @@ const ComAdmin = () => {
     }
     setAlertOpen(false);
     navigate(0);
+  };
+  const handleCpClickOpenDialog = () => {
+    setOpenCpDialog(true);
+  };
+  const handleCpCloseDialog = () => {
+    setOpenCpDialog(false);
   };
   const handleMemberClickOpenDialog = () => {
     setOpenMemberDialog(true);
@@ -58,11 +65,42 @@ const ComAdmin = () => {
   const handleAncmntCloseDialog = () => {
     setOpenAncmntDialog(false);
   };
-
+  const [newCpData, setCpNewData] = useState({});
   const [newMemberData, setMemberNewData] = useState({});
   const [newAncmntData, setAncmntNewData] = useState({});
   const [newEventData, setEventNewData] = useState({});
-
+  const handleCpDataChange = (e) => {
+    setCpNewData({ ...newCpData, [e.target.name]: e.target.value });
+  };
+  const handleCpSubmit = (e) => {
+    e.preventDefault();
+    const setCommitteeCp = async () => {
+      const response = await fetch(`${ServerUrl}/api/student/makeNewCP`, 
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cemail: JSON.parse(localStorage.getItem("userinfo")).email,
+          nemail: newCpData.nemail,
+          comname: params.comname
+        }),
+      });
+      if (!response.ok) {
+        setAlertOpen(true);
+        setSeverity("error");
+        setMessage("Something went wrong, please try again later");
+      }
+      if (response.ok) {
+        const data = await response.json();
+        setAlertOpen(true);
+        setSeverity("success");
+        setMessage("Chairperson Changed successfully");
+      }
+    };
+    setCommitteeCp();
+  }
   const handleMemberDataChange = (e) => {
     setMemberNewData({ ...newMemberData, [e.target.name]: e.target.value });
   };
@@ -228,20 +266,17 @@ const ComAdmin = () => {
             }),
           }
           );
-          console.log(response)
           if (response.ok) {
             const data = await response.json();
             setAlertOpen(true);
             setSeverity("success");
             setMessage("Announcement set successfully");
           } else {
-            console.log("Error:", response.status);
             setAlertOpen(true);
             setSeverity("error");
             setMessage("Something went wrong, please try again later");
           }
         } catch (error) {
-          console.log("Error:", error);
           setAlertOpen(true);
           setSeverity("error");
           setMessage("Something went wrong, please try again later");
@@ -264,9 +299,12 @@ const ComAdmin = () => {
       </h1>
       <div className="flex justify-between items-center text-2xl p-1 font-semibold">
         <h2>Announcements</h2>
-        {
-          data.roleData.role === params.comname ? <AddButton onClick={handleAncmntClickOpenDialog} btntext="ADD ANNOUNCEMENT" /> : null
-        }
+        {data.roleData.role === params.comname ? (
+          <AddButton
+            onClick={handleAncmntClickOpenDialog}
+            btntext="ADD ANNOUNCEMENT"
+          />
+        ) : null}
       </div>
       <div className={styles.card}>
         <div className={styles.inner}>
@@ -328,9 +366,9 @@ const ComAdmin = () => {
       <hr className={styles.divider} />
       <div className="flex justify-between items-center text-2xl p-1 font-semibold">
         <h2>Committee Events</h2>
-        {
-          data.roleData.role === params.comname ? <AddButton onClick={handleEventClickOpenDialog} btntext="ADD EVENT" /> : null
-        }
+        {data.roleData.role === params.comname ? (
+          <AddButton onClick={handleEventClickOpenDialog} btntext="ADD EVENT" />
+        ) : null}
       </div>
       <div>
         {events.map((event, index) => (
@@ -345,33 +383,28 @@ const ComAdmin = () => {
       <hr className={styles.divider} />
       <div className="flex justify-between items-center text-2xl p-1 font-semibold">
         <h2>Core Members</h2>
-        {
-          data.roleData.role === params.comname ? 
-          <div className='flex gap-4'>
-            <AddButton onClick={handleMemberClickOpenDialog} btntext="ADD" /> 
-            <AddButton 
+        {data.roleData.role === params.comname ? (
+          <div className="flex gap-4">
+            <AddButton onClick={handleMemberClickOpenDialog} btntext="ADD" />
+            <AddButton
               icon=""
-              onClick={handleMemberClickOpenDialog} 
-              btntext="TRANSFER" 
-            /> 
+              onClick={handleCpClickOpenDialog}
+              btntext="TRANSFER CP"
+            />
           </div>
-          : null
-        }
+        ) : null}
       </div>
       <div className={styles.tableHeader}>
         <h3>Name</h3>
         <h3>Position</h3>
-        {
-          data.roleData.role === params.comname ? <h3>Action</h3> : null
-        }
+        {data.roleData.role === params.comname ? <h3>Action</h3> : null}
       </div>
       <hr className={styles.divider} />
       {members.map((member, index) => (
         <div className={styles.cols}>
           <h3>{member.name}</h3>
           <h3>{member.position}</h3>
-          {
-            data.roleData.role === params.comname ?
+          {data.roleData.role === params.comname ? (
             <h3>
               <AddButton
                 icon={<DeleteIcon />}
@@ -379,8 +412,7 @@ const ComAdmin = () => {
                 btntext="DELETE"
               />
             </h3>
-            : null
-          }
+          ) : null}
         </div>
       ))}
       <MultiFieldModal
@@ -460,6 +492,27 @@ const ComAdmin = () => {
           variant="standard"
           helperText="Short Description of the event"
           onChange={handleEventDataChange}
+        />
+      </MultiFieldModal>
+      <MultiFieldModal
+        handleDataSubmit={handleCpSubmit}
+        openDialog={openCpDialog}
+        handleClickOpenDialog={handleCpClickOpenDialog}
+        handleCloseDialog={handleCpCloseDialog}
+        title="Transfer Chairperson Role"
+      >
+        <TextField
+          required
+          autoFocus
+          margin="dense"
+          name="nemail"
+          label="Email"
+          autoComplete="off"
+          type="email"
+          fullWidth
+          variant="standard"
+          helperText="Email id of the incoming Chairperson"
+          onChange={handleCpDataChange}
         />
       </MultiFieldModal>
       <Dialog
