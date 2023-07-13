@@ -292,3 +292,25 @@ exports.principalAppraisal = async (req, res) => {
         return res.status(504)
     }
 }
+
+exports.getSubmittedFaculty = async (req, res) => {
+    try {
+        const appraisal = await Appraisal.find({ isSubmitted: true, HODReviewed: true, principalReviewed: true })
+        // console.log(appraisal)
+        if (appraisal) {
+            const faculty = []
+            appraisal.map((info) => {
+                faculty.push(
+                    info.facultyName
+                )
+            })
+            console.log(faculty)
+            return res.status(200).json(faculty)
+        }
+        else {
+            return res.status(404).json("No faculty found")
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}

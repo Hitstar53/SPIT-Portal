@@ -853,7 +853,7 @@ const setDim4Principal = asyncHandler(async (req, res) => {
         updatedApp = await Appraisal.findOne(
             { _id: existingFaculty._id }
             )
-        console.log(updatedApp)
+        // console.log(updatedApp)
         res.status(200).json(updatedApp);
     } catch (error) {
         console.log(error);
