@@ -894,6 +894,24 @@ const getDim4 = asyncHandler(async (req, res) => {
     }
 })
 
+const isSubmittedTeacher= asyncHandler(async (req, res) => {
+    try {
+        const { name, yearofAssesment } = req.body
+        const facultyInfo = await Appraisal.findOne({
+            facultyName: name,
+            yearofAssesment: yearofAssesment,
+        })
+        if (facultyInfo.isSubmitted) {
+            res.status(200).json("teacher has already submitted")
+        }
+        else {
+            res.status(204).json("teacher has not submitted")
+        }
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 
 module.exports = {
     setAppraisal,
@@ -908,4 +926,5 @@ module.exports = {
     getDim4,
     getAppraisal,
     getAllAppraisal,
+    isSubmittedTeacher
 }
