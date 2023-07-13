@@ -905,7 +905,7 @@ const isSubmittedTeacher= asyncHandler(async (req, res) => {
             facultyName: name,
             yearofAssesment: yearofAssesment,
         })
-        if (facultyInfo.isSubmitted) {
+        if (facultyInfo && facultyInfo.isSubmitted) {
             res.status(200).json("teacher has already submitted")
         }
         else {
