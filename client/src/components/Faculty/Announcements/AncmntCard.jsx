@@ -3,7 +3,7 @@ import styles from "./Card.module.css";
 import dayjs from "dayjs";
 import ScrollModal from "../../UI/Modals/ScrollModal";
 
-const AncmntExam = (props) => {
+const AncmntCard = (props) => {
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -48,4 +48,4 @@ const AncmntExam = (props) => {
   );
 };
 
-export default AncmntExam;
+export default AncmntCard;

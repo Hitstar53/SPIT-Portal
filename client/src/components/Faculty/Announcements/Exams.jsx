@@ -9,10 +9,8 @@ import styles from "./Exams.module.css";
 import AddButton from "../../UI/AddButton.jsx";
 import TextField from "@mui/material/TextField";
 import MultiFieldModal from "../../UI/Modals/MultiFieldModal";
-import { InputLabel } from "@mui/material";
-import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import AncmntExam from "./Card";
+import AncmntExamCard from "./AncmntExamCard";
 import ServerUrl from "../../../constants";
 
 const exam = [
@@ -116,7 +114,7 @@ const Exams = (props) => {
       <div className={styles.card}>
         <div className={styles.inner}>
           {exams.map((exam, index) => (
-            <AncmntExam
+            <AncmntExamCard
               key={index}
               title={exam.courseName}
               date={exam.date}
@@ -261,8 +259,9 @@ const Exams = (props) => {
           helperText="Select type of exam, Eg. ISE or MSE"
           onChange={handleExamDataChange}
         >
+          <MenuItem value="VIVA">VIVA</MenuItem>
           <MenuItem value="ISE">ISE</MenuItem>
-          <MenuItem value="LABISE">Lab ISE</MenuItem>
+          <MenuItem value="LabISE">Lab ISE</MenuItem>
           <MenuItem value="MSE">MSE</MenuItem>
         </TextField>
       </MultiFieldModal>

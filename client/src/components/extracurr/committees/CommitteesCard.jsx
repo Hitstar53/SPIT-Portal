@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./CommitteesCard.module.css";
-import ComAdmin from "./ComAdmin.jsx";
 import { useNavigate } from "react-router-dom";
 import { Avatar } from "@mui/material";
 

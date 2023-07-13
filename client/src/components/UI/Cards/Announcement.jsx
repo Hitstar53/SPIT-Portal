@@ -13,7 +13,6 @@ const Announcement = (props) => {
     const handleClose = () => {
       setOpen(false);
     };
-    console.log(props.item)
     return (
       <React.Fragment>
         <div className={styles.cardItem} onClick={handleClickOpen}>
@@ -31,7 +30,9 @@ const Announcement = (props) => {
           <div className={styles.cardItemSubHeader}>
             <p>From: {props.item.sender}</p>
           </div>
-          <p className={styles.cardItemContent}>{props.item.description}</p>
+          <p className={styles.cardItemContent}>
+            {props.item.description.substring(0, 125) + "..."}
+          </p>
         </div>
         {open && (
           <ScrollModal

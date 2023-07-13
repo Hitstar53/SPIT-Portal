@@ -18,7 +18,12 @@ export default function MultiFieldModal(props) {
             {props.title}
           </DialogTitle>
           <DialogContent>
-            <DialogContentText>
+            <DialogContentText
+              sx={{
+                textAlign: "center",
+                marginBottom: "1rem",
+              }}
+            >
               {props.content}
             </DialogContentText>
             {props.children}

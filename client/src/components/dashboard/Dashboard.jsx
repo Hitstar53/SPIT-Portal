@@ -2,7 +2,6 @@ import React from 'react'
 import { useLoaderData, json } from 'react-router-dom'
 import UpcomingExams from './UpcomingExams'
 import AnnounceCard from '../UI/Cards/AnnounceCard'
-import AttendCard from '../UI/Cards/AttendCard'
 import EventCard from '../UI/Cards/EventCard'
 import styles from './Dashboard.module.css'
 import OtherAnnounceCard from '../UI/Cards/OtherAnnounceCard'
@@ -21,10 +20,6 @@ const Dashboard = () => {
                 <h1 className="text-2xl p-1 font-semibold heading">Academic Announcements</h1>
                 <AnnounceCard data={academic} />
             </div>
-            {/* <div className="flex flex-col gap-4">
-                <h1 className="text-xl p-1 font-semibold heading">Attendance</h1>
-                <AttendCard />
-            </div> */}
             <div className="flex flex-col gap-6 mt-6">
                 <h1 className="text-2xl p-1 font-semibold heading">Upcoming Exams</h1>
                 <UpcomingExams data={data.examData.exams} />

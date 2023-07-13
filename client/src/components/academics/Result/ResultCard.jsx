@@ -14,7 +14,6 @@ const ResultCard = (props) => {
           <span>DATE: </span>
           {props.exam.date}
         </h3>
-        {/* <h3>{props.exam.examtype}</h3> */}
       </div>
     </div>
   );

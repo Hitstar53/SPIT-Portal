@@ -15,7 +15,6 @@ import ServerUrl from "../../../constants";
 
 const Research = (props) => {
   const [research, setResearch] = useState(props.research.research || []);
-  
   const [alertOpen, setAlertOpen] = useState(false);
   const [severity, setSeverity] = useState("");
   const [message, setMessage] = useState("");

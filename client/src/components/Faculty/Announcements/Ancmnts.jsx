@@ -10,7 +10,7 @@ import AddButton from "../../UI/AddButton.jsx";
 import TextField from "@mui/material/TextField";
 import MultiFieldModal from "../../UI/Modals/MultiFieldModal";
 import MenuItem from "@mui/material/MenuItem";
-import Card from "./Card";
+import AncmntCard from "./AncmntCard";
 import ServerUrl from "../../../constants";
 
 const Ancmnts = (props) => {
@@ -167,7 +167,7 @@ const Ancmnts = (props) => {
       <div className={styles.card}>
         <div className={styles.inner}>
           {ancmnts?.map((ancmnt, index) => (
-            <Card
+            <AncmntCard
               key={index}
               title={ancmnt.title}
               date={ancmnt.date}

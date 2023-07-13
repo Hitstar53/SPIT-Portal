@@ -13,7 +13,6 @@ import AddButton from '../../UI/AddButton'
 import styles from './Projects.module.css'
 import ServerUrl from '../../../constants';
 
-
 const Projects = (props) => {
   const [projects, setProjects] = useState(props.projects.projects || [])
   const [alertOpen, setAlertOpen] = useState(false);
