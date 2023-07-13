@@ -120,7 +120,7 @@ exports.addEvent = asyncHandler(async (req, res) => {
                 _id: event._id
             })
         })
-        console.log(allEvents)
+        // console.log(allEvents)
         res.status(200).send(allEvents);
     } catch (err) {
         console.log(err);
