@@ -281,11 +281,9 @@ const ViewHistory = () => {
                         </div>
 
                         {/* {( */}
-                        {selectedFaculty && (<div className="dropdown flex items-center">
+                        {selectedFaculty && (<div className="dropdown">
                             <div>Select a Year:</div>
                             <select
-                                className='p-1 rounded-md'
-                                style={{border: "1px solid gray"}}
                                 id="dropdown"
                                 value={year2}
                                 onChange={(e) => setYear2(e.target.value)}
@@ -470,7 +468,7 @@ const ViewHistory = () => {
                     {/* Principal content */}
                     {/* {/* <h1>Principal</h1> */}
                     {/* <p>Welcome, Principal!</p> */}
-                    <div className='flex flex-col items-center justify-evenly m-4'>
+                    <div className='flex items-center justify-evenly m-4'>
 
                         <form className='flex items-center justify-center' onSubmit={handlePrincipalSubmit}>
                             <Autocomplete
@@ -487,11 +485,9 @@ const ViewHistory = () => {
                             </button>
                         </form>
                         {selectedFaculty &&
-                            <div className="dropdown flex items-center">
+                            <div className="dropdown">
                                 <div>Select a Year:</div>
                                 <select
-                                    className='p-1 rounded-md'
-                                    style={{border: "1px solid gray"}}
                                     id="dropdown"
                                     value={year3}
                                     onChange={(e) => setYear3(e.target.value)}
@@ -695,11 +691,9 @@ const ViewHistory = () => {
                     </div>
                     {years ? (
 
-                        <div className="dropdown flex items-center">
+                        <div className="dropdown">
                             <div>Select a Year:</div>
                             <select
-                                className='p-1 rounded-md'
-                                style={{border: "1px solid gray"}}
                                 id="dropdown"
                                 value={year}
                                 onChange={(e) => setYear(e.target.value)}
@@ -1129,20 +1123,20 @@ const ViewHistory = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {history.Dimension1.info.courses.map(
+                                            {history.Dimension1.AP8.remedialData.map(
                                                 (course, index) => {
                                                     return (
                                                         <tr key={index}>
                                                             <td>{index + 1}</td>
                                                             <td>{course.sem}</td>
-                                                            <td>{course.name}</td>
-                                                            <td>{course.AP8ActivityRemedial}</td>
+                                                            <td>{course.subject}</td>
+                                                            <td>{course.activityDetails}</td>
                                                         </tr>
                                                     );
                                                 }
                                             )}
                                             <th colSpan={10} className="table-heading">
-                                                Totals Marks: {history.Dimension1.info.AP8Marks}
+                                                Totals Marks: {history.Dimension1.AP8.totalMarks}
                                             </th>
                                         </tbody>
                                     </table>
@@ -1167,20 +1161,20 @@ const ViewHistory = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {history.Dimension1.info.courses.map((ref, index) => {
+                                            {history.Dimension1.AP9.noteworthyData.map((ref, index) => {
                                                 return (
                                                     <tr key={index}>
                                                         <td>{index + 1}</td>
                                                         <td>{ref.sem}</td>
-                                                        <td>{ref.name}</td>
-                                                        <td>{ref.AP9noteworthyDetails}</td>
+                                                        <td>{ref.subject}</td>
+                                                        <td>{ref.activityDetails}</td>
                                                         {index === 0 && (
                                                             <td
                                                                 rowSpan={
-                                                                    history.Dimension1.info.courses.length
+                                                                    history.Dimension1.AP9.noteworthyData.length
                                                                 }
                                                             >
-                                                                {history.Dimension1.info.AP9Marks}
+                                                                {history.Dimension1.AP9.average}
                                                             </td>
                                                         )}
                                                     </tr>
@@ -1216,7 +1210,7 @@ const ViewHistory = () => {
                                                 );
                                             })}
                                             <th colSpan={10} className="table-heading">
-                                                Totals Marks: {history.Dimension1.info.AP8Marks}
+                                                Totals Marks: {history.Dimension1.AP10.averageMarks}
                                             </th>
                                         </tbody>
                                     </table>
