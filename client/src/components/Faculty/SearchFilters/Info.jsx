@@ -100,7 +100,7 @@ const Info = () => {
   return (
     <div className={container}>
       <div className="flex justify-between items-center text-4xl font-semibold">
-        <p>Student Search</p>
+        <p>Student Info Search</p>
         <Search />
       </div>
       <Filter

@@ -61,7 +61,7 @@ const Professional = () => {
   return (
     <div className={container}>
       <div className="flex justify-between items-center text-4xl font-semibold">
-        <p>Student Search</p>
+        <p>Professional Student Search</p>
         <Search />
       </div>
       <Filter
