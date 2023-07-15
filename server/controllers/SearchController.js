@@ -9,10 +9,36 @@ exports.getProfessionalInfo = asyncHandler(async(req,res) => {
     try{ 
         if(type === "All")
         {
-            // const placementEmails = await Placement.find({ companyName: organization }, 'emailID -_id');
-            // const emailIDs = placementEmails.map(placement => placement.emailID);
-            // const students = await Student.find({ emailID: { $in: emailIDs } }, 'emailID name uid -_id');
-            // res.status(200).json(students)
+            if(organization && ctc)
+            {
+                const placementEmails = await Placement.find({ ctc:ctc,companyName:organization}, 'emailID -_id');
+                const emailIDs = placementEmails.map(placement => placement.emailID);
+                const studentsPlacement = await Student.find({ emailID: { $in: emailIDs } }, 'emailID name uid -_id');
+                const studentsInternship = await Student.find({internship:{$elemMatch:{organization:organization}}},'emailID name uid -_id')
+                res.status(200).json({studentsPlacement,studentsInternship,placementEmails})
+            }
+            else if(organization)
+            {
+                const placementEmails = await Placement.find({companyName:organization}, 'emailID ctc -_id');
+                const emailIDs = placementEmails.map(placement => placement.emailID);
+                const studentsPlacement = await Student.find({ emailID: { $in: emailIDs } }, 'emailID name uid -_id');
+                const studentsInternship = await Student.find({internship:{$elemMatch:{organization:organization}}},'emailID name uid -_id')
+                res.status(200).json({studentsPlacement,studentsInternship,placementEmails})
+            }
+            else if(ctc)
+            {
+                const placementEmails = await Placement.find({ctc:ctc}, 'emailID companyName -_id');
+                const emailIDs = placementEmails.map(placement => placement.emailID);
+                const students = await Student.find({ emailID: { $in: emailIDs } }, 'emailID name uid -_id');
+                res.status(200).json({placementEmails,students})
+            }
+            else{
+                const placementEmails = await Placement.find({'companyName':{'$ne':'-'}}, 'emailID companyName ctc -_id');
+                const emailIDs = placementEmails.map(placement => placement.emailID);
+                const studentsPlacement = await Student.find({ emailID: { $in: emailIDs } }, 'emailID name uid -_id');
+                const studentsInternship = await Student.find({'internship.0':{$exists:true}},'emailID name uid internship.organization -_id')
+                res.status(200).json({studentsInternship,studentsPlacement,placementEmails})
+            }
         }
         else if(type === "Placement")
         {
@@ -27,19 +53,19 @@ exports.getProfessionalInfo = asyncHandler(async(req,res) => {
                 const placementEmails = await Placement.find({companyName:organization}, 'emailID ctc -_id');
                 const emailIDs = placementEmails.map(placement => placement.emailID);
                 const students = await Student.find({ emailID: { $in: emailIDs } }, 'emailID name uid -_id');
-                res.status(200).json(students)
+                res.status(200).json({placementEmails,students})
             }
             else if(ctc){
-                const placementEmails = await Placement.find({ctc:ctc}, 'emailID -_id');
+                const placementEmails = await Placement.find({ctc:ctc}, 'emailID companyName -_id');
                 const emailIDs = placementEmails.map(placement => placement.emailID);
                 const students = await Student.find({ emailID: { $in: emailIDs } }, 'emailID name uid -_id');
-                res.status(200).json(students)
+                res.status(200).json({placementEmails,students})
             }
             else{
-                const placementEmails = await Placement.find({}, 'emailID -_id');
+                const placementEmails = await Placement.find({'companyName':{'$ne':'-'}}, 'emailID companyName ctc -_id');
                 const emailIDs = placementEmails.map(placement => placement.emailID);
                 const students = await Student.find({ emailID: { $in: emailIDs } }, 'emailID name uid -_id');
-                res.status(200).json(students)
+                res.status(200).json({placementEmails,students})
             }
         }
         else{
@@ -48,7 +74,7 @@ exports.getProfessionalInfo = asyncHandler(async(req,res) => {
                 res.status(200).json(students)
             }
             else{
-                const students = await Student.find({'internship.0':{$exists:true}},'emailID name uid -_id')
+                const students = await Student.find({'internship.0':{$exists:true}},'emailID name uid internship.organization -_id')
                 res.status(200).json(students)
             }
         }
