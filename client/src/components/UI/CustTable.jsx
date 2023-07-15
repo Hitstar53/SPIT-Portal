@@ -116,6 +116,8 @@ export default function CustTable(props) {
     setOrderBy(property);
   };
 
+  console.log(props.rows);
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -167,7 +169,7 @@ export default function CustTable(props) {
               rowCount={props.rows.length}
             />
             <TableBody>
-              {visibleRows.map((row, index) => {
+              {props.rows.map((row, index) => {
                 console.log(row)
                 return (
                   <TableRow

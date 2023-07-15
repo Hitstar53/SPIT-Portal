@@ -81,14 +81,14 @@ const headCells = [
 
 const Professional = () => {
   const container = styles.container + " flex flex-col gap-8 p-8";
-  const [newRows, setNewRows] = useState(rows);
+  const [newRows, setNewRows] = useState([]);
   const [newFilters, setNewFilters] = useState(filters);
   const onSearchSubmit = (data) => {
     console.log(data);
     setNewFilters(filters);
   }
-  const onFilterSubmit = (data) => {
-    console.log(data);
+  const onFilterSubmit = (filterData) => {
+    console.log(filterData);
     setNewFilters(filters);
     const setProfessional = async () => {
       const response = await fetch(
@@ -99,9 +99,9 @@ const Professional = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            type: data.type,
-            organization: data.organization,
-            ctc: data.ctc,
+            type: filterData.type,
+            organization: filterData.organization,
+            ctc: filterData.ctc,
           }),
         }
       );
@@ -110,10 +110,28 @@ const Professional = () => {
       }
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        if (filterData.organization) {
+          const tempArray = data.students.map((student, index) => ({
+            uid: student.uid,
+            studentname: student.name,
+            email: student.emailID,
+            Organization: filterData.organization,
+            ctc: data.placementEmails[index].ctc,
+            type: "placement",
+          }));
+          console.log(tempArray);
+          setNewRows(tempArray);
+        } else {
+          const tempArray = data.students.map((student, index) => ({
+            email: student.emailID,
+            uid: student.uid,
+            studentname: student.name,
+          }));
+          setNewRows(tempArray);
+        }
       }
     }
-    setProfessional();
+    setProfessional();  
   }
   return (
     <div className={container}>
@@ -129,7 +147,7 @@ const Professional = () => {
         onSubmit={onFilterSubmit}
       />
       <div className="mt-6">
-        <CustTable rows={rows} headCells={headCells} />
+        <CustTable rows={newRows} headCells={headCells} />
       </div>
     </div>
   );
