@@ -1,41 +1,55 @@
 import * as React from "react";
+import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 
 export default function Filter(props) {
+  const [newData, setNewData] = React.useState({});
+  const handleDataChange = (e) => {
+    setNewData({ ...newData, [e.target.name]: e.target.value });
+  };
+  const handleDataSubmit = async (e) => {
+    e.preventDefault();
+    props.onSubmit(newData);
+  };
   return (
-    <div className="mt-2 flex flex-row gap-6 items-center">
+    <Box
+      className="mt-2 flex flex-row gap-6 items-center flex-wrap"
+      component="form"
+      noValidate
+      autoComplete="off"
+      onSubmit={handleDataSubmit}
+    >
       <p className="text-xl font-semibold">Available Filters</p>
       <TextField
-          required
-          name="type"
-          id="outlined-required"
-          select
-          size="small"
-          sx={{
-            width: "12rem",
-            color: "var(--text-color)",
-            background: "var(--bg-color-2)",
-          }}
-          label="Select Type"
-        >
-        {
-          props.options.map((item) => {
-            return (
-              <MenuItem value={item.value}>{item.name}</MenuItem>
-            )
-          })
-        }
-        </TextField>
+        required
+        name="type"
+        id="outlined-required"
+        select
+        size="small"
+        sx={{
+          width: "12rem",
+          color: "var(--text-color)",
+          background: "var(--bg-color-2)",
+        }}
+        label="Select Type"
+        onChange={handleDataChange}
+      >
+        {props.options.map((item) => {
+          return <MenuItem value={item.value}>{item.name}</MenuItem>;
+        })}
+      </TextField>
 
       {props.filters.map((item) => {
         return (
           <TextField
             id={item.id}
+            name={item.id}
             label={item.label}
             variant="outlined"
             size="small"
+            onChange={handleDataChange}
             sx={{
               width: "20rem",
               color: "var(--text-color)",
@@ -45,6 +59,7 @@ export default function Filter(props) {
         );
       })}
       <Button
+        type="submit"
         variant="contained"
         size="small"
         sx={{
@@ -63,6 +78,6 @@ export default function Filter(props) {
       >
         Search
       </Button>
-    </div>
+    </Box>
   );
 }

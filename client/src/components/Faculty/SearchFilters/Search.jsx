@@ -1,13 +1,34 @@
 import React from 'react'
+import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import styles from './Search.module.css'
 
 const Search = (props) => {
+  const [newData, setNewData] = React.useState({})
+  const handleDataChange = (e) => {
+    setNewData({ ...newData, [e.target.name]: e.target.value })
+  }
+  const handleDataSubmit = async (e) => {
+    e.preventDefault()
+    props.onSubmit(newData)
+  }
   return (
     <React.Fragment>
-      <div className={styles.searchContainer}>
-        <input placeholder="Search for any student..." className={styles.searchBar} />
+      <Box 
+        component="form"
+        noValidate
+        autoComplete="off"
+        onSubmit={handleDataSubmit}
+        className={styles.searchContainer}
+      >
+        <input 
+          name="search"
+          onChange={handleDataChange}
+          placeholder="Search for any student..." 
+          className={styles.searchBar}
+        />
         <Button 
+          type="submit"
           variant="contained"
           sx={{
             color: "var(--text-light)",
@@ -24,7 +45,7 @@ const Search = (props) => {
         >
           Go
         </Button>
-      </div>
+      </Box>
     </React.Fragment>
   )
 }

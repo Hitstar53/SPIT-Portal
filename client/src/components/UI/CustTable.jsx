@@ -26,33 +26,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-function createData(uid, studentname, email, Organization, ctc) {
-  return {
-    uid,
-    studentname,
-    email,
-    Organization,
-    ctc,
-  };
-}
-
-const rows = [
-  createData(
-    2021300108,
-    "Hatim Sawai",
-    "hatim.sawai@spit.ac.in",
-    "JP Morgan",
-    "10.5"
-  ),
-  createData(
-    2021300109,
-    "Kaif Sayyed",
-    "kaif.sayyed@spit.ac.in",
-    "Barclays",
-    "12.5"
-  ),
-];
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -81,34 +54,6 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-const headCells = [
-  {
-    id: "uid",
-    numeric: true,
-    label: "UID",
-  },
-  {
-    id: "studentname",
-    numeric: false,
-    label: "Student Name",
-  },
-  {
-    id: "email",
-    numeric: false,
-    label: "Email",
-  },
-  {
-    id: "Organization",
-    numeric: false,
-    label: "Organization",
-  },
-  {
-    id: "ctc",
-    numeric: true,
-    label: "CTC (LPA)",
-  },
-];
-
 function EnhancedTableHead(props) {
   const { order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
@@ -118,7 +63,7 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        {headCells.map((headCell) => (
+        {props.headCells.map((headCell) => (
           <StyledTableCell
             key={headCell.id}
             align={headCell.numeric ? "left" : "left"}
@@ -182,7 +127,7 @@ export default function CustTable(props) {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - props.rows.length) : 0;
 
   const visibleRows = React.useMemo(
     () =>
@@ -217,12 +162,13 @@ export default function CustTable(props) {
             <EnhancedTableHead
               order={order}
               orderBy={orderBy}
+              headCells={props.headCells}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={props.rows.length}
             />
             <TableBody>
               {visibleRows.map((row, index) => {
-                const labelId = `enhanced-table-checkbox-${index}`;
+                console.log(row)
                 return (
                   <TableRow
                     hover
@@ -230,7 +176,7 @@ export default function CustTable(props) {
                     key={row.uid}
                     sx={{ cursor: "pointer" }}
                   >
-                    <StyledTableCell
+                    {/* <StyledTableCell
                       component="th"
                       id={labelId}
                       scope="row"
@@ -244,13 +190,19 @@ export default function CustTable(props) {
                     </StyledTableCell>
                     <StyledTableCell align="left">
                       {row.email}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {row.Organization}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {row.ctc}
-                    </StyledTableCell>
+                    </StyledTableCell> */}
+                    {props.headCells.map((headCell) => {
+                      return (
+                        <StyledTableCell
+                          key={headCell.id}
+                          align={headCell.numeric ? "left" : "left"}
+                          padding={"normal"}
+                          sortDirection={orderBy === headCell.id ? order : false}
+                        >
+                          {row[headCell.id]}
+                        </StyledTableCell>
+                      );
+                    })}
                   </TableRow>
                 );
               })}
@@ -269,7 +221,7 @@ export default function CustTable(props) {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={props.rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

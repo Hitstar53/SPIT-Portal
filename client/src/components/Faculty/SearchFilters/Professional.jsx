@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import CustTable from '../../UI/CustTable'
 import Search from './Search'
 import Filter from './Filter'
+import ServerUrl from '../../../constants'
 import styles from './FilterLayout.module.css'
 
 const rows = [
@@ -49,27 +50,86 @@ const options = [
   }
 ]
 
+const headCells = [
+  {
+    id: "uid",
+    numeric: true,
+    label: "UID",
+  },
+  {
+    id: "studentname",
+    numeric: false,
+    label: "Student Name",
+  },
+  {
+    id: "email",
+    numeric: false,
+    label: "Email",
+  },
+  {
+    id: "Organization",
+    numeric: false,
+    label: "Organization",
+  },
+  {
+    id: "ctc",
+    numeric: true,
+    label: "CTC (LPA)",
+  },
+];
+
 
 const Professional = () => {
   const container = styles.container + " flex flex-col gap-8 p-8";
-
   const [newRows, setNewRows] = useState(rows);
-  // setNewRows = () => {
-
-  // };
-
+  const [newFilters, setNewFilters] = useState(filters);
+  const onSearchSubmit = (data) => {
+    console.log(data);
+    setNewFilters(filters);
+  }
+  const onFilterSubmit = (data) => {
+    console.log(data);
+    setNewFilters(filters);
+    const setProfessional = async () => {
+      const response = await fetch(
+        `${ServerUrl}/api/faculty/getProfessionalInfo`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            type: data.type,
+            organization: data.organization,
+            ctc: data.ctc,
+          }),
+        }
+      );
+      if (!response.ok) {
+        console.log("Something went wrong, please try again later");
+      }
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+      }
+    }
+    setProfessional();
+  }
   return (
     <div className={container}>
       <div className="flex justify-between items-center text-4xl font-semibold">
         <p>Professional Student Search</p>
-        <Search />
+        <Search
+          onSubmit={onSearchSubmit}
+        />
       </div>
       <Filter
         options={options}
         filters={filters}
+        onSubmit={onFilterSubmit}
       />
       <div className="mt-6">
-        <CustTable rows={newRows} />
+        <CustTable rows={rows} headCells={headCells} />
       </div>
     </div>
   );

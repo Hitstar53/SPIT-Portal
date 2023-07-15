@@ -31,6 +31,7 @@ export default function FormModal(props) {
             </DialogTitle>
             <DialogContent>
               <TextField
+                autoFocus
                 margin="dense"
                 id="name"
                 label={props.label}

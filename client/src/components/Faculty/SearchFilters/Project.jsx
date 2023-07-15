@@ -19,7 +19,7 @@ const rows = [
     email: "kaif.sayyed@spit.ac.in",
     project: "Health App",
     domain: "App Development",
-    type: "Flutter, Firebase",
+    techstack: "Flutter, Firebase",
   },
 ]
 
@@ -57,14 +57,42 @@ const options = [
   }
 ]
 
+const headCells = [
+  {
+    id: "uid",
+    numeric: true,
+    label: "UID",
+  },
+  {
+    id: "studentname",
+    numeric: false,
+    label: "Student Name",
+  },
+  {
+    id: "email",
+    numeric: false,
+    label: "Email",
+  },
+  {
+    id: "project",
+    numeric: false,
+    label: "Project",
+  },
+  {
+    id: "domain",
+    numeric: false,
+    label: "Domain",
+  },
+  {
+    id: "techstack",
+    numeric: false,
+    label: "TechStack",
+  },
+];
+
 
 const Project = () => {
   const container = styles.container + " flex flex-col gap-8 p-8";
-
-  const [newRows, setNewRows] = useState(rows);
-  // setNewRows = () => {
-
-  // };
 
   return (
     <div className={container}>
@@ -77,7 +105,7 @@ const Project = () => {
         filters={filters}
       />
       <div className="mt-6">
-        <CustTable rows={newRows} />
+        <CustTable rows={rows} headCells={headCells}  />
       </div>
     </div>
   );

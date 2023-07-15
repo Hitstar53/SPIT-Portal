@@ -28,7 +28,6 @@ export default function SkillSet(props) {
       return;
     }
     setAlertOpen(false);
-    navigate(0);
   };
 
   const [open, setOpen] = React.useState(false);

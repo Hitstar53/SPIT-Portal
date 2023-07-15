@@ -119,7 +119,6 @@ const Internship = () => {
         setAlertOpen(true);
         setSeverity("success");
         setMessage("Internship Added Successfully");
-        getInternships();
       }
     };
     updateInternship();

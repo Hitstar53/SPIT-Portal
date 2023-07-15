@@ -31,6 +31,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import moodle from "../../assets/moodle.png";
 import ServerUrl from "../../constants";
+import { dark } from "@mui/material/styles/createPalette";
 
 let drawerWidth = 275;
 
@@ -218,12 +219,29 @@ export default function MiniDrawer({ open,setOpen }) {
     setOpen(true);
   }
 
+  // const isDarkMode =
+  //   window.matchMedia &&
+  //   window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    const isDarkReaderEnabled = () => {
+      const element = document.querySelector("body");
+      const computedStyles = window.getComputedStyle(element);
+      // Compare the styles with your expected dark mode styles
+      const isDarkMode =
+        computedStyles.color === "rgb(255, 255, 255)" &&
+        computedStyles.backgroundColor === "rgb(0, 0, 0)";
+      return isDarkMode;
+    };
+
+    const darkReaderEnabled = isDarkReaderEnabled();
+
   const [checked, setChecked] = React.useState(
-    localStorage.getItem("theme") === "dark" ? true : false
+    localStorage.getItem("theme") === "dark"
+    ? true : false
   );
 
   React.useEffect(() => {
-    if (localStorage.getItem("theme") === "dark") {
+    if (localStorage.getItem("theme") === "dark" || darkReaderEnabled) {
       DarkMode();
       setChecked(true);
     } else {

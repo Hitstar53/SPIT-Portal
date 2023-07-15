@@ -7,33 +7,22 @@ import styles from './FilterLayout.module.css'
 const rows = [
   {
     uid: 2021300108,
-    studentname: "Hatim Sawai",
+    name: "Hatim Sawai",
     email: "hatim.sawai@spit.ac.in",
     branch: "Computer Engineering",
     batch: "B",
     committee: "Oculus Coding League",
-    event: [
-      {
-        name: "S.E. Hackathon",
-      },
-      {
-        name: "IPL Auction",
-      }
-    ],
+    event: "S.E. Hackathon, IPL Auction",
     cgpa: 9.5,
   },
   {
     uid: 2021300109,
-    studentname: "Kaif Sayyed",
+    name: "Kaif Sayyed",
     email: "kaif.sayyed@spit.ac.in",
     branch: "Computer Engineering",
     batch: "B",
     committee: "",
-    event: [
-      {
-        name: "Pitch Perfect",
-      }
-    ],
+    event: "Pitch Perfect",
     cgpa: 8.1,
   },
 ]
@@ -88,14 +77,52 @@ const options = [
   }
 ]
 
+const headCells = [
+  {
+    id: "uid",
+    numeric: true,
+    label: "UID",
+  },
+  {
+    id: "name",
+    numeric: false,
+    label: "Name",
+  },
+  {
+    id: "email",
+    numeric: false,
+    label: "Email",
+  },
+  {
+    id: "branch",
+    numeric: false,
+    label: "Branch",
+  },
+  {
+    id: "batch",
+    numeric: false,
+    label: "Batch",
+  },
+  {
+    id: "committee",
+    numeric: false,
+    label: "Committee",
+  },
+  {
+    id: "event",
+    numeric: false,
+    label: "Events",
+  },
+  {
+    id: "cgpa",
+    numeric: true,
+    label: "CGPA",
+  },
+];
+
 
 const Info = () => {
   const container = styles.container + " flex flex-col gap-8 p-8";
-
-  const [newRows, setNewRows] = useState(rows);
-  // setNewRows = () => {
-
-  // };
 
   return (
     <div className={container}>
@@ -108,7 +135,7 @@ const Info = () => {
         filters={filters}
       />
       <div className="mt-6">
-        <CustTable rows={newRows} />
+        <CustTable rows={rows} headCells={headCells} />
       </div>
     </div>
   );

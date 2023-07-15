@@ -210,7 +210,7 @@ exports.updateGroupUpcomingExams = asyncHandler(async(req,res) =>{
 exports.getUpcomingExams = asyncHandler(async(req,res) => {
     const email = req.body.email;
     try {
-        const examStudent = await Profile.findOne({emailID:email}).select('exams.name exams.date exams.syllabus exams.type exams.courseName -_id')
+        const examStudent = await Profile.findOne({emailID:email}).select('exams.date exams.syllabus exams.type exams.courseName -_id')
         res.status(200).json(examStudent)
     }
     catch (error){
