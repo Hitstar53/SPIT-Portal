@@ -116,8 +116,6 @@ export default function CustTable(props) {
     setOrderBy(property);
   };
 
-  console.log(props.rows);
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -131,13 +129,9 @@ export default function CustTable(props) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - props.rows.length) : 0;
 
-  const visibleRows = React.useMemo(
-    () =>
-      stableSort(props.rows, getComparator(order, orderBy)).slice(
-        page * rowsPerPage,
-        page * rowsPerPage + rowsPerPage
-      ),
-    [order, orderBy, page, rowsPerPage]
+  const visibleRows = stableSort(props.rows, getComparator(order, orderBy)).slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
   );
 
   return (
@@ -169,8 +163,7 @@ export default function CustTable(props) {
               rowCount={props.rows.length}
             />
             <TableBody>
-              {props.rows.map((row, index) => {
-                console.log(row)
+              {visibleRows.map((row, index) => {
                 return (
                   <TableRow
                     hover

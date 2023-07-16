@@ -15,7 +15,7 @@ export default function Filter(props) {
   };
   return (
     <Box
-      className="mt-2 flex flex-row gap-6 items-center flex-wrap"
+      className="mt-2 flex flex-row justify-between gap-6 items-center flex-wrap"
       component="form"
       noValidate
       autoComplete="off"
