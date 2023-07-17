@@ -3,6 +3,7 @@ import CustTable from '../../UI/CustTable'
 import Search from './Search'
 import Filter from './Filter'
 import styles from './FilterLayout.module.css'
+import ServerUrl from '../../../constants'
 
 const rows = [
   {
@@ -41,19 +42,19 @@ const options = [
   },
   {
     name: "F.E.",
-    value: "F.E.",
+    value: "FE",
   },
   {
     name: "S.E.",
-    value: "S.E.",
+    value: "SE",
   },
   {
     name: "T.E.",
-    value: "T.E.",
+    value: "TE",
   },
   {
     name: "B.E.",
-    value: "B.E.",
+    value: "BE",
   }
 ]
 
@@ -93,19 +94,52 @@ const headCells = [
 
 const Project = () => {
   const container = styles.container + " flex flex-col gap-8 p-8";
-
+  const [newRows, setNewRows] = useState([]);
+  const [newFilters, setNewFilters] = useState(filters);
+  const onSearchSubmit = (data) => {
+    console.log(data);
+    setNewFilters(filters);
+  };
+  const onFilterSubmit = (filterData) => {
+    setNewFilters(filters);
+    const setProject = async () => {
+      const response = await fetch(
+        `${ServerUrl}/api/faculty/getProjectsInfo`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            year: filterData.type === "All" ? "" : filterData.type,
+            domain: filterData.domain ? ".*"+filterData.domain.split("").join(".*")+".*" : undefined,
+            techStack: filterData.techstack ? ".*"+filterData.techstack.split("").join(".*")+".*" : undefined,
+          }),
+        }
+      );
+      if (!response.ok) {
+        console.log("Something went wrong, please try again later");
+      }
+      if (response.ok) {
+        const data = await response.json();
+        setNewRows(data);
+      }
+    };
+    setProject();
+  };
   return (
     <div className={container}>
       <div className="flex justify-between items-center text-4xl font-semibold">
         <p>Project Based Student Search</p>
-        <Search />
+        <Search onSubmit={onSearchSubmit} />
       </div>
       <Filter
         options={options}
         filters={filters}
+        onSubmit={onFilterSubmit}
       />
       <div className="mt-6">
-        <CustTable rows={rows} headCells={headCells}  />
+        <CustTable rows={newRows} headCells={headCells}  />
       </div>
     </div>
   );

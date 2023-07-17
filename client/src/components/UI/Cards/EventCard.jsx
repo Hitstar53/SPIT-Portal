@@ -33,10 +33,7 @@ const data = [
 const EventCard = (props) => {
     return (
         <div className={styles.card}>
-            <div className={styles.inner}>
-                <EventAccordion data={props.data} />
-            </div>
-            {/* {props.data.length === 0 ? 
+            {props.data.length === 0 ? 
                 <div className={styles.inner}
                     style={{
                         padding: "1rem 0",
@@ -55,7 +52,7 @@ const EventCard = (props) => {
                     <div className={styles.inner}>
                         <EventAccordion data={props.data} />
                     </div>
-                )} */}
+                )}
         </div>
     )
 }

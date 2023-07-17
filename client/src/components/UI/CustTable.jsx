@@ -168,24 +168,9 @@ export default function CustTable(props) {
                   <TableRow
                     hover
                     tabIndex={-1}
-                    key={row.uid}
+                    key={index}
                     sx={{ cursor: "pointer" }}
                   >
-                    {/* <StyledTableCell
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                      padding="normal"
-                      align="left"
-                    >
-                      {row.uid}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {row.studentname}
-                    </StyledTableCell>
-                    <StyledTableCell align="left">
-                      {row.email}
-                    </StyledTableCell> */}
                     {props.headCells.map((headCell) => {
                       return (
                         <StyledTableCell

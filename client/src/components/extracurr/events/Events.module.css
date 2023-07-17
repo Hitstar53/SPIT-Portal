@@ -26,6 +26,7 @@
 
 @media screen and (max-width: 768px) {
   .header {
+    align-items: flex-start;
     flex-direction: column;
     margin-bottom: 1.5rem;
   }

@@ -12,7 +12,12 @@ import AddButton from "../../UI/AddButton.jsx";
 import MultiFieldModal from "../../UI/Modals/MultiFieldModal";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import { json, useLoaderData, useNavigate,useRouteLoaderData } from "react-router-dom";
+import {
+  json,
+  useLoaderData,
+  useNavigate,
+  useRouteLoaderData,
+} from "react-router-dom";
 import ServerUrl from "../../../constants";
 
 const Activities = () => {
@@ -116,7 +121,7 @@ const Activities = () => {
     deleteVolunteerWork();
     setVolOpen(false);
   };
-  
+
   const [openComDialog, setOpenComDialog] = useState(false);
   const handleComClickOpenDialog = () => {
     setOpenComDialog(true);
@@ -124,7 +129,7 @@ const Activities = () => {
   const handleComCloseDialog = () => {
     setOpenComDialog(false);
   };
-  
+
   const [newComData, setNewComData] = useState({});
   const handleComDataChange = (e) => {
     setNewComData({ ...newComData, [e.target.name]: e.target.value });
@@ -157,11 +162,11 @@ const Activities = () => {
             eventName: newVolData.volname,
             date: newVolData.voldur,
             organization: newVolData.instructor,
-            description: newVolData.desc
+            description: newVolData.desc,
           }),
         }
       );
-      
+
       if (!response.ok) {
         setAlertOpen(true);
         setSeverity("error");
@@ -193,8 +198,8 @@ const Activities = () => {
           body: JSON.stringify({
             email: JSON.parse(localStorage.getItem("userinfo")).email,
             committeeDetails: newComData.comname,
-            tenure:newComData.comyear,
-            position:newComData.compos
+            tenure: newComData.comyear,
+            position: newComData.compos,
           }),
         }
       );
@@ -213,19 +218,16 @@ const Activities = () => {
     updateCommitteeWork();
     setComOpen(false);
   };
-  
 
   return (
     <div className={styles.activitiesPage}>
       <div className={styles.committees}>
         <div className={styles.header}>
           <h1 className={styles.heading}>Committee Work</h1>
-          <div>
-            <AddButton
-              btntext="Add Committee Work"
-              onClick={handleComClickOpenDialog}
-            />
-          </div>
+          <AddButton
+            btntext="Add Committee Work"
+            onClick={handleComClickOpenDialog}
+          />
         </div>
         <div className={styles.comGrid}>
           {committeeWork.map((cominfo, index) => (
@@ -444,29 +446,23 @@ export async function loader() {
       }),
     }
   );
-  const response2 = await fetch(
-    `${ServerUrl}/api/student/getYourCommittee`,
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: JSON.parse(localStorage.getItem("userinfo")).email,
-      }),
-    }
-  );
-  const response3 = await fetch(
-    `${ServerUrl}/api/student/getCommitteeNames`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  if(!response1.ok && !response2.ok && !response3.ok) {
-    throw json({ message: "Error fetching activity details"}, 422);
+  const response2 = await fetch(`${ServerUrl}/api/student/getYourCommittee`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: JSON.parse(localStorage.getItem("userinfo")).email,
+    }),
+  });
+  const response3 = await fetch(`${ServerUrl}/api/student/getCommitteeNames`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (!response1.ok && !response2.ok && !response3.ok) {
+    throw json({ message: "Error fetching activity details" }, 422);
   }
   if (response1.ok && response2.ok && response3.ok) {
     const volData = await response1.json();

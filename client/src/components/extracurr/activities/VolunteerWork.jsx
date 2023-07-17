@@ -28,9 +28,7 @@ const VolunteerWork = (props) => {
               />
             </div>
           </div>
-          <div className={styles.position}>
-            <div className={styles.instructor}>{props.instructor}</div>
-          </div>
+          <div className={styles.instructor}>{props.instructor}</div>
           <div className={styles.description}>{props.desc}</div>
         </div>
       </div>

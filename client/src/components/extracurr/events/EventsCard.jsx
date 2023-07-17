@@ -6,21 +6,19 @@ const Events = (props) => {
   return (
     <div className={styles.eventsCard}>
       <div className={styles.content}>
-        <div className={styles.position}>
-          <div className={styles.eventname}>{props.eventname}</div>
-          <div className={styles.eventcontrol}>
-            {props.eventdate}
-            <CloseIcon
-              sx={{ color: "var(--text-light)", cursor: "pointer" }}
-              onClick={() => {
-                props.handleClickOpen(props.key);
-              }}
-            />
+        <div className={styles.eventcontrol}>
+          <div className={styles.position}>
+            <div className={styles.eventname}>{props.eventname}</div>
+            <div>{props.eventdate}</div>
           </div>
+          <CloseIcon
+            sx={{ color: "var(--text-light)", cursor: "pointer" }}
+            onClick={() => {
+              props.handleClickOpen(props.key);
+            }}
+          />
         </div>
-        <div className={styles.position}>
-          <hr className={styles.horizontalLine} />
-        </div>
+        <hr className={styles.horizontalLine} />
         <div className={styles.position}>
           <div className={styles.organisation_name}>{props.orgname}</div>
         </div>

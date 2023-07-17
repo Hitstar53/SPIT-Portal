@@ -23,7 +23,6 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 1rem;
-    width: 100%;
 }
 
 .cardItemLogo {
@@ -35,7 +34,7 @@
 }
 
 .cardItemContent h1 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 600;
 }
 

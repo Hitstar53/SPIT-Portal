@@ -78,6 +78,121 @@ const headCells = [
   },
 ];
 
+const SearchFilters = (data,filterData) => {
+  if (filterData.type === "All") {
+    if (filterData.organization && filterData.ctc) {
+      console.log(data);
+      const rowData = data.students.map((student, index) => ({
+        uid: student.uid,
+        studentname: student.name,
+        email: student.emailID,
+        Organization: filterData.organization,
+        ctc: filterData.ctc,
+        type: "placement",
+      }));
+      return rowData;
+    } else if (filterData.organization) {
+      console.log(data);
+      const rowData = data.students.map((student, index) => ({
+        uid: student.uid,
+        studentname: student.name,
+        email: student.emailID,
+        Organization: filterData.organization,
+        ctc: data.placementEmails[index].ctc,
+        type: "placement",
+      }));
+      return rowData;
+    } else if (filterData.ctc) {
+      console.log(data);
+      const rowData = data.students.map((student, index) => ({
+        uid: student.uid,
+        studentname: student.name,
+        email: student.emailID,
+        Organization: data.placementEmails[index].companyName,
+        ctc: filterData.ctc,
+        type: "placement",
+      }));
+      return rowData;
+    } else {
+      console.log(data);
+      const rowData = data.students.map((student, index) => ({
+        email: student.emailID,
+        uid: student.uid,
+        studentname: student.name,
+        Organization: data.placementEmails[index].companyName,
+        ctc: data.placementEmails[index].ctc,
+        type: "placement",
+      }));
+      return rowData;
+    }
+  }
+  else if (filterData.type === "Placement") {
+    if (filterData.organization && filterData.ctc) {
+      const rowData = data.map((student, index) => ({
+        uid: student.uid,
+        studentname: student.name,
+        email: student.emailID,
+        Organization: filterData.organization,
+        ctc: filterData.ctc,
+        type: "placement",
+      }));
+      return rowData;
+    } else if (filterData.organization) {
+      const rowData = data.students.map((student, index) => ({
+        uid: student.uid,
+        studentname: student.name,
+        email: student.emailID,
+        Organization: filterData.organization,
+        ctc: data.placementEmails[index].ctc,
+        type: "placement",
+      }));
+      return rowData;
+    } else if (filterData.ctc) {
+      const rowData = data.students.map((student, index) => ({
+        uid: student.uid,
+        studentname: student.name,
+        email: student.emailID,
+        Organization: data.placementEmails[index].companyName,
+        ctc: filterData.ctc,
+        type: "placement",
+      }));
+      return rowData;
+    } else {
+      const rowData = data.students.map((student, index) => ({
+        email: student.emailID,
+        uid: student.uid,
+        studentname: student.name,
+        Organization: data.placementEmails[index].companyName,
+        ctc: data.placementEmails[index].ctc,
+        type: "placement",
+      }));
+      return rowData;
+    }
+  } else if (filterData.type === "Internship") {
+    if (filterData.organization) {
+      const rowData = data.map((student, index) => ({
+        uid: student.uid,
+        studentname: student.name,
+        email: student.emailID,
+        Organization: filterData.organization,
+        ctc: "-",
+        type: "internship",
+      }));
+      return rowData;
+    } else {
+      const rowData = data.map((student, index) => ({
+        uid: student.uid,
+        studentname: student.name,
+        email: student.emailID,
+        Organization: student.internship.map(({organization}) => organization).join(", "),
+        ctc: "-",
+        type: "internship",
+      }));
+      return rowData;
+    }
+  }
+}
+
 
 const Professional = () => {
   const container = styles.container + " flex flex-col gap-8 p-8";
@@ -111,62 +226,7 @@ const Professional = () => {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        if (filterData.type === "Placement") {
-          if (filterData.organization) {
-            const rowData = data.students.map((student, index) => ({
-              uid: student.uid,
-              studentname: student.name,
-              email: student.emailID,
-              Organization: filterData.organization,
-              ctc: data.placementEmails[index].ctc,
-              type: "placement",
-            }));
-            setNewRows(rowData);
-          } else if (filterData.ctc) {
-            const rowData = data.students.map((student, index) => ({
-              uid: student.uid,
-              studentname: student.name,
-              email: student.emailID,
-              Organization: data.placementEmails[index].companyName,
-              ctc: filterData.ctc,
-              type: "placement",
-            }));
-            setNewRows(rowData);
-          } else {
-            console.log(data);
-            const rowData = data.students.map((student, index) => ({
-              email: student.emailID,
-              uid: student.uid,
-              studentname: student.name,
-              Organization: data.placementEmails[index].companyName,
-              ctc: data.placementEmails[index].ctc,
-              type: "placement",
-            }));
-            setNewRows(rowData);
-          }
-        } else if (filterData.type === "Internship") {
-          if (filterData.organization) {
-            const rowData = data.map((student, index) => ({
-              uid: student.uid,
-              studentname: student.name,
-              email: student.emailID,
-              Organization: filterData.organization,
-              ctc: "-",
-              type: "internship",
-            }));
-            setNewRows(rowData);
-          } else {
-            const rowData = data.map((student, index) => ({
-              uid: student.uid,
-              studentname: student.name,
-              email: student.emailID,
-              Organization: student.internship.map(({organization}) => organization).join(", "),
-              ctc: "-",
-              type: "internship",
-            }));
-            setNewRows(rowData);
-          }
-        }
+        setNewRows(SearchFilters(data,filterData));
       }
     }
     setProfessional();  

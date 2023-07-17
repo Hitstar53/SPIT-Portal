@@ -22,62 +22,63 @@ export default function Filter(props) {
       onSubmit={handleDataSubmit}
     >
       <p className="text-xl font-semibold">Available Filters</p>
-      <TextField
-        required
-        name="type"
-        id="outlined-required"
-        select
-        size="small"
-        sx={{
-          width: "12rem",
-          color: "var(--text-color)",
-          background: "var(--bg-color-2)",
-        }}
-        label="Select Type"
-        onChange={handleDataChange}
-      >
-        {props.options.map((item) => {
-          return <MenuItem value={item.value}>{item.name}</MenuItem>;
+      <div className="flex flex-row gap-6 items-center flex-wrap flex-1">
+        <TextField
+          required
+          name="type"
+          id="outlined-required"
+          select
+          size="small"
+          sx={{
+            width: "12rem",
+            color: "var(--text-color)",
+            background: "var(--bg-color-2)",
+          }}
+          label="Select Type"
+          onChange={handleDataChange}
+        >
+          {props.options.map((item) => {
+            return <MenuItem value={item.value}>{item.name}</MenuItem>;
+          })}
+        </TextField>
+        {props.filters.map((item) => {
+          return (
+            <TextField
+              id={item.id}
+              name={item.id}
+              label={item.label}
+              variant="outlined"
+              size="small"
+              onChange={handleDataChange}
+              sx={{
+                width: "20rem",
+                color: "var(--text-color)",
+                background: "var(--bg-color-2)",
+              }}
+            />
+          );
         })}
-      </TextField>
-
-      {props.filters.map((item) => {
-        return (
-          <TextField
-            id={item.id}
-            name={item.id}
-            label={item.label}
-            variant="outlined"
-            size="small"
-            onChange={handleDataChange}
-            sx={{
-              width: "20rem",
-              color: "var(--text-color)",
-              background: "var(--bg-color-2)",
-            }}
-          />
-        );
-      })}
-      <Button
-        type="submit"
-        variant="contained"
-        size="small"
-        sx={{
-          color: "var(--text-light)",
-          backgroundColor: "var(--primary-color)",
-          borderRadius: "0.5rem",
-          paddingX: "1rem",
-          fontSize: "1rem",
-          fontWeight: "bold",
-          textTransform: "none",
-          "&:hover": {
-            color: "var(--text-dark)",
-            backgroundColor: "var(--secondary-color)",
-          },
-        }}
-      >
-        Search
-      </Button>
+        <Button
+          type="submit"
+          variant="contained"
+          size="small"
+          sx={{
+            color: "var(--text-light)",
+            backgroundColor: "var(--primary-color)",
+            borderRadius: "0.5rem",
+            paddingX: "1rem",
+            fontSize: "1rem",
+            fontWeight: "bold",
+            textTransform: "none",
+            "&:hover": {
+              color: "var(--text-dark)",
+              backgroundColor: "var(--secondary-color)",
+            },
+          }}
+        >
+          Search
+        </Button>
+      </div>
     </Box>
   );
 }

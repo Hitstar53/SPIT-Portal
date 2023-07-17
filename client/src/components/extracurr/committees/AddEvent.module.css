@@ -20,8 +20,12 @@
   cursor: pointer;
 }
 
+.card:hover {
+  background-color: var(--tertiary-color);
+}
+
 .accordDivider {
-  margin: 0.5rem 0 0.5rem 0;
+  margin: 1rem 0 1rem 0;
   border: none;
   background-color: var(--text-light);
   height: 1px;
@@ -44,4 +48,10 @@
 .date{
   font-weight: 400;
   font-size: 1rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .event {
+    flex-wrap: wrap;
+  }
 }

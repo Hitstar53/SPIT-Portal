@@ -83,3 +83,58 @@ exports.getProfessionalInfo = asyncHandler(async(req,res) => {
         console.error(error)
     }
 })
+
+
+exports.getProjectsInfo = asyncHandler(async (req, res) => {
+    let { year, domain, techStack } = req.body;
+    const fieldMapping = {
+      year: 'educationalInfo.0.year',
+      domain: 'projects.domain',
+      techStack: 'projects.techStack',
+    };
+    const filter = {};
+    for (const field in fieldMapping) {
+      if (req.body[field] !== undefined) {
+        const schemaField = fieldMapping[field];
+        filter[schemaField] = {
+            $regex: `${req.body[field]}`,
+            $options: 'i',
+        };
+      }
+    }
+    try {
+      const response = await Student.find(filter).select(
+        'uid name emailID projects.name projects.domain projects.techStack -_id'
+      );
+      let projectInfo = [];
+      for (const res in response) {
+        const { uid, name, emailID, projects } = response[res];
+        for (const p in projects) {
+          const project = projects[p].name;
+          const domain = projects[p].domain;
+          const techStack = projects[p].techStack.join(',');
+          projectInfo.push({
+            uid: uid,
+            studentname: name,
+            email: emailID,
+            project: project,
+            domain: domain,
+            techstack: techStack,
+          });
+        }
+      }
+      if (domain) {
+        const domainRegex = new RegExp( domain , 'i');
+        projectInfo = projectInfo.filter((item) => domainRegex.test(item.domain));
+      }
+      if (techStack) {
+        const techStackRegex = new RegExp( techStack , 'i');
+        projectInfo = projectInfo.filter((item) => techStackRegex.test(item.techstack));
+      }
+      res.json(projectInfo);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  

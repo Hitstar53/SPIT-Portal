@@ -21,6 +21,15 @@
   padding: 0 0.5rem;
 }
 
+.header {
+  grid-column: 1/3;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 .title {
   grid-column: 1 / 2;
   font-size: 1.3rem;
