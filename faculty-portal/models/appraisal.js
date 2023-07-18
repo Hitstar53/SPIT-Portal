@@ -193,6 +193,9 @@ const appraisalSchema = new mongoose.Schema({
                 subject: {
                     type: String
                 },
+                marksOutOf10:{
+                    type:Number
+                },
                 activityDetails: {
                     type: String
                 }

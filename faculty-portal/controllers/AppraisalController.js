@@ -64,10 +64,10 @@ const setAppraisal = asyncHandler(async (req, res) => {
         var avgAP1Marks = 0;
         var avgAP2Marks = 0;
 
-        if (Dimension1.info.courses.length > 2) {
+        if (Dimension1.info.courses.length > 3) {
             avgAP1Marks = 10;
         } else {
-            avgAP1Marks = Dimension1.info.courses.length * 4;
+            avgAP1Marks = Dimension1.info.courses.length * 3;
         }
         // ----------------------------------------------------------------------------------------
         //AP2
@@ -191,7 +191,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
         var ap9totalmarks = 0
         for (var i = 0; i < Dimension1.AP9.noteworthyData.length; i++) {
             if (Dimension1.AP9.noteworthyData[i].activityDetails != "Null") {
-                ap9totalmarks = ap9totalmarks + 10;
+                ap9totalmarks = ap9totalMarks+Dimension1.AP9.noteworthyData[i].marksOutOf10;
             }
         }
         if (Dimension1.AP9.noteworthyData.length > 0) {
