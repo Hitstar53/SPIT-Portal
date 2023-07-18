@@ -9,6 +9,8 @@ import ReactToPrint, { useReactToPrint } from 'react-to-print';
 import DoneIcon from '@mui/icons-material/Done';
 import HeaderImage from '../assets/spit.png';
 import Autocomplete from "@mui/material/Autocomplete";
+import Done from "../assets/project-is-done.png"
+import Notfound from "../assets/404-not-found.png" 
 
 const ViewHistory = () => {
     const { user } = useContext(UserContext);
@@ -29,6 +31,7 @@ const ViewHistory = () => {
     const [nameForPrincipal, setNameForPrincipal] = useState("");
     const [year3, setYear3] = useState("");
     const [years3, setYears3] = useState([]);
+    const [notFound, setNotFound] = useState(false);
 
     const [facultyName, setfacultyName] = useState([]);
     // const pdfExportComponent = useRef(null);
@@ -214,7 +217,7 @@ const ViewHistory = () => {
             }),
         })
             .then((res) => res.json())
-            .then((data) => setYears3(data))
+            .then((data) => {setYears3(data),(data.length > 0 && setSelectedFaculty(true)), (data.length == 0 && setNotFound(true))})
     }
 
     function handleSubmit(e) {
@@ -233,7 +236,7 @@ const ViewHistory = () => {
         setYear3(null)
         setNameForPrincipal(e.target[0].value)
         getPrincipalYears(e.target[0].value);
-        setSelectedFaculty(true);
+        // setSelectedFaculty(true);
     }
 
     useEffect(() => {
@@ -468,7 +471,7 @@ const ViewHistory = () => {
                     {/* Principal content */}
                     {/* {/* <h1>Principal</h1> */}
                     {/* <p>Welcome, Principal!</p> */}
-                    <div className='flex items-center justify-evenly m-4'>
+                    <div className='flex flex-col items-center justify-evenly m-4'>
 
                         <form className='flex items-center justify-center' onSubmit={handlePrincipalSubmit}>
                             <Autocomplete
@@ -484,6 +487,12 @@ const ViewHistory = () => {
                                 View Faculty
                             </button>
                         </form>
+                        {!selectedFaculty && (
+                            <div className="flex flex-col items-center justify-center mt-8">
+                            <h2>{notFound ? "No Faculty Found" : "Click on Find Faculty to view and print their Confidential Report"}</h2>
+                            <img src={notFound ? Notfound : Done} alt="not found" width="550px"/>
+                        </div>
+                        )}
                         {selectedFaculty &&
                             <div className="dropdown">
                                 <div>Select a Year:</div>

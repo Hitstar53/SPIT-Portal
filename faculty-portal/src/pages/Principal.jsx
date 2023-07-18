@@ -6,15 +6,36 @@ import { useContext } from "react";
 import { UserContext } from '../context/UserContext';
 import axios from 'axios';
 import Report from "../components/Report";
+import AllSteps from "../components/AllSteps";
+import { IconButton } from "@mui/material";
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import SelectFaculty from "../assets/select-faculty.png";
 import "../styles/Principal.css"
 
 const Principal = () => {
     const { user } = useContext(UserContext);
     const [name, setName] = useState("");
     const [status,setStatus]=useState("Not searched");
-    let report = null;
     const [facultyName, setfacultyName] = useState([]);
     const [facultyData , setfacultyData] = useState([]);
+    const [backToTop, setBackToTop] = useState(false);
+
+    useEffect(() => {
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 100) {
+            setBackToTop(true);
+          } else {
+            setBackToTop(false);
+          }
+        });
+    },[])
+
+    const scrollToTop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+    }
 
     if (user.designation !== "Principal") {
         window.location.href = "/home";
@@ -73,12 +94,15 @@ const Principal = () => {
 
   }
 
+  var appraisalView = null
+
   function handleSubmit(e) {
     e.preventDefault();
     console.log("You clicked submit.");
     setName(e.target[0].value);
     console.log(e.target[0].value);
     viewReport(e.target[0].value);
+    // appraisalView = <AllSteps fullName={name} year={yr} />
   }
 
   return (
@@ -100,11 +124,36 @@ const Principal = () => {
         </div>
       </form>
       <div>
+        <div>
+          {appraisalView}
+        </div>
       <div className="dept-appraisal-body">
-        {status==="Not searched"&&<h1>Click on Find Faculty to Enter their marks</h1>}
-        {status==="Faculty found"&&<h1><Report facultyData={facultyData} name={name}/></h1>}
+        {status==="Not searched"&&
+        <div className="flex flex-col items-center justify-center">
+        <h2>Click on Find Faculty to View Appraisal Enter their marks</h2>
+        <img src={SelectFaculty} alt="not found" width="550px"/>
+        </div>
+        }
+        {status==="Faculty found"&&
+        <div style={{marginTop: "-4rem"}}>
+          <AllSteps fullName={name} year={yr} />
+        <h1><Report facultyData={facultyData} name={name}/>
+        </h1>
+        </div>}
         {status==="Faculty not found"&&<h1>Faculty not found</h1>}
       </div>
+      </div>
+      <div>
+      {backToTop && (
+        <IconButton
+          sx={{position: "fixed", bottom: "2rem", right: "2rem", zIndex: "999"}}
+          className="back-to-top"
+          onClick={scrollToTop}
+          aria-label="Back to top"
+        >
+          <ArrowUpwardIcon />
+        </IconButton>
+      )}
       </div>
     </div>
   );

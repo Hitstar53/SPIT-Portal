@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import HeaderImage from "../assets/spit.png";
+import DoneIcon from "@mui/icons-material/Done";
 import axios from "axios";
 
 export default function AllSteps({fullName,year}) {

@@ -52,12 +52,9 @@ const Report = ({ facultyData, name }) => {
     return (
         <div>
             <div className='report'>
-            <h1>Confidential Report for {name}</h1>
+            <h1>Enter the Marks for {name}</h1>
                 <Table striped bordered style={{margin: "1rem"}}>
                     <thead>
-                        <tr>
-                            <th className='table-header text-center align-middle' colSpan={4}>Confidential Report</th>
-                        </tr>
                         <tr>
                             <th className='table-header text-center align-middle'>HOD Remarks</th>
                             <th className='table-header text-center align-middle' colSpan={3}>{dim4.confidentialReport.HODRemarks}</th>
