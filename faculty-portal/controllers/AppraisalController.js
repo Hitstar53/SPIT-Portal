@@ -64,7 +64,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
         var avgAP1Marks = 0;
         var avgAP2Marks = 0;
 
-        if (Dimension1.info.courses.length > 3) {
+        if (Dimension1.info.courses.length > 4) {
             avgAP1Marks = 10;
         } else {
             avgAP1Marks = Dimension1.info.courses.length * 3;
@@ -268,18 +268,16 @@ const setAppraisal = asyncHandler(async (req, res) => {
         var rp1marks = 0;
         for (var i = 0; i < Dimension2.RP1.papers.length; i++) {
             if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Journal" && Dimension2.RP1.papers[i].conferenceOrJournal.reputation == "High") {
-                rp1marks = rp1marks + 20;
+                rp1marks = rp1marks + 30;
             }
-            if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Journal" && Dimension2.RP1.papers[i].conferenceOrJournal.reputation == "Medium") {
-                rp1marks = rp1marks + 15;
-            }
-            if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Journal" && Dimension2.RP1.papers[i].conferenceOrJournal.reputation == "None") {
+            
+            if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Journal" && Dimension2.RP1.papers[i].conferenceOrJournal.reputation != "High") {
                 rp1marks = rp1marks + 10;
             }
             if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Conference" && Dimension2.RP1.papers[i].conferenceOrJournal.reputation == "High") {
                 rp1marks = rp1marks + 10;
             }
-            if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Conference" && (Dimension2.RP1.papers[i].conferenceOrJournal.reputation == "None" || Dimension2.RP1.papers[i].conferenceOrJournal.reputation == "Medium")) {
+            if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Conference" && (Dimension2.RP1.papers[i].conferenceOrJournal.reputation != "High") ){
                 rp1marks = rp1marks + 7;
             }
         }
@@ -292,7 +290,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
         var rp2marks = 0;
         for (var i = 0; i < Dimension2.RP2.patents.length; i++) {
             if (Dimension2.RP2.patents[i].status == "Obtained") {
-                rp2marks = rp2marks + 15;
+                rp2marks = rp2marks + 30;
             }
             if (Dimension2.RP2.patents[i].status == "Published") {
                 rp2marks = rp2marks + 5;
@@ -300,7 +298,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
         }
         for (var i = 0; i < Dimension2.RP2.books.length; i++) {
             if (Dimension2.RP2.books[i].status == "Published") {
-                rp2marks = rp2marks + 15;
+                rp2marks = rp2marks + 30;
             }
             if (Dimension2.RP2.books[i].status == "Book Chapter/Monograms/Copyright") {
                 rp2marks = rp2marks + 5;
@@ -311,13 +309,13 @@ const setAppraisal = asyncHandler(async (req, res) => {
                 rp2marks = rp2marks + 0;
             }
             if (Dimension2.RP2.moocs[i].duration >= 8 && Dimension2.RP2.moocs[i].duration < 24) {
-                rp2marks = rp2marks + 5;
+                rp2marks = rp2marks + 10;
             }
             if (Dimension2.RP2.moocs[i].duration >= 24 && Dimension2.RP2.moocs[i].duration < 40) {
-                rp2marks = rp2marks + 15;
+                rp2marks = rp2marks + 20;
             }
             if (Dimension2.RP2.moocs[i].duration >= 40) {
-                rp2marks = rp2marks + 20;
+                rp2marks = rp2marks + 30;
             }
 
         }
@@ -352,8 +350,8 @@ const setAppraisal = asyncHandler(async (req, res) => {
         if (rp3marks > 30) {
             rp3marks = 30;
         }
-        //RP4
 
+        //RP4
         // ----------------------------
         //RP5
         var rp5marks = 0
@@ -362,15 +360,15 @@ const setAppraisal = asyncHandler(async (req, res) => {
                 rp5marks = rp5marks + (1 * Dimension2.RP5.selfDevelopment[i].duration);
             }
             if (Dimension2.RP5.selfDevelopment[i].type === "MOOC") {
-                rp5marks = rp5marks + 1 * Dimension2.RP5.selfDevelopment[i].duration;
+                rp5marks = rp5marks + (1 * (Dimension2.RP5.selfDevelopment[i].duration / 7));
             }
             if (Dimension2.RP5.selfDevelopment[i].type === "Industry Internship") {
-                rp5marks = rp5marks + (5 * Dimension2.RP5.selfDevelopment[i].duration);
+                rp5marks = rp5marks + (5 * (Dimension2.RP5.selfDevelopment[i].duration  / 7));
             }
         }
 
-        if (rp5marks > 20) {
-            rp5marks = 20;
+        if (rp5marks > 25) {
+            rp5marks = 25;
         }
         // -----------------------------------------------------
         //RP6
@@ -427,61 +425,99 @@ const setAppraisal = asyncHandler(async (req, res) => {
 
         //organised
         var OPMarks = 0;
-        var trainingMarks = 0;
+        // var trainingMarks = 0;
         // OPMarks = 3 * Dimension3.OP1.organized.length;
         // if (OPMarks > 15) {
         //     OPMarks = 15;
         // }
         for (var i = 0; i < Dimension3.OP1.organized.length; i++) {
-            if (Dimension3.OP1.organized[i].type == "FDP") {
-                if (Dimension3.OP1.organized[i].days < 14) {
-                    OPMarks = OPMarks + 10;
-                }
-                if (Dimension3.OP1.organized[i].days >= 14) {
-                    OPMarks = OPMarks + 15;
-                }
-            }
-            if (Dimension3.OP1.organized[i].type == "Training Organised") {
-                trainingMarks = trainingMarks + (3 * Dimension3.OP1.organized[i].days);
-            }
-        }
-        if (trainingMarks > 15) {
-            trainingMarks = 15;
-        }
+            // if (Dimension3.OP1.organized[i].type == "FDP") {
+            //     if (Dimension3.OP1.organized[i].days < 14) {
+            //         OPMarks = OPMarks + 10;
+            //     }
+            //     if (Dimension3.OP1.organized[i].days >= 14) {
+            //         OPMarks = OPMarks + 15;
+            //     }
+            // }
+            // if (Dimension3.OP1.organized[i].type == "Training Organised") {
+            //     trainingMarks = trainingMarks + (3 * Dimension3.OP1.organized[i].days);
+            // }
 
-        OPMarks = OPMarks + trainingMarks;
+            OPMarks= OPMarks + (5*Dimension3.OP1.organized[i].days )
+        }
+        // if (trainingMarks > 15) {
+        //     trainingMarks = 15;
+        // }
+
+        // OPMarks = OPMarks + trainingMarks;
 
         // ------------------------------------------------------
         //invited 
-        var invitedmarks = 0;
-        var guestmarks = 0;
+        // var invitedmarks = 0;
+        // var guestmarks = 0;
         var invitedfinalmarks = 0;
         for (var i = 0; i < Dimension3.Invited.invitedAt.length; i++) {
-            if (Dimension3.Invited.invitedAt[i].type == "Guest Faculty") {
-                guestmarks = guestmarks + 3;
-            }
-            if (Dimension3.Invited.invitedAt[i].type == "Visiting Professor") {
-                invitedmarks = invitedmarks + 5;
+            // if (Dimension3.Invited.invitedAt[i].type == "Guest Faculty") {
+            //     guestmarks = guestmarks + 3;
+            // }
+            // if (Dimension3.Invited.invitedAt[i].type == "Visiting Professor") {
+            //     invitedmarks = invitedmarks + 5;
 
-            }
+            // }
+            invitedfinalmarks = invitedfinalmarks + (Dimension3.Invited.invitedAt[i].duration * 5)
         }
-
-        if (invitedmarks > 15) {
-            invitedmarks = 15;
-        }
-        if (guestmarks > 10) {
-            guestmarks = 10;
-        }
-        invitedfinalmarks = (invitedmarks + guestmarks) > 15 ? 15 : (invitedmarks + guestmarks);
+        // if (invitedmarks > 15) {
+        //     invitedmarks = 15;
+        // }
+        // if (guestmarks > 10) {
+        //     guestmarks = 10;
+        // }
+        // invitedfinalmarks = (invitedmarks + guestmarks) > 15 ? 15 : (invitedmarks + guestmarks);
 
         // ----------------------------------------
+        // op3
 
+        op3Marks =0 
+        for (var i =0; i < Dimension3.op3.receivedFDP.length; i++){
+            if (Dimension3.op3.receivedFDP[i].days >= 14){
+                op3Marks = op3Marks + 15
+                continue
+            }
+            if (Dimension3.op3.receivedFDP[i].days >= 7 ){
+                op3Marks = op3Marks + 10
+            }
+        }
+
+        if (op3Marks >15){
+            op3Marks = 15
+        }
+
+        Dimension3.op3.totalMarks = op3marks
+
+        // --------------------------------------------------------
+        // op4
+
+        op4Marks = 0 
+        for (var i=0 ; i < Dimension3.op4.invitedTalk.length; i++ ){
+            op4Marks = op4Marks + 5
+        }
+
+        if (op4Marks >10){
+            op4Marks = 10
+        }
+
+        Dimension3.op4.totalMarks = op4Marks
+
+
+
+
+        // ---------------------------------------------------------
 
         var countCommittee = Dimension3.Partof.committee.length;
         if (countCommittee == 0) {
             Dimension3.Partof.totalMarks = 0;
-        } else if (countCommittee <= 3) {
-            Dimension3.Partof.totalMarks = 3 * countCommittee;
+        } else if (countCommittee <= 2) {
+            Dimension3.Partof.totalMarks = 5 * countCommittee;
         } else {
             Dimension3.Partof.totalMarks = 10;
         }
@@ -497,6 +533,17 @@ const setAppraisal = asyncHandler(async (req, res) => {
         } else {
             Dimension3.Article.totalMarks = 10;
         }
+
+        // -----------------------------------------------
+        var countNGO = Dimension3.ngo.data.length;
+        if (countNGO == 0) {
+            Dimension3.ngo.totalMarks = 0;
+        } else if (countNGO <= 2) {
+            Dimension3.ngo.totalMarks = 5 * countNGO;
+        } else {
+            Dimension3.ngo.totalMarks = 10;
+        }
+
         // ------------------------------------------------------------
 
         var countCoGuide = Dimension3.coGuide.data.length;
@@ -519,14 +566,12 @@ const setAppraisal = asyncHandler(async (req, res) => {
         }
 
 
-
-
         //   ------------------------------------------
 
         Dimension3.totalIP1IP2DP1Marks = Dimension3Marks;
         Dimension3.OP1.totalMarks = OPMarks;
         Dimension3.Invited.totalMarks = invitedfinalmarks;
-        const tempOP = (Dimension3.OP1.totalMarks + Dimension3.Invited.totalMarks + Dimension3.Partof.totalMarks + Dimension3.Article.totalMarks + Dimension3.coGuide.totalMarks + Dimension3.collaboration.totalMarks) > 40 ? 40 : (Dimension3.OP1.totalMarks + Dimension3.Invited.totalMarks + Dimension3.Partof.totalMarks + Dimension3.Article.totalMarks + Dimension3.coGuide.totalMarks + Dimension3.collaboration.totalMarks);
+        const tempOP = (Dimension3.OP1.totalMarks + Dimension3.Invited.totalMarks+ Dimension3.op3.totalMarks + Dimension3.op4.totalMarks  + Dimension3.Partof.totalMarks + Dimension3.Article.totalMarks + Dimension3.ngo.totalMarks + Dimension3.coGuide.totalMarks + Dimension3.collaboration.totalMarks) > 40 ? 40 : (Dimension3.OP1.totalMarks + Dimension3.Invited.totalMarks+ Dimension3.op3.totalMarks + Dimension3.op4.totalMarks  + Dimension3.Partof.totalMarks + Dimension3.Article.totalMarks + Dimension3.ngo.totalMarks + Dimension3.coGuide.totalMarks + Dimension3.collaboration.totalMarks);
 
         Dimension3.totalMarks = Dimension3.totalIP1IP2DP1Marks + tempOP;
 
@@ -804,7 +849,6 @@ const setDim4HOD = asyncHandler(async (req, res) => {
     try {
         const { yearofAssesment, fullName, Dimension4 } = req.body;
         Dimension4.feedbackMarks.E = parseInt(Dimension4.feedbackMarks.A) + parseInt(Dimension4.feedbackMarks.B) + parseInt(Dimension4.feedbackMarks.C) ;
-            
         var updatedApp = null;
 
         const existingFaculty = await Appraisal.findOne({

@@ -534,6 +534,52 @@ const appraisalSchema = new mongoose.Schema({
             },
         },
 
+        op3:{
+            receivedFDP: [
+                {
+                    name: {
+                        type: String,
+                    },
+                    type: {
+                        type: String,
+                         //drop down 
+                        //FDP , Training Organised
+                    },
+                    sponsorerName: {
+                        type: String,
+                    },
+                    fund: {
+                        type: Number,
+                    },
+                    days: {
+                        type: Number,
+                    },
+                },
+            ],
+            totalMarks:{
+                type: Number
+            }
+        },
+
+        op4:{
+             invitedTalk: [
+                {
+                    industryName: {
+                        type: String,
+                    },
+                    dates: {
+                        type: String,
+                    },
+                    details: {
+                        type: String,
+                    },
+                },
+            ],
+            totalMarks: {
+                type: Number,
+            },
+        },
+
         Partof: {
             committee: [
                 {
@@ -562,6 +608,19 @@ const appraisalSchema = new mongoose.Schema({
                     type: String,
                 },
             }],
+            totalMarks: {
+                type: Number,
+            },
+        },
+
+        ngo:{
+              data: [
+                {
+                    details: {
+                        type: String,
+                    },
+                },
+            ],
             totalMarks: {
                 type: Number,
             },
