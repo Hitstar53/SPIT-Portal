@@ -49,6 +49,30 @@ function StepThree({setDimension3, yr}) {
     name: "OP1.organized",
   });
   const {
+    fields: receivedFDPFields,
+    append: appendReceivedFDP,
+    remove: removeReceivedFDP,
+  } = useFieldArray({
+    control,
+    name: "op3.receivedFDP",
+  });
+  const {
+    fields: invitedTalkFields,
+    append: appendinvitedTalk,
+    remove: removeinvitedTalk,
+  } = useFieldArray({
+    control,
+    name: "op4.invidedTalk",
+  });
+  const {
+    fields: dataFields,
+    append: appendData,
+    remove: removeData,
+  } = useFieldArray({
+    control,
+    name: "ngo.data",
+  });
+  const {
     fields: invitedFields,
     append: appendInvited,
     remove: removeInvited,
@@ -250,7 +274,7 @@ function StepThree({setDimension3, yr}) {
             <tr>
               <th className='table-header text-center align-middle'>FDP/Training Organised(Name)</th>
               <th className='table-header text-center align-middle'>Type</th>
-              <th className='table-header text-center align-middle'>Sponser name</th>
+              <th className='table-header text-center align-middle'>Sponsering Agency</th>
               <th className='table-header text-center align-middle'>Funds</th>
               <th className='table-header text-center align-middle'>No. of days</th>
               <th className='table-header text-center align-middle'></th>
@@ -265,12 +289,12 @@ function StepThree({setDimension3, yr}) {
                     type="text"
                     placeholder="Organised"
                     className="form-input"
-                    {...register(`OP1.organized[${index}].name`)}
+                    {...register(`op3.receivedFDP[${index}].name`)}
                   />
                 </td>
                 {/* <label className="form-label">Agency</label> */}
                 <td>
-                  <select {...register(`OP1.organized[${index}].type`)}>
+                  <select {...register(`op3.receivedFDP[${index}].type`)}>
                     <option value="FDP">FDP</option>
                     <option value="Training Organised">
                       Training Organised
@@ -281,9 +305,9 @@ function StepThree({setDimension3, yr}) {
                 <td>
                   <input
                     type="text"
-                    placeholder="sponsorer name"
+                    placeholder="Sponsering Agency"
                     className="form-input"
-                    {...register(`OP1.organized[${index}].sponsorerName`)}
+                    {...register(`op3.receivedFDP[${index}].sponsorerName`)}
                   />
                 </td>
                 <td>
@@ -292,7 +316,7 @@ function StepThree({setDimension3, yr}) {
                   onWheel={(e) => e.target.blur()}
                     placeholder="Funds"
                     className="form-input"
-                    {...register(`OP1.organized[${index}].fund`)}
+                    {...register(`op3.receivedFDP[${index}].fund`)}
                   />
                 </td>
                 {/* <label className="form-label">Days</label> */}
@@ -302,7 +326,7 @@ function StepThree({setDimension3, yr}) {
                   onWheel={(e) => e.target.blur()}
                     placeholder="Days"
                     className="form-input"
-                    {...register(`OP1.organized[${index}].days`)}
+                    {...register(`op3.receivedFDP[${index}].days`)}
                   />
                 </td>
                 <td className="text-center align-middle">
@@ -334,7 +358,7 @@ function StepThree({setDimension3, yr}) {
               <th className='table-header text-center align-middle'>Dates</th>
               <th className='table-header text-center align-middle'>Details (No. of participants, affiliation)</th>
               <th className='table-header text-center align-middle'>Type</th>
-              <th className='table-header text-center align-middle'>Duration</th>
+              <th className='table-header text-center align-middle'>Duration (Days)</th>
               <th className='table-header text-center align-middle'></th>
             </tr>
           </thead>
@@ -404,8 +428,151 @@ function StepThree({setDimension3, yr}) {
         Add Invited
       </button>
 
+      {/* Received Sponsored FDP */}
+      <h1>OP3: Received Sponsored FDP</h1>
+      {receivedFDPFields.length > 0 && (
+        <Table striped bordered>
+          <thead>
+            <tr>
+              <th className='table-header text-center align-middle'>FDP/Training Organised(Name)</th>
+              <th className='table-header text-center align-middle'>Type</th>
+              <th className='table-header text-center align-middle'>Sponsering Agency</th>
+              <th className='table-header text-center align-middle'>Funded Amount</th>
+              <th className='table-header text-center align-middle'>No. of days</th>
+              <th className='table-header text-center align-middle'></th>
+            </tr>
+          </thead>
+          <tbody>
+            {receivedFDPFields.map((item, index) => (
+              <tr key={item.id}>
+                {/* <label className="form-label">Organised</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Organised"
+                    className="form-input"
+                    {...register(`op3.receivedFDP[${index}].name`)}
+                  />
+                </td>
+                {/* <label className="form-label">Agency</label> */}
+                <td>
+                  <select {...register(`op3.receivedFDP[${index}].type`)}>
+                    <option value="FDP">FDP</option>
+                    <option value="Training Organised">
+                      Training Organised
+                    </option>
+                  </select>
+                </td>
+                {/* <label className="form-label">Funds</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Sponsering Agency"
+                    className="form-input"
+                    {...register(`op3.receivedFDP[${index}].sponsorerName`)}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                  onWheel={(e) => e.target.blur()}
+                    placeholder="Funds"
+                    className="form-input"
+                    {...register(`op3.receivedFDP[${index}].fund`)}
+                  />
+                </td>
+                {/* <label className="form-label">Days</label> */}
+                <td>
+                  <input
+                    type="number"
+                  onWheel={(e) => e.target.blur()}
+                    placeholder="Days"
+                    className="form-input"
+                    {...register(`op3.receivedFDP[${index}].days`)}
+                  />
+                </td>
+                <td className="text-center align-middle">
+                  <button type="button" onClick={() => removeReceivedFDP(index)}>
+                    <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
+      <button
+        className="add-btn"
+        type="button"
+        onClick={() => appendReceivedFDP({})}
+        style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
+      >
+        Add Sponsership
+      </button>
+
+      {/* Invited talk as Guest faculty */}
+      <h1>OP4: Invited talk as Guest faculty</h1>
+      {invitedTalkFields.length > 0 && (
+        <Table striped bordered>
+          <thead>
+            <tr>
+              <th className='table-header text-center align-middle'>Dates</th>
+              <th className='table-header text-center align-middle'>Industry/ Institution Name</th>
+              <th className='table-header text-center align-middle'>Details (Title , No. of participants, affiliation) etc</th>
+              <th className='table-header text-center align-middle'></th>
+            </tr>
+          </thead>
+          <tbody>
+            {invitedTalkFields.map((item, index) => (
+              <tr key={item.id}>
+                {/* <label className="form-label">Organised</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Dates"
+                    className="form-input"
+                    {...register(`op4.invidedTalk[${index}].industryName`)}
+                  />
+                </td>
+                {/* <label className="form-label">Funds</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Industry/ Institution Name"
+                    className="form-input"
+                    {...register(`op4.invidedTalk[${index}].dates`)}
+                  />
+                </td>
+                {/* <label className="form-label">Funds</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Details"
+                    className="form-input"
+                    {...register(`op4.invidedTalk[${index}].details`)}
+                  />
+                </td>
+                <td className="text-center align-middle">
+                  <button type="button" onClick={() => removeinvitedTalk(index)}>
+                    <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
+      <button
+        className="add-btn"
+        type="button"
+        onClick={() => appendinvitedTalk({})}
+        style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
+      >
+        Add Talks
+      </button>
+
       {/* Selection Committee */}
-      <h1>Part of selection committee / inquiry/ academic audit / examiner panel/ 
+      <h1>OP5: Part of selection committee / inquiry/ academic audit / examiner panel/ 
 		BOS /AC/LIC/ RRC meetings/ external Auditor
 </h1>
       {committeeFields.length > 0 && (
@@ -478,7 +645,7 @@ function StepThree({setDimension3, yr}) {
       </button>
 
       {/* Article */}
-      <h1>Article in media/ newspaper to boost Institution’s Image</h1>
+      <h1>OP6: Article in media/ newspaper to boost Institution’s Image</h1>
       {articleFields.length > 0 && (
         <Table striped bordered>
           <thead>
@@ -518,8 +685,49 @@ function StepThree({setDimension3, yr}) {
         Add Article
       </button>
 
+      {/* Article */}
+      <h1>OP7: Any noteworthy work with NGO</h1>
+      {dataFields.length > 0 && (
+        <Table striped bordered>
+          <thead>
+            <tr>
+              <th className='table-header text-center align-middle'>Details</th>
+              <th className='table-header text-center align-middle'></th>
+            </tr>
+          </thead>
+          <tbody>
+            {dataFields.map((item, index) => (
+              <tr key={item.id}>
+                {/* <label className="form-label">Details</label> */}
+                <td>
+                  <input
+                    type="text"
+                    placeholder="Details"
+                    className="form-input"
+                    {...register(`ngo.data[${index}].details`)}
+                    />
+                </td>
+                <td className="text-center align-middle">
+                  <button type="button" onClick={() => removeData(index)}>
+                    <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
+      <button
+        className="add-btn"
+        type="button"
+        onClick={() => appendData({})}
+        style={{ padding: "10px 25px", borderRadius: "10px", margin: "0px" }}
+      >
+        Add Work
+      </button>
+
       {/* CoGuide */}
-      <h1>Co-guide for student projects and dissertations in the peer institutions </h1>
+      <h1>OP8: Co-guide for student projects and dissertations in the peer institutions </h1>
       {coGuideFields.length > 0 && (
         <Table striped bordered>
           <thead>
@@ -570,7 +778,7 @@ function StepThree({setDimension3, yr}) {
       </button>
 
       {/* Collaboration */}
-      <h1>Any academic collaboration with the other institutions</h1>
+      <h1>OP9: Any academic collaboration with the other institutions</h1>
       {collaborationFields.length > 0 && (
         <Table striped bordered>
           <thead>
