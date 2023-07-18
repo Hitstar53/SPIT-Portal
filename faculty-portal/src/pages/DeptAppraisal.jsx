@@ -95,8 +95,10 @@ export default function DeptAppraisal() {
         </div>
       </form>
       <div className="dept-appraisal-body">
-        {status === "Faculty found" && <StepFour yr={yr} fullName={name} setStatus={setStatus} />}
-        {status==="Step Four Saved"&&(
+        {status === "Faculty found" && (
+          <StepFour yr={yr} fullName={name} setStatus={setStatus} />
+        )}
+        {status === "Step Four Saved" && (
           <div className="dept-appraisal-vertical">
             <h1>Step Four Saved</h1>
             <img src={Done} alt="not found" />
@@ -110,7 +112,9 @@ export default function DeptAppraisal() {
         )}
         {status === "Faculty not found" && (
           <div className="dept-appraisal-vertical">
-            <h1>{name} not found in {user.department} department</h1>
+            <h1>
+              {name} not found in {user.department} department
+            </h1>
             <img src={NotFound} alt="not found" />
           </div>
         )}
