@@ -8,6 +8,7 @@ import { TextareaAutosize } from "@mui/base";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 import { Modal, ModalBody, ModalFooter } from "reactstrap";
+import AllSteps from "./AllSteps";
 
 function StepFour({ yr, fullName,setStatus }) {
   const [modal, setModal] = useState(false);
@@ -79,6 +80,7 @@ function StepFour({ yr, fullName,setStatus }) {
 
   return (
     <div>
+      <AllSteps fullName={fullName} year={yr} />
       <div>
         <form className="container" onSubmit={handleSubmit(onSubmit)}>
           <h1>Dimension 4: Perception/ 360 degree feedback</h1>
