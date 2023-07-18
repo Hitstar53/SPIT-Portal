@@ -430,8 +430,8 @@ function StepTwo({ setDimension2, yr }) {
               <Table striped bordered>
                 <thead>
                   <tr>
-                    <th className='table-header text-center align-middle'>MOOC’s attended</th>
-                    <th className='table-header text-center align-middle'>Duration (days/weeks)</th>
+                    <th className='table-header text-center align-middle'>MOOC’s Developed</th>
+                    <th className='table-header text-center align-middle'>Duration (hours)</th>
                     <th className='table-header text-center align-middle'>Details (Grade,certificate etc)</th>
                     <th className='table-header text-center align-middle'></th>
                   </tr>
