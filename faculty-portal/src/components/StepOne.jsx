@@ -12,6 +12,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 const StepOne = ({ setDimension1, yr }) => {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
+  const open = "{"
+  const close = "}"
   const options = [
     { value: "", label: "Select an option" },
     { value: "1", label: "I" },
@@ -283,7 +285,7 @@ const StepOne = ({ setDimension1, yr }) => {
           </div>
           <form className="container" onSubmit={handleSubmit(onSubmit)}>
             <div className="info-container">
-              <h3>Courses</h3>
+              <h3>AP1 - AP5: Courses</h3>
               {courseFields.length > 0 && (
                 <div>
                   <Table className="course-table" striped bordered>
@@ -298,23 +300,31 @@ const StepOne = ({ setDimension1, yr }) => {
                         <th className="table-header text-center align-middle">
                           Class Name
                         </th>
-                        <th className="table-header text-center align-middle">
+                        <th className="table-header text-center align-middle" style={{width: "5rem"}}>
                           Sem
                         </th>
                         <th className="table-header text-center align-middle">
+                          <div>
+
                           Marks Obtained
+                          </div>
+                          <span style={{fontSize: "0.6rem"}}> (To be filled from audited course file)
+</span>
                         </th>
                         <th className="table-header text-center align-middle">
-                          Lecture Target
+                          Number of Lectures Targeted
                         </th>
                         <th className="table-header text-center align-middle">
-                          Total Lecture Taken
+                        Number of Lecture Conducted
                         </th>
                         <th className="table-header text-center align-middle">
-                          Percentage Feedback
+                          Faculty Feedback Score
                         </th>
                         <th className="table-header text-center align-middle">
+                          <div>
                           Attendance of the Students
+                          </div>
+                          <span style={{fontSize: "0.6rem"}}>summation of {open}total attendee / (no of lectures * no of students in the class){close} * 100 marks</span>
                         </th>
                         <th className="table-header text-center align-middle"></th>
                       </tr>
@@ -438,8 +448,163 @@ const StepOne = ({ setDimension1, yr }) => {
                 Add Course
               </button>
 
+              <h3>AP6: Mentoring: Feedback from Mentees</h3>
+              {menteeFields.length > 0 && (
+                <div>
+                  <Table striped bordered style={{ width: "30rem" }}>
+                    <thead>
+                      <tr>
+                        <th className="table-header text-center align-middle">
+                          Sr No
+                        </th>
+                        <th className="table-header text-center align-middle">
+                        Mentee Feedback Score Average Marks (Out of 5)
+                        </th>
+                        <th className="table-header text-center align-middle"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {menteeFields.map((field, index) => (
+                        <tr key={field.id}>
+                          <td className="text-center align-middle" style={{ fontSize: "1.5rem", fontWeight: 600 }}>
+                            {index+1}
+                          </td>
+                          <td className="text-center align-middle">
+                            <input
+                              type="number"
+                              onWheel={(e) => e.target.blur()}
+                              {...register(`AP6.menteeFeedback[${index}]`, {
+                                required: true,
+                              })}
+                              className="form-input"
+                            />
+                          </td>
+                          <td className="text-center align-middle">
+                            <IconButton
+                              onClick={() => handleRemoveMentee(index)}
+                            >
+                              <DeleteIcon
+                                sx={{ color: "red", fontSize: "25px" }}
+                              />
+                            </IconButton>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </div>
+              )}
+
+              <button
+                type="button"
+                className="add-btn"
+                onClick={() => appendMentee({})}
+              >
+                Add Mentee
+              </button>
+
+              <h3>AP7: Arranged Guest Lectures / co-teaching from industry <span style={{fontSize: "0.8rem"}}>(eminent resource person from the respective 
+domain industry)</span></h3>
+              {guestFields.length > 0 && (
+                <div>
+                  <Table striped bordered style={{ width: "50rem" }}>
+                    <thead>
+                      <tr>
+                        <th className="table-header text-center align-middle">
+                          Sr No
+                        </th>
+                        <th className="table-header text-center align-middle">
+                          Lecture Date
+                        </th>
+                        <th className="table-header text-center align-middle">
+                          Lecture Title
+                        </th>
+                        <th className="table-header text-center align-middle">
+                          Speaker Name
+                        </th>
+                        <th className="table-header text-center align-middle">
+                          Arranged for
+                        </th>
+                        <th className="table-header text-center align-middle"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {guestFields.map((field, index) => (
+                        <tr key={field.id}>
+                          <td className="text-center align-middle" style={{ fontSize: "1.5rem", fontWeight: 600 }}>
+                            {index+1}
+                          </td>
+                          <td className="text-center align-middle">
+                            <input
+                              type="datetime-local"
+                              placeholder="date local"
+                              {...register(
+                                `AP7.guestLectureData[${index}].date`,
+                                { required: true }
+                              )}
+                              className="form-input"
+                            />
+                          </td>
+                          <td className="text-center align-middle">
+                            <input
+                              type="text"
+                              {...register(
+                                `AP7.guestLectureData[${index}].title`,
+                                { required: true }
+                              )}
+                              className="form-input"
+                            />
+                          </td>
+                          <td className="text-center align-middle">
+                            <input
+                              type="text"
+                              {...register(
+                                `AP7.guestLectureData[${index}].speakerName`,
+                                { required: true }
+                              )}
+                              className="form-input"
+                            />
+                          </td>
+                          <td className="text-center align-middle">
+                            <select
+                              defaultValue=""
+                              {...register(
+                                `AP7.guestLectureData[${index}].arrangedFor`,
+                                { required: true }
+                              )}
+                              className="form-input"
+                            >
+                              <option value="">Select an option</option>
+                              <option value="Students">Students</option>
+                              <option value="Faculty">Faculty</option>
+                            </select>
+                          </td>
+                          <td className="text-center align-middle">
+                            <IconButton
+                              onClick={() => handleRemoveGuest(index)}
+                            >
+                              <DeleteIcon
+                                sx={{ color: "red", fontSize: "25px" }}
+                              />
+                            </IconButton>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </div>
+              )}
+
+              <button
+                type="button"
+                className="add-btn"
+                onClick={() => appendGuest({})}
+              >
+                Add Guest Lecture
+              </button>
+
               <h3>
-                Remedial activity for weak students / efforts towards bright
+                AP8: Remedial activity for weak students / efforts towards bright
                 students
               </h3>
 
@@ -531,8 +696,8 @@ const StepOne = ({ setDimension1, yr }) => {
               </button>
 
               <h3>
-                Noteworthy efforts towards enriching the learning experience /
-                innovation in TLE methods{" "}
+                AP9: Noteworthy efforts towards enriching the learning experience /
+                innovation in TLE methods
               </h3>
 
               {noteFields.length > 0 && (
@@ -551,6 +716,9 @@ const StepOne = ({ setDimension1, yr }) => {
                         </th>
                         <th className="table-header text-center align-middle">
                           Activity Details
+                        </th>
+                        <th className="table-header text-center align-middle">
+                          Marks out of 10
                         </th>
                         <th className="table-header text-center align-middle"></th>
                       </tr>
@@ -599,6 +767,16 @@ const StepOne = ({ setDimension1, yr }) => {
                             />
                           </td>
                           <td className="text-center align-middle">
+                            <input
+                              type="number"
+                              className="form-input"
+                              {...register(
+                                `AP9.noteworthyData[${index}].marksOutOf10`,
+                                { required: false }
+                              )}
+                            />
+                          </td>
+                          <td className="text-center align-middle">
                             <IconButton onClick={() => handleRemoveNote(index)}>
                               <DeleteIcon
                                 sx={{ color: "red", fontSize: "25px" }}
@@ -620,12 +798,15 @@ const StepOne = ({ setDimension1, yr }) => {
                 Add Noteworthy Efforts
               </button>
 
-              <h3>Question Paper Auditing</h3>
+              <h3>AP10: Question Paper Auditing</h3>
               {paperFields.length > 0 && (
                 <div>
                   <Table striped bordered style={{ width: "50rem" }}>
                     <thead>
                       <tr>
+                        <th className="table-header text-center align-middle">
+                          Sr No
+                        </th>
                         <th className="table-header text-center align-middle">
                           Paper Set for Course
                         </th>
@@ -638,6 +819,9 @@ const StepOne = ({ setDimension1, yr }) => {
                     <tbody>
                       {paperFields.map((field, index) => (
                         <tr key={field.id}>
+                          <td className="text-center align-middle" style={{ fontSize: "1.5rem", fontWeight: 600 }}>
+                            {index+1}
+                          </td>
                           <td className="text-center align-middle">
                             <input
                               type="text"
@@ -681,147 +865,6 @@ const StepOne = ({ setDimension1, yr }) => {
                 Add Question Paper
               </button>
 
-              <h3>Mentee Feedback</h3>
-              {menteeFields.length > 0 && (
-                <div>
-                  <Table striped bordered style={{ width: "30rem" }}>
-                    <thead>
-                      <tr>
-                        <th className="table-header text-center align-middle">
-                          Mentee Feedback
-                        </th>
-                        <th className="table-header text-center align-middle"></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {menteeFields.map((field, index) => (
-                        <tr key={field.id}>
-                          <td className="text-center align-middle">
-                            <input
-                              type="number"
-                              onWheel={(e) => e.target.blur()}
-                              {...register(`AP6.menteeFeedback[${index}]`, {
-                                required: true,
-                              })}
-                              className="form-input"
-                            />
-                          </td>
-                          <td className="text-center align-middle">
-                            <IconButton
-                              onClick={() => handleRemoveMentee(index)}
-                            >
-                              <DeleteIcon
-                                sx={{ color: "red", fontSize: "25px" }}
-                              />
-                            </IconButton>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
-                </div>
-              )}
-
-              <button
-                type="button"
-                className="add-btn"
-                onClick={() => appendMentee({})}
-              >
-                Add Mentee
-              </button>
-
-              <h3>Arranged Guest Lectures / co-teaching from industry </h3>
-              {guestFields.length > 0 && (
-                <div>
-                  <Table striped bordered style={{ width: "50rem" }}>
-                    <thead>
-                      <tr>
-                        <th className="table-header text-center align-middle">
-                          Lecture Date
-                        </th>
-                        <th className="table-header text-center align-middle">
-                          Lecture Title
-                        </th>
-                        <th className="table-header text-center align-middle">
-                          Speaker Name
-                        </th>
-                        <th className="table-header text-center align-middle">
-                          Arranged for
-                        </th>
-                        <th className="table-header text-center align-middle"></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {guestFields.map((field, index) => (
-                        <tr key={field.id}>
-                          <td className="text-center align-middle">
-                            <input
-                              type="datetime-local"
-                              placeholder="date local"
-                              {...register(
-                                `AP7.guestLectureData[${index}].date`,
-                                { required: true }
-                              )}
-                              className="form-input"
-                            />
-                          </td>
-                          <td className="text-center align-middle">
-                            <input
-                              type="text"
-                              {...register(
-                                `AP7.guestLectureData[${index}].title`,
-                                { required: true }
-                              )}
-                              className="form-input"
-                            />
-                          </td>
-                          <td className="text-center align-middle">
-                            <input
-                              type="text"
-                              {...register(
-                                `AP7.guestLectureData[${index}].speakerName`,
-                                { required: true }
-                              )}
-                              className="form-input"
-                            />
-                          </td>
-                          <td className="text-center align-middle">
-                            <select
-                              defaultValue=""
-                              {...register(
-                                `AP7.guestLectureData[${index}].arrangedFor`,
-                                { required: true }
-                              )}
-                              className="form-input"
-                            >
-                              <option value="">Select an option</option>
-                              <option value="Students">Students</option>
-                              <option value="Faculty">Faculty</option>
-                            </select>
-                          </td>
-                          <td className="text-center align-middle">
-                            <IconButton
-                              onClick={() => handleRemoveGuest(index)}
-                            >
-                              <DeleteIcon
-                                sx={{ color: "red", fontSize: "25px" }}
-                              />
-                            </IconButton>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
-                </div>
-              )}
-
-              <button
-                type="button"
-                className="add-btn"
-                onClick={() => appendGuest({})}
-              >
-                Add Guest Lecture
-              </button>
             </div>
 
             <button className="save-btn" type="submit">

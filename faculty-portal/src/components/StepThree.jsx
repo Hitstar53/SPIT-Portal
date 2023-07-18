@@ -242,6 +242,7 @@ function StepThree({setDimension3, yr}) {
           ))}
         </div>
       </div>
+      <h1>Outreach Activities(40 Marks)</h1>
       <h1>OP1: Organized training for Industry/External learners</h1>
       {organizedFields.length > 0 && (
         <Table striped bordered>
@@ -324,7 +325,7 @@ function StepThree({setDimension3, yr}) {
       </button>
 
       {/* Invited */}
-      <h1>Invited as visiting /Guest faculty for delivering a course in industry/ institute</h1>
+      <h1>OP2: Invited as visiting /Guest faculty for delivering a course in industry/ institute of repute</h1>
       {invitedFields.length > 0 && (
         <Table striped bordered>
           <thead>
