@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 import CustTable from '../../UI/CustTable'
 import Search from './Search'
 import Filter from './Filter'
@@ -41,19 +43,19 @@ const options = [
     value: "All",
   },
   {
-    name: "F.E.",
+    name: "FE",
     value: "FE",
   },
   {
-    name: "S.E.",
+    name: "SE",
     value: "SE",
   },
   {
-    name: "T.E.",
+    name: "TE",
     value: "TE",
   },
   {
-    name: "B.E.",
+    name: "BE",
     value: "BE",
   }
 ]
@@ -75,9 +77,14 @@ const headCells = [
     label: "Email",
   },
   {
-    id: "project",
+    id: "type",
     numeric: false,
-    label: "Project",
+    label: "Type",
+  },
+  {
+    id: "title",
+    numeric: false,
+    label: "Title",
   },
   {
     id: "domain",
@@ -94,6 +101,7 @@ const headCells = [
 
 const Project = () => {
   const container = styles.container + " flex flex-col gap-8 p-8";
+  const [isLoading, setIsLoading] = useState(false);
   const [newRows, setNewRows] = useState([]);
   const [newFilters, setNewFilters] = useState(filters);
   const onSearchSubmit = (data) => {
@@ -102,6 +110,7 @@ const Project = () => {
   };
   const onFilterSubmit = (filterData) => {
     setNewFilters(filters);
+    setIsLoading(true);
     const setProject = async () => {
       const response = await fetch(
         `${ServerUrl}/api/faculty/getProjectsInfo`,
@@ -122,8 +131,10 @@ const Project = () => {
       }
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
         setNewRows(data);
       }
+      setIsLoading(false);
     };
     setProject();
   };
@@ -133,14 +144,26 @@ const Project = () => {
         <p>Project Based Student Search</p>
         <Search onSubmit={onSearchSubmit} />
       </div>
-      <Filter
-        options={options}
-        filters={filters}
-        onSubmit={onFilterSubmit}
-      />
-      <div className="mt-6">
-        <CustTable rows={newRows} headCells={headCells}  />
-      </div>
+      <Filter options={options} filters={filters} onSubmit={onFilterSubmit} />
+      {isLoading ? (
+        <Backdrop
+          sx={{
+            color: "#fff",
+            marginLeft: open ? "240px" : "0px",
+            marginTop: "64px",
+          }}
+          open={true}
+        >
+          <div className="flex flex-col items-center justify-center gap-3">
+            <CircularProgress color="inherit" />
+            Have patience, we are loading your data...
+          </div>
+        </Backdrop>
+      ) : (
+        <div className="mt-6">
+          <CustTable rows={newRows} headCells={headCells} />
+        </div>
+      )}
     </div>
   );
 }

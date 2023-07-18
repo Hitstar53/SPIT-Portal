@@ -20,8 +20,7 @@ exports.setAnnouncementsAllStudents = asyncHandler(async (req, res) => {
         // Student.collection.createIndex({ expireAt: 1 }, { expireAfterSeconds: 0 });
         // const date = new Date(endDatyy')e)
         // const formattedDate = format(date, 'MM-dd-yy
-        // console.log(date)
-        // console.log(typeof(date))
+
         const senderName = await Faculty.findOne({emailID:sender}).select('name -_id')
         const announcement = await Announcement.create({
             title:title,

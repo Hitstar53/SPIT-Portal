@@ -3,88 +3,7 @@ const Student = require('../models/student.js');
 const Placement = require('../models/placement.js');
 
 exports.getProfessionalInfo = asyncHandler(async(req,res) => {
-    // const organization = req.body.organization;
-    // const type = req.body.type;
-    // const ctc = req.body.ctc;
-    // try{ 
-        // if(type === "All")
-        // {
-        //     if(organization && ctc)
-        //     {
-        //         const placementEmails = await Placement.find({ ctc:ctc,companyName:organization}, 'emailID -_id').sort('emailID');
-        //         const emailIDs = placementEmails.map(placement => placement.emailID);
-        //         const studentsPlacement = await Student.find({ emailID: { $in: emailIDs } }, 'emailID name uid -_id').sort('emailID');
-        //         const studentsInternship = await Student.find({internship:{$elemMatch:{organization:organization}}},'emailID name uid -_id').sort('emailID')
-        //         res.status(200).json({studentsPlacement,studentsInternship,placementEmails})
-        //     }
-        //     else if(organization)
-        //     {
-        //         const placementEmails = await Placement.find({companyName:organization}, 'emailID ctc -_id').sort('emailID');
-        //         const emailIDs = placementEmails.map(placement => placement.emailID);
-        //         const studentsPlacement = await Student.find({ emailID: { $in: emailIDs } }, 'emailID name uid -_id').sort('emailID');
-        //         const studentsInternship = await Student.find({internship:{$elemMatch:{organization:organization}}},'emailID name uid -_id').sort('emailID')
-        //         res.status(200).json({studentsPlacement,studentsInternship,placementEmails})
-        //     }
-        //     else if(ctc)
-        //     {
-        //         const placementEmails = await Placement.find({ctc:ctc}, 'emailID companyName -_id').sort('emailID');
-        //         const emailIDs = placementEmails.map(placement => placement.emailID);
-        //         const students = await Student.find({ emailID: { $in: emailIDs } }, 'emailID name uid -_id').sort('emailID');
-        //         res.status(200).json({placementEmails,students})
-        //     }
-        //     else{
-        //         const placementEmails = await Placement.find({'companyName':{'$ne':'-'}}, 'emailID companyName ctc -_id').sort('emailID');
-        //         const emailIDs = placementEmails.map(placement => placement.emailID);
-        //         const studentsPlacement = await Student.find({ emailID: { $in: emailIDs } }, 'emailID name uid -_id').sort('emailID');
-        //         const studentsInternship = await Student.find({'internship.0':{$exists:true}},'emailID name uid internship.organization -_id').sort('emailID')
-        //         res.status(200).json({studentsInternship,studentsPlacement,placementEmails})
-        //     }
-        // }
-        // else if(type === "Placement")
-        // {
-        //     if(ctc && organization)
-        //     {
-        //         const placementEmails = await Placement.find({ ctc:ctc,companyName:organization}, 'emailID -_id').sort('emailID');
-        //         const emailIDs = placementEmails.map(placement => placement.emailID);
-        //         const students = await Student.find({ emailID: { $in: emailIDs } }, 'emailID name uid -_id').sort('emailID')
-        //         res.status(200).json(students)
-        //     }
-        //     else if(organization){
-        //         const placementEmails = await Placement.find({companyName:organization}, 'emailID ctc -_id').sort('emailID');
-        //         const emailIDs = placementEmails.map(placement => placement.emailID);
-        //         const students = await Student.find({ emailID: { $in: emailIDs } }, 'emailID name uid -_id').sort('emailID');
-        //         res.status(200).json({placementEmails,students})
-        //     }
-        //     else if(ctc){
-        //         const placementEmails = await Placement.find({ctc:ctc}, 'emailID companyName -_id').sort('emailID');
-        //         const emailIDs = placementEmails.map(placement => placement.emailID);
-        //         const students = await Student.find({ emailID: { $in: emailIDs } }, 'emailID name uid -_id').sort('emailID');
-        //         res.status(200).json({placementEmails,students})
-        //     }
-        //     else{
-        //         const placementEmails = await Placement.find({'companyName':{'$ne':'-'}}, 'emailID companyName ctc -_id').sort('emailID');
-        //         const emailIDs = placementEmails.map(placement => placement.emailID);
-        //         const students = await Student.find({ emailID: { $in: emailIDs } }, 'emailID name uid -_id').sort('emailID');
-        //         res.status(200).json({placementEmails,students})
-        //     }
-        // }
-        // else{
-        //     if(organization){
-        //         const students = await Student.find({internship:{$elemMatch:{organization:organization}}},'emailID name uid -_id')
-        //         res.status(200).json(students)
-        //     }
-        //     else{
-        //         const students = await Student.find({'internship.0':{$exists:true}},'emailID name uid internship.organization -_id')
-        //         res.status(200).json(students)
-        //     }
-        // }
-        
-    // }
-    // catch(error){
-    //     console.error(error)
-    // }
     const { type, organization, ctc } = req.body;
-
   if (type === 'Placement') {
     const filter = {};
     if (organization) filter.companyName = { $regex: new RegExp(organization, 'i') };
@@ -97,7 +16,7 @@ exports.getProfessionalInfo = asyncHandler(async(req,res) => {
       const students = await Student.find({ emailID: { $in: emailIDs } }).select('uid name emailID');
       const result = students.map((student) => ({
         uid: student.uid,
-        name: student.name,
+        studentname: student.name,
         email: student.emailID,
         Organization: placements.find((placement) => placement.emailID === student.emailID)?.companyName || '',
         ctc: placements.find((placement) => placement.emailID === student.emailID)?.ctc || '',
@@ -110,15 +29,19 @@ exports.getProfessionalInfo = asyncHandler(async(req,res) => {
     }
   } else if (type === 'Internship') {
     try {
-      const students = await Student.find({ 'internship.organization': { $regex: new RegExp(organization, 'i') } }).select('name uid emailID internship.organization');
+      let students;
+      if (organization) {
+        students = await Student.find({ 'internship.organization': { $regex: new RegExp(organization, 'i') } }).select('name uid emailID internship.organization');
+      } else {
+        students = await Student.find({ 'internship.0': { $exists: true } }).select('name uid emailID internship.organization');
+      }
       const result = students.map((student) => ({
         uid: student.uid,
-        name: student.name,
+        studentname: student.name,
         email: student.emailID,
-        Organization: student.internship.find((internship) => internship.organization.toLowerCase() === organization.toLowerCase())?.organization || '',
+        Organization: student.internship.map((internship) => internship.organization).join(', ') || '',
         ctc: '',
       }));
-
       res.json(result);
     } catch (error) {
       console.error(error);
@@ -127,7 +50,7 @@ exports.getProfessionalInfo = asyncHandler(async(req,res) => {
   } else if (type === 'All') {
     try {
       const placementFilter = {};
-      const internshipFilter = {};
+      const internshipFilter = { 'internship.0': { $exists: true } };
       if (organization) {
         placementFilter.companyName = { $regex: new RegExp(organization, 'i') };
         internshipFilter['internship.organization'] = { $regex: new RegExp(organization, 'i') };
@@ -139,18 +62,19 @@ exports.getProfessionalInfo = asyncHandler(async(req,res) => {
       const internshipStudents = await Student.find(internshipFilter).select('uid name emailID internship.organization');
 
       const placementResult = placementStudents.map((placementStudent) => ({
-        name: '',
+        studentname: '',
         email: placementStudent.emailID,
         Organization: placementStudent.companyName,
         ctc: placementStudent.ctc,
       }));
 
       const internshipResult = internshipStudents.map((internshipStudent) => ({
-        name: internshipStudent.name,
+        uid: internshipStudent.uid,
+        studentname: internshipStudent.name,
         email: internshipStudent.emailID,
         ctc: '',
-        organization: internshipStudent.internship.find((internship) => internship.organization.toLowerCase() === organization.toLowerCase())?.organization || '',
-      }));
+        Organization: internshipStudent.internship.map((internship) => internship.organization).join(', ') || ''
+        }));
 
 
       const studentResult = await Student.find({ emailID: { $in: placementEmailIDs } }).select('uid name emailID');
@@ -158,7 +82,7 @@ exports.getProfessionalInfo = asyncHandler(async(req,res) => {
       const result = [...placementResult, ...internshipResult].map((item) => {
         const student = studentResult.find((s) => s.emailID === item.email);
         if (student) {
-          item.name = student.name;
+          item.studentname = student.name;
           item.uid = student.uid;
         }
         return item;
@@ -177,57 +101,168 @@ exports.getProfessionalInfo = asyncHandler(async(req,res) => {
 
 
 exports.getProjectsInfo = asyncHandler(async (req, res) => {
-    let { year, domain, techStack } = req.body;
-    const fieldMapping = {
-      year: 'educationalInfo.0.year',
-      domain: 'projects.domain',
-      techStack: 'projects.techStack',
-    };
-    const filter = {};
-    for (const field in fieldMapping) {
-      if (req.body[field] !== undefined) {
-        const schemaField = fieldMapping[field];
-        filter[schemaField] = {
-            $regex: `${req.body[field]}`,
-            $options: 'i',
+  let { year, domain, techStack } = req.body;
+  const fieldMapping = {
+    year: 'educationalInfo.0.year',
+    domain: ['$or', 'projects.domain', 'research.domain'],
+    techStack: ['$or', 'projects.techStack', 'research.techStack'],
+  };
+  const filter = {};
+  for (const field in fieldMapping) {
+    if (req.body[field] !== undefined) {
+      const schemaFields = fieldMapping[field];
+      if (schemaFields[0] === '$or') {
+        filter[schemaFields[0]] = filter[schemaFields[0]] || [];
+        if (field === 'domain' && domain !== undefined) {
+          filter[schemaFields[0]].push(
+            ...schemaFields.slice(1).map((field) => ({
+              [field]: {
+                $regex: `${domain}`,
+                $options: 'i',
+              },
+            }))
+          );
+        } else if (field === 'techStack' && techStack !== undefined) {
+          filter[schemaFields[0]].push(
+            ...schemaFields.slice(1).map((field) => ({
+              [field]: {
+                $regex: `${techStack}`,
+                $options: 'i',
+              },
+            }))
+          );
+        } else {
+          filter[schemaFields[0]].push(
+            ...schemaFields.slice(1).map((field) => ({
+              [field]: {
+                $regex: `${req.body[field]}`,
+                $options: 'i',
+              },
+            }))
+          );
+        }
+      } else {
+        filter[schemaFields] = {
+          $regex: `${req.body[field]}`,
+          $options: 'i',
         };
       }
     }
-    try {
-      const response = await Student.find(filter).select(
-        'uid name emailID projects.name projects.domain projects.techStack -_id'
-      );
-      let projectInfo = [];
-      for (const res in response) {
-        const { uid, name, emailID, projects } = response[res];
-        for (const p in projects) {
-          const project = projects[p].name;
-          const domain = projects[p].domain;
-          const techStack = projects[p].techStack.join(',');
-          projectInfo.push({
-            uid: uid,
-            studentname: name,
-            email: emailID,
-            project: project,
-            domain: domain,
-            techstack: techStack,
-          });
-        }
+  }
+  try {
+    const response = await Student.find(filter).select(
+      'uid name emailID projects.name projects.domain projects.techStack research.name research.domain research.techStack -_id'
+    );
+    let projectInfo = [];
+    for (const res in response) {
+      const { uid, name, emailID, projects, research } = response[res];
+      for (const p in projects) {
+        const project = projects[p].name;
+        const domain = projects[p].domain;
+        const techStack = projects[p].techStack.join(',');
+        projectInfo.push({
+          uid: uid,
+          studentname: name,
+          email: emailID,
+          title: project,
+          domain: domain,
+          techstack: techStack,
+          type: 'Project',
+        });
       }
-      if (domain) {
-        const domainRegex = new RegExp( domain , 'i');
-        projectInfo = projectInfo.filter((item) => domainRegex.test(item.domain));
+      for (const r in research) {
+        const project = research[r].name;
+        const domain = research[r].domain;
+        const techStack = research[r].techStack.join(',');
+        projectInfo.push({
+          uid: uid,
+          studentname: name,
+          email: emailID,
+          title: project,
+          domain: domain,
+          techstack: techStack,
+          type: 'Research',
+        });
       }
-      if (techStack) {
-        const techStackRegex = new RegExp( techStack , 'i');
-        projectInfo = projectInfo.filter((item) => techStackRegex.test(item.techstack));
-      }
-      res.json(projectInfo);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal server error' });
     }
-  });
+    if (domain) {
+      const domainRegex = new RegExp(domain, 'i');
+      projectInfo = projectInfo.filter((item) =>
+      domainRegex.test(item.domain)
+      );
+    }
+    if (techStack) {
+      const techStackRegex = new RegExp(techStack, 'i');
+      projectInfo = projectInfo.filter((item) =>
+      techStackRegex.test(item.techstack)
+      );
+    }
+    res.json(projectInfo);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+exports.getInformation = asyncHandler(async (req, res) => {
+  const { year, branch, batch, committee, event, cgpa } = req.body;
+
+  const fieldMapping = {
+    year: 'educationalInfo.0.year',
+    branch: 'educationalInfo.0.branch',
+    batch: 'educationalInfo.0.batch',
+    committee: 'committee.committeeDetails',
+    event: 'participation.eventName',
+    cgpa: 'educationalInfo.0.score',
+  };
+
+  const filter = {};
+  for (const field in fieldMapping) {
+    if (req.body[field] !== undefined) {
+      const schemaField = fieldMapping[field];
+      filter[schemaField] = {
+        $regex: `${req.body[field]}`,
+        $options: 'i',
+      };
+    }
+  }
+
+  try {
+    const response = await Student.find(filter).select(
+      'uid name emailID educationalInfo committee participation -_id'
+    );
+    const studentInfo = response.map((student) => {
+      const educationalInfo = student.educationalInfo[0];
+      let committeeNames =''
+      if(student.committee.length>0){
+        committeeNames = student.committee.map((committee) => committee.committeeDetails).join(', ');
+      }
+
+      let participationDescription =  '';
+      if(student.participation.length>0){
+        participationDescription = student.participation.map((participation) => participation.eventName).join(', ');
+      }
+      return {
+        uid: student.uid,
+        studentname: student.name,
+        email: student.emailID,
+        year: educationalInfo ? educationalInfo.year : '',
+        branch: educationalInfo ? educationalInfo.branch : '',
+        batch: educationalInfo ? educationalInfo.batch : '',
+        committee: committeeNames,
+        event: participationDescription,
+        cgpa: educationalInfo ? educationalInfo.score : '',
+      };
+    });
+
+    res.json(studentInfo);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
   
 
   exports.getGeneralInfo = asyncHandler(async (req, res) => {

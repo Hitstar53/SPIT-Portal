@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 import CustTable from '../../UI/CustTable'
 import Search from './Search'
-import Filter from './Filter'
+import InfoFilter from './InfoFilter'
+import ServerUrl from '../../../constants'
 import styles from './FilterLayout.module.css'
 
 const rows = [
@@ -29,18 +32,6 @@ const rows = [
 
 const filters = [
   {
-    id: "uid",
-    label: "U.I.D.",
-  },
-  {
-    id: "branch",
-    label: "Branch",
-  },
-  {
-    id: "batch",
-    label: "Batch",
-  },
-  {
     id: "committee",
     label: "Committee",
   },
@@ -61,20 +52,39 @@ const options = [
   },
   {
     name: "FE",
-    value: "F.E.",
+    value: "FE",
   },
   {
     name: "SE",
-    value: "S.E.",
+    value: "SE",
   },
   {
     name: "TE",
-    value: "T.E.",
+    value: "TE",
   },
   {
     name: "BE",
-    value: "B.E.",
+    value: "BE",
   }
+]
+
+const branchOptions = [
+  { name: "All", value: "All" },
+  { name: "Comps", value: "Comps" },
+  { name: "AIML", value: "AIML" },
+  { name: "DS", value: "DS" },
+  { name: "CSE", value: "CSE" },
+  { name: "EXTC", value: "EXTC" },
+  { name: "ETRX", value: "ETRX" },
+  { name: "IT", value: "IT" },
+]
+
+const batchOptions = [
+  { name: "All", value: "All" },
+  { name: "A", value: "A" },
+  { name: "B", value: "B" },
+  { name: "C", value: "C" },
+  { name: "D", value: "D" },
 ]
 
 const headCells = [
@@ -84,7 +94,7 @@ const headCells = [
     label: "UID",
   },
   {
-    id: "name",
+    id: "studentname",
     numeric: false,
     label: "Name",
   },
@@ -123,20 +133,75 @@ const headCells = [
 
 const Info = () => {
   const container = styles.container + " flex flex-col gap-8 p-8";
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [newRows, setNewRows] = useState([]);
+  const [newFilters, setNewFilters] = useState(filters);
+  const onSearchSubmit = (data) => {
+    console.log(data);
+    setNewFilters(filters);
+  };
+  const onFilterSubmit = (filterData) => {
+    setNewFilters(filters);
+    setIsLoading(true);
+    const setInfo = async () => {
+      const response = await fetch(`${ServerUrl}/api/faculty/getInformation`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          year: filterData.type === "All" ? "" : filterData.type,
+          branch: filterData.branch === "All" ? "" : filterData.branch,
+          batch: filterData.batch === "All" ? "" : filterData.batch,
+          committee: filterData.committee,
+          event: filterData.event,
+          cgpa: filterData.cgpa,
+        }),
+      });
+      if (!response.ok) {
+        console.log("Something went wrong, please try again later");
+      }
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        setNewRows(data);
+      }
+      setIsLoading(false);
+    };
+    setInfo();
+  };
   return (
     <div className={container}>
       <div className="flex justify-between items-center text-4xl font-semibold">
         <p>Student Info Search</p>
-        <Search />
+        <Search onSubmit={onSearchSubmit} />
       </div>
-      <Filter
+      <InfoFilter
         options={options}
+        branchOptions={branchOptions}
+        batchOptions={batchOptions}
         filters={filters}
+        onSubmit={onFilterSubmit}
       />
-      <div className="mt-6">
-        <CustTable rows={rows} headCells={headCells} />
-      </div>
+      {isLoading ? (
+        <Backdrop
+          sx={{
+            color: "#fff",
+            marginLeft: open ? "240px" : "0px",
+            marginTop: "64px",
+          }}
+          open={true}
+        >
+          <div className="flex flex-col items-center justify-center gap-3">
+            <CircularProgress color="inherit" />
+            Have patience, we are loading your data...
+          </div>
+        </Backdrop>
+      ) : (
+        <div className="mt-6">
+          <CustTable rows={newRows} headCells={headCells} />
+        </div>
+      )}
     </div>
   );
 }
