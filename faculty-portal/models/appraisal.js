@@ -617,10 +617,7 @@ const appraisalSchema = new mongoose.Schema({
                 type: Number,
                 default: 0,
             },
-            D: {
-                type: Number,
-                default: 0,
-            },
+           
             E: {
                 type: Number,
             },

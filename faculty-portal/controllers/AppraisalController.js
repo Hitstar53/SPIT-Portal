@@ -803,7 +803,7 @@ const getDim3 = asyncHandler(async (req, res) => {
 const setDim4HOD = asyncHandler(async (req, res) => {
     try {
         const { yearofAssesment, fullName, Dimension4 } = req.body;
-        Dimension4.feedbackMarks.E = parseInt(Dimension4.feedbackMarks.A) + parseInt(Dimension4.feedbackMarks.B) + parseInt(Dimension4.feedbackMarks.C) + parseInt(Dimension4.feedbackMarks.D)
+        Dimension4.feedbackMarks.E = parseInt(Dimension4.feedbackMarks.A) + parseInt(Dimension4.feedbackMarks.B) + parseInt(Dimension4.feedbackMarks.C) ;
             
         var updatedApp = null;
 
