@@ -179,12 +179,12 @@ exports.getFacultyByDept = asyncHandler(async (req, res) => {
 exports.getFacultyByDeptHOD = asyncHandler(async (req, res) => {
     console.log("Inside for the HODappraisal")
     try {
-        const { department,yearofAssesment } = req.body
+        const { department, yearofAssesment } = req.body
         const facultyInfo = await Appraisal.find({
             yearofAssesment,
             department,
-            isSubmitted:true,
-            HODReviewed:false
+            isSubmitted: true,
+            HODReviewed: false
         }, { facultyName: 1 })
 
         if (facultyInfo) {
@@ -314,3 +314,23 @@ exports.getSubmittedFaculty = async (req, res) => {
         console.log(error)
     }
 }
+
+
+// ==> /get/faculty/getalldepartments
+exports.getAllDepartments = async (req, res) => {
+    try {
+        var deptArray = new Set();
+        const faculty = await Faculty.find()
+        console.log(faculty)
+
+        for (var i = 0; i < faculty.length; i++) {
+            deptArray.add(faculty[i].department)
+        }
+    } catch (err) {
+        res.status(404).json("No faculty found")
+    }
+    const myarr = Array.from(deptArray)
+    console.log(myarr)
+    res.status(200).json(myarr)
+}
+

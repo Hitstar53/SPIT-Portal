@@ -17,4 +17,5 @@ router.post('/get/faculty/all-principal', teacherDataController.getPrincipalFacu
 router.post('/get/faculty/check-faculty', teacherDataController.checkFaculty)
 router.post('/get/faculty/check-principal-faculty', teacherDataController.principalAppraisal)
 router.get('/get/faculty/submitted', teacherDataController.getSubmittedFaculty)
+router.get('/getalldepartments', teacherDataController.getAllDepartments)
 module.exports = router; 

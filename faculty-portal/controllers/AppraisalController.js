@@ -1034,20 +1034,6 @@ const getHodComments = asyncHandler(async (req, res) => {
 })
 
 
-// const getUniqueDepartments = asyncHandler(async (req, res) => {
-
-//     var deptArray = []
-//     const faculty = await Faculty.find
-
-//     if (existingFaculty) {
-//         res.status(200).json(existingFaculty.HODcomments);
-//     }
-//     else {
-//         res.status(404).json("Departments Not Found In getuniqueDepartments")
-//     }
-    
-// })
-
 
 
 module.exports = {
