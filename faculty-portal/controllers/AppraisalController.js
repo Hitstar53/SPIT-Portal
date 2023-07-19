@@ -981,6 +981,7 @@ const isSubmittedTeacher = asyncHandler(async (req, res) => {
 
 const setHodComments = asyncHandler(async (req, res) => {
     const { yearofAssesment, fullName, comment } = req.body;
+
     try {
         const existingFaculty = await Appraisal.findOne({
             facultyName: fullName,
