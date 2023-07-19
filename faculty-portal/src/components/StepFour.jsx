@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import { Modal, ModalBody, ModalFooter } from "reactstrap";
 import AllSteps from "./AllSteps";
 
-function StepFour({ yr, fullName,setStatus }) {
+function StepFour({ yr, fullName, setStatus }) {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   // const [loading, setLoading] = useState(true)
@@ -47,6 +47,34 @@ function StepFour({ yr, fullName,setStatus }) {
   } = useForm({
     defaultValues: {},
   });
+
+  const resendAppraisal = (e) => {
+    e.preventDefault();
+    let data = e.target[0].value;
+    if (data === "") {
+      toast.error("Please enter the comment before rejecting the appraisal");
+      return;
+    }
+    fetch("http://localhost:5000/api/faculty/appraisal/hod-comments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fullName: fullName,
+        yearofAssesment: yr,
+        comment: data,
+      }),
+    }).then((res) => {
+      if (res.status === 200) {
+        toast.success("Appraisal Rejected Successfully");
+        setStatus("Appraisal Rejected");
+        // window.location.href="/home"
+      } else {
+        toast.error("Appraisal Rejection Failed");
+      }
+    });
+  };
 
   const onSubmit = (data) => {
     console.log("line 51");
@@ -193,54 +221,34 @@ function StepFour({ yr, fullName,setStatus }) {
             </label>
           </div>
           <div style={{ textAlign: "center" }}>
-            <input type="submit" className="save-btn" />
+            {/* <input type="submit" className="save-btn" /> */}
+            <button className="save-btn">Submit Appraisal</button>
           </div>
-          {/* <div style={{textAlign:'center'}}>
-            <Button
-              sx={{
-                background: "#38ba6c",
-                "&:hover": { background: "#38ba6c" },
-              }}
-              variant="contained"
-              onClick={toggle}
-            >
-              Submit Form
-            </Button>
-            <Modal isOpen={modal} toggle={toggle}>
-              <ModalBody>
-                <div style={{ fontSize: "1.4rem", fontWeight: 700 }}>
-                  Are you sure you want to submit the form?
-                </div>
-                <div>Once you submit you will not be able to edit the form</div>
-              </ModalBody>
-              <ModalFooter>
-                <Button
-                  sx={{ margin: "0 1rem" }}
-                  variant="contained"
-                  color="success"
-                  onClick={() => {
-                    handleSubmit(onSubmit)
-                    toggle();
-                    toast.success("Complete Form Submitted!", {
-                      position: "top-center",
-                      autoClose: 2000,
-                      hideProgressBar: false,
-                      closeOnClick: true,
-                      pauseOnHover: true,
-                      draggable: true,
-                      progress: undefined,
-                      theme: "light",
-                    });
-                  }}
-                >
-                  Submit
-                </Button>{" "}
-                <Button variant="contained" color="error" onClick={toggle}>
-                  Cancel
-                </Button>
-              </ModalFooter>
-            </Modal>
-          </div> */}
+        </form>
+        <h1>OR</h1>
+        {/* <div style={{width: "100%", height: "20px", borderBottom: "1px solid black", textAlign: "center"}}>
+          <span style={{fontSize: '40px' ,'backgroundColor': #F3F5F6, padding: "0 10px"}}>
+            OR{" "}
+          </span>
+        </div> */}
+        <form onSubmit={resendAppraisal}>
+          <div style={{ margin: "2rem 0" }}>
+            <label className="form-label">
+              Comment:
+              <textarea
+                rows={4}
+                // {...register("HODComments")}
+                placeholder="comment..."
+                className="form-textarea"
+                style={{ width: "100%" }}
+              />
+            </label>
+          </div>
+          <div style={{ textAlign: "center" }}>
+            <button className="save-btn" style={{ backgroundColor: "#d83c3c" }}>
+              Reject Appraisal
+            </button>
+          </div>
         </form>
       </div>
     </div>
