@@ -46,6 +46,7 @@ const SemesterCard = (props) => {
           <Chip
             label={year}
             sx={{
+              fontSize: "0.8rem",
               backgroundColor: "var(--secondary-color)",
               color: "var(--text-color)",
               cursor: "pointer",
@@ -57,6 +58,7 @@ const SemesterCard = (props) => {
           <Chip
             label="2022-23"
             sx={{
+              fontSize: "0.8rem",
               backgroundColor: "var(--secondary-color)",
               color: "var(--text-color)",
               cursor: "pointer",

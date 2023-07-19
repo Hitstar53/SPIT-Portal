@@ -31,6 +31,7 @@ export default function EventAccordion(props) {
             color: "var(--text-light)",
             border: "none",
             boxShadow: "none",
+            marginBottom: "1rem",
           }}
         >
           <AccordionSummary
@@ -44,10 +45,14 @@ export default function EventAccordion(props) {
               pl: "2rem",
               pr: "1rem",
               pt: "1rem",
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              justifyContent: "left",
             }}
           >
-            <img src={logo} alt="pic" width={75} />
-            <Box sx={{ display: "flex", flexDirection: "column", pl: "1rem" }}>
+            <img src={logo} alt="pic" width={isMobile ? 75 : 100} height={isMobile ? 75 : 100} />
+            <Box sx={{ display: "flex", flexDirection: "column", marginRight: "1rem"}}>
               <Typography
                 sx={{
                   flexShrink: 0,

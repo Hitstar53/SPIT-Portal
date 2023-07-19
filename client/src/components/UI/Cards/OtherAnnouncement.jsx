@@ -33,23 +33,22 @@ const OtherAnnouncement = (props) => {
             ? "var(--secondary-color)"
             : "var(--secondary-color)",
           filter: isHover ? "brightness(0.8)" : "",
+          color: isHover ? "var(--text-color)" : "var(--text-color)",
         }}
       >
-        <div className={styles.cardItemLogo}>
-          <Avatar
-            sx={{ width: 75, height: 75, fontSize: "3rem", margin: "0 auto" }}
-            alt={props.item.sender}
-            src={props.item.senderPhoto}
-          />
-        </div>
+        <Avatar
+          className={styles.avatar}
+          alt={props.item.sender}
+          src={props.item.senderPhoto}
+        />
         <div className={styles.cardItemHeader}>
           <h1>{props.item.title}</h1>
           <p>{dayjs(props.item.endDate).format('DD-MM-YYYY')}</p>
         </div>
-        <div className={styles.cardItemSubHeader}>
+        <div className={styles.cardItemSub}>
           <p>From: {props.item.sender}</p>
+          <div className={styles.cardItemContent}>{props.item.description}</div>
         </div>
-        <p className={styles.cardItemContent}>{props.item.description}</p>
       </div>
       {open && (
         <ScrollModal

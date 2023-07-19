@@ -42,3 +42,35 @@
     font-size: 1.25rem;
     font-weight: 200;
 }
+
+@media screen and (max-width: 1344px) {
+    .card {
+        width: 13rem;
+        height:13rem;
+    }
+    .title {
+        font-size: 1.5rem;
+    }
+    .status {
+        font-size: 1.2rem;
+    }
+    .sgpa {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .card {
+        width: 16rem;
+        height:16rem;
+    }
+    .title {
+        font-size: 1.8rem;
+    }
+    .status {
+        font-size: 1.4rem;
+    }
+    .sgpa {
+        font-size: 1.2rem;
+    }
+}

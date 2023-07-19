@@ -16,17 +16,15 @@ const Announcement = (props) => {
   return (
     <React.Fragment>
       <div className={styles.cardItem} onClick={handleClickOpen}>
-        <div className={styles.cardItemLogo}>
-          <Avatar
-            sx={{ width: 75, height: 75, fontSize: "3rem", margin: "0 auto" }}
-            alt={props.item.sender}
-            src={props.item.senderPhoto}
-          />
-        </div>
+        <Avatar
+          className = {styles.avatar}
+          alt={props.item.sender}
+          src={props.item.senderPhoto}
+        />
         <div>
           <div className={styles.cardItemHeader}>
             <h1>{props.item.title}</h1>
-            <p className={styles.cardDate}>{dayjs(props.item.postDate).format("DD-MM-YYYY")}</p>
+            <div className={styles.cardDate}>{dayjs(props.item.postDate).format("DD-MM-YYYY")}</div>
           </div>
           <div className={styles.cardItemSubHeader}>
             <p>From: {props.item.sender}</p>
