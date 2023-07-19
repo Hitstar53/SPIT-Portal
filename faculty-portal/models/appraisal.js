@@ -291,6 +291,9 @@ const appraisalSchema = new mongoose.Schema({
                     },
                 },
             ],
+            patentMarks:{
+            type:Number
+            },
             books: [
                 {
                     title: {
@@ -309,6 +312,9 @@ const appraisalSchema = new mongoose.Schema({
                     },
                 },
             ],
+            booksMarks:{
+            type:Number
+            },
             moocs: [
                 {
                     name: {
@@ -324,6 +330,9 @@ const appraisalSchema = new mongoose.Schema({
                     },
                 },
             ],
+            moocsMarks:{
+            type:Number
+            },
             totalMarks: {
                 type: Number,
                 max: 30,

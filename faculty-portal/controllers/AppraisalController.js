@@ -299,37 +299,46 @@ const setAppraisal = asyncHandler(async (req, res) => {
         // ------------------------------------
         //RP2
         var rp2marks = 0;
+        var patents=0;
         for (var i = 0; i < Dimension2.RP2.patents.length; i++) {
             if (Dimension2.RP2.patents[i].status == "Obtained") {
-                rp2marks = rp2marks + 30;
+                patents= patents + 30;
             }
             if (Dimension2.RP2.patents[i].status == "Published") {
-                rp2marks = rp2marks + 5;
+                patents = patents + 5;
             }
         }
+        var books = 0  ;
         for (var i = 0; i < Dimension2.RP2.books.length; i++) {
             if (Dimension2.RP2.books[i].status == "Published") {
-                rp2marks = rp2marks + 30;
+                books = books + 30;
             }
             if (Dimension2.RP2.books[i].status == "Book Chapter/Monograms/Copyright") {
-                rp2marks = rp2marks + 5;
+                books= books + 5;
             }
         }
+
+        var moocs = 0 ;
         for (var i = 0; i < Dimension2.RP2.moocs.length; i++) {
             if (Dimension2.RP2.moocs[i].duration < 8) {
-                rp2marks = rp2marks + 0;
+                moocs = moocs + 0;
             }
             if (Dimension2.RP2.moocs[i].duration >= 8 && Dimension2.RP2.moocs[i].duration < 24) {
-                rp2marks = rp2marks + 10;
+                 moocs= moocs + 10;
             }
             if (Dimension2.RP2.moocs[i].duration >= 24 && Dimension2.RP2.moocs[i].duration < 40) {
-                rp2marks = rp2marks + 20;
+                moocs = moocs + 20;
             }
             if (Dimension2.RP2.moocs[i].duration >= 40) {
-                rp2marks = rp2marks + 30;
+                moocs = moocs + 30;
             }
 
         }
+
+        rp2marks=patents+books+moocs;
+        Dimension2.RP2.patentMarks=patents;
+        Dimension2.RP2.booksMarks=books;
+        Dimension2.RP2.moocsMarks=moocs;
 
         if (rp2marks > 30) {
             rp2marks = 30;
