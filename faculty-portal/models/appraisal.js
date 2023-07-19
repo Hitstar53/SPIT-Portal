@@ -777,6 +777,13 @@ const appraisalSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+
+    HODcomments:[{
+        comment:{
+         type:String   
+        }
+    }
+    ]
 });
 
 const Appraisal = mongoose.model('Appraisal', appraisalSchema);
