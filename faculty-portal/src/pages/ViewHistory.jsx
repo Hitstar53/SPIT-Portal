@@ -405,7 +405,7 @@ const ViewHistory = () => {
                                                         <td>{Dim4.feedbackMarks.A}</td>
                                                         <td>{Dim4.feedbackMarks.B}</td>
                                                         <td>{Dim4.feedbackMarks.C}</td>
-                                                        <td>{Dim4.feedbackMarks.D}</td>
+                                                        
 
                                                         <td>{Dim4.feedbackMarks.E}</td>
                                                     </tr>
@@ -695,8 +695,8 @@ const ViewHistory = () => {
                 <>
                     <div>
                         {/* Faculty content */}
-                        <h1>Faculty</h1>
-                        <p>Welcome, Faculty!</p>
+                       
+                        
                     </div>
                     {years ? (
 
@@ -807,12 +807,13 @@ const ViewHistory = () => {
                                         style={{
                                             display: "flex",
                                             width: "90%",
+                                            
                                             flexDirection: "column",
                                         }}
                                     >
                                         <table
                                             style={{
-                                                margin: "0px 0px 0px 1em",
+                                                //margin: "1px 0px 0px 1em",
                                                 width: "60%",
                                             }}
                                         >
@@ -854,7 +855,7 @@ const ViewHistory = () => {
                                         {/* AP2 */}
                                         <table
                                             style={{
-                                                margin: "1em 0px 0px 1em",
+                                               // margin: "1em 0px 0px 1em",
                                                 width: "60%",
                                             }}
                                         >
@@ -898,7 +899,7 @@ const ViewHistory = () => {
                                     {/* ---------------------------------------------------------------------------AP3 */}
                                     <table>
                                         <thead>
-                                            <th colSpan={7} className="table-heading">
+                                            <th colSpan={8} className="table-heading">
                                                 AP3:Lecture target achieved. Average for all the
                                                 courses taught in one academic year
                                             </th>
@@ -911,6 +912,8 @@ const ViewHistory = () => {
                                                 <th>Number of lectures conducted</th>
                                                 <th>% of target target achieved</th>
                                                 <th>Average % of all Courses</th>
+                                                <th>AP3 Marks</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -923,6 +926,16 @@ const ViewHistory = () => {
                                                             <td>{course.AP3LecturesTarget}</td>
                                                             <td>{course.AP3LectureConducted}</td>
                                                             <td>{course.AP3PercentAchieved}</td>
+                                                            
+                                                            {index === 0 && (
+                                                                <td
+                                                                    rowSpan={
+                                                                        history.Dimension1.info.courses.length
+                                                                    }
+                                                                >
+                                                                    {history.Dimension1.info.AP3Average}
+                                                                </td>
+                                                            )}
                                                             {index === 0 && (
                                                                 <td
                                                                     rowSpan={
@@ -936,9 +949,7 @@ const ViewHistory = () => {
                                                     );
                                                 }
                                             )}
-                                            <th colSpan={10} className="table-heading">
-                                                AP3 Marks :{history.Dimension1.info.AP3Marks}
-                                            </th>
+                                            
                                         </tbody>
                                     </table>
 
@@ -950,6 +961,7 @@ const ViewHistory = () => {
                                             gap: "1rem",
                                             flexDirection: "column",
                                             width: "60%",
+                                            
                                         }}
                                     >
                                         <table>
@@ -1002,7 +1014,7 @@ const ViewHistory = () => {
                                                 </th>
                                             </thead>
                                             <tr>
-                                                <th>Attendance of Students</th>
+                                                <th>Attendance of students</th>
                                                 <th>Average Students</th>
                                             </tr>
 
@@ -1036,18 +1048,21 @@ const ViewHistory = () => {
                                     {/* ---------------------------------------------------------- AP6*/}
                                     <table>
                                         <thead>
-                                            <th colSpan={5} className="table-heading">
+                                            <th colSpan={2} className="table-heading">
                                                 AP6 : Mentoring : Feedback from mentees
                                             </th>
                                         </thead>
 
-                                        <tr>
-                                            <th>Sr.No</th>
-                                            <th>Mentee Feedback</th>
-                                            <th>Average Marks(Out of 5)</th>
-                                        </tr>
-
+                                       
                                         <tbody>
+                                             
+                                         <th  className="table-heading">
+                                                Mentee Feedback Score Average Marks (Out of 5): 
+                                            </th>
+                                            <td style={{padding:"10px"}}>{history.Dimension1.AP6.averageMarks}</td>
+                                        </tbody>
+
+                                        {/* <tbody>
                                             {history.Dimension1.AP6.menteeFeedback.map(
                                                 (mf, index) => {
                                                     return (
@@ -1068,7 +1083,7 @@ const ViewHistory = () => {
                                                     );
                                                 }
                                             )}
-                                        </tbody>
+                                        </tbody> */}
                                     </table>
                                     {/* ----------------------------------------------------------------------------- */}
                                     {/* ----------------------------------------------------------------------------AP7- */}
@@ -1155,7 +1170,7 @@ const ViewHistory = () => {
 
                                     <table>
                                         <thead>
-                                            <th colSpan={5} className="table-heading">
+                                            <th colSpan={6} className="table-heading">
                                                 AP9:Noteworthy efforts towards enriching the learning
                                                 experience / innovation in TLE methods
                                             </th>
@@ -1166,8 +1181,10 @@ const ViewHistory = () => {
                                                 <th>Sem</th>
                                                 <th>Subject</th>
                                                 <th>Activity details </th>
+                                                <th>Marks out of 10</th>
                                                 <th>Average of all courses (filled by auditor)</th>
                                             </tr>
+                                            
                                         </thead>
                                         <tbody>
                                             {history.Dimension1.AP9.noteworthyData.map((ref, index) => {
@@ -1177,6 +1194,7 @@ const ViewHistory = () => {
                                                         <td>{ref.sem}</td>
                                                         <td>{ref.subject}</td>
                                                         <td>{ref.activityDetails}</td>
+                                                        <td>{ref.marksOutOf10}</td>
                                                         {index === 0 && (
                                                             <td
                                                                 rowSpan={
@@ -1189,6 +1207,9 @@ const ViewHistory = () => {
                                                     </tr>
                                                 );
                                             })}
+                                            <th colSpan={6} className="table-heading">
+                                                AP9 Total Marks : {history.Dimension1.AP9.average}
+                                            </th>
                                         </tbody>
                                     </table>
                                     {/* ---------------------------------------------------------------------------AP10*/}
@@ -1218,9 +1239,10 @@ const ViewHistory = () => {
                                                     </tr>
                                                 );
                                             })}
-                                            <th colSpan={10} className="table-heading">
+                                            <th colSpan={5} className="table-heading">
                                                 Totals Marks: {history.Dimension1.AP10.averageMarks}
                                             </th>
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -1261,6 +1283,8 @@ const ViewHistory = () => {
                                         <th>Sr No.</th>
                                         <th>Paper Title</th>
                                         <th>Journal/ Conference Name</th>
+                                        <th>Journal/ Conference</th>
+                                        <th>High / Medium <br/>/ Low Repute</th>
                                         <th>Authors</th>
                                         <th>Publisher</th>
                                         <th>Paper Link</th>
@@ -1272,6 +1296,8 @@ const ViewHistory = () => {
                                                     <td>{index + 1}</td>
                                                     <td>{rp.title}</td>
                                                     <td>{rp.conferenceOrJournal.name}</td>
+                                                    <td>{rp.conferenceOrJournal.type}</td>
+                                                    <td>{rp.conferenceOrJournal.reputation}</td>
                                                     <td>{rp.author}</td>
                                                     <td>{rp.publisher}</td>
                                                     <td>{rp.paperLink}</td>
@@ -1279,7 +1305,7 @@ const ViewHistory = () => {
                                             );
                                         })}
                                         <th colSpan={10} className="table-heading">
-                                            Total Marks: {history.Dimension2.RP1.totalMarks}
+                                         RP1   Total Marks: {history.Dimension2.RP1.totalMarks}
                                         </th>
                                     </tbody>
                                 </table>
@@ -1298,7 +1324,7 @@ const ViewHistory = () => {
                                                 <th>Sr. No.</th>
                                                 <th>Patent Obtained</th>
                                                 <th>Details</th>
-                                                <th>Status</th>
+                                               
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -1309,12 +1335,14 @@ const ViewHistory = () => {
                                                             <td>{index + 1}</td>
                                                             <td>{patent.name}</td>
                                                             <td>{patent.details}</td>
-                                                            <td>{patent.status}</td>
+                                                            
                                                         </tr>
                                                     </>
                                                 );
                                             })}
                                         </tbody>
+                                       
+                                        <th colSpan={4} className="table-heading">Marks Obtained : {history.Dimension2.RP2.patentMarks}</th>
                                     </table>
                                     <table>
                                         <thead>
@@ -1323,7 +1351,7 @@ const ViewHistory = () => {
                                                 <th> Books published &nbsp;(Title of the book)</th>
                                                 <th>Authors</th>
                                                 <th>Publisher</th>
-                                                <th>Status</th>
+                                               
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -1335,12 +1363,14 @@ const ViewHistory = () => {
                                                             <td>{book.title}</td>
                                                             <td>{book.author}</td>
                                                             <td>{book.publisher}</td>
-                                                            <td>{book.status}</td>
+                                                           
                                                         </tr>
                                                     </>
                                                 );
                                             })}
                                         </tbody>
+                                        
+                                        <th colSpan={5} className="table-heading">Marks Obtained : {history.Dimension2.RP2.booksMarks}</th>
                                     </table>
                                     <table>
                                         <thead>
@@ -1364,11 +1394,15 @@ const ViewHistory = () => {
                                                     </>
                                                 );
                                             })}
+                                        
+                                        <th colSpan={5} className="table-heading">Marks Obtained : {history.Dimension2.RP2.moocsMarks}</th>
                                         </tbody>
+
+                                        
                                     </table>
                                     <thead>
                                         <th colSpan={5} className="table-heading">
-                                            Total Marks: {history.Dimension2.RP2.totalMarks}
+                                            RP2 Total Marks: {history.Dimension2.RP2.totalMarks}
                                         </th>
                                     </thead>
                                 </table>
@@ -1406,6 +1440,9 @@ const ViewHistory = () => {
                                             }
                                         )}
                                     </tbody>
+                                    <th colSpan={6} className="table-heading">
+                                            RP3 Total Marks: {history.Dimension2.RP3.totalMarks}
+                                        </th>
                                 </table>
 
                                 {/* //RP4 */}
@@ -1418,10 +1455,10 @@ const ViewHistory = () => {
                                     <thead>
                                         <tr>
                                             <th>
-                                                Sr. No. Number of citations in the previous calendar
+                                                Number of citations in the previous calendar
                                                 year * 0.4 Marks
                                             </th>
-                                            <th>Marks</th>
+                                            <th>RP4 Marks</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1476,7 +1513,7 @@ const ViewHistory = () => {
                                         )}
 
                                         <th colSpan={10} className="table-heading">
-                                            Total Marks: {history.Dimension2.RP5.totalMarks}
+                                            RP5 Total Marks: {history.Dimension2.RP5.totalMarks}
                                         </th>
                                     </tbody>
                                 </table>
@@ -1520,7 +1557,7 @@ const ViewHistory = () => {
                                             );
                                         })}
                                         <th colSpan={10} className="table-heading">
-                                            Total Marks: {history.Dimension2.RP6.totalMarks}
+                                           RP6 Total Marks: {history.Dimension2.RP6.totalMarks}
                                         </th>
                                     </tbody>
                                 </table>
@@ -1555,7 +1592,7 @@ const ViewHistory = () => {
                                             }
                                         )}
                                         <th colSpan={10} className="table-heading">
-                                            Total Marks: {history.Dimension2.RP7.totalMarks}
+                                        RP7 Total Marks: {history.Dimension2.RP7.totalMarks}
                                         </th>
                                     </tbody>
                                 </table>
@@ -1602,8 +1639,8 @@ const ViewHistory = () => {
                                         </tr>
                                     </tbody>
                                     <thead>
-                                        <th colSpan={5} className="table-heading">
-                                            IP1
+                                        <th colSpan={5} className="table-heading" style={{textAlign:"center"}}>
+                                            IP1 : Institute level assignments
                                         </th>
                                     </thead>
 
@@ -1619,8 +1656,8 @@ const ViewHistory = () => {
                                     })}
 
                                     <thead>
-                                        <th colSpan={5} className="table-heading">
-                                            IP2
+                                        <th colSpan={5} className="table-heading"  style={{textAlign:"center"}}>
+                                            IP2 : Other Institute level assignments 
                                         </th>
                                     </thead>
 
@@ -1637,8 +1674,8 @@ const ViewHistory = () => {
                                         })}
                                     </tbody>
                                     <thead>
-                                        <th colSpan={5} className="table-heading">
-                                            DP1
+                                        <th colSpan={5} className="table-heading" style={{textAlign:"center"}}>
+                                            DP1 : Other Institute level assignments
                                         </th>
                                     </thead>
 
@@ -1654,7 +1691,7 @@ const ViewHistory = () => {
                                             );
                                         })}
                                     </tbody>
-                                    <th colSpan={10} className="table-heading">
+                                    <th colSpan={10} className="table-heading" style={{textAlign:"center"}}>
                                         Total of IP1, IP2, DP1 :{" "}
                                         {history.Dimension3.totalIP1IP2DP1Marks}
                                     </th>
@@ -1681,14 +1718,14 @@ const ViewHistory = () => {
                                                 <tr key={index}>
                                                     <td>{index + 1}</td>
                                                     <td>{sd.name}</td>
-                                                    <td>{sd.type}</td>
+                                                   
                                                     <td>{sd.sponsorerName}</td>
                                                     <td>{sd.fund}</td>
                                                     <td>{sd.days}</td>
                                                 </tr>
                                             );
                                         })}
-                                        <th colSpan={10} className="table-heading">
+                                        <th colSpan={10} className="table-heading" >
                                             TotalMarks : {history.Dimension3.OP1.totalMarks}
                                         </th>
                                     </tbody>
@@ -1699,7 +1736,7 @@ const ViewHistory = () => {
                                 <table>
                                     <thead>
                                         <th colSpan={5} className="table-heading">
-                                            Invited as visiting /Guest faculty for delivering a
+                                            OP2:Invited as visiting /Guest faculty for delivering a
                                             course in industry/ institute
                                         </th>
                                     </thead>
@@ -1731,12 +1768,81 @@ const ViewHistory = () => {
                                         </th>
                                     </tbody>
                                 </table>
+                                 {/* Dimension op3  */}
+                                 <table>
+                                    <thead>
+                                        <th colSpan={5} className="table-heading">
+                                            OP3:Received Sponsored FDP
+                                        </th>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <th>Sr No.</th>
+                                            <th>FDP/Training Organised</th>
+                                            <th>Sponsoring Agency</th>
+                                            <th>Funded Amount</th>
+                                            <th>No. of days</th>
+                                        </tr>
+                                        {history.Dimension3.op3.receivedFDP.map((sd, index) => {
+                                            return (
+                                                <tr key={index}>
+                                                    <td>{index + 1}</td>
+                                                    <td>{sd.name}</td>
+                                                   
+                                                    <td>{sd.sponsorerName}</td>
+                                                    <td>{sd.fund}</td>
+                                                    <td>{sd.days}</td>
+                                                </tr>
+                                            );
+                                        })}
+                                        <th colSpan={10} className="table-heading" >
+                                            TotalMarks : {history.Dimension3.op3.totalMarks}
+                                        </th>
+                                    </tbody>
+                                </table>
+                               {/* Dimension 3 invited as */} 
+                                <table>
+                                    <thead>
+                                        <th colSpan={5} className="table-heading">
+                                           OP4: Invited talk as Guest faculty
+                                        </th>
+                                    </thead>
+                                    <thead>
+                                        <tr>
+                                            <th>Sr. No.</th>
+                                            <th>Industry/ Institution Name</th>
+                                            <th>Dates</th>
+                                            <th>Details (Title , No. of participants, <br/>affiliation) etc</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {history.Dimension3.op4.invitedTalk.map(
+                                            (course, index) => {
+                                                return (
+                                                    <>
+                                                        <tr key={index}>
+                                                            <td>{index + 1}</td>
+                                                            <td>{course.industryName}</td>
+                                                            <td>{course.dates}</td>
+                                                            <td>{course.details}</td>
+                                                        </tr>
+                                                    </>
+                                                );
+                                            }
+                                        )}
+                                        <th colSpan={10} className="table-heading">
+                                            Total Marks : {history.Dimension3.op4.totalMarks}
+                                        </th>
+                                    </tbody>
+                                </table>
+
                                 {/* Dimension 3 committee */}
 
                                 <table>
                                     <thead>
                                         <th colSpan={5} className="table-heading">
-                                            Part of selection committee / inquiry/ academic audit /
+                                            OP5:Part of selection committee / inquiry/ academic audit /
                                             examiner panel/ BOS /AC/LIC/ RRC meetings/ external
                                             Auditor
                                         </th>
@@ -1767,7 +1873,7 @@ const ViewHistory = () => {
                                                 );
                                             }
                                         )}
-                                        <th colSpan={10} className="table-heading">
+                                        <th colSpan={10} className="table-heading" >
                                             Total Marks : {history.Dimension3.Partof.totalMarks}
                                         </th>
                                     </tbody>
@@ -1777,7 +1883,7 @@ const ViewHistory = () => {
                                 <table>
                                     <thead>
                                         <th colSpan={2} className="table-heading">
-                                            Article in media/ newspaper to boost Institution’s Image
+                                         OP6:Article in media/ newspaper to boost Institution's Image
                                         </th>
                                     </thead>
                                     <thead>
@@ -1800,7 +1906,38 @@ const ViewHistory = () => {
                                             }
                                         )}
                                         <th colSpan={10} className="table-heading">
-                                            Article Marks : {history.Dimension3.Article.totalMarks}
+                                            Total Marks : {history.Dimension3.Article.totalMarks}
+                                        </th>
+                                    </tbody>
+                                </table>
+                                {/* Dim 3 NGO */}
+                                <table>
+                                    <thead>
+                                        <th colSpan={2} className="table-heading">
+                                         OP7:Any noteworthy work with NGO
+                                        </th>
+                                    </thead>
+                                    <thead>
+                                        <tr>
+                                            <th>Sr. No.</th>
+                                            <th>Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {history.Dimension3.ngo.data.map(
+                                            (art, index) => {
+                                                return (
+                                                    <>
+                                                        <tr key={index}>
+                                                            <td>{index + 1}</td>
+                                                            <td>{art.details}</td>
+                                                        </tr>
+                                                    </>
+                                                );
+                                            }
+                                        )}
+                                        <th colSpan={10} className="table-heading">
+                                            Total Marks : {history.Dimension3.ngo.totalMarks}
                                         </th>
                                     </tbody>
                                 </table>
@@ -1809,7 +1946,7 @@ const ViewHistory = () => {
                                 <table>
                                     <thead>
                                         <th colSpan={3} className="table-heading">
-                                            Co-guide for student projects and dissertations in the
+                                            OP8:Co-guide for student projects and dissertations in the
                                             peer institutions
                                         </th>
                                     </thead>
@@ -1844,7 +1981,7 @@ const ViewHistory = () => {
                                 <table>
                                     <thead>
                                         <th colSpan={5} className="table-heading">
-                                            Any academic collaboration with the other institutions
+                                         OP9: Any academic collaboration with the other institutions
                                         </th>
                                     </thead>
                                     <thead>
