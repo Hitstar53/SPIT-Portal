@@ -8,6 +8,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import logo from "../../assets/user.svg";
 import dayjs from "dayjs";
 import Box from "@mui/material/Box";
+import { Avatar } from "@mui/material";
 
 export default function EventAccordion(props) {
   const [expanded, setExpanded] = React.useState(false);
@@ -45,13 +46,18 @@ export default function EventAccordion(props) {
               pl: "2rem",
               pr: "1rem",
               pt: "1rem",
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "center",
-              justifyContent: "left",
             }}
           >
-            <img src={logo} alt="pic" width={isMobile ? 75 : 100} height={isMobile ? 75 : 100} />
+            {/* <img src={logo} alt="pic" width={isMobile ? 75 : 100} height={isMobile ? 75 : 100} /> */}
+            <Avatar
+              src={logo}
+              sx={{
+                width: isMobile ? "3rem" : "5rem",
+                height: isMobile ? "3rem" : "5rem",
+                marginRight: "1rem",
+                alignSelf: "center",
+              }}
+            />
             <Box sx={{ display: "flex", flexDirection: "column", marginRight: "1rem"}}>
               <Typography
                 sx={{

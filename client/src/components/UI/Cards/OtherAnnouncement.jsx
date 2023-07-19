@@ -37,13 +37,18 @@ const OtherAnnouncement = (props) => {
         }}
       >
         <Avatar
-          className={styles.avatar}
           alt={props.item.sender}
           src={props.item.senderPhoto}
+          sx={{
+            width: "3rem",
+            height: "3rem",
+            marginRight: "1rem",
+            alignSelf: "center",
+          }}
         />
         <div className={styles.cardItemHeader}>
           <h1>{props.item.title}</h1>
-          <p>{dayjs(props.item.endDate).format('DD-MM-YYYY')}</p>
+          <p>{dayjs(props.item.endDate).format("DD-MM-YYYY")}</p>
         </div>
         <div className={styles.cardItemSub}>
           <p>From: {props.item.sender}</p>

@@ -37,12 +37,6 @@
     background-color: var(--tertiary-color);
 }
 
-.avatar {
-    width: 4.5rem !important; 
-    height: 4.5rem !important; 
-    margin-right: 0.5rem;
-}
-
 .cardItemHeader {
     align-items: center;
     font-size: 1.1rem;

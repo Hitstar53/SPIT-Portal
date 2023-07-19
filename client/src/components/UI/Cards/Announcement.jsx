@@ -17,9 +17,14 @@ const Announcement = (props) => {
     <React.Fragment>
       <div className={styles.cardItem} onClick={handleClickOpen}>
         <Avatar
-          className = {styles.avatar}
           alt={props.item.sender}
           src={props.item.senderPhoto}
+          sx={{
+            width: "3rem",
+            height: "3rem",
+            marginRight: "1rem",
+            alignSelf: "center",
+          }}
         />
         <div>
           <div className={styles.cardItemHeader}>

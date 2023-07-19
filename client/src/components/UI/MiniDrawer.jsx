@@ -368,7 +368,7 @@ export default function MiniDrawer({ open,setOpen }) {
                 alt={name}
                 src={picture}
               />
-              <Badge badgeContent={3} color="primary">
+              {/* <Badge badgeContent={3} color="primary">
                 <NavLink
                   to="notifications"
                   className={({ isActive }) =>
@@ -387,7 +387,7 @@ export default function MiniDrawer({ open,setOpen }) {
                     }}
                   />
                 </NavLink>
-              </Badge>
+              </Badge> */}
             </span>
           </Typography>
         </Toolbar>
