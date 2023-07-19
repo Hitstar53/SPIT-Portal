@@ -44,10 +44,12 @@ const appraisalSchema = new mongoose.Schema({
                     },
                     AP3PercentAchieved: {
                         type: Number,
+                        default: 0
                         // max: 100
                     },
                     AP4PercentFeedback: {
                         type: Number,
+                        default: 0
                         // max: 100
                     },
                     AP5AttendanceStudent: {
@@ -77,50 +79,50 @@ const appraisalSchema = new mongoose.Schema({
 
             AP1Marks: {
                 type: Number,
-                default: null,
+                default: 0,
                 // max: 10
             },
             AP2Average: {
                 type: Number,
                 //max: 10
-                default: null
+                default: 0
             },
             AP2Marks: {
                 type: Number,
                 //max: 10   
-                default: null
+                default: 0
             },
             AP3Average: {
                 type: Number,
                 //max: 30
-                default: null
+                default: 0
             },
             AP3Marks: {
                 type: Number,
                 //max: 30
-                default: null
+                default: 0
 
             },
             AP4Marks: {
                 type: Number,
                 //max: 30
-                default: null
+                default: 0
 
             },
             AP5Average: {
                 type: Number,
                 //max: 5
-                default: null
+                default: 0
             },
             AP5Marks: {
                 type: Number,
                 // max: 5
-                default: null
+                default: 0
             },
             // AP8Marks: {
             //     type: Number,
             //     // max: 5
-            //     default: null
+            //     default: 0
             // },
             // AP9Marks: {
             //     type: Number,
@@ -141,7 +143,7 @@ const appraisalSchema = new mongoose.Schema({
             ],
             averageMarks: {
                 type: Number,
-                default: null,
+                default: 0,
             },
         },
         AP7: {
@@ -164,14 +166,15 @@ const appraisalSchema = new mongoose.Schema({
 
             totalMarks: {
                 type: Number,
-                default: null,
+                default: 0,
             },
         },
 
         AP8: {
             remedialData: [{
                 sem: {
-                    type: Number
+                    type: Number,
+                    default: 0
                 },
                 subject: {
                     type: String
@@ -182,6 +185,7 @@ const appraisalSchema = new mongoose.Schema({
             }],
             totalMarks: {
                 type: Number,
+                default: 0
             }
         },
 
@@ -193,15 +197,17 @@ const appraisalSchema = new mongoose.Schema({
                 subject: {
                     type: String
                 },
-                marksOutOf10:{
-                    type:Number
+                marksOutOf10: {
+                    type: Number,
+                    default: 0
                 },
                 activityDetails: {
                     type: String
                 }
             }],
             average: {
-                type: Number
+                type: Number,
+                default: 0
             }
         },
 
@@ -213,16 +219,19 @@ const appraisalSchema = new mongoose.Schema({
                     },
                     marks: {
                         type: Number,
+                        default: 0
                     },
                 },
             ],
             averageMarks: {
                 type: Number,
+                default: 0
             },
         },
 
         totalMarks: {
             type: Number,
+            default: 0
         },
     },
 
@@ -262,6 +271,7 @@ const appraisalSchema = new mongoose.Schema({
             totalMarks: {
                 type: Number,
                 // max: 30
+                default: 0
             },
         },
         // },
@@ -490,7 +500,6 @@ const appraisalSchema = new mongoose.Schema({
                         type: String,
                         //drop down 
                         //FDP , Training Organised
-
                     },
                     sponsorerName: {
                         type: String,
@@ -534,7 +543,7 @@ const appraisalSchema = new mongoose.Schema({
             },
         },
 
-        op3:{
+        op3: {
             receivedFDP: [
                 {
                     name: {
@@ -542,7 +551,7 @@ const appraisalSchema = new mongoose.Schema({
                     },
                     type: {
                         type: String,
-                         //drop down 
+                        //drop down 
                         //FDP , Training Organised
                     },
                     sponsorerName: {
@@ -556,13 +565,13 @@ const appraisalSchema = new mongoose.Schema({
                     },
                 },
             ],
-            totalMarks:{
+            totalMarks: {
                 type: Number
             }
         },
 
-        op4:{
-             invitedTalk: [
+        op4: {
+            invitedTalk: [
                 {
                     industryName: {
                         type: String,
@@ -613,8 +622,8 @@ const appraisalSchema = new mongoose.Schema({
             },
         },
 
-        ngo:{
-              data: [
+        ngo: {
+            data: [
                 {
                     details: {
                         type: String,
@@ -676,7 +685,7 @@ const appraisalSchema = new mongoose.Schema({
                 type: Number,
                 default: 0,
             },
-           
+
             E: {
                 type: Number,
             },
@@ -778,14 +787,11 @@ const appraisalSchema = new mongoose.Schema({
         default: false,
     },
 
-    HODcomments:[{
-        comment:{
-         type:String   
-        }
-    }
-    ]
+    HODcomments: [{
+        type: String,
+    }]
 });
-
+//{comment:"nfkgjn"}
 const Appraisal = mongoose.model('Appraisal', appraisalSchema);
 
 module.exports = Appraisal;

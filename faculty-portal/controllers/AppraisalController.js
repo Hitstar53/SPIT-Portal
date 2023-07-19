@@ -63,92 +63,98 @@ const setAppraisal = asyncHandler(async (req, res) => {
         var total = 0;
         var avgAP1Marks = 0;
         var avgAP2Marks = 0;
-
-        if (Dimension1.info.courses.length > 4) {
-            avgAP1Marks = 10;
-        } else {
-            avgAP1Marks = Dimension1.info.courses.length * 3;
-        }
-        // ----------------------------------------------------------------------------------------
-        //AP2
-        for (var i = 0; i < Dimension1.info.courses.length; i++) {
-            total = total + Dimension1.info.courses[i].AP2MarksObtained;
-        }
         if (Dimension1.info.courses.length > 0) {
-            avgAP2Marks = total / Dimension1.info.courses.length;
-        }
+            if (Dimension1.info.courses.length > 4) {
+                avgAP1Marks = 10;
+            } else {
+                avgAP1Marks = Dimension1.info.courses.length * 3;
+            }
+            Dimension1.info.AP1Marks = avgAP1Marks;
+            // ----------------------------------------------------------------------------------------
+            //AP2
+            for (var i = 0; i < Dimension1.info.courses.length; i++) {
+                total = total + Dimension1.info.courses[i].AP2MarksObtained;
+            }
+            if (Dimension1.info.courses.length > 0) {
+                avgAP2Marks = total / Dimension1.info.courses.length;
+            }
 
-        avgAP2Marks = avgAP2Marks > 10 ? 10 : avgAP2Marks;
+            avgAP2Marks = avgAP2Marks > 10 ? 10 : avgAP2Marks;
+            Dimension1.info.AP2Marks = avgAP2Marks;
+            // ---------------------------------------------------------------------
+            //AP3
+            for (var i = 0; i < Dimension1.info.courses.length; i++) {
+                var averagePercent =
+                    (Dimension1.info.courses[i].AP3LectureConducted /
+                        Dimension1.info.courses[i].AP3LecturesTarget) *
+                    100;
+                Dimension1.info.courses[i].AP3PercentAchieved = averagePercent;
+            }
+            var totalTarget = 0;
+            var averagePercent = 0;
+            for (var i = 0; i < Dimension1.info.courses.length; i++) {
+                totalTarget =
+                    totalTarget + Dimension1.info.courses[i].AP3PercentAchieved;
+            }
+            if (Dimension1.info.courses.length > 0) {
+                averagePercent = totalTarget / Dimension1.info.courses.length;
+            }
 
-        // ---------------------------------------------------------------------
-        //AP3
-        for (var i = 0; i < Dimension1.info.courses.length; i++) {
-            var averagePercent =
-                (Dimension1.info.courses[i].AP3LectureConducted /
-                    Dimension1.info.courses[i].AP3LecturesTarget) *
-                100;
-            Dimension1.info.courses[i].AP3PercentAchieved = averagePercent;
-        }
-        var totalTarget = 0;
-        var averagePercent = 0;
-        for (var i = 0; i < Dimension1.info.courses.length; i++) {
-            totalTarget =
-                totalTarget + Dimension1.info.courses[i].AP3PercentAchieved;
-        }
-        if (Dimension1.info.courses.length > 0) {
-            averagePercent = totalTarget / Dimension1.info.courses.length;
-        }
-
-        if (averagePercent < 80) {
-            //To be discussed
-            Dimension1.info.AP3Marks = 0;
-        }
-        if (averagePercent >= 80 && averagePercent < 90) {
-            Dimension1.info.AP3Marks = 3;
-        }
-        if (averagePercent >= 90 && averagePercent < 95) {
-            Dimension1.info.AP3Marks = 4;
-        }
-        if (averagePercent >= 95 && averagePercent <= 100) {
-            Dimension1.info.AP3Marks = 5;
-        }
-        // -----------------------------------------------------------------------------------
-        //AP4
-        var totalpercentAP4 = 0;
-        var averagePercentAP4 = 0;
-        for (var i = 0; i < Dimension1.info.courses.length; i++) {
-            totalpercentAP4 =
-                totalpercentAP4 + Dimension1.info.courses[i].AP4PercentFeedback;
-        }
-        if (Dimension1.info.courses.length > 0) {
-            averagePercentAP4 = totalpercentAP4 / Dimension1.info.courses.length;
-        }
+            if (averagePercent < 80) {
+                //To be discussed
+                Dimension1.info.AP3Marks = 0;
+            }
+            if (averagePercent >= 80 && averagePercent < 90) {
+                Dimension1.info.AP3Marks = 3;
+            }
+            if (averagePercent >= 90 && averagePercent < 95) {
+                Dimension1.info.AP3Marks = 4;
+            }
+            if (averagePercent >= 95 && averagePercent <= 100) {
+                Dimension1.info.AP3Marks = 5;
+            }
+            Dimension1.info.AP3Average = averagePercent;
+            // -----------------------------------------------------------------------------------
+            //AP4
+            var totalpercentAP4 = 0;
+            var averagePercentAP4 = 0;
+            for (var i = 0; i < Dimension1.info.courses.length; i++) {
+                totalpercentAP4 =
+                    totalpercentAP4 + Dimension1.info.courses[i].AP4PercentFeedback;
+            }
+            if (Dimension1.info.courses.length > 0) {
+                averagePercentAP4 = totalpercentAP4 / Dimension1.info.courses.length;
+            }
 
 
-        if (averagePercentAP4 > 30) {
-            averagePercentAP4 = 30;
-        }
-        // -----------------------------------------------------------------------------------
-        //AP5
-        var totalAttendanceP5 = 0;
-        var averageAttedanceAP5 = 0;
-        var AP5Marks = 0;
-        for (var i = 0; i < Dimension1.info.courses.length; i++) {
-            totalAttendanceP5 =
-                totalAttendanceP5 + Dimension1.info.courses[i].AP5AttendanceStudent;
-        }
-        averageAttedanceAP5 = totalAttendanceP5 / Dimension1.info.courses.length;
+            if (averagePercentAP4 > 30) {
+                averagePercentAP4 = 30;
+            }
+            Dimension1.info.AP4Marks = averagePercentAP4;
+            // -----------------------------------------------------------------------------------
+            //AP5
+            var totalAttendanceP5 = 0;
+            var averageAttedanceAP5 = 0;
+            var AP5Marks = 0;
+            for (var i = 0; i < Dimension1.info.courses.length; i++) {
+                totalAttendanceP5 =
+                    totalAttendanceP5 + Dimension1.info.courses[i].AP5AttendanceStudent;
+            }
+            averageAttedanceAP5 = totalAttendanceP5 / Dimension1.info.courses.length;
 
-        if (averageAttedanceAP5 >= 90 && averageAttedanceAP5 <= 100) {
-            AP5Marks = 5;
-        } else if (averageAttedanceAP5 >= 80 && averageAttedanceAP5 < 90) {
-            AP5Marks = 4;
-        } else if (averageAttedanceAP5 >= 70 && averageAttedanceAP5 < 80) {
-            AP5Marks = 3;
-        } else if (averageAttedanceAP5 >= 60 && averageAttedanceAP5 < 70) {
-            AP5Marks = 2;
-        } else {
-            AP5Marks = 1;
+            if (averageAttedanceAP5 >= 90 && averageAttedanceAP5 <= 100) {
+                AP5Marks = 5;
+            } else if (averageAttedanceAP5 >= 80 && averageAttedanceAP5 < 90) {
+                AP5Marks = 4;
+            } else if (averageAttedanceAP5 >= 70 && averageAttedanceAP5 < 80) {
+                AP5Marks = 3;
+            } else if (averageAttedanceAP5 >= 60 && averageAttedanceAP5 < 70) {
+                AP5Marks = 2;
+            } else {
+                AP5Marks = 1;
+            }
+            Dimension1.info.AP5Average = averageAttedanceAP5;
+            Dimension1.info.AP5Marks = AP5Marks;
         }
         // ---------------------------------------------------------------------------------------
         //AP6
@@ -191,7 +197,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
         var ap9totalmarks = 0
         for (var i = 0; i < Dimension1.AP9.noteworthyData.length; i++) {
             if (Dimension1.AP9.noteworthyData[i].activityDetails != "Null") {
-                ap9totalmarks = ap9totalMarks+Dimension1.AP9.noteworthyData[i].marksOutOf10;
+                ap9totalmarks = ap9totalmarks + Dimension1.AP9.noteworthyData[i].marksOutOf10;
             }
         }
         if (Dimension1.AP9.noteworthyData.length > 0) {
@@ -241,18 +247,23 @@ const setAppraisal = asyncHandler(async (req, res) => {
         }
         // ---------------------------------------------------------------------------------
 
-        Dimension1.info.AP1Marks = avgAP1Marks;
-        Dimension1.info.AP2Average = avgAP2Marks;
-        Dimension1.info.AP2Marks = avgAP2Marks;
-        Dimension1.info.AP3Average = averagePercent;
-        Dimension1.info.AP4Marks = averagePercentAP4;
-        Dimension1.info.AP5Average = averageAttedanceAP5;
-        Dimension1.info.AP5Marks = AP5Marks;
         Dimension1.AP6.averageMarks = averageMenteeFeedback;
         Dimension1.AP7.totalMarks = totalpercentAP7;
         Dimension1.AP8.totalMarks = ap8totalmarks;
         Dimension1.AP9.average = ap9average;
         Dimension1.AP10.averageMarks = averageAuditMarks;
+        console.log(
+            Dimension1.info.AP1Marks,
+            Dimension1.info.AP2Marks,
+            Dimension1.info.AP3Average,
+            Dimension1.info.AP4Marks,
+            Dimension1.info.AP5Marks,
+            Dimension1.AP6.averageMarks,
+            Dimension1.AP7.totalMarks,
+            Dimension1.AP8.totalMarks,
+            Dimension1.AP9.average,
+            Dimension1.AP10.averageMarks
+        )
         // ----------------------------------------------
         Dimension1.totalMarks = Dimension1.info.AP1Marks + Dimension1.info.AP2Marks + Dimension1.info.AP3Marks + Dimension1.info.AP4Marks + Dimension1.info.AP5Marks + Dimension1.AP6.averageMarks + Dimension1.AP7.totalMarks + Dimension1.AP8.totalMarks + Dimension1.AP9.average + Dimension1.AP10.averageMarks;
         if (Dimension1.totalMarks > 100) {
@@ -270,14 +281,14 @@ const setAppraisal = asyncHandler(async (req, res) => {
             if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Journal" && Dimension2.RP1.papers[i].conferenceOrJournal.reputation == "High") {
                 rp1marks = rp1marks + 30;
             }
-            
+
             if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Journal" && Dimension2.RP1.papers[i].conferenceOrJournal.reputation != "High") {
                 rp1marks = rp1marks + 10;
             }
             if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Conference" && Dimension2.RP1.papers[i].conferenceOrJournal.reputation == "High") {
                 rp1marks = rp1marks + 10;
             }
-            if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Conference" && (Dimension2.RP1.papers[i].conferenceOrJournal.reputation != "High") ){
+            if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Conference" && (Dimension2.RP1.papers[i].conferenceOrJournal.reputation != "High")) {
                 rp1marks = rp1marks + 7;
             }
         }
@@ -363,7 +374,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
                 rp5marks = rp5marks + (1 * (Dimension2.RP5.selfDevelopment[i].duration / 7));
             }
             if (Dimension2.RP5.selfDevelopment[i].type === "Industry Internship") {
-                rp5marks = rp5marks + (5 * (Dimension2.RP5.selfDevelopment[i].duration  / 7));
+                rp5marks = rp5marks + (5 * (Dimension2.RP5.selfDevelopment[i].duration / 7));
             }
         }
 
@@ -443,7 +454,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
             //     trainingMarks = trainingMarks + (3 * Dimension3.OP1.organized[i].days);
             // }
 
-            OPMarks= OPMarks + (5*Dimension3.OP1.organized[i].days )
+            OPMarks = OPMarks + (5 * Dimension3.OP1.organized[i].days)
         }
         // if (trainingMarks > 15) {
         //     trainingMarks = 15;
@@ -477,32 +488,32 @@ const setAppraisal = asyncHandler(async (req, res) => {
         // ----------------------------------------
         // op3
 
-        op3Marks =0 
-        for (var i =0; i < Dimension3.op3.receivedFDP.length; i++){
-            if (Dimension3.op3.receivedFDP[i].days >= 14){
+        op3Marks = 0
+        for (var i = 0; i < Dimension3.op3.receivedFDP.length; i++) {
+            if (Dimension3.op3.receivedFDP[i].days >= 14) {
                 op3Marks = op3Marks + 15
                 continue
             }
-            if (Dimension3.op3.receivedFDP[i].days >= 7 ){
+            if (Dimension3.op3.receivedFDP[i].days >= 7) {
                 op3Marks = op3Marks + 10
             }
         }
 
-        if (op3Marks >15){
+        if (op3Marks > 15) {
             op3Marks = 15
         }
 
-        Dimension3.op3.totalMarks = op3marks
+        Dimension3.op3.totalMarks = op3Marks
 
         // --------------------------------------------------------
         // op4
 
-        op4Marks = 0 
-        for (var i=0 ; i < Dimension3.op4.invitedTalk.length; i++ ){
+        op4Marks = 0
+        for (var i = 0; i < Dimension3.op4.invitedTalk.length; i++) {
             op4Marks = op4Marks + 5
         }
 
-        if (op4Marks >10){
+        if (op4Marks > 10) {
             op4Marks = 10
         }
 
@@ -571,7 +582,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
         Dimension3.totalIP1IP2DP1Marks = Dimension3Marks;
         Dimension3.OP1.totalMarks = OPMarks;
         Dimension3.Invited.totalMarks = invitedfinalmarks;
-        const tempOP = (Dimension3.OP1.totalMarks + Dimension3.Invited.totalMarks+ Dimension3.op3.totalMarks + Dimension3.op4.totalMarks  + Dimension3.Partof.totalMarks + Dimension3.Article.totalMarks + Dimension3.ngo.totalMarks + Dimension3.coGuide.totalMarks + Dimension3.collaboration.totalMarks) > 40 ? 40 : (Dimension3.OP1.totalMarks + Dimension3.Invited.totalMarks+ Dimension3.op3.totalMarks + Dimension3.op4.totalMarks  + Dimension3.Partof.totalMarks + Dimension3.Article.totalMarks + Dimension3.ngo.totalMarks + Dimension3.coGuide.totalMarks + Dimension3.collaboration.totalMarks);
+        const tempOP = (Dimension3.OP1.totalMarks + Dimension3.Invited.totalMarks + Dimension3.op3.totalMarks + Dimension3.op4.totalMarks + Dimension3.Partof.totalMarks + Dimension3.Article.totalMarks + Dimension3.ngo.totalMarks + Dimension3.coGuide.totalMarks + Dimension3.collaboration.totalMarks) > 40 ? 40 : (Dimension3.OP1.totalMarks + Dimension3.Invited.totalMarks + Dimension3.op3.totalMarks + Dimension3.op4.totalMarks + Dimension3.Partof.totalMarks + Dimension3.Article.totalMarks + Dimension3.ngo.totalMarks + Dimension3.coGuide.totalMarks + Dimension3.collaboration.totalMarks);
 
         Dimension3.totalMarks = Dimension3.totalIP1IP2DP1Marks + tempOP;
 
@@ -667,10 +678,10 @@ const setDim1 = asyncHandler(async (req, res) => {
         const { yearofAssesment, faculty, Dimension1 } = req.body;
         var updatedApp = null;
         console.log(yearofAssesment)
-        console.log(faculty)  
-        console.log(faculty.fullName)  
-        console.log(faculty.designation)  
-        console.log(faculty.department)  
+        console.log(faculty)
+        console.log(faculty.fullName)
+        console.log(faculty.designation)
+        console.log(faculty.department)
 
         const existingFaculty = await Appraisal.findOne({
             facultyName: faculty.fullName,
@@ -683,12 +694,14 @@ const setDim1 = asyncHandler(async (req, res) => {
             console.log("inside existing faculty")
             updatedApp = await Appraisal.findOneAndUpdate(
                 { _id: existingFaculty._id },
-                { $set: { 
-                    facultyName: faculty.fullName,
-                    department: faculty.department,
-                    designation: faculty.designation,
-                    yearofAssesment: yearofAssesment,
-                    Dimension1: Dimension1 } 
+                {
+                    $set: {
+                        facultyName: faculty.fullName,
+                        department: faculty.department,
+                        designation: faculty.designation,
+                        yearofAssesment: yearofAssesment,
+                        Dimension1: Dimension1
+                    }
                 }
             );
         } else {
@@ -746,12 +759,14 @@ const setDim2 = asyncHandler(async (req, res) => {
         if (existingFaculty) {
             updatedApp = await Appraisal.findOneAndUpdate(
                 { _id: existingFaculty._id },
-                { $set: {
-                    facultyName: faculty.fullName,
-                    department: faculty.department,
-                    designation: faculty.designation,
-                    yearofAssesment: yearofAssesment, 
-                    Dimension2: Dimension2 } 
+                {
+                    $set: {
+                        facultyName: faculty.fullName,
+                        department: faculty.department,
+                        designation: faculty.designation,
+                        yearofAssesment: yearofAssesment,
+                        Dimension2: Dimension2
+                    }
                 }
             );
         } else {
@@ -802,12 +817,14 @@ const setDim3 = asyncHandler(async (req, res) => {
         if (existingFaculty) {
             updatedApp = await Appraisal.findOneAndUpdate(
                 { _id: existingFaculty._id },
-                { $set: { 
-                    facultyName: faculty.fullName,
-                    department: faculty.department,
-                    designation: faculty.designation,
-                    yearofAssesment: yearofAssesment, 
-                    Dimension3: Dimension3 } 
+                {
+                    $set: {
+                        facultyName: faculty.fullName,
+                        department: faculty.department,
+                        designation: faculty.designation,
+                        yearofAssesment: yearofAssesment,
+                        Dimension3: Dimension3
+                    }
                 }
             );
         } else {
@@ -848,7 +865,7 @@ const getDim3 = asyncHandler(async (req, res) => {
 const setDim4HOD = asyncHandler(async (req, res) => {
     try {
         const { yearofAssesment, fullName, Dimension4 } = req.body;
-        Dimension4.feedbackMarks.E = parseInt(Dimension4.feedbackMarks.A) + parseInt(Dimension4.feedbackMarks.B) + parseInt(Dimension4.feedbackMarks.C) ;
+        Dimension4.feedbackMarks.E = parseInt(Dimension4.feedbackMarks.A) + parseInt(Dimension4.feedbackMarks.B) + parseInt(Dimension4.feedbackMarks.C);
         var updatedApp = null;
 
         const existingFaculty = await Appraisal.findOne({
@@ -867,7 +884,7 @@ const setDim4HOD = asyncHandler(async (req, res) => {
 
         updatedApp = await Appraisal.findOne(
             { _id: existingFaculty._id }
-            )
+        )
         console.log(updatedApp)
         res.status(200).json(updatedApp);
     } catch (error) {
@@ -881,13 +898,13 @@ const setDim4Principal = asyncHandler(async (req, res) => {
         const { yearofAssesment, fullName, Dimension4 } = req.body;
         var updatedApp = null;
         //console.log(Dimension4)
-        Dimension4.confidentialReport.perceptionMarks = Dimension4.feedbackMarks.E*Dimension4.confidentialReport.principalRemarks;
+        Dimension4.confidentialReport.perceptionMarks = Dimension4.feedbackMarks.E * Dimension4.confidentialReport.principalRemarks;
 
         const existingFaculty = await Appraisal.findOne({
             facultyName: fullName,
             yearofAssesment: yearofAssesment,
         });
-        
+
         if (existingFaculty) {
             updatedApp = await Appraisal.findOneAndUpdate(
                 { _id: existingFaculty._id },
@@ -899,18 +916,18 @@ const setDim4Principal = asyncHandler(async (req, res) => {
 
         updatedApp = await Appraisal.findOne(
             { _id: existingFaculty._id }
-            )
+        )
         console.log(updatedApp.finalGrandTotal)
         console.log(updatedApp.Dimension4.totalMarks)
         updatedApp.finalGrandTotal.dimension1.totalMarks = updatedApp.Dimension1.totalMarks;
         updatedApp.finalGrandTotal.dimension2.totalMarks = updatedApp.Dimension2.totalMarks;
         updatedApp.finalGrandTotal.dimension3.totalMarks = updatedApp.Dimension3.totalMarks;
         updatedApp.finalGrandTotal.dimension4.totalMarks = updatedApp.Dimension4.confidentialReport.perceptionMarks;
-        
-        updatedApp.finalGrandTotal.dimension1.finalMarks = updatedApp.finalGrandTotal.dimension1.totalMarks*updatedApp.finalGrandTotal.dimension1.multiplyingFactor;
-        updatedApp.finalGrandTotal.dimension2.finalMarks = updatedApp.finalGrandTotal.dimension2.totalMarks*updatedApp.finalGrandTotal.dimension2.multiplyingFactor;
-        updatedApp.finalGrandTotal.dimension3.finalMarks = updatedApp.finalGrandTotal.dimension3.totalMarks*updatedApp.finalGrandTotal.dimension3.multiplyingFactor;
-        updatedApp.finalGrandTotal.dimension4.finalMarks = updatedApp.finalGrandTotal.dimension4.totalMarks*updatedApp.finalGrandTotal.dimension4.multiplyingFactor;
+
+        updatedApp.finalGrandTotal.dimension1.finalMarks = updatedApp.finalGrandTotal.dimension1.totalMarks * updatedApp.finalGrandTotal.dimension1.multiplyingFactor;
+        updatedApp.finalGrandTotal.dimension2.finalMarks = updatedApp.finalGrandTotal.dimension2.totalMarks * updatedApp.finalGrandTotal.dimension2.multiplyingFactor;
+        updatedApp.finalGrandTotal.dimension3.finalMarks = updatedApp.finalGrandTotal.dimension3.totalMarks * updatedApp.finalGrandTotal.dimension3.multiplyingFactor;
+        updatedApp.finalGrandTotal.dimension4.finalMarks = updatedApp.finalGrandTotal.dimension4.totalMarks * updatedApp.finalGrandTotal.dimension4.multiplyingFactor;
 
         updatedApp.finalGrandTotal.GrandTotal = updatedApp.finalGrandTotal.dimension1.finalMarks + updatedApp.finalGrandTotal.dimension2.finalMarks + updatedApp.finalGrandTotal.dimension3.finalMarks + updatedApp.finalGrandTotal.dimension4.finalMarks;
 
@@ -944,7 +961,7 @@ const getDim4 = asyncHandler(async (req, res) => {
     }
 })
 
-const isSubmittedTeacher= asyncHandler(async (req, res) => {
+const isSubmittedTeacher = asyncHandler(async (req, res) => {
     try {
         const { name, yearofAssesment } = req.body
         const facultyInfo = await Appraisal.findOne({
@@ -962,6 +979,35 @@ const isSubmittedTeacher= asyncHandler(async (req, res) => {
     }
 })
 
+const setHodComments = asyncHandler(async (req, res) => {
+    const { yearofAssesment, fullName, comment } = req.body;
+    try {
+        const existingFaculty = await Appraisal.findOne({
+            facultyName: fullName,
+            yearofAssesment: yearofAssesment,
+        });
+        var commentArr = []
+        if (existingFaculty.HODcomments) {
+            commentArr = existingFaculty.HODcomments;
+            commentArr.push(comment);
+        } else {
+            commentArr.push(comment);
+        }
+        if (existingFaculty) {
+            await Appraisal.findOneAndUpdate(
+                { yearofAssesment: yearofAssesment, facultyName: fullName },
+                { $set: { HODcomments: commentArr, isSubmitted: false } }
+            );
+        } else {
+            return res.status(404).json("Faculty Not Found In setHodComments")
+        }
+        res.status(200).json("HOD comments added successfully");
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+
 
 module.exports = {
     setAppraisal,
@@ -976,5 +1022,6 @@ module.exports = {
     getDim4,
     getAppraisal,
     getAllAppraisal,
-    isSubmittedTeacher
+    isSubmittedTeacher,
+    setHodComments
 }
