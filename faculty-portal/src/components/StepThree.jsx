@@ -289,12 +289,12 @@ function StepThree({setDimension3, yr}) {
                     type="text"
                     placeholder="Organised"
                     className="form-input"
-                    {...register(`op3.receivedFDP[${index}].name`)}
+                    {...register(`OP1.organized[${index}].name`)}
                   />
                 </td>
                 {/* <label className="form-label">Agency</label> */}
                 <td>
-                  <select {...register(`op3.receivedFDP[${index}].type`)}>
+                  <select {...register(`OP1.organized[${index}].type`)}>
                     <option value="FDP">FDP</option>
                     <option value="Training Organised">
                       Training Organised
@@ -307,7 +307,7 @@ function StepThree({setDimension3, yr}) {
                     type="text"
                     placeholder="Sponsering Agency"
                     className="form-input"
-                    {...register(`op3.receivedFDP[${index}].sponsorerName`)}
+                    {...register(`OP1.organized[${index}].sponsorerName`)}
                   />
                 </td>
                 <td>
@@ -316,7 +316,7 @@ function StepThree({setDimension3, yr}) {
                   onWheel={(e) => e.target.blur()}
                     placeholder="Funds"
                     className="form-input"
-                    {...register(`op3.receivedFDP[${index}].fund`)}
+                    {...register(`OP1.organized[${index}].fund`)}
                   />
                 </td>
                 {/* <label className="form-label">Days</label> */}
@@ -326,7 +326,7 @@ function StepThree({setDimension3, yr}) {
                   onWheel={(e) => e.target.blur()}
                     placeholder="Days"
                     className="form-input"
-                    {...register(`op3.receivedFDP[${index}].days`)}
+                    {...register(`OP1.organized[${index}].days`)}
                   />
                 </td>
                 <td className="text-center align-middle">
