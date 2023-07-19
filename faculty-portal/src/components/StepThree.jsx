@@ -62,7 +62,7 @@ function StepThree({setDimension3, yr}) {
     remove: removeinvitedTalk,
   } = useFieldArray({
     control,
-    name: "op4.invidedTalk",
+    name: "op4.invitedTalk",
   });
   const {
     fields: dataFields,
@@ -531,7 +531,7 @@ function StepThree({setDimension3, yr}) {
                     type="text"
                     placeholder="Dates"
                     className="form-input"
-                    {...register(`op4.invidedTalk[${index}].industryName`)}
+                    {...register(`op4.invitedTalk[${index}].industryName`)}
                   />
                 </td>
                 {/* <label className="form-label">Funds</label> */}
@@ -540,7 +540,7 @@ function StepThree({setDimension3, yr}) {
                     type="text"
                     placeholder="Industry/ Institution Name"
                     className="form-input"
-                    {...register(`op4.invidedTalk[${index}].dates`)}
+                    {...register(`op4.invitedTalk[${index}].dates`)}
                   />
                 </td>
                 {/* <label className="form-label">Funds</label> */}
@@ -549,7 +549,7 @@ function StepThree({setDimension3, yr}) {
                     type="text"
                     placeholder="Details"
                     className="form-input"
-                    {...register(`op4.invidedTalk[${index}].details`)}
+                    {...register(`op4.invitedTalk[${index}].details`)}
                   />
                 </td>
                 <td className="text-center align-middle">
@@ -746,7 +746,7 @@ function StepThree({setDimension3, yr}) {
                     type="text"
                     placeholder="Institute"
                     className="form-input"
-                    {...register(`CoGuide[${index}].institutionName`)}
+                    {...register(`coGuide.data[${index}].institutionName`)}
                   />
                 </td>
                 {/* <label className="form-label">Details</label> */}
@@ -755,7 +755,7 @@ function StepThree({setDimension3, yr}) {
                     type="text"
                     placeholder="Details"
                     className="form-input"
-                    {...register(`CoGuide[${index}].details`)}
+                    {...register(`coGuide.data[${index}].details`)}
                   />
                 </td>
                 <td className="text-center align-middle">
