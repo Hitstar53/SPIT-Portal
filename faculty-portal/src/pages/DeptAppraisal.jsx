@@ -118,6 +118,14 @@ export default function DeptAppraisal() {
             <img src={NotFound} alt="not found" />
           </div>
         )}
+        {status === "Appraisal Rejected" && (
+          <div className="dept-appraisal-vertical">
+            <h1>
+              {name}'s Appraisal has been rejected
+            </h1>
+            <img src={Done} alt="not found" />
+          </div>
+        )}
       </div>
     </div>
   );
