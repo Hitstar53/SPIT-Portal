@@ -25,6 +25,9 @@ const ViewHistory = () => {
     const [years2, setYears2] = useState([]);
     const [Dim4, setDim4] = useState();
     // For Principal
+    const [allDept, setAllDept] = useState([]);
+    const [message, setMessage] = useState("");
+    const [selectedDept, setSelectedDept] = useState(false);
     const [faculty, setFaculty] = useState([]);
     const [report, setReport] = useState();
     const [selectedFaculty, setSelectedFaculty] = useState(false);
@@ -176,16 +179,45 @@ const ViewHistory = () => {
 
     // For Principal Select Box 
     if (user.designation === "Principal") {
-        useEffect(() => {
-            fetch("http://localhost:5000/api/faculty/get/faculty/submitted", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            })
-                .then((res) => res.json())
-                .then((data) => setFaculty(data.sort()));
-        }, [])
+        useEffect (() => {
+            const getDept = async () => {
+                await axios.get("http://localhost:5000/api/faculty/get/faculty/getalldepartments")
+                .then((res) => {
+                    console.log(res.data)
+                    setAllDept(res.data)
+                })
+                .catch((err) => console.log(err))
+            }
+            getDept()
+        },[])
+        // useEffect(() => {
+        //     fetch("http://localhost:5000/api/faculty/get/faculty/submitted", {
+        //         method: "GET",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //     })
+        //         .then((res) => res.json())
+        //         .then((data) => setFaculty(data.sort()));
+        // }, [])
+    }
+
+    const getPrincipalFaculty = async (dept) => {
+        console.log(dept)
+        await axios.post("http://localhost:5000/api/faculty/get/faculty/submitted", {
+            department: dept,
+        })
+        .then((res) => {
+            console.log(res.data)
+            setFaculty(res.data.sort())
+            setSelectedDept(true)
+        })
+        .catch((err) => {
+            console.log(err)
+            setFaculty([])
+            setSelectedDept(false)
+            setMessage("No Faculty Found")
+        })
     }
 
     const getYears = async (name) => {
@@ -227,6 +259,13 @@ const ViewHistory = () => {
         setYear2(null)
         getYears(e.target[0].value);
         setSelectedFaculty(true);
+    }
+
+    const handleDeptSubmit = (e) => {
+        e.preventDefault();
+        console.log("You clicked submit.");
+        console.log(e.target[0].value);
+        getPrincipalFaculty(e.target[0].value)
     }
 
     const handlePrincipalSubmit = (e) => {
@@ -467,29 +506,45 @@ const ViewHistory = () => {
             )}
 
             {user.designation === "Principal" && (
-                <div>
+                <div className='flex flex-col items-center justify-center gap-4'>
                     {/* Principal content */}
                     {/* {/* <h1>Principal</h1> */}
                     {/* <p>Welcome, Principal!</p> */}
                     <div className='flex flex-col items-center justify-evenly m-4'>
 
-                        <form className='flex items-center justify-center' onSubmit={handlePrincipalSubmit}>
+                        <form className='flex items-center justify-center' onSubmit={handleDeptSubmit}>
                             <Autocomplete
                                 disablePortal
                                 id="combo-box-demo"
-                                options={faculty}
+                                options={allDept}
                                 sx={{ width: 300, display: "inline-block" }}
                                 renderInput={(params) => (
-                                    <TextField {...params} label="Enter Faculty Name" />
+                                    <TextField {...params} label="Enter Department" />
                                 )}
                             />
                             <button type="submit" className="marks-btn btn btn-primary">
                                 View Faculty
                             </button>
                         </form>
+                        {selectedDept && (
+                             <form className='flex items-center justify-center' onSubmit={handlePrincipalSubmit}>
+                             <Autocomplete
+                                 disablePortal
+                                 id="combo-box-demo"
+                                 options={faculty}
+                                 sx={{ width: 300, display: "inline-block" }}
+                                 renderInput={(params) => (
+                                     <TextField {...params} label="Enter Faculty Name" />
+                                 )}
+                             />
+                             <button type="submit" className="marks-btn btn btn-primary">
+                                Find Faculty
+                             </button>
+                         </form>
+                        )}
                         {!selectedFaculty && (
                             <div className="flex flex-col items-center justify-center mt-8">
-                            <h2>{notFound ? "No Faculty Found" : "Click on Find Faculty to view and print their Confidential Report"}</h2>
+                            <h2>{notFound ? "No Faculty Found" : "Select Department and Faculty to view and print their Confidential Report"}</h2>
                             <img src={notFound ? Notfound : Done} alt="not found" width="550px"/>
                         </div>
                         )}
