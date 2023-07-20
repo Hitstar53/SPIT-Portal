@@ -293,7 +293,7 @@ const ViewHistory = () => {
 
                     {console.log("Inside HOD")}
                     <div style={{
-                        display: "flex",
+                        display: "flex flex-col items-center justify-center",
                         justifyContent: "space-around",
                         alignItems: "center",
                         width: "100%",
@@ -323,7 +323,7 @@ const ViewHistory = () => {
                         </div>
 
                         {/* {( */}
-                        {selectedFaculty && (<div className="dropdown">
+                        {selectedFaculty && (<div className="dropdown justify-center pt-0">
                             <div>Select a Year:</div>
                             <select
                                 id="dropdown"
