@@ -136,7 +136,7 @@ function StepFour({ yr, fullName, setStatus }) {
                 </td>
                 <td className="table-header text-center align-middle">25</td>
                 <td className="table-header text-center align-middle">25</td>
-                <td className="table-header text-center align-middle">25</td>
+                <td className="table-header text-center align-middle">50</td>
               </tr>
               <tr>
                 <td className="table-header text-center align-middle">Marks</td>
