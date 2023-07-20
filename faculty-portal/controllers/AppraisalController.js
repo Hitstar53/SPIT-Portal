@@ -78,9 +78,10 @@ const setAppraisal = asyncHandler(async (req, res) => {
             if (Dimension1.info.courses.length > 0) {
                 avgAP2Marks = total / Dimension1.info.courses.length;
             }
-
+            Dimension1.info.AP2Average=avgAP2Marks;
             avgAP2Marks = avgAP2Marks > 10 ? 10 : avgAP2Marks;
             Dimension1.info.AP2Marks = avgAP2Marks;
+           
             // ---------------------------------------------------------------------
             //AP3
             for (var i = 0; i < Dimension1.info.courses.length; i++) {
