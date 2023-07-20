@@ -1114,7 +1114,7 @@ const ViewHistory = () => {
                                          <th  className="table-heading">
                                                 Mentee Feedback Score Average Marks (Out of 5): 
                                             </th>
-                                            <td style={{padding:"10px"}}>{history.Dimension1.AP6.averageMarks}</td>
+                                            <th style={{padding:"10px"}}>{history.Dimension1.AP6.averageMarks}</th>
                                         </tbody>
 
                                         {/* <tbody>
@@ -1155,9 +1155,7 @@ const ViewHistory = () => {
                                                 <th>Sr.No</th>
                                                 <th>Date</th>
                                                 <th>
-                                                    Sr. No. Date Title of the Guest Lecture Name &
-                                                    <br></br> details of the Speaker Arranged for
-                                                    students/faculty
+                                                    Title of the Guest Lecture 
                                                 </th>
                                                 <th>Name & Details of the Speaker</th>
                                                 <th>Arranged for students/faculty</th>
