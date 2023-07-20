@@ -233,9 +233,9 @@ exports.getAllFaculty = asyncHandler(async (req, res) => {
 
 exports.getPrincipalFaculty = asyncHandler(async (req, res) => {
     try {
-        const { year } = req.body
+        const { department, year } = req.body
         // console.log(year)
-        const appraisal = await Appraisal.find({ yearofAssesment: year, isSubmitted: true, HODReviewed: true, principalReviewed: false })
+        const appraisal = await Appraisal.find({ department: department, yearofAssesment: year, isSubmitted: true, HODReviewed: true, principalReviewed: false })
         // console.log(appraisal)
         if (appraisal) {
             const faculty = []
@@ -295,25 +295,31 @@ exports.principalAppraisal = async (req, res) => {
 
 exports.getSubmittedFaculty = async (req, res) => {
     try {
-        const appraisal = await Appraisal.find({ isSubmitted: true, HODReviewed: true, principalReviewed: true })
-        // console.log(appraisal)
-        if (appraisal) {
-            const faculty = []
-            appraisal.map((info) => {
-                faculty.push(
-                    info.facultyName
-                )
-            })
-            console.log(faculty)
-            return res.status(200).json(faculty)
-        }
-        else {
-            return res.status(404).json("No faculty found")
+        const { department } = req.body
+        const appraisal = await Appraisal.find({department: department, isSubmitted: true, HODReviewed: true, principalReviewed: true });
+        console.log(appraisal)
+        if (appraisal && appraisal.length > 0) {
+            // Using a Set to store unique faculty names
+            const facultySet = new Set();
+
+            appraisal.forEach((info) => {
+                facultySet.add(info.facultyName);
+            });
+
+            // Converting Set back to array to maintain the original response structure
+            const faculty = Array.from(facultySet);
+
+            console.log(faculty);
+            return res.status(200).json(faculty);
+        } else {
+            return res.status(404).json("No faculty found");
         }
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        return res.status(500).json("Internal server error");
     }
-}
+};
+
 
 
 // ==> /get/faculty/getalldepartments
@@ -321,16 +327,17 @@ exports.getAllDepartments = async (req, res) => {
     try {
         var deptArray = new Set();
         const faculty = await Faculty.find()
-        console.log(faculty)
 
         for (var i = 0; i < faculty.length; i++) {
+            if (faculty[i].department === 'Principal'||
+            faculty[i].department === 'Training and Placement Office' ||
+            faculty[i].department === 'Library') continue;
             deptArray.add(faculty[i].department)
         }
     } catch (err) {
         res.status(404).json("No faculty found")
     }
     const myarr = Array.from(deptArray)
-    console.log(myarr)
     res.status(200).json(myarr)
 }
 
