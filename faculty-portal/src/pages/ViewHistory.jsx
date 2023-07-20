@@ -522,7 +522,7 @@ const ViewHistory = () => {
                                     <TextField {...params} label="Enter Department" />
                                 )}
                             />
-                            <button type="submit" className="marks-btn btn btn-primary">
+                            <button type="submit" className="find-faculty-btn">
                                 View Faculty
                             </button>
                         </form>
@@ -537,7 +537,7 @@ const ViewHistory = () => {
                                      <TextField {...params} label="Enter Faculty Name" />
                                  )}
                              />
-                             <button type="submit" className="marks-btn btn btn-primary">
+                             <button type="submit" className="find-faculty-btn">
                                 Find Faculty
                              </button>
                          </form>
