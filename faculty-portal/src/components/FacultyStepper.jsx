@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Box from "@mui/material/Box";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
@@ -6,8 +6,11 @@ import StepThree from "./StepThree";
 import StepFour from "./StepFour";
 import StepHead from "./StepHead";
 import StepFoot from "./StepFoot";
-import { UserContext } from '../context/UserContext';
-
+import { UserContext } from "../context/UserContext";
+import { set } from "react-hook-form";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import Stack from "@mui/material/Stack";
 // import Header from './Header';
 
 const steps = [
@@ -19,7 +22,7 @@ const steps = [
 
 export default function FacultyStepper() {
   const { user } = useContext(UserContext);
-
+  const [comments, setComments] = useState([]);
   const [Dimension1, setDimension1] = useState({});
   const [Dimension2, setDimension2] = useState({});
   const [Dimension3, setDimension3] = useState({});
@@ -50,7 +53,7 @@ export default function FacultyStepper() {
     console.log("Dimension4=", Dimension4);
   }, [Dimension4]);
 
-var yr=getDate()
+  var yr = getDate();
   function getDate() {
     const year = new Date().getFullYear();
     const month = new Date().getMonth() + 1;
@@ -59,7 +62,7 @@ var yr=getDate()
     console.log(year);
     console.log(day);
     // if(month<6)
-    return `${year}-${year+1}`
+    return `${year}-${year + 1}`;
     // else
     // return `${year+1}-${year+2}`
   }
@@ -73,13 +76,32 @@ var yr=getDate()
       },
       body: JSON.stringify({
         yearofAssesment: yr,
-        facultyName:user.fullName,
-        department:user.department,
-        designation:user.designation,
-        isSubmitted:true,
+        facultyName: user.fullName,
+        department: user.department,
+        designation: user.designation,
+        isSubmitted: true,
       }),
     });
   }
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/faculty/appraisal/get/hod-comments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        yearofAssesment: yr,
+        fullName: user.fullName,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => setComments(data));
+  }, []);
+
+  useEffect(() => {
+    console.log(comments);
+  }, [comments]);
 
   // React.useEffect(()=>{
   //   if(activeStep === 4){
@@ -95,18 +117,38 @@ var yr=getDate()
       {/* shows steps for stepper */}
       <Box sx={{ width: "95%", margin: "auto" }}>
         <StepHead activeStep={activeStep} steps={steps} />
+        {comments.length > 0 && (
+          <>
+            <Stack sx={{ width: "100%", margin:"1rem 0", textAlign:'left' }} spacing={2}>
+              <Alert severity="error">
+                <AlertTitle><h3 style={{fontWeight:'bolder'}}>Appraisal Rejected By HOD</h3></AlertTitle>
+                <h4 style={{fontWeight:'bolder'}}>{comments[comments.length - 1]}</h4>
+              </Alert>
+            </Stack>
+          </>
+        )}
 
         {/* render different pages depending upon activeStep */}
         {activeStep === 0 && <StepOne yr={yr} setDimension1={setDimension1} />}
         {activeStep === 1 && (
-          <StepTwo setDimension2={setDimension2} yr={yr} sendToServer={sendToServer} />
+          <StepTwo
+            setDimension2={setDimension2}
+            yr={yr}
+            sendToServer={sendToServer}
+          />
         )}
-        {activeStep === 2 && <StepThree yr={yr} setDimension3={setDimension3} />}
+        {activeStep === 2 && (
+          <StepThree yr={yr} setDimension3={setDimension3} />
+        )}
         {activeStep === 3 && (
-          <StepFour yr={yr} setDimension4={setDimension4} handleNext={handleNext} />
+          <StepFour
+            yr={yr}
+            setDimension4={setDimension4}
+            handleNext={handleNext}
+          />
         )}
         {/* {activeStep === 4 && <StepFour handleBack={handleBack} submitted={true} />} */}
-            {activeStep === 4 && <h1>Submitted the form</h1>}
+        {activeStep === 4 && <h1>Submitted the form</h1>}
         {/* show footer only if all steps are not completed */}
         {
           <StepFoot

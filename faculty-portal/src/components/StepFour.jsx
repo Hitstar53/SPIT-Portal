@@ -225,12 +225,12 @@ function StepFour({ yr, fullName, setStatus }) {
             <button className="save-btn">Submit Appraisal</button>
           </div>
         </form>
-        <h1>OR</h1>
-        {/* <div style={{width: "100%", height: "20px", borderBottom: "1px solid black", textAlign: "center"}}>
-          <span style={{fontSize: '40px' ,'backgroundColor': #F3F5F6, padding: "0 10px"}}>
+        {/* <h1>OR</h1> */}
+        <div style={{width: "100%", height: "20px", borderBottom: "1px solid black", textAlign: "center",margin:"3.5rem 0"}}>
+          <span style={{fontSize: '2rem' ,'backgroundColor': "#F3F5F6", padding: "0 10px"}}>
             OR{" "}
           </span>
-        </div> */}
+        </div>
         <form onSubmit={resendAppraisal}>
           <div style={{ margin: "2rem 0" }}>
             <label className="form-label">
