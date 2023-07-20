@@ -527,7 +527,7 @@ const ViewHistory = () => {
                             </button>
                         </form>
                         {selectedDept && (
-                             <form className='flex items-center justify-center' onSubmit={handlePrincipalSubmit}>
+                             <form className='flex items-center justify-center mt-4' onSubmit={handlePrincipalSubmit}>
                              <Autocomplete
                                  disablePortal
                                  id="combo-box-demo"
