@@ -3,7 +3,7 @@ import HeaderImage from "../assets/spit.png";
 import DoneIcon from "@mui/icons-material/Done";
 import axios from "axios";
 
-export default function AllSteps({ fullName, year }) {
+export default function AllSteps({ fullName, year, isPrincipal=false }) {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -1279,6 +1279,54 @@ export default function AllSteps({ fullName, year }) {
               Total Marks Dimension 3 : {history.Dimension3.totalMarks}
             </strong>
           </div>
+          {isPrincipal && (
+            <>
+            <div
+            className="dimhead"
+            style={{
+              backgroundColor: "#fabf8f",
+              margin: "1em",
+              padding: "0.4em 0.4em",
+            }}
+          >
+            <strong>Dimension 4: Perception/ 360 degree feedback</strong>
+          </div>
+            <table>
+            <thead>
+              <th colSpan={5} className="table-heading">
+                Dimension 4: Perception/ 360 degree feedback
+              </th>
+            </thead>
+            <thead>
+              <tr>
+                <th>Perception 360 degree feedbacks</th>
+                <th>Bright students’ feedback (A)</th>
+                <th>Peer Feedback (B)</th>
+                <th>HOD feedback (C)</th>
+                <th>Total (E) E=A+B+C</th>
+              </tr>
+              <tr>
+                <th>Max Marks</th>
+                <th>25</th>
+                <th>25</th>
+                <th>50</th>
+                <th>100</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>Marks</td>
+              {Object.keys(history.Dimension4.feedbackMarks).map((mark, index) => {
+                return (
+                  <td key={index}>{history.Dimension4.feedbackMarks[mark]}</td>
+                )
+              }
+              )}
+            </tr>
+            </tbody>
+          </table>
+              </>
+      )}
         </div>
       )}
     </>
