@@ -125,10 +125,7 @@ function StepFour({ yr, fullName, setStatus }) {
                   Peer Feedback (B)
                 </th>
                 <th className="table-header text-center align-middle">
-                  Dean feedback (C)
-                </th>
-                <th className="table-header text-center align-middle">
-                  HOD feedback (D)
+                  HOD feedback (C)
                 </th>
               </tr>
             </thead>
@@ -137,7 +134,6 @@ function StepFour({ yr, fullName, setStatus }) {
                 <td className="table-header text-center align-middle">
                   Max Marks
                 </td>
-                <td className="table-header text-center align-middle">25</td>
                 <td className="table-header text-center align-middle">25</td>
                 <td className="table-header text-center align-middle">25</td>
                 <td className="table-header text-center align-middle">25</td>
@@ -181,28 +177,13 @@ function StepFour({ yr, fullName, setStatus }) {
                     onWheel={(e) => e.target.blur()}
                     {...register("feedbackMarks.C", {
                       required: true,
-                      max: 25,
+                      max: 50,
                     })}
                   />
                   {errors.feedbackMarks?.C?.type === "required" &&
                     "Marks is required"}
                   {errors.feedbackMarks?.C?.type === "max" &&
-                    "Marks should be less than or equal to 25"}
-                </td>
-                <td className="table-header text-center align-middle">
-                  <input
-                    className="form-input"
-                    type="number"
-                    onWheel={(e) => e.target.blur()}
-                    {...register("feedbackMarks.D", {
-                      required: true,
-                      max: 25,
-                    })}
-                  />
-                  {errors.feedbackMarks?.D?.type === "required" &&
-                    "Marks is required"}
-                  {errors.feedbackMarks?.D?.type === "max" &&
-                    "Marks should be less than or equal to 25"}
+                    "Marks should be less than or equal to 50"}
                 </td>
               </tr>
             </tbody>
