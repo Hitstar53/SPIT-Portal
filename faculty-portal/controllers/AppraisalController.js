@@ -69,6 +69,9 @@ const setAppraisal = asyncHandler(async (req, res) => {
         const appraisal = await Appraisal.findOne({ yearofAssesment, facultyName });
         console.log(appraisal);
         appraisal.isSubmitted = true;
+        if (appraisal.department == "HOD") {
+            appraisal.HODReviewed = true;
+        }
         var Dimension1 = appraisal.Dimension1;
         var Dimension2 = appraisal.Dimension2;
         var Dimension3 = appraisal.Dimension3;
@@ -923,6 +926,7 @@ const setDim4Principal = asyncHandler(async (req, res) => {
         const { yearofAssesment, fullName, Dimension4 } = req.body;
         var updatedApp = null;
         //console.log(Dimension4)
+        Dimension4.feedbackMarks.E = parseInt(Dimension4.feedbackMarks.A) + parseInt(Dimension4.feedbackMarks.B) + parseInt(Dimension4.feedbackMarks.C);
         Dimension4.confidentialReport.perceptionMarks = Dimension4.feedbackMarks.E * Dimension4.confidentialReport.principalRemarks;
 
         const existingFaculty = await Appraisal.findOne({
@@ -1025,7 +1029,7 @@ const setHodComments = asyncHandler(async (req, res) => {
                 { $set: { HODcomments: commentArr, isSubmitted: false } }
             );
         } else {
-            return res.status(404).json("Faculty Not Found In setHodComments")
+            return res.status(404).json([])
         }
         res.status(200).json("HOD comments added successfully");
     } catch (error) {
