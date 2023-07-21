@@ -69,7 +69,7 @@ const setAppraisal = asyncHandler(async (req, res) => {
         const appraisal = await Appraisal.findOne({ yearofAssesment, facultyName });
         console.log(appraisal);
         appraisal.isSubmitted = true;
-        if (appraisal.department == "HOD") {
+        if (appraisal.designation == "HOD") {
             appraisal.HODReviewed = true;
         }
         var Dimension1 = appraisal.Dimension1;
