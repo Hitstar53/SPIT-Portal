@@ -52,7 +52,7 @@ const Report = ({ facultyData, name }) => {
     return (
         <div>
             <div className='report'>
-            <h1>Enter the Marks for {name}</h1>
+            {/* <h1>Enter the Marks for {name}</h1> */}
                 <Table striped bordered style={{margin: "1rem"}}>
                     <thead>
                         <tr>

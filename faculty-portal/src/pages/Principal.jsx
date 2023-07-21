@@ -192,7 +192,7 @@ const Principal = () => {
           }
           {status === "Faculty found" &&
             <div style={{ marginTop: "-4rem" }}>
-              <AllSteps fullName={name} year={yr} isPrincipal={true} />
+              <AllSteps fullName={name} year={yr} isPrincipal={true} forHOD={facultyData.designation==='HOD'} />
               <h1><Report facultyData={facultyData} name={name} />
               </h1>
             </div>}
