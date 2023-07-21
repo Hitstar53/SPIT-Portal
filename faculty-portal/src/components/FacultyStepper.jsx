@@ -96,7 +96,8 @@ export default function FacultyStepper() {
       }),
     })
       .then((res) => res.json())
-      .then((data) => setComments(data));
+      .then((data) => setComments(data))
+      .then((data) => console.log(data));
   }, []);
 
   useEffect(() => {
