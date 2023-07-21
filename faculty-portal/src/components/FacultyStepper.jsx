@@ -67,6 +67,10 @@ export default function FacultyStepper() {
     // return `${year+1}-${year+2}`
   }
 
+  function timeout(delay) {
+    return new Promise( res => setTimeout(res, delay) );
+}
+
   function sendToServer() {
     console.log("Sending to server");
     fetch("http://localhost:5000/api/faculty/appraisal", {
@@ -81,7 +85,9 @@ export default function FacultyStepper() {
         designation: user.designation,
         isSubmitted: true,
       }),
-    });
+    }).then(
+       timeout(1500).then(window.location.reload())
+    )
   }
 
   useEffect(() => {
