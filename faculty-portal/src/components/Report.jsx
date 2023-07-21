@@ -35,9 +35,11 @@ const Report = ({ facultyData, name, forHOD = false }) => {
         console.log(data);
         let dim4=facultyData.Dimension4
         dim4.confidentialReport.principalRemarks=parseFloat(data.confidentialReport.principalRemarks)
+        if (facultyData.designation === "HOD") {
         dim4.feedbackMarks.A=parseFloat(data.feedbackMarks.A)
         dim4.feedbackMarks.B=parseFloat(data.feedbackMarks.B)
         dim4.feedbackMarks.C=parseFloat(data.feedbackMarks.C)
+        }
 
         // console.log(dim4.confidentialReport.principalRemarks)
         // console.log(data.feedbackMarks)
