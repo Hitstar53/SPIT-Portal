@@ -16,6 +16,7 @@ const {
   isSubmittedTeacher,
   setHodComments,
   getHodComments,
+  getAllHODAppraisal,
 } = require("../controllers/AppraisalController");
 
 router.post("/", setAppraisal);
@@ -33,4 +34,5 @@ router.post("/getallappraisal", getAllAppraisal);
 router.post("/isSubmitted-teacher", isSubmittedTeacher);
 router.post("/hod-comments", setHodComments);
 router.post("/get/hod-comments", getHodComments);
+router.post("/get-hod-appraisal-year", getAllHODAppraisal)
 module.exports = router;

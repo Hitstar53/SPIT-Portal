@@ -45,6 +45,21 @@ const getAllAppraisal = asyncHandler(async (req, res) => {
     }
 })
 
+const getAllHODAppraisal = asyncHandler(async (req, res) => {
+    console.log("Inside getAllAppraisal");
+    try {
+        var { facultyName } = req.body;
+        console.log(facultyName);
+        const appraisals = await Appraisal.find({ facultyName, isSubmitted: true, HODReviewed:true }, { yearofAssesment: 1 });
+        console.log(appraisals);
+        if (appraisals) {
+            res.json(appraisals);
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Server Error in getAllAppraisals" });
+    }
+})
+
 
 const setAppraisal = asyncHandler(async (req, res) => {
     console.log("Inside setAppraisalDim1");
@@ -1052,5 +1067,6 @@ module.exports = {
     getAllAppraisal,
     isSubmittedTeacher,
     setHodComments,
-    getHodComments
+    getHodComments,
+    getAllHODAppraisal
 }
