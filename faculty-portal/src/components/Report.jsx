@@ -5,6 +5,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import axios from "axios";
 import "../styles/Principal.css";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { Controller } from "react-hook-form";
 
 
@@ -67,6 +68,10 @@ const Report = ({ facultyData, name, forHOD = false }) => {
         //     });
     };
 
+    function timeout(delay) {
+        return new Promise( res => setTimeout(res, delay) );
+    }
+
     const sendMarks = async (dim4) => {
         console.log(dim4);
         await axios
@@ -75,11 +80,22 @@ const Report = ({ facultyData, name, forHOD = false }) => {
                 fullName: facultyData.facultyName,
                 Dimension4: dim4,
             })
-            .then((res) => {
+            .then(async (res) => {
                 console.log(res.data.Dimension4);
+                toast.success("Marks Submitted!", {
+                    position: "top-center",
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                });
+                await timeout(1500);
+                window.location.reload();
+
             })
             .catch((err) => {
                 console.log(err);
+                toast.error("Error in submitting marks!");
             });
     };
 
