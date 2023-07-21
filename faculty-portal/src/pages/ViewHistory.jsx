@@ -35,19 +35,31 @@ const ViewHistory = () => {
     const [year3, setYear3] = useState("");
     const [years3, setYears3] = useState([]);
     const [notFound, setNotFound] = useState(false);
+    const [principalDepartment, setPrincipalDepartment] = useState("");
 
     const [facultyName, setfacultyName] = useState([]);
     // const pdfExportComponent = useRef(null);
     //for adding print function
     const myvar = "HOD"
-    const elementRef = useRef();
-    const handleExportPDF = useReactToPrint({
-        content: () => elementRef.current,
-        documentTitle: "Appraisal_For_Teachers",
+    const elementRefHOD = useRef();
+    const elementRefPrincipal = useRef();
+    const elementRefFaculty = useRef();
+
+    const handleExportPDFHOD = useReactToPrint({
+        content: () => elementRefHOD.current,
         // onAfterPrint: alert("Printed Successfully"),
-
+        documentTitle: `${user.department}_${name}_${year2}_AppraisalForm_byHOD`,
     })
-
+    const handleExportPDFPrincipal = useReactToPrint({
+        content: () => elementRefPrincipal.current,
+        // onAfterPrint: alert("Printed Successfully"),
+        documentTitle: `${principalDepartment}_${nameForPrincipal}_${year3}_AppraisalForm_byPrincipal`,
+    })
+    const handleExportPDFFaculty = useReactToPrint({
+        content: () => elementRefFaculty.current,
+        // onAfterPrint: alert("Printed Successfully"),
+        documentTitle: `${user.department}_${user.fullName}_${year}_AppraisalForm_bySelf`,
+    })
 
     if (user.designation == "HOD") {
         useEffect(() => {
@@ -223,7 +235,7 @@ const ViewHistory = () => {
     const getYears = async (name) => {
         console.log("Inside GetYears")
         console.log("Name on LIne 86", name)
-        await fetch("http://localhost:5000/api/faculty/appraisal/getallappraisal", {
+        await fetch("http://localhost:5000/api/faculty/appraisal/get-hod-appraisal-year", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -265,6 +277,7 @@ const ViewHistory = () => {
         e.preventDefault();
         console.log("You clicked submit.");
         console.log(e.target[0].value);
+        setPrincipalDepartment(e.target[0].value)
         getPrincipalFaculty(e.target[0].value)
     }
 
@@ -354,13 +367,13 @@ const ViewHistory = () => {
                         {
                             Dim4 ? (
                                 <>
-                                    <div ref={elementRef} style={{
+                                    <div ref={elementRefHOD} style={{
                                         width: "95%",
                                         // padding:"0 0 2em 0",
                                         border: "1px solid black",
                                         margin: "1em auto",
                                     }}>
-
+                                        
                                         <img
                                             src={HeaderImage}
                                             style={{
@@ -405,16 +418,12 @@ const ViewHistory = () => {
 
                                                         <th>Peer Feedback(B)</th>
 
-
-                                                        <th>Dean feedback
-                                                            ( C)
-                                                        </th>
                                                         <th>HOD feedback
-                                                            (D)
+                                                            (C)
                                                         </th>
                                                         <th>Total
                                                             (E)
-                                                            E=A+B+C+D
+                                                            E=A+B+C
                                                         </th>
                                                     </tr>
 
@@ -429,9 +438,7 @@ const ViewHistory = () => {
                                                         <th>25</th>
 
 
-                                                        <th>25
-                                                        </th>
-                                                        <th>25
+                                                        <th>50
                                                         </th>
                                                         <th>100
                                                         </th>
@@ -482,7 +489,7 @@ const ViewHistory = () => {
                                         </div>
                                     </div>
                                     <button
-                                        onClick={handleExportPDF}
+                                        onClick={handleExportPDFHOD}
                                         style={{
                                             backgroundColor: "#f32236",
                                             color: "white",
@@ -571,7 +578,7 @@ const ViewHistory = () => {
                     {report && (
                         <>
                             <div
-                                ref={elementRef}
+                                ref={elementRefPrincipal}
                                 style={{
                                     width: "95%",
                                     // padding:"0 0 2em 0",
@@ -579,6 +586,7 @@ const ViewHistory = () => {
                                     margin: "1em auto",
                                 }}
                             >
+                                
                                 <img
                                     src={HeaderImage}
                                     style={{
@@ -587,6 +595,7 @@ const ViewHistory = () => {
                                         width: "70%",
                                     }}
                                 />
+                                
                                 <div className='flex flex-col items-center justify-center'>
                                     <h1 className='text-xl font-extrabold mt-3'>Confidential Report for {report.facultyName} ({report.yearofAssesment})</h1>
                                     {/* <Table striped bordered style={{ margin: "1rem", width: "95%" }}> */}
@@ -723,7 +732,7 @@ const ViewHistory = () => {
                             {
                                 report ? (
                                     <button
-                                        onClick={handleExportPDF}
+                                        onClick={handleExportPDFPrincipal}
                                         style={{
                                             backgroundColor: "#f32236",
                                             color: "white",
@@ -781,7 +790,7 @@ const ViewHistory = () => {
                     <div>
                         {history ? (
                             <div
-                                ref={elementRef}
+                                ref={elementRefFaculty}
                                 style={{
                                     width: "95%",
                                     // padding:"0 0 2em 0",
@@ -2114,7 +2123,7 @@ const ViewHistory = () => {
             {
                 history ? (
                     <button
-                        onClick={handleExportPDF}
+                        onClick={handleExportPDFFaculty}
                         style={{
                             backgroundColor: "#f32236",
                             color: "white",
