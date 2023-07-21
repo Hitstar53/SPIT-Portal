@@ -44,7 +44,7 @@ const Report = ({ facultyData, name }) => {
         };
         // await setDim4(updatedDim4);
         sendMarks(updatedDim4);
-        window.location.reload();
+        // window.location.reload();
     }
     
     
