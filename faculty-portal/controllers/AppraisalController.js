@@ -1048,7 +1048,7 @@ const getHodComments = asyncHandler(async (req, res) => {
         res.status(200).json(existingFaculty.HODcomments);
     }
     else {
-        res.status(404).json("Faculty Not Found In getHodComments")
+        res.status(404).json("")
     }
     
 })
