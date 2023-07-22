@@ -10,7 +10,8 @@ import DoneIcon from '@mui/icons-material/Done';
 import HeaderImage from '../assets/spit.png';
 import Autocomplete from "@mui/material/Autocomplete";
 import Done from "../assets/project-is-done.png"
-import Notfound from "../assets/404-not-found.png" 
+import Notfound from "../assets/404-not-found.png"
+import AllSteps from '../components/AllSteps';
 
 const ViewHistory = () => {
     const { user } = useContext(UserContext);
@@ -24,6 +25,7 @@ const ViewHistory = () => {
     const [year2, setYear2] = useState("");
     const [years2, setYears2] = useState([]);
     const [Dim4, setDim4] = useState();
+    const [isHOD, setIsHOD] = useState(false);
     // For Principal
     const [allDept, setAllDept] = useState([]);
     const [message, setMessage] = useState("");
@@ -152,7 +154,12 @@ const ViewHistory = () => {
             }).then((response) => {
                 console.log("here");
                 console.log(response.data);
-                setDim4(response.data.Dimension4);
+                if (response.data.designation == 'HOD') {
+                    setIsHOD(true);
+                }
+                else {
+                    setDim4(response.data.Dimension4);
+                }
                 console.log(Dim4);
             });
         }
@@ -191,17 +198,17 @@ const ViewHistory = () => {
 
     // For Principal Select Box 
     if (user.designation === "Principal") {
-        useEffect (() => {
+        useEffect(() => {
             const getDept = async () => {
                 await axios.get("http://localhost:5000/api/faculty/get/faculty/getalldepartments")
-                .then((res) => {
-                    console.log(res.data)
-                    setAllDept(res.data)
-                })
-                .catch((err) => console.log(err))
+                    .then((res) => {
+                        console.log(res.data)
+                        setAllDept(res.data)
+                    })
+                    .catch((err) => console.log(err))
             }
             getDept()
-        },[])
+        }, [])
         // useEffect(() => {
         //     fetch("http://localhost:5000/api/faculty/get/faculty/submitted", {
         //         method: "GET",
@@ -219,17 +226,17 @@ const ViewHistory = () => {
         await axios.post("http://localhost:5000/api/faculty/get/faculty/submitted", {
             department: dept,
         })
-        .then((res) => {
-            console.log(res.data)
-            setFaculty(res.data.sort())
-            setSelectedDept(true)
-        })
-        .catch((err) => {
-            console.log(err)
-            setFaculty([])
-            setSelectedDept(false)
-            setMessage("No Faculty Found")
-        })
+            .then((res) => {
+                console.log(res.data)
+                setFaculty(res.data.sort())
+                setSelectedDept(true)
+            })
+            .catch((err) => {
+                console.log(err)
+                setFaculty([])
+                setSelectedDept(false)
+                setMessage("No Faculty Found")
+            })
     }
 
     const getYears = async (name) => {
@@ -261,7 +268,7 @@ const ViewHistory = () => {
             }),
         })
             .then((res) => res.json())
-            .then((data) => {setYears3(data),(data.length > 0 && setSelectedFaculty(true)), (data.length == 0 && setNotFound(true))})
+            .then((data) => { setYears3(data), (data.length > 0 && setSelectedFaculty(true)), (data.length == 0 && setNotFound(true)) })
     }
 
     function handleSubmit(e) {
@@ -373,7 +380,7 @@ const ViewHistory = () => {
                                         border: "1px solid black",
                                         margin: "1em auto",
                                     }}>
-                                        
+
                                         <img
                                             src={HeaderImage}
                                             style={{
@@ -451,7 +458,7 @@ const ViewHistory = () => {
                                                         <td>{Dim4.feedbackMarks.A}</td>
                                                         <td>{Dim4.feedbackMarks.B}</td>
                                                         <td>{Dim4.feedbackMarks.C}</td>
-                                                        
+
 
                                                         <td>{Dim4.feedbackMarks.E}</td>
                                                     </tr>
@@ -508,6 +515,34 @@ const ViewHistory = () => {
 
                             ) : ("")
                         }
+                        {isHOD && (
+                            <div
+                                ref={elementRefFaculty}
+                                style={{
+                                    width: "95%",
+                                    // padding:"0 0 2em 0",
+                                    border: "1px solid black",
+                                    margin: "1em auto",
+                                }}
+                            >
+                                <AllSteps fullName={name} year={year2} />
+                                <button
+                                    onClick={handleExportPDFFaculty}
+                                    style={{
+                                        backgroundColor: "#f32236",
+                                        color: "white",
+                                        padding: "10px",
+                                        // borderRadius: "5px",
+                                        border: "none",
+                                        width: "150px",
+                                        margin: "1em auto",
+                                        display: "block",
+                                    }}
+                                >
+                                    Export to PDF
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </>
             )}
@@ -534,26 +569,26 @@ const ViewHistory = () => {
                             </button>
                         </form>
                         {selectedDept && (
-                             <form className='flex items-center justify-center mt-4' onSubmit={handlePrincipalSubmit}>
-                             <Autocomplete
-                                 disablePortal
-                                 id="combo-box-demo"
-                                 options={faculty}
-                                 sx={{ width: 300, display: "inline-block" }}
-                                 renderInput={(params) => (
-                                     <TextField {...params} label="Enter Faculty Name" />
-                                 )}
-                             />
-                             <button type="submit" className="find-faculty-btn">
-                                Find Faculty
-                             </button>
-                         </form>
+                            <form className='flex items-center justify-center mt-4' onSubmit={handlePrincipalSubmit}>
+                                <Autocomplete
+                                    disablePortal
+                                    id="combo-box-demo"
+                                    options={faculty}
+                                    sx={{ width: 300, display: "inline-block" }}
+                                    renderInput={(params) => (
+                                        <TextField {...params} label="Enter Faculty Name" />
+                                    )}
+                                />
+                                <button type="submit" className="find-faculty-btn">
+                                    Find Faculty
+                                </button>
+                            </form>
                         )}
                         {!selectedFaculty && (
                             <div className="flex flex-col items-center justify-center mt-8">
-                            <h2>{notFound ? "No Faculty Found" : "Select Department and Faculty to view and print their Confidential Report"}</h2>
-                            <img src={notFound ? Notfound : Done} alt="not found" width="550px"/>
-                        </div>
+                                <h2>{notFound ? "No Faculty Found" : "Select Department and Faculty to view and print their Confidential Report"}</h2>
+                                <img src={notFound ? Notfound : Done} alt="not found" width="550px" />
+                            </div>
                         )}
                         {selectedFaculty &&
                             <div className="dropdown">
@@ -586,7 +621,7 @@ const ViewHistory = () => {
                                     margin: "1em auto",
                                 }}
                             >
-                                
+
                                 <img
                                     src={HeaderImage}
                                     style={{
@@ -595,7 +630,7 @@ const ViewHistory = () => {
                                         width: "70%",
                                     }}
                                 />
-                                
+
                                 <div className='flex flex-col items-center justify-center'>
                                     <h1 className='text-xl font-extrabold mt-3'>Confidential Report for {report.facultyName} ({report.yearofAssesment})</h1>
                                     {/* <Table striped bordered style={{ margin: "1rem", width: "95%" }}> */}
@@ -608,7 +643,7 @@ const ViewHistory = () => {
                                     }}>
                                         <thead>
                                             <tr>
-                                                <th className='table-header text-center align-middle' style={{overflowWrap: "anywhere",}}>HOD Remarks</th>
+                                                <th className='table-header text-center align-middle' style={{ overflowWrap: "anywhere", }}>HOD Remarks</th>
                                                 <th className='table-header text-left align-middle' colSpan={3}>{report.Dimension4.confidentialReport.HODRemarks}</th>
                                             </tr>
                                             <tr>
@@ -759,8 +794,8 @@ const ViewHistory = () => {
                 <>
                     <div>
                         {/* Faculty content */}
-                       
-                        
+
+
                     </div>
                     {years ? (
 
@@ -871,7 +906,7 @@ const ViewHistory = () => {
                                         style={{
                                             display: "flex",
                                             width: "90%",
-                                            
+
                                             flexDirection: "column",
                                         }}
                                     >
@@ -919,7 +954,7 @@ const ViewHistory = () => {
                                         {/* AP2 */}
                                         <table
                                             style={{
-                                               // margin: "1em 0px 0px 1em",
+                                                // margin: "1em 0px 0px 1em",
                                                 width: "60%",
                                             }}
                                         >
@@ -990,7 +1025,7 @@ const ViewHistory = () => {
                                                             <td>{course.AP3LecturesTarget}</td>
                                                             <td>{course.AP3LectureConducted}</td>
                                                             <td>{course.AP3PercentAchieved}</td>
-                                                            
+
                                                             {index === 0 && (
                                                                 <td
                                                                     rowSpan={
@@ -1013,7 +1048,7 @@ const ViewHistory = () => {
                                                     );
                                                 }
                                             )}
-                                            
+
                                         </tbody>
                                     </table>
 
@@ -1025,7 +1060,7 @@ const ViewHistory = () => {
                                             gap: "1rem",
                                             flexDirection: "column",
                                             width: "60%",
-                                            
+
                                         }}
                                     >
                                         <table>
@@ -1117,13 +1152,13 @@ const ViewHistory = () => {
                                             </th>
                                         </thead>
 
-                                       
+
                                         <tbody>
-                                             
-                                         <th  className="table-heading">
-                                                Mentee Feedback Score Average Marks (Out of 5): 
+
+                                            <th className="table-heading">
+                                                Mentee Feedback Score Average Marks (Out of 5):
                                             </th>
-                                            <th style={{padding:"10px"}}>{history.Dimension1.AP6.averageMarks}</th>
+                                            <th style={{ padding: "10px" }}>{history.Dimension1.AP6.averageMarks}</th>
                                         </tbody>
 
                                         {/* <tbody>
@@ -1164,7 +1199,7 @@ const ViewHistory = () => {
                                                 <th>Sr.No</th>
                                                 <th>Date</th>
                                                 <th>
-                                                    Title of the Guest Lecture 
+                                                    Title of the Guest Lecture
                                                 </th>
                                                 <th>Name & Details of the Speaker</th>
                                                 <th>Arranged for students/faculty</th>
@@ -1246,7 +1281,7 @@ const ViewHistory = () => {
                                                 <th>Marks out of 10</th>
                                                 <th>Average of all courses (filled by auditor)</th>
                                             </tr>
-                                            
+
                                         </thead>
                                         <tbody>
                                             {history.Dimension1.AP9.noteworthyData.map((ref, index) => {
@@ -1304,7 +1339,7 @@ const ViewHistory = () => {
                                             <th colSpan={5} className="table-heading">
                                                 Totals Marks: {history.Dimension1.AP10.averageMarks}
                                             </th>
-                                            
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -1346,7 +1381,7 @@ const ViewHistory = () => {
                                         <th>Paper Title</th>
                                         <th>Journal/ Conference Name</th>
                                         <th>Journal/ Conference</th>
-                                        <th>High / Medium <br/>/ Low Repute</th>
+                                        <th>High / Medium <br />/ Low Repute</th>
                                         <th>Authors</th>
                                         <th>Publisher</th>
                                         <th>Paper Link</th>
@@ -1367,7 +1402,7 @@ const ViewHistory = () => {
                                             );
                                         })}
                                         <th colSpan={10} className="table-heading">
-                                         RP1   Total Marks: {history.Dimension2.RP1.totalMarks}
+                                            RP1   Total Marks: {history.Dimension2.RP1.totalMarks}
                                         </th>
                                     </tbody>
                                 </table>
@@ -1386,7 +1421,7 @@ const ViewHistory = () => {
                                                 <th>Sr. No.</th>
                                                 <th>Patent Obtained</th>
                                                 <th>Details</th>
-                                               
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -1397,13 +1432,13 @@ const ViewHistory = () => {
                                                             <td>{index + 1}</td>
                                                             <td>{patent.name}</td>
                                                             <td>{patent.details}</td>
-                                                            
+
                                                         </tr>
                                                     </>
                                                 );
                                             })}
                                         </tbody>
-                                       
+
                                         <th colSpan={4} className="table-heading">Marks Obtained : {history.Dimension2.RP2.patentMarks}</th>
                                     </table>
                                     <table>
@@ -1413,7 +1448,7 @@ const ViewHistory = () => {
                                                 <th> Books published &nbsp;(Title of the book)</th>
                                                 <th>Authors</th>
                                                 <th>Publisher</th>
-                                               
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -1425,13 +1460,13 @@ const ViewHistory = () => {
                                                             <td>{book.title}</td>
                                                             <td>{book.author}</td>
                                                             <td>{book.publisher}</td>
-                                                           
+
                                                         </tr>
                                                     </>
                                                 );
                                             })}
                                         </tbody>
-                                        
+
                                         <th colSpan={5} className="table-heading">Marks Obtained : {history.Dimension2.RP2.booksMarks}</th>
                                     </table>
                                     <table>
@@ -1456,11 +1491,11 @@ const ViewHistory = () => {
                                                     </>
                                                 );
                                             })}
-                                        
-                                        <th colSpan={5} className="table-heading">Marks Obtained : {history.Dimension2.RP2.moocsMarks}</th>
+
+                                            <th colSpan={5} className="table-heading">Marks Obtained : {history.Dimension2.RP2.moocsMarks}</th>
                                         </tbody>
 
-                                        
+
                                     </table>
                                     <thead>
                                         <th colSpan={5} className="table-heading">
@@ -1503,8 +1538,8 @@ const ViewHistory = () => {
                                         )}
                                     </tbody>
                                     <th colSpan={6} className="table-heading">
-                                            RP3 Total Marks: {history.Dimension2.RP3.totalMarks}
-                                        </th>
+                                        RP3 Total Marks: {history.Dimension2.RP3.totalMarks}
+                                    </th>
                                 </table>
 
                                 {/* //RP4 */}
@@ -1619,7 +1654,7 @@ const ViewHistory = () => {
                                             );
                                         })}
                                         <th colSpan={10} className="table-heading">
-                                           RP6 Total Marks: {history.Dimension2.RP6.totalMarks}
+                                            RP6 Total Marks: {history.Dimension2.RP6.totalMarks}
                                         </th>
                                     </tbody>
                                 </table>
@@ -1654,7 +1689,7 @@ const ViewHistory = () => {
                                             }
                                         )}
                                         <th colSpan={10} className="table-heading">
-                                        RP7 Total Marks: {history.Dimension2.RP7.totalMarks}
+                                            RP7 Total Marks: {history.Dimension2.RP7.totalMarks}
                                         </th>
                                     </tbody>
                                 </table>
@@ -1701,7 +1736,7 @@ const ViewHistory = () => {
                                         </tr>
                                     </tbody>
                                     <thead>
-                                        <th colSpan={5} className="table-heading" style={{textAlign:"center"}}>
+                                        <th colSpan={5} className="table-heading" style={{ textAlign: "center" }}>
                                             IP1 : Institute level assignments
                                         </th>
                                     </thead>
@@ -1718,8 +1753,8 @@ const ViewHistory = () => {
                                     })}
 
                                     <thead>
-                                        <th colSpan={5} className="table-heading"  style={{textAlign:"center"}}>
-                                            IP2 : Other Institute level assignments 
+                                        <th colSpan={5} className="table-heading" style={{ textAlign: "center" }}>
+                                            IP2 : Other Institute level assignments
                                         </th>
                                     </thead>
 
@@ -1736,7 +1771,7 @@ const ViewHistory = () => {
                                         })}
                                     </tbody>
                                     <thead>
-                                        <th colSpan={5} className="table-heading" style={{textAlign:"center"}}>
+                                        <th colSpan={5} className="table-heading" style={{ textAlign: "center" }}>
                                             DP1 : Other Institute level assignments
                                         </th>
                                     </thead>
@@ -1753,7 +1788,7 @@ const ViewHistory = () => {
                                             );
                                         })}
                                     </tbody>
-                                    <th colSpan={10} className="table-heading" style={{textAlign:"center"}}>
+                                    <th colSpan={10} className="table-heading" style={{ textAlign: "center" }}>
                                         Total of IP1, IP2, DP1 :{" "}
                                         {history.Dimension3.totalIP1IP2DP1Marks}
                                     </th>
@@ -1780,7 +1815,7 @@ const ViewHistory = () => {
                                                 <tr key={index}>
                                                     <td>{index + 1}</td>
                                                     <td>{sd.name}</td>
-                                                   
+
                                                     <td>{sd.sponsorerName}</td>
                                                     <td>{sd.fund}</td>
                                                     <td>{sd.days}</td>
@@ -1830,8 +1865,8 @@ const ViewHistory = () => {
                                         </th>
                                     </tbody>
                                 </table>
-                                 {/* Dimension op3  */}
-                                 <table>
+                                {/* Dimension op3  */}
+                                <table>
                                     <thead>
                                         <th colSpan={5} className="table-heading">
                                             OP3:Received Sponsored FDP
@@ -1851,7 +1886,7 @@ const ViewHistory = () => {
                                                 <tr key={index}>
                                                     <td>{index + 1}</td>
                                                     <td>{sd.name}</td>
-                                                   
+
                                                     <td>{sd.sponsorerName}</td>
                                                     <td>{sd.fund}</td>
                                                     <td>{sd.days}</td>
@@ -1863,11 +1898,11 @@ const ViewHistory = () => {
                                         </th>
                                     </tbody>
                                 </table>
-                               {/* Dimension 3 invited as */} 
+                                {/* Dimension 3 invited as */}
                                 <table>
                                     <thead>
                                         <th colSpan={5} className="table-heading">
-                                           OP4: Invited talk as Guest faculty
+                                            OP4: Invited talk as Guest faculty
                                         </th>
                                     </thead>
                                     <thead>
@@ -1875,7 +1910,7 @@ const ViewHistory = () => {
                                             <th>Sr. No.</th>
                                             <th>Industry/ Institution Name</th>
                                             <th>Dates</th>
-                                            <th>Details (Title , No. of participants, <br/>affiliation) etc</th>
+                                            <th>Details (Title , No. of participants, <br />affiliation) etc</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1945,7 +1980,7 @@ const ViewHistory = () => {
                                 <table>
                                     <thead>
                                         <th colSpan={2} className="table-heading">
-                                         OP6:Article in media/ newspaper to boost Institution's Image
+                                            OP6:Article in media/ newspaper to boost Institution's Image
                                         </th>
                                     </thead>
                                     <thead>
@@ -1976,7 +2011,7 @@ const ViewHistory = () => {
                                 <table>
                                     <thead>
                                         <th colSpan={2} className="table-heading">
-                                         OP7:Any noteworthy work with NGO
+                                            OP7:Any noteworthy work with NGO
                                         </th>
                                     </thead>
                                     <thead>
@@ -2043,7 +2078,7 @@ const ViewHistory = () => {
                                 <table>
                                     <thead>
                                         <th colSpan={5} className="table-heading">
-                                         OP9: Any academic collaboration with the other institutions
+                                            OP9: Any academic collaboration with the other institutions
                                         </th>
                                     </thead>
                                     <thead>
