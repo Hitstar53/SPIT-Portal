@@ -286,3 +286,49 @@ th{
 .appraisal-center img{
     height: 500px;
 }
+
+.marks-box {
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4rem;
+    font-size: 1rem;
+    background-color: #136634;
+    opacity: 0.8;
+    color: #f5f5f5;
+}
+
+
+@media (max-width: 1410px) {
+    .tab {
+        width: 22rem;
+    }
+}
+
+@media (max-width: 1310px) {
+    .tab {
+        width: 20rem;
+    }
+}
+
+@media (max-width: 1220px) {
+
+    .tab {
+        width: 18rem;
+    }
+
+    .marks-box {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 1120px) {
+
+    .tab {
+        width: 16rem;
+    }
+
+    .marks-box {
+        font-size: 0.6rem;
+    }
+}

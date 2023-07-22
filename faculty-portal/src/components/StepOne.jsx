@@ -12,6 +12,19 @@ import CircularProgress from "@mui/material/CircularProgress";
 const StepOne = ({ setDimension1, yr }) => {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
+  const [marks, setMarks] = useState({
+    AP1: 0,
+    AP2: 0,
+    AP3: 0,
+    AP4: 0,
+    AP5: 0,
+    AP6: 0,
+    AP7: 0,
+    AP8: 0,
+    AP9: 0,
+    AP10: 0,
+    totalMarks: 0,
+  });
   const open = "{"
   const close = "}"
   const options = [
@@ -38,6 +51,7 @@ const StepOne = ({ setDimension1, yr }) => {
     defaultValues: JSON.parse(localStorage.getItem("dim1Data")) || {},
   });
 
+
   useEffect(() => {
     toast.info("Please Save Changes Before Leaving!", {
       position: "top-right",
@@ -57,10 +71,23 @@ const StepOne = ({ setDimension1, yr }) => {
         })
         .then((res) => {
           console.log(res.data.Dimension1);
+          setMarks({
+            AP1: res.data.Dimension1.info.AP1Marks,
+            AP2: res.data.Dimension1.info.AP2Average,
+            AP3: res.data.Dimension1.info.AP3Marks,
+            AP4: res.data.Dimension1.info.AP4Marks,
+            AP5: res.data.Dimension1.info.AP5Marks,
+            AP6: res.data.Dimension1.AP6.averageMarks,
+            AP7: res.data.Dimension1.AP7.totalMarks,
+            AP8: res.data.Dimension1.AP8.totalMarks,
+            AP9: res.data.Dimension1.AP9.average,
+            AP10: res.data.Dimension1.AP10.averageMarks,
+            totalMarks: res.data.Dimension1.totalMarks,
+          })
           localStorage.setItem("dim1Data", JSON.stringify(res.data.Dimension1));
           reset(JSON.parse(localStorage.getItem("dim1Data")));
           const storedData = localStorage.getItem("dim1Data");
-          console.log(storedData);
+          // console.log(storedData);
           if (storedData) {
             Object.keys(JSON.parse(storedData)).map((key) => {
               setValue(key, JSON.parse(storedData)[key]);
@@ -74,6 +101,10 @@ const StepOne = ({ setDimension1, yr }) => {
     };
     getData();
   }, []);
+
+  useEffect(() => {
+    console.log(marks)
+  },[marks])
 
   const {
     fields: courseFields,
@@ -129,10 +160,10 @@ const StepOne = ({ setDimension1, yr }) => {
     name: "AP10.paper",
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
     setDimension1(data);
-    axios
+    await axios
       .post("http://localhost:5000/api/faculty/appraisal/dim1", {
         yearofAssesment: yr,
         faculty: user,
@@ -140,6 +171,7 @@ const StepOne = ({ setDimension1, yr }) => {
       })
       .then((res) => {
         console.log(res.data);
+        setMarks(res.data)
         toast.success("Step One Saved!", {
           position: "top-center",
           autoClose: 5000,
@@ -440,6 +472,8 @@ const StepOne = ({ setDimension1, yr }) => {
                 </div>
               )}
 
+            <div className="flex flex-row items-center gap-4">
+
               <button
                 type="button"
                 className="add-btn"
@@ -447,6 +481,30 @@ const StepOne = ({ setDimension1, yr }) => {
               >
                 Add Course
               </button>
+                <div className="flex flex-row items-start justify-start gap-4">
+                  <div className="marks-box">
+                    AP1 Marks: <span>{marks.AP1}</span>
+                  </div>
+
+                  <div className="marks-box">
+                    AP2 Marks: <span>{marks.AP2}</span>
+                  </div>
+          
+                  <div className="marks-box">
+                    AP3 Marks: <span>{marks.AP3}</span>
+                  </div>
+               
+                  <div className="marks-box">
+                    AP4 Marks: <span>{marks.AP4}</span>
+                  </div>
+
+                  <div className="marks-box">
+                    AP5 Marks: <span>{marks.AP5}</span>
+                  </div>
+
+                </div>
+            </div>
+            
 
               <h3>AP6: Mentoring: Feedback from Mentees</h3>
               {menteeFields.length > 0 && (
@@ -475,6 +533,7 @@ const StepOne = ({ setDimension1, yr }) => {
                               onWheel={(e) => e.target.blur()}
                               {...register(`AP6.menteeFeedback[${index}]`, {
                                 required: true,
+                                max: 5,
                               })}
                               className="form-input"
                             />
@@ -495,6 +554,7 @@ const StepOne = ({ setDimension1, yr }) => {
                 </div>
               )}
 
+            <div className="flex flex-row items-center gap-4">
               <button
                 type="button"
                 className="add-btn"
@@ -502,6 +562,11 @@ const StepOne = ({ setDimension1, yr }) => {
               >
                 Add Mentee
               </button>
+
+              <div className="marks-box">
+                    AP6 Marks: <span>{marks.AP6}</span>
+              </div>
+            </div>
 
               <h3>AP7: Arranged Guest Lectures / co-teaching from industry <span style={{fontSize: "0.8rem"}}>(eminent resource person from the respective 
 domain industry)</span></h3>
@@ -595,6 +660,8 @@ domain industry)</span></h3>
                 </div>
               )}
 
+            <div className="flex flex-row items-center gap-4">
+
               <button
                 type="button"
                 className="add-btn"
@@ -602,6 +669,11 @@ domain industry)</span></h3>
               >
                 Add Guest Lecture
               </button>
+
+              <div className="marks-box">
+                    AP7 Marks: <span>{marks.AP7}</span>
+              </div>
+            </div>
 
               <h3>
                 AP8: Remedial activity for weak students / efforts towards bright
@@ -687,6 +759,7 @@ domain industry)</span></h3>
                 </div>
               )}
 
+              <div className="flex flex-row items-center gap-4">
               <button
                 type="button"
                 className="add-btn"
@@ -694,6 +767,12 @@ domain industry)</span></h3>
               >
                 Add Remedial Activity
               </button>
+
+              <div className="marks-box">
+                    AP8 Marks: <span>{marks.AP8}</span>
+              </div>
+              </div>
+
 
               <h3>
                 AP9: Noteworthy efforts towards enriching the learning experience /
@@ -790,6 +869,8 @@ domain industry)</span></h3>
                 </div>
               )}
 
+              <div className="flex flex-row items-center gap-4">
+
               <button
                 type="button"
                 className="add-btn"
@@ -797,6 +878,12 @@ domain industry)</span></h3>
               >
                 Add Noteworthy Efforts
               </button>
+
+              <div className="marks-box">
+                    AP9 Marks: <span>{marks.AP9}</span>
+              </div>
+              </div>
+
 
               <h3>AP10: Question Paper Auditing</h3>
               {paperFields.length > 0 && (
@@ -857,6 +944,8 @@ domain industry)</span></h3>
                 </div>
               )}
 
+              <div className="flex flex-row items-center gap-4">
+
               <button
                 type="button"
                 className="add-btn"
@@ -865,11 +954,24 @@ domain industry)</span></h3>
                 Add Question Paper
               </button>
 
+              <div className="marks-box">
+                    AP10 Marks: <span>{marks.AP10}</span>
+              </div>
+              </div>
+
             </div>
+
+            <div className="flex flex-row items-center justify-center gap-4">
 
             <button className="save-btn" type="submit">
               Save Changes
             </button>
+
+            <div className="marks-box">
+                    Dimension1 Marks: <span>{marks.totalMarks}</span>
+            </div>
+            </div>
+
           </form>
         </>
       )}
