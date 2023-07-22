@@ -36,9 +36,11 @@ exports.setParticipation = asyncHandler(async(req,res) =>{
         const organization = req.body.organization
         const description = req.body.description
         const email = req.body.email
+        const type = req.body.type
+        const link = req.body.link
         try {
             const extracurricular = await Extracurricular.findOne({emailID:email})
-            extracurricular.participation.unshift({eventName:eventName,date:date,organization:organization,description:description})
+            extracurricular.participation.unshift({eventName:eventName,date:date,organization:organization,description:description,type:type,link:link})
             await extracurricular.save()
             res.status(200).json('Your Event Participation Added Succesfully')
         } catch (error) {

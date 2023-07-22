@@ -121,6 +121,7 @@ const Events = () => {
     e.preventDefault();
     const arr = [...events];
     arr.unshift(newEventData);
+    console.log(newEventData)
     const updateParticipation = async () => {
       const response = await fetch(
         `${ServerUrl}/api/student/setParticipation`,
@@ -135,6 +136,8 @@ const Events = () => {
             date: newEventData.eventdate,
             organization: newEventData.orgname,
             description: newEventData.description,
+            type: newEventData.type,
+            link: newEventData.link,
           }),
         }
       );
@@ -197,6 +200,24 @@ const Events = () => {
           helperText="Please enter the name of the event"
           onChange={handleEventDataChange}
         />
+        <TextField
+          select
+          required
+          margin="dense"
+          name="type"
+          fullWidth
+          label="Participation Type"
+          placeholder="Participation Type"
+          helperText="Please select the type of participation"
+          onChange={handleEventDataChange}
+          sx ={{mt: "1rem"}}
+        >
+          <MenuItem value="winner">Winner</MenuItem>
+          <MenuItem value="second">First Runner Up</MenuItem>
+          <MenuItem value="third">Second Runner Up</MenuItem>
+          <MenuItem value="participation">Participation</MenuItem>
+          <MenuItem value="others">Others</MenuItem>
+        </TextField>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateField
             required
@@ -220,6 +241,18 @@ const Events = () => {
           fullWidth
           variant="standard"
           helperText="Organization who hosted the event"
+          onChange={handleEventDataChange}
+        />
+        <TextField
+          required
+          margin="dense"
+          name="link"
+          label="Certification Link"
+          autoComplete="off"
+          type="text"
+          fullWidth
+          variant="standard"
+          helperText="Google Drive Link"
           onChange={handleEventDataChange}
         />
         <TextField

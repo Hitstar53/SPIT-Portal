@@ -6,4 +6,5 @@ router.put('/getProfessionalInfo',searchController.getProfessionalInfo);
 router.put('/getProjectsInfo',searchController.getProjectsInfo);
 router.put('/getGeneralInfo',searchController.getGeneralInfo);
 router.put('/getInformation',searchController.getInformation);
+router.put('/getExtra',searchController.getExtraInfo);
 module.exports = router

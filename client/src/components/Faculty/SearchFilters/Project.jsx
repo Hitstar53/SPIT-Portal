@@ -142,7 +142,7 @@ const Project = () => {
     <div className={container}>
       <div className="flex justify-between items-center text-4xl font-semibold">
         <p>Project Based Student Search</p>
-        <Search onSubmit={onSearchSubmit} />
+        {/* <Search onSubmit={onSearchSubmit} /> */}
       </div>
       <Filter options={options} filters={filters} onSubmit={onFilterSubmit} />
       {isLoading ? (

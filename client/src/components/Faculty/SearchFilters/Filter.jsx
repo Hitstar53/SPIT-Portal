@@ -15,7 +15,7 @@ export default function Filter(props) {
   };
   return (
     <Box
-      className="mt-2 flex flex-row justify-between gap-6 items-center flex-wrap"
+      className="mt-2 flex flex-row justify-between gap-5 items-center flex-wrap"
       component="form"
       noValidate
       autoComplete="off"
@@ -30,7 +30,7 @@ export default function Filter(props) {
           select
           size="small"
           sx={{
-            width: "12rem",
+            width: "15rem",
             color: "var(--text-color)",
             background: "var(--bg-color-2)",
           }}
@@ -51,7 +51,7 @@ export default function Filter(props) {
               size="small"
               onChange={handleDataChange}
               sx={{
-                width: "20rem",
+                width: "17rem",
                 color: "var(--text-color)",
                 background: "var(--bg-color-2)",
               }}

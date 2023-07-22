@@ -25,6 +25,7 @@ import Info from './components/Faculty/SearchFilters/Info';
 import Professional from './components/Faculty/SearchFilters/Professional';
 import Project from './components/Faculty/SearchFilters/Project';
 import './App.css';
+import ExtraCurr from './components/Faculty/SearchFilters/ExtraCurr';
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,7 @@ const router = createBrowserRouter([
           { path: "announcements", element: <Announcements />, loader: AncmntsLoader },
           { path: "informational", element: <Info /> },
           { path: "professional", element: <Professional /> },
+          { path: "extracurricular", element: <ExtraCurr /> },
           { path: "project", element: <Project /> },
         ],
       },

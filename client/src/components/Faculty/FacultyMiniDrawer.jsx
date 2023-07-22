@@ -94,7 +94,7 @@ const sidebardata = [
   {
     text: "Search Filters",
     icon: <i className="fas fa-filter"></i>,
-    sub: ["Project", "Professional", "Informational"],
+    sub: ["Project", "Professional", "Informational","Extracurricular"],
   },
 ];
 const openedMixin = (theme) => ({

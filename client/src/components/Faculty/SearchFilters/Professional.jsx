@@ -103,9 +103,9 @@ const Professional = () => {
     <div className={container}>
       <div className="flex justify-between items-center text-4xl font-semibold">
         <p>Professional Student Search</p>
-        <Search
+        {/* <Search
           onSubmit={onSearchSubmit}
-        />
+        /> */}
       </div>
       <Filter
         options={options}

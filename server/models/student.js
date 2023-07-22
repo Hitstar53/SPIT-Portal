@@ -94,6 +94,8 @@ const studentSchema = mongoose.Schema({
             date:{ type : String, required:true},
             organization:{ type : String, required:true},
             description:{ type : String, required:true},
+            type:{ type : String, required:true},
+            link:{ type : String, required:true},
         }
     ],
     volunteerWork:[

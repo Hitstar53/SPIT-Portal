@@ -205,14 +205,12 @@ exports.getProjectsInfo = asyncHandler(async (req, res) => {
 });
 
 exports.getInformation = asyncHandler(async (req, res) => {
-  const { year, branch, batch, committee, event, cgpa } = req.body;
+  const { year, branch, batch, cgpa } = req.body;
 
   const fieldMapping = {
     year: 'educationalInfo.0.year',
     branch: 'educationalInfo.0.branch',
     batch: 'educationalInfo.0.batch',
-    committee: 'committee.committeeDetails',
-    event: 'participation.eventName',
     cgpa: 'educationalInfo.0.score',
   };
 
@@ -229,19 +227,11 @@ exports.getInformation = asyncHandler(async (req, res) => {
 
   try {
     const response = await Student.find(filter).select(
-      'uid name emailID educationalInfo committee participation -_id'
+      'uid name emailID educationalInfo -_id'
     );
     const studentInfo = response.map((student) => {
       const educationalInfo = student.educationalInfo[0];
-      let committeeNames =''
-      if(student.committee.length>0){
-        committeeNames = student.committee.map((committee) => committee.committeeDetails).join(', ');
-      }
-
-      let participationDescription =  '';
-      if(student.participation.length>0){
-        participationDescription = student.participation.map((participation) => participation.eventName).join(', ');
-      }
+     
       return {
         uid: student.uid,
         studentname: student.name,
@@ -249,8 +239,6 @@ exports.getInformation = asyncHandler(async (req, res) => {
         year: educationalInfo ? educationalInfo.year : '',
         branch: educationalInfo ? educationalInfo.branch : '',
         batch: educationalInfo ? educationalInfo.batch : '',
-        committee: committeeNames,
-        event: participationDescription,
         cgpa: educationalInfo ? educationalInfo.score : '',
       };
     });
@@ -283,3 +271,45 @@ exports.getInformation = asyncHandler(async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   });
+
+  exports.getExtraInfo = asyncHandler(async(req,res)=>{
+    const { type , name , committee } = req.body
+    if(name){
+      const response = await Student.find({name:{$regex:name,$options: 'i'}}).select('uid name emailID educationalInfo participation committee -_id')
+      let result = []
+      for (let r = 0; r < response.length; r++) {
+        const element = response[r];
+        let committeeNames = element.committee.map((e)=> e.committeeDetails).join(',')||''
+        for (let i = 0; i < element.participation.length; i++) {
+          const e = element.participation[i];
+          result.push({uid:element.uid,name:element.name,email:element.emailID,branch:element.educationalInfo[0].branch, committeeDetails:committeeNames,event:e.eventName,eventLink:e.link})
+        }
+      }
+      res.json(result)
+    }
+    else if(type){
+      const response = await Student.find({"participation.type":type}).select('uid name emailID educationalInfo participation committee -_id')
+      let result = []
+      for (let r = 0; r < response.length; r++) {
+        const element = response[r];
+        let committeeNames = element.committee.map((e)=> e.committeeDetails).join(',')||''
+        for (let i = 0; i < element.participation.length; i++) {
+          const e = element.participation[i];
+          if (type === e.type) {
+            result.push({uid:element.uid,studentname:element.name,email:element.emailID,branch:element.educationalInfo[0].branch, committee:committeeNames,event:e.eventName,eventLink:e.link})
+          }
+        }
+      }
+      res.json(result)
+    }
+    else{
+      const response = await Student.find({"committee.committeeDetails":{$regex:committee,$options: 'i'}}).select('uid name emailID educationalInfo participation committee -_id')
+      let result = []
+      for (let r = 0; r < response.length; r++) {
+        const element = response[r];
+        let committeeNames = element.committee.map((e)=> e.committeeDetails).join(',')||''
+        result.push({uid:element.uid,name:element.name,email:element.emailID,branch:element.educationalInfo[0].branch, committeeDetails:committeeNames,event:'-'})
+      }
+      res.json(result)
+    }
+  })
