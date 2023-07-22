@@ -988,6 +988,134 @@ const setDim2 = asyncHandler(async (req, res) => {
         });
 
         if (existingFaculty) {
+            var rp1marks = 0;
+        for (var i = 0; i < Dimension2.RP1.papers.length; i++) {
+            if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Journal" && Dimension2.RP1.papers[i].conferenceOrJournal.reputation == "High") {
+                rp1marks = rp1marks + 30;
+            }
+
+            if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Journal" && Dimension2.RP1.papers[i].conferenceOrJournal.reputation != "High") {
+                rp1marks = rp1marks + 10;
+            }
+            if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Conference" && Dimension2.RP1.papers[i].conferenceOrJournal.reputation == "High") {
+                rp1marks = rp1marks + 10;
+            }
+            if (Dimension2.RP1.papers[i].conferenceOrJournal.type == "Conference" && (Dimension2.RP1.papers[i].conferenceOrJournal.reputation != "High")) {
+                rp1marks = rp1marks + 7;
+            }
+        }
+        if (rp1marks > 30) {
+            rp1marks = 30;
+        }
+
+        // ------------------------------------
+        //RP2
+        var rp2marks = 0;
+        var patents=0;
+        for (var i = 0; i < Dimension2.RP2.patents.length; i++) {
+            if (Dimension2.RP2.patents[i].status == "Obtained") {
+                patents= patents + 30;
+            }
+            if (Dimension2.RP2.patents[i].status == "Published") {
+                patents = patents + 5;
+            }
+        }
+        var books = 0  ;
+        for (var i = 0; i < Dimension2.RP2.books.length; i++) {
+            if (Dimension2.RP2.books[i].status == "Published") {
+                books = books + 30;
+            }
+            if (Dimension2.RP2.books[i].status == "Book Chapter/Monograms/Copyright") {
+                books= books + 5;
+            }
+        }
+
+        var moocs = 0 ;
+        for (var i = 0; i < Dimension2.RP2.moocs.length; i++) {
+            if (Dimension2.RP2.moocs[i].duration < 8) {
+                moocs = moocs + 0;
+            }
+            if (Dimension2.RP2.moocs[i].duration >= 8 && Dimension2.RP2.moocs[i].duration < 24) {
+                 moocs= moocs + 10;
+            }
+            if (Dimension2.RP2.moocs[i].duration >= 24 && Dimension2.RP2.moocs[i].duration < 40) {
+                moocs = moocs + 20;
+            }
+            if (Dimension2.RP2.moocs[i].duration >= 40) {
+                moocs = moocs + 30;
+            }
+        }
+        rp2marks=patents+books+moocs;
+        Dimension2.RP2.patentMarks=patents;
+        Dimension2.RP2.booksMarks=books;
+        Dimension2.RP2.moocsMarks=moocs;
+
+        if (rp2marks > 30) {
+            rp2marks = 30;
+        }
+        // ----------------------------------
+        //RP3
+        //To be Discussed
+        var rp3marks = 0;
+        for (var i = 0; i < Dimension2.RP3.sponsored.length; i++) {
+            if (Dimension2.RP3.sponsored[i].status == "Submitted") {
+                rp3marks = rp3marks + 2;
+            }
+            if (Dimension2.RP3.sponsored[i].status == "Submitted and Approved") {
+                if (Dimension2.RP3.sponsored[i].amount < 100000) {
+                    rp3marks = rp3marks + 3 + 2;
+                }
+                else if (Dimension2.RP3.sponsored[i].amount >= 100000 && Dimension2.RP3.sponsored[i].amount < 500000) {
+                    rp3marks = rp3marks + 5 + 2;
+                }
+                else if (Dimension2.RP3.sponsored[i].amount >= 500000 && Dimension2.RP3.sponsored[i].amount < 1000000) {
+                    rp3marks = rp3marks + 7 + 2;
+                }
+                else {
+                    rp3marks = rp3marks + 13 + 2;
+                }
+            }
+        }
+        if (rp3marks > 30) {
+            rp3marks = 30;
+        }
+        //RP4
+        // ----------------------------
+        //RP5
+        var rp5marks = 0
+        for (var i = 0; i < Dimension2.RP5.selfDevelopment.length; i++) {
+            if (Dimension2.RP5.selfDevelopment[i].type === "STTP" || Dimension2.RP5.selfDevelopment[i].type === "FDP") {
+                rp5marks = rp5marks + (1 * Dimension2.RP5.selfDevelopment[i].duration);
+            }
+            if (Dimension2.RP5.selfDevelopment[i].type === "MOOC") {
+                rp5marks = rp5marks + (1 * (Dimension2.RP5.selfDevelopment[i].duration / 7));
+            }
+            if (Dimension2.RP5.selfDevelopment[i].type === "Industry Internship") {
+                rp5marks = rp5marks + (5 * (Dimension2.RP5.selfDevelopment[i].duration / 7));
+            }
+        }
+
+        if (rp5marks > 25) {
+            rp5marks = 25;
+        }
+        // -----------------------------------------------------
+        //RP6
+        Dimension2.RP6.softHardDev.length >= 2 ? Dimension2.RP6.totalMarks = 10 : Dimension2.RP6.totalMarks = 5 * Dimension2.RP6.softHardDev.length;
+
+        // ------------------------------------
+        //RP7
+        Dimension2.RP7.activityNotCovered.length >= 2 ? Dimension2.RP7.totalMarks = 10 : Dimension2.RP7.totalMarks = 5 * Dimension2.RP7.activityNotCovered.length;
+        // ------------------------------
+
+        Dimension2.RP1.totalMarks = rp1marks;
+        Dimension2.RP2.totalMarks = rp2marks;
+        Dimension2.RP3.totalMarks = rp3marks;
+        Dimension2.RP4.totalMarks = (Dimension2.RP4.number * 0.4) <= 25 ? (Dimension2.RP4.number * 0.4) : 25;
+        Dimension2.RP5.totalMarks = rp5marks;
+
+        //+ Dimension2.RP3.totalMarks
+        Dimension2.totalMarks = Dimension2.RP1.totalMarks + Dimension2.RP2.totalMarks + Dimension2.RP2.totalMarks + Dimension2.RP4.totalMarks + Dimension2.RP5.totalMarks + Dimension2.RP6.totalMarks + Dimension2.RP7.totalMarks;
+        Dimension2.totalMarks = (Dimension2.totalMarks / 150) * 100;
             updatedApp = await Appraisal.findOneAndUpdate(
                 { _id: existingFaculty._id },
                 {
@@ -1009,8 +1137,8 @@ const setDim2 = asyncHandler(async (req, res) => {
                 Dimension2: Dimension2,
             });
         }
-
-        res.status(200).json(updatedApp);
+        const fac = await Appraisal.findOne({ facultyName: faculty.fullName, yearofAssesment: yearofAssesment });
+        res.status(200).json(fac.Dimension2);
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -1046,6 +1174,176 @@ const setDim3 = asyncHandler(async (req, res) => {
         });
 
         if (existingFaculty) {
+            var Dimension3Marks = 0;
+        for (var i = 0; i < Dimension3.IP1.length; i++) {
+            if (Dimension3.IP1[i].tick) {
+                Dimension3Marks = Dimension3Marks + 20;
+            }
+        }
+        for (var i = 0; i < Dimension3.IP2.length; i++) {
+            if (Dimension3.IP2[i].tick) {
+                Dimension3Marks = Dimension3Marks + 10;
+            }
+        }
+        for (var i = 0; i < Dimension3.DP1.length; i++) {
+            if (Dimension3.DP1[i].tick) {
+                Dimension3Marks = Dimension3Marks + 10;
+            }
+        }
+        if (Dimension3Marks >= 60) {
+            Dimension3Marks = 60;
+        }
+        // ------------------------------------------------------
+
+        //OP1
+
+        //organised
+        var OPMarks = 0;
+        // var trainingMarks = 0;
+        // OPMarks = 3 * Dimension3.OP1.organized.length;
+        // if (OPMarks > 15) {
+        //     OPMarks = 15;
+        // }
+        for (var i = 0; i < Dimension3.OP1.organized.length; i++) {
+            // if (Dimension3.OP1.organized[i].type == "FDP") {
+            //     if (Dimension3.OP1.organized[i].days < 14) {
+            //         OPMarks = OPMarks + 10;
+            //     }
+            //     if (Dimension3.OP1.organized[i].days >= 14) {
+            //         OPMarks = OPMarks + 15;
+            //     }
+            // }
+            // if (Dimension3.OP1.organized[i].type == "Training Organised") {
+            //     trainingMarks = trainingMarks + (3 * Dimension3.OP1.organized[i].days);
+            // }
+
+            OPMarks = OPMarks + (5 * Dimension3.OP1.organized[i].days)
+        }
+        // if (trainingMarks > 15) {
+        //     trainingMarks = 15;
+        // }
+
+        // OPMarks = OPMarks + trainingMarks;
+
+        // ------------------------------------------------------
+        //invited 
+        // var invitedmarks = 0;
+        // var guestmarks = 0;
+        var invitedfinalmarks = 0;
+        for (var i = 0; i < Dimension3.Invited.invitedAt.length; i++) {
+            // if (Dimension3.Invited.invitedAt[i].type == "Guest Faculty") {
+            //     guestmarks = guestmarks + 3;
+            // }
+            // if (Dimension3.Invited.invitedAt[i].type == "Visiting Professor") {
+            //     invitedmarks = invitedmarks + 5;
+
+            // }
+            invitedfinalmarks = invitedfinalmarks + (Dimension3.Invited.invitedAt[i].duration * 5)
+        }
+        // if (invitedmarks > 15) {
+        //     invitedmarks = 15;
+        // }
+        // if (guestmarks > 10) {
+        //     guestmarks = 10;
+        // }
+        // invitedfinalmarks = (invitedmarks + guestmarks) > 15 ? 15 : (invitedmarks + guestmarks);
+
+        // ----------------------------------------
+        // op3
+
+        op3Marks = 0
+        for (var i = 0; i < Dimension3.op3.receivedFDP.length; i++) {
+            if (Dimension3.op3.receivedFDP[i].days >= 14) {
+                op3Marks = op3Marks + 15
+                continue
+            }
+            if (Dimension3.op3.receivedFDP[i].days >= 7) {
+                op3Marks = op3Marks + 10
+            }
+        }
+
+        if (op3Marks > 15) {
+            op3Marks = 15
+        }
+
+        Dimension3.op3.totalMarks = op3Marks
+
+        // --------------------------------------------------------
+        // op4
+
+        op4Marks = 0
+        for (var i = 0; i < Dimension3.op4.invitedTalk.length; i++) {
+            op4Marks = op4Marks + 5
+        }
+
+        if (op4Marks > 10) {
+            op4Marks = 10
+        }
+
+        Dimension3.op4.totalMarks = op4Marks
+
+        // ---------------------------------------------------------
+
+        var countCommittee = Dimension3.Partof.committee.length;
+        if (countCommittee == 0) {
+            Dimension3.Partof.totalMarks = 0;
+        } else if (countCommittee <= 2) {
+            Dimension3.Partof.totalMarks = 5 * countCommittee;
+        } else {
+            Dimension3.Partof.totalMarks = 10;
+        }
+
+
+        // -----------------------------------------------
+
+        var countArticle = Dimension3.Article.articleDetails.length;
+        if (countArticle == 0) {
+            Dimension3.Article.totalMarks = 0;
+        } else if (countArticle <= 2) {
+            Dimension3.Article.totalMarks = 5 * countArticle;
+        } else {
+            Dimension3.Article.totalMarks = 10;
+        }
+
+        // -----------------------------------------------
+        var countNGO = Dimension3.ngo.data.length;
+        if (countNGO == 0) {
+            Dimension3.ngo.totalMarks = 0;
+        } else if (countNGO <= 2) {
+            Dimension3.ngo.totalMarks = 5 * countNGO;
+        } else {
+            Dimension3.ngo.totalMarks = 10;
+        }
+
+        // ------------------------------------------------------------
+
+        var countCoGuide = Dimension3.coGuide.data.length;
+        if (countCoGuide == 0) {
+            Dimension3.coGuide.totalMarks = 0;
+        } else if (countCoGuide <= 2) {
+            Dimension3.coGuide.totalMarks = 5 * countCoGuide;
+        } else {
+            Dimension3.coGuide.totalMarks = 10;
+        }
+        // ------------------------------------------------------
+
+        var countCollab = Dimension3.collaboration.institutionDetails.length;
+        if (countCollab == 0) {
+            Dimension3.collaboration.totalMarks = 0;
+        } else if (countCollab <= 2) {
+            Dimension3.collaboration.totalMarks = 5 * countCollab;
+        } else {
+            Dimension3.collaboration.totalMarks = 10;
+        }
+
+        //   ------------------------------------------
+
+        Dimension3.totalIP1IP2DP1Marks = Dimension3Marks;
+        Dimension3.OP1.totalMarks = OPMarks;
+        Dimension3.Invited.totalMarks = invitedfinalmarks;
+        const tempOP = (Dimension3.OP1.totalMarks + Dimension3.Invited.totalMarks + Dimension3.op3.totalMarks + Dimension3.op4.totalMarks + Dimension3.Partof.totalMarks + Dimension3.Article.totalMarks + Dimension3.ngo.totalMarks + Dimension3.coGuide.totalMarks + Dimension3.collaboration.totalMarks) > 40 ? 40 : (Dimension3.OP1.totalMarks + Dimension3.Invited.totalMarks + Dimension3.op3.totalMarks + Dimension3.op4.totalMarks + Dimension3.Partof.totalMarks + Dimension3.Article.totalMarks + Dimension3.ngo.totalMarks + Dimension3.coGuide.totalMarks + Dimension3.collaboration.totalMarks);
+
+        Dimension3.totalMarks = Dimension3.totalIP1IP2DP1Marks + tempOP;
             updatedApp = await Appraisal.findOneAndUpdate(
                 { _id: existingFaculty._id },
                 {
@@ -1067,8 +1365,8 @@ const setDim3 = asyncHandler(async (req, res) => {
                 Dimension3: Dimension3,
             });
         }
-
-        res.status(200).json(updatedApp);
+        const fac = await Appraisal.findOne({ facultyName: faculty.fullName, yearofAssesment: yearofAssesment });
+        res.status(200).json(fac.Dimension3);
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: 'Internal Server Error' });

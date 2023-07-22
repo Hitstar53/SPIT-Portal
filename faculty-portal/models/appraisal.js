@@ -294,7 +294,7 @@ const appraisalSchema = new mongoose.Schema({
             patentMarks:{
             type:Number
             },
-            books: [
+            books   : [
                 {
                     title: {
                         type: String,
