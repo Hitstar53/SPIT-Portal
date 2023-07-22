@@ -287,7 +287,7 @@ const Report = ({ facultyData, name, forHOD = false }) => {
                                 <TextField {...params} label="Enter Marks" />
                             )}
                         /> */}
-                        <label style={{ fontSize: '1.5rem', fontWeight: '600' }} htmlFor="Enter Marks">Enter Marks:
+                        <label style={{ fontSize: '1.5rem', fontWeight: '600' }} htmlFor="Enter Marks">Enter Multiplier factor:
                             <select style={{ height: 'max-content', fontSize: '1.5rem', minWidth: '200px', padding: '10px', borderRadius: '8px', margin: '0 10px', border: '2px solid grey' }} 
                             id="Enter Marks" {...register("confidentialReport.principalRemarks", { required: true })}>
                                 <option value="1">1</option>
