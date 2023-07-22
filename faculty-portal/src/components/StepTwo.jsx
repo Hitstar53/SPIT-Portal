@@ -15,6 +15,19 @@ function StepTwo({ setDimension2, yr }) {
     useForm({
       defaultValues: JSON.parse(localStorage.getItem("dim2Data")) || {},
     });
+  const [marks, setMarks] = useState({
+    RP1: 0,
+    RP2: 0,
+    RP3: 0,
+    RP4: 0,
+    RP5: 0,
+    RP6: 0,
+    RP7: 0,
+    patentmarks: 0,
+    booksmarks: 0,
+    moocmarks: 0,
+    totalMarks: 0,
+  });
 
   useEffect(() => {
     toast.info('Please Save Changes Before Leaving!', {
@@ -26,7 +39,7 @@ function StepTwo({ setDimension2, yr }) {
       draggable: true,
       progress: undefined,
       theme: "light",
-      });
+    });
     const getData = async () => {
       await axios
         .post("http://localhost:5000/api/faculty/appraisal/get/dim2", {
@@ -34,10 +47,24 @@ function StepTwo({ setDimension2, yr }) {
           yearofAssesment: yr,
         })
         .then((res) => {
-          console.log(res.data);
+          console.log("Response Data : ", res.data);
+          setMarks({
+            RP1: res.data.RP1.totalMarks,
+            RP2: res.data.RP2.totalMarks,
+            RP3: res.data.RP3.totalMarks,
+            RP4: res.data.RP4.totalMarks,
+            RP5: res.data.RP5.totalMarks,
+            RP6: res.data.RP6.totalMarks,
+            RP7: res.data.RP7.totalMarks,
+            patentmarks: res.data.RP2.patentMarks,
+            booksmarks: res.data.RP2.booksMarks,
+            moocmarks: res.data.RP2.moocsMarks,
+            totalMarks: res.data.totalMarks,
+          });
           localStorage.setItem("dim2Data", JSON.stringify(res.data));
           reset(JSON.parse(localStorage.getItem("dim2Data")));
           const storedData = localStorage.getItem("dim2Data");
+          console.log(storedData);
           console.log(storedData);
           if (storedData) {
             Object.keys(JSON.parse(storedData)).map((key) => {
@@ -52,6 +79,10 @@ function StepTwo({ setDimension2, yr }) {
     };
     getData();
   }, []);
+
+  useEffect(() => {
+    console.log("here");
+  }, [marks])
 
   const {
     fields: paperFields,
@@ -129,7 +160,7 @@ function StepTwo({ setDimension2, yr }) {
   const onSubmit = async (data) => {
     console.log(data);
     setDimension2(data);
-    localStorage.setItem("dim2Data", JSON.stringify(data));
+
     axios
       .post("http://localhost:5000/api/faculty/appraisal/dim2", {
         yearofAssesment: yr,
@@ -137,7 +168,8 @@ function StepTwo({ setDimension2, yr }) {
         Dimension2: data,
       })
       .then((res) => {
-        console.log(res.data);
+        console.log("qwertyuiopdcfvghjkl;xcfvbghj");
+        console.log("Response: ", res.data);
         toast.success("Step Two Saved", {
           position: "top-center",
           autoClose: 5000,
@@ -148,10 +180,25 @@ function StepTwo({ setDimension2, yr }) {
           progress: undefined,
           theme: "light",
         });
+        setMarks({
+          RP1: res.data.RP1.totalMarks,
+          RP2: res.data.RP2.totalMarks,
+          RP3: res.data.RP3.totalMarks,
+          RP4: res.data.RP4.totalMarks,
+          RP5: res.data.RP5.totalMarks,
+          RP6: res.data.RP6.totalMarks,
+          RP7: res.data.RP7.totalMarks,
+          patentmarks: res.data.RP2.patentMarks,
+          booksmarks: res.data.RP2.booksMarks,
+          moocmarks: res.data.RP2.moocsMarks,
+          totalMarks: res.data.totalMarks,
+        });
+        localStorage.setItem("dim2Data", JSON.stringify(res.data));
       })
       .catch((err) => {
         console.log(err);
       });
+    localStorage.setItem("dim2Data", JSON.stringify(data));
     // toast.success("Form submitted successfully!");
     // await sendToServer()
   };
@@ -276,18 +323,24 @@ function StepTwo({ setDimension2, yr }) {
               </Table>
             )}
 
-            <button
-              className="add-btn"
-              type="button"
-              onClick={() => appendPaper({})}
+
+            <div className="flex flex-row items-center gap-4">
+              <button
+                className="add-btn"
+                type="button"
+                onClick={() => appendPaper({})}
               // style={{
               //   padding: "10px 25px",
               //   borderRadius: "10px",
               //   margin: "0px",
               // }}
-            >
-              Add Paper
-            </button>
+              >
+                Add Paper
+              </button>
+              <div className="marks-box">
+                RP1 Total Marks: <span>{marks.RP1}</span>
+              </div>
+            </div>
 
             <h1> RP 2: Patent/books/Monograms/ MOOC (30 marks)</h1>
             {patentFields.length > 0 && (
@@ -340,18 +393,24 @@ function StepTwo({ setDimension2, yr }) {
                 </tbody>
               </Table>
             )}
-            <button
-              className="add-btn"
-              type="button"
-              onClick={() => appendPatent({})}
+
+            <div className="flex flex-row items-center gap-4">
+              <button
+                className="add-btn"
+                type="button"
+                onClick={() => appendPatent({})}
               // style={{
               //   padding: "10px 25px",
               //   borderRadius: "10px",
               //   margin: "0px",
               // }}
-            >
-              Add Patent
-            </button>
+              >
+                Add Patent
+              </button>
+              <div className="marks-box">
+                Marks Obtained: <span>{marks.patentmarks}</span>
+              </div>
+            </div>
 
             {bookFields.length > 0 && (
               <Table striped bordered>
@@ -412,19 +471,24 @@ function StepTwo({ setDimension2, yr }) {
                 </tbody>
               </Table>
             )}
-
-            <button
-              className="add-btn"
-              type="button"
-              onClick={() => appendBook({})}
+            <div className="flex flex-row items-center gap-4">
+              <button
+                className="add-btn"
+                type="button"
+                onClick={() => appendBook({})}
               // style={{
               //   padding: "10px 25px",
               //   borderRadius: "10px",
               //   margin: "0px",
               // }}
-            >
-              Add Book
-            </button>
+              >
+                Add Book
+              </button>
+              <div className="marks-box">
+                Marks Obtained: <span>{marks.booksmarks}</span>
+              </div>
+
+            </div>
 
             {moocFields.length > 0 && (
               <Table striped bordered>
@@ -453,7 +517,7 @@ function StepTwo({ setDimension2, yr }) {
                         <label className="form-label">
                           <input
                             type="number"
-                  onWheel={(e) => e.target.blur()}
+                            onWheel={(e) => e.target.blur()}
                             {...register(`RP2.moocs[${index}].duration`)}
                             className="form-input"
                           />
@@ -480,18 +544,26 @@ function StepTwo({ setDimension2, yr }) {
               </Table>
             )}
 
-            <button
-              className="add-btn"
-              type="button"
-              onClick={() => appendMOOC({})}
+            <div className="flex flex-row items-center gap-4">
+              <button
+                className="add-btn"
+                type="button"
+                onClick={() => appendMOOC({})}
               // style={{
               //   padding: "10px 25px",
               //   borderRadius: "10px",
               //   margin: "0px",
               // }}
-            >
-              Add MOOC
-            </button>
+              >
+                Add MOOC
+              </button>
+              <div className="marks-box">
+                Marks Obtained: <span>{marks.moocmarks}</span>
+              </div>
+            </div>
+            <div className="marks-box">
+              RP2 Marks: <span>{marks.RP2}</span>
+            </div>
 
             <h1>RP3: Sponsored Research and Consultancy</h1>
             {sponsoredFields.length > 0 && (
@@ -554,7 +626,7 @@ function StepTwo({ setDimension2, yr }) {
                         <label className="form-label">
                           <input
                             type="number"
-                  onWheel={(e) => e.target.blur()}
+                            onWheel={(e) => e.target.blur()}
                             {...register(`RP3.sponsored[${index}].amount`)}
                             className="form-input"
                           />
@@ -581,18 +653,24 @@ function StepTwo({ setDimension2, yr }) {
                 </tbody>
               </Table>
             )}
-            <button
-              className="add-btn"
-              type="button"
-              onClick={() => appendSponsored({})}
+
+            <div className="flex flex-row items-center gap-4">
+              <button
+                className="add-btn"
+                type="button"
+                onClick={() => appendSponsored({})}
               // style={{
               //   padding: "10px 25px",
               //   borderRadius: "10px",
               //   margin: "0px",
               // }}
-            >
-              Add Sponsored
-            </button>
+              >
+                Add Sponsored
+              </button>
+              <div className="marks-box">
+                RP3 Marks: <span>{marks.RP3}</span>
+              </div>
+            </div>
 
             <div>
               <h1>RP4: Citations</h1>
@@ -605,6 +683,11 @@ function StepTwo({ setDimension2, yr }) {
                   className="form-input citation"
                 />
               </label>
+            </div>
+
+
+            <div className="marks-box">
+              RP4 Marks: <span>{marks.RP4}</span>
             </div>
 
             <h1>RP5: Self Development</h1>
@@ -671,7 +754,7 @@ function StepTwo({ setDimension2, yr }) {
                         <label className="form-label">
                           <input
                             type="number"
-                  onWheel={(e) => e.target.blur()}
+                            onWheel={(e) => e.target.blur()}
                             {...register(
                               `RP5.selfDevelopment[${index}].duration`
                             )}
@@ -693,18 +776,23 @@ function StepTwo({ setDimension2, yr }) {
               </Table>
             )}
 
-            <button
-              className="add-btn"
-              type="button"
-              onClick={() => appendDevelopment({})}
+            <div className="flex flex-row items-center gap-4">
+              <button
+                className="add-btn"
+                type="button"
+                onClick={() => appendDevelopment({})}
               // style={{
               //   padding: "10px 25px",
               //   borderRadius: "10px",
               //   margin: "0px",
               // }}
-            >
-              Add Development
-            </button>
+              >
+                Add Development
+              </button>
+              <div className="marks-box">
+                RP5 Marks: <span>{marks.RP5}</span>
+              </div>
+            </div>
 
             <h1>
               RP6: New Software development / Hardware lab setup development
@@ -764,20 +852,23 @@ function StepTwo({ setDimension2, yr }) {
                 </tbody>
               </Table>
             )}
-
-            <button
-              className="add-btn"
-              type="button"
-              onClick={() => appendSoftHardDev({})}
+            <div className="flex flex-row items-center gap-4">
+              <button
+                className="add-btn"
+                type="button"
+                onClick={() => appendSoftHardDev({})}
               // style={{
               //   padding: "10px 25px",
               //   borderRadius: "10px",
               //   margin: "0px",
               // }}
-            >
-              Add Soft/Hard Dev
-            </button>
-
+              >
+                Add Soft/Hard Dev
+              </button>
+              <div className="marks-box">
+                RP6 Marks: <span>{marks.RP6}</span>
+              </div>
+            </div>
             <h1>RP7: Any activity not covered.</h1>
             {extrasFields.length > 0 && (
               <Table striped bordered>
@@ -818,50 +909,69 @@ function StepTwo({ setDimension2, yr }) {
                         </label>
                       </td>
                       <td className="text-center align-middle">
+
                         <button
                           type="button"
                           onClick={() => removeExtras(index)}
                         >
                           <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
+
                         </button>
+
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </Table>
             )}
-
-            <button
-              className="add-btn"
-              type="button"
-              onClick={() => appendExtras({})}
-              // style={{
-              //   padding: "10px 25px",
-              //   borderRadius: "10px",
-              //   margin: "0px",
-              // }}
-            >
-              Add Extra
-            </button>
-
+            <div className="flex flex-row items-center gap-4">
+              <div className="flex flex-row items-center gap-4">
+                <button
+                  className="add-btn"
+                  type="button"
+                  onClick={() => appendExtras({})}
+                // style={{
+                //   padding: "10px 25px",
+                //   borderRadius: "10px",
+                //   margin: "0px",
+                // }}
+                >
+                  Add Extra
+                </button>
+                <div className="marks-box">
+                  Dimension2 RP7 Marks: <span>{marks.RP7}</span>
+                </div>
+              </div>
+            </div>
             {/* <input
         className="btn btn-primary"
         type="submit"
         value="Save Changes"
         style={{ display: "block", width: "100px" }}
       /> */}
-      <div className="center">
 
-            <button
-              className="save-btn"
-              type="submit"
-            >
-              Save Changes
-            </button>
-      </div>
+            <div className="center" style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "10px",
+            }}>
+              <div className="flex flex-row items-center gap-4">
+                <button
+                  className="save-btn"
+                  type="submit"
+                >
+                  Save Changes
+                </button>
+                <div className="marks-box">
+                  Dimension2 Total Marks: <span>{marks.totalMarks.toFixed(2)}</span>
+                </div>
+              </div>
+            </div>
           </form>
         </>
-      )}
+      )
+      }
     </>
   );
 }

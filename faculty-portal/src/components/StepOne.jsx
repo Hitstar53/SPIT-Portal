@@ -70,7 +70,8 @@ const StepOne = ({ setDimension1, yr }) => {
           yearofAssesment: yr,
         })
         .then((res) => {
-          console.log(res.data.Dimension1);
+          // console.log(res.data.Dimension1);
+          console.log("Response Data: ", res.data)
           setMarks({
             AP1: res.data.Dimension1.info.AP1Marks,
             AP2: res.data.Dimension1.info.AP2Average,
@@ -104,7 +105,7 @@ const StepOne = ({ setDimension1, yr }) => {
 
   useEffect(() => {
     console.log(marks)
-  },[marks])
+  }, [marks])
 
   const {
     fields: courseFields,
@@ -248,7 +249,7 @@ const StepOne = ({ setDimension1, yr }) => {
       {loading ? (
         <CircularProgress color="success" />
       ) : (
-        
+
         <>
           <div className="basic-info">
             <div className="inputs">
@@ -332,31 +333,31 @@ const StepOne = ({ setDimension1, yr }) => {
                         <th className="table-header text-center align-middle">
                           Class Name
                         </th>
-                        <th className="table-header text-center align-middle" style={{width: "5rem"}}>
+                        <th className="table-header text-center align-middle" style={{ width: "5rem" }}>
                           Sem
                         </th>
                         <th className="table-header text-center align-middle">
                           <div>
 
-                          Marks Obtained
+                            Marks Obtained
                           </div>
-                          <span style={{fontSize: "0.6rem"}}> (To be filled from audited course file)
-</span>
+                          <span style={{ fontSize: "0.6rem" }}> (To be filled from audited course file)
+                          </span>
                         </th>
                         <th className="table-header text-center align-middle">
                           Number of Lectures Targeted
                         </th>
                         <th className="table-header text-center align-middle">
-                        Number of Lecture Conducted
+                          Number of Lecture Conducted
                         </th>
                         <th className="table-header text-center align-middle">
                           Faculty Feedback Score
                         </th>
                         <th className="table-header text-center align-middle">
                           <div>
-                          Attendance of the Students
+                            Attendance of the Students
                           </div>
-                          <span style={{fontSize: "0.6rem"}}>summation of {open}total attendee / (no of lectures * no of students in the class){close} * 100 marks</span>
+                          <span style={{ fontSize: "0.6rem" }}>summation of {open}total attendee / (no of lectures * no of students in the class){close} * 100 marks</span>
                         </th>
                         <th className="table-header text-center align-middle"></th>
                       </tr>
@@ -472,15 +473,15 @@ const StepOne = ({ setDimension1, yr }) => {
                 </div>
               )}
 
-            <div className="flex flex-row items-center gap-4">
+              <div className="flex flex-row items-center gap-4">
 
-              <button
-                type="button"
-                className="add-btn"
-                onClick={() => appendCourse({})}
-              >
-                Add Course
-              </button>
+                <button
+                  type="button"
+                  className="add-btn"
+                  onClick={() => appendCourse({})}
+                >
+                  Add Course
+                </button>
                 <div className="flex flex-row items-start justify-start gap-4">
                   <div className="marks-box">
                     AP1 Marks: <span>{marks.AP1}</span>
@@ -489,11 +490,11 @@ const StepOne = ({ setDimension1, yr }) => {
                   <div className="marks-box">
                     AP2 Marks: <span>{marks.AP2}</span>
                   </div>
-          
+
                   <div className="marks-box">
                     AP3 Marks: <span>{marks.AP3}</span>
                   </div>
-               
+
                   <div className="marks-box">
                     AP4 Marks: <span>{marks.AP4}</span>
                   </div>
@@ -503,8 +504,8 @@ const StepOne = ({ setDimension1, yr }) => {
                   </div>
 
                 </div>
-            </div>
-            
+              </div>
+
 
               <h3>AP6: Mentoring: Feedback from Mentees</h3>
               {menteeFields.length > 0 && (
@@ -516,7 +517,7 @@ const StepOne = ({ setDimension1, yr }) => {
                           Sr No
                         </th>
                         <th className="table-header text-center align-middle">
-                        Mentee Feedback Score Average Marks (Out of 5)
+                          Mentee Feedback Score Average Marks (Out of 5)
                         </th>
                         <th className="table-header text-center align-middle"></th>
                       </tr>
@@ -525,7 +526,7 @@ const StepOne = ({ setDimension1, yr }) => {
                       {menteeFields.map((field, index) => (
                         <tr key={field.id}>
                           <td className="text-center align-middle" style={{ fontSize: "1.5rem", fontWeight: 600 }}>
-                            {index+1}
+                            {index + 1}
                           </td>
                           <td className="text-center align-middle">
                             <input
@@ -554,22 +555,22 @@ const StepOne = ({ setDimension1, yr }) => {
                 </div>
               )}
 
-            <div className="flex flex-row items-center gap-4">
-              <button
-                type="button"
-                className="add-btn"
-                onClick={() => appendMentee({})}
-              >
-                Add Mentee
-              </button>
+              <div className="flex flex-row items-center gap-4">
+                <button
+                  type="button"
+                  className="add-btn"
+                  onClick={() => appendMentee({})}
+                >
+                  Add Mentee
+                </button>
 
-              <div className="marks-box">
-                    AP6 Marks: <span>{marks.AP6}</span>
+                <div className="marks-box">
+                  AP6 Marks: <span>{marks.AP6}</span>
+                </div>
               </div>
-            </div>
 
-              <h3>AP7: Arranged Guest Lectures / co-teaching from industry <span style={{fontSize: "0.8rem"}}>(eminent resource person from the respective 
-domain industry)</span></h3>
+              <h3>AP7: Arranged Guest Lectures / co-teaching from industry <span style={{ fontSize: "0.8rem" }}>(eminent resource person from the respective
+                domain industry)</span></h3>
               {guestFields.length > 0 && (
                 <div>
                   <Table striped bordered style={{ width: "50rem" }}>
@@ -597,7 +598,7 @@ domain industry)</span></h3>
                       {guestFields.map((field, index) => (
                         <tr key={field.id}>
                           <td className="text-center align-middle" style={{ fontSize: "1.5rem", fontWeight: 600 }}>
-                            {index+1}
+                            {index + 1}
                           </td>
                           <td className="text-center align-middle">
                             <input
@@ -660,20 +661,20 @@ domain industry)</span></h3>
                 </div>
               )}
 
-            <div className="flex flex-row items-center gap-4">
+              <div className="flex flex-row items-center gap-4">
 
-              <button
-                type="button"
-                className="add-btn"
-                onClick={() => appendGuest({})}
-              >
-                Add Guest Lecture
-              </button>
+                <button
+                  type="button"
+                  className="add-btn"
+                  onClick={() => appendGuest({})}
+                >
+                  Add Guest Lecture
+                </button>
 
-              <div className="marks-box">
-                    AP7 Marks: <span>{marks.AP7}</span>
+                <div className="marks-box">
+                  AP7 Marks: <span>{marks.AP7}</span>
+                </div>
               </div>
-            </div>
 
               <h3>
                 AP8: Remedial activity for weak students / efforts towards bright
@@ -760,17 +761,17 @@ domain industry)</span></h3>
               )}
 
               <div className="flex flex-row items-center gap-4">
-              <button
-                type="button"
-                className="add-btn"
-                onClick={() => appendRemedial({})}
-              >
-                Add Remedial Activity
-              </button>
+                <button
+                  type="button"
+                  className="add-btn"
+                  onClick={() => appendRemedial({})}
+                >
+                  Add Remedial Activity
+                </button>
 
-              <div className="marks-box">
-                    AP8 Marks: <span>{marks.AP8}</span>
-              </div>
+                <div className="marks-box">
+                  AP8 Marks: <span>{marks.AP8}</span>
+                </div>
               </div>
 
 
@@ -871,17 +872,17 @@ domain industry)</span></h3>
 
               <div className="flex flex-row items-center gap-4">
 
-              <button
-                type="button"
-                className="add-btn"
-                onClick={() => appendNote({})}
-              >
-                Add Noteworthy Efforts
-              </button>
+                <button
+                  type="button"
+                  className="add-btn"
+                  onClick={() => appendNote({})}
+                >
+                  Add Noteworthy Efforts
+                </button>
 
-              <div className="marks-box">
-                    AP9 Marks: <span>{marks.AP9}</span>
-              </div>
+                <div className="marks-box">
+                  AP9 Marks: <span>{marks.AP9}</span>
+                </div>
               </div>
 
 
@@ -907,7 +908,7 @@ domain industry)</span></h3>
                       {paperFields.map((field, index) => (
                         <tr key={field.id}>
                           <td className="text-center align-middle" style={{ fontSize: "1.5rem", fontWeight: 600 }}>
-                            {index+1}
+                            {index + 1}
                           </td>
                           <td className="text-center align-middle">
                             <input
@@ -946,30 +947,30 @@ domain industry)</span></h3>
 
               <div className="flex flex-row items-center gap-4">
 
-              <button
-                type="button"
-                className="add-btn"
-                onClick={() => appendPaper({})}
-              >
-                Add Question Paper
-              </button>
+                <button
+                  type="button"
+                  className="add-btn"
+                  onClick={() => appendPaper({})}
+                >
+                  Add Question Paper
+                </button>
 
-              <div className="marks-box">
-                    AP10 Marks: <span>{marks.AP10}</span>
-              </div>
+                <div className="marks-box">
+                  AP10 Marks: <span>{marks.AP10}</span>
+                </div>
               </div>
 
             </div>
 
             <div className="flex flex-row items-center justify-center gap-4">
 
-            <button className="save-btn" type="submit">
-              Save Changes
-            </button>
+              <button className="save-btn" type="submit">
+                Save Changes
+              </button>
 
-            <div className="marks-box">
-                    Dimension1 Marks: <span>{marks.totalMarks}</span>
-            </div>
+              <div className="marks-box">
+                Dimension1 Marks: <span>{marks.totalMarks}</span>
+              </div>
             </div>
 
           </form>
