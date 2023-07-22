@@ -705,21 +705,194 @@ const setDim1 = asyncHandler(async (req, res) => {
     try {
         const { yearofAssesment, faculty, Dimension1 } = req.body;
         var updatedApp = null;
-        console.log(yearofAssesment)
-        console.log(faculty)
-        console.log(faculty.fullName)
-        console.log(faculty.designation)
-        console.log(faculty.department)
+        // console.log(yearofAssesment)
+        // console.log(faculty)
+        // console.log(faculty.fullName)
+        // console.log(faculty.designation)
+        // console.log(faculty.department)
 
         const existingFaculty = await Appraisal.findOne({
             facultyName: faculty.fullName,
             yearofAssesment: yearofAssesment,
         });
 
-        console.log(existingFaculty)
+        // console.log(existingFaculty)
 
         if (existingFaculty) {
             console.log("inside existing faculty")
+            var total = 0;
+            var avgAP1Marks = 0;
+            var avgAP2Marks = 0;
+            if (Dimension1.info.courses.length > 0) {
+                if (Dimension1.info.courses.length > 4) {
+                    avgAP1Marks = 10;
+                } else {
+                    avgAP1Marks = Dimension1.info.courses.length * 3;
+                }
+                Dimension1.info.AP1Marks = avgAP1Marks;
+                // ----------------------------------------------------------------------------------------
+                //AP2
+                for (var i = 0; i < Dimension1.info.courses.length; i++) {
+                    total = total + Dimension1.info.courses[i].AP2MarksObtained;
+                }
+                if (Dimension1.info.courses.length > 0) {
+                    avgAP2Marks = total / Dimension1.info.courses.length;
+                }
+                Dimension1.info.AP2Average=avgAP2Marks;
+                avgAP2Marks = avgAP2Marks > 10 ? 10 : avgAP2Marks;
+                Dimension1.info.AP2Marks = avgAP2Marks;
+               
+                // ---------------------------------------------------------------------
+                //AP3
+                for (var i = 0; i < Dimension1.info.courses.length; i++) {
+                    var averagePercent =
+                        (Dimension1.info.courses[i].AP3LectureConducted /
+                            Dimension1.info.courses[i].AP3LecturesTarget) *
+                        100;
+                    Dimension1.info.courses[i].AP3PercentAchieved = averagePercent;
+                }
+                var totalTarget = 0;
+                var averagePercent = 0;
+                for (var i = 0; i < Dimension1.info.courses.length; i++) {
+                    totalTarget =
+                        totalTarget + Dimension1.info.courses[i].AP3PercentAchieved;
+                }
+                if (Dimension1.info.courses.length > 0) {
+                    averagePercent = totalTarget / Dimension1.info.courses.length;
+                }
+    
+                if (averagePercent < 80) {
+                    //To be discussed
+                    Dimension1.info.AP3Marks = 0;
+                }
+                if (averagePercent >= 80 && averagePercent < 90) {
+                    Dimension1.info.AP3Marks = 3;
+                }
+                if (averagePercent >= 90 && averagePercent < 95) {
+                    Dimension1.info.AP3Marks = 4;
+                }
+                if (averagePercent >= 95 && averagePercent <= 100) {
+                    Dimension1.info.AP3Marks = 5;
+                }
+                Dimension1.info.AP3Average = averagePercent;
+                // -----------------------------------------------------------------------------------
+                //AP4
+                var totalpercentAP4 = 0;
+                var averagePercentAP4 = 0;
+                for (var i = 0; i < Dimension1.info.courses.length; i++) {
+                    totalpercentAP4 =
+                        totalpercentAP4 + Dimension1.info.courses[i].AP4PercentFeedback;
+                }
+                if (Dimension1.info.courses.length > 0) {
+                    averagePercentAP4 = totalpercentAP4 / Dimension1.info.courses.length;
+                }
+    
+    
+                if (averagePercentAP4 > 30) {
+                    averagePercentAP4 = 30;
+                }
+                Dimension1.info.AP4Marks = averagePercentAP4;
+                // -----------------------------------------------------------------------------------
+                //AP5
+                var totalAttendanceP5 = 0;
+                var averageAttedanceAP5 = 0;
+                var AP5Marks = 0;
+                for (var i = 0; i < Dimension1.info.courses.length; i++) {
+                    totalAttendanceP5 =
+                        totalAttendanceP5 + Dimension1.info.courses[i].AP5AttendanceStudent;
+                }
+                averageAttedanceAP5 = totalAttendanceP5 / Dimension1.info.courses.length;
+    
+                if (averageAttedanceAP5 >= 90 && averageAttedanceAP5 <= 100) {
+                    AP5Marks = 5;
+                } else if (averageAttedanceAP5 >= 80 && averageAttedanceAP5 < 90) {
+                    AP5Marks = 4;
+                } else if (averageAttedanceAP5 >= 70 && averageAttedanceAP5 < 80) {
+                    AP5Marks = 3;
+                } else if (averageAttedanceAP5 >= 60 && averageAttedanceAP5 < 70) {
+                    AP5Marks = 2;
+                } else {
+                    AP5Marks = 1;
+                }
+                Dimension1.info.AP5Average = averageAttedanceAP5;
+                Dimension1.info.AP5Marks = AP5Marks;
+            }
+            // ---------------------------------------------------------------------------------------
+            //AP6
+            var totalMenteeFeedback = 0;
+            var averageMenteeFeedback = 0;
+            for (var i = 0; i < Dimension1.AP6.menteeFeedback.length; i++) {
+                totalMenteeFeedback =
+                    totalMenteeFeedback + Dimension1.AP6.menteeFeedback[i];
+            }
+            if (Dimension1.AP6.menteeFeedback.length > 0) {
+                averageMenteeFeedback =
+                    totalMenteeFeedback / Dimension1.AP6.menteeFeedback.length;
+            }
+            if (averageMenteeFeedback > 5) {
+                averageMenteeFeedback = 5;
+            }
+            //  ---------------------------------------------------------------
+            //AP7
+            if (Dimension1.AP7.guestLectureData.length > 0) {
+                var totalpercentAP7 = Dimension1.AP7.guestLectureData.length == 1 ? 3 : 5;
+            }
+            else {
+                var totalpercentAP7 = 0;
+            }
+            //  ---------------------------------------------------------------
+            //AP8
+    
+            var ap8totalmarks = 0
+            for (var i = 0; i < Dimension1.AP8.remedialData.length; i++) {
+                if (Dimension1.info.courses[i].AP8ActivityRemedial != "Null") {
+                    ap8totalmarks = ap8totalmarks + 2.5;
+                }
+            }
+            if (ap8totalmarks > 5) {
+                ap8totalmarks = 5;
+            }
+            //  ---------------------------------------------------------------
+            //AP9
+    
+            var ap9totalmarks = 0
+            for (var i = 0; i < Dimension1.AP9.noteworthyData.length; i++) {
+                if (Dimension1.AP9.noteworthyData[i].activityDetails != "Null") {
+                    ap9totalmarks = ap9totalmarks + Dimension1.AP9.noteworthyData[i].marksOutOf10;
+                }
+            }
+            if (Dimension1.AP9.noteworthyData.length > 0) {
+                var ap9average = ap9totalmarks / Dimension1.info.courses.length;
+                if (ap9average > 10) {
+                    ap9average = 10;
+                }
+            }
+            else {
+                var ap9average = 0;
+            }
+            //  ---------------------------------------------------------------
+            //AP10
+            var totalAuditMarks = 0;
+            var averageAuditMarks = 0;
+            for (var i = 0; i < Dimension1.AP10.paper.length; i++) {
+                totalAuditMarks = totalAuditMarks + Dimension1.AP10.paper[i].marks;
+    
+            }
+            if (Dimension1.AP10.paper.length > 0) {
+                averageAuditMarks = totalAuditMarks / Dimension1.AP10.paper.length;
+            }
+            // ---------------------------------------------------------------------------------
+    
+            Dimension1.AP6.averageMarks = averageMenteeFeedback;
+            Dimension1.AP7.totalMarks = totalpercentAP7;
+            Dimension1.AP8.totalMarks = ap8totalmarks;
+            Dimension1.AP9.average = ap9average;
+            Dimension1.AP10.averageMarks = averageAuditMarks;
+            // ----------------------------------------------
+            Dimension1.totalMarks = Dimension1.info.AP1Marks + Dimension1.info.AP2Marks + Dimension1.info.AP3Marks + Dimension1.info.AP4Marks + Dimension1.info.AP5Marks + Dimension1.AP6.averageMarks + Dimension1.AP7.totalMarks + Dimension1.AP8.totalMarks + Dimension1.AP9.average + Dimension1.AP10.averageMarks;
+            if (Dimension1.totalMarks > 100) {
+                Dimension1.totalMarks = 100;
+            }
             updatedApp = await Appraisal.findOneAndUpdate(
                 { _id: existingFaculty._id },
                 {
@@ -743,7 +916,37 @@ const setDim1 = asyncHandler(async (req, res) => {
             });
         }
 
-        res.status(200).json(updatedApp);
+        // console.log(
+        //     Dimension1.info.AP1Marks,
+        //     Dimension1.info.AP2Marks,
+        //     Dimension1.info.AP3Marks,
+        //     Dimension1.info.AP4Marks,
+        //     Dimension1.info.AP5Marks,
+        //     Dimension1.AP6.averageMarks,
+        //     Dimension1.AP7.totalMarks,
+        //     Dimension1.AP8.totalMarks,
+        //     Dimension1.AP9.average,
+        //     Dimension1.AP10.averageMarks,
+        //     Dimension1.totalMarks
+        // )
+
+        const marks = {
+            AP1: Dimension1.info.AP1Marks,
+            AP2: Dimension1.info.AP2Average,
+            AP3: Dimension1.info.AP3Average,
+            AP4: Dimension1.info.AP4Marks,
+            AP5: Dimension1.info.AP5Average,
+            AP6: Dimension1.AP6.averageMarks,
+            AP7: Dimension1.AP7.totalMarks,
+            AP8: Dimension1.AP8.totalMarks,
+            AP9: Dimension1.AP9.average,
+            AP10: Dimension1.AP10.averageMarks,
+            totalMarks: Dimension1.totalMarks,
+        }
+
+        // console.log(marks)
+
+        res.status(200).json(marks);
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -1053,7 +1256,20 @@ const getHodComments = asyncHandler(async (req, res) => {
     
 })
 
-
+const getMarksDim1 = asyncHandler(async (req, res) => {
+    const { yearofAssesment, fullName } = req.body;
+    const existingFaculty = await Appraisal.findOne({
+        facultyName: fullName,
+        yearofAssesment: yearofAssesment,
+    });
+    if (existingFaculty) {
+        res.status(200).json(existingFaculty.Dimension1);
+    }
+    else {
+        res.status(404).json("")
+    }
+    
+})
 
 
 module.exports = {
