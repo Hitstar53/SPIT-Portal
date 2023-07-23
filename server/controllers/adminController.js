@@ -33,7 +33,7 @@ exports.intitializeStudent = asyncHandler(async (req, res) => {
     const name = req.body.name
     try {
         const placement = await new Placement({
-            emailID: email, companyName: '-', contactNo: '-', address: '-', role: '-', description: '-', doj: '-/-/-', ctc: '-',
+            emailID: email, companyName: '-', contactNo: '-', address: '-', role: '-', description: '-', doj: new Date(), ctc: '-',
         })
         await placement.save();
         const photo = await new Photo({

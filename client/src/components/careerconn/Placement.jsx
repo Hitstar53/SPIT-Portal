@@ -254,6 +254,7 @@ const Placement = () => {
                         <DateField
                           name="doj"
                           label="Date Of Joining"
+                          format="DD/MM/YYYY"
                           value={dayjs(roleInfo.doj)}
                           onChange={handleChangeDate}
                         />

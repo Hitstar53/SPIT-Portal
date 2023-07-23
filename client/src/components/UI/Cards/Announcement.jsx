@@ -35,7 +35,7 @@ const Announcement = (props) => {
             <p>From: {props.item.sender}</p>
           </div>
           <p className={styles.cardItemContent}>
-            {props.item.description.substring(0, 125) + "..."}
+            {props.item.description.length>125?props.item.description.substring(0, 125) + " ...":props.item.description}
           </p>
         </div>
       </div>

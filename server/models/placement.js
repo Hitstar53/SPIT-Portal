@@ -6,7 +6,7 @@ const placementSchema = mongoose.Schema({
     address:{ type : String, required:true},
     role:{ type : String, required:true},
     description:{ type : String, required:true},
-    doj:{ type : String, required:true},
+    doj:{ type : Date, required:true},
     ctc:{ type : String, required:true},
 },{
     collection:"placement"

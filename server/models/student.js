@@ -91,7 +91,7 @@ const studentSchema = mongoose.Schema({
     participation:[
         {
             eventName:{ type : String, required:true},
-            date:{ type : String, required:true},
+            date:{ type : Date, required:true},
             organization:{ type : String, required:true},
             description:{ type : String, required:true},
             type:{ type : String, required:true},

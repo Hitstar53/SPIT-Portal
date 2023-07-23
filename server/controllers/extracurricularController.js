@@ -32,7 +32,7 @@ exports.setVolunteerWork = asyncHandler(async(req,res) =>{
 
 exports.setParticipation = asyncHandler(async(req,res) =>{
         const eventName = req.body.eventName
-        const date = req.body.date
+        const date = new Date(req.body.date)
         const organization = req.body.organization
         const description = req.body.description
         const email = req.body.email

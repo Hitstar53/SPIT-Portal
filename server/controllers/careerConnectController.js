@@ -154,7 +154,7 @@ exports.updatePlacement = asyncHandler(async(req,res)=>{
     const address = req.body.address
     const role = req.body.role
     const description = req.body.description
-    const doj = req.body.doj
+    const doj = new Date(req.body.doj)
     const ctc = req.body.ctc
     const email = req.body.email
     try{
