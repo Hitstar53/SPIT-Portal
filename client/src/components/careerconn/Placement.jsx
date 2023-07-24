@@ -246,7 +246,7 @@ const Placement = () => {
                     {!edit && (
                       <span className="flex flex-row gap-2 items-center">
                         <FaCalendarAlt className="text-xl" />
-                        Joining Date:&nbsp;&nbsp;{roleInfo.doj}
+                        Joining Date:&nbsp;&nbsp;{dayjs(roleInfo.doj).format('DD/MM/YYYY')}
                       </span>
                     )}
                     {edit && (
@@ -265,7 +265,7 @@ const Placement = () => {
                     {!edit && (
                       <span className="flex flex-row gap-2 items-center">
                         <FaRupeeSign className="text-xl" />
-                        C.T.C.:&nbsp;&nbsp;{roleInfo.ctc}
+                        C.T.C.:&nbsp;&nbsp;{roleInfo.ctc} LPA
                       </span>
                     )}
                     {edit && (

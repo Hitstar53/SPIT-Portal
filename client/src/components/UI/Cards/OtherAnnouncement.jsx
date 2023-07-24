@@ -52,7 +52,7 @@ const OtherAnnouncement = (props) => {
         </div>
         <div className={styles.cardItemSub}>
           <p>From: {props.item.sender}</p>
-          <div className={styles.cardItemContent}>{props.item.description}</div>
+          <div className={styles.cardItemContent}>{props.item.description.length>125?props.item.description.substring(0, 125) + " ...":props.item.description}</div>
         </div>
       </div>
       {open && (

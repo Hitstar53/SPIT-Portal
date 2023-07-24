@@ -108,6 +108,7 @@ exports.getProjectsInfo = asyncHandler(async (req, res) => {
     techStack: ['$or', 'projects.techStack', 'research.techStack'],
   };
   const filter = {};
+
   for (const field in fieldMapping) {
     if (req.body[field] !== undefined) {
       const schemaFields = fieldMapping[field];
@@ -149,17 +150,35 @@ exports.getProjectsInfo = asyncHandler(async (req, res) => {
       }
     }
   }
+
   try {
     const response = await Student.find(filter).select(
-      'uid name emailID projects.name projects.domain projects.techStack research.name research.domain research.techStack -_id'
+      'uid name emailID projects.name projects.domain projects.techStack projects.duration research.name research.domain research.techStack research.duration -_id'
     );
+
     let projectInfo = [];
     for (const res in response) {
       const { uid, name, emailID, projects, research } = response[res];
-      for (const p in projects) {
-        const project = projects[p].name;
-        const domain = projects[p].domain;
-        const techStack = projects[p].techStack.join(',');
+      const currentYear = new Date().getFullYear();
+      const pastYear = currentYear - 1;
+
+      // Filter projects based on duration (currentYear and pastYear)
+      const filteredProjects = projects.filter(project => {
+        const duration = project.duration;
+        return new RegExp(`(${currentYear}|${pastYear})`, 'i').test(duration);
+      });
+
+      // Filter research based on duration (currentYear and pastYear)
+      const filteredResearch = research.filter(research => {
+        const duration = research.duration;
+        return new RegExp(`(${currentYear}|${pastYear})`, 'i').test(duration);
+      });
+
+      for (const p in filteredProjects) {
+        const project = filteredProjects[p].name;
+        const domain = filteredProjects[p].domain;
+        const techStack = filteredProjects[p].techStack.join(',');
+        const duration = filteredProjects[p].duration;
         projectInfo.push({
           uid: uid,
           studentname: name,
@@ -168,12 +187,14 @@ exports.getProjectsInfo = asyncHandler(async (req, res) => {
           domain: domain,
           techstack: techStack,
           type: 'Project',
+          duration: duration,
         });
       }
-      for (const r in research) {
-        const project = research[r].name;
-        const domain = research[r].domain;
-        const techStack = research[r].techStack.join(',');
+      for (const r in filteredResearch) {
+        const project = filteredResearch[r].name;
+        const domain = filteredResearch[r].domain;
+        const techStack = filteredResearch[r].techStack.join(',');
+        const duration = filteredResearch[r].duration;
         projectInfo.push({
           uid: uid,
           studentname: name,
@@ -182,27 +203,32 @@ exports.getProjectsInfo = asyncHandler(async (req, res) => {
           domain: domain,
           techstack: techStack,
           type: 'Research',
+          duration: duration,
         });
       }
     }
+
     if (domain) {
       const domainRegex = new RegExp(domain, 'i');
       projectInfo = projectInfo.filter((item) =>
-      domainRegex.test(item.domain)
+        domainRegex.test(item.domain)
       );
     }
+
     if (techStack) {
       const techStackRegex = new RegExp(techStack, 'i');
       projectInfo = projectInfo.filter((item) =>
-      techStackRegex.test(item.techstack)
+        techStackRegex.test(item.techstack)
       );
     }
+
     res.json(projectInfo);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 exports.getInformation = asyncHandler(async (req, res) => {
   const { year, branch, batch, cgpa } = req.body;
@@ -288,28 +314,66 @@ exports.getInformation = asyncHandler(async (req, res) => {
       res.json(result)
     }
     else if(type){
-      const response = await Student.find({"participation.type":type}).select('uid name emailID educationalInfo participation committee -_id')
-      let result = []
+      const currentYear = new Date().getFullYear();
+      const pastYear = currentYear - 1;
+      const response = await Student.find({ "participation.type": type }).select('uid name emailID educationalInfo participation committee -_id');
+      let result = [];
       for (let r = 0; r < response.length; r++) {
         const element = response[r];
-        let committeeNames = element.committee.map((e)=> e.committeeDetails).join(',')||''
+        let committeeNames = element.committee.map((e) => e.committeeDetails).join(',') || '';
         for (let i = 0; i < element.participation.length; i++) {
           const e = element.participation[i];
           if (type === e.type) {
-            result.push({uid:element.uid,studentname:element.name,email:element.emailID,branch:element.educationalInfo[0].branch, committee:committeeNames,event:e.eventName,eventLink:e.link})
+            // Check if the event's year is either the currentYear or pastYear
+            const eventYear = new Date(e.date).getFullYear();
+            if (eventYear === currentYear || eventYear === pastYear) {
+              result.push({
+                uid: element.uid,
+                studentname: element.name,
+                email: element.emailID,
+                branch: element.educationalInfo[0].branch,
+                committee: committeeNames,
+                event: e.eventName,
+                eventLink: e.link
+              });
+            }
           }
         }
       }
-      res.json(result)
-    }
-    else{
-      const response = await Student.find({"committee.committeeDetails":{$regex:committee,$options: 'i'}}).select('uid name emailID educationalInfo participation committee -_id')
-      let result = []
-      for (let r = 0; r < response.length; r++) {
-        const element = response[r];
-        let committeeNames = element.committee.map((e)=> e.committeeDetails).join(',')||''
-        result.push({uid:element.uid,name:element.name,email:element.emailID,branch:element.educationalInfo[0].branch, committeeDetails:committeeNames,event:'-'})
+    res.json(result);
+  }
+  else{
+    const currentYear = new Date().getFullYear();
+    const pastYear = currentYear - 1;
+    
+    // Find the committees that match the regex
+    const matchingCommittees = await Student.find({
+      "committee.committeeDetails": { $regex: committee, $options: 'i' }
+    }).select('uid name emailID educationalInfo participation committee.committeeDetails committee.tenure -_id');
+    
+    let result = [];
+    for (const student of matchingCommittees) {
+      const matchingCommitteeData = student.committee.filter((committeeData) => {
+        const tenurePattern = new RegExp(`(${currentYear}|${pastYear})`);
+        return committeeData.committeeDetails.match(new RegExp(committee, 'i')) && tenurePattern.test(committeeData.tenure);
+      });
+    
+      if (matchingCommitteeData.length > 0) {
+        let committeeNames = matchingCommitteeData.map((committeeData) => committeeData.committeeDetails).join(', ');
+    
+        result.push({
+          uid: student.uid,
+          studentname: student.name,
+          email: student.emailID,
+          branch: student.educationalInfo[0].branch,
+          committee: committeeNames,
+          event: '-'
+        });
       }
-      res.json(result)
+    }
+    
+    res.json(result);
+    
+
     }
   })

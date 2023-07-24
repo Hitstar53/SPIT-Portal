@@ -71,7 +71,7 @@ export default function EventAccordion(props) {
               >
                 {item.name}
                 <span className="text-lg font-normal opacity-75">
-                  {dayjs(item.startDate).format("DD/MM/YYYY")}
+                  {dayjs(item.endDate).format("DD/MM/YYYY")}
                 </span>              
               </Typography>
               <Typography

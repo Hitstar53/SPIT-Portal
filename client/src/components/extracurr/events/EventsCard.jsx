@@ -1,6 +1,7 @@
 import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import styles from "./EventsCard.module.css";
+import dayjs from "dayjs"
 
 const Events = (props) => {
   return (
@@ -9,7 +10,7 @@ const Events = (props) => {
         <div className={styles.eventcontrol}>
           <div className={styles.position}>
             <div className={styles.eventname}>{props.eventname}</div>
-            <div>{props.eventdate}</div>
+            <div>{dayjs(props.eventdate).format('DD/MM/YYYY')}</div>
           </div>
           <CloseIcon
             sx={{ color: "var(--text-light)", cursor: "pointer" }}

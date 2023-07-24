@@ -185,9 +185,9 @@ exports.updateGroupUpcomingExams = asyncHandler(async(req,res) =>{
     const syllabus = req.body.syllabus;
     const courseName = req.body.courseName;
     const batch = req.body.batch
-    const sendTo = `${year} ${branch} ${division} Batch: ${batch}`
     if(batch)
     {
+        const sendTo = `${year} ${branch} ${division} Batch: ${batch}`
         try {
             await Profile.updateMany({"educationalInfo.0.year":year,"educationalInfo.0.branch":branch,"educationalInfo.0.division":division,"educationalInfo.0.batch":batch},{$push:{exams:{date:date,type:type,syllabus:syllabus,courseName:courseName}}})
             await Faculty.updateOne({emailID:email},{$push:{upcomingExams:{date:date,type:type,syllabus:syllabus,courseName:courseName,sendTo:sendTo}}})
@@ -197,6 +197,7 @@ exports.updateGroupUpcomingExams = asyncHandler(async(req,res) =>{
         }
     }
     else{
+        const sendTo = `${year} ${branch} ${division}`
         try {
             await Profile.updateMany({"educationalInfo.0.year":year,"educationalInfo.0.branch":branch,"educationalInfo.0.division":division},{$push:{exams:{date:date,type:type,syllabus:syllabus,courseName:courseName}}})
             await Faculty.updateOne({emailID:email},{$push:{upcomingExams:{date:date,type:type,syllabus:syllabus,courseName:courseName,sendTo:sendTo}}})
@@ -211,6 +212,7 @@ exports.getUpcomingExams = asyncHandler(async(req,res) => {
     const email = req.body.email;
     try {
         const examStudent = await Profile.findOne({emailID:email}).select('exams.date exams.syllabus exams.type exams.courseName -_id')
+        examStudent.exams.sort((a, b) => new Date(a.date) - new Date(b.date));
         res.status(200).json(examStudent)
     }
     catch (error){

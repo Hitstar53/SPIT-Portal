@@ -71,6 +71,7 @@ export async function loader() {
     }
     if (response1.ok && response2.ok && response3.ok) {
       const announceData = await response1.json();
+      console.log(announceData)
       const eventsData = await response2.json();
       const examData = await response3.json();
       return { announceData, eventsData, examData };

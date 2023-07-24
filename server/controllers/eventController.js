@@ -16,7 +16,7 @@ exports.setEvent = asyncHandler(async(req,res) =>{
 
 exports.getEvent = asyncHandler(async(req,res) =>{
     try {
-        const allEvents = await Event.find()
+        const allEvents = await Event.find().sort({endDate:1})
         res.status(200).json(allEvents)    
     } catch (error) {
         console.error(error)

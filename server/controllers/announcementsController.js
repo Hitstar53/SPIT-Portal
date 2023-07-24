@@ -108,7 +108,7 @@ exports.setAnnouncementsSpecificStudents = asyncHandler(async (req, res) => {
     const title = req.body.title
     const description = req.body.description
     const sender = req.body.email
-    const senderPhoto = req.body.senderPhoto || "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+    const senderPhoto = req.body.senderPhoto || "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" 
     const type = req.body.type
     const postDate = new Date()
     const students = req.body.students
@@ -137,7 +137,10 @@ exports.setAnnouncementsSpecificStudents = asyncHandler(async (req, res) => {
 exports.getStudentAnnouncements = asyncHandler(async (req, res) => {
     const email = req.body.email
     try {   
-        const student = await Student.findOne({emailID:email}).populate('announcements')
+        const student = await Student.findOne({emailID:email}).populate({
+            path: 'announcements',
+            options: { sort: { postDate: -1 } }
+        })
         res.status(200).json(student.announcements)
     }
     catch (error) {
@@ -148,7 +151,10 @@ exports.getStudentAnnouncements = asyncHandler(async (req, res) => {
 exports.getFacultyAnnouncements = asyncHandler(async (req, res) => {
     const email = req.body.email
     try {   
-        const faculty = await Faculty.findOne({emailID:email}).select('announcements upcomingExams -_id').populate('announcements')
+        const faculty = await Faculty.findOne({emailID:email}).select('announcements upcomingExams -_id').populate({
+            path: 'announcements',
+            options: { sort: { postDate: -1 } }
+        })
         res.status(200).json(faculty)
     }
     catch (error) {
@@ -188,7 +194,10 @@ exports.setCommitteeAnnouncements = asyncHandler(async(req,res) => {    const ti
 exports.getCommitteeAnnouncements = asyncHandler(async(req,res) => {
     const comname = req.body.comname;
     try{
-        const committee = await Committee.findOne({name : comname}).select('name comAnnouncements -_id').populate('comAnnouncements')
+        const committee = await Committee.findOne({name : comname}).select('name comAnnouncements -_id').populate({
+            path: 'comAnnouncements',
+            options: { sort: { postDate: -1 } }
+        })
         res.status(200).json(committee.comAnnouncements)
     }
     catch(error){

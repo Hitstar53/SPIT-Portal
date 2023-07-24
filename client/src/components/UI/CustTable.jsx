@@ -13,6 +13,7 @@ import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
 import { styled } from "@mui/material/styles";
 import './CustTable.css'
+import { Link } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -83,6 +84,7 @@ function EnhancedTableHead(props) {
                 },
               }}
             >
+
               {headCell.label}
               {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden} >
@@ -179,7 +181,10 @@ export default function CustTable(props) {
                           padding={"normal"}
                           sortDirection={orderBy === headCell.id ? order : false}
                         >
-                          {row[headCell.id]}
+                          {headCell.id==="event"?
+                          <a style={{color:"blue"}} href={row['eventLink']} target="_blank">{row[headCell.id]}</a>
+                          :
+                          row[headCell.id]}
                         </StyledTableCell>
                       );
                     })}
