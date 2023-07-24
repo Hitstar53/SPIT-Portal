@@ -96,6 +96,11 @@ const sidebardata = [
     icon: <i className="fas fa-filter"></i>,
     sub: ["Project", "Professional", "Informational","Extracurricular"],
   },
+  {
+    text: "Upload Marks",
+    icon: <i class="fa-solid fa-square-poll-horizontal"></i>,
+    sub: [],
+  },
 ];
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -395,7 +400,7 @@ export default function AdminMiniDrawer() {
                     </ListItemIcon>
                     <Link
                       to={
-                        index == 0 || index == 1
+                        index == 0 || index == 1 || index == 3
                           ? data.text.toLowerCase()
                           : location.pathname
                       }
@@ -410,7 +415,7 @@ export default function AdminMiniDrawer() {
                       )}
                     </Link>
                     {open ? (
-                      index != 0 && index != 1 ? (
+                      index != 0 && index != 1 && index != 3? (
                         openSub[index] ? (
                           <ExpandLess />
                         ) : (

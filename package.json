@@ -16,6 +16,7 @@
     "concurrently": "^8.2.0"
   },
   "dependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "react-dropzone": "^14.2.3"
   }
 }

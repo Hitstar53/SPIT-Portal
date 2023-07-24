@@ -26,6 +26,7 @@ import Professional from './components/Faculty/SearchFilters/Professional';
 import Project from './components/Faculty/SearchFilters/Project';
 import './App.css';
 import ExtraCurr from './components/Faculty/SearchFilters/ExtraCurr';
+import UploadMarks from './components/Faculty/Upload Marks/UploadMarks';
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,7 @@ const router = createBrowserRouter([
           { path: "professional", element: <Professional /> },
           { path: "extracurricular", element: <ExtraCurr /> },
           { path: "project", element: <Project /> },
+          { path: "upload marks", element: <UploadMarks />},
         ],
       },
     ],
