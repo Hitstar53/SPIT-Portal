@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import CustTable from "../../UI/CustTable";
-import Search from "./Search";
 import Filter from "./Filter";
 import ServerUrl from "../../../constants";
 import styles from "./FilterLayout.module.css";
-import InfoFilter from "./InfoFilter";
 
 const rows = [
   {
@@ -114,15 +112,9 @@ const ExtraCurr = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-        //   year: filterData.type === "All" ? "" : filterData.type,
-        //   branch: filterData.branch === "All" ? "" : filterData.branch,
-        //   batch: filterData.batch === "All" ? "" : filterData.batch,
-        //   committee: filterData.committee,
-        //   event: filterData.event,
-        //   cgpa: filterData.cgpa,
-        type:filterData.type,
-        name:filterData.name,
-        committee:filterData.committee
+          type:filterData.type,
+          name:filterData.name,
+          committee:filterData.committee
         }),
       });   
       if (!response.ok) {
@@ -141,9 +133,6 @@ const ExtraCurr = () => {
     <div className={container}>
       <div className="flex justify-between items-center text-4xl font-semibold">
         <p>Extra Curriculars Student Search</p>
-        {/* <Search
-          onSubmit={onSearchSubmit}
-        /> */}
       </div>
       <Filter
         options={options}

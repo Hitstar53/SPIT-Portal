@@ -205,12 +205,13 @@ const Events = () => {
           required
           margin="dense"
           name="type"
+          variant="standard"
           fullWidth
           label="Participation Type"
           placeholder="Participation Type"
           helperText="Please select the type of participation"
           onChange={handleEventDataChange}
-          sx ={{mt: "1rem"}}
+          sx={{ mt: "1rem" }}
         >
           <MenuItem value="winner">Winner</MenuItem>
           <MenuItem value="second">First Runner Up</MenuItem>
@@ -252,7 +253,7 @@ const Events = () => {
           type="text"
           fullWidth
           variant="standard"
-          helperText="Google Drive Link"
+          helperText="Link to the certification. Eg. google drive link (accessible to anyone with the link)"
           onChange={handleEventDataChange}
         />
         <TextField

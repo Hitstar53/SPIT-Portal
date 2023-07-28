@@ -14,6 +14,7 @@ import { visuallyHidden } from "@mui/utils";
 import { styled } from "@mui/material/styles";
 import './CustTable.css'
 import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -67,7 +68,7 @@ function EnhancedTableHead(props) {
         {props.headCells.map((headCell) => (
           <StyledTableCell
             key={headCell.id}
-            align={headCell.numeric ? "left" : "left"}
+            align={headCell.id === "profile" ? "center" : "left"}
             padding={"normal"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -177,14 +178,37 @@ export default function CustTable(props) {
                       return (
                         <StyledTableCell
                           key={headCell.id}
-                          align={headCell.numeric ? "left" : "left"}
+                          align={headCell.id === "profile" ? "center" : "left"}
                           padding={"normal"}
-                          sortDirection={orderBy === headCell.id ? order : false}
+                          sortDirection={
+                            orderBy === headCell.id ? order : false
+                          }
                         >
-                          {headCell.id==="event"?
-                          <a style={{color:"blue"}} href={row['eventLink']} target="_blank">{row[headCell.id]}</a>
-                          :
-                          row[headCell.id]}
+                          {headCell.id === "event" && (
+                            <a
+                              style={{ color: "blue" }}
+                              href={row["eventLink"]}
+                              target="_blank"
+                            >
+                              {row[headCell.id]}
+                            </a>
+                          )}
+                          {headCell.id === "profile" && (
+                            <Link
+                              to={`/faculty/download/${row["uid"]}`}
+                            >
+                              <i
+                                style={{
+                                  paddingRight: "2.5rem",
+                                  cursor: "pointer"
+                                }}
+                                className="fas fa-download"
+                              ></i>
+                            </Link>
+                          )}
+                          {headCell.id !== "event" && headCell.id !== "profile" && (
+                            row[headCell.id]
+                          )}
                         </StyledTableCell>
                       );
                     })}

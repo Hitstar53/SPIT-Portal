@@ -57,3 +57,5 @@ exports.intitializeStudent = asyncHandler(async (req, res) => {
         console.error(error)
     }
 })
+
+

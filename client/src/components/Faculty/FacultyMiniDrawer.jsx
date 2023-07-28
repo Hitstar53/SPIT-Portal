@@ -98,7 +98,7 @@ const sidebardata = [
   },
   {
     text: "Upload Marks",
-    icon: <i class="fa-solid fa-square-poll-horizontal"></i>,
+    icon: <i class="fas fa-square-poll-horizontal"></i>,
     sub: [],
   },
 ];

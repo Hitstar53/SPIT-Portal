@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import CustTable from '../../UI/CustTable'
-import Search from './Search'
 import Filter from './Filter'
 import styles from './FilterLayout.module.css'
 import ServerUrl from '../../../constants'
@@ -142,7 +141,6 @@ const Project = () => {
     <div className={container}>
       <div className="flex justify-between items-center text-4xl font-semibold">
         <p>Project Based Student Search</p>
-        {/* <Search onSubmit={onSearchSubmit} /> */}
       </div>
       <Filter options={options} filters={filters} onSubmit={onFilterSubmit} />
       {isLoading ? (

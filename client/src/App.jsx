@@ -24,9 +24,10 @@ import Announcements, {loader as AncmntsLoader} from './components/Faculty/Annou
 import Info from './components/Faculty/SearchFilters/Info';
 import Professional from './components/Faculty/SearchFilters/Professional';
 import Project from './components/Faculty/SearchFilters/Project';
-import './App.css';
 import ExtraCurr from './components/Faculty/SearchFilters/ExtraCurr';
 import UploadMarks from './components/Faculty/Upload Marks/UploadMarks';
+import ProfileDownload, {loader as ProfileDownloader} from './components/Faculty/SearchFilters/ProfileDownload';
+import './App.css';
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,7 @@ const router = createBrowserRouter([
           { path: "extracurricular", element: <ExtraCurr /> },
           { path: "project", element: <Project /> },
           { path: "upload marks", element: <UploadMarks />},
+          { path: "download/:uid", element: <ProfileDownload />, loader: ProfileDownloader },
         ],
       },
     ],

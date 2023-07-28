@@ -85,7 +85,7 @@ export default function InfoFilter(props) {
               size="small"
               onChange={handleDataChange}
               sx={{
-                width: "20rem",
+                width: "12rem",
                 color: "var(--text-color)",
                 background: "var(--bg-color-2)",
               }}

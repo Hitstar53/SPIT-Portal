@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import CustTable from '../../UI/CustTable'
-import Search from './Search'
 import InfoFilter from './InfoFilter'
 import ServerUrl from '../../../constants'
 import styles from './FilterLayout.module.css'
@@ -110,6 +109,11 @@ const headCells = [
     numeric: true,
     label: "CGPA",
   },
+  {
+    id: "profile",
+    numeric: false,
+    label: "Profile",
+  }
 ];
 
 
@@ -135,8 +139,6 @@ const Info = () => {
           year: filterData.type === "All" ? "" : filterData.type,
           branch: filterData.branch === "All" ? "" : filterData.branch,
           batch: filterData.batch === "All" ? "" : filterData.batch,
-          committee: filterData.committee,
-          event: filterData.event,
           cgpa: filterData.cgpa,
         }),
       });
@@ -156,7 +158,6 @@ const Info = () => {
     <div className={container}>
       <div className="flex justify-between items-center text-4xl font-semibold">
         <p>Student Info Search</p>
-        {/* <Search onSubmit={onSearchSubmit} /> */}
       </div>
       <InfoFilter
         options={options}
