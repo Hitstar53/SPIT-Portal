@@ -1067,7 +1067,7 @@ function StepThree({ setDimension3, yr }) {
         style={{ display: "block", width: "100px" }}
       /> */}
           <div
-            className="flex flex-row items-center gap-4"
+            className="flex flex-col items-center gap-4"
             style={{
               display: "flex",
               alignItems: "center",
@@ -1081,7 +1081,7 @@ function StepThree({ setDimension3, yr }) {
               </button>
             </div>
             <div className="marks-box">
-              Total Marks: <span>{Marks.totalMarks}</span>
+              Total Marks of Dimension 3 (Administration and Outreach): <span>{Marks.totalMarks}</span>
             </div>
           </div>
         </form>

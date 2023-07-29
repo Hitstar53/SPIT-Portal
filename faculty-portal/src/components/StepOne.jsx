@@ -962,14 +962,13 @@ const StepOne = ({ setDimension1, yr }) => {
 
             </div>
 
-            <div className="flex flex-row items-center justify-center gap-4">
-
+            <div className="flex flex-col items-center justify-center gap-4">
               <button className="save-btn" type="submit">
                 Save Changes
               </button>
 
               <div className="marks-box">
-                Dimension1 Marks: <span>{marks.totalMarks}</span>
+              Total Marks of Dimension 1 (Academics): <span>{marks.totalMarks}</span>
               </div>
             </div>
 

@@ -956,7 +956,7 @@ function StepTwo({ setDimension2, yr }) {
               justifyContent: "center",
               padding: "10px",
             }}>
-              <div className="flex flex-row items-center gap-4">
+              <div className="flex flex-col items-center gap-4">
                 <button
                   className="save-btn"
                   type="submit"
@@ -964,7 +964,7 @@ function StepTwo({ setDimension2, yr }) {
                   Save Changes
                 </button>
                 <div className="marks-box">
-                  Dimension2 Total Marks: <span>{marks.totalMarks.toFixed(2)}</span>
+                  Total Marks of Dimension 2 (Research and Development): <span>{marks.totalMarks.toFixed(2)}</span>
                 </div>
               </div>
             </div>
