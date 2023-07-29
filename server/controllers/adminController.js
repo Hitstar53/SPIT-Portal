@@ -11,7 +11,7 @@ exports.intitializeFaculty = asyncHandler(async (req, res) => {
     const name = req.body.name
     try {
         const faculty = await new Faculty({
-            emailID: email, name: name, announcements: []
+            emailID: email, name: name, announcements: [],isAdmin:false
         })
         await faculty.save();
         const user = await new User({

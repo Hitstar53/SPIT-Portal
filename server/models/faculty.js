@@ -15,7 +15,8 @@ const facultySchema = new Schema({
             courseName:{ type : String, required:true},
             sendTo:{ type : String, required:true},
         }
-    ]
+    ],
+    isAdmin:{type:Boolean,required:true},
 },
 {collection: 'Faculty'});
 

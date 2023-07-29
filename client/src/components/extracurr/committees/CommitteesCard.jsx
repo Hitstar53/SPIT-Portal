@@ -7,7 +7,10 @@ const CommitteesCard = (props) => {
   const navigate = useNavigate();
 
   const clickHandler = () => {
-    navigate(`/student/committees/${props.comname}`);
+    if (window.location.href.includes("faculty"))
+      navigate(`/faculty/committee info/${props.comname}`);
+    else
+      navigate(`/student/committees/${props.comname}`);
   };
 
   return (

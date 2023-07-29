@@ -92,6 +92,11 @@ const sidebardata = [
     sub: [],
   },
   {
+    text: "Committee Info",
+    icon: <i className="fas fa-users"></i>,
+    sub: [],
+  },
+  {
     text: "Search Filters",
     icon: <i className="fas fa-filter"></i>,
     sub: ["Project", "Professional", "Informational","Extracurricular"],
@@ -102,6 +107,7 @@ const sidebardata = [
     sub: [],
   },
 ];
+
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -241,14 +247,17 @@ export default function AdminMiniDrawer() {
   };
 
   const [name, setName] = React.useState("");
+  const [admin, setAdmin] = React.useState(false);
   const [picture, setPicture] = React.useState("");
+  const [sbdata, setSbdata] = React.useState(
+    []
+  );
 
   React.useEffect(() => {
     fetchUserInfo();
   }, []);
 
   const fetchUserInfo = async () => {
-    console.log(JSON.parse(localStorage.getItem("userinfo")).email);
     const response = await fetch(`${ServerUrl}/api/faculty/getFaculty`, {
       method: "PUT",
       headers: {
@@ -264,6 +273,8 @@ export default function AdminMiniDrawer() {
     if (response.ok) {
       const data = await response.json();
       setName(data.name);
+      setAdmin(data.isAdmin);
+      setSbdata(data.isAdmin ? sidebardata : sidebardata.slice(0, 4) );
       // setPicture(data.photo);
     }
   };
@@ -373,7 +384,7 @@ export default function AdminMiniDrawer() {
           }}
         >
           <List>
-            {sidebardata.map((data, index) => (
+            {sbdata?.map((data, index) => (
               <div key={index}>
                 <ListItem disablePadding sx={{ display: "block" }}>
                   <ListItemButton
@@ -400,7 +411,7 @@ export default function AdminMiniDrawer() {
                     </ListItemIcon>
                     <Link
                       to={
-                        index == 0 || index == 1 || index == 3
+                        index !== 3
                           ? data.text.toLowerCase()
                           : location.pathname
                       }
@@ -415,7 +426,7 @@ export default function AdminMiniDrawer() {
                       )}
                     </Link>
                     {open ? (
-                      index != 0 && index != 1 && index != 3? (
+                      index == 3 ? (
                         openSub[index] ? (
                           <ExpandLess />
                         ) : (

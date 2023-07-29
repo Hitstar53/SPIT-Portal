@@ -589,26 +589,38 @@ export async function loader({ params }) {
       comname: params.comname,
     }),
   });
-  const response3 = await fetch(`${ServerUrl}/api/student/getRole`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: JSON.parse(localStorage.getItem("userinfo")).email,
-    }),
-  });
-  if (!response.ok || !response1.ok || !response2.ok || !response3.ok) {
+  //check if link has faculty or student
+  let response3 = {}
+  if (!window.location.href.includes("faculty")) {
+    response3 = await fetch(`${ServerUrl}/api/student/getRole`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: JSON.parse(localStorage.getItem("userinfo")).email,
+      }),
+    });
+    if (!response3.ok) {
+      throw json(
+        { message: "Could not fetch role information" },
+        { status: 422 }
+      );
+    }
+  }
+  if (!response.ok || !response1.ok || !response2.ok) {
     throw json(
       { message: "Could not fetch announcement information" },
       { status: 422 }
     );
   }
-  if (response.ok && response1.ok && response2.ok && response3.ok) {
+  let roleData = ""
+  if (response.ok && response1.ok && response2.ok) {
     const comData = await response.json();
     const ancmntData = await response1.json();
     const eventData = await response2.json();
-    const roleData = await response3.json();
+    if (!window.location.href.includes("faculty"))
+      roleData = await response3.json();
     return { comData, ancmntData, eventData, roleData };
   }
 }

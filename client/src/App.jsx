@@ -61,6 +61,8 @@ const router = createBrowserRouter([
         children: [
           { path: "home", element: <Faculty /> , loader: facultyLoader},
           { path: "announcements", element: <Announcements />, loader: AncmntsLoader },
+          { path: "committee info", element: <Committees />, loader: CommitteesLoader },
+          { path: "committee info/:comname", element: <ComAdmin />, loader: ComAdminLoader},
           { path: "informational", element: <Info /> },
           { path: "professional", element: <Professional /> },
           { path: "extracurricular", element: <ExtraCurr /> },
