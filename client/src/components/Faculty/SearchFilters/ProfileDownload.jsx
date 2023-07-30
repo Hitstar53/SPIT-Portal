@@ -25,8 +25,12 @@ const ProfilePdf = ({data}) => {
         fontFamily:"Poppins"
       },
       section: {
-        margin: 10,
-        padding: 10,
+        marginBottom:10,
+        marginLeft:10,
+        marginRight:10,
+        paddingLeft:10,
+        paddingRight:10,
+        paddingBottom:10,
         flexGrow: 1,
       },
       title: {
@@ -47,6 +51,9 @@ const ProfilePdf = ({data}) => {
       <Document>
         <Page size="A4" style={styles.page} wrap>
           <View style={styles.section}>
+          <Text style={{marginTop:10,textAlign:"right",fontSize:10,fontWeight:600}}  render={({ pageNumber, totalPages }) => (
+        `${pageNumber}`
+      )} fixed />
             <View style={styles.title}>
               <Text>Student Profile Of {data.name}</Text>
             </View>
@@ -106,11 +113,10 @@ const ProfilePdf = ({data}) => {
                 />
               </Svg>
             </View>
-            <Text render={({ pageNumber, totalPages }) => (
-        `${pageNumber} / ${totalPages}`
-      )} fixed />
-            <View style={{ marginTop: 35 }} wrap={false}>
-              <Heading heading="Educational Information" />
+              
+           
+            <View style={{ marginTop: 10 }} wrap={false}>
+              <Heading  heading="Educational Information" />
               <SubHeading heading="Current Details" />
               <Row heading="Institute" data={data.educationalInfo[0].insName} />
               <Row heading="Degree" data={data.educationalInfo[0].degree} />
@@ -150,7 +156,7 @@ const ProfilePdf = ({data}) => {
                 />
               </Svg>
             </View>
-            <View break style={{ marginTop: 35 }}>
+            <View break style={{ marginTop: 10 }}>
               <Heading heading="Academic Information" />
               {data.semester.map((sem) => {
                 return (
@@ -200,7 +206,7 @@ const ProfilePdf = ({data}) => {
                 />
               </Svg>
             </View>
-            <View style={{ marginTop: 35 }} wrap={false}>
+            <View style={{ marginTop: 10 }} wrap={false}>
               <Heading heading="Extra Curricular Information" />
               <SubHeading heading="Event Participation" />
               {data.participation.length > 0 ? (
@@ -263,7 +269,7 @@ const ProfilePdf = ({data}) => {
                 stroke="rgb(0,0,0)"
               />
             </Svg>
-            <View break style={{ marginTop: 35 }}>
+            <View break style={{ marginTop: 10 }}>
               <Heading heading="Professional Information" />
               {data.skills.length > 0 ? (
                 <View style={{ marginTop: 10 }} wrap={false}>
@@ -509,9 +515,9 @@ const ProfileDownload = () => {
             />
             Student Profile
           </p>
-          <Fab color="primary" aria-label="add">
+          {/* <Fab color="primary" aria-label="add">
             <DownloadIcon />
-          </Fab>
+          </Fab> */}
         </div>
         <PDFViewer
           style={{

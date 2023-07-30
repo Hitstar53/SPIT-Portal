@@ -437,7 +437,7 @@ export default function MiniDrawer({ open,setOpen }) {
         >
           <List>
             {sidebardata.map((data, index) => (
-              <div key={index}>
+              <span key={index}>
                 <ListItem disablePadding sx={{ display: "block" }}>
                   <ListItemButton
                     sx={{
@@ -496,7 +496,7 @@ export default function MiniDrawer({ open,setOpen }) {
                   </ListItemButton>
                 </ListItem>
                 <Collapse in={openSub[index]} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
+                  <List component="span" disablePadding>
                     {data.sub.map((heading, index2) => {
                       return (
                         <ListItemButton sx={{ pl: 8 }} key={index2}>
@@ -516,7 +516,7 @@ export default function MiniDrawer({ open,setOpen }) {
                     })}
                   </List>
                 </Collapse>
-              </div>
+              </span>
             ))}
           </List>
           <List>

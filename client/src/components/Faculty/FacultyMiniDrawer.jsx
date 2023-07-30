@@ -103,7 +103,7 @@ const sidebardata = [
   },
   {
     text: "Upload Marks",
-    icon: <i class="fas fa-square-poll-horizontal"></i>,
+    icon: <i className="fas fa-square-poll-horizontal"></i>,
     sub: [],
   },
 ];
@@ -129,7 +129,7 @@ const closedMixin = (theme) => ({
   },
 });
 
-const DrawerHeader = styled("div")(({ theme }) => ({
+const DrawerHeader = styled("span")(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   display: "flex",
@@ -385,7 +385,7 @@ export default function AdminMiniDrawer() {
         >
           <List>
             {sbdata?.map((data, index) => (
-              <div key={index}>
+              <span key={index}>
                 <ListItem disablePadding sx={{ display: "block" }}>
                   <ListItemButton
                     sx={{
@@ -441,7 +441,7 @@ export default function AdminMiniDrawer() {
                   </ListItemButton>
                 </ListItem>
                 <Collapse in={openSub[index]} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
+                  <List component="span" disablePadding>
                     {data.sub.map((heading, index2) => {
                       return (
                         <ListItemButton sx={{ pl: 8 }} key={index2}>
@@ -456,7 +456,7 @@ export default function AdminMiniDrawer() {
                     })}
                   </List>
                 </Collapse>
-              </div>
+              </span>
             ))}
           </List>
           <List>

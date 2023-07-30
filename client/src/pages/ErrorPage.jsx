@@ -36,7 +36,7 @@ const ErrorPage = () => {
         </button>
       </div>
       <p className="text-gray-600 flex gap-2 items-center">
-        <Info /> If this keep happening, please 
+        <Info /> If this keep happeninwg, please 
         <span className="text-blue-500 font-semibold">
           <a href="mailto:hatim.sawai@spit.ac.in" target="_blank">
             contact us
