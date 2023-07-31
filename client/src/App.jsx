@@ -7,7 +7,6 @@ import Result, {loader as SemesterLoader} from './components/academics/Result/Re
 import SemResult, {loader as SemResultLoader} from './components/academics/Result/SemResult';
 import Activities, { loader as ActivityLoader } from './components/extracurr/activities/Activities';
 import Courses from './components/academics/Courses/Courses';
-import TimeTable from './components/academics/Timetable/TimeTable';
 import Portfolio, { loader as PortfolioLoader } from './components/careerconn/Portfolio/Portfolio';
 import Internship, { loader as InternLoader } from './components/careerconn/Internship';
 import Placement, { loader as PlacementLoader } from './components/careerconn/Placement';
@@ -43,7 +42,6 @@ const router = createBrowserRouter([
           { path: "profile", element: <Profile />, loader: ProfileLoader },
           { path: "notifications", element: <Notification /> },
           { path: "courses", element: <Courses /> },
-          { path: "timetable", element: <TimeTable /> },
           { path: "result", element: <Result />, loader: SemesterLoader },
           { path: "result/:semester", element: <SemResult />, loader: SemResultLoader },
           { path: "activities", element: <Activities />, loader: ActivityLoader },

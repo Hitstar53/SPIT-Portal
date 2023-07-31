@@ -113,8 +113,6 @@ const ProfilePdf = ({data}) => {
                 />
               </Svg>
             </View>
-              
-           
             <View style={{ marginTop: 10 }} wrap={false}>
               <Heading  heading="Educational Information" />
               <SubHeading heading="Current Details" />
