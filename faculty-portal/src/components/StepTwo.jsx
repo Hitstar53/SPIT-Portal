@@ -964,7 +964,7 @@ function StepTwo({ setDimension2, yr }) {
                   Save Changes
                 </button>
                 <div className="marks-box">
-                  Total Marks of Dimension 2 (Research and Development): <span>{marks.totalMarks.toFixed(2)}</span>
+                  Total Marks of Dimension 2 (Research and Development): <span>{marks.totalMarks > 0 ? marks.totalMarks.toFixed(2) : 0}</span>
                 </div>
               </div>
             </div>
