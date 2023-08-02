@@ -20,18 +20,18 @@ const Login = () => {
       })
       .then(res => res.data);
       localStorage.setItem('userinfo', JSON.stringify(userInfo));
-      const role = await axios.put(`${ServerUrl}/api/users/getUsers`, {email: userInfo.email}).then(res => res.data.role);
-      if (role === 'Faculty') {
-        navigate('faculty/home');
-        localStorage.setItem('isLoggedIn', true);
-        localStorage.setItem('role', role);
+        const role = await axios.put(`${ServerUrl}/api/users/getUsers`, {email: userInfo.email,name: userInfo.name}).then(res => res.data.role);
+        if (role === 'Faculty') {
+          navigate('faculty/home');
+          localStorage.setItem('isLoggedIn', true);
+          localStorage.setItem('role', role);
+        }
+        else if (role === 'Student') {
+          navigate('student/home');
+          localStorage.setItem('isLoggedIn', true);
+          localStorage.setItem('role', role);
+        }
       }
-      else if (role === 'Student') {
-        navigate('student/home');
-        localStorage.setItem('isLoggedIn', true);
-        localStorage.setItem('role', role);
-      } 
-    }
   });
 
   return (
