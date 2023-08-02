@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Box } from "@mui/material";
 import "../styles/ViewProfile.css";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";

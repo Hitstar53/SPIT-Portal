@@ -100,7 +100,7 @@ export default function DeptAppraisal() {
         )}
         {status === "Step Four Saved" && (
           <div className="dept-appraisal-vertical">
-            <h1>Step Four Saved</h1>
+            <h1>{name}'s Appraisal has been Accepted</h1>
             <img src={Done} alt="not found" />
           </div>
         )}
