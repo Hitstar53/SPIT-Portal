@@ -102,7 +102,7 @@ const sidebardata = [
     sub: ["Project", "Professional", "Informational","Extracurricular"],
   },
   {
-    text: "Upload Marks",
+    text: "Admin Functions",
     icon: <i className="fas fa-square-poll-horizontal"></i>,
     sub: [],
   },

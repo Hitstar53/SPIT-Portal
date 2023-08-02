@@ -64,13 +64,7 @@ const Professional = () => {
   const container = styles.container + " flex flex-col gap-8 p-8";
   const [isLoading, setIsLoading] = useState(false);
   const [newRows, setNewRows] = useState([]);
-  const [newFilters, setNewFilters] = useState(filters);
-  const onSearchSubmit = (data) => {
-    console.log(data);
-    setNewFilters(filters);
-  }
   const onFilterSubmit = (filterData) => {
-    setNewFilters(filters);
     setIsLoading(true);
     const setProfessional = async () => {
       const response = await fetch(
@@ -92,6 +86,7 @@ const Professional = () => {
       }
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
         setNewRows(data);
       }
       setIsLoading(false);

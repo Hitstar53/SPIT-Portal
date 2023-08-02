@@ -10,11 +10,11 @@ exports.intitializeFaculty = asyncHandler(async (req, res) => {
     const email = req.body.email
     const name = req.body.name
     try {
-        const faculty = await new Faculty({
+        const faculty = new Faculty({
             emailID: email, name: name, announcements: [],isAdmin:false
         })
         await faculty.save();
-        const user = await new User({
+        const user = new User({
             emailID: email, role: 'Faculty'
         })
         await user.save();
@@ -59,3 +59,19 @@ exports.intitializeStudent = asyncHandler(async (req, res) => {
 })
 
 
+exports.makeAdmin = asyncHandler(async(req,res)=>{
+    const email = req.body.email
+    try{
+        const faculty = await Faculty.findOne({emailID:email})
+        if(faculty){
+            faculty.isAdmin = true
+            await faculty.save()
+            res.status(200).json({message:"Admin added succesfully"})
+        }
+        else{
+            res.status(404).json({message:"Faculty does not exist"})
+        }
+    }catch(error){
+        res.status(404).json({message:"Something went wrong. Please try again later."})        
+    }
+})

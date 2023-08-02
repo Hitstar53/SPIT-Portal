@@ -19,7 +19,7 @@ const FacultyLayout = () => {
   );
   React.useEffect(() => {
     const flag = localStorage.getItem("isLoggedIn");
-    console.log(flag);
+    document.title = "Faculty Portal";
     if (flag === "true") {
       setIsLoggedIn(true);
     } else {

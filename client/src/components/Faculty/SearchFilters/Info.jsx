@@ -122,7 +122,6 @@ const Info = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [newRows, setNewRows] = useState([]);
   const onFilterSubmit = (filterData) => {
-    setNewFilters(filters);
     setIsLoading(true);
     const setInfo = async () => {
       const response = await fetch(`${ServerUrl}/api/faculty/getInformation`, {

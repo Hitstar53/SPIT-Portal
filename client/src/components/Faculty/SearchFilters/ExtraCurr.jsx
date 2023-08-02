@@ -97,13 +97,7 @@ const ExtraCurr = () => {
   const container = styles.container + " flex flex-col gap-8 p-8";
   const [isLoading, setIsLoading] = useState(false);
   const [newRows, setNewRows] = useState([]);
-  const [newFilters, setNewFilters] = useState(filters);
-  const onSearchSubmit = (data) => {
-    console.log(data);
-    setNewFilters(filters);
-  };
   const onFilterSubmit = (filterData) => {
-    setNewFilters(filters);
     setIsLoading(true);
     const setInfo = async () => {
       const response = await fetch(`${ServerUrl}/api/faculty/getExtra`, {

@@ -24,7 +24,7 @@ import Info from './components/Faculty/SearchFilters/Info';
 import Professional from './components/Faculty/SearchFilters/Professional';
 import Project from './components/Faculty/SearchFilters/Project';
 import ExtraCurr from './components/Faculty/SearchFilters/ExtraCurr';
-import UploadMarks from './components/Faculty/Upload Marks/UploadMarks';
+import AdminFunctions from './components/Faculty/AdminFunctions/AdminFunctions';
 import ProfileDownload, {loader as ProfileDownloader} from './components/Faculty/SearchFilters/ProfileDownload';
 import './App.css';
 
@@ -65,7 +65,7 @@ const router = createBrowserRouter([
           { path: "professional", element: <Professional /> },
           { path: "extracurricular", element: <ExtraCurr /> },
           { path: "project", element: <Project /> },
-          { path: "upload marks", element: <UploadMarks />},
+          { path: "admin functions", element: <AdminFunctions /> },
           { path: "download/:uid", element: <ProfileDownload />, loader: ProfileDownloader },
         ],
       },
