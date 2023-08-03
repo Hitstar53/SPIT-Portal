@@ -1438,7 +1438,7 @@ const setDim4Principal = asyncHandler(async (req, res) => {
         if (existingFaculty) {
             updatedApp = await Appraisal.findOneAndUpdate(
                 { _id: existingFaculty._id },
-                { $set: { Dimension4: Dimension4, principalReviewed: true } }
+                { $set: { Dimension4: Dimension4 } }
             );
         } else {
             return res.status(404).json("Faculty Not Found In setDim4")
@@ -1569,6 +1569,9 @@ const getMarksDim1 = asyncHandler(async (req, res) => {
     
 })
 
+const principalSubmit = asyncHandler(async (req, res) => {
+    
+})
 
 module.exports = {
     setAppraisal,

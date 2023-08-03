@@ -798,9 +798,19 @@ const appraisalSchema = new mongoose.Schema({
 
     HODcomments: [{
         type: String,
-    }]
+    }],
+
+    principalComments: {
+        type: String,
+    },
+
+    bonusMarks: {
+        type: Number,
+        default: 0,
+    },
+
 });
-//{comment:"nfkgjn"}
+
 const Appraisal = mongoose.model('Appraisal', appraisalSchema);
 
 module.exports = Appraisal;
