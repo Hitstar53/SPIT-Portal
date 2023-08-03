@@ -294,7 +294,7 @@ function StepTwo({ setDimension2, yr }) {
                         >
                           <option value="High">High</option>
                           <option value="Medium">Medium</option>
-                          <option value="None ">None </option>
+                          <option value="Other ">Other </option>
                         </select>
                       </td>
 

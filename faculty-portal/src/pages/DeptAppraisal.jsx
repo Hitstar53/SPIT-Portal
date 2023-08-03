@@ -121,7 +121,7 @@ export default function DeptAppraisal() {
         {status === "Appraisal Rejected" && (
           <div className="dept-appraisal-vertical">
             <h1>
-              {name}'s Appraisal has been rejected
+              {name}'s Appraisal has been resended
             </h1>
             <img src={Done} alt="not found" />
           </div>
