@@ -52,7 +52,7 @@ function StepFour({ yr, fullName, setStatus }) {
     e.preventDefault();
     let data = e.target[0].value;
     if (data === "") {
-      toast.error("Please enter the comment before rejecting the appraisal");
+      toast.error("Please enter the comment before resending the appraisal");
       return;
     }
     fetch("http://localhost:5000/api/faculty/appraisal/hod-comments", {
@@ -67,7 +67,7 @@ function StepFour({ yr, fullName, setStatus }) {
       }),
     }).then((res) => {
       if (res.status === 200) {
-        toast.success("Appraisal Rejected Successfully");
+        toast.success("Appraisal resended Successfully");
         setStatus("Appraisal Rejected");
         // window.location.href="/home"
       } else {
@@ -227,7 +227,7 @@ function StepFour({ yr, fullName, setStatus }) {
           </div>
           <div style={{ textAlign: "center" }}>
             <button className="save-btn" style={{ backgroundColor: "#d83c3c" }}>
-              Reject Appraisal
+              resend Appraisal
             </button>
           </div>
         </form>
