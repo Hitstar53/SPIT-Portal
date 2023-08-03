@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import Table from "react-bootstrap/Table";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
 import axios from "axios";
 import "../styles/Principal.css";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { Controller } from "react-hook-form";
+import FinalTable from "../components/FinalTable";
 
-
-const Report = ({ facultyData, name, forHOD = false }) => {
-    console.log(facultyData);
+const Report = ({ facultyData, forHOD = false }) => {
+    // console.log(facultyData);
     const [dim4, setDim4] = useState(facultyData.Dimension4);
+    const [viewBonus, setViewBonus] = useState(false);
+    const [change, setChange] = useState(false);
     const marks = [
         { label: "1" },
         { label: "0.95" },
@@ -31,7 +30,8 @@ const Report = ({ facultyData, name, forHOD = false }) => {
     });
 
     const onSubmit = (data) => {
-        console.log("line 31");
+        // console.log("line 31");
+        setChange(!change)
         console.log(data);
         let dim4=facultyData.Dimension4
         dim4.confidentialReport.principalRemarks=parseFloat(data.confidentialReport.principalRemarks)
@@ -43,31 +43,8 @@ const Report = ({ facultyData, name, forHOD = false }) => {
 
         // console.log(dim4.confidentialReport.principalRemarks)
         // console.log(data.feedbackMarks)
-        console.log(dim4)
+        // console.log(dim4)
         sendMarks(dim4)
-        // axios
-        //     .post("http://localhost:5000/api/faculty/appraisal/principal-review", {
-        //         yearofAssesment: facultyData.yearofAssesment,
-        //         fullName: facultyData.facultyName,
-        //         Dimension4: dim4,
-        //     })
-        //     .then((res) => {
-        //         console.log(res.data);
-        //         setStatus("Step Four Saved");
-        //         toast.success("Step Four Saved!", {
-        //             position: "top-center",
-        //             autoClose: 5000,
-        //             hideProgressBar: false,
-        //             closeOnClick: true,
-        //             pauseOnHover: true,
-        //             draggable: true,
-        //             progress: undefined,
-        //             theme: "light",
-        //         });
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //     });
     };
 
     function timeout(delay) {
@@ -75,7 +52,7 @@ const Report = ({ facultyData, name, forHOD = false }) => {
     }
 
     const sendMarks = async (dim4) => {
-        console.log(dim4);
+        // console.log(dim4);
         await axios
             .post("http://localhost:5000/api/faculty/appraisal/principal-review", {
                 yearofAssesment: facultyData.yearofAssesment,
@@ -83,7 +60,7 @@ const Report = ({ facultyData, name, forHOD = false }) => {
                 Dimension4: dim4,
             })
             .then(async (res) => {
-                console.log(res.data.Dimension4);
+                console.log("Dim4 = ",res.data.Dimension4);
                 toast.success("Marks Submitted!", {
                     position: "top-center",
                     autoClose: 1500,
@@ -91,9 +68,10 @@ const Report = ({ facultyData, name, forHOD = false }) => {
                     closeOnClick: true,
                     pauseOnHover: false,
                 });
-                await timeout(1500);
-                window.location.reload();
-
+                // await timeout(1500);
+                // window.location.reload();
+                setViewBonus(true);
+                // fetchReport();
             })
             .catch((err) => {
                 console.log(err);
@@ -318,6 +296,14 @@ const Report = ({ facultyData, name, forHOD = false }) => {
                         </button>
                     </div>
                 </form>
+                <div>
+                    {viewBonus && (
+                        <FinalTable facultyData={facultyData} change={change}/>
+                        // <div>
+                        //     Test Div
+                        // </div>
+                    )}
+                </div>
             </div>
         </div>
     );

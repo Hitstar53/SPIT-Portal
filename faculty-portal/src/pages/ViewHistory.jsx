@@ -847,7 +847,7 @@ const ViewHistory = () => {
                                         <tbody>
                                             <tr>
                                                 <td className="table-content table-data text-center align-middle">
-                                                    Dimension 1
+                                                    Academics
                                                 </td>
                                                 <td className="table-content table-data text-center align-middle">
                                                     {report.finalGrandTotal.dimension1.totalMarks.toFixed(
@@ -867,7 +867,7 @@ const ViewHistory = () => {
                                             </tr>
                                             <tr>
                                                 <td className="table-content table-data text-center align-middle">
-                                                    Dimension 2
+                                                Research and Development
                                                 </td>
                                                 <td className="table-content table-data text-center align-middle">
                                                     {report.finalGrandTotal.dimension2.totalMarks.toFixed(
@@ -887,7 +887,7 @@ const ViewHistory = () => {
                                             </tr>
                                             <tr>
                                                 <td className="table-content table-data text-center align-middle">
-                                                    Dimension 3
+                                                Administration and Outreach
                                                 </td>
                                                 <td className="table-content table-data text-center align-middle">
                                                     {report.finalGrandTotal.dimension3.totalMarks.toFixed(
@@ -907,7 +907,7 @@ const ViewHistory = () => {
                                             </tr>
                                             <tr>
                                                 <td className="table-content table-data text-center align-middle">
-                                                    Dimension 4
+                                                Perception/ 360 degree feedback
                                                 </td>
                                                 <td className="table-content table-data text-center align-middle">
                                                     {report.finalGrandTotal.dimension4.totalMarks.toFixed(
