@@ -219,3 +219,14 @@ exports.getUpcomingExams = asyncHandler(async(req,res) => {
         console.error(error)
     }
 })
+
+exports.updateUID = asyncHandler(async(req,res)=>{
+    const email = req.body.email
+    const uid = req.body.uid;
+    try{
+        await Profile.updateOne({emailID:email},{uid:uid})
+        res.status(200).json("UID updated successfully")
+    }catch(error){
+        console.error(error)
+    }
+})

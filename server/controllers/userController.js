@@ -24,7 +24,7 @@ exports.getUsers = asyncHandler(async (req, res) => {
                 const student = await new Student({
                     emailID: email, uid: 0, name: name, phone: '-', address: '-', dob: new Date(), religion: '-', blood: '-', gender: '-', linkedin: '-', github: '-', onGoingSemester: 1, cgpa: 0,role:"-", batch: '-', announcements: [],
                     mname: '-', mphone: '-', memail: '-', fname: '-', fphone: '-', femail: '-', class: '-', exams: [], educationalInfo: [{ type: "Current Degree", insName: "-", year: "-" , degree: "-", branch: "-", division: "-", semester: 0,batch:'-' , passingYear: 0, score: "0" }, { type: "Junior College", insName: "-", degree: "-", passingYear: 0, score: "0" }, { type: "School", insName: "-", degree: "-", passingYear: 0, score: "0" }], semester: [{semesterNumber:1,courses:[],sgpa:0,status:"Ongoing"},{semesterNumber:2,courses:[],sgpa:0,status:"Not Started"},{semesterNumber:3,courses:[],sgpa:0,status:"Not Started"},{semesterNumber:4,courses:[],sgpa:0,status:"Not Started"},{semesterNumber:5,courses:[],sgpa:0,status:"Not Started"},{semesterNumber:6,courses:[],sgpa:0,status:"Not Started"},{semesterNumber:7,courses:[],sgpa:0,status:"Not Started"},{semesterNumber:8,courses:[],sgpa:0,status:"Not Started"},], committee: [], participation: [], volunteerWork: [],
-                    skills: [], projects: [], research: [], internship: [],
+                    skills: [], projects: [], research: [], internship: [],mprofession:'-',fprofession:'-'
                 })
                 await student.save();
                 const user = await new User({

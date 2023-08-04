@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import CustAlert from '../UI/CustAlert'
+import TextField from "@mui/material/TextField";
 import Avatar from "@mui/material/Avatar";
 import { deepOrange } from '@mui/material/colors';
 import { LuEdit2 } from "react-icons/lu";
@@ -21,16 +22,6 @@ const ProfileHeader = (props) => {
     setOpen(false);
     navigate(0);
   };
-
-  // useEffect(() => {
-  //   const userInfo = JSON.parse(localStorage.getItem("userinfo"));
-  //   setName(userInfo?.name);
-  //   if (userInfo?.photo) {
-  //     setProfilePic(userInfo?.photo);
-  //   } else {
-  //     setProfilePic(profilePic);
-  //   }
-  // }, []);
 
   const handleFileUpload = async(e) =>{
     const file = e.target.files[0]
@@ -65,6 +56,21 @@ const ProfileHeader = (props) => {
     updateProfilePic();
   }
   
+  const [uid, setUid] = useState(profileInfo.uid);
+  const [edit, setEdit] = useState(false);
+
+  const handleClickEdit = () => {
+    if (!edit) {
+      setEdit(true);
+    } else {
+      setEdit(false);
+    }
+  };
+
+  const handleChange = (e) => {
+    setUid(e.target.value);
+  };
+  
   return (
     <div className={styles.header}>
       <div className={styles.img}>
@@ -90,7 +96,24 @@ const ProfileHeader = (props) => {
       </div>
       <div className={styles.title}>
         <h1> {profileInfo.name} </h1>
-        <h2> UID: {profileInfo.uid} </h2>
+        <div className='flex gap-4 items-center'>
+          {!edit && <h2> UID: {profileInfo.uid} </h2>}
+          {edit && (
+            <div>
+              <TextField
+                name="uid"
+                id="outlined-required"
+                label="uid"
+                type="text"
+                onChange={handleChange}
+                defaultValue={profileInfo.uid}
+              />
+            </div>
+          )}
+          <LuEdit2
+            onClick={handleClickEdit}
+          />
+        </div>
       </div>
       <CustAlert
         open={open}

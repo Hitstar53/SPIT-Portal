@@ -231,13 +231,14 @@ exports.getProjectsInfo = asyncHandler(async (req, res) => {
 
 
 exports.getInformation = asyncHandler(async (req, res) => {
-  const { year, branch, batch, cgpa } = req.body;
+  const { year, branch, batch, cgpa ,division } = req.body;
 
   const fieldMapping = {
     year: 'educationalInfo.0.year',
     branch: 'educationalInfo.0.branch',
     batch: 'educationalInfo.0.batch',
     cgpa: 'educationalInfo.0.score',
+    division:'educationalInfo.0.division'
   };
 
   const filter = {};
@@ -266,6 +267,7 @@ exports.getInformation = asyncHandler(async (req, res) => {
         branch: educationalInfo ? educationalInfo.branch : '',
         batch: educationalInfo ? educationalInfo.batch : '',
         cgpa: educationalInfo ? educationalInfo.score : '',
+        division: educationalInfo ? educationalInfo.division : '',
       };
     });
 
