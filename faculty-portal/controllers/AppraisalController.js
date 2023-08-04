@@ -262,6 +262,10 @@ const setAppraisal = asyncHandler(async (req, res) => {
         if (Dimension1.AP10.paper.length > 0) {
             averageAuditMarks = totalAuditMarks / Dimension1.AP10.paper.length;
         }
+
+        if (averageAuditMarks > 10) {
+            averageAuditMarks = 10;
+        }
         // ---------------------------------------------------------------------------------
 
         Dimension1.AP6.averageMarks = averageMenteeFeedback;
@@ -726,7 +730,10 @@ const setDim1 = asyncHandler(async (req, res) => {
             var totalAttendanceP5 = 0;
             var averageAttedanceAP5 = 0;
             var AP5Marks = 0;
-
+            var averagePercent = 0;
+            var totalTarget = 0;
+            var averagePercent2 = 0;
+            var finalAP3 = 0
             if (Dimension1.info.courses.length > 0) {
                 if (Dimension1.info.courses.length >= 4) {
                     avgAP1Marks = 10;
@@ -748,6 +755,10 @@ const setDim1 = asyncHandler(async (req, res) => {
                 // ---------------------------------------------------------------------
                 //AP3
                 for (var i = 0; i < Dimension1.info.courses.length; i++) {
+                    if (parseInt(Dimension1.info.courses[i].AP3LecturesTarget) == 0 || !Dimension1.info.courses[i].AP3LectureConducted || !Dimension1.info.courses[i].AP3LecturesTarget) {
+                        Dimension1.info.courses[i].AP3PercentAchieved = 0;
+                        continue;
+                    }
                     var averagePercent =
                         (parseInt(Dimension1.info.courses[i].AP3LectureConducted) /
                             parseInt(Dimension1.info.courses[i].AP3LecturesTarget)) *
@@ -755,34 +766,36 @@ const setDim1 = asyncHandler(async (req, res) => {
                     Dimension1.info.courses[i].AP3PercentAchieved = parseFloat(averagePercent.toFixed(2));
                 }
                 var totalTarget = 0;
-                var averagePercent = 0;
+                var averagePercent2 = 0;
                 for (var i = 0; i < Dimension1.info.courses.length; i++) {
                     totalTarget =
                         totalTarget + parseInt(Dimension1.info.courses[i].AP3PercentAchieved);
                 }
                 if (Dimension1.info.courses.length > 0) {
-                    averagePercent = totalTarget / Dimension1.info.courses.length;
+                    averagePercent2 = totalTarget / Dimension1.info.courses.length;
                 }
 
-                // if (averagePercent < 80) {
-                //     //To be discussed
-                //     Dimension1.info.AP3Marks = 0;
-                // }
-                if (averagePercent < 90) {
-                    Dimension1.info.AP3Marks = 3;
+                if (averagePercent2 < 80) {
+                    //To be discussed
+                    finalAP3 = 0;
                 }
-                if (averagePercent >= 90 && averagePercent < 95) {
-                    Dimension1.info.AP3Marks = 4;
+                if (averagePercent2 >= 80 && averagePercent2 < 90) {
+                    finalAP3 = 3;
                 }
-                if (averagePercent >= 95 && averagePercent <= 100) {
-                    Dimension1.info.AP3Marks = 5;
+                if (averagePercent2 >= 90 && averagePercent2 < 95) {
+                    finalAP3 = 4;
+                }
+                if (averagePercent2 >= 95 && averagePercent2 <= 100) {
+                    finalAP3 = 5;
                 }
                 // -----------------------------------------------------------------------------------
                 //AP4
 
                 for (var i = 0; i < Dimension1.info.courses.length; i++) {
-                    totalpercentAP4 =
-                        totalpercentAP4 + parseInt(Dimension1.info.courses[i].AP4PercentFeedback);
+                    if (Dimension1.info.courses[i].AP4PercentFeedback) {
+                        totalpercentAP4 =
+                            totalpercentAP4 + parseInt(Dimension1.info.courses[i].AP4PercentFeedback);
+                    }
                 }
                 if (Dimension1.info.courses.length > 0) {
                     averagePercentAP4 = totalpercentAP4 / Dimension1.info.courses.length;
@@ -790,18 +803,21 @@ const setDim1 = asyncHandler(async (req, res) => {
                 if (averagePercentAP4 > 30) {
                     averagePercentAP4 = 30;
                 }
-                console.log("Average Percent AP4: ", averagePercentAP4)
+                // console.log("Average Percent AP4: ", averagePercentAP4)
 
                 // -----------------------------------------------------------------------------------
                 //AP5
 
                 for (var i = 0; i < Dimension1.info.courses.length; i++) {
-                    totalAttendanceP5 =
-                        totalAttendanceP5 + parseInt(Dimension1.info.courses[i].AP5AttendanceStudent);
+                    if (Dimension1.info.courses[i].AP5AttendanceStudent) {
+                        totalAttendanceP5 = totalAttendanceP5 + parseInt(Dimension1.info.courses[i].AP5AttendanceStudent);
+                    }
                 }
                 averageAttedanceAP5 = totalAttendanceP5 / Dimension1.info.courses.length;
-
-                if (averageAttedanceAP5 >= 90 && averageAttedanceAP5 <= 100) {
+                if (averageAttedanceAP5 == 0) {
+                    AP5Marks = 0;
+                }
+                else if (averageAttedanceAP5 >= 90 && averageAttedanceAP5 <= 100) {
                     AP5Marks = 5;
                 } else if (averageAttedanceAP5 >= 80 && averageAttedanceAP5 < 90) {
                     AP5Marks = 4;
@@ -840,10 +856,11 @@ const setDim1 = asyncHandler(async (req, res) => {
             //AP8
 
             var ap8totalmarks = 0
+            console.log("Courses:", Dimension1.info.courses)
             for (var i = 0; i < Dimension1.AP8.remedialData.length; i++) {
-                if (Dimension1.info.courses[i].AP8ActivityRemedial != "Null") {
-                    ap8totalmarks = ap8totalmarks + 2.5;
-                }
+                // if (Dimension1.AP8.remedialData[i] != "Null") {
+                ap8totalmarks = ap8totalmarks + 2.5;
+                // }
             }
             if (ap8totalmarks > 5) {
                 ap8totalmarks = 5;
@@ -853,12 +870,14 @@ const setDim1 = asyncHandler(async (req, res) => {
 
             var ap9totalmarks = 0
             for (var i = 0; i < Dimension1.AP9.noteworthyData.length; i++) {
-                if (Dimension1.AP9.noteworthyData[i].activityDetails != "Null") {
-                    ap9totalmarks = ap9totalmarks + Dimension1.AP9.noteworthyData[i].marksOutOf10;
+                // if (Dimension1.AP9.noteworthyData[i].activityDetails != "Null") {
+                if (Dimension1.AP9.noteworthyData[i].marksOutOf10) {
+                    ap9totalmarks = ap9totalmarks + parseInt(Dimension1.AP9.noteworthyData[i].marksOutOf10);
                 }
+                // }
             }
             if (Dimension1.AP9.noteworthyData.length > 0) {
-                var ap9average = ap9totalmarks / Dimension1.info.courses.length;
+                var ap9average = ap9totalmarks / parseInt(Dimension1.AP9.noteworthyData.length);
                 if (ap9average > 10) {
                     ap9average = 10;
                 }
@@ -871,17 +890,23 @@ const setDim1 = asyncHandler(async (req, res) => {
             var totalAuditMarks = 0;
             var averageAuditMarks = 0;
             for (var i = 0; i < Dimension1.AP10.paper.length; i++) {
-                totalAuditMarks = totalAuditMarks + Dimension1.AP10.paper[i].marks;
-
+                if (Dimension1.AP10.paper[i].marks) {
+                    totalAuditMarks = totalAuditMarks + parseInt(Dimension1.AP10.paper[i].marks);
+                }
             }
             if (Dimension1.AP10.paper.length > 0) {
-                averageAuditMarks = totalAuditMarks / Dimension1.AP10.paper.length;
+                averageAuditMarks = totalAuditMarks / parseInt(Dimension1.AP10.paper.length);
+            }
+
+            if (averageAuditMarks > 10) {
+                averageAuditMarks = 10;
             }
             // ---------------------------------------------------------------------------------
             Dimension1.info.AP1Marks = parseFloat(avgAP1Marks.toFixed(2));
             Dimension1.info.AP2Average = parseFloat(avgAP2Marks.toFixed(2));
             Dimension1.info.AP2Marks = parseFloat(avgAP2Marks.toFixed(2));
             Dimension1.info.AP3Average = parseFloat(averagePercent.toFixed(2));
+            Dimension1.info.AP3Marks = parseFloat(finalAP3.toFixed(2));
             Dimension1.info.AP4Marks = parseFloat(averagePercentAP4.toFixed(2));
             Dimension1.info.AP5Average = parseFloat(averageAttedanceAP5.toFixed(2));
             Dimension1.info.AP5Marks = parseFloat(AP5Marks.toFixed(2));
@@ -890,13 +915,13 @@ const setDim1 = asyncHandler(async (req, res) => {
             Dimension1.AP8.totalMarks = parseFloat(ap8totalmarks.toFixed(2));
             Dimension1.AP9.average = parseFloat(ap9average.toFixed(2));
             Dimension1.AP10.averageMarks = parseFloat(averageAuditMarks.toFixed(2));
-            
+
             // ----------------------------------------------
             Dimension1.totalMarks = Dimension1.info.AP1Marks + Dimension1.info.AP2Marks + Dimension1.info.AP3Marks + Dimension1.info.AP4Marks + Dimension1.info.AP5Marks + Dimension1.AP6.averageMarks + Dimension1.AP7.totalMarks + Dimension1.AP8.totalMarks + Dimension1.AP9.average + Dimension1.AP10.averageMarks;
             if (Dimension1.totalMarks > 100) {
                 Dimension1.totalMarks = 100;
             }
-            console.log(Dimension1)
+            // console.log(Dimension1)
             updatedApp = await Appraisal.findOneAndUpdate(
                 { _id: existingFaculty._id },
                 {
@@ -1090,9 +1115,11 @@ const setDim2 = asyncHandler(async (req, res) => {
                     rp5marks = rp5marks + (1 * Dimension2.RP5.selfDevelopment[i].duration);
                 }
                 if (Dimension2.RP5.selfDevelopment[i].type === "MOOC") {
-                    rp5marks = rp5marks + (1 * (Dimension2.RP5.selfDevelopment[i].duration / 7));
+                    // console.log("Inside MOOC")
+                    rp5marks = rp5marks + (1 * parseInt((Dimension2.RP5.selfDevelopment[i].duration / 7)));
                 }
                 if (Dimension2.RP5.selfDevelopment[i].type === "Industry Internship") {
+                    // console.log("Inside Industry Internship")
                     rp5marks = rp5marks + (5 * (Dimension2.RP5.selfDevelopment[i].duration / 7));
                 }
             }
