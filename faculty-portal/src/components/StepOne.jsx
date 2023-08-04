@@ -74,7 +74,7 @@ const StepOne = ({ setDimension1, yr }) => {
           console.log("Response Data: ", res.data)
           setMarks({
             AP1: res.data.Dimension1.info.AP1Marks,
-            AP2: res.data.Dimension1.info.AP2Average,
+            AP2: res.data.Dimension1.info.AP2Marks,
             AP3: res.data.Dimension1.info.AP3Marks,
             AP4: res.data.Dimension1.info.AP4Marks,
             AP5: res.data.Dimension1.info.AP5Marks,

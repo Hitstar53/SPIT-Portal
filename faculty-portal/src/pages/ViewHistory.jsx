@@ -926,6 +926,14 @@ const ViewHistory = () => {
                                                 </td>
                                             </tr>
                                             <tr>
+                                                <td colSpan={3} className="table-content table-data text-center align-middle">
+                                                Bonus Marks Given By Principal
+                                                </td>
+                                                <td className="table-content table-data text-center align-middle">
+                                                    {report.Dimension4.confidentialReport.bonusMarks.toFixed(2)}
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td
                                                     className="table-content table-data text-center align-middle"
                                                     colSpan={3}
@@ -934,6 +942,17 @@ const ViewHistory = () => {
                                                 </td>
                                                 <td className="table-content table-data text-center align-middle">
                                                     {report.finalGrandTotal.GrandTotal.toFixed(2)}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td className="table-content table-data text-center align-middle">
+                                                    Principal Remarks
+                                                </td>
+                                                <td
+                                                    className="table-content table-data text-center align-middle"
+                                                    colSpan={3}
+                                                >
+                                                    {report.Dimension4.confidentialReport.principalComments}
                                                 </td>
                                             </tr>
                                         </tbody>
