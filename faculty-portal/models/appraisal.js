@@ -217,6 +217,9 @@ const appraisalSchema = new mongoose.Schema({
                     course: {
                         type: String,
                     },
+                    sem: {
+                        type: Number,
+                    },
                     marks: {
                         type: Number,
                         default: 0
