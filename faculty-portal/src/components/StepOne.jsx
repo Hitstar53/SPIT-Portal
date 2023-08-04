@@ -162,7 +162,7 @@ const StepOne = ({ setDimension1, yr }) => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
+    console.log("Sending Data",data);
     setDimension1(data);
     await axios
       .post("http://localhost:5000/api/faculty/appraisal/dim1", {
@@ -171,7 +171,7 @@ const StepOne = ({ setDimension1, yr }) => {
         Dimension1: data,
       })
       .then((res) => {
-        console.log(res.data);
+        console.log("On Submit = ",res.data);
         setMarks(res.data)
         toast.success("Step One Saved!", {
           position: "top-center",
