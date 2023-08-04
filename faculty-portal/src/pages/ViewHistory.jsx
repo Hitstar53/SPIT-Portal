@@ -690,7 +690,7 @@ const ViewHistory = () => {
                                         margin: "1em auto",
                                     }}
                                 >
-                                    <AllSteps fullName={nameForPrincipal} year={year3} isPrincipal={true} />
+                                    <AllSteps fullName={nameForPrincipal} year={year3} isPrincipal={!isHOD} />
                                 </div>
                             )}
                             <div
