@@ -574,7 +574,7 @@ function StepTwo({ setDimension2, yr }) {
                     <th className='table-header text-center align-middle'>Project Title/Consultancy</th>
                     <th className='table-header text-center align-middle'>Sponsoring Agency/Consultant</th>
                     <th className='table-header text-center align-middle'>Details (Govt/ Non-Govt)</th>
-                    <th className='table-header text-center align-middle'>Funded Amount in </th>
+                    <th className='table-header text-center align-middle'>Funded Amount in ₹</th>
                     <th className='table-header text-center align-middle'>Status</th>
                     <th className='table-header text-center align-middle'></th>
                   </tr>

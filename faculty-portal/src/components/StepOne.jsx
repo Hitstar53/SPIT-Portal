@@ -899,6 +899,9 @@ const StepOne = ({ setDimension1, yr }) => {
                           Paper Set for Course
                         </th>
                         <th className="table-header text-center align-middle">
+                          Sem
+                        </th>
+                        <th className="table-header text-center align-middle">
                           Marks in audit report
                         </th>
                         <th className="table-header text-center align-middle"></th>
@@ -918,6 +921,19 @@ const StepOne = ({ setDimension1, yr }) => {
                               })}
                               className="form-input"
                             />
+                          </td>
+                          <td className="text-center align-middle">
+                            <select
+                              defaultValue=""
+                              className="form-input"
+                              {...register(`AP10.paper[${index}].sem`)}
+                            >
+                              {options.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                  {option.label}
+                                </option>
+                              ))}
+                            </select>
                           </td>
                           <td className="text-center align-middle">
                             <input
