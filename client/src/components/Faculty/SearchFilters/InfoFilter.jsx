@@ -17,6 +17,16 @@ export default function InfoFilter(props) {
     <Box
       className="mt-2 flex flex-row justify-between gap-6 items-center flex-wrap"
       component="form"
+      sx={{
+        "& .MuiOutlinedInput-input": {
+          color: "var(--text-color) !important",
+        },
+        "& .MuiOutlinedInput-notchedOutline": {
+          borderColor: "var(--dark-override-color) !important",
+        },
+        "& .MuiInputLabel-root": { color: "var(--text-color) !important" },
+        "& .Mui-focused": { color: "var(--dark-override-color) !important" },
+      }}
       noValidate
       autoComplete="off"
       onSubmit={handleDataSubmit}

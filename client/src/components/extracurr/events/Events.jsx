@@ -89,7 +89,7 @@ const Events = () => {
         const data = await response.json();
         setAlertOpen(true);
         setSeverity("success");
-        setMessage("Project deleted successfully");
+        setMessage("Event participation deleted successfully");
       }
     };
     deleteEvent();

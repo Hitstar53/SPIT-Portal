@@ -176,7 +176,7 @@ const Activities = () => {
         const data = await response.json();
         setAlertOpen(true);
         setSeverity("success");
-        setMessage("Activity added successfully");
+        setMessage("Volunteer Work added successfully");
       }
     };
     updateVolunteerWork();
@@ -341,7 +341,7 @@ const Activities = () => {
               type="text"
               fullWidth
               variant="standard"
-              helperText="e.g. 2 months"
+              helperText="e.g. 2020-2020"
               onChange={handleVolDataChange}
             />
             <TextField

@@ -18,6 +18,16 @@ export default function Filter(props) {
       className="mt-2 flex flex-row justify-between gap-5 items-center flex-wrap"
       component="form"
       noValidate
+      sx={{
+        "& .MuiOutlinedInput-input": {
+          color: "var(--text-color) !important",
+        },
+        "& .MuiOutlinedInput-notchedOutline": {
+          borderColor: "var(--dark-override-color) !important",
+        },
+        "& .MuiInputLabel-root": { color: "var(--text-color) !important" },
+        "& .Mui-focused": { color: "var(--dark-override-color) !important" },
+      }}
       autoComplete="off"
       onSubmit={handleDataSubmit}
     >

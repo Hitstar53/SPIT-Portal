@@ -65,7 +65,7 @@ const ParentalInfo = (props) => {
         const data = await response.json();
         setOpen(true);
         setSeverity("success");
-        setMessage("Personal Information Updated Successfully");
+        setMessage("Parental Information Updated Successfully");
       }
     };
     updateParentalInfo();

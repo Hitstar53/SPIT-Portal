@@ -57,7 +57,7 @@ const EduCard = (props) => {
         const data = await response.json();
         setAlertOpen(true);
         setSeverity("success");
-        setMessage("Education Information Updated Successfully");
+        setMessage("Educational Information Updated Successfully");
       }
     };
     updateEduInfo();
