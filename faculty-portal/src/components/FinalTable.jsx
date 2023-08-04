@@ -39,15 +39,16 @@ const FinalTable = ({ facultyData, change }) => {
                     margin: "0em auto",
                     padding: "0.4em 0.4em",
                     width: "95%",
+                    height: "3rem",
                 }}
             >
-                <strong>
+                <h4 className='text-center text-2xl font-bold'>
                     {" "}
                     Perception Marks out of 100 (G) :{" "}
                     {
                         report.Dimension4.confidentialReport.perceptionMarks
                     }{" "}
-                </strong>
+                </h4>
             </div>
             <table
                 style={{
