@@ -128,8 +128,8 @@ export default function FacultyStepper() {
           <>
             <Stack sx={{ width: "100%", margin:"1rem 0", textAlign:'left' }} spacing={2}>
               <Alert severity="error">
-                <AlertTitle><h4 style={{fontWeight:'bolder'}}>Appraisal resended By HOD</h4></AlertTitle>
-                <h4 style={{fontWeight:'bolder'}}>Message : {comments[comments.length - 1]}</h4>
+                <AlertTitle><h4 style={{fontWeight:'bolder',fontSize:'23px'}}>Appraisal resended By HOD</h4></AlertTitle>
+                <h4 style={{fontWeight:'bolder',fontSize:'20px'}}>Message : {comments[comments.length - 1]}</h4>
               </Alert>
             </Stack>
           </>
