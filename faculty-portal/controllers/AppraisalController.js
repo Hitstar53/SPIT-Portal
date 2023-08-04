@@ -1570,7 +1570,55 @@ const getMarksDim1 = asyncHandler(async (req, res) => {
 })
 
 const principalSubmit = asyncHandler(async (req, res) => {
-    
+    console.log("inside principal submit")
+    try {
+        const { yearofAssesment, fullName, Dimension4 } = req.body;
+        var updatedApp = null;
+        //console.log(Dimension4)
+        Dimension4.feedbackMarks.E = parseInt(Dimension4.feedbackMarks.A) + parseInt(Dimension4.feedbackMarks.B) + parseInt(Dimension4.feedbackMarks.C);
+        Dimension4.confidentialReport.perceptionMarks = Dimension4.feedbackMarks.E * Dimension4.confidentialReport.principalRemarks;
+
+        const existingFaculty = await Appraisal.findOne({
+            facultyName: fullName,
+            yearofAssesment: yearofAssesment,
+        });
+
+        if (existingFaculty) {
+            updatedApp = await Appraisal.findOneAndUpdate(
+                { _id: existingFaculty._id },
+                { $set: { Dimension4: Dimension4, principalReviewed: true } }
+            );
+        } else {
+            return res.status(404).json("Faculty Not Found In setDim4")
+        }
+
+        updatedApp = await Appraisal.findOne(
+            { _id: existingFaculty._id }
+        )
+        console.log(updatedApp.finalGrandTotal)
+        console.log(updatedApp.Dimension4.totalMarks)
+        updatedApp.finalGrandTotal.dimension1.totalMarks = updatedApp.Dimension1.totalMarks;
+        updatedApp.finalGrandTotal.dimension2.totalMarks = updatedApp.Dimension2.totalMarks;
+        updatedApp.finalGrandTotal.dimension3.totalMarks = updatedApp.Dimension3.totalMarks;
+        updatedApp.finalGrandTotal.dimension4.totalMarks = updatedApp.Dimension4.confidentialReport.perceptionMarks;
+
+        updatedApp.finalGrandTotal.dimension1.finalMarks = updatedApp.finalGrandTotal.dimension1.totalMarks * updatedApp.finalGrandTotal.dimension1.multiplyingFactor;
+        updatedApp.finalGrandTotal.dimension2.finalMarks = updatedApp.finalGrandTotal.dimension2.totalMarks * updatedApp.finalGrandTotal.dimension2.multiplyingFactor;
+        updatedApp.finalGrandTotal.dimension3.finalMarks = updatedApp.finalGrandTotal.dimension3.totalMarks * updatedApp.finalGrandTotal.dimension3.multiplyingFactor;
+        updatedApp.finalGrandTotal.dimension4.finalMarks = updatedApp.finalGrandTotal.dimension4.totalMarks * updatedApp.finalGrandTotal.dimension4.multiplyingFactor;
+
+        updatedApp.finalGrandTotal.GrandTotal = updatedApp.finalGrandTotal.dimension1.finalMarks + updatedApp.finalGrandTotal.dimension2.finalMarks + updatedApp.finalGrandTotal.dimension3.finalMarks + updatedApp.finalGrandTotal.dimension4.finalMarks;
+
+        //console.log(updatedApp)
+        updatedApp = await Appraisal.findOneAndUpdate(
+            { _id: existingFaculty._id },
+            { $set: { finalGrandTotal: updatedApp.finalGrandTotal } }
+        );
+        res.status(200).json(updatedApp);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 })
 
 module.exports = {
@@ -1589,5 +1637,6 @@ module.exports = {
     isSubmittedTeacher,
     setHodComments,
     getHodComments,
-    getAllHODAppraisal
+    getAllHODAppraisal,
+    principalSubmit
 }

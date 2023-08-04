@@ -710,13 +710,20 @@ const appraisalSchema = new mongoose.Schema({
                 type: Number,
                 default: 0,
             },
+
             perceptionMarks: {
                 type: Number,
                 default: 0,
             },
-            // grandTotal: {
-            //     type: Number
-            // },
+
+            principalComments: {
+                type: String,
+            },
+            
+            bonusMarks: {
+                type: Number,
+                default: 0,
+            },
         },
     },
 
@@ -799,15 +806,6 @@ const appraisalSchema = new mongoose.Schema({
     HODcomments: [{
         type: String,
     }],
-
-    principalComments: {
-        type: String,
-    },
-
-    bonusMarks: {
-        type: Number,
-        default: 0,
-    },
 
 });
 

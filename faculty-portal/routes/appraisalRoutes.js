@@ -17,6 +17,7 @@ const {
   setHodComments,
   getHodComments,
   getAllHODAppraisal,
+  principalSubmit,
 } = require("../controllers/AppraisalController");
 
 router.post("/", setAppraisal);
@@ -28,7 +29,7 @@ router.post("/dim3", setDim3);
 router.post("/get/dim3", getDim3);
 router.post("/hodreview", setDim4HOD);
 router.post("/principal-review", setDim4Principal);
-router.post("/principal-submit", )
+router.post("/principal-submit", principalSubmit)
 router.post("/get/dim4", getDim4);
 router.post("/getappraisal", getAppraisal);
 router.post("/getallappraisal", getAllAppraisal);
