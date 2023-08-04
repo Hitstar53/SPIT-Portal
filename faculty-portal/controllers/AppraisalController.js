@@ -1608,7 +1608,10 @@ const principalSubmit = asyncHandler(async (req, res) => {
         updatedApp.finalGrandTotal.dimension4.finalMarks = updatedApp.finalGrandTotal.dimension4.totalMarks * updatedApp.finalGrandTotal.dimension4.multiplyingFactor;
 
         updatedApp.finalGrandTotal.GrandTotal = updatedApp.finalGrandTotal.dimension1.finalMarks + updatedApp.finalGrandTotal.dimension2.finalMarks + updatedApp.finalGrandTotal.dimension3.finalMarks + updatedApp.finalGrandTotal.dimension4.finalMarks;
-
+        updatedApp.finalGrandTotal.GrandTotal = updatedApp.finalGrandTotal.GrandTotal + updatedApp.Dimension4.confidentialReport.bonusMarks
+        if (updatedApp.finalGrandTotal.GrandTotal > 100) {
+            updatedApp.finalGrandTotal.GrandTotal = 100
+        }
         //console.log(updatedApp)
         updatedApp = await Appraisal.findOneAndUpdate(
             { _id: existingFaculty._id },
