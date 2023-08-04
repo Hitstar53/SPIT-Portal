@@ -39,6 +39,12 @@ const ViewHistory = () => {
     const [years3, setYears3] = useState([]);
     const [notFound, setNotFound] = useState(false);
     const [principalDepartment, setPrincipalDepartment] = useState("");
+    const [toggle, setToggle] = useState(false);
+
+    function togglecheckbox(e) {
+        console.log(e.target.checked)
+        setToggle(e.target.checked)
+    }
 
     const [facultyName, setfacultyName] = useState([]);
     // const pdfExportComponent = useRef(null);
@@ -326,7 +332,6 @@ const ViewHistory = () => {
             } */}
             {user.designation === "HOD" && (
                 <>
-                    {console.log("Inside HOD")}
                     <div
                         style={{
                             display: "flex flex-col items-center justify-center",
@@ -407,6 +412,25 @@ const ViewHistory = () => {
                     <div>
                         {Dim4 ? (
                             <>
+                                <div className="switch-container">
+                                    {/* <h4>Hide Previous Dimensions</h4> */}
+                                    <label class="switch">
+                                        <input type="checkbox" value={toggle} onChange={togglecheckbox} />
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <h4>Show Previous Dimensions</h4>
+                                </div>
+                                {toggle && (
+                                    <div
+                                        style={{
+                                            width: "95%",
+                                            border: "1px solid black",
+                                            margin: "1em auto",
+                                        }}
+                                    >
+                                        <AllSteps fullName={name} year={year2} />
+                                    </div>
+                                )}
                                 <div
                                     ref={elementRefHOD}
                                     style={{
@@ -576,8 +600,6 @@ const ViewHistory = () => {
             {user.designation === "Principal" && (
                 <div className="flex flex-col items-center justify-center gap-4">
                     {/* Principal content */}
-                    {/* {/* <h1>Principal</h1> */}
-                    {/* <p>Welcome, Principal!</p> */}
                     <div className="flex flex-col items-center justify-evenly m-4">
                         <form
                             className="flex items-center justify-center"
@@ -867,7 +889,7 @@ const ViewHistory = () => {
                                             </tr>
                                             <tr>
                                                 <td className="table-content table-data text-center align-middle">
-                                                Research and Development
+                                                    Research and Development
                                                 </td>
                                                 <td className="table-content table-data text-center align-middle">
                                                     {report.finalGrandTotal.dimension2.totalMarks.toFixed(
@@ -887,7 +909,7 @@ const ViewHistory = () => {
                                             </tr>
                                             <tr>
                                                 <td className="table-content table-data text-center align-middle">
-                                                Administration and Outreach
+                                                    Administration and Outreach
                                                 </td>
                                                 <td className="table-content table-data text-center align-middle">
                                                     {report.finalGrandTotal.dimension3.totalMarks.toFixed(
@@ -907,7 +929,7 @@ const ViewHistory = () => {
                                             </tr>
                                             <tr>
                                                 <td className="table-content table-data text-center align-middle">
-                                                Perception/ 360 degree feedback
+                                                    Perception/ 360 degree feedback
                                                 </td>
                                                 <td className="table-content table-data text-center align-middle">
                                                     {report.finalGrandTotal.dimension4.totalMarks.toFixed(
