@@ -674,6 +674,25 @@ const ViewHistory = () => {
 
                     {report && (
                         <>
+                            <div className="switch-container">
+                                {/* <h4>Hide Previous Dimensions</h4> */}
+                                <label class="switch">
+                                    <input type="checkbox" value={toggle} onChange={togglecheckbox} />
+                                    <span class="slider round"></span>
+                                </label>
+                                <h4>Show Previous Dimensions</h4>
+                            </div>
+                            {toggle && (
+                                <div
+                                    style={{
+                                        width: "95%",
+                                        border: "1px solid black",
+                                        margin: "1em auto",
+                                    }}
+                                >
+                                    <AllSteps fullName={nameForPrincipal} year={year3} isPrincipal={true} />
+                                </div>
+                            )}
                             <div
                                 ref={elementRefPrincipal}
                                 style={{
