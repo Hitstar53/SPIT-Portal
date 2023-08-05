@@ -8,7 +8,7 @@ import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import HistoryIcon from '@mui/icons-material/History';
 import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
 
-export const SideBarData = [
+export const TeacherSideBar = [
   {
     title: 'Home',
     icon: <HomeIcon />,

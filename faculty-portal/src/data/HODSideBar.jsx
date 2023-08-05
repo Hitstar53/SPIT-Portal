@@ -7,8 +7,9 @@ import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstruct
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import HistoryIcon from '@mui/icons-material/History';
 import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
+import ArticleIcon from '@mui/icons-material/Article';
 
-export const SideBarData = [
+export const HODSideBar = [
   {
     title: 'Home',
     icon: <HomeIcon />,
@@ -38,6 +39,11 @@ export const SideBarData = [
     title: 'Appraisal',
     icon: <InsertDriveFileIcon />,
     path: '/appraisal',
+  },
+  {
+    title: 'Dept Appraisal',
+    icon: <ArticleIcon />,
+    path: '/dept_appraisal',
   },
   {
     title: 'History',

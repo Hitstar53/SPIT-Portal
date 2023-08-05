@@ -940,7 +940,6 @@ const StepOne = ({ setDimension1, yr }) => {
                               type="number"
                               onWheel={(e) => e.target.blur()}
                               {...register(`AP10.paper[${index}].marks`, {
-                                required: true,
                               })}
                               className="form-input"
                             />

@@ -367,10 +367,11 @@ function StepTwo({ setDimension2, yr }) {
                       </td>
                       <td>
                         <label className="form-label">
-                          <input
+                          <textarea
                             type="text"
+                            placeholder="Details"
                             {...register(`RP2.patents[${index}].details`)}
-                            className="form-input"
+                            className="form-textarea w-full"
                           />
                         </label>
                       </td>
@@ -526,10 +527,11 @@ function StepTwo({ setDimension2, yr }) {
 
                       <td>
                         <label className="form-label">
-                          <input
+                          <textarea
+                            placeholder="Details"
                             type="text"
                             {...register(`RP2.moocs[${index}].details`)}
-                            className="form-input"
+                            className="form-textarea w-full"
                           />
                         </label>
                       </td>
@@ -614,10 +616,11 @@ function StepTwo({ setDimension2, yr }) {
 
                       <td>
                         <label className="form-label">
-                          <input
+                          <textarea
+                            placeholder="Details"
                             type="text"
                             {...register(`RP3.sponsored[${index}].details`)}
-                            className="form-input"
+                            className="form-textarea w-full"
                           />
                         </label>
                       </td>
@@ -730,12 +733,13 @@ function StepTwo({ setDimension2, yr }) {
 
                       <td>
                         <label className="form-label">
-                          <input
+                          <textarea
+                            placeholder="Details"
                             type="text"
                             {...register(
                               `RP5.selfDevelopment[${index}].organization`
                             )}
-                            className="form-input"
+                            className="form-textarea w-full"
                           />
                         </label>
                       </td>
@@ -832,10 +836,11 @@ function StepTwo({ setDimension2, yr }) {
 
                       <td>
                         <label className="form-label">
-                          <input
+                          <textarea
+                            placeholder="Details"
                             type="text"
                             {...register(`RP6.softHardDev[${index}].details`)}
-                            className="form-input"
+                            className="form-textarea w-full"
                           />
                         </label>
                       </td>
@@ -899,12 +904,13 @@ function StepTwo({ setDimension2, yr }) {
 
                       <td>
                         <label className="form-label">
-                          <input
+                          <textarea
+                            placeholder="Details"
                             type="text"
                             {...register(
                               `RP7.activityNotCovered[${index}].details`
                             )}
-                            className="form-input"
+                            className="form-textarea w-full"
                           />
                         </label>
                       </td>

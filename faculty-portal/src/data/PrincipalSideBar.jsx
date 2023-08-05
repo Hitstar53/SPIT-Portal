@@ -7,8 +7,9 @@ import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstruct
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import HistoryIcon from '@mui/icons-material/History';
 import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
+import ArticleIcon from '@mui/icons-material/Article';
 
-export const SideBarData = [
+export const PrincipalSideBar = [
   {
     title: 'Home',
     icon: <HomeIcon />,
@@ -35,14 +36,14 @@ export const SideBarData = [
   //   path: '/mini-proj',
   // },
   {
-    title: 'Appraisal',
-    icon: <InsertDriveFileIcon />,
-    path: '/appraisal',
-  },
-  {
-    title: 'History',
-    icon: <HistoryIcon />,
-    path: '/view-history',
-  },
+      title: 'History',
+      icon: <HistoryIcon />,
+      path: '/view-history',
+    },
+    {
+      title: 'View Appraisal',
+      icon: <ArticleIcon/>,
+      path: '/all_appraisall',
+    },
   
 ];

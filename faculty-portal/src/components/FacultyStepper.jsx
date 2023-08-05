@@ -53,6 +53,17 @@ export default function FacultyStepper() {
     console.log("Dimension4=", Dimension4);
   }, [Dimension4]);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+    useEffect(() => {
+      scrollToTop();
+    }, [activeStep]);
+
   var yr = getDate();
   function getDate() {
     const year = new Date().getFullYear();
