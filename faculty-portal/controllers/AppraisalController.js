@@ -1112,7 +1112,7 @@ const setDim2 = asyncHandler(async (req, res) => {
             var rp5marks = 0
             for (var i = 0; i < Dimension2.RP5.selfDevelopment.length; i++) {
                 if (Dimension2.RP5.selfDevelopment[i].type === "STTP" || Dimension2.RP5.selfDevelopment[i].type === "FDP") {
-                    rp5marks = rp5marks + (1 * Dimension2.RP5.selfDevelopment[i].duration);
+                    rp5marks = rp5marks + parseInt((1 * Dimension2.RP5.selfDevelopment[i].duration));
                 }
                 if (Dimension2.RP5.selfDevelopment[i].type === "MOOC") {
                     // console.log("Inside MOOC")
@@ -1120,7 +1120,7 @@ const setDim2 = asyncHandler(async (req, res) => {
                 }
                 if (Dimension2.RP5.selfDevelopment[i].type === "Industry Internship") {
                     // console.log("Inside Industry Internship")
-                    rp5marks = rp5marks + (5 * (Dimension2.RP5.selfDevelopment[i].duration / 7));
+                    rp5marks = rp5marks + (5 * parseInt((Dimension2.RP5.selfDevelopment[i].duration / 7)));
                 }
             }
 
