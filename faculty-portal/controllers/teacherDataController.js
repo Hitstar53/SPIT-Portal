@@ -18,7 +18,7 @@ exports.updateFaculty = asyncHandler(async (req, res) => {
     console.log(email);
     try {
         var facultyDetails = await Faculty.updateOne({ email: email }, req.body);
-        var newDet = await Faculty.findOne({ email: email });
+        var newDet = await Faculty.findOne({ email: email.trim() });
         console.log(newDet);
         res.status(200).json(newDet);
     }
