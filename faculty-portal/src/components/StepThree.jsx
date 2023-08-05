@@ -470,7 +470,7 @@ function StepThree({ setDimension3, yr }) {
                     {/* <label className="form-label">Dates</label> */}
                     <td>
                       <input
-                        type="text"
+                        type="date"
                         placeholder="Dates"
                         className="form-input"
                         {...register(`Invited.invitedAt[${index}].dates`)}
@@ -662,7 +662,7 @@ function StepThree({ setDimension3, yr }) {
                     {/* <label className="form-label">Organised</label> */}
                     <td>
                       <input
-                        type="text"
+                        type="date"
                         placeholder="Dates"
                         className="form-input"
                         {...register(`op4.invitedTalk[${index}].industryName`)}
@@ -774,7 +774,7 @@ function StepThree({ setDimension3, yr }) {
                     {/* <label className="form-label">Date</label> */}
                     <td>
                       <input
-                        type="text"
+                        type="date"
                         placeholder="Date"
                         className="form-input"
                         {...register(`Partof.committee[${index}].date`)}

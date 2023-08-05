@@ -587,7 +587,7 @@ function StepTwo({ setDimension2, yr }) {
                       <td>
                         <label className="form-label">
                           <input
-                            type="text"
+                            type="date"
                             {...register(`RP3.sponsored[${index}].date`)}
                             className="form-input"
                           />
@@ -747,7 +747,7 @@ function StepTwo({ setDimension2, yr }) {
                       <td>
                         <label className="form-label">
                           <input
-                            type="text"
+                            type="date"
                             {...register(`RP5.selfDevelopment[${index}].dates`)}
                             className="form-input"
                           />
@@ -893,7 +893,7 @@ function StepTwo({ setDimension2, yr }) {
                       <td>
                         <label className="form-label">
                           <input
-                            type="text"
+                            type="date"
                             {...register(
                               `RP7.activityNotCovered[${index}].date`
                             )}
