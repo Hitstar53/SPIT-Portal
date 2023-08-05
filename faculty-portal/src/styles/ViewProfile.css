@@ -100,7 +100,7 @@ section{
     /* width: 100%; */
     /* margin: 0 auto;  */
     padding: 30px;
-    flex: 0;
+    /* flex: 0; */
 }
 .info-head{
     font-weight: 900;

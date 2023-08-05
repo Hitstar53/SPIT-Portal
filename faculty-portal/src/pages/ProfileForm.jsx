@@ -214,7 +214,7 @@ export default function ProfileForm() {
               <div className="input-box">
                 <label>
                   Aadhar Card Number:
-                  <input {...register("aadharCardNumber")} />
+                  <input type="number" {...register("aadharCardNumber")} />
                 </label>
               </div>
 
