@@ -111,14 +111,14 @@ export default function ProfileForm() {
               <div className="input-box">
                 <label>
                   Date of Birth:
-                  <input {...register("dateOfBirth")} />
+                  <input type="date" {...register("dateOfBirth")} />
                 </label>
               </div>
 
               <div className="input-box">
                 <label>
                   Date of Joining:
-                  <input {...register("dateOfJoining")} />
+                  <input type='date' {...register("dateOfJoining")} />
                 </label>
               </div>
 
