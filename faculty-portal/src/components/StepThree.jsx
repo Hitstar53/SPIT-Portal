@@ -338,7 +338,7 @@ function StepThree({ setDimension3, yr }) {
                     Sponsering Agency
                   </th>
                   <th className="table-header text-center align-middle">
-                    Funds
+                    Funds in ₹
                   </th>
                   <th className="table-header text-center align-middle">
                     No. of days
@@ -550,7 +550,7 @@ function StepThree({ setDimension3, yr }) {
                     Sponsering Agency
                   </th>
                   <th className="table-header text-center align-middle">
-                    Funded Amount
+                    Funded Amount in ₹
                   </th>
                   <th className="table-header text-center align-middle">
                     No. of days
