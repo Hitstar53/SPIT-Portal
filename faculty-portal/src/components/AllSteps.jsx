@@ -523,7 +523,7 @@ export default function AllSteps({
             }}
           >
             <strong>
-              Total Marks of Dimension 1 : {history.Dimension1.totalMarks}{" "}
+              Total Marks of Dimension 1 Out of 100 : {history.Dimension1.totalMarks}{" "}
             </strong>
           </div>
           {/* //Dimension2 Starts Here */}
@@ -1199,7 +1199,7 @@ export default function AllSteps({
                 );
               })}
               <th colSpan={10} className="table-heading">
-                Total Marks : {history.Dimension3.ngo.totalMarks}
+                Total Marks Out of 100 : {history.Dimension3.ngo.totalMarks}
               </th>
             </tbody>
           </table>
@@ -1283,6 +1283,34 @@ export default function AllSteps({
             <strong>
               Total Marks Dimension 3 : {history.Dimension3.totalMarks}
             </strong>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+              margin: "7em 2em",
+              marginBottom: "1em",
+            }}
+          >
+            <div
+              style={{
+                borderTop: "1px solid black",
+                width: "15%",
+                textAlign: "center",
+              }}
+            >
+              Signature
+            </div>
+            <div
+              style={{
+                borderTop: "1px solid black",
+                width: "15%",
+                textAlign: "center",
+              }}
+            >
+              Date
+            </div>
           </div>
           {isPrincipal && (
             <>
