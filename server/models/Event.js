@@ -8,6 +8,9 @@ const eventSchema = mongoose.Schema({
 {
     collection: 'Event'
 })
+
+eventSchema.index({ endDate: 1 }, { expireAfterSeconds: 0 });
+
 const Event = mongoose.model('Event', eventSchema);
 
 module.exports = Event;
