@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import CustAlert from '../UI/CustAlert'
 import TextField from "@mui/material/TextField";
@@ -7,6 +7,8 @@ import { deepOrange } from '@mui/material/colors';
 import { LuEdit2 } from "react-icons/lu";
 import styles from './ProfileHeader.module.css'
 import ServerUrl from '../../constants';
+import { FaEdit, FaSave } from 'react-icons/fa';
+import { Box, Fab } from '@mui/material';
 
 const ProfileHeader = (props) => {
   const [profileInfo, setProfileInfo] = useState(props.info);
@@ -58,7 +60,7 @@ const ProfileHeader = (props) => {
   
   const [uid, setUid] = useState(profileInfo.uid);
   const [edit, setEdit] = useState(false);
-
+  const fileRef = useRef(null)
   const handleClickEdit = () => {
     if (!edit) {
       setEdit(true);
@@ -70,9 +72,53 @@ const ProfileHeader = (props) => {
   const handleChange = (e) => {
     setUid(e.target.value);
   };
-  
+  const handleUIDUpload = (e) =>{
+    e.preventDefault()
+    setEdit(false)
+    const updateUID = async () => {
+      const response = await fetch(
+        `${ServerUrl}/api/student/updateUID`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: JSON.parse(localStorage.getItem("userinfo")).email,
+            uid: uid,
+          }),
+        }
+      );
+      if (!response.ok) {
+        setOpen(true);
+        setSeverity("error");
+        setMessage("Something went wrong, please try again later");
+      }
+      if (response.ok) {
+        const data = await response.json();
+        setOpen(true);
+        setSeverity("success");
+        setMessage("UID Updated Successfully");
+      }
+    };
+    updateUID();
+  }
   return (
-    <div className={styles.header}>
+    <Box 
+      sx={{
+        "& .MuiOutlinedInput-input": {
+          color: "var(--text-color) !important",
+        },
+        "& .MuiOutlinedInput-notchedOutline": {
+          borderColor: "var(--dark-override-color) !important",
+        },
+        "& .MuiInputLabel-root": { color: "var(--text-color) !important" },
+        "& .Mui-focused": { color: "var(--dark-override-color) !important" },
+      }}
+      className={styles.header}
+      component="form"
+      onSubmit={handleUIDUpload}
+    >
       <div className={styles.img}>
         <Avatar
           sx={{ width: 150, height: 150, bgcolor: deepOrange[500] }}
@@ -82,13 +128,13 @@ const ProfileHeader = (props) => {
         <div className={styles.edit}>
           <input
             type="file"
-            id="profile_photo_input"
+            ref={fileRef}
             style={{ display: "none" }}
             onChange={handleFileUpload}
           />
           <LuEdit2
             onClick={() => {
-              document.getElementById("profile_photo_input").click();
+              fileRef.current.click();
             }}
             className={styles.editIcon}
           />
@@ -103,16 +149,39 @@ const ProfileHeader = (props) => {
               <TextField
                 name="uid"
                 id="outlined-required"
-                label="uid"
+                label="UID"
                 type="text"
                 onChange={handleChange}
                 defaultValue={profileInfo.uid}
               />
             </div>
           )}
-          <LuEdit2
-            onClick={handleClickEdit}
-          />
+{!edit ? (
+          <FaEdit onClick={handleClickEdit} className={styles.titleIcon} />
+        ) : (
+          <Fab
+            type="submit"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              fontWeight: "bold",
+              borderRadius: "10px",
+              backgroundColor: "var(--secondary-color)",
+              color: "var(--text-color)",
+              padding: "0.5rem 1rem",
+              ":hover": {
+                backgroundColor: "var(--secondary-color)",
+              },
+            }}
+            variant="extended"
+            size="small"
+            aria-label="add"
+          >
+            <FaSave />
+            Save
+          </Fab>
+        )}
         </div>
       </div>
       <CustAlert
@@ -121,7 +190,7 @@ const ProfileHeader = (props) => {
         severity={severity}
         message={message}
       />
-    </div>
+    </Box>
   );
 }
 
