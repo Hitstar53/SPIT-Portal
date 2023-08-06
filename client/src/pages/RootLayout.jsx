@@ -18,7 +18,7 @@ const RootLayout = () => {
 
     React.useEffect(() => {
       const flag = localStorage.getItem("isLoggedIn");
-      console.log(flag);
+      // console.log(flag);
       if (flag === "true") {
         setIsLoggedIn(true);
       } else {

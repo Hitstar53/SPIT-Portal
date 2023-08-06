@@ -78,7 +78,7 @@ export async function loader() {
     const parentalData = await response2.json();
     const profileHeaderData = await response3.json();
     const eduData = await response4.json();
-    console.log(personalData)
+    // console.log(personalData)
     return { profileHeaderData, personalData, parentalData, eduData };
   }
 }

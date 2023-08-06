@@ -70,6 +70,18 @@ const branchOptions = [
   { name: "IT", value: "IT" },
 ]
 
+const divisionOptions = [
+  { name: "All", value: "All" },
+  { name: "A", value: "A" },
+  { name: "B", value: "B" },
+  { name: "C", value: "C" },
+  { name: "D", value: "D" },
+  { name: "E", value: "E" },
+  { name: "F", value: "F" },
+  { name: "G", value: "G" },
+  { name: "H", value: "H" },
+]
+
 const batchOptions = [
   { name: "All", value: "All" },
   { name: "A", value: "A" },
@@ -98,6 +110,11 @@ const headCells = [
     id: "branch",
     numeric: false,
     label: "Branch",
+  },
+  {
+    id: "division",
+    numeric: false,
+    label: "Division",
   },
   {
     id: "batch",
@@ -132,6 +149,7 @@ const Info = () => {
         body: JSON.stringify({
           year: filterData.type === "All" ? "" : filterData.type,
           branch: filterData.branch === "All" ? "" : filterData.branch,
+          division: filterData.division === "All" ? "" : filterData.division,
           batch: filterData.batch === "All" ? "" : filterData.batch,
           cgpa: filterData.cgpa,
         }),
@@ -141,7 +159,7 @@ const Info = () => {
       }
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         setNewRows(data);
       }
       setIsLoading(false);
@@ -156,6 +174,7 @@ const Info = () => {
       <InfoFilter
         options={options}
         branchOptions={branchOptions}
+        divisionOptions={divisionOptions}
         batchOptions={batchOptions}
         filters={filters}
         onSubmit={onFilterSubmit}

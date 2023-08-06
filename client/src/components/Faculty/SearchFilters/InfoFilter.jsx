@@ -69,6 +69,23 @@ export default function InfoFilter(props) {
           })}
         </TextField>
         <TextField
+          name="division"
+          id="outlined-required"
+          select
+          size="small"
+          sx={{
+            width: "12rem",
+            color: "var(--text-color)",
+            background: "var(--bg-color-2)",
+          }}
+          label="Select Division"
+          onChange={handleDataChange}
+        >
+          {props.divisionOptions.map((item) => {
+            return <MenuItem value={item.value}>{item.name}</MenuItem>;
+          })}
+        </TextField>
+        <TextField
           name="batch"
           id="outlined-required"
           select

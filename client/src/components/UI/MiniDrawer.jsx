@@ -268,7 +268,7 @@ export default function MiniDrawer({ open,setOpen }) {
   }, []);
 
   const fetchUserInfo = async () => {
-    console.log(JSON.parse(localStorage.getItem("userinfo")).email);
+    // console.log(JSON.parse(localStorage.getItem("userinfo")).email);
     const response = await fetch(
       `${ServerUrl}/api/student/getMiniDrawer`,
       {
@@ -355,40 +355,12 @@ export default function MiniDrawer({ open,setOpen }) {
                 </>
               )}
             </span>
-            <span
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-              }}
-            >
-              <Avatar
-                onClick={profileHandler}
-                sx={{ width: 50, height: 50, cursor: "pointer" }}
-                alt={name}
-                src={picture}
-              />
-              {/* <Badge badgeContent={3} color="primary">
-                <NavLink
-                  to="notifications"
-                  className={({ isActive }) =>
-                    isActive ? "notifActive" : "notifInactive"
-                  }
-                >
-                  <NotificationsIcon
-                    sx={{
-                      cursor: "pointer",
-                      color: "var(--text-light)",
-                      width: 25,
-                      height: 25,
-                      "&:hover": {
-                        opacity: 1,
-                      },
-                    }}
-                  />
-                </NavLink>
-              </Badge> */}
-            </span>
+            <Avatar
+              onClick={profileHandler}
+              sx={{ width: 50, height: 50, cursor: "pointer" }}
+              alt={name}
+              src={picture}
+            />
           </Typography>
         </Toolbar>
       </AppBar>
@@ -407,13 +379,13 @@ export default function MiniDrawer({ open,setOpen }) {
             }}
           >
             <Avatar sx={{ width: 50, height: 50 }} alt="logo" src={logo} />
-            <span>
+            <div>
               <span style={{ fontSize: 18 }}>SPIT</span>
               <br />
               <span style={{ fontSize: 14, marginRight: 20 }}>
                 Student Portal
               </span>
-            </span>
+            </div>
           </h1>
           <IconButton
             sx={{ color: "var(--text-light)" }}

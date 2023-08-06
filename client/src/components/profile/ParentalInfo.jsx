@@ -234,7 +234,7 @@ const ParentalInfo = (props) => {
         </div>
         <div className={styles.PartInfo}>
           <div className={styles.twoCol}>
-            <i class="fa-solid fa-briefcase"></i>
+            <i className="fa-solid fa-briefcase"></i>
             {!edit && (
               <span className={styles.iconInfo}>{parentalInfo.fprofession}</span>
             )}
@@ -250,7 +250,7 @@ const ParentalInfo = (props) => {
             )}
           </div>
           <div className={styles.twoCol}>
-            <i class="fa-solid fa-briefcase"></i>
+            <i className="fa-solid fa-briefcase"></i>
             {!edit && (
               <span className={styles.iconInfo}>{parentalInfo.mprofession}</span>
             )}
