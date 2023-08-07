@@ -13,7 +13,7 @@ import SelectFaculty from "../assets/select-faculty.png";
 import "../styles/Principal.css"
 
 const Principal = () => {
-  const { user } = useContext(UserContext);
+  const { user,yr } = useContext(UserContext);
   const [name, setName] = useState("");
   const [status, setStatus] = useState("Not searched");
   const [allDept, setAllDept] = useState([]);
@@ -42,21 +42,6 @@ const Principal = () => {
   if (user.designation !== "Principal") {
     window.location.href = "/home";
   }
-
-  function getDate() {
-    const year = new Date().getFullYear();
-    const month = new Date().getMonth() + 1;
-    const day = new Date().getDate();
-    // console.log(month);
-    // console.log(year);
-    // console.log(day);
-    // if(month<6)
-    return `${year}-${year + 1}`;
-    // else
-    // return `${year+1}-${year+2}`
-  }
-
-  var yr = getDate();
 
   useEffect(() => {
     const getDept = async () => {

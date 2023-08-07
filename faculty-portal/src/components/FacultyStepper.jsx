@@ -21,7 +21,7 @@ const steps = [
 ];
 
 export default function FacultyStepper() {
-  const { user } = useContext(UserContext);
+  const { user,yr } = useContext(UserContext);
   const [comments, setComments] = useState([]);
   const [Dimension1, setDimension1] = useState({});
   const [Dimension2, setDimension2] = useState({});
@@ -64,19 +64,6 @@ export default function FacultyStepper() {
       scrollToTop();
     }, [activeStep]);
 
-  var yr = getDate();
-  function getDate() {
-    const year = new Date().getFullYear();
-    const month = new Date().getMonth() + 1;
-    const day = new Date().getDate();
-    console.log(month);
-    console.log(year);
-    console.log(day);
-    // if(month<6)
-    return `${year}-${year + 1}`;
-    // else
-    // return `${year+1}-${year+2}`
-  }
 
   function timeout(delay) {
     return new Promise( res => setTimeout(res, delay) );

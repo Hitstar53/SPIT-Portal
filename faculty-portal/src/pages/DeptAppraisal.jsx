@@ -9,24 +9,9 @@ import NotFound from "../assets/404-not-found.png";
 import SelectFaculty from "../assets/select-faculty.png";
 import Done from "../assets/done.png";
 
-// const facultyNames = ["CSE", "ECE", "EEE"];
-var yr = getDate();
-function getDate() {
-  const year = new Date().getFullYear();
-  const month = new Date().getMonth() + 1;
-  const day = new Date().getDate();
-  console.log(month);
-  console.log(year);
-  console.log(day);
-  // if(month<6)
-  return `${year}-${year + 1}`;
-  // else
-  // return `${year+1}-${year+2}`
-}
-
 export default function DeptAppraisal() {
   const [status, setStatus] = useState("Not searched");
-  const { user } = useContext(UserContext);
+  const { user,yr } = useContext(UserContext);
   const [name, setName] = useState("");
   const [facultyName, setfacultyName] = useState([]);
   if (user.designation !== "HOD") {
