@@ -36,6 +36,7 @@ const Events = () => {
         eventname: event.eventName,
         eventdate: event.date,
         orgname: event.organization,
+        type: event.type,
         description: event.description,
       };
     })
@@ -171,6 +172,7 @@ const Events = () => {
           return (
             <EventsCard
               key={index}
+              type={event.type}
               eventname={event.eventname}
               eventdate={event.eventdate}
               orgname={event.orgname}
@@ -213,9 +215,9 @@ const Events = () => {
           onChange={handleEventDataChange}
           sx={{ mt: "1rem" }}
         >
-          <MenuItem value="winner">Winner</MenuItem>
-          <MenuItem value="second">First Runner Up</MenuItem>
-          <MenuItem value="third">Second Runner Up</MenuItem>
+          <MenuItem value="Winner">Winner</MenuItem>
+          <MenuItem value="2nd Place">First Runner Up</MenuItem>
+          <MenuItem value="3rd Place">Second Runner Up</MenuItem>
           <MenuItem value="participation">Participation</MenuItem>
           <MenuItem value="others">Others</MenuItem>
         </TextField>
@@ -258,6 +260,7 @@ const Events = () => {
         />
         <TextField
           required
+          multiline
           margin="dense"
           name="description"
           label="Description"

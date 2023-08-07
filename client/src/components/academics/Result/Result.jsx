@@ -58,7 +58,6 @@ const semesters = [
 const Result = () => {
     const container = styles.container + " flex flex-col gap-8 p-8"
     const data = useLoaderData()
-    
     return (
         <div className={container}>
             <h1 className="text-4xl font-semibold">Result Information</h1>

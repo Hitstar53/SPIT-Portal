@@ -166,7 +166,7 @@ const Placement = () => {
                   {!edit && (
                     <span className="flex flex-row gap-2 items-center">
                       <BsPersonWorkspace className="text-xl" />
-                      {companyInfo.companyName}
+                      Name:&nbsp;&nbsp;{companyInfo.companyName}
                     </span>
                   )}
                   {edit && (
@@ -184,7 +184,7 @@ const Placement = () => {
                   {!edit && (
                     <span className="flex flex-row gap-2 items-center">
                       <GrContact className="text-xl" />
-                      Contact Information:&nbsp;&nbsp;{companyInfo.contactNo}
+                      Contact Info:&nbsp;&nbsp;{companyInfo.contactNo}
                     </span>
                   )}
                   {edit && (

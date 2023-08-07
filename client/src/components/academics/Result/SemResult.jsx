@@ -28,17 +28,17 @@ const SemResult = () => {
     {
       id: "ise",
       numeric: true,
-      label: "ISE (out of "+data[0].exams[0].maxScore+")",
+      label: "ISE (out of "+data[0]?.exams[0]?.maxScore+")",
     },
     {
       id: "mse",
       numeric: true,
-      label: "MSE (out of "+data[0].exams[1].maxScore+")",
+      label: "MSE (out of "+data[0]?.exams[1]?.maxScore+")",
     },
     {
       id: "ese",
       numeric: true,
-      label: "ESE (out of "+data[0].exams[2].maxScore+")",
+      label: "ESE (out of "+data[0]?.exams[2]?.maxScore+")",
     },
   ]);
   const container = styles.container + " flex flex-col gap-8 p-8";
@@ -54,10 +54,16 @@ const SemResult = () => {
       {/* {data.map((course, index) => (
         <SubColumn key={index} id={index} course={course} />
       ))} */}
-      <CustTable
-        headCells={headCells}
-        rows={newRows}
-      />
+      {
+        data && data.length === 0 && <h1 className="text-2xl text-center">No Results Found</h1>
+      }
+      {
+        data && data.length > 0 && 
+          <CustTable
+            headCells={headCells}
+            rows={newRows}
+          />
+      }
     </div>
   );
 };

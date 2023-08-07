@@ -4,6 +4,7 @@ import styles from "./EventsCard.module.css";
 import dayjs from "dayjs"
 
 const Events = (props) => {
+  console.log(props);
   return (
     <div className={styles.eventsCard}>
       <div className={styles.content}>
@@ -22,6 +23,9 @@ const Events = (props) => {
         <hr className={styles.horizontalLine} />
         <div className={styles.position}>
           <div className={styles.organisation_name}>{props.orgname}</div>
+          <div className={styles.organisation_name}>
+            {props.type}
+          </div>
         </div>
         <div className={styles.position}>
           <div className={styles.descr}>{props.description}</div>
