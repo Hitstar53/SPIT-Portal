@@ -108,7 +108,7 @@ function StepFour({ yr, fullName, setStatus }) {
 
   return (
     <div>
-      <AllSteps fullName={fullName} year={yr} />
+      <AllSteps fullName={fullName} year={yr} showComments={true} />
       <div>
         <form className="container" onSubmit={handleSubmit(onSubmit)}>
           <h1>Dimension 4: Perception/ 360 degree feedback</h1>

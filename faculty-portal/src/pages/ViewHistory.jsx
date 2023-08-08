@@ -428,7 +428,7 @@ const ViewHistory = () => {
                                             margin: "1em auto",
                                         }}
                                     >
-                                        <AllSteps fullName={name} year={year2} />
+                                        <AllSteps fullName={name} year={year2} showComments={true} />
                                     </div>
                                 )}
                                 <div
@@ -575,7 +575,7 @@ const ViewHistory = () => {
                                     margin: "1em auto",
                                 }}
                             >
-                                <AllSteps fullName={name} year={year2} />
+                                <AllSteps fullName={name} year={year2} showComments={true} />
                                 <button
                                     onClick={handleExportPDFFaculty}
                                     style={{
@@ -1092,7 +1092,7 @@ const ViewHistory = () => {
                                     margin: "1em auto",
                                 }}
                             >
-                                <AllSteps fullName={user.fullName} year={year} />
+                                <AllSteps fullName={user.fullName} year={year} showComments={true} />
                             </div>
                         ) : (
                             ""

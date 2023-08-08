@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 import HeaderImage from "../assets/spit.png";
 import DoneIcon from "@mui/icons-material/Done";
 import axios from "axios";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import Stack from "@mui/material/Stack";
 
 export default function AllSteps({
   fullName,
   year,
   isPrincipal = false,
   forHOD = false,
+  showComments = false,
 }) {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -54,6 +58,22 @@ export default function AllSteps({
               width: "70%",
             }}
           />
+
+          {showComments && history.HODcomments && (
+            <div style={{
+              margin: "1em",
+              padding: "0.4em 0.4em",
+            }}>
+              <Stack sx={{ width: "100%", margin: "1rem 0", textAlign: 'left' }} spacing={2}>
+                <Alert severity="error">
+                  <AlertTitle><h4 style={{ fontWeight: 'bolder', fontSize: '23px' }}>Comments (Latest to Oldest)</h4></AlertTitle>
+                  {history.HODcomments.map((comment, index) => (
+                    <h4 style={{ fontWeight: 'bolder', fontSize: '20px' }}>{index + 1}. {comment}</h4>
+                  ))}
+                </Alert>
+              </Stack>
+            </div>
+          )}
 
           <div>
             <table
