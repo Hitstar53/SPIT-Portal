@@ -40,15 +40,15 @@ const filters = [
 const options = [
   {
     name: "Winner",
-    value: "winner",
+    value: "Winner",
   },
   {
     name: "First Runner Up",
-    value: "second",
+    value: "2nd Place",
   },
   {
     name: "Second Runner Up",
-    value: "third",
+    value: "3rd Place",
   },
   {
     name: "Participation",

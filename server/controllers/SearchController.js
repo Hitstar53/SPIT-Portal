@@ -6,7 +6,14 @@ exports.getProfessionalInfo = asyncHandler(async(req,res) => {
     const { type, organization, ctc } = req.body;
   if (type === 'Placement') {
     const filter = {};
-    if (organization) filter.companyName = { $regex: new RegExp(organization, 'i') };
+    if (organization)
+    { 
+      filter.companyName = { $regex: new RegExp(organization, 'i') }
+    }
+    else{
+      filter.companyName = { $ne : '-' }
+    }
+     ;
     if (ctc) filter.ctc = { $regex: new RegExp(ctc, 'i') };
 
     try {
@@ -18,8 +25,9 @@ exports.getProfessionalInfo = asyncHandler(async(req,res) => {
         uid: student.uid,
         studentname: student.name,
         email: student.emailID,
-        Organization: placements.find((placement) => placement.emailID === student.emailID)?.companyName || '',
-        ctc: placements.find((placement) => placement.emailID === student.emailID)?.ctc || '',
+        Organization: placements.find((placement) => placement.emailID === student.emailID)?.companyName || '-',
+        
+        ctc: placements.find((placement) => placement.emailID === student.emailID)?.ctc || '-',
       }));
 
       res.json(result);
@@ -40,7 +48,7 @@ exports.getProfessionalInfo = asyncHandler(async(req,res) => {
         studentname: student.name,
         email: student.emailID,
         Organization: student.internship.map((internship) => internship.organization).join(', ') || '',
-        ctc: '',
+        ctc: '-',
       }));
       res.json(result);
     } catch (error) {
@@ -49,7 +57,7 @@ exports.getProfessionalInfo = asyncHandler(async(req,res) => {
     }
   } else if (type === 'All') {
     try {
-      const placementFilter = {};
+      const placementFilter = {companyName:{$ne:'-'}};
       const internshipFilter = { 'internship.0': { $exists: true } };
       if (organization) {
         placementFilter.companyName = { $regex: new RegExp(organization, 'i') };
@@ -72,8 +80,8 @@ exports.getProfessionalInfo = asyncHandler(async(req,res) => {
         uid: internshipStudent.uid,
         studentname: internshipStudent.name,
         email: internshipStudent.emailID,
-        ctc: '',
-        Organization: internshipStudent.internship.map((internship) => internship.organization).join(', ') || ''
+        ctc: '-',
+        Organization: internshipStudent.internship.map((internship) => internship.organization).join(', ') || '-'
         }));
 
 
@@ -307,10 +315,10 @@ exports.getInformation = asyncHandler(async (req, res) => {
       let result = []
       for (let r = 0; r < response.length; r++) {
         const element = response[r];
-        let committeeNames = element.committee.map((e)=> e.committeeDetails).join(',')||''
+        let committeeNames = element.committee.map((e)=> e.committeeDetails).join(',')||'-'
         for (let i = 0; i < element.participation.length; i++) {
           const e = element.participation[i];
-          result.push({uid:element.uid,name:element.name,email:element.emailID,branch:element.educationalInfo[0].branch, committeeDetails:committeeNames,event:e.eventName,eventLink:e.link})
+          result.push({uid:element.uid,studentname:element.name,email:element.emailID,branch:element.educationalInfo[0].branch, committee:committeeNames,event:e.eventName,eventLink:e.link})
         }
       }
       res.json(result)
