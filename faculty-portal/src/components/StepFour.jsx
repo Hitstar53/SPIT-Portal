@@ -107,7 +107,7 @@ function StepFour({ yr, fullName, setStatus }) {
   };
 
   return (
-    <div>
+    <div className="container">
       <AllSteps fullName={fullName} year={yr} showComments={true} />
       <div>
         <form className="container" onSubmit={handleSubmit(onSubmit)}>
