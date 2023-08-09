@@ -14,10 +14,10 @@ export default function UserContextProvider({ children }) {
     console.log(month);
     console.log(year);
     console.log(day);
-    // if(month<6)
+    if(month<=6)
+    return `${year-1}-${year}`
+    else
     return `${year}-${year+1}`
-    // else
-    // return `${year+1}-${year+2}`
   }
 
   useEffect(() => {
