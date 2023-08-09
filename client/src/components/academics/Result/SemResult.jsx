@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { useParams, useNavigate, useLoaderData } from "react-router-dom";
 import styles from "./SemResult.module.css";
 import { FaArrowLeft } from "react-icons/fa";
@@ -11,12 +11,13 @@ const SemResult = () => {
   const navigate = useNavigate();
   const data = useLoaderData();
   const [newRows, setNewRows] = useState(
-    data.map((course, index) => ({
+    data.results.map((course, index) => ({
       id: index,
       coursename: course.courseName,
       ise: course.exams[0].obtainedScore,
       mse: course.exams[1].obtainedScore,
       ese: course.exams[2].obtainedScore,
+      total: course.exams[3].obtainedScore,
     }))
   );
   const [headCells, setHeadCells] = useState([
@@ -28,17 +29,22 @@ const SemResult = () => {
     {
       id: "ise",
       numeric: true,
-      label: "ISE (out of "+data[0]?.exams[0]?.maxScore+")",
+      label: "ISE (out of "+data.results[0]?.exams[0]?.maxScore+")",
     },
     {
       id: "mse",
       numeric: true,
-      label: "MSE (out of "+data[0]?.exams[1]?.maxScore+")",
+      label: "MSE (out of "+data.results[0]?.exams[1]?.maxScore+")",
     },
     {
       id: "ese",
       numeric: true,
-      label: "ESE (out of "+data[0]?.exams[2]?.maxScore+")",
+      label: "ESE (out of "+data.results[0]?.exams[2]?.maxScore+")",
+    },
+    {
+      id: "total",
+      numeric: true,
+      label: "Total (out of "+data.results[0]?.exams[3]?.maxScore+")",
     },
   ]);
   const container = styles.container + " flex flex-col gap-8 p-8";
@@ -58,7 +64,7 @@ const SemResult = () => {
         data && data.length === 0 && <h1 className="text-2xl text-center">No Results Found</h1>
       }
       {
-        data && data.length > 0 && 
+        data && 
           <CustTable
             headCells={headCells}
             rows={newRows}
@@ -88,6 +94,7 @@ export async function loader({ params }) {
     );
   } else {
     const resultData = await response.json();
+    console.log(resultData)
     return resultData;
   }
 }

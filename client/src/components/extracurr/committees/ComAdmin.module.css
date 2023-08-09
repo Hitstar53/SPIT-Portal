@@ -54,6 +54,14 @@
   padding: 0.3rem;
   border-radius: 0.5rem;
 }
+.cardItem {
+  cursor: pointer;
+  display: grid;
+  row-gap: 0.5rem;
+  grid-template-columns: 1fr 15fr;
+  border-radius: 2rem;
+  padding: 1rem 1.5rem 1rem 0.5rem;
+} 
 
 .tableHeader {
   display: grid;

@@ -70,6 +70,7 @@ const Result = () => {
                             year={semester.year}
                             status={semester.status} 
                             sgpa={semester.sgpa} 
+                            admissionYear = {data.admissionYear}
                         />
                     ))}
                 </div>

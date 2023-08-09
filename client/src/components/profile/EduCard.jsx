@@ -325,17 +325,17 @@ const EduCard = (props) => {
               <div className={styles.threeColMiddle}>
                 {!edit && (
                   <p>
-                    <label>Passing Year:&nbsp;&nbsp;</label>
-                    {props?.info?.passingYear}
+                    <label>Admission Year:&nbsp;&nbsp;</label>
+                    {props?.info?.admissionYear}
                   </p>
                 )}
                 {edit && (
                   <TextField
                     id="outlined-required"
-                    label="Passing Year"
+                    label="Admission Year"
                     type="text"
-                    name="passingYear"
-                    defaultValue={props?.info?.passingYear}
+                    name="admissionYear"
+                    defaultValue={props?.info?.admissionYear}
                     onChange={props?.handleChange}
                   />
                 )}

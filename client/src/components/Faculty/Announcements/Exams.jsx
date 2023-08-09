@@ -112,7 +112,19 @@ const Exams = (props) => {
         <AddButton onClick={handleExamClickOpenDialog} btntext="ADD" />
       </div>
       <div className={styles.card}>
-        <div className={styles.inner}>
+      {exams.length === 0 ? 
+      <div className={styles.cardItem}>
+        <p
+          style={{
+            gridColumn: "1 / 3",
+            fontSize: "1rem",
+            fontWeight: "500",
+            textAlign: "center",
+          }}
+        >
+          No Exams Yet</p>
+      </div> :
+        (<div className={styles.inner}>
           {exams.map((exam, index) => (
             <AncmntExamCard
               key={index}
@@ -126,7 +138,7 @@ const Exams = (props) => {
               division={exam.division}
             />
           ))}
-        </div>
+        </div>)}
       </div>
       <MultiFieldModal
         handleDataSubmit={handleExamSubmit}

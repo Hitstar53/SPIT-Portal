@@ -137,9 +137,10 @@ exports.getSemesters = asyncHandler(async(req,res)=>{
     const email = req.body.email;
     try {
         const semesters = await Profile.findOne({ emailID: email }).select(
-          "semester.semesterNumber semester.sgpa semester.status -_id"
+          "semester.semesterNumber semester.sgpa semester.status educationalInfo -_id"
         );
-        res.status(200).json(semesters)
+        const admissionYear = semesters.educationalInfo[0].admissionYear
+        res.status(200).json({semester:semesters.semester,admissionYear})
     } catch (error) {
         console.error(error)
     }
@@ -150,9 +151,10 @@ exports.getResults = asyncHandler(async(req,res)=>{
     const email = req.body.email;
     const semesterNumber = req.body.semesterNumber;
     try {
-        const sem = await Profile.findOne({emailID:email}).select('semester -_id')
+        const sem = await Profile.findOne({emailID:email}).select('semester educationalInfo -_id')
+        const admissionYear = sem.educationalInfo[0].admissionYear
         const results = (sem.semester[semesterNumber-1].courses)
-        res.status(200).json(results)
+        res.status(200).json({results:results,admissionYear})
     }
     catch (error){
         console.error(error)

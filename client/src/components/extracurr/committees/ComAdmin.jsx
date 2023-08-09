@@ -309,7 +309,20 @@ const ComAdmin = () => {
         ) : null}
       </div>
       <div className={styles.card}>
+      {ancmnts.length === 0 ? 
+        <div className={styles.cardItem}>
+          <p
+            style={{
+              gridColumn: "1 / 3",
+              fontSize: "1rem",
+              fontWeight: "500",
+              textAlign: "center",
+            }}
+          >
+            No Announcements Yet</p>
+        </div> :
         <div className={styles.inner}>
+
           {ancmnts.map((ancmnt, index) => (
             <AncmntCard
               key={index}
@@ -318,7 +331,7 @@ const ComAdmin = () => {
               ancmnt={ancmnt.description}
             />
           ))}
-        </div>
+        </div>}
       </div>
       <MultiFieldModal
         handleDataSubmit={handleAncmntSubmit}
@@ -373,7 +386,19 @@ const ComAdmin = () => {
         ) : null}
       </div>
       <div className={styles.card}>
-        <div className={styles.inner}>
+      {events.length === 0 ? 
+      <div className={styles.cardItem}>
+        <p
+          style={{
+            gridColumn: "1 / 3",
+            fontSize: "1rem",
+            fontWeight: "500",
+            textAlign: "center",
+          }}
+        >
+          No Events Yet</p>
+      </div> :
+        (<div className={styles.inner}>
           {events.map((event, index) => (
             <AddEvent
               key={index}
@@ -382,7 +407,7 @@ const ComAdmin = () => {
               description={event.description}
             />
           ))}
-        </div>
+        </div>)}
       </div>
       <hr className={styles.divider} />
       <div className="flex justify-between items-center text-2xl p-1 font-semibold flex-wrap">

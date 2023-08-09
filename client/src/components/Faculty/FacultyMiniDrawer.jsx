@@ -320,6 +320,7 @@ export default function AdminMiniDrawer() {
               gap: "1rem",
               lineHeight: 1.2,
             }}
+            component="div"
           >
             <span
               style={{

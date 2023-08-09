@@ -9,14 +9,19 @@ const SemesterCard = (props) => {
   let color = ""
 
   let year = ""
+  let semesterYear = 0
   if (props.semesterNumber === 1 || props.semesterNumber === 2) {
     year = "F.Y.B.Tech"
+    semesterYear = `${props.admissionYear}-${props.admissionYear%100+1}`
   } else if (props.semesterNumber === 3 || props.semesterNumber === 4) {
     year = "S.Y.B.Tech"
+    semesterYear = `${parseInt(props.admissionYear)+1}-${props.admissionYear%100+2}`
   } else if (props.semesterNumber === 5 || props.semesterNumber === 6) {
     year = "T.Y.B.Tech"
+    semesterYear = `${parseInt(props.admissionYear)+2}-${props.admissionYear%100+3}`
   } else if (props.semesterNumber === 7 || props.semesterNumber === 8) {
     year = "B.Tech"
+    semesterYear = `${parseInt(props.admissionYear)+3}-${props.admissionYear%100+4}`
   }
 
   if (props.status === "Completed") {
@@ -56,7 +61,7 @@ const SemesterCard = (props) => {
             }}
           />
           <Chip
-            label="2022-23"
+            label={semesterYear}
             sx={{
               fontSize: "0.8rem",
               backgroundColor: "var(--secondary-color)",

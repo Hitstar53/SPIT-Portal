@@ -165,7 +165,19 @@ const Ancmnts = (props) => {
         <AddButton onClick={handleAncmntClickOpenDialog} btntext="ADD" />
       </div>
       <div className={styles.card}>
-        <div className={styles.inner}>
+      {ancmnts.length === 0 ? 
+      <div className={styles.cardItem}>
+        <p
+          style={{
+            gridColumn: "1 / 3",
+            fontSize: "1rem",
+            fontWeight: "500",
+            textAlign: "center",
+          }}
+        >
+          No Announcements Yet</p>
+      </div> :
+        (<div className={styles.inner}>
           {ancmnts?.map((ancmnt, index) => (
             <AncmntCard
               key={index}
@@ -180,7 +192,8 @@ const Ancmnts = (props) => {
               uid={ancmnt.uid}
             />
           ))}
-        </div>
+        </div>)}
+
       </div>
       <MultiFieldModal
         handleDataSubmit={handleAncmntSubmit}

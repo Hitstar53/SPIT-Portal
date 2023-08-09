@@ -124,8 +124,8 @@ const ProfilePdf = ({data}) => {
               <Row heading="Batch" data={data.educationalInfo[0].batch} />
               <Row heading="CGPA" data={data.educationalInfo[0].score} />
               <Row
-                heading="Passing Year"
-                data={data.educationalInfo[0].passingYear}
+                heading="Admission Year"
+                data={data.educationalInfo[0].admissionYear}
               />
               <SubHeading heading="Junior College / XIIth" />
               <Row heading="Institute" data={data.educationalInfo[1].insName} />
@@ -156,10 +156,12 @@ const ProfilePdf = ({data}) => {
             </View>
             <View break style={{ marginTop: 10 }}>
               <Heading heading="Academic Information" />
-              {data.semester.map((sem) => {
+              {data.semester.map((sem,index) => {
                 return (
-                  <View wrap={false}>
-                    <SubHeading heading={`Semester ${sem.semesterNumber}`} />
+                  <View wrap={false} key={index}>
+                    <SubHeading heading={`Semester ${sem.semesterNumber} Academic Year:`} />
+                  
+
                     {sem.courses.length > 0 ? (
                       <>
                       <Text
@@ -173,16 +175,17 @@ const ProfilePdf = ({data}) => {
                       >
                         SGPA: {sem.sgpa}
                       </Text>
-                      <View wrap={false}>
-                        <Thead data={["Course Name", "ISE", "MSE", "ESE"]} />
-                        {sem.courses.map((course) => {
+                      <View wrap={false} key={index}>
+                        <Thead data={["Course Name", "ISE", "MSE", "ESE","Total"]} />
+                        {sem.courses.map((course,index) => {
                           return (
-                            <Tbody
+                            <Tbody key={index}
                               data={[
                                 course.courseName,
                                 course.exams[0].obtainedScore,
                                 course.exams[1].obtainedScore,
                                 course.exams[2].obtainedScore,
+                                course.exams[3].obtainedScore,
                               ]}
                             />
                           );
@@ -212,9 +215,10 @@ const ProfilePdf = ({data}) => {
                   <Thead
                     data={["Event Name", "Organization", "Type", "Description"]}
                   />
-                  {data.participation.map((event) => {
+                  {data.participation.map((event,index) => {
                     return (
                       <Tbody
+                        key={index}
                         data={[
                           event.eventName,
                           event.organization,
@@ -230,9 +234,10 @@ const ProfilePdf = ({data}) => {
               {data.committee.length > 0 ? (
                 <View style={{ marginTop: 10 }} wrap={false}>
                   <Thead data={["Committe Name", "Tenure", "Position"]} />
-                  {data.committee.map((com) => {
+                  {data.committee.map((com,index) => {
                     return (
                       <Tbody
+                        key={index}
                         data={[com.committeeDetails, com.tenure, com.position]}
                       />
                     );
@@ -243,9 +248,10 @@ const ProfilePdf = ({data}) => {
               {data.volunteerWork.length > 0 ? (
                 <View style={{ marginTop: 10 }} wrap={false}>
                   <Thead data={["Event Name", "Organization", "Description"]} />
-                  {data.volunteerWork.map((work) => {
+                  {data.volunteerWork.map((work,index) => {
                     return (
                       <Tbody
+                        key={index}
                         data={[
                           work.eventName,
                           work.organization,
@@ -289,9 +295,10 @@ const ProfilePdf = ({data}) => {
                       "Description",
                     ]}
                   />
-                  {data.projects.map((proj) => {
+                  {data.projects.map((proj,index) => {
                     return (
                       <Tbody
+                        key={index}
                         data={[
                           proj.name,
                           proj.domain,
@@ -316,9 +323,10 @@ const ProfilePdf = ({data}) => {
                       "Description",
                     ]}
                   />
-                  {data.research.map((proj) => {
+                  {data.research.map((proj,index) => {
                     return (
                       <Tbody
+                        key={index}
                         data={[
                           proj.name,
                           proj.domain,
@@ -343,9 +351,10 @@ const ProfilePdf = ({data}) => {
                       "Description",
                     ]}
                   />
-                  {data.internship.map((intern) => {
+                  {data.internship.map((intern,index) => {
                     return (
                       <Tbody
+                        key={index}
                         data={[
                           intern.organization,
                           intern.position,
@@ -450,7 +459,7 @@ const Thead = ({ data }) => {
       {
         data.map((head,index) => {
           return (
-            <Text style={index!==data.length-1?{...TheadStyles.tableHeaderCell,width:`${100/data.length}%`}:{...TheadStyles.tableHeaderCellLast,width:`${100/data.length}%`}}>
+            <Text key={index} style={index!==data.length-1?{...TheadStyles.tableHeaderCell,width:`${100/data.length}%`}:{...TheadStyles.tableHeaderCellLast,width:`${100/data.length}%`}}>
               {head}
             </Text>
           )
@@ -488,7 +497,7 @@ const Tbody = ({ data }) => {
       {
         data.map((body,index) => {
           return (
-            <Text style={index!==data.length-1?{...TbodyStyles.tableRowCell,width:`${100/data.length}%`}:{...TbodyStyles.tableRowCellLast,width:`${100/data.length}%`}}>
+            <Text key={index} style={index!==data.length-1?{...TbodyStyles.tableRowCell,width:`${100/data.length}%`}:{...TbodyStyles.tableRowCellLast,width:`${100/data.length}%`}}>
               {body}
             </Text>
           )

@@ -11,10 +11,6 @@ const committeeSchema = mongoose.Schema({
     comAnnouncements:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Announcements'
-    }],
-    comEvents:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Announcements'
     }]
 }
 ,{

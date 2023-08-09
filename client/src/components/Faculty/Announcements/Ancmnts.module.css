@@ -1,7 +1,7 @@
 .card {
     color: var(--text-light);
     max-height: 420px;
-    border-radius: 0.5rem;
+    border-radius: 2rem;
     background-color: var(--tertiary-color);
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
     display: flex;
@@ -9,7 +9,14 @@
     gap: 0.5rem;
     overflow: hidden;
 }
-
+.cardItem {
+    cursor: pointer;
+    display: grid;
+    row-gap: 0.5rem;
+    grid-template-columns: 1fr 15fr;
+    border-radius: 2rem;
+    padding: 1rem 1.5rem 1rem 0.5rem;
+} 
 .card .inner {
     padding: 1rem 1.5rem;
     display: flex;
