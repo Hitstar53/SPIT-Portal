@@ -4,7 +4,6 @@ import styles from "./EventsCard.module.css";
 import dayjs from "dayjs"
 
 const Events = (props) => {
-  console.log(props);
   return (
     <div className={styles.eventsCard}>
       <div className={styles.content}>

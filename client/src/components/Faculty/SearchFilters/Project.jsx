@@ -124,7 +124,6 @@ const Project = () => {
       }
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         setNewRows(data);
       }
       setIsLoading(false);

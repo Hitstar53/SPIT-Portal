@@ -32,7 +32,8 @@ exports.getProfessionalInfo = asyncHandler(async(req,res) => {
 
       res.json(result);
     } catch (error) {
-      console.error(error);
+              res.status(400).json(error)
+;
       res.status(500).json({ error: 'Internal server error' });
     }
   } else if (type === 'Internship') {
@@ -52,7 +53,8 @@ exports.getProfessionalInfo = asyncHandler(async(req,res) => {
       }));
       res.json(result);
     } catch (error) {
-      console.error(error);
+              res.status(400).json(error)
+;
       res.status(500).json({ error: 'Internal server error' });
     }
   } else if (type === 'All') {
@@ -98,7 +100,8 @@ exports.getProfessionalInfo = asyncHandler(async(req,res) => {
 
       res.json(result);
     } catch (error) {
-      console.error(error);
+              res.status(400).json(error)
+;
       res.status(500).json({ error: 'Internal server error' });
     }
   } else {
@@ -232,7 +235,8 @@ exports.getProjectsInfo = asyncHandler(async (req, res) => {
 
     res.json(projectInfo);
   } catch (error) {
-    console.error(error);
+            res.status(400).json(error)
+;
     res.status(500).json({ error: 'Internal server error' });
   }
 });
@@ -281,7 +285,8 @@ exports.getInformation = asyncHandler(async (req, res) => {
 
     res.json(studentInfo);
   } catch (error) {
-    console.error(error);
+            res.status(400).json(error)
+;
     res.status(500).json({ error: 'Internal server error' });
   }
 });
@@ -303,7 +308,8 @@ exports.getInformation = asyncHandler(async (req, res) => {
   
       res.json(response);
     } catch (error) {
-      console.error(error);
+              res.status(400).json(error)
+;
       res.status(500).json({ error: 'Internal server error' });
     }
   });

@@ -70,7 +70,7 @@ const studentSchema = mongoose.Schema({
                     exams:[
                         {
                             type:{type:String,required:true},
-                            date:{type:String,required:true},
+                            date:{type:String},
                             maxScore:{type:Number,required:true},
                             obtainedScore:{type:Number,required:true}
                         }
@@ -78,6 +78,7 @@ const studentSchema = mongoose.Schema({
                 }
             ],
             sgpa:{ type : Number, required:true},
+            academicYear:{ type : String, required:true},
             status:{ type : String, required:true},
         },
     ],

@@ -211,20 +211,17 @@ const ComAdmin = () => {
             }),
           }
         );
-        console.log(response);
         if (response.ok) {
           const data = await response.json();
           setAlertOpen(true);
           setSeverity("success");
           setMessage("Announcement set successfully");
         } else {
-          console.log("Error:", response.status);
           setAlertOpen(true);
           setSeverity("error");
           setMessage("Something went wrong, please try again later");
         }
       } catch (error) {
-        console.log("Error:", error);
         setAlertOpen(true);
         setSeverity("error");
         setMessage("Something went wrong, please try again later");

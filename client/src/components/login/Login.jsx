@@ -7,7 +7,6 @@ import logo from "../../assets/spitlogo.jpg";
 import axios from "axios";
 import ServerUrl from "../../constants.js"
 
-
 const Login = () => {
   const navigate = useNavigate();
   const login = useGoogleLogin({

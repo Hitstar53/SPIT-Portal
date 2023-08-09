@@ -15,7 +15,7 @@ exports.setInternship = asyncHandler(async(req,res) =>{
         await profile.save()
         res.status(200).json("Internship added succesfully")
     }catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 exports.deleteInternships = asyncHandler(async(req,res)=>{
@@ -25,7 +25,7 @@ exports.deleteInternships = asyncHandler(async(req,res)=>{
         await Student.findOneAndUpdate({emailID:email},{$set:{internship:internships}})
         res.status(200).json('Your Internship deleted Succesfully')
     } catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 
@@ -35,7 +35,7 @@ exports.getInternships = asyncHandler(async(req,res)=>{
         const internships = await Student.findOne({emailID:email}).select('internship -_id')
         res.status(200).json(internships)    
     } catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 
@@ -53,7 +53,7 @@ exports.setProjects = asyncHandler(async(req,res) =>{
         await profile.save()
         res.status(200).json('Your Project Added Succesfully')
     } catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 exports.deleteProjects = asyncHandler(async(req,res)=>{
@@ -63,7 +63,7 @@ exports.deleteProjects = asyncHandler(async(req,res)=>{
         await Student.findOneAndUpdate({emailID:email},{$set:{projects:projects}})
         res.status(200).json('Your Project deleted Succesfully')
     } catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 
@@ -73,7 +73,7 @@ exports.getProjects = asyncHandler(async(req,res)=>{
         const projects = await Student.findOne({emailID:email}).select('projects -_id')
         res.status(200).json(projects)    
     } catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 
@@ -91,7 +91,7 @@ exports.setResearch = asyncHandler(async(req,res) =>{
         await profile.save()
         res.status(200).json('Your Research Added Succesfully')
     } catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 exports.deleteResearch = asyncHandler(async(req,res)=>{
@@ -101,7 +101,7 @@ exports.deleteResearch = asyncHandler(async(req,res)=>{
         await Student.findOneAndUpdate({emailID:email},{$set:{research:research}})
         res.status(200).json('Your Research deleted Succesfully')
     } catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 
@@ -111,7 +111,7 @@ exports.getResearch = asyncHandler(async(req,res)=>{
         const research = await Student.findOne({emailID:email}).select('research -_id')
         res.status(200).json(research)    
     } catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 
@@ -124,7 +124,7 @@ exports.setSkills = asyncHandler(async(req,res) =>{
         await profile.save()
         res.status(200).json('Your Skill Added Succesfully')
     } catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 exports.deleteSkills = asyncHandler(async(req,res) =>{
@@ -134,7 +134,7 @@ exports.deleteSkills = asyncHandler(async(req,res) =>{
         await Student.findOneAndUpdate({emailID:email},{$set:{skills:skills}})
         res.status(200).json('Your Skill deleted Succesfully')
     } catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 
@@ -144,7 +144,7 @@ exports.getSkills = asyncHandler(async(req,res)=>{
         const skills  = await Student.findOne({emailID:email}).select('skills -_id')
         res.status(200).json(skills)    
     } catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 
@@ -172,7 +172,7 @@ exports.updatePlacement = asyncHandler(async(req,res)=>{
         res.status(200).json("Updated Placement Succesfully")
     }
     catch(error){
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 
@@ -182,6 +182,6 @@ exports.getPlacement = asyncHandler(async(req,res)=>{
         const placement  = await Placement.findOne({emailID:email}).select('-_id')
         res.status(200).json(placement)   
     } catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })

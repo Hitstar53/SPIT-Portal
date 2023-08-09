@@ -5,7 +5,7 @@ import App from "./App.jsx";
 import "./Index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <GoogleOAuthProvider clientId="1022374715852-08he0cp90hauoe1vmmf6ec932leo3lo4.apps.googleusercontent.com">
+  <GoogleOAuthProvider clientId={import.meta.env.VITE_OAUTH_CLIENT_ID}>
     <App />
   </GoogleOAuthProvider>
 );

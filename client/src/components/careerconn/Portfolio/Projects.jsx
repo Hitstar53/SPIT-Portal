@@ -168,11 +168,11 @@ const Projects = (props) => {
             required
             margin="dense"
             name="duration"
-            label="Duration"
+            label="Academic Year"
             type="text"
             fullWidth
             variant="standard"
-            helperText="Enter duration in months, e.g. 2 months"
+            helperText="Enter Year of the project, e.g. 2022"
             onChange={handleDataChange}
           />
           <TextField

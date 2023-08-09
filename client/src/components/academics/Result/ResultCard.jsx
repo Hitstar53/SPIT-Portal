@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import styles from "./ResultCard.module.css";
 
 const ResultCard = (props) => {

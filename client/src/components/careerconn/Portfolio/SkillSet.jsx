@@ -92,7 +92,7 @@ export default function SkillSet(props) {
           },
           body: JSON.stringify({
             email: JSON.parse(localStorage.getItem("userinfo")).email,
-            skill:newSkill
+            skill: newSkill
           }),
         }
       );
@@ -106,7 +106,6 @@ export default function SkillSet(props) {
         setAlertOpen(true);
         setSeverity("success");
         setMessage("Skills added successfully");
-        fetchSkills()
       }
     };
     updateSkills();

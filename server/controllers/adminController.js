@@ -22,7 +22,7 @@ exports.intitializeFaculty = asyncHandler(async (req, res) => {
         )
     }
     catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 
@@ -54,7 +54,7 @@ exports.intitializeStudent = asyncHandler(async (req, res) => {
     }
 
     catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 

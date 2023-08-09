@@ -172,11 +172,11 @@ const Research = (props) => {
             required
             margin="dense"
             name="duration"
-            label="Duration"
+            label="Academic Year"
             type="text"
             fullWidth
             variant="standard"
-            helperText="Enter duration of the research work, e.g. 2 months"
+            helperText="Enter year of the research work, e.g. 2023"
             onChange={handleDataChange}
           />
           <TextField

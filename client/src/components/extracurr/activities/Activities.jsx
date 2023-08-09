@@ -19,6 +19,7 @@ import {
   useRouteLoaderData,
 } from "react-router-dom";
 import ServerUrl from "../../../constants";
+import NoData from "../../UI/NoData";
 
 const Activities = () => {
   const data = useLoaderData();
@@ -229,6 +230,14 @@ const Activities = () => {
             onClick={handleComClickOpenDialog}
           />
         </div>
+        {
+          committeeWork.length === 0 && (
+            <NoData 
+              title="No Committee Work Added"
+              message="Add your committee work by clicking on the add button"
+            />
+          )
+        }
         <div className={styles.comGrid}>
           {committeeWork.map((cominfo, index) => (
             <CommitteeWorkCard
@@ -287,7 +296,7 @@ const Activities = () => {
               type="text"
               fullWidth
               variant="standard"
-              helperText="e.g. 2019-2020"
+              helperText="e.g. 2022-2023"
               onChange={handleComDataChange}
             />
           </MultiFieldModal>
@@ -301,6 +310,14 @@ const Activities = () => {
             <AddButton btntext="Add Work" onClick={handleVolClickOpenDialog} />
           </div>
         </div>
+        {
+          volunteerWork.length === 0 && (
+            <NoData
+              title="No Volunteer Work Added"
+              message="Add your volunteer work by clicking on the add button"
+            />
+          )
+        }
         <div className={styles.volGrid}>
           {volunteerWork.map((volinfo, index) => (
             <VolunteerWork
@@ -336,12 +353,12 @@ const Activities = () => {
               required
               margin="dense"
               name="voldur"
-              label="duration"
+              label="Academic Year"
               autoComplete="off"
               type="text"
               fullWidth
               variant="standard"
-              helperText="e.g. 2020-2020"
+              helperText="e.g. 2020"
               onChange={handleVolDataChange}
             />
             <TextField

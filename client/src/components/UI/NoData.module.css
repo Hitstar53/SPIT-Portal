@@ -1,0 +1,18 @@
+.noData {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-color);
+    margin: 1rem 0;
+}
+
+.noData p {
+    font-size: 0.85rem;
+    opacity: 0.75;
+}

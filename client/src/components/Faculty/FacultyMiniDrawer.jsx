@@ -333,7 +333,6 @@ export default function AdminMiniDrawer() {
               )}
             </span>
             <Avatar
-                onClick={profileHandler}
                 sx={{ width: 50, height: 50, cursor: "pointer" }}
                 alt={name}
                 src={picture}

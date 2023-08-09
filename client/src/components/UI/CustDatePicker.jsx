@@ -7,7 +7,6 @@ import { DateField } from "@mui/x-date-pickers/DateField";
 
 export default function CustDatePicker(props) {
   const value = dayjs(props.defaultValue);
-  console.log(value);
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker

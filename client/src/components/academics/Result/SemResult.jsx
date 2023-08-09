@@ -2,8 +2,8 @@ import React, { useState ,useEffect} from "react";
 import { useParams, useNavigate, useLoaderData } from "react-router-dom";
 import styles from "./SemResult.module.css";
 import { FaArrowLeft } from "react-icons/fa";
-import SubColumn from "./SubColumn.jsx";
 import CustTable from "../../UI/CustTable";
+import NoData from "../../UI/NoData";
 import ServerUrl from "../../../constants";
 
 const SemResult = () => {
@@ -55,16 +55,18 @@ const SemResult = () => {
           onClick={() => navigate(-1)}
           className="text-2xl cursor-pointer"
         />
-        Semester {semester}
+        Semester {semester},&nbsp;&nbsp;{data?.academicYear}
       </h1>
-      {/* {data.map((course, index) => (
-        <SubColumn key={index} id={index} course={course} />
-      ))} */}
       {
-        data && data.length === 0 && <h1 className="text-2xl text-center">No Results Found</h1>
+        data.results.length === 0 && (
+          <NoData
+            title="No Results Found"
+            message="Your results will be displayed here once they are published"
+          />
+        )
       }
       {
-        data && 
+        data.results.length > 0 && 
           <CustTable
             headCells={headCells}
             rows={newRows}
@@ -94,7 +96,6 @@ export async function loader({ params }) {
     );
   } else {
     const resultData = await response.json();
-    console.log(resultData)
     return resultData;
   }
 }

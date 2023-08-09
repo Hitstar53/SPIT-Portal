@@ -11,6 +11,7 @@ import TextField from "@mui/material/TextField";
 import MultiFieldModal from "../../UI/Modals/MultiFieldModal";
 import MenuItem from "@mui/material/MenuItem";
 import AncmntCard from "./AncmntCard";
+import NoData from "../../UI/NoData";
 import ServerUrl from "../../../constants";
 
 const Ancmnts = (props) => {
@@ -162,39 +163,44 @@ const Ancmnts = (props) => {
     <div className={styles.facultyAncmnt}>
       <div className={styles.header}>
         <h2 className={styles.subheading}>Announcements</h2>
-        <AddButton onClick={handleAncmntClickOpenDialog} btntext="ADD" />
+        <AddButton onClick={handleAncmntClickOpenDialog} btntext="Make Announcemnt" />
       </div>
-      <div className={styles.card}>
       {ancmnts.length === 0 ? 
-      <div className={styles.cardItem}>
-        <p
-          style={{
-            gridColumn: "1 / 3",
-            fontSize: "1rem",
-            fontWeight: "500",
-            textAlign: "center",
-          }}
-        >
-          No Announcements Yet</p>
-      </div> :
-        (<div className={styles.inner}>
-          {ancmnts?.map((ancmnt, index) => (
-            <AncmntCard
-              key={index}
-              title={ancmnt.title}
-              date={ancmnt.date}
-              ancmnt={ancmnt.description}
-              type={ancmnt.type}
-              sendTo={ancmnt.sendTo}
-              year={ancmnt.year}
-              branch={ancmnt.branch}
-              division={ancmnt.division}
-              uid={ancmnt.uid}
-            />
-          ))}
-        </div>)}
-
-      </div>
+        // <div className={styles.cardItem}>
+        //   <p
+        //     style={{
+        //       gridColumn: "1 / 3",
+        //       fontSize: "1rem",
+        //       fontWeight: "500",
+        //       textAlign: "center",
+        //     }}
+        //   >
+        //     No Announcements Yet</p>
+        // </div> 
+        <NoData
+          title="No Announcements Yet"
+          message="You can make an announcement by clicking on the button above"
+        /> :
+        ( 
+          <div className={styles.card}>
+            <div className={styles.inner}>
+              {ancmnts?.map((ancmnt, index) => (
+                <AncmntCard
+                  key={index}
+                  title={ancmnt.title}
+                  date={ancmnt.date}
+                  ancmnt={ancmnt.description}
+                  type={ancmnt.type}
+                  sendTo={ancmnt.sendTo}
+                  year={ancmnt.year}
+                  branch={ancmnt.branch}
+                  division={ancmnt.division}
+                  uid={ancmnt.uid}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       <MultiFieldModal
         handleDataSubmit={handleAncmntSubmit}
         openDialog={openAncmntDialog}

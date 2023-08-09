@@ -7,7 +7,7 @@ import animationData from "../assets/page-not-found-2.json";
 const ErrorPage = () => {
   const navigate = useNavigate();
   const error = useRouteError();
-  console.log(error);
+  // console.log(error);
   let title = "An error occurred";
   let message = error?.message || "Something went wrong";
   if (error?.status === 404) {

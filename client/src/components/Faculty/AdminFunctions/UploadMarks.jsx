@@ -1,6 +1,5 @@
 import React,{ useState,useRef } from 'react'
 import { useNavigate } from "react-router-dom";
-import DropZone from '../DropZone'
 import CustAlert from "../../UI/CustAlert";
 import styles from './UploadMarks.module.css'
 import {read,utils} from "xlsx"
@@ -25,7 +24,7 @@ const UploadMarks = () => {
     const wb = read(f)
     const ws = wb.Sheets[wb.SheetNames[0]]
     const data = utils.sheet_to_json(ws)
-    console.log(data)
+    // console.log(data)
     setAlertOpen(true);
     setSeverity("success");
     setMessage("Marks Uploaded!");

@@ -11,22 +11,8 @@ import TextField from "@mui/material/TextField";
 import MultiFieldModal from "../../UI/Modals/MultiFieldModal";
 import MenuItem from "@mui/material/MenuItem";
 import AncmntExamCard from "./AncmntExamCard";
+import NoData from "../../UI/NoData";
 import ServerUrl from "../../../constants";
-
-const exam = [
-  {
-    subject: "Database and Management Systems",
-    date: "23/6/23",
-    syllabus:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-    type: "MSE",
-    sendTo: "All",
-    year: "",
-    branch: "",
-    division: "",
-    uid: "",
-  },
-];
 
 const Exams = (props) => {
   const [alertOpen, setAlertOpen] = useState(false);
@@ -69,7 +55,6 @@ const Exams = (props) => {
     const arr = [...exams];
     arr.unshift(newExamData);
     const makeExam = async () => {
-        console.log(newExamData);
         const response = await fetch(
           `${ServerUrl}/api/student/updateGroupUpcomingExams`,
           {
@@ -111,35 +96,41 @@ const Exams = (props) => {
         <h2 className={styles.subheading}>Exams</h2>
         <AddButton onClick={handleExamClickOpenDialog} btntext="ADD" />
       </div>
-      <div className={styles.card}>
       {exams.length === 0 ? 
-      <div className={styles.cardItem}>
-        <p
-          style={{
-            gridColumn: "1 / 3",
-            fontSize: "1rem",
-            fontWeight: "500",
-            textAlign: "center",
-          }}
-        >
-          No Exams Yet</p>
-      </div> :
-        (<div className={styles.inner}>
-          {exams.map((exam, index) => (
-            <AncmntExamCard
-              key={index}
-              title={exam.courseName}
-              date={exam.date}
-              ancmnt={exam.syllabus}
-              type={exam.type}
-              sendTo={exam.sendTo}
-              year={exam.year}
-              branch={exam.branch}
-              division={exam.division}
-            />
-          ))}
-        </div>)}
-      </div>
+        // <div className={styles.cardItem}>
+        //   <p
+        //     style={{
+        //       gridColumn: "1 / 3",
+        //       fontSize: "1rem",
+        //       fontWeight: "500",
+        //       textAlign: "center",
+        //     }}
+        //   >
+        //     No Exams Yet</p>
+        // </div> 
+        <NoData
+          title="No Exams Scheduled Yet"
+          message="You can Schedule an exam by clicking on the add button"
+        /> :
+        (
+          <div className={styles.card}>
+            <div className={styles.inner}>
+              {exams.map((exam, index) => (
+                <AncmntExamCard
+                  key={index}
+                  title={exam.courseName}
+                  date={exam.date}
+                  ancmnt={exam.syllabus}
+                  type={exam.type}
+                  sendTo={exam.sendTo}
+                  year={exam.year}
+                  branch={exam.branch}
+                  division={exam.division}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       <MultiFieldModal
         handleDataSubmit={handleExamSubmit}
         openDialog={openExamDialog}

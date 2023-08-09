@@ -41,7 +41,7 @@ const data = [
 const AnnounceCard = (props) => {
   return (
     <div className={styles.card}>
-      {props.data.length === 0 ? 
+      {/* {props.data.length === 0 ? 
       <div className={styles.cardItem}>
         <p
           style={{
@@ -58,7 +58,12 @@ const AnnounceCard = (props) => {
             <Announcement key={index} item={item} />
           ))}
         </div>
-      )}
+      )} */}
+      <div className={styles.inner}>
+        {props.data.map((item, index) => (
+          <Announcement key={index} item={item} />
+        ))}
+      </div>
     </div>
   );
 }

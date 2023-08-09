@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './Faculty.module.css'
 import EventCard from '../UI/Cards/EventCard'
 import ServerUrl from '../../constants'
+import NoData from '../UI/NoData'
 import { json, useLoaderData } from 'react-router-dom'
 
 const Faculty = () => {
@@ -13,6 +14,13 @@ const Faculty = () => {
       <h1 className="text-4xl font-semibold">Welcome, {facultyName}! 👋</h1>
       <div className="flex flex-col gap-4">
         <h1 className="text-2xl p-1 font-semibold heading">Upcoming Events</h1>
+        {
+          data.length === 0 && 
+            <NoData
+              title="No Events Scheduled"
+              message="There are no events scheduled for now. Please check back later."
+            />
+        }
       </div>
       <EventCard data={data} />
     </div>

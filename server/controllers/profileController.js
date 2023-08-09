@@ -16,7 +16,8 @@ exports.updatePersonalInfo = asyncHandler(async(req,res) =>{
             await Profile.findOneAndUpdate({emailID:email},{$set: {phone:phone,address:address,dob:dob,gender:gender,blood:blood,religion:religion,linkedin:linkedin,github:github}},{upsert:true})
             res.status(200).json(' Personal Profile updated Succesfully')
         } catch (error) {
-            console.error(error)
+                    res.status(400).json(error)
+
         }
 })
 exports.updateProfilePic = asyncHandler(async(req,res) => {
@@ -26,7 +27,8 @@ exports.updateProfilePic = asyncHandler(async(req,res) => {
             await Photo.findOneAndUpdate({emailID:email},{$set:{photoURI:photo}},{upsert:true})
             res.status(200).json('Profile Picture updated Succesfully')
         } catch (error) {
-            console.error(error)
+                    res.status(400).json(error)
+
         }
 })
 
@@ -48,7 +50,8 @@ exports.updateParentalInfo = asyncHandler(async(req,res) =>{
         await Profile.findOneAndUpdate({emailID:email},{$set: {fname:fatherName,mname:motherName,fphone:fatherPhoneNo,mphone:motherPhoneNo,femail:fatherEmailID,memail:motherEmailID,fprofession:fprofession,mprofession:mprofession}},{upsert:true})
         res.status(200).json(' Parental Profile updated Succesfully')
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -87,7 +90,8 @@ exports.getPersonalInfo = asyncHandler(async(req,res)=>{
         const profile = await Profile.findOne({emailID:email}).select("emailID phone address dob religion blood gender linkedin github -_id")
         res.status(200).json(profile)
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -98,7 +102,8 @@ exports.getParentalInfo = asyncHandler(async(req,res)=>{
         const profile = await Profile.findOne({emailID:email}).select("fname mname mphone fphone memail femail fprofession mprofession -_id")
         res.status(200).json(profile)
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -108,7 +113,8 @@ exports.getEduInfo = asyncHandler(async(req,res)=>{
         const profile = await Profile.findOne({emailID:email}).select("educationalInfo -_id")
         res.status(200).json(profile)
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -119,7 +125,8 @@ exports.getMiniDrawer = asyncHandler(async(req,res)=>{
         const {uid,name} = await Profile.findOne({emailID:email}).select("uid name -_id")
         res.status(200).json({photo:photo.photoURI,uid:uid,name:name})
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -129,7 +136,8 @@ exports.getExams = asyncHandler(async(req,res)=>{
         const exams = await Profile.findOne({emailID:email}).select("exams -_id")
         res.status(200).json(exams)
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -137,12 +145,12 @@ exports.getSemesters = asyncHandler(async(req,res)=>{
     const email = req.body.email;
     try {
         const semesters = await Profile.findOne({ emailID: email }).select(
-          "semester.semesterNumber semester.sgpa semester.status educationalInfo -_id"
+          "semester.semesterNumber semester.sgpa semester.status semester.academicYear educationalInfo -_id"
         );
-        const admissionYear = semesters.educationalInfo[0].admissionYear
-        res.status(200).json({semester:semesters.semester,admissionYear})
+        res.status(200).json({semester:semesters.semester})
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 }
 )
@@ -152,12 +160,13 @@ exports.getResults = asyncHandler(async(req,res)=>{
     const semesterNumber = req.body.semesterNumber;
     try {
         const sem = await Profile.findOne({emailID:email}).select('semester educationalInfo -_id')
-        const admissionYear = sem.educationalInfo[0].admissionYear
+        const academicYear = sem.semester[semesterNumber-1].academicYear
         const results = (sem.semester[semesterNumber-1].courses)
-        res.status(200).json({results:results,admissionYear})
+        res.status(200).json({results:results,academicYear})
     }
     catch (error){
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -173,7 +182,8 @@ exports.updateUpcomingExams = asyncHandler(async(req,res) =>{
         await Faculty.updateOne({emailID:email},{$push:{upcomingExams:{date:date,type:type,syllabus:syllabus,courseName:courseName}}})
         res.status(200).json("exam announcements updated")
     }  catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -195,7 +205,8 @@ exports.updateGroupUpcomingExams = asyncHandler(async(req,res) =>{
             await Faculty.updateOne({emailID:email},{$push:{upcomingExams:{date:date,type:type,syllabus:syllabus,courseName:courseName,sendTo:sendTo}}})
             res.status(200).json("exam announcements updated")
         }  catch (error) {
-            console.error(error)
+                    res.status(400).json(error)
+
         }
     }
     else{
@@ -205,7 +216,8 @@ exports.updateGroupUpcomingExams = asyncHandler(async(req,res) =>{
             await Faculty.updateOne({emailID:email},{$push:{upcomingExams:{date:date,type:type,syllabus:syllabus,courseName:courseName,sendTo:sendTo}}})
             res.status(200).json("exam announcements updated")
         }  catch (error) {
-            console.error(error)
+                    res.status(400).json(error)
+
         }
     }
 
@@ -218,7 +230,8 @@ exports.getUpcomingExams = asyncHandler(async(req,res) => {
         res.status(200).json(examStudent)
     }
     catch (error){
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -229,6 +242,7 @@ exports.updateUID = asyncHandler(async(req,res)=>{
         await Profile.updateOne({emailID:email},{uid:uid})
         res.status(200).json("UID updated successfully")
     }catch(error){
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })

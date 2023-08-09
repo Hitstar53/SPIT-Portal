@@ -159,11 +159,9 @@ const ProfilePdf = ({data}) => {
               {data.semester.map((sem,index) => {
                 return (
                   <View wrap={false} key={index}>
-                    <SubHeading heading={`Semester ${sem.semesterNumber} Academic Year:`} />
-                  
-
                     {sem.courses.length > 0 ? (
                       <>
+                      <SubHeading heading={`Semester ${sem.semesterNumber}, ${sem.academicYear}`} />
                       <Text
                         style={{
                           fontSize: 12,
@@ -176,7 +174,14 @@ const ProfilePdf = ({data}) => {
                         SGPA: {sem.sgpa}
                       </Text>
                       <View wrap={false} key={index}>
-                        <Thead data={["Course Name", "ISE", "MSE", "ESE","Total"]} />
+                        <Thead data={[
+                            "Course Name",
+                            "ISE ("+sem.courses[0].exams[0].maxScore+")",
+                            "MSE ("+sem.courses[0].exams[1].maxScore+")",
+                            "ESE ("+sem.courses[0].exams[2].maxScore+")",
+                            "Total ("+sem.courses[0].exams[3].maxScore+")",
+                          ]} 
+                        />
                         {sem.courses.map((course,index) => {
                           return (
                             <Tbody key={index}
@@ -209,8 +214,10 @@ const ProfilePdf = ({data}) => {
             </View>
             <View style={{ marginTop: 10 }} wrap={false}>
               <Heading heading="Extra Curricular Information" />
-              <SubHeading heading="Event Participation" />
               {data.participation.length > 0 ? (
+                <>
+                
+              <SubHeading heading="Event Participation" />
                 <View style={{ marginTop: 10 }} wrap={false}>
                   <Thead
                     data={["Event Name", "Organization", "Type", "Description"]}
@@ -229,9 +236,12 @@ const ProfilePdf = ({data}) => {
                     );
                   })}
                 </View>
+                </>
+
               ) : null}
-              <SubHeading heading="Committe Participation" />
               {data.committee.length > 0 ? (
+                <>
+                <SubHeading heading="Committe Participation" />
                 <View style={{ marginTop: 10 }} wrap={false}>
                   <Thead data={["Committe Name", "Tenure", "Position"]} />
                   {data.committee.map((com,index) => {
@@ -243,10 +253,13 @@ const ProfilePdf = ({data}) => {
                     );
                   })}
                 </View>
+                
+                </>
               ) : null}
-              <SubHeading heading="Volunteer Work" />
               {data.volunteerWork.length > 0 ? (
-                <View style={{ marginTop: 10 }} wrap={false}>
+                <> 
+                <SubHeading heading="Volunteer Work" />
+               <View style={{ marginTop: 10 }} wrap={false}>
                   <Thead data={["Event Name", "Organization", "Description"]} />
                   {data.volunteerWork.map((work,index) => {
                     return (
@@ -260,7 +273,7 @@ const ProfilePdf = ({data}) => {
                       />
                     );
                   })}
-                </View>
+                </View></>
               ) : null}
             </View>
             <Svg style={{ marginTop: 15 }} height="10" width="580">
@@ -311,8 +324,10 @@ const ProfilePdf = ({data}) => {
                   })}
                 </View>
               ) : null}
-              <SubHeading heading="Research" />
               {data.research.length > 0 ? (
+                <>
+                
+                  <SubHeading heading="Research" />
                 <View style={{ marginTop: 10 }} wrap={false}>
                   <Thead
                     data={[
@@ -337,10 +352,11 @@ const ProfilePdf = ({data}) => {
                       />
                     );
                   })}
-                </View>
+                </View></>
               ) : null}
-              <SubHeading heading="Internship" />
               {data.internship.length > 0 ? (
+                <>
+                <SubHeading heading="Internship" />
                 <View style={{ marginTop: 10 }} wrap={false}>
                   <Thead
                     data={[
@@ -365,7 +381,7 @@ const ProfilePdf = ({data}) => {
                       />
                     );
                   })}
-                </View>
+                </View></>
               ) : null}
               <View wrap={false}>
                 <SubHeading heading="Placement" />

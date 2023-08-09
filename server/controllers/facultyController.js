@@ -22,7 +22,8 @@ exports.downloadStudent = asyncHandler( async(req,res) =>{
         res.status(200).json({...student._doc,placement:placement})
     }
     catch(error){
-        console.error(error)
+                res.status(400).json(error)
+
     }
 
 } )

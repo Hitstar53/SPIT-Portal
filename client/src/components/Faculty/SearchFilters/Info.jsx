@@ -133,7 +133,6 @@ const headCells = [
   }
 ];
 
-
 const Info = () => {
   const container = styles.container + " flex flex-col gap-8 p-8";
   const [isLoading, setIsLoading] = useState(false);
@@ -159,7 +158,6 @@ const Info = () => {
       }
       if (response.ok) {
         const data = await response.json();
-        // console.log(data);
         setNewRows(data);
       }
       setIsLoading(false);

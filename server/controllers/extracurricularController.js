@@ -11,7 +11,8 @@ exports.setYourCommittee = asyncHandler(async(req,res) =>{
             await extracurricular.save()
             res.status(200).json('Your Committee Added Succesfully')
         } catch (error) {
-            console.error(error)
+                    res.status(400).json(error)
+
         }
 })
 exports.setVolunteerWork = asyncHandler(async(req,res) =>{
@@ -26,7 +27,8 @@ exports.setVolunteerWork = asyncHandler(async(req,res) =>{
             await extracurricular.save()
             res.status(200).json('Your Volunteer Work Added Succesfully')
         } catch (error) {
-            console.error(error)
+                    res.status(400).json(error)
+
         }
 })
 
@@ -44,7 +46,8 @@ exports.setParticipation = asyncHandler(async(req,res) =>{
             await extracurricular.save()
             res.status(200).json('Your Event Participation Added Succesfully')
         } catch (error) {
-            console.error(error)
+                    res.status(400).json(error)
+
         }
 })
 
@@ -55,7 +58,8 @@ exports.deleteYourCommittee = asyncHandler(async(req,res)=>{
         await Extracurricular.findOneAndUpdate({emailID:email},{$set:{committee:committees}})
         res.status(200).json('Your Committee deleted Succesfully')
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -66,7 +70,8 @@ exports.deleteYourVolunteerWork = asyncHandler(async(req,res)=>{
         await Extracurricular.findOneAndUpdate({emailID:email},{$set:{volunteerWork:volunteerWork}})
         res.status(200).json('Your Volunteer WORK deleted Succesfully')
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -77,7 +82,8 @@ exports.deleteParticipation = asyncHandler(async(req,res)=>{
         await Extracurricular.findOneAndUpdate({emailID:email},{$set:{participation:participation}})
         res.status(200).json('Your Event Participation deleted Succesfully')
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -87,7 +93,8 @@ exports.getYourCommittee = asyncHandler(async(req,res)=>{
         const yourCommittees = await Extracurricular.findOne({emailID:email}).select('committee -_id')
         res.status(200).json(yourCommittees)    
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 exports.getYourVolunteerWork = asyncHandler(async(req,res)=>{
@@ -96,7 +103,8 @@ exports.getYourVolunteerWork = asyncHandler(async(req,res)=>{
         const yourVolunteerWork = await Extracurricular.findOne({emailID:email}).select('volunteerWork -_id')
         res.status(200).json(yourVolunteerWork)    
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 exports.getParticipation = asyncHandler(async(req,res)=>{
@@ -105,7 +113,8 @@ exports.getParticipation = asyncHandler(async(req,res)=>{
         const participation = await Extracurricular.findOne({emailID:email}).select('participation -_id')
         res.status(200).json(participation)    
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -116,7 +125,8 @@ exports.getResults = asyncHandler(async(req,res)=>{
         res.status(200).json(results)
     }
     catch(error){
-        console.error(error)
+                res.status(400).json(error)
+
     }
 
 })

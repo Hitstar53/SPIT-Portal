@@ -17,7 +17,7 @@ import MultiFieldModal from '../../UI/Modals/MultiFieldModal';
 import TextField from '@mui/material/TextField';
 import ServerUrl from "../../../constants";
 import MenuItem  from '@mui/material/MenuItem';
-import { DatePicker } from "@mui/x-date-pickers";
+import NoData from "../../UI/NoData";
 
 const eventinfo = [
   {
@@ -122,7 +122,6 @@ const Events = () => {
     e.preventDefault();
     const arr = [...events];
     arr.unshift(newEventData);
-    console.log(newEventData)
     const updateParticipation = async () => {
       const response = await fetch(
         `${ServerUrl}/api/student/setParticipation`,
@@ -167,6 +166,13 @@ const Events = () => {
           <AddButton onClick={handleEventClickOpenDialog} btntext="Add Event" />
         </div>
       </div>
+      {
+        events.length === 0 && 
+        <NoData
+          title="No Participation Added"
+          message="Add your participation details to showcase your achievements"
+        />
+      }
       <div className={styles.comGrid}>
         {events.map((event, index) => {
           return (

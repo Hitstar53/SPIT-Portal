@@ -13,6 +13,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import MultiFieldModal from '../UI/Modals/MultiFieldModal';
 import TextField from '@mui/material/TextField';
 import MenuItem  from '@mui/material/MenuItem';
+import NoData from '../UI/NoData';
 import ServerUrl from '../../constants';
 
 const Internship = () => {
@@ -136,6 +137,13 @@ const Internship = () => {
               btntext="Add Internship"
             />
           </h1>
+          {
+            internships.length == 0 && 
+              <NoData 
+                title="No Internships Added"
+                message="You have not added any internships yet. Click on the button above to add one."
+              />
+          }
           {internships.map((info, index) => {
             return (
               <div
@@ -212,12 +220,12 @@ const Internship = () => {
               required
               margin="dense"
               name="duration"
-              label="Duration"
+              label="Academic Year"
               autoComplete="off"
               type="text"
               fullWidth
               variant="standard"
-              helperText="Enter duration of the internship, Eg: 2 months"
+              helperText="Enter Year of the internship, Eg: 2023"
               onChange={handleDataChange}
             />
             <TextField
@@ -343,7 +351,6 @@ export async function loader() {
   }
   if (response.ok) {
     const internshipData = await response.json();
-    console.log(internshipData);
     return internshipData;
   }
 }

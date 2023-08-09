@@ -14,7 +14,6 @@ import Events, { loader as EventsLoader } from './components/extracurr/events/Ev
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Committees, { loader as CommitteesLoader } from "./components/extracurr/committees/Committees";
 import ComAdmin, {loader as ComAdminLoader} from "./components/extracurr/committees/ComAdmin";
-import Notification from './components/Notifications/Notifications';
 import RootLayout from './pages/RootLayout';
 import FacultyLayout from './pages/FacultyLayout';
 import ErrorPage from './pages/ErrorPage';
@@ -40,7 +39,6 @@ const router = createBrowserRouter([
         children: [
           { path: "home", element: <Dashboard />, loader: DashboardLoader },
           { path: "profile", element: <Profile />, loader: ProfileLoader },
-          { path: "notifications", element: <Notification /> },
           { path: "courses", element: <Courses /> },
           { path: "result", element: <Result />, loader: SemesterLoader },
           { path: "result/:semester", element: <SemResult />, loader: SemResultLoader },

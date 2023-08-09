@@ -38,7 +38,7 @@ exports.setAnnouncementsAllStudents = asyncHandler(async (req, res) => {
         
         res.status(200).json(announcement)
     }  catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 
@@ -74,7 +74,7 @@ exports.setAnnouncementsGroupStudents = asyncHandler(async (req, res) => {
             
             res.status(200).json(announcement)
         }  catch (error) {
-            console.error(error)
+            res.status(400).json(error)
         }
         
     }
@@ -96,7 +96,7 @@ exports.setAnnouncementsGroupStudents = asyncHandler(async (req, res) => {
             
             res.status(200).json(announcement)
         }  catch (error) {
-            console.error(error)
+            res.status(400).json(error)
         }
     }
     
@@ -130,7 +130,7 @@ exports.setAnnouncementsSpecificStudents = asyncHandler(async (req, res) => {
 
         res.status(200).json(announcement)
     }  catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 
@@ -144,7 +144,7 @@ exports.getStudentAnnouncements = asyncHandler(async (req, res) => {
         res.status(200).json(student.announcements)
     }
     catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 
@@ -158,7 +158,7 @@ exports.getFacultyAnnouncements = asyncHandler(async (req, res) => {
         res.status(200).json(faculty)
     }
     catch (error) {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 
@@ -187,7 +187,7 @@ exports.setCommitteeAnnouncements = asyncHandler(async(req,res) => {    const ti
     }
     catch(error)
     {
-        console.error(error)
+        res.status(400).json(error)
     }
 })
 
@@ -201,7 +201,7 @@ exports.getCommitteeAnnouncements = asyncHandler(async(req,res) => {
         res.status(200).json(committee.comAnnouncements)
     }
     catch(error){
-        console.error(error)
+        res.status(400).json(error)
     }
 
 })

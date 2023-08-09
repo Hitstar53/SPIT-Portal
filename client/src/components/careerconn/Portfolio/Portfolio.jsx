@@ -4,6 +4,7 @@ import SkillSet from './SkillSet'
 import Projects from './Projects'
 import Research from './Research'
 import styles from './Portfolio.module.css'
+import NoData from '../../UI/NoData'
 import ServerUrl from '../../../constants'
 
 const Portfolio = () => {
@@ -14,13 +15,34 @@ const Portfolio = () => {
       <h1 className="text-4xl font-semibold">My Portfolio</h1>
       <div className="flex flex-col gap-4">
         <h1 className="text-xl p-1 font-semibold heading">Skill Set</h1>
+        {
+          data.skillData.skills.length === 0 && 
+          <NoData
+            title="No Skills Added"
+            message="Add your skills to showcase them. (Refresh Page to see changes)"
+          />
+        }
         <SkillSet skills={data.skillData} />
       </div>
       <div className="flex flex-col gap-4">
         <Projects projects={data.projectData} />
+        {
+          data.projectData.projects.length === 0 &&
+          <NoData
+            title="No Projects Added"
+            message="Add your projects by clicking on the Add Project button"
+          />
+        }
       </div>
       <div className="flex flex-col gap-4 mt-2">
         <Research research={data.researchData} />
+        {
+          data.researchData.research.length === 0 &&
+          <NoData
+            title="No Research Added"
+            message="Add your research by clicking on the Add Research button"
+          />
+        }
       </div>
     </div>
   );

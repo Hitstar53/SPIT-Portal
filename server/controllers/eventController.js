@@ -10,7 +10,8 @@ exports.setEvent = asyncHandler(async(req,res) =>{
             await event.save()
             res.status(200).json('Event Added Succesfully')
         } catch (error) {
-            console.error(error)
+                    res.status(400).json(error)
+
         }
 })
 
@@ -19,7 +20,8 @@ exports.getEvent = asyncHandler(async(req,res) =>{
         const allEvents = await Event.find().sort({endDate:1})
         res.status(200).json(allEvents)    
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -29,7 +31,8 @@ exports.deleteEvent = asyncHandler(async(req,res)=>{
         await Event.findOneAndDelete({'_id':id})
         res.status(200).json('deleted Succesfully')
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -44,7 +47,8 @@ exports.setCommitteeEvents = asyncHandler(async(req,res) => {
             res.status(200).json('Committee Event Saved Successfully');
         }
         catch(error){
-            console.error(error)
+                    res.status(400).json(error)
+
         }
 })
 
@@ -55,6 +59,7 @@ exports.getCommitteeEvents = asyncHandler(async(req,res) => {
             res.status(200).json(event)
         }
         catch(error){
-            console.error(error)
+                    res.status(400).json(error)
+
         }
 })

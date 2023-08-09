@@ -16,7 +16,7 @@ exports.setCommittee = asyncHandler(async(req,res) =>{
             await committee.save()
             res.status(200).json('Committee Added Succesfully')
         } catch (error) {
-            console.error(error)
+            res.status(400).json(error)
         }
 })
 
@@ -25,7 +25,8 @@ exports.getAllCommittees = asyncHandler(async(req,res) =>{
         const allCommittees = await Committee.find()
         res.status(200).json(allCommittees)    
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -35,7 +36,8 @@ exports.deleteCommittee = asyncHandler(async(req,res)=>{
         await Committee.findOneAndDelete({'_id':id})
         res.status(200).json('deleted Succesfully')
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -49,7 +51,8 @@ exports.updateCommittee = asyncHandler(async(req,res) => {
         await Committee.findOneAndUpdate({name:name},{description:description,facultyMentor:facultyMentor,members:members,logo:logo},{upsert:true})
         res.status(200).json('committee updated successfully')
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -58,7 +61,8 @@ exports.getCommitteeNames = asyncHandler(async(req,res) =>{
         const committeeNames = await Committee.find().select('name facultyMentor -_id')
         res.status(200).json(committeeNames)
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 exports.getCommitteeDetails = asyncHandler(async(req,res) =>{
@@ -67,7 +71,8 @@ exports.getCommitteeDetails = asyncHandler(async(req,res) =>{
         const committeeNames = await Committee.findOne({name:comname}).select('members -_id')
         res.status(200).json(committeeNames)
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 exports.setCommitteeDetails = asyncHandler(async(req,res) =>{
@@ -80,7 +85,8 @@ exports.setCommitteeDetails = asyncHandler(async(req,res) =>{
         await committee.save()
         res.status(200).json("committee member added successfully")
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 exports.deleteCommitteeDetails = asyncHandler(async(req,res) =>{
@@ -90,7 +96,8 @@ exports.deleteCommitteeDetails = asyncHandler(async(req,res) =>{
         const committee = await Committee.findOneAndUpdate({name:comname},{$set:{members:members}})
         res.status(200).json("committee member deleted successfully")
     } catch (error) {
-        console.error(error)
+                res.status(400).json(error)
+
     }
 })
 
@@ -100,7 +107,8 @@ exports.getRole = asyncHandler(async(req,res)=>{
         const role = await Student.findOne({emailID:email}).select('role -_id')
         res.status(200).json(role)
     } catch (error) {  
-        console.error(error)
+                res.status(400).json(error)
+
     }   
 })
 
@@ -113,7 +121,8 @@ exports.makeNewCP = asyncHandler(async(req,res)=>{
         await Student.findOneAndUpdate({emailID:newCPEmail},{$set:{role:comname}})
         res.status(200).json("New CP made successfully")
     } catch (error) {  
-        console.error(error)
+                res.status(400).json(error)
+
     }
         
 })
@@ -141,6 +150,7 @@ exports.makeNewCP = asyncHandler(async(req,res)=>{
 //     }
 //     catch(error)
 //     {
-//         console.error(error)
+//                 res.status(400).json(error)
+
 //     }
 // })
