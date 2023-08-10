@@ -187,7 +187,7 @@ const Principal = () => {
       <div>
         {backToTop && (
           <IconButton
-            sx={{ position: "fixed", bottom: "2rem", right: "2rem", zIndex: "999",  backgroundColor: "gray", color: "white", "&:hover": { color: "black" }  }}
+            sx={{ position: "fixed", bottom: "2rem", right: "2.5rem", zIndex: "999",  backgroundColor: "gray", color: "white", "&:hover": { color: "black" }  }}
             className="back-to-top"
             onClick={scrollToTop}
             aria-label="Back to top"
