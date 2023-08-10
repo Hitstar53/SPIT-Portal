@@ -230,7 +230,7 @@ export default function AllSteps({
             <table>
               <thead>
                 <th colSpan={8} className="table-heading">
-                  AP3:Lecture target achieved. Average for all the courses
+                  AP3: Lecture target achieved. Average for all the courses
                   taught in one academic year
                 </th>
               </thead>
@@ -262,7 +262,7 @@ export default function AllSteps({
                       )}
                       {index === 0 && (
                         <td rowSpan={history.Dimension1.info.courses.length}>
-                          {history.Dimension1.info.AP3Average}
+                          {history.Dimension1.info.AP3Marks}
                         </td>
                       )}
                     </tr>
@@ -397,7 +397,7 @@ export default function AllSteps({
             <table className="page-break">
               <thead>
                 <th colSpan={5} className="table-heading">
-                  AP7:Arrange Guest Lectures / co-teaching from industry
+                  AP7: Arrange Guest Lectures / co-teaching from industry
                   (eminent resource person from the respective domain industry)
                 </th>
               </thead>
@@ -469,7 +469,7 @@ export default function AllSteps({
             <table>
               <thead>
                 <th colSpan={6} className="table-heading">
-                  AP9:Noteworthy efforts towards enriching the learning
+                  AP9: Noteworthy efforts towards enriching the learning
                   experience / innovation in TLE methods
                 </th>
               </thead>
@@ -511,7 +511,7 @@ export default function AllSteps({
             <table>
               <thead>
                 <th colSpan={5} className="table-heading">
-                  AP10:Question Paper auditing
+                  AP10: Question Paper auditing
                 </th>
               </thead>
               <thead>
