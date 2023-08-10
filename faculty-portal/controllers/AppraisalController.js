@@ -534,7 +534,7 @@ const setDim2 = asyncHandler(async (req, res) => {
             Dimension2.RP1.totalMarks = rp1marks;
             Dimension2.RP2.totalMarks = rp2marks;
             Dimension2.RP3.totalMarks = rp3marks;
-            Dimension2.RP4.totalMarks = (Dimension2.RP4.number * 0.4) <= 25 ? (Dimension2.RP4.number * 0.4) : 25;
+            Dimension2.RP4.totalMarks = (Dimension2.RP4.number * 0.4) <= 25 ? (Dimension2.RP4.number * 0.4).toFixed(2) : 25;
             Dimension2.RP5.totalMarks = rp5marks;
 
             
