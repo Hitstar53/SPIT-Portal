@@ -601,6 +601,7 @@ const ViewHistory = () => {
                             ""
                         )}
                         {isHOD && (
+                            <>
                             <div
                                 ref={elementRefFaculty}
                                 style={{
@@ -611,22 +612,51 @@ const ViewHistory = () => {
                                 }}
                             >
                                 <AllSteps fullName={name} year={year2} showComments={true} />
-                                <button
-                                    onClick={handleExportPDFFaculty}
-                                    style={{
-                                        backgroundColor: "#f32236",
-                                        color: "white",
-                                        padding: "10px",
-                                        // borderRadius: "5px",
-                                        border: "none",
-                                        width: "150px",
-                                        margin: "1em auto",
-                                        display: "block",
-                                    }}
-                                >
-                                    Export to PDF
-                                </button>
+                                <div
+                                        style={{
+                                            display: "flex",
+                                            justifyContent: "space-around",
+                                            alignItems: "center",
+                                            margin: "7em 2em",
+                                            marginBottom: "1em",
+                                        }}
+                                    >
+                                        <div
+                                            style={{
+                                                borderTop: "1px solid black",
+                                                width: "15%",
+                                                textAlign: "center",
+                                            }}
+                                        >
+                                            Signature
+                                        </div>
+                                        <div
+                                            style={{
+                                                borderTop: "1px solid black",
+                                                width: "15%",
+                                                textAlign: "center",
+                                            }}
+                                        >
+                                            Date
+                                        </div>
+                                    </div>
                             </div>
+                            <button
+                                onClick={handleExportPDFFaculty}
+                                style={{
+                                    backgroundColor: "#f32236",
+                                    color: "white",
+                                    padding: "10px",
+                                    // borderRadius: "5px",
+                                    border: "none",
+                                    width: "150px",
+                                    margin: "1em auto",
+                                    display: "block",
+                                }}
+                            >
+                                Export to PDF
+                            </button>
+                            </>
                         )}
                     </div>
                 </>
