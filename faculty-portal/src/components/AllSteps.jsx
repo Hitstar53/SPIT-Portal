@@ -5,6 +5,8 @@ import axios from "axios";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 export default function AllSteps({
   fullName,
@@ -33,13 +35,17 @@ export default function AllSteps({
     };
     fetchHistory();
   }, []);
+  
   useEffect(() => {
     console.log(history);
   }, [history]);
+
   return (
     <>
       {loading ? (
-        <h1>loading</h1>
+        <Box sx={{ display: 'flex', alignItems: "center", justifyContent: "center" }}>
+          <CircularProgress />
+        </Box>
       ) : (
         <div
           // ref={elementRef}
