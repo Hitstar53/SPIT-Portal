@@ -86,14 +86,14 @@ export default function ProfileForm() {
               <div className="input-box">
                 <label>
                   Designation:
-                  <input {...register("designation")} />
+                  <input disabled {...register("designation")} />
                 </label>
               </div>
 
               <div className="input-box">
                 <label>
                   Department:
-                  <input {...register("department")} />
+                  <input disabled {...register("department")} />
                 </label>
               </div>
 
