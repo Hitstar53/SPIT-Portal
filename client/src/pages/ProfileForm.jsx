@@ -75,7 +75,7 @@ export default function ProfileForm() {
               <div className="input-box">
                 <label>
                   Full Name:
-                  <input {...register("fullName")} />
+                  <input disabled {...register("fullName")} />
                 </label>
               </div>
 
