@@ -35,7 +35,7 @@ export default function AllSteps({
     };
     fetchHistory();
   }, []);
-  
+
   useEffect(() => {
     console.log(history);
   }, [history]);
@@ -1310,34 +1310,7 @@ export default function AllSteps({
               Total Marks Dimension 3 : {history.Dimension3.totalMarks}
             </strong>
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-around",
-              alignItems: "center",
-              margin: "7em 2em",
-              marginBottom: "1em",
-            }}
-          >
-            <div
-              style={{
-                borderTop: "1px solid black",
-                width: "15%",
-                textAlign: "center",
-              }}
-            >
-              Signature
-            </div>
-            <div
-              style={{
-                borderTop: "1px solid black",
-                width: "15%",
-                textAlign: "center",
-              }}
-            >
-              Date
-            </div>
-          </div>
+
           {isPrincipal && (
             <>
               <div

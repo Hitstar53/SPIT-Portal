@@ -12,6 +12,9 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Done from "../assets/project-is-done.png";
 import Notfound from "../assets/404-not-found.png";
 import AllSteps from "../components/AllSteps";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import Stack from "@mui/material/Stack";
 
 const ViewHistory = () => {
     const { user } = useContext(UserContext);
@@ -968,7 +971,7 @@ const ViewHistory = () => {
                                             </tr>
                                             <tr>
                                                 <td colSpan={3} className="table-content table-data text-center align-middle">
-                                                Bonus Marks Given By Principal
+                                                    Bonus Marks Given By Principal
                                                 </td>
                                                 <td className="table-content table-data text-center align-middle">
                                                     {report.Dimension4.confidentialReport.bonusMarks.toFixed(2)}
@@ -1083,18 +1086,61 @@ const ViewHistory = () => {
                     )}
                     <div>
                         {history ? (
-                            <div
-                                ref={elementRefFaculty}
-                                style={{
-                                    width: "95%",
-                                    // padding:"0 0 2em 0",
-                                    border: "1px solid black",
-                                    margin: "1em auto",
-                                }}
-                            >
-                                <AllSteps fullName={user.fullName} year={year} showComments={true} />
-                            </div>
-                        ) : (
+                            <>
+                                <div style={{
+                                    margin: "1em",
+                                    padding: "0.4em 0.4em",
+                                }}>
+                                    <Stack sx={{ width: "100%", margin: "1rem 0", textAlign: 'left' }} spacing={2}>
+                                        <Alert severity="error">
+                                            <AlertTitle><h4 style={{ fontWeight: 'bolder', fontSize: '23px' }}>Comments (Latest to Oldest)</h4></AlertTitle>
+                                            {history.HODcomments.map((comment, index) => (
+                                                <h4 style={{ fontWeight: 'bolder', fontSize: '20px' }}>{index + 1}. {comment}</h4>
+                                            ))}
+                                        </Alert>
+                                    </Stack>
+                                </div>
+                                <div
+                                    ref={elementRefFaculty}
+                                    style={{
+                                        width: "95%",
+                                        // padding:"0 0 2em 0",
+                                        border: "1px solid black",
+                                        margin: "1em auto",
+                                    }}
+                                >
+                                    <AllSteps fullName={user.fullName} year={year} />
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            justifyContent: "space-around",
+                                            alignItems: "center",
+                                            margin: "7em 2em",
+                                            marginBottom: "1em",
+                                        }}
+                                    >
+                                        <div
+                                            style={{
+                                                borderTop: "1px solid black",
+                                                width: "15%",
+                                                textAlign: "center",
+                                            }}
+                                        >
+                                            Signature
+                                        </div>
+                                        <div
+                                            style={{
+                                                borderTop: "1px solid black",
+                                                width: "15%",
+                                                textAlign: "center",
+                                            }}
+                                        >
+                                            Date
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </>) : (
                             ""
                         )}
                     </div>
