@@ -72,7 +72,7 @@ export default function AllSteps({
             }}>
               <Stack sx={{ width: "100%", margin: "1rem 0", textAlign: 'left' }} spacing={2}>
                 <Alert severity="error">
-                  <AlertTitle><h4 style={{ fontWeight: 'bolder', fontSize: '23px' }}>Comments (Latest to Oldest)</h4></AlertTitle>
+                  <AlertTitle><h4 style={{ fontWeight: 'bolder', fontSize: '23px' }}>Comments (Oldest to Latest)</h4></AlertTitle>
                   {history.HODcomments.map((comment, index) => (
                     <h4 style={{ fontWeight: 'bolder', fontSize: '20px' }}>{index + 1}. {comment}</h4>
                   ))}
