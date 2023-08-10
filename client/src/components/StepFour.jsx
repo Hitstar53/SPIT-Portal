@@ -54,9 +54,7 @@ function StepFour({ yr, fullName, setStatus }) {
   };
 
   const onSubmit = (data) => {
-    ("line 51");
-   
-    axiosconsole.log
+    axios
       .post("http://localhost:5000/api/faculty/appraisal/hodreview", {
         yearofAssesment: yr,
         fullName: fullName,
