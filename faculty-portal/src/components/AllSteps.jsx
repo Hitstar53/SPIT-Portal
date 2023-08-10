@@ -65,7 +65,7 @@ export default function AllSteps({
             }}
           />
 
-          {showComments && history.HODcomments && (
+          {showComments && history.HODcomments?.length>0 && (
             <div style={{
               margin: "1em",
               padding: "0.4em 0.4em",
