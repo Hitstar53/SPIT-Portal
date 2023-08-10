@@ -37,20 +37,20 @@ export default function FacultyStepper() {
   };
 
   React.useEffect(() => {
-    console.log(activeStep);
+  
   }, [activeStep]);
 
   React.useEffect(() => {
-    console.log("Dimension1=", Dimension1);
+   
   }, [Dimension1]);
   React.useEffect(() => {
-    console.log("Dimension2=", Dimension2);
+   
   }, [Dimension2]);
   React.useEffect(() => {
-    console.log("Dimension3=", Dimension3);
+   
   }, [Dimension3]);
   React.useEffect(() => {
-    console.log("Dimension4=", Dimension4);
+   
   }, [Dimension4]);
 
   const scrollToTop = () => {
@@ -70,7 +70,7 @@ export default function FacultyStepper() {
 }
 
   function sendToServer() {
-    console.log("Sending to server");
+   
     fetch("http://localhost:5000/api/faculty/appraisal", {
       method: "POST",
       headers: {
@@ -100,24 +100,18 @@ export default function FacultyStepper() {
       }),
     })
       .then((res) => res.json())
-      .then((data) => setComments(data))
-      .then((data) => console.log(data));
+      .then((data) => setComments(data));
   }, []);
 
   useEffect(() => {
-    console.log(comments);
+  
   }, [comments]);
 
-  // React.useEffect(()=>{
-  //   if(activeStep === 4){
-  //     sendToServer()
-  //   }
-  // },[activeStep])
+
 
   return (
     <React.Fragment>
-      {/* header with Test_Study as heading and profile button */}
-      {/* <Header /> */}
+
 
       {/* shows steps for stepper */}
       <Box sx={{ width: "95%", margin: "auto" }}>
@@ -152,9 +146,9 @@ export default function FacultyStepper() {
             handleNext={handleNext}
           />
         )}
-        {/* {activeStep === 4 && <StepFour handleBack={handleBack} submitted={true} />} */}
+       
         {activeStep === 4 && <h1>Submitted the form</h1>}
-        {/* show footer only if all steps are not completed */}
+  
         {
           <StepFoot
             activeStep={activeStep}

@@ -36,7 +36,7 @@ function StepThree({ setDimension3, yr }) {
       await axios.post('http://localhost:5000/api/faculty/appraisal/get/dim3',
         { name: user.fullName, yearofAssesment: yr }
       ).then((res) => {
-        console.log("Response Data for dim 3:", res.data);
+        
         setMarks({
           totalIPDPmarks: res.data.totalIP1IP2DP1Marks,
           OP1marks: res.data.OP1.totalMarks,
@@ -53,7 +53,7 @@ function StepThree({ setDimension3, yr }) {
         localStorage.setItem("dim3Data", JSON.stringify(res.data))
         reset(JSON.parse(localStorage.getItem("dim3Data")))
         const storedData = localStorage.getItem("dim3Data")
-        console.log(storedData)
+        
         if (storedData) {
           Object.keys(JSON.parse(storedData)).map((key) => {
             setValue(key, JSON.parse(storedData)[key])
@@ -142,13 +142,13 @@ function StepThree({ setDimension3, yr }) {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+
     setDimension3(data)
     localStorage.setItem('dim3Data', JSON.stringify(data));
     axios.post('http://localhost:5000/api/faculty/appraisal/dim3',
       { yearofAssesment: yr, faculty: user, Dimension3: data }
     ).then((res) => {
-      console.log(res.data)
+      
       toast.success('Step Three Saved!', {
         position: "top-center",
         autoClose: 5000,
@@ -175,20 +175,11 @@ function StepThree({ setDimension3, yr }) {
       localStorage.setItem("dim3Data", JSON.stringify(res.data))
       reset(JSON.parse(localStorage.getItem("dim3Data")))
       const storedData = localStorage.getItem("dim3Data")
-      console.log(storedData)
+      
     }).catch((err) => {
       console.log(err)
     })
   };
-
-
-
-  // useEffect(() => {
-  //   console.log(dimension3);
-  // }, [dimension3]);
-
-
-
 
   return (
     <>
@@ -349,7 +340,7 @@ function StepThree({ setDimension3, yr }) {
               <tbody>
                 {organizedFields.map((item, index) => (
                   <tr key={item.id}>
-                    {/* <label className="form-label">Organised</label> */}
+                  
                     <td>
                       <input
                         type="text"
@@ -358,7 +349,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`OP1.organized[${index}].name`)}
                       />
                     </td>
-                    {/* <label className="form-label">Agency</label> */}
+                  
                     <td>
                       <select {...register(`OP1.organized[${index}].type`)}>
                         <option value="FDP">FDP</option>
@@ -367,7 +358,7 @@ function StepThree({ setDimension3, yr }) {
                         </option>
                       </select>
                     </td>
-                    {/* <label className="form-label">Funds</label> */}
+                  
                     <td>
                       <input
                         type="text"
@@ -385,7 +376,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`OP1.organized[${index}].fund`)}
                       />
                     </td>
-                    {/* <label className="form-label">Days</label> */}
+                  
                     <td>
                       <input
                         type="number"
@@ -456,7 +447,7 @@ function StepThree({ setDimension3, yr }) {
               <tbody>
                 {invitedFields.map((item, index) => (
                   <tr key={item.id}>
-                    {/* <label className="form-label">Name</label> */}
+                  
                     <td>
                       <input
                         type="text"
@@ -467,7 +458,7 @@ function StepThree({ setDimension3, yr }) {
                         )}
                       />
                     </td>
-                    {/* <label className="form-label">Dates</label> */}
+                  
                     <td>
                       <input
                         type="date"
@@ -476,7 +467,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`Invited.invitedAt[${index}].dates`)}
                       />
                     </td>
-                    {/* <label className="form-label">Details</label> */}
+                   
                     <td>
                       <input
                         type="text"
@@ -561,7 +552,7 @@ function StepThree({ setDimension3, yr }) {
               <tbody>
                 {receivedFDPFields.map((item, index) => (
                   <tr key={item.id}>
-                    {/* <label className="form-label">Organised</label> */}
+                 
                     <td>
                       <input
                         type="text"
@@ -570,7 +561,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`op3.receivedFDP[${index}].name`)}
                       />
                     </td>
-                    {/* <label className="form-label">Agency</label> */}
+                  
                     <td>
                       <select {...register(`op3.receivedFDP[${index}].type`)}>
                         <option value="FDP">FDP</option>
@@ -579,7 +570,7 @@ function StepThree({ setDimension3, yr }) {
                         </option>
                       </select>
                     </td>
-                    {/* <label className="form-label">Funds</label> */}
+                  
                     <td>
                       <input
                         type="text"
@@ -597,7 +588,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`op3.receivedFDP[${index}].fund`)}
                       />
                     </td>
-                    {/* <label className="form-label">Days</label> */}
+                   
                     <td>
                       <input
                         type="number"
@@ -659,7 +650,7 @@ function StepThree({ setDimension3, yr }) {
               <tbody>
                 {invitedTalkFields.map((item, index) => (
                   <tr key={item.id}>
-                    {/* <label className="form-label">Organised</label> */}
+                  
                     <td>
                       <input
                         type="date"
@@ -668,7 +659,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`op4.invitedTalk[${index}].industryName`)}
                       />
                     </td>
-                    {/* <label className="form-label">Funds</label> */}
+
                     <td>
                       <input
                         type="text"
@@ -677,7 +668,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`op4.invitedTalk[${index}].dates`)}
                       />
                     </td>
-                    {/* <label className="form-label">Funds</label> */}
+
                     <td>
                       <input
                         type="text"
@@ -744,7 +735,7 @@ function StepThree({ setDimension3, yr }) {
               <tbody>
                 {committeeFields.map((item, index) => (
                   <tr key={item.id}>
-                    {/* <label className="form-label">Committee</label> */}
+                   
                     <td>
                       <input
                         type="text"
@@ -753,7 +744,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`Partof.committee[${index}].name`)}
                       />
                     </td>
-                    {/* <label className="form-label">Details</label> */}
+                   
                     <td>
                       <input
                         type="text"
@@ -762,7 +753,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`Partof.committee[${index}].details`)}
                       />
                     </td>
-                    {/* <label className="form-label">Organization</label> */}
+
                     <td>
                       <input
                         type="text"
@@ -771,7 +762,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`Partof.committee[${index}].organization`)}
                       />
                     </td>
-                    {/* <label className="form-label">Date</label> */}
+                    
                     <td>
                       <input
                         type="date"
@@ -826,7 +817,7 @@ function StepThree({ setDimension3, yr }) {
               <tbody>
                 {articleFields.map((item, index) => (
                   <tr key={item.id}>
-                    {/* <label className="form-label">Details</label> */}
+                    
                     <td>
                       <input
                         type="text"
@@ -881,7 +872,7 @@ function StepThree({ setDimension3, yr }) {
               <tbody>
                 {dataFields.map((item, index) => (
                   <tr key={item.id}>
-                    {/* <label className="form-label">Details</label> */}
+                    
                     <td>
                       <input
                         type="text"
@@ -939,7 +930,7 @@ function StepThree({ setDimension3, yr }) {
               <tbody>
                 {coGuideFields.map((item, index) => (
                   <tr key={item.id}>
-                    {/* <label className="form-label">Institute</label> */}
+
                     <td>
                       <input
                         type="text"
@@ -948,7 +939,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`coGuide.data[${index}].institutionName`)}
                       />
                     </td>
-                    {/* <label className="form-label">Details</label> */}
+                   
                     <td>
                       <input
                         type="text"
@@ -1006,7 +997,7 @@ function StepThree({ setDimension3, yr }) {
               <tbody>
                 {collaborationFields.map((item, index) => (
                   <tr key={item.id}>
-                    {/* <label className="form-label">Name</label> */}
+                  
                     <td>
                       <input
                         type="text"
@@ -1017,7 +1008,7 @@ function StepThree({ setDimension3, yr }) {
                         )}
                       />
                     </td>
-                    {/* <label className="form-label">Details</label> */}
+                   
                     <td>
                       <input
                         type="text"
@@ -1060,12 +1051,6 @@ function StepThree({ setDimension3, yr }) {
             </div>
           </div>
 
-          {/* <input
-        className="btn btn-primary"
-        type="submit"
-        value="Save Changes"
-        style={{ display: "block", width: "100px" }}
-      /> */}
           <div
             className="flex flex-col items-center gap-4"
             style={{

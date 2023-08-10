@@ -12,14 +12,12 @@
     color: black;
 }
 .profile-form form{
-    /* width:700px; */
+
     max-width: 90%;
     margin: 20px auto;
     min-height: 100vh;
     display: flex;
     flex-wrap: wrap;
-    /* flex-direction: column; */
-    /* padding: 40px 60px; */
     border-radius: 10px;
     justify-content: center;
     margin-top: 0px;

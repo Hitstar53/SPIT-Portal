@@ -65,13 +65,12 @@ const ViewHistory = () => {
     }
 
     function togglecheckbox(e) {
-        console.log(e.target.checked)
+    
         setToggle(e.target.checked)
     }
 
     const [facultyName, setfacultyName] = useState([]);
-    // const pdfExportComponent = useRef(null);
-    //for adding print function
+
     const myvar = "HOD";
     const elementRefHOD = useRef();
     const elementRefPrincipal = useRef();
@@ -84,12 +83,12 @@ const ViewHistory = () => {
     });
     const handleExportPDFPrincipal = useReactToPrint({
         content: () => elementRefPrincipal.current,
-        // onAfterPrint: alert("Printed Successfully"),
+    
         documentTitle: `${principalDepartment}_${nameForPrincipal}_${year3}_AppraisalForm_byPrincipal`,
     });
     const handleExportPDFFaculty = useReactToPrint({
         content: () => elementRefFaculty.current,
-        // onAfterPrint: alert("Printed Successfully"),
+   
         documentTitle: `${user.department}_${user.fullName}_${year}_AppraisalForm_bySelf`,
     });
 
@@ -109,32 +108,15 @@ const ViewHistory = () => {
         }, []);
 
         useEffect(() => {
-            console.log("name: ", name);
+        
         }, [name]);
         useEffect(() => {
-            console.log("Years of that teacher : ", years2);
+        
         }, [years2]);
 
-        // const handleOption = async () => {
-        //     const fetchDim4 = async () => {
-        //         const endpoint = 'http://localhost:5000/api/faculty/appraisal/get/dim4';
-        //         await axios.post(endpoint, {
-        //             yearofAssesment: year2,
-        //             facultyName: "Sudhir Namdeorao Dhage",
-        //             // facultyName: "Mahesh Patil"
-        //         }).then((response) => {
-        //             console.log(response.data);
-        //             setDim4(response.data);
-        //             console.log(Dim4);
-        //         }).catch((err) => {
-        //             console.log(err);
-        //         });
-        //     }
-        //     fetchDim4();
-        // }
     } else {
         useEffect(() => {
-            console.log("Inside UseEffect");
+        
             fetch("http://localhost:5000/api/faculty/appraisal/getallappraisal", {
                 method: "POST",
                 headers: {
@@ -146,21 +128,20 @@ const ViewHistory = () => {
             })
                 .then((res) => res.json())
                 .then((data) => {
-                    console.log(data);
+          
                     setYears(data);
                 });
 
             const fetchHistory = async () => {
                 const endpoint =
                     "http://localhost:5000/api/faculty/appraisal/getappraisal";
-                // const payload = JSON.parse(localStorage.getItem('user'));
                 await axios
                     .post(endpoint, {
                         facultyName: user.fullName,
                         yearofAssesment: year,
                     })
                     .then((response) => {
-                        console.log(response.data);
+                     
                         setHistory(response.data);
                     });
             };
@@ -169,7 +150,7 @@ const ViewHistory = () => {
     }
 
     const handleOption = async () => {
-        console.log(year3);
+
         const fetchHODData = async () => {
             const endpoint =
                 "http://localhost:5000/api/faculty/appraisal/getappraisal";
@@ -177,17 +158,16 @@ const ViewHistory = () => {
                 .post(endpoint, {
                     yearofAssesment: year2,
                     facultyName: name,
-                    // facultyName: "Mahesh Patil"
                 })
                 .then((response) => {
-                    console.log("here");
-                    console.log(response.data);
+                 
+
                     if (response.data.designation == "HOD") {
                         setIsHOD(true);
                     } else {
                         setDim4(response.data.Dimension4);
                     }
-                    console.log(Dim4);
+                   
                 });
         };
 
@@ -198,19 +178,18 @@ const ViewHistory = () => {
                 .post(endpoint, {
                     yearofAssesment: year3,
                     facultyName: nameForPrincipal,
-                    // facultyName: "Mahesh Patil"
                 })
                 .then((response) => {
-                    console.log("here");
-                    console.log(response.data);
+
+                
                     setReport(response.data);
                     if (response.data.designation == "HOD") {
                         setIsHOD(true);
                     }
-                    console.log(Dim4);
+
                 })
                 .catch((err) => {
-                    console.log(err);
+
                 });
         };
         if (user.designation === "HOD") {
@@ -221,15 +200,11 @@ const ViewHistory = () => {
         }
     };
     useEffect(() => {
-        console.log("Faculty Year :", year);
+
         handleOption();
     }, [year2, year3]);
 
-    // useEffect(() => {
-    //     console.log("Faculty Year :", year);
-    //     handleOption();
-    // }, [year])
-
+   
     // For Principal Select Box
     if (user.designation === "Principal") {
         useEffect(() => {
@@ -239,33 +214,23 @@ const ViewHistory = () => {
                         "http://localhost:5000/api/faculty/get/faculty/getalldepartments"
                     )
                     .then((res) => {
-                        console.log(res.data);
                         setAllDept(res.data);
                     })
                     .catch((err) => console.log(err));
             };
             getDept();
         }, []);
-        // useEffect(() => {
-        //     fetch("http://localhost:5000/api/faculty/get/faculty/submitted", {
-        //         method: "GET",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //     })
-        //         .then((res) => res.json())
-        //         .then((data) => setFaculty(data.sort()));
-        // }, [])
+       
     }
 
     const getPrincipalFaculty = async (dept) => {
-        console.log(dept);
+
         await axios
             .post("http://localhost:5000/api/faculty/get/faculty/submitted", {
                 department: dept,
             })
             .then((res) => {
-                console.log(res.data);
+
                 setFaculty(res.data.sort());
                 setSelectedDept(true);
             })
@@ -278,8 +243,7 @@ const ViewHistory = () => {
     };
 
     const getYears = async (name) => {
-        console.log("Inside GetYears");
-        console.log("Name on LIne 86", name);
+
         await fetch(
             "http://localhost:5000/api/faculty/appraisal/get-hod-appraisal-year",
             {
@@ -297,8 +261,7 @@ const ViewHistory = () => {
     };
 
     const getPrincipalYears = async (name) => {
-        console.log("Inside GetYears");
-        console.log("Name on LIne 86", name);
+
         await fetch("http://localhost:5000/api/faculty/appraisal/getallappraisal", {
             method: "POST",
             headers: {
@@ -318,7 +281,7 @@ const ViewHistory = () => {
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(e.target[0].value);
+
         setName(e.target[0].value);
         setYear2(null);
         getYears(e.target[0].value);
@@ -327,32 +290,25 @@ const ViewHistory = () => {
 
     const handleDeptSubmit = (e) => {
         e.preventDefault();
-        console.log("You clicked submit.");
-        console.log(e.target[0].value);
+
         setPrincipalDepartment(e.target[0].value);
         getPrincipalFaculty(e.target[0].value);
     };
 
     const handlePrincipalSubmit = (e) => {
         e.preventDefault();
-        console.log("You clicked submit.");
-        console.log(e.target[0].value);
+
         setYear3(null);
         setNameForPrincipal(e.target[0].value);
         getPrincipalYears(e.target[0].value);
-        // setSelectedFaculty(true);
-    };
+       };
 
     useEffect(() => {
-        console.log(years2);
+
     }, [years2]);
 
     return (
         <>
-            {/* {if(user.designation == "HOD"){
-                
-            }
-            } */}
             <div>
                 {backToTop && (
                     <IconButton
@@ -406,7 +362,7 @@ const ViewHistory = () => {
                             </form>
                         </div>
 
-                        {/* {( */}
+                       
                         {selectedFaculty && (
                             <div className="dropdown justify-center pt-0">
                                 <div>Select a Year:</div>
@@ -427,7 +383,7 @@ const ViewHistory = () => {
                             </div>
                         )}
                     </div>
-                    {/* )} */}
+                
 
                     {!year2 || !name ? (
                         <p
@@ -448,7 +404,6 @@ const ViewHistory = () => {
                         {Dim4 ? (
                             <>
                                 <div className="switch-container">
-                                    {/* <h4>Hide Previous Dimensions</h4> */}
                                     <label class="switch">
                                         <input type="checkbox" value={toggle} onChange={togglecheckbox} />
                                         <span class="slider round"></span>
@@ -470,7 +425,6 @@ const ViewHistory = () => {
                                     ref={elementRefHOD}
                                     style={{
                                         width: "95%",
-                                        // padding:"0 0 2em 0",
                                         border: "1px solid black",
                                         margin: "1em auto",
                                     }}
@@ -492,7 +446,6 @@ const ViewHistory = () => {
                                     >
                                         Feedback Marks for {name} ({year2})
                                     </h1>
-                                    {/* <Table striped bordered style={{ margin: "1rem", width: "95%" }}> */}
                                     <div
                                         className="dimhead"
                                         style={{
@@ -587,7 +540,6 @@ const ViewHistory = () => {
                                         backgroundColor: "#f32236",
                                         color: "white",
                                         padding: "10px",
-                                        // borderRadius: "5px",
                                         border: "none",
                                         width: "150px",
                                         margin: "1em auto",
@@ -606,7 +558,6 @@ const ViewHistory = () => {
                                 ref={elementRefFaculty}
                                 style={{
                                     width: "95%",
-                                    // padding:"0 0 2em 0",
                                     border: "1px solid black",
                                     margin: "1em auto",
                                 }}
@@ -647,7 +598,6 @@ const ViewHistory = () => {
                                     backgroundColor: "#f32236",
                                     color: "white",
                                     padding: "10px",
-                                    // borderRadius: "5px",
                                     border: "none",
                                     width: "150px",
                                     margin: "1em auto",
@@ -740,7 +690,7 @@ const ViewHistory = () => {
                     {report && (
                         <>
                             <div className="switch-container">
-                                {/* <h4>Hide Previous Dimensions</h4> */}
+                               
                                 <label class="switch">
                                     <input type="checkbox" value={toggle} onChange={togglecheckbox} />
                                     <span class="slider round"></span>
@@ -762,7 +712,7 @@ const ViewHistory = () => {
                                 ref={elementRefPrincipal}
                                 style={{
                                     width: "95%",
-                                    // padding:"0 0 2em 0",
+                                   
                                     border: "1px solid black",
                                     margin: "1em auto",
                                 }}
@@ -781,7 +731,7 @@ const ViewHistory = () => {
                                         Confidential Report for {report.facultyName} (
                                         {report.yearofAssesment})
                                     </h1>
-                                    {/* <Table striped bordered style={{ margin: "1rem", width: "95%" }}> */}
+
                                     {isHOD && (
                                         <table>
                                             <thead>
@@ -825,7 +775,7 @@ const ViewHistory = () => {
                                     <table
                                         style={{
                                             maxWidth: "95%",
-                                            // margin: "0em auto",
+                                          
                                             marginTop: "1em",
                                         }}
                                     >
@@ -850,7 +800,7 @@ const ViewHistory = () => {
 
                                         </thead>
                                     </table>
-                                    {/* </Table> */}
+                                
                                     <div
                                         className="dimhead"
                                         style={{
@@ -874,7 +824,6 @@ const ViewHistory = () => {
                                             margin: "0em auto",
                                         }}
                                     >
-                                        {/* <Table bordered style={{ margin: "1rem", width: "95%" }}> */}
                                         <thead>
                                             <tr>
                                                 <th className="table-header text-center align-middle">
@@ -1043,7 +992,6 @@ const ViewHistory = () => {
                                         backgroundColor: "#f32236",
                                         color: "white",
                                         padding: "10px",
-                                        // borderRadius: "5px",
                                         border: "none",
                                         width: "150px",
                                         margin: "1em auto",
@@ -1079,9 +1027,7 @@ const ViewHistory = () => {
                                         </option>
                                     );
                                 })}
-                                {/* // <option value="">-- Select Assessment Year --</option>
-                    // <option value="Existing Client">Existing Client</option>
-                    // <option value="Potential Client">Potential Client</option> */}
+                               
                             </select>
                         </div>
                     ) : (
@@ -1107,7 +1053,7 @@ const ViewHistory = () => {
                                     ref={elementRefFaculty}
                                     style={{
                                         width: "95%",
-                                        // padding:"0 0 2em 0",
+                                        
                                         border: "1px solid black",
                                         margin: "1em auto",
                                     }}
@@ -1156,7 +1102,6 @@ const ViewHistory = () => {
                         backgroundColor: "#f32236",
                         color: "white",
                         padding: "10px",
-                        // borderRadius: "5px",
                         border: "none",
                         width: "150px",
                         margin: "1em auto",
@@ -1172,11 +1117,5 @@ const ViewHistory = () => {
     );
 };
 
-{
-    /* <th colSpan={10} className="table-heading">Total Marks: {history.Dimension2.RP5.totalMarks}</th> */
-}
 
-{
-    /* <th colSpan={10} className="table-heading">Total Marks: {history.Dimension2.RP5.totalMarks}</th> */
-}
 export default ViewHistory;

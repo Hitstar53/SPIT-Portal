@@ -22,9 +22,7 @@ import EditIcon from "@mui/icons-material/Edit";
 const ViewProfile = () => {
   const { user } = useContext(UserContext);
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  // React.useEffect(()=>{
-  //   console.log(user)
-  // },[])
+
   return (
     <>
       {!user ? (
@@ -38,7 +36,6 @@ const ViewProfile = () => {
             <div className="info-head-wrapper">
               <h1 className="info-head">{user.fullName} </h1>
               <h1 className="info-subhead">{user.designation}, {user.department}</h1>
-              {/* <h1 className="big">Department : </h1> */}
               <h1 className="info-subhead">ID : {user.id}</h1>
             </div>
           </div>

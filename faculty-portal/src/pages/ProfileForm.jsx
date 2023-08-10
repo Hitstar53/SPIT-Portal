@@ -38,7 +38,7 @@ export default function ProfileForm() {
     }
   });
   const onSubmit = (data) => {
-    console.log("data to be submitted",data);
+
     fetch(`http://localhost:5000/api/faculty/update`,{
       method:"POST",
       headers:{
@@ -63,11 +63,7 @@ export default function ProfileForm() {
 
   if(redirect) return <Navigate to="/profile" />
 
-  // useEffect(() => {
-    // fetch(`http://localhost:5000/api/faculty/get`,{
-
-  console.log(watch("example")); // watch input value by passing the name of it
-
+  
   return (
     <>
       <h1 className="profile-heading">Edit Profile</h1>

@@ -24,7 +24,7 @@ const ViewEvent = ({ title, start, end, id, fetchEvents, toggle2 }) => {
     const handleDelete = async () => {
         await axios.post('http://localhost:5000/api/faculty/delete/event', { email: user.email, id: id })
             .then(async (res) => {
-                console.log(res.data);
+
                 toast.success('Event Deleted Successfully!', {
                     position: "top-center",
                     autoClose: 2000,

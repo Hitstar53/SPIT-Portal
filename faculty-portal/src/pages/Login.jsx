@@ -18,7 +18,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn}) => {
         headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
       })
       .then(res => res.data);
-      console.log(userInfo.picture)
+   
       localStorage.setItem('userInfo', JSON.stringify(userInfo));
       handleLogin(userInfo.email)
     }
@@ -28,7 +28,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn}) => {
     await axios
     .post("http://localhost:5000/api/faculty/login", { email })
     .then((res) => {
-      console.log(res.data);
+    
       setIsLoggedIn(true);
       setUser(res.data)
       localStorage.setItem("loggedin", true);

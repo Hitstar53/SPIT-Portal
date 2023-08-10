@@ -1,25 +1,20 @@
 .assesmentCard {
-  /* border: 2px solid red; */
-  /* width: 40%; */
+
   max-width: 300px;
   margin: 0 auto;
   border-radius: 30px;
   background: #e0e0e0;
   padding: 2em;
   margin-bottom: 2em;
-  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
-  border: 1px solid black;
+   border: 1px solid black;
 }
 .outer {
-  /* border: 2px solid red; */
+
   display: flex;
   flex-direction: row;
   width: 90%;
   margin: 0 auto;
   justify-content: space-around;
-  /* border: #45a049 2px solid; */
   padding: 2em 0;
   flex-wrap: wrap;
 }

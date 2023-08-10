@@ -14,26 +14,7 @@ export const SideBarData = [
     icon: <HomeIcon />,
     path: '/home',
   },
-  // {
-  //   title: 'Classes',
-  //   icon: <SchoolIcon />,
-  //   path: '/classes',
-  // },
-  // {
-  //   title: 'Attendance',
-  //   icon: <AssignmentIndIcon />,
-  //   path: '/attendance',
-  // },
-  // {
-  //   title: 'Leaves',
-  //   icon: <HolidayVillageIcon />,
-  //   path: '/leaves',
-  // },
-  // {
-  //   title: 'Mini Project',
-  //   icon: <IntegrationInstructionsIcon />,
-  //   path: '/mini-proj',
-  // },
+
   {
     title: 'Appraisal',
     icon: <InsertDriveFileIcon />,

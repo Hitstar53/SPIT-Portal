@@ -47,7 +47,7 @@ function StepTwo({ setDimension2, yr }) {
           yearofAssesment: yr,
         })
         .then((res) => {
-          console.log("Response Data : ", res.data);
+          
           setMarks({
             RP1: res.data.RP1.totalMarks,
             RP2: res.data.RP2.totalMarks,
@@ -64,8 +64,7 @@ function StepTwo({ setDimension2, yr }) {
           localStorage.setItem("dim2Data", JSON.stringify(res.data));
           reset(JSON.parse(localStorage.getItem("dim2Data")));
           const storedData = localStorage.getItem("dim2Data");
-          console.log(storedData);
-          console.log(storedData);
+
           if (storedData) {
             Object.keys(JSON.parse(storedData)).map((key) => {
               setValue(key, JSON.parse(storedData)[key]);
@@ -81,7 +80,7 @@ function StepTwo({ setDimension2, yr }) {
   }, []);
 
   useEffect(() => {
-    console.log("here");
+   
   }, [marks])
 
   const {
@@ -158,7 +157,7 @@ function StepTwo({ setDimension2, yr }) {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
+
     setDimension2(data);
 
     axios
@@ -168,8 +167,7 @@ function StepTwo({ setDimension2, yr }) {
         Dimension2: data,
       })
       .then((res) => {
-        console.log("qwertyuiopdcfvghjkl;xcfvbghj");
-        console.log("Response: ", res.data);
+
         toast.success("Step Two Saved", {
           position: "top-center",
           autoClose: 5000,
@@ -199,19 +197,10 @@ function StepTwo({ setDimension2, yr }) {
         console.log(err);
       });
     localStorage.setItem("dim2Data", JSON.stringify(data));
-    // toast.success("Form submitted successfully!");
-    // await sendToServer()
+   
   };
 
-  // useEffect(() => {
-  //   console.log("changed");
-  //   localStorage.setItem("dim2Data", JSON.stringify(getValues()));
-  //   setDimension2(getValues());
-  // }, [paperFields]);
 
-  // useEffect(() => {
-  //   console.log("dimension2=", dimension2);
-  // }, [dimension2]);
 
   return (
     <>
@@ -239,7 +228,7 @@ function StepTwo({ setDimension2, yr }) {
                 <tbody>
                   {paperFields.map((field, index) => (
                     <tr key={field.id}>
-                      {/* <div key={field.id}> */}
+                      
                       <td className="text-center align-middle">
                         <label className="form-label">
                           <input
@@ -316,7 +305,7 @@ function StepTwo({ setDimension2, yr }) {
                           <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
                         </button>
                       </td>
-                      {/* </div> */}
+                      
                     </tr>
                   ))}
                 </tbody>
@@ -329,11 +318,7 @@ function StepTwo({ setDimension2, yr }) {
                 className="add-btn"
                 type="button"
                 onClick={() => appendPaper({})}
-              // style={{
-              //   padding: "10px 25px",
-              //   borderRadius: "10px",
-              //   margin: "0px",
-              // }}
+
               >
                 Add Paper
               </button>
@@ -400,11 +385,7 @@ function StepTwo({ setDimension2, yr }) {
                 className="add-btn"
                 type="button"
                 onClick={() => appendPatent({})}
-              // style={{
-              //   padding: "10px 25px",
-              //   borderRadius: "10px",
-              //   margin: "0px",
-              // }}
+
               >
                 Add Patent
               </button>
@@ -477,11 +458,7 @@ function StepTwo({ setDimension2, yr }) {
                 className="add-btn"
                 type="button"
                 onClick={() => appendBook({})}
-              // style={{
-              //   padding: "10px 25px",
-              //   borderRadius: "10px",
-              //   margin: "0px",
-              // }}
+
               >
                 Add Book
               </button>
@@ -551,11 +528,7 @@ function StepTwo({ setDimension2, yr }) {
                 className="add-btn"
                 type="button"
                 onClick={() => appendMOOC({})}
-              // style={{
-              //   padding: "10px 25px",
-              //   borderRadius: "10px",
-              //   margin: "0px",
-              // }}
+
               >
                 Add MOOC
               </button>
@@ -662,11 +635,7 @@ function StepTwo({ setDimension2, yr }) {
                 className="add-btn"
                 type="button"
                 onClick={() => appendSponsored({})}
-              // style={{
-              //   padding: "10px 25px",
-              //   borderRadius: "10px",
-              //   margin: "0px",
-              // }}
+
               >
                 Add Sponsored
               </button>
@@ -785,11 +754,7 @@ function StepTwo({ setDimension2, yr }) {
                 className="add-btn"
                 type="button"
                 onClick={() => appendDevelopment({})}
-              // style={{
-              //   padding: "10px 25px",
-              //   borderRadius: "10px",
-              //   margin: "0px",
-              // }}
+             
               >
                 Add Development
               </button>
@@ -862,11 +827,7 @@ function StepTwo({ setDimension2, yr }) {
                 className="add-btn"
                 type="button"
                 onClick={() => appendSoftHardDev({})}
-              // style={{
-              //   padding: "10px 25px",
-              //   borderRadius: "10px",
-              //   margin: "0px",
-              // }}
+              
               >
                 Add Soft/Hard Dev
               </button>
@@ -936,11 +897,7 @@ function StepTwo({ setDimension2, yr }) {
                   className="add-btn"
                   type="button"
                   onClick={() => appendExtras({})}
-                // style={{
-                //   padding: "10px 25px",
-                //   borderRadius: "10px",
-                //   margin: "0px",
-                // }}
+                
                 >
                   Add Extra
                 </button>
@@ -949,12 +906,7 @@ function StepTwo({ setDimension2, yr }) {
                 </div>
               </div>
             </div>
-            {/* <input
-        className="btn btn-primary"
-        type="submit"
-        value="Save Changes"
-        style={{ display: "block", width: "100px" }}
-      /> */}
+            
 
             <div className="center" style={{
               display: "flex",

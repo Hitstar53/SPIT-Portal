@@ -32,19 +32,19 @@ export default function StepHead({ activeStep, steps }) {
                             color: '#fff', // circle color (ACTIVE)
                         },
                         '& .Mui-active.MuiStepLabel-iconContainer': {
-                            color: '#fff', // circle color (ACTIVE)
+                            color: '#fff', 
                             border: '2px solid #10A44B',
                             borderRadius: '50%',
                         },
                         '& .MuiStepLabel-label.Mui-active.MuiStepLabel-alternativeLabel':
                         {
-                            color: '#10A44B', // Just text label (ACTIVE)
+                            color: '#10A44B', 
                         },
                         '& .MuiStepLabel-root .Mui-active .MuiStepIcon-text': {
-                            fill: '#10A44B', // circle's number (ACTIVE)
+                            fill: '#10A44B', 
                         },
                         '& .MuiStepLabel-root .Mui-disabled .MuiStepIcon-text': {
-                            fill: 'grey', // circle's number (disabled)
+                            fill: 'grey',
                         },
                     }}>
                         <StepLabel >{label} </StepLabel>

@@ -47,7 +47,7 @@ const Principal = () => {
     const getDept = async () => {
       await axios.get("http://localhost:5000/api/faculty/get/faculty/getalldepartments")
         .then((res) => {
-          console.log(res.data)
+
           setAllDept(res.data)
         })
         .catch((err) => console.log(err))
@@ -55,19 +55,6 @@ const Principal = () => {
     getDept()
   }, [])
 
-  // useEffect(() => {
-  //   const getAllFaculty = async () => {
-  //       axios.post("http://localhost:5000/api/faculty/get/faculty/all-principal", { year: yr })
-  //       .then((res) => {
-  //           // console.log(res.data)
-  //           setfacultyName(res.data.sort());
-  //       })
-  //       .catch((err) => {
-  //           console.log(err);
-  //       })
-  //   }
-  //   getAllFaculty();
-  // }, []);
 
   const viewReport = async (faculty) => {
     await axios.post("http://localhost:5000/api/faculty/get/faculty/check-principal-faculty", {
@@ -75,8 +62,7 @@ const Principal = () => {
       year: yr,
     })
       .then((res) => {
-        console.log(res.data);
-        console.log(res.status)
+
         if (res.status === 200) {
           setStatus("Faculty found")
           setfacultyData(res.data);
@@ -96,13 +82,13 @@ const Principal = () => {
 
 
   const getPrincipalFaculty = async (dept) => {
-    console.log(dept)
+
     await axios.post("http://localhost:5000/api/faculty/get/faculty/all-principal", {
       department: dept,
       year: yr
     })
       .then((res) => {
-        console.log(res.data)
+
         setfacultyName(res.data.sort())
         setSelectedDept(true)
       })
@@ -115,18 +101,17 @@ const Principal = () => {
 
   const handleDeptSubmit = (e) => {
     e.preventDefault();
-    console.log("You clicked submit.");
-    console.log(e.target[0].value);
+
     getPrincipalFaculty(e.target[0].value)
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("You clicked submit.");
+
     setName(e.target[0].value);
-    console.log(e.target[0].value);
+
     viewReport(e.target[0].value);
-    // appraisalView = <AllSteps fullName={name} year={yr} />
+
   }
 
   return (

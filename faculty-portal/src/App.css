@@ -5,7 +5,7 @@
 
 /* variable for theme switching */
 * {
-  /* font-family: "Poppins"; */
+
   font-family: 'Poppins', sans-serif;
   letter-spacing: 0.75px;
 }
@@ -21,7 +21,7 @@ h1 {
 }
 
 form h1 {
-  /* color: green; */
+
   font-weight: 600;
   font-size: 1.5rem;
 }

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import FinalTable from "../components/FinalTable";
 
 const Report = ({ facultyData, forHOD = false }) => {
-    // console.log(facultyData);
+
     const [dim4, setDim4] = useState(facultyData.Dimension4);
     const [viewBonus, setViewBonus] = useState(false);
     const [change, setChange] = useState(false);
@@ -30,8 +30,8 @@ const Report = ({ facultyData, forHOD = false }) => {
     });
 
     const onSubmit = (data) => {
-        // console.log("line 31");
-        console.log(data);
+   
+        
         let dim4 = facultyData.Dimension4
         dim4.confidentialReport.principalRemarks = parseFloat(data.confidentialReport.principalRemarks)
         if (facultyData.designation === "HOD") {
@@ -40,9 +40,7 @@ const Report = ({ facultyData, forHOD = false }) => {
             dim4.feedbackMarks.C = parseFloat(data.feedbackMarks.C)
         }
 
-        // console.log(dim4.confidentialReport.principalRemarks)
-        // console.log(data.feedbackMarks)
-        // console.log(dim4)
+        
         sendMarks(dim4)
     };
 
@@ -51,7 +49,7 @@ const Report = ({ facultyData, forHOD = false }) => {
     }
 
     const sendMarks = async (dim4) => {
-        // console.log(dim4);
+      
         await axios
             .post("http://localhost:5000/api/faculty/appraisal/principal-review", {
                 yearofAssesment: facultyData.yearofAssesment,
@@ -59,8 +57,7 @@ const Report = ({ facultyData, forHOD = false }) => {
                 Dimension4: dim4,
             })
             .then(async (res) => {
-                console.log("Dim4 = ", res.data.Dimension4);
-                console.log(res.status)
+                
                 toast.success("Marks Submitted!", {
                     position: "top-center",
                     autoClose: 1500,
@@ -70,8 +67,6 @@ const Report = ({ facultyData, forHOD = false }) => {
                 });
                 setChange(!change)
                 setViewBonus(true);
-                // window.location.reload();
-                // fetchReport();
             })
             .catch((err) => {
                 console.log(err);
@@ -80,7 +75,7 @@ const Report = ({ facultyData, forHOD = false }) => {
     };
 
     const sendBonus = async (dim4) => {
-        console.log(dim4)
+        
         await axios
         .post("http://localhost:5000/api/faculty/appraisal/principal-submit", {
             yearofAssesment: facultyData.yearofAssesment,
@@ -88,7 +83,7 @@ const Report = ({ facultyData, forHOD = false }) => {
             Dimension4: dim4,
         })
         .then(async (res) => {
-            console.log("Dim4 = ", res.data.Dimension4);
+           
             toast.success("Remarks Submitted!", {
                 position: "top-center",
                 autoClose: 1500,
@@ -106,7 +101,7 @@ const Report = ({ facultyData, forHOD = false }) => {
     }
 
     const handleBonus = (data) => {
-        console.log(data)
+
         let dim4 = facultyData.Dimension4
         dim4.confidentialReport.bonusMarks = parseFloat(data.confidentialReport.bonusMarks)
         dim4.confidentialReport.principalComments = data.confidentialReport.principalComments
@@ -117,10 +112,9 @@ const Report = ({ facultyData, forHOD = false }) => {
     return (
         <div>
             <div className="report">
-                {/* <h1>Enter the Marks for {name}</h1> */}
-                {/* <form className="marks-sec" onSubmit={handleMarks}> */}
+               
                 <form className="marks-sec" onSubmit={handleSubmit(onSubmit)}>
-                    {/* <form className="marks-sec" onSubmit={handleSubmit(data => console.log(data))}> */}
+                  
                     {forHOD && (
                         <Table striped bordered style={{ marginTop: "2rem" }}>
                             <thead>
@@ -275,15 +269,7 @@ const Report = ({ facultyData, forHOD = false }) => {
                         </thead>
                     </Table>
                     <div className="flex flex-col justify-center align-items-center">
-                        {/* <Autocomplete
-                            disablePortal
-                            id="combo-box-demo"
-                            options={marks}
-                            sx={{ width: 300, display: "inline-block" }}
-                            renderInput={(params) => (
-                                <TextField {...params} label="Enter Marks" />
-                            )}
-                        /> */}
+                       
                         <label style={{ fontSize: '1.5rem', fontWeight: '600' }} htmlFor="Enter Marks">Enter Multiplier factor:
                             <select style={{ height: 'max-content', fontSize: '1rem', minWidth: '100px', padding: '10px', borderRadius: '8px', margin: '0 10px', border: '2px solid grey' }}
                                 id="Enter Marks" {...register("confidentialReport.principalRemarks", { required: true })}>
@@ -294,23 +280,7 @@ const Report = ({ facultyData, forHOD = false }) => {
                                 <option value="0.80">0.80</option>
                             </select>
                         </label>
-                        {/* <Controller
-                            render={({ onChange, ...props }) => (
-                                <Autocomplete
-                                options={marks}
-                                    getOptionLabel={getOptionLabel}
-                                    renderOption={renderOption}
-                                    renderInput={renderInput}
-                                    onChange={(e, data) => onChange(data)}
-                                    {...props}
-                                />
-                            )}
-                            onChange={([, data]) => data}
-                            // defaultValue={defaultValue}
-                            name={name}
-                            control={control}
-                        /> */}
-                        <button style={{ fontSize: '20px', marginTop: '1rem' }} type="submit" className="find-faculty-btn">
+                             <button style={{ fontSize: '20px', marginTop: '1rem' }} type="submit" className="find-faculty-btn">
                             Submit
                         </button>
                     </div>

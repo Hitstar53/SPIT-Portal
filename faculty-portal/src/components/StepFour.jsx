@@ -13,30 +13,7 @@ import AllSteps from "./AllSteps";
 function StepFour({ yr, fullName, setStatus }) {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
-  // const [loading, setLoading] = useState(true)
-
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     await axios.post('http://localhost:5000/api/faculty/appraisal/get/dim4',
-  //       { name: user.fullName, yearofAssesment: yr }
-  //     ).then((res) => {
-  //       console.log(res.data)
-  //       localStorage.setItem("dim4Data", JSON.stringify(res.data))
-  //       reset(JSON.parse(localStorage.getItem('dim4Data')))
-  //       const storedData = localStorage.getItem("dim4Data")
-  //       console.log(storedData)
-  //       if(storedData) {
-  //         Object.keys(JSON.parse(storedData)).map((key) => {
-  //           setValue(key, JSON.parse(storedData)[key])
-  //         })
-  //       }
-  //       setLoading(false)
-  //     }).catch((err) => {
-  //       console.log(err)
-  //     })
-  //   }
-  //   getData()
-  // }, []);
+  
 
   const {
     register,
@@ -77,17 +54,16 @@ function StepFour({ yr, fullName, setStatus }) {
   };
 
   const onSubmit = (data) => {
-    console.log("line 51");
-    console.log(data);
-    // localStorage.setItem("dim4Data", JSON.stringify(data));
-    axios
+    ("line 51");
+   
+    axiosconsole.log
       .post("http://localhost:5000/api/faculty/appraisal/hodreview", {
         yearofAssesment: yr,
         fullName: fullName,
         Dimension4: data,
       })
       .then((res) => {
-        console.log(res.data);
+        
         setStatus("Step Four Saved");
         toast.success("Step Four Saved!", {
           position: "top-center",
@@ -103,7 +79,7 @@ function StepFour({ yr, fullName, setStatus }) {
       .catch((err) => {
         console.log(err);
       });
-    // handleNext()
+
   };
 
   return (
@@ -218,7 +194,7 @@ function StepFour({ yr, fullName, setStatus }) {
               Comment:
               <textarea
                 rows={4}
-                // {...register("HODComments")}
+                
                 placeholder="comment..."
                 className="form-textarea"
                 style={{ width: "100%" }}

@@ -22,7 +22,6 @@ export default function StepFoot({
                 flexDirection: "row",
                 pt: 2,
                 borderRadius: "8px",
-                // padding: "7.5px 15px",
                 marginTop: "10px",
             }}
         >

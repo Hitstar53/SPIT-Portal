@@ -21,14 +21,14 @@ export default function AllSteps({
     const fetchHistory = async () => {
       const endpoint =
         "http://localhost:5000/api/faculty/appraisal/getappraisal";
-      // const payload = JSON.parse(localStorage.getItem('user'));
+     
       await axios
         .post(endpoint, {
           facultyName: fullName,
           yearofAssesment: year,
         })
         .then((response) => {
-          console.log(response.data);
+       
           setHistory(response.data);
           setLoading(false);
         });
@@ -37,7 +37,7 @@ export default function AllSteps({
   }, []);
 
   useEffect(() => {
-    console.log(history);
+  
   }, [history]);
 
   return (
@@ -48,11 +48,9 @@ export default function AllSteps({
         </Box>
       ) : (
         <div
-          // ref={elementRef}
+          
           style={{
-            // width: "95%",
-            // padding:"0 0 2em 0",
-            // border: "1px solid black",
+            
             margin: "1em auto",
           }}
         >
@@ -84,7 +82,7 @@ export default function AllSteps({
           <div>
             <table
               style={{
-                // border:"2px solid red",
+              
                 margin: "0 auto",
                 width: "85%",
               }}
@@ -151,7 +149,7 @@ export default function AllSteps({
             >
               <table
                 style={{
-                  //margin: "1px 0px 0px 1em",
+                 
                   width: "60%",
                 }}
               >
@@ -191,7 +189,7 @@ export default function AllSteps({
               {/* AP2 */}
               <table
                 style={{
-                  // margin: "1em 0px 0px 1em",
+                
                   width: "60%",
                 }}
               >
@@ -299,7 +297,7 @@ export default function AllSteps({
                       Feedback
                     </span>
                   </th>
-                  {/* <th>Average Marks</th> */}
+
                 </tr>
 
                 <tbody>
@@ -369,28 +367,7 @@ export default function AllSteps({
                 </th>
               </tbody>
 
-              {/* <tbody>
-                                            {history.Dimension1.AP6.menteeFeedback.map(
-                                                (mf, index) => {
-                                                    return (
-                                                        <tr key={index}>
-                                                            <td>{index + 1}</td>
-                                                            <td>{mf}</td>
-                                                            {index === 0 && (
-                                                                <td
-                                                                    rowSpan={
-                                                                        history.Dimension1.AP6.menteeFeedback
-                                                                            .length
-                                                                    }
-                                                                >
-                                                                    {history.Dimension1.AP6.averageMarks}
-                                                                </td>
-                                                            )}
-                                                        </tr>
-                                                    );
-                                                }
-                                            )}
-                                        </tbody> */}
+              
             </table>
             {/* ----------------------------------------------------------------------------- */}
             {/* ----------------------------------------------------------------------------AP7- */}

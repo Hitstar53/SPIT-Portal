@@ -54,11 +54,11 @@ export default function DeptAppraisal() {
     checkFaculty(e.target[0].value);
   }
   useEffect(() => {
-    console.log(name);
+   
   }, [name]);
 
   useEffect(() => {
-    console.log(status);
+
   }, [status]);
 
   return (

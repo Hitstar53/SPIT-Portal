@@ -39,8 +39,7 @@ span.rbc-btn-group button:hover {
 }
 
 span.rbc-btn-group button:focus {
-    /* Your button hover styles here */
-    /* For example: */
+
     background-color: #301683;
     color: #fff;
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3)
@@ -141,7 +140,7 @@ button.rbc-active {
 .strip-foot {
     margin: 0 1rem;
     flex-direction: column;
-    /* gap: 0; */
+
     justify-content: flex-start;
     align-items: flex-start;
     padding-bottom: 5px;

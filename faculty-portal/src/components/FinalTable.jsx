@@ -3,19 +3,19 @@ import axios from 'axios';
 import CircularProgress from "@mui/material/CircularProgress";
 
 const FinalTable = ({ facultyData, change }) => {
-    // console.log(report)
+   
     const [report, setReport] = useState({})
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const fetchReport = async () => {
-            // console.log(viewBonus)
+            
             await axios.post("http://localhost:5000/api/faculty/appraisal/getappraisal", {
                 yearofAssesment: facultyData.yearofAssesment,
                 facultyName: facultyData.facultyName,
             })
             .then((res) => {
-                console.log(res.data)
+               
                 setReport(res.data)
                 setLoading(false)
             })
@@ -56,7 +56,7 @@ const FinalTable = ({ facultyData, change }) => {
                     margin: "0em auto",
                 }}
             >
-                {/* <Table bordered style={{ margin: "1rem", width: "95%" }}> */}
+                
                 <thead>
                     <tr>
                         <th className="table-header text-center align-middle">
@@ -142,7 +142,7 @@ const FinalTable = ({ facultyData, change }) => {
                         </td>
                     </tr>
                 </tbody>
-                {/* </Table> */}
+             
             </table>
         </div>
         )}

@@ -160,8 +160,7 @@ table,td,th,tr{
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 0.5rem;
-    /* margin: 0.5rem 0.5rem; */
-    /* width: 25rem; */
+
 }
 
 .buttons {
@@ -192,7 +191,7 @@ table,td,th,tr{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* align-items: center; */
+
     margin: 1rem;
 }
 .info-container h3{
@@ -217,10 +216,7 @@ table,td,th,tr{
 
 .stepTwo,.stepThree,.info-container{
     text-align: left !important;
-    /* background-color: #2C5784;
-    padding: 2rem;
-    border-radius: 1rem;
-    color: whitesmoke; */
+
 }
 .stepTwo h1,.stepThree h1,.info-container h3{
     margin-top: 2rem;
@@ -262,7 +258,7 @@ th{
     color: white;
     width: 180px;
     margin-left: 0rem;
-    /* border: 1px solid #000; */
+
 }
 .center{
     text-align: center;

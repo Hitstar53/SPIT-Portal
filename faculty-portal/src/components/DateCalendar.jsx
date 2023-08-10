@@ -53,7 +53,7 @@ const DateCalendar = () => {
                 email: user.email,
             })
             .then((res) => {
-                console.log(res.data);
+                
                 const allEvents = res.data.map((event) => ({
                     title: event.title,
                     startDate: new Date(event.startDate),
@@ -81,7 +81,7 @@ const DateCalendar = () => {
     const toggle2 = () => setModal2(!modal2);
 
     const handleAddEvent = async () => {
-        console.log(newEvent);
+    
         if (
             newEvent.title === "" ||
             newEvent.startDate === "" ||
@@ -105,7 +105,7 @@ const DateCalendar = () => {
                 events: newEvent,
             })
             .then((res) => {
-                console.log(res.data);
+             
                 setAllEvents(res.data);
             })
             .catch((err) => {
@@ -130,14 +130,7 @@ const DateCalendar = () => {
         );
     });
     
-    // const events=[
-    //     {
-    //     title: "All Day Event very long title",
-    //     startDate: new Date(2023, 6, 6),
-    //     endDate: new Date(2023, 7, 7),
-    //     }
-    // ]
-
+   
     return (
         <div className="calendar-container">
             <Calendar
