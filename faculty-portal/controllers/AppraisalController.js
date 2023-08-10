@@ -813,7 +813,7 @@ const setDim4Principal = asyncHandler(async (req, res) => {
         var updatedApp = null;
         
         Dimension4.feedbackMarks.E = parseInt(Dimension4.feedbackMarks.A) + parseInt(Dimension4.feedbackMarks.B) + parseInt(Dimension4.feedbackMarks.C);
-        Dimension4.confidentialReport.perceptionMarks = Dimension4.feedbackMarks.E * Dimension4.confidentialReport.principalRemarks;
+        Dimension4.confidentialReport.perceptionMarks = parseFloat((Dimension4.feedbackMarks.E * Dimension4.confidentialReport.principalRemarks).toFixed(2));
 
         const existingFaculty = await Appraisal.findOne({
             facultyName: fullName,
@@ -960,7 +960,7 @@ const principalSubmit = asyncHandler(async (req, res) => {
         var updatedApp = null;
         
         Dimension4.feedbackMarks.E = parseInt(Dimension4.feedbackMarks.A) + parseInt(Dimension4.feedbackMarks.B) + parseInt(Dimension4.feedbackMarks.C);
-        Dimension4.confidentialReport.perceptionMarks = Dimension4.feedbackMarks.E * Dimension4.confidentialReport.principalRemarks;
+        Dimension4.confidentialReport.perceptionMarks = parseFloat((Dimension4.feedbackMarks.E * Dimension4.confidentialReport.principalRemarks).toFixed(2));
 
         const existingFaculty = await Appraisal.findOne({
             facultyName: fullName,
