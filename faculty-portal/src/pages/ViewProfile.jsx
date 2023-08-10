@@ -101,12 +101,12 @@ const ViewProfile = () => {
                   <h1 className="bigg">
                   
                     <GitHubIcon sx={{ marginRight: 2.5 }} />
-                    GitHub : {user.gitHubProfile}
+                    GitHub : <a target="_blank" href={user.gitHubProfile}>{user.gitHubProfile}</a>
                   </h1>
                   <h1 className="bigg">
                   
                     <LinkedInIcon sx={{ marginRight: 2.5 }} />
-                    LinkedIn : {user.linkedinProfile}
+                    LinkedIn :<a target="_blank" href={user.linkedinProfile}>{user.linkedinProfile}</a>
                   </h1>
                 </div>
               </div>
