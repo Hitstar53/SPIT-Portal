@@ -15,6 +15,8 @@ import AllSteps from "../components/AllSteps";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
+import { IconButton } from "@mui/material";
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 const ViewHistory = () => {
     const { user } = useContext(UserContext);
@@ -43,6 +45,24 @@ const ViewHistory = () => {
     const [notFound, setNotFound] = useState(false);
     const [principalDepartment, setPrincipalDepartment] = useState("");
     const [toggle, setToggle] = useState(false);
+    const [backToTop, setBackToTop] = useState(false);
+
+    useEffect(() => {
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 100) {
+                setBackToTop(true);
+            } else {
+                setBackToTop(false);
+            }
+        });
+    }, [])
+
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
 
     function togglecheckbox(e) {
         console.log(e.target.checked)
@@ -333,6 +353,18 @@ const ViewHistory = () => {
                 
             }
             } */}
+            <div>
+                {backToTop && (
+                    <IconButton
+                        sx={{ position: "fixed", bottom: "2rem", right: "2.5rem", zIndex: "999", backgroundColor: "gray", color: "white", "&:hover": { color: "black" } }}
+                        className="back-to-top"
+                        onClick={scrollToTop}
+                        aria-label="Back to top"
+                    >
+                        <ArrowUpwardIcon />
+                    </IconButton>
+                )}
+            </div>
             {user.designation === "HOD" && (
                 <>
                     <div
@@ -715,7 +747,7 @@ const ViewHistory = () => {
                                 />
 
                                 <div className="flex flex-col items-center justify-center">
-                                    <h1 className="text-xl font-extrabold mt-3">
+                                    <h1 className="text-xl font-extrabold mt-0">
                                         Confidential Report for {report.facultyName} (
                                         {report.yearofAssesment})
                                     </h1>
@@ -784,67 +816,8 @@ const ViewHistory = () => {
                                                     </th>
                                                 </tr>
                                             )}
-                                            <tr>
-                                                <th
-                                                    className="table-header text-center align-middle"
-                                                    rowSpan={6}
-                                                >
-                                                    Principal Remarks
-                                                </th>
-                                                <th className="table-header text-center align-middle">
-                                                    Multiplier factor (F)
-                                                </th>
-                                                <th className="table-header text-center align-middle">
-                                                    Details
-                                                </th>
-                                                <th
-                                                    className="table-header text-center align-middle"
-                                                    rowSpan={6}
-                                                >
-                                                    Marks E * F
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <td className="table-content table-data text-center align-middle">
-                                                    1
-                                                </td>
-                                                <td className="table-content table-data text-center align-middle">
-                                                    Strongly agree: Contributor/ motivate others
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td className="table-content table-data text-center align-middle">
-                                                    0.95
-                                                </td>
-                                                <td className="table-content table-data text-center align-middle">
-                                                    Agree: performer / self-motivated
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td className="table-content table-data text-center align-middle">
-                                                    0.90
-                                                </td>
-                                                <td className="table-content table-data text-center align-middle">
-                                                    Neutral: committed / complete the tasks
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td className="table-content table-data text-center align-middle">
-                                                    0.85
-                                                </td>
-                                                <td className="table-content table-data text-center align-middle">
-                                                    Disagree: low commitments/ needs follow ups{" "}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td className="table-content table-data text-center align-middle">
-                                                    0.80
-                                                </td>
-                                                <td className="table-content table-data text-center align-middle">
-                                                    Strongly disagree: not committed / needs frequent
-                                                    follow up
-                                                </td>
-                                            </tr>
+
+
                                         </thead>
                                     </table>
                                     {/* </Table> */}
