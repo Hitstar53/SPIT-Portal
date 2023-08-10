@@ -56,24 +56,7 @@ const appraisalSchema = new mongoose.Schema({
                         type: Number,
                         default: 0
                     },
-                    // AP8ActivityRemedial: {
-                    //     type: String,
-                    //     default: "Null",
-                    // },
-                    // AP9noteworthyDetails: {
-                    //     type: String,
-                    //     default: "Null",
-                    // },
-                    // AP10paperSet: [{
-                    //     paperSetForCourse: {
-                    //         type: String,
-                    //         default: "Null"
-                    //     },
-                    //     marks: {
-                    //         type: Number,
-                    //         default: 0
-                    //     }
-                    // }]
+                    
                 },
             ],
 
@@ -118,26 +101,13 @@ const appraisalSchema = new mongoose.Schema({
                 // max: 5
                 default: 0
             },
-            // AP8Marks: {
-            //     type: Number,
-            //     // max: 5
-            //     default: 0
-            // },
-            // AP9Marks: {
-            //     type: Number,
-            //     // max: 10
-            //     default: null
-            // },
-            // AP10Marks: {
-            //     type: Number,
-            //     // max: 10
-            // },
+            
         },
 
         AP6: {
             menteeFeedback: [
                 {
-                    type: Number, //  changes from string quantified and filled here
+                    type: Number, 
                 },
             ],
             averageMarks: {
@@ -250,13 +220,11 @@ const appraisalSchema = new mongoose.Schema({
                         },
                         type: {
                             type: String,
-                            //drop down
-                            //Journal , Conference 
+                             
                         },
                         reputation: {
                             type: String,
-                            //drop down
-                            //High,Medium,None 
+                            
                         },
                     },
                     author: {
@@ -276,7 +244,7 @@ const appraisalSchema = new mongoose.Schema({
                 default: 0
             },
         },
-        // },
+        
         RP2: {
             patents: [
                 {
@@ -288,8 +256,7 @@ const appraisalSchema = new mongoose.Schema({
                     },
                     status: {
                         type: String,
-                        //drop down
-                        //Obtained,Published
+                       
                     },
                 },
             ],
@@ -309,8 +276,7 @@ const appraisalSchema = new mongoose.Schema({
                     },
                     status: {
                         type: String,
-                        //drop down
-                        //Published ,Book Chapter/Monograms/Copyright
+                       
                     },
                 },
             ],
@@ -324,7 +290,7 @@ const appraisalSchema = new mongoose.Schema({
                     },
                     duration: {
                         type: Number,
-                        //has to be given in hours 
+                        
 
                     },
                     details: {
@@ -362,8 +328,7 @@ const appraisalSchema = new mongoose.Schema({
                     status: {
                         type: String,
                         default: "Null",
-                        //drop down
-                        //Submitted,Submitted and Approved
+                        
                     },
                 },
             ],
@@ -379,7 +344,7 @@ const appraisalSchema = new mongoose.Schema({
             },
             totalMarks: {
                 type: Number,
-                // max: 25
+               
             },
         },
 
@@ -388,8 +353,7 @@ const appraisalSchema = new mongoose.Schema({
                 {
                     type: {
                         type: String,
-                        //drop down
-                        //STTP , FDP , MOOC ,Industry Internship
+                        
                     },
                     title: {
                         type: String,
@@ -402,8 +366,7 @@ const appraisalSchema = new mongoose.Schema({
                     },
                     duration: {
                         type: Number,
-                        //duration in weeks for MOOC , Industry Internship 
-                        //duration in days for STTP , FDP
+                       
                     },
                 },
             ],
@@ -428,7 +391,7 @@ const appraisalSchema = new mongoose.Schema({
             ],
             totalMarks: {
                 type: Number,
-                //max: 10
+               
             },
         },
 
@@ -445,7 +408,7 @@ const appraisalSchema = new mongoose.Schema({
             ],
             totalMarks: {
                 type: Number,
-                //max: 10
+               
             },
         },
 
@@ -458,11 +421,11 @@ const appraisalSchema = new mongoose.Schema({
             {
                 role: {
                     type: String,
-                    // required: true,
+                    
                 },
                 tick: {
                     type: Boolean,
-                    // required: true,
+                    
                 },
                 marks: {
                     type: Number,
@@ -509,8 +472,7 @@ const appraisalSchema = new mongoose.Schema({
                     },
                     type: {
                         type: String,
-                        //drop down 
-                        //FDP , Training Organised
+                        
                     },
                     sponsorerName: {
                         type: String,
@@ -541,8 +503,7 @@ const appraisalSchema = new mongoose.Schema({
                     },
                     type: {
                         type: String,
-                        // drop down 
-                        //Guest Faculty,Visiting Professor
+                       
                     },
                     duration: {
                         type: Number,
@@ -562,8 +523,7 @@ const appraisalSchema = new mongoose.Schema({
                     },
                     type: {
                         type: String,
-                        //drop down 
-                        //FDP , Training Organised
+                        
                     },
                     sponsorerName: {
                         type: String,

@@ -4,7 +4,7 @@ const Appraisal = require('../models/appraisal.js')
 const { error } = require("console");
 
 exports.getFaculty = asyncHandler(async (req, res) => {
-    console.log("Inside getFaculty");
+   
     const faculties = await Faculty.findById(req.params.id);
     res.status(200).json(faculties);
 })
@@ -15,11 +15,11 @@ exports.setFaculty = asyncHandler(async (req, res) => {
 
 exports.updateFaculty = asyncHandler(async (req, res) => {
     const email = req.body.email;
-    console.log(email);
+    
     try {
         var facultyDetails = await Faculty.updateOne({ email: email }, req.body);
         var newDet = await Faculty.findOne({ email: email.trim() });
-        console.log(newDet);
+        
         res.status(200).json(newDet);
     }
     catch (err) {
@@ -77,12 +77,7 @@ exports.getEvent = asyncHandler(async (req, res) => {
             return res.status(404).send('User not found');
         }
         const events = det.events
-        // const events = {
-        //     title: det.events.title,
-        //     startDate: det.events.startDate,
-        //     endDate: det.events.endDate
-        // }
-        // console.log(events);
+        
         const allEvents = []
         events.map((event) => {
             allEvents.push({
@@ -92,7 +87,7 @@ exports.getEvent = asyncHandler(async (req, res) => {
                 _id: event._id
             })
         })
-        // console.log(allEvents)
+       
         res.status(200).send(allEvents);
     } catch (err) {
         console.log(err);
@@ -102,7 +97,7 @@ exports.getEvent = asyncHandler(async (req, res) => {
 
 exports.addEvent = asyncHandler(async (req, res) => {
     const { email, events } = req.body;
-    console.log(req.body)
+    
     try {
         const det = await Faculty.updateOne({ email: email }, {
             $push: {
@@ -110,7 +105,7 @@ exports.addEvent = asyncHandler(async (req, res) => {
             }
         })
         const faculty = await Faculty.findOne({ email: email });
-        // console.log(faculty.events);
+       
         const allEvents = []
         faculty.events.map((event) => {
             allEvents.push({
@@ -120,7 +115,7 @@ exports.addEvent = asyncHandler(async (req, res) => {
                 _id: event._id
             })
         })
-        // console.log(allEvents)
+       
         res.status(200).send(allEvents);
     } catch (err) {
         console.log(err);
@@ -130,7 +125,7 @@ exports.addEvent = asyncHandler(async (req, res) => {
 
 exports.deleteEvent = asyncHandler(async (req, res) => {
     const { email, id } = req.body;
-    console.log(req.body)
+   
     try {
         const det = await Faculty.updateOne({ email: email }, {
             $pull: {
@@ -140,7 +135,7 @@ exports.deleteEvent = asyncHandler(async (req, res) => {
             }
         })
         const faculty = await Faculty.findOne({ email: email });
-        console.log(faculty.events);
+      
         res.send("Deleted");
     } catch (err) {
         console.log(err);
@@ -149,7 +144,7 @@ exports.deleteEvent = asyncHandler(async (req, res) => {
 })
 
 exports.getFacultyByDept = asyncHandler(async (req, res) => {
-    console.log("Inside for the HODappraisal")
+   
     const { name, year } = req.body
     try {
         const { department } = req.body
@@ -177,7 +172,7 @@ exports.getFacultyByDept = asyncHandler(async (req, res) => {
 })
 
 exports.getFacultyByDeptHOD = asyncHandler(async (req, res) => {
-    console.log("Inside for the HODappraisal")
+   
     try {
         const { department, yearofAssesment } = req.body
         const facultyInfo = await Appraisal.find({
@@ -191,7 +186,7 @@ exports.getFacultyByDeptHOD = asyncHandler(async (req, res) => {
             console.log(facultyInfo)
             const faculty = []
             facultyInfo.map((info) => {
-                // console.log(info)
+                
                 faculty.push(
                     info.facultyName
                 )
@@ -211,7 +206,7 @@ exports.getAllFaculty = asyncHandler(async (req, res) => {
     try {
         const facultyInfo = await Faculty.find({}, { fullName: 1 })
         if (facultyInfo) {
-            console.log(facultyInfo)
+            
             const faculty = []
             facultyInfo.map((info) => {
                 if (info.fullName || info.fullName === NaN) {
@@ -220,7 +215,7 @@ exports.getAllFaculty = asyncHandler(async (req, res) => {
                     )
                 }
             })
-            console.log(faculty)
+           
             return res.status(200).json(faculty)
         }
         else {
@@ -234,9 +229,9 @@ exports.getAllFaculty = asyncHandler(async (req, res) => {
 exports.getPrincipalFaculty = asyncHandler(async (req, res) => {
     try {
         const { department, year } = req.body
-        // console.log(year)
+        
         const appraisal = await Appraisal.find({ department: department, yearofAssesment: year, isSubmitted: true, HODReviewed: true, principalReviewed: false })
-        // console.log(appraisal)
+        
         if (appraisal) {
             const faculty = []
             appraisal.map((info) => {
@@ -244,7 +239,7 @@ exports.getPrincipalFaculty = asyncHandler(async (req, res) => {
                     info.facultyName
                 )
             })
-            console.log(faculty)
+            
             return res.status(200).json(faculty)
         }
         else {
@@ -276,12 +271,12 @@ exports.checkFaculty = async (req, res) => {
 
 exports.principalAppraisal = async (req, res) => {
     const { name, year } = req.body
-    console.log(name, year)
+    
     try {
         const faculty = await Faculty.findOne({ fullName: name })
         if (faculty) {
             const appraisal = await Appraisal.findOne({ facultyName: name, yearofAssesment: year })
-            // console.log(appraisal)
+           
             res.status(200).json(appraisal)
         }
         else {
@@ -297,19 +292,19 @@ exports.getSubmittedFaculty = async (req, res) => {
     try {
         const { department } = req.body
         const appraisal = await Appraisal.find({department: department, isSubmitted: true, HODReviewed: true, principalReviewed: true });
-        console.log(appraisal)
+        
         if (appraisal && appraisal.length > 0) {
-            // Using a Set to store unique faculty names
+           
             const facultySet = new Set();
 
             appraisal.forEach((info) => {
                 facultySet.add(info.facultyName);
             });
 
-            // Converting Set back to array to maintain the original response structure
+            
             const faculty = Array.from(facultySet);
 
-            console.log(faculty);
+            
             return res.status(200).json(faculty);
         } else {
             return res.status(404).json("No faculty found");
@@ -322,7 +317,6 @@ exports.getSubmittedFaculty = async (req, res) => {
 
 
 
-// ==> /get/faculty/getalldepartments
 exports.getAllDepartments = async (req, res) => {
     try {
         var deptArray = new Set();

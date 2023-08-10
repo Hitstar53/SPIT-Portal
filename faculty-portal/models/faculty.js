@@ -6,15 +6,15 @@ const teacherSchema = new mongoose.Schema({
     },
     firstName: {
         type: String,
-        // unique: true
+        
     },
     middleName: {
         type: String,
-        // unique: true
+       
     },
     lastName: {
         type: String,
-        // unique: true
+       
     },
     email: {
         type: String,
@@ -23,7 +23,7 @@ const teacherSchema = new mongoose.Schema({
     },
     mobileNumber: {
         type: Number,
-        // max: 9999999999,
+        
     },
     id: {
         type: String,
