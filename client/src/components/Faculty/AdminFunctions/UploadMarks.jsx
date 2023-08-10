@@ -26,8 +26,8 @@ const UploadMarks = () => {
     const data = utils.sheet_to_json(ws)
     // console.log(data)
     setAlertOpen(true);
-    setSeverity("success");
-    setMessage("Marks Uploaded!");
+    setSeverity("error");
+    setMessage("Something went wrong!");
   }
   return (
     <React.Fragment>
