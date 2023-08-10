@@ -153,7 +153,7 @@ exports.getFacultyByDept = asyncHandler(async (req, res) => {
         }, { fullName: 1 })
 
         if (facultyInfo) {
-            console.log(facultyInfo)
+            
             const faculty = []
             facultyInfo.map((info) => {
                 faculty.push(
@@ -183,7 +183,7 @@ exports.getFacultyByDeptHOD = asyncHandler(async (req, res) => {
         }, { facultyName: 1 })
 
         if (facultyInfo) {
-            console.log(facultyInfo)
+           
             const faculty = []
             facultyInfo.map((info) => {
                 
@@ -191,7 +191,7 @@ exports.getFacultyByDeptHOD = asyncHandler(async (req, res) => {
                     info.facultyName
                 )
             })
-            console.log(faculty)
+            
             return res.status(200).json(faculty)
         }
         else {

@@ -4,7 +4,7 @@ const Appraisal = require('../models/appraisal.js')
 const { error } = require("console");
 
 const getAppraisal = asyncHandler(async (req, res) => {
-    console.log("Inside getAppraisal");
+    
     try {
         var { yearofAssesment, facultyName } = req.body;
         
@@ -54,9 +54,9 @@ const setAppraisal = asyncHandler(async (req, res) => {
    
     try {
         var { yearofAssesment, facultyName, department, designation } = req.body;
-        console.log(facultyName);
+      
         const appraisal = await Appraisal.findOne({ yearofAssesment, facultyName });
-        console.log(appraisal);
+       
         appraisal.isSubmitted = true;
         if (appraisal.designation == "HOD") {
             appraisal.HODReviewed = true;
@@ -263,7 +263,7 @@ const setDim1 = asyncHandler(async (req, res) => {
             //AP8
 
             var ap8totalmarks = 0
-            console.log("Courses:", Dimension1.info.courses)
+           
             for (var i = 0; i < Dimension1.AP8.remedialData.length; i++) {
                 // if (Dimension1.AP8.remedialData[i] != "Null") {
                 ap8totalmarks = ap8totalmarks + 2.5;
@@ -799,7 +799,7 @@ const setDim4HOD = asyncHandler(async (req, res) => {
         updatedApp = await Appraisal.findOne(
             { _id: existingFaculty._id }
         )
-        console.log(updatedApp)
+      
         res.status(200).json(updatedApp);
     } catch (error) {
         console.log(error);
@@ -832,8 +832,7 @@ const setDim4Principal = asyncHandler(async (req, res) => {
         updatedApp = await Appraisal.findOne(
             { _id: existingFaculty._id }
         )
-        console.log(updatedApp.finalGrandTotal)
-        console.log(updatedApp.Dimension4.totalMarks)
+    
         updatedApp.finalGrandTotal.dimension1.totalMarks = updatedApp.Dimension1.totalMarks;
         updatedApp.finalGrandTotal.dimension2.totalMarks = updatedApp.Dimension2.totalMarks;
         updatedApp.finalGrandTotal.dimension3.totalMarks = updatedApp.Dimension3.totalMarks;
@@ -955,7 +954,7 @@ const getMarksDim1 = asyncHandler(async (req, res) => {
 })
 
 const principalSubmit = asyncHandler(async (req, res) => {
-    console.log("inside principal submit")
+    
     try {
         const { yearofAssesment, fullName, Dimension4 } = req.body;
         var updatedApp = null;
@@ -980,8 +979,7 @@ const principalSubmit = asyncHandler(async (req, res) => {
         updatedApp = await Appraisal.findOne(
             { _id: existingFaculty._id }
         )
-        console.log(updatedApp.finalGrandTotal)
-        console.log(updatedApp.Dimension4.totalMarks)
+       
         updatedApp.finalGrandTotal.dimension1.totalMarks = updatedApp.Dimension1.totalMarks;
         updatedApp.finalGrandTotal.dimension2.totalMarks = updatedApp.Dimension2.totalMarks;
         updatedApp.finalGrandTotal.dimension3.totalMarks = updatedApp.Dimension3.totalMarks;
