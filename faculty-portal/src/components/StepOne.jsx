@@ -63,6 +63,11 @@ const StepOne = ({ setDimension1, yr }) => {
       progress: undefined,
       theme: "light",
     });
+
+    if (user.designation === "Principal") {
+      window.location.href = "/home";
+    }
+
     const getData = async () => {
       await axios
         .post("http://localhost:5000/api/faculty/appraisal/get/dim1", {

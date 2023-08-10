@@ -26,6 +26,7 @@ import {toast} from 'react-toastify'
 import ArticleIcon from '@mui/icons-material/Article';
 import { UserContext } from '../context/UserContext';
 import '../styles/SideBar.css'
+import { useScrollTrigger } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -140,6 +141,14 @@ export default function MiniDrawer({setIsLoggedIn}) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    if (user.designation === "Principal") {
+        SideBarData.map((item, index) => {
+            if (item.title === "Appraisal") {
+                SideBarData.splice(index, 1)
+            }
+        })
+    }
 
     useEffect(() => {
         const path = window.location.pathname;
