@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* variable for theme switching */
+* {
+
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.75px;
+}
+
+.Toastify {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bolder;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+form h1 {
+
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.section-form h1 {
+  text-align: center;
+}
+
+:root {
+  --primary-color: #2C5784;
+  --secondary-color: #b6c3f1;
+  --tertiary-color: #301683;
+  --danger-color: #f44336;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --info-color: #2196f3;
+  --bg-dark: #1e1e1e;
+  --bg-light: #f1f1f1;
+  --bg-color: #f1f1f1;
+  --text-light: #fff;
+  --text-dark: #222;
+  --text-color: #222;
+  --scrollbar-track: #ccc;
+  --scrollbar-thumb: rgba(65, 28, 186, 0.5);
+}
+
+/* dark theme */
+[data-theme="dark"] {
+  --dark-override-color: #b6c3f1;
+  --primary-color: #3a3a3a;
+  --secondary-color: #5a5a5a;
+  --tertiary-color: #1e1e1e;
+  --danger-color: #f44336;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --info-color: #2196f3;
+  --bg-dark: #1e1e1e;
+  --bg-light: #f1f1f1;
+  --bg-color: #1e1e1e;
+  --text-light: #fff;
+  --text-dark: #222;
+  --text-color: #fff;
+  --scrollbar-track: #ccc;
+  --scrollbar-thumb: rgba(10, 10, 13, 0.5);
+}

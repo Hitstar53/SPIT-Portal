@@ -1,0 +1,15 @@
+.table-content {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+}
+
+.marks-btn {
+    background-color: #2C5784;
+}
+
+.report {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

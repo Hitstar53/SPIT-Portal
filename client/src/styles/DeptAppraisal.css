@@ -1,0 +1,35 @@
+
+.dept-appraisal-header{
+    width: 80%;
+    margin: 50px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.find-faculty-btn{
+    background-color: #2C5784;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin-left: 20px;
+    color: white;
+    font-weight: bold;
+}
+.dept-appraisal-body{
+    width: 80%;
+    margin: 50px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dept-appraisal-vertical{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 750px;
+}
+.dept-appraisal-vertical img{
+    width: 500px;
+}
