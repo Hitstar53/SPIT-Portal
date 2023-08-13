@@ -1,0 +1,330 @@
+body {
+    background-color: #f5f5f5;
+}
+
+.MuiStepLabel-labelContainer span {
+    font-size: 1.35rem;
+}
+
+table,td,th,tr{
+    border: 1px solid #b4adad !important;
+}
+
+/* step 3 */
+
+.form-input-cb, .form-input-tb, .form-input-title {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    margin: 0.5rem 0.5rem;
+}
+
+.form-input-tb {
+    display: none;
+}
+
+.dim3-table {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+}
+
+.tb-field {
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+}
+
+.form-input-cb {
+    margin-left: 2rem;
+    cursor: pointer;
+}
+
+.tab {
+    margin: 0 1rem;
+    padding: 25px 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    min-height: 42rem;
+    width: 24rem;
+    margin-bottom: 2rem;
+}
+
+.tb-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.tab-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-bottom: 1rem;
+}
+
+.head {
+    text-align: center;
+}
+
+.form-input-title {
+    font-size: 1.1rem;
+}
+
+.table-title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+
+.appraisal-page {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 1rem;
+    justify-content: center;
+}
+
+.app-title {
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.ap-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0.5rem;
+}
+
+.btn {
+    margin: 1rem;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.form-label {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.form-input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    /* margin: 0.5rem 0.5rem; */
+    width: 100%;
+}
+
+.error {
+    color: red;
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+    text-align: right;
+}
+
+.marks-info {
+    font-size: 0.8rem;
+}
+
+.form-textarea {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    width: max-content;
+    border-radius: 10px;
+}
+
+.basic-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 2rem;
+}
+.basic-info .input .form-label{
+    font-size: 2rem;
+}
+.table-header{
+    font-size: 1.1rem;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    margin: 1rem;
+}
+.info-container h3{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.table-header {
+    font-size: 1rem;
+}
+
+.course-title {
+    width: 20rem;
+}
+
+.class-name {
+    width: 10rem;
+}
+.btn{
+    margin: 1rem 25px !important;
+}
+
+.stepTwo,.stepThree,.info-container{
+    text-align: left !important;
+
+}
+.stepTwo h1,.stepThree h1,.info-container h3{
+    margin-top: 2rem;
+}
+
+.citation{
+    width: 100px;
+    margin: 0 1rem;
+}
+
+th{
+    text-align: center;
+    justify-content: center;
+}
+
+.table{
+    margin: 0px;
+    margin-bottom: 20px;
+}
+.appraisal-page .btn{
+    margin-left: 0px !important;
+}
+
+.appraisal-page select{
+    width: 100%;
+    padding: .5rem;
+    border-radius: .5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+}
+
+.add-btn{
+    margin: 1rem;
+    border: 1px solid #ccc;
+    font-size: .75rem;
+    padding: 10px;
+    border-radius:8px;
+    background-color: #10A44B;
+    color: white;
+    width: 180px;
+    margin-left: 0rem;
+
+}
+.center{
+    text-align: center;
+}
+.save-btn{
+    background-color: #4B3F72;
+    color: white;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    padding: 15px;
+    border-radius:8px;
+}
+.appraisal-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100%;
+    margin-top: 75px;
+}
+.appraisal-center img{
+    height: 500px;
+}
+
+.marks-box {
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4rem;
+    font-size: 1rem;
+    background-color: #136634;
+    opacity: 0.8;
+    color: #f5f5f5;
+}
+
+
+@media (max-width: 1410px) {
+    .tab {
+        width: 22rem;
+    }
+}
+
+@media (max-width: 1310px) {
+    .tab {
+        width: 20rem;
+    }
+}
+
+@media (max-width: 1220px) {
+
+    .tab {
+        width: 18rem;
+    }
+
+    .marks-box {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 1120px) {
+
+    .tab {
+        width: 16rem;
+    }
+
+    .marks-box {
+        font-size: 0.6rem;
+    }
+}

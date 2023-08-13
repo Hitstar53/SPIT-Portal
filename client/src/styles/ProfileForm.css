@@ -1,0 +1,85 @@
+.profile-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+.profile-heading{
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 30px;
+    text-align: center;
+    color: black;
+}
+.profile-form form{
+
+    max-width: 90%;
+    margin: 20px auto;
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    justify-content: center;
+    margin-top: 0px;
+}
+.section-form{
+    background-color: #2C5784;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    width: 385px;
+    max-width: 90%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+}
+.section-data{
+    display:flex;
+    flex-direction: column;
+    margin: 10px 20px;
+}
+.section-data label{
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    width: 100%;
+}
+.section-data input{
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    color: black;
+}
+.input-box{
+    display:flex;
+    justify-content: space-between;
+    margin:10px 0;
+}
+.input-box label{
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    width: 100%;
+}
+.input-box input{
+    width: 100%;
+    font-size: 1.1rem;
+}
+.btn-div{
+    width: 100%;
+}
+.profile-submit{
+    display: block;
+    background-color: #219d30;
+    font-size: 1.25rem;
+    margin: 0 auto;
+    padding: 7px 34px;
+    border-radius: 7px;
+    max-width: 90%;
+}
+input:disabled{
+    background: lightgray;
+}

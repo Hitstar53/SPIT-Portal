@@ -1,0 +1,340 @@
+{
+    "yearofAssesment": "2023",
+    "facultyName": "John Doe",
+    "department": "Computer Science",
+    "designation": "Professor",
+    "Dimension1": {
+        "info": {
+            "courses": [
+                {
+                    "name": "Course 1",
+                    "class": "Class A",
+                    "sem": "Semester 1",
+                    "AP2MarksObtained": 80,
+                    "AP3LecturesTarget": 30,
+                    "AP3LectureConducted": 28,
+                    "AP4PercentFeedback": 80,
+                    "AP5AttendanceStudent": 90,
+                    "AP8ActivityRemedial": "Name",
+                    "AP9noteworthyDetails": "Name"
+                },
+                {
+                    "name": "Course 2",
+                    "class": "Class B",
+                    "sem": "Semester 2",
+                    "AP2MarksObtained": 75,
+                    "AP3LecturesTarget": 25,
+                    "AP3LectureConducted": 25,
+                    "AP4PercentFeedback": 70,
+                    "AP5AttendanceStudent": 95,
+                    "AP8ActivityRemedial": "Name",
+                    "AP9noteworthyDetails": "Null"
+                }
+            ]
+        },
+        "AP6": {
+            "menteeFeedback": [
+                8,
+                9,
+                7,
+                10
+            ]
+        },
+        "AP7": {
+            "guestLectureData": [
+                {
+                    "date": "2023-05-10",
+                    "title": "Guest Lecture 1",
+                    "speakerName": "Jane Smith",
+                    "arrangedFor": "Class A"
+                },
+                {
+                    "date": "2023-06-15",
+                    "title": "Guest Lecture 2",
+                    "speakerName": "John Smith",
+                    "arrangedFor": "Class B"
+                }
+            ]
+        },
+        "AP10": {
+            "paper": [
+                {
+                    "course": "Course 1",
+                    "marks": 80
+                },
+                {
+                    "course": "Course 2",
+                    "marks": 75
+                }
+            ]
+        }
+    },
+    "Dimension2": {
+        "RP1": {
+            "papers": [
+                {
+                    "title": "Paper 1",
+                    "conferenceOrJournal": "Journal 1",
+                    "author": "Author 1",
+                    "publisher": "Publisher 1",
+                    "paperLink": "Link to Paper 1"
+                },
+                {
+                    "title": "Paper 2",
+                    "conferenceOrJournal": "Journal 2",
+                    "author": "Author 2",
+                    "publisher": "Publisher 2",
+                    "paperLink": "Link to Paper 2"
+                }
+            ]
+        },
+        "RP2": {
+            "patents": [
+                {
+                    "name": "Patent 1",
+                    "details": "Patent details 1",
+                    "status": "Published"
+                },
+                {
+                    "name": "Patent 2",
+                    "details": "Patent details 2",
+                    "status": "Obtained"
+                }
+            ],
+            "books": [
+                {
+                    "title": "Book 1",
+                    "author": "Author 1",
+                    "publisher": "Publisher 1",
+                    "status": "Published"
+                },
+                {
+                    "title": "Book 2",
+                    "author": "Author 2",
+                    "publisher": "Publisher 2",
+                    "status": "Book Chapter/Monograms/Copyright"
+                }
+            ],
+            "moocs": [
+                {
+                    "name": "MOOC 1",
+                    "duration": 30,
+                    "details": "MOOC details 1"
+                },
+                {
+                    "name": "MOOC 2",
+                    "duration": 45,
+                    "details": "MOOC details 2"
+                }
+            ]
+        },
+        "RP3": {
+            "sponsored": [
+                {
+                    "date": "2023-05-01",
+                    "title": "Sponsored Event 1",
+                    "agency": "Agency 1",
+                    "details": "Event details 1",
+                    "amount": 5000
+                },
+                {
+                    "date": "2023-05-05",
+                    "title": "Sponsored Event 2",
+                    "agency": "Agency 2",
+                    "details": "Event details 2",
+                    "amount": 8000
+                }
+            ]
+        },
+        "RP4": {
+            "number": 5
+        },
+        "RP5": {
+            "selfDevelopment": [
+                {
+                    "title": "Development 1",
+                    "organization": "Organization 1",
+                    "dates": "2023-06-10",
+                    "duration": 8,
+                    "type": "STTP"
+                },
+                {
+                    "title": "Development 2",
+                    "organization": "Organization 2",
+                    "dates": "2023-06-15",
+                    "duration": 14,
+                    "type": "Industry Internship"
+                },
+                {
+                    "title": "Development 2",
+                    "organization": "Organization 2",
+                    "dates": "2023-06-15",
+                    "duration": 15,
+                    "type": "MOOC"
+                }
+            ]
+        },
+        "RP6": {
+            "softHardDev": [
+                {
+                    "type": "Soft Development",
+                    "model": "Model 1",
+                    "details": "Soft development details"
+                },
+                {
+                    "type": "Hard Development",
+                    "model": "Model 2",
+                    "details": "Hard development details"
+                }
+            ]
+        },
+        "RP7": {
+            "activityNotCovered": [
+                {
+                    "date": "2023-06-20",
+                    "details": "Activity not covered details 1"
+                },
+                {
+                    "date": "2023-06-21",
+                    "details": "Activity not covered details 2"
+                }
+            ]
+        },
+        "totalMarks": 200
+    },
+    "Dimension3": {
+        "IP1": [
+            {
+                "role": "Role 1",
+                "tick": true
+            },
+            {
+                "role": "Role 2",
+                "tick": true
+            }
+        ],
+        "IP2": [
+            {
+                "role": "Role 1",
+                "tick": true
+            },
+            {
+                "role": "Role 2",
+                "tick": true
+            }
+        ],
+        "DP1": [
+            {
+                "role": "Role 1",
+                "tick": true
+            },
+            {
+                "role": "Role 2",
+                "tick": true
+            }
+        ],
+        "OP1": {
+            "organized": [
+                {
+                    "name": "Event 1",
+                    "sponsorerName": "Sponsored by Company 1",
+                    "type": "FDP",
+                    "fund": 10000,
+                    "days": 14
+                },
+                {
+                    "name": "Event 1",
+                    "sponsorerName": "Sponsored by Company 1",
+                    "type": "FDP",
+                    "fund": 10000,
+                    "days": 7
+                },
+                {
+                    "name": "Event 2",
+                    "sponsorerName": "Sponsored by Company 2",
+                    "fund": 15000,
+                    "days": 20,
+                    "type": "Training Organised"
+                }
+            ]
+        },
+        "Invited": {
+            "invitedAt": [
+                {
+                    "industryName": "Industry 1",
+                    "dates": "2023-06-10",
+                    "details": "Invited details 1"
+                },
+                {
+                    "industryName": "Industry 2",
+                    "dates": "2023-06-15",
+                    "details": "Invited details 2"
+                }
+            ]
+        },
+        "Partof": {
+            "committee": [
+                {
+                    "name": "Committee 1",
+                    "details": "Committee details 1",
+                    "organization": "Organization 1",
+                    "date": "2023-05-01"
+                },
+                {
+                    "name": "Committee 2",
+                    "details": "Committee details 2",
+                    "organization": "Organization 2",
+                    "date": "2023-05-05"
+                }
+            ]
+        },
+        "Article": {
+            "articleDetails": [
+              {
+              "name":"Article 1"
+              },
+              {
+                "name":"Article 2"
+              }
+            ]
+        },
+        "coGuide": {
+            "data": [
+                {
+                    "institutionName": "Institution 1",
+                    "details": "Co-guide details 1"
+                },
+                {
+                    "institutionName": "Institution 2",
+                    "details": "Co-guide details 2"
+                }
+            ]
+        },
+        "collaboration": {
+            "institutionDetails": [
+                {
+                    "name": "Institution 1",
+                    "details": "Collaboration details 1"
+                },
+                {
+                    "name": "Institution 2",
+                    "details": "Collaboration details 2"
+                }
+            ]
+        }
+    },
+    "Dimension4": {
+        "feedbackMarks": {
+            "A": 1,
+            "B": 2,
+            "C": 3,
+            "D": 4,
+            "E": 0
+        },
+        "confidentialReport": {
+            "HODRemarks": "Remarks from HOD",
+            "principalRemarks": 9,
+            "perceptionMarks": 8
+        }
+    }
+}

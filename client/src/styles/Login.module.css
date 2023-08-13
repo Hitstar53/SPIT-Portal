@@ -1,0 +1,96 @@
+.loginButt {
+  border-radius: 2.5rem;
+  border: 0.0625rem white solid;
+  padding: 0.625rem 1.5rem;
+  margin: 0.625rem;
+  box-shadow: 0px 0px 10px 3px var(--tertiary-color);
+  transition: 0.25s ease;
+}
+
+.loginButt:hover {
+  transform: scale(1.1);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.or {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem;
+  border-radius: 1.6rem;
+  box-shadow: 0px 0px 10px 2px #1e1e1e;
+  backdrop-filter: blur(10px) brightness(75%);
+}
+
+.loginPage {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  color: var(--text-light);
+  height: 100vh;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.5) 25%,
+    rgba(255, 255, 255, 0.1) 100%
+  ), url('../assets/spitbg.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.header {
+  font-size: 1.5rem;
+  font-weight: 600;
+  width: 60%;
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+hr {
+  border: none;
+  background-color: white;
+  display: inline-block;
+  width: 6.25rem;
+  opacity: 0.3;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.links a {
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ccc;
+  gap: 0.65rem;
+}
+
+.links a:hover {
+  transform: scale(1.1);
+  color: var(--text-light);
+}
+
+.linksImg {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  box-shadow: 0px 0px 8px 3px var(--tertiary-color);
+}
