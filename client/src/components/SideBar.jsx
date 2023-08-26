@@ -27,6 +27,7 @@ import ArticleIcon from '@mui/icons-material/Article';
 import { UserContext } from '../context/UserContext';
 import '../styles/SideBar.css'
 import { useScrollTrigger } from '@mui/material';
+import { API_URL } from '../config';
 
 const drawerWidth = 240;
 

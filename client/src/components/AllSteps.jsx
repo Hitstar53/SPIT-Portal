@@ -7,6 +7,7 @@ import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { API_URL } from '../config';
 
 export default function AllSteps({
   fullName,
@@ -20,15 +21,15 @@ export default function AllSteps({
   useEffect(() => {
     const fetchHistory = async () => {
       const endpoint =
-        "http://localhost:5000/api/faculty/appraisal/getappraisal";
-     
+        API_URL + "/api/faculty/appraisal/getappraisal";
+
       await axios
         .post(endpoint, {
           facultyName: fullName,
           yearofAssesment: year,
         })
         .then((response) => {
-       
+
           setHistory(response.data);
           setLoading(false);
         });
@@ -37,7 +38,7 @@ export default function AllSteps({
   }, []);
 
   useEffect(() => {
-  
+
   }, [history]);
 
   return (
@@ -48,9 +49,9 @@ export default function AllSteps({
         </Box>
       ) : (
         <div
-          
+
           style={{
-            
+
             margin: "1em auto",
           }}
         >
@@ -63,7 +64,7 @@ export default function AllSteps({
             }}
           />
 
-          {showComments && history.HODcomments?.length>0 && (
+          {showComments && history.HODcomments?.length > 0 && (
             <div style={{
               margin: "1em",
               padding: "0.4em 0.4em",
@@ -82,7 +83,7 @@ export default function AllSteps({
           <div>
             <table
               style={{
-              
+
                 margin: "0 auto",
                 width: "85%",
               }}
@@ -149,7 +150,7 @@ export default function AllSteps({
             >
               <table
                 style={{
-                 
+
                   width: "60%",
                 }}
               >
@@ -189,7 +190,7 @@ export default function AllSteps({
               {/* AP2 */}
               <table
                 style={{
-                
+
                   width: "60%",
                 }}
               >
@@ -367,7 +368,7 @@ export default function AllSteps({
                 </th>
               </tbody>
 
-              
+
             </table>
             {/* ----------------------------------------------------------------------------- */}
             {/* ----------------------------------------------------------------------------AP7- */}

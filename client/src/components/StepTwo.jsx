@@ -6,6 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import { toast } from "react-toastify";
 import CircularProgress from "@mui/material/CircularProgress";
+import { API_URL } from '../config';
 
 function StepTwo({ setDimension2, yr }) {
   const { user } = useContext(UserContext);
@@ -42,12 +43,12 @@ function StepTwo({ setDimension2, yr }) {
     });
     const getData = async () => {
       await axios
-        .post("http://localhost:5000/api/faculty/appraisal/get/dim2", {
+        .post(API_URL + "/api/faculty/appraisal/get/dim2", {
           name: user.fullName,
           yearofAssesment: yr,
         })
         .then((res) => {
-          
+
           setMarks({
             RP1: res.data.RP1.totalMarks,
             RP2: res.data.RP2.totalMarks,
@@ -80,7 +81,7 @@ function StepTwo({ setDimension2, yr }) {
   }, []);
 
   useEffect(() => {
-   
+
   }, [marks])
 
   const {
@@ -161,7 +162,7 @@ function StepTwo({ setDimension2, yr }) {
     setDimension2(data);
 
     axios
-      .post("http://localhost:5000/api/faculty/appraisal/dim2", {
+      .post(API_URL + "/api/faculty/appraisal/dim2", {
         yearofAssesment: yr,
         faculty: user,
         Dimension2: data,
@@ -197,7 +198,7 @@ function StepTwo({ setDimension2, yr }) {
         console.log(err);
       });
     localStorage.setItem("dim2Data", JSON.stringify(data));
-   
+
   };
 
 
@@ -228,7 +229,7 @@ function StepTwo({ setDimension2, yr }) {
                 <tbody>
                   {paperFields.map((field, index) => (
                     <tr key={field.id}>
-                      
+
                       <td className="text-center align-middle">
                         <label className="form-label">
                           <input
@@ -305,7 +306,7 @@ function StepTwo({ setDimension2, yr }) {
                           <DeleteIcon sx={{ color: "red", fontSize: "25px" }} />
                         </button>
                       </td>
-                      
+
                     </tr>
                   ))}
                 </tbody>
@@ -754,7 +755,7 @@ function StepTwo({ setDimension2, yr }) {
                 className="add-btn"
                 type="button"
                 onClick={() => appendDevelopment({})}
-             
+
               >
                 Add Development
               </button>
@@ -827,7 +828,7 @@ function StepTwo({ setDimension2, yr }) {
                 className="add-btn"
                 type="button"
                 onClick={() => appendSoftHardDev({})}
-              
+
               >
                 Add Soft/Hard Dev
               </button>
@@ -897,7 +898,7 @@ function StepTwo({ setDimension2, yr }) {
                   className="add-btn"
                   type="button"
                   onClick={() => appendExtras({})}
-                
+
                 >
                   Add Extra
                 </button>
@@ -906,7 +907,7 @@ function StepTwo({ setDimension2, yr }) {
                 </div>
               </div>
             </div>
-            
+
 
             <div className="center" style={{
               display: "flex",

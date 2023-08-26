@@ -11,6 +11,7 @@ import { set } from "react-hook-form";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
+import { API_URL } from '../config';
 // import Header from './Header';
 
 const steps = [
@@ -21,7 +22,7 @@ const steps = [
 ];
 
 export default function FacultyStepper() {
-  const { user,yr } = useContext(UserContext);
+  const { user, yr } = useContext(UserContext);
   const [comments, setComments] = useState([]);
   const [Dimension1, setDimension1] = useState({});
   const [Dimension2, setDimension2] = useState({});
@@ -37,20 +38,20 @@ export default function FacultyStepper() {
   };
 
   React.useEffect(() => {
-  
+
   }, [activeStep]);
 
   React.useEffect(() => {
-   
+
   }, [Dimension1]);
   React.useEffect(() => {
-   
+
   }, [Dimension2]);
   React.useEffect(() => {
-   
+
   }, [Dimension3]);
   React.useEffect(() => {
-   
+
   }, [Dimension4]);
 
   const scrollToTop = () => {
@@ -60,18 +61,18 @@ export default function FacultyStepper() {
     });
   };
 
-    useEffect(() => {
-      scrollToTop();
-    }, [activeStep]);
+  useEffect(() => {
+    scrollToTop();
+  }, [activeStep]);
 
 
   function timeout(delay) {
-    return new Promise( res => setTimeout(res, delay) );
-}
+    return new Promise(res => setTimeout(res, delay));
+  }
 
   function sendToServer() {
-   
-    fetch("http://localhost:5000/api/faculty/appraisal", {
+
+    fetch(API_URL + "/api/faculty/appraisal", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -84,12 +85,12 @@ export default function FacultyStepper() {
         isSubmitted: true,
       }),
     }).then(
-       timeout(1500).then(window.location.reload())
+      timeout(1500).then(window.location.reload())
     )
   }
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/faculty/appraisal/get/hod-comments", {
+    fetch(API_URL + "/api/faculty/appraisal/get/hod-comments", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -104,7 +105,7 @@ export default function FacultyStepper() {
   }, []);
 
   useEffect(() => {
-  
+
   }, [comments]);
 
 
@@ -118,10 +119,10 @@ export default function FacultyStepper() {
         <StepHead activeStep={activeStep} steps={steps} />
         {comments.length > 0 && (
           <>
-            <Stack sx={{ width: "100%", margin:"1rem 0", textAlign:'left' }} spacing={2}>
+            <Stack sx={{ width: "100%", margin: "1rem 0", textAlign: 'left' }} spacing={2}>
               <Alert severity="error">
-                <AlertTitle><h4 style={{fontWeight:'bolder',fontSize:'23px'}}>Appraisal resended By HOD</h4></AlertTitle>
-                <h4 style={{fontWeight:'bolder',fontSize:'20px'}}>Message : {comments[comments.length - 1]}</h4>
+                <AlertTitle><h4 style={{ fontWeight: 'bolder', fontSize: '23px' }}>Appraisal resended By HOD</h4></AlertTitle>
+                <h4 style={{ fontWeight: 'bolder', fontSize: '20px' }}>Message : {comments[comments.length - 1]}</h4>
               </Alert>
             </Stack>
           </>
@@ -146,9 +147,9 @@ export default function FacultyStepper() {
             handleNext={handleNext}
           />
         )}
-       
+
         {activeStep === 4 && <h1>Submitted the form</h1>}
-  
+
         {
           <StepFoot
             activeStep={activeStep}

@@ -8,17 +8,18 @@ import StepFour from "../components/StepFour";
 import NotFound from "../assets/404-not-found.png";
 import SelectFaculty from "../assets/select-faculty.png";
 import Done from "../assets/done.png";
+import { API_URL } from '../config';
 
 export default function DeptAppraisal() {
   const [status, setStatus] = useState("Not searched");
-  const { user,yr } = useContext(UserContext);
+  const { user, yr } = useContext(UserContext);
   const [name, setName] = useState("");
   const [facultyName, setfacultyName] = useState([]);
   if (user.designation !== "HOD") {
     window.location.href = "/home";
   }
   useEffect(() => {
-    fetch("http://localhost:5000/api/faculty/get/faculty/by-dept-hod", {
+    fetch(API_URL + "/api/faculty/get/faculty/by-dept-hod", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +34,7 @@ export default function DeptAppraisal() {
   }, []);
 
   async function checkFaculty(name) {
-    await fetch("http://localhost:5000/api/faculty/get/faculty/check-faculty", {
+    await fetch(API_URL + "/api/faculty/get/faculty/check-faculty", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +55,7 @@ export default function DeptAppraisal() {
     checkFaculty(e.target[0].value);
   }
   useEffect(() => {
-   
+
   }, [name]);
 
   useEffect(() => {

@@ -8,6 +8,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import { toast } from "react-toastify";
 import CircularProgress from '@mui/material/CircularProgress';
+import { API_URL } from '../config';
 
 function StepThree({ setDimension3, yr }) {
   const { user } = useContext(UserContext);
@@ -33,10 +34,10 @@ function StepThree({ setDimension3, yr }) {
 
   useEffect(() => {
     const getData = async () => {
-      await axios.post('http://localhost:5000/api/faculty/appraisal/get/dim3',
+      await axios.post(API_URL + '/api/faculty/appraisal/get/dim3',
         { name: user.fullName, yearofAssesment: yr }
       ).then((res) => {
-        
+
         setMarks({
           totalIPDPmarks: res.data.totalIP1IP2DP1Marks,
           OP1marks: res.data.OP1.totalMarks,
@@ -53,7 +54,7 @@ function StepThree({ setDimension3, yr }) {
         localStorage.setItem("dim3Data", JSON.stringify(res.data))
         reset(JSON.parse(localStorage.getItem("dim3Data")))
         const storedData = localStorage.getItem("dim3Data")
-        
+
         if (storedData) {
           Object.keys(JSON.parse(storedData)).map((key) => {
             setValue(key, JSON.parse(storedData)[key])
@@ -145,10 +146,10 @@ function StepThree({ setDimension3, yr }) {
 
     setDimension3(data)
     localStorage.setItem('dim3Data', JSON.stringify(data));
-    axios.post('http://localhost:5000/api/faculty/appraisal/dim3',
+    axios.post(API_URL + '/api/faculty/appraisal/dim3',
       { yearofAssesment: yr, faculty: user, Dimension3: data }
     ).then((res) => {
-      
+
       toast.success('Step Three Saved!', {
         position: "top-center",
         autoClose: 5000,
@@ -175,7 +176,7 @@ function StepThree({ setDimension3, yr }) {
       localStorage.setItem("dim3Data", JSON.stringify(res.data))
       reset(JSON.parse(localStorage.getItem("dim3Data")))
       const storedData = localStorage.getItem("dim3Data")
-      
+
     }).catch((err) => {
       console.log(err)
     })
@@ -340,7 +341,7 @@ function StepThree({ setDimension3, yr }) {
               <tbody>
                 {organizedFields.map((item, index) => (
                   <tr key={item.id}>
-                  
+
                     <td>
                       <input
                         type="text"
@@ -349,7 +350,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`OP1.organized[${index}].name`)}
                       />
                     </td>
-                  
+
                     <td>
                       <select {...register(`OP1.organized[${index}].type`)}>
                         <option value="FDP">FDP</option>
@@ -358,7 +359,7 @@ function StepThree({ setDimension3, yr }) {
                         </option>
                       </select>
                     </td>
-                  
+
                     <td>
                       <input
                         type="text"
@@ -376,7 +377,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`OP1.organized[${index}].fund`)}
                       />
                     </td>
-                  
+
                     <td>
                       <input
                         type="number"
@@ -447,7 +448,7 @@ function StepThree({ setDimension3, yr }) {
               <tbody>
                 {invitedFields.map((item, index) => (
                   <tr key={item.id}>
-                  
+
                     <td>
                       <input
                         type="text"
@@ -458,7 +459,7 @@ function StepThree({ setDimension3, yr }) {
                         )}
                       />
                     </td>
-                  
+
                     <td>
                       <input
                         type="date"
@@ -467,7 +468,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`Invited.invitedAt[${index}].dates`)}
                       />
                     </td>
-                   
+
                     <td>
                       <input
                         type="text"
@@ -552,7 +553,7 @@ function StepThree({ setDimension3, yr }) {
               <tbody>
                 {receivedFDPFields.map((item, index) => (
                   <tr key={item.id}>
-                 
+
                     <td>
                       <input
                         type="text"
@@ -561,7 +562,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`op3.receivedFDP[${index}].name`)}
                       />
                     </td>
-                  
+
                     <td>
                       <select {...register(`op3.receivedFDP[${index}].type`)}>
                         <option value="FDP">FDP</option>
@@ -570,7 +571,7 @@ function StepThree({ setDimension3, yr }) {
                         </option>
                       </select>
                     </td>
-                  
+
                     <td>
                       <input
                         type="text"
@@ -588,7 +589,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`op3.receivedFDP[${index}].fund`)}
                       />
                     </td>
-                   
+
                     <td>
                       <input
                         type="number"
@@ -650,7 +651,7 @@ function StepThree({ setDimension3, yr }) {
               <tbody>
                 {invitedTalkFields.map((item, index) => (
                   <tr key={item.id}>
-                  
+
                     <td>
                       <input
                         type="date"
@@ -735,7 +736,7 @@ function StepThree({ setDimension3, yr }) {
               <tbody>
                 {committeeFields.map((item, index) => (
                   <tr key={item.id}>
-                   
+
                     <td>
                       <input
                         type="text"
@@ -744,7 +745,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`Partof.committee[${index}].name`)}
                       />
                     </td>
-                   
+
                     <td>
                       <input
                         type="text"
@@ -762,7 +763,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`Partof.committee[${index}].organization`)}
                       />
                     </td>
-                    
+
                     <td>
                       <input
                         type="date"
@@ -817,7 +818,7 @@ function StepThree({ setDimension3, yr }) {
               <tbody>
                 {articleFields.map((item, index) => (
                   <tr key={item.id}>
-                    
+
                     <td>
                       <input
                         type="text"
@@ -872,7 +873,7 @@ function StepThree({ setDimension3, yr }) {
               <tbody>
                 {dataFields.map((item, index) => (
                   <tr key={item.id}>
-                    
+
                     <td>
                       <input
                         type="text"
@@ -939,7 +940,7 @@ function StepThree({ setDimension3, yr }) {
                         {...register(`coGuide.data[${index}].institutionName`)}
                       />
                     </td>
-                   
+
                     <td>
                       <input
                         type="text"
@@ -997,7 +998,7 @@ function StepThree({ setDimension3, yr }) {
               <tbody>
                 {collaborationFields.map((item, index) => (
                   <tr key={item.id}>
-                  
+
                     <td>
                       <input
                         type="text"
@@ -1008,7 +1009,7 @@ function StepThree({ setDimension3, yr }) {
                         )}
                       />
                     </td>
-                   
+
                     <td>
                       <input
                         type="text"

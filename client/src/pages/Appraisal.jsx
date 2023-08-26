@@ -6,13 +6,14 @@ import { UserContext } from "../context/UserContext";
 import ProjectDone from "../assets/project-is-done.png";
 import { set } from "date-fns";
 import CircularProgress from "@mui/material/CircularProgress";
+import { API_URL } from '../config';
 
 const Appraisal = () => {
   const { user, yr } = useContext(UserContext);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch("http://localhost:5000/api/faculty/appraisal/isSubmitted-teacher", {
+    fetch(API_URL + "/api/faculty/appraisal/isSubmitted-teacher", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

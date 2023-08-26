@@ -17,6 +17,7 @@ import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
 import { IconButton } from "@mui/material";
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import { API_URL } from '../config';
 
 const ViewHistory = () => {
     const { user } = useContext(UserContext);
@@ -65,7 +66,7 @@ const ViewHistory = () => {
     }
 
     function togglecheckbox(e) {
-    
+
         setToggle(e.target.checked)
     }
 
@@ -83,18 +84,18 @@ const ViewHistory = () => {
     });
     const handleExportPDFPrincipal = useReactToPrint({
         content: () => elementRefPrincipal.current,
-    
+
         documentTitle: `${principalDepartment}_${nameForPrincipal}_${year3}_AppraisalForm_byPrincipal`,
     });
     const handleExportPDFFaculty = useReactToPrint({
         content: () => elementRefFaculty.current,
-   
+
         documentTitle: `${user.department}_${user.fullName}_${year}_AppraisalForm_bySelf`,
     });
 
     if (user.designation == "HOD") {
         useEffect(() => {
-            fetch("http://localhost:5000/api/faculty/get/faculty/by-dept", {
+            fetch(API_URL + "/api/faculty/get/faculty/by-dept", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -108,16 +109,16 @@ const ViewHistory = () => {
         }, []);
 
         useEffect(() => {
-        
+
         }, [name]);
         useEffect(() => {
-        
+
         }, [years2]);
 
     } else {
         useEffect(() => {
-        
-            fetch("http://localhost:5000/api/faculty/appraisal/getallappraisal", {
+
+            fetch(API_URL + "/api/faculty/appraisal/getallappraisal", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -128,20 +129,20 @@ const ViewHistory = () => {
             })
                 .then((res) => res.json())
                 .then((data) => {
-          
+
                     setYears(data);
                 });
 
             const fetchHistory = async () => {
                 const endpoint =
-                    "http://localhost:5000/api/faculty/appraisal/getappraisal";
+                    API_URL + "/api/faculty/appraisal/getappraisal";
                 await axios
                     .post(endpoint, {
                         facultyName: user.fullName,
                         yearofAssesment: year,
                     })
                     .then((response) => {
-                     
+
                         setHistory(response.data);
                     });
             };
@@ -153,27 +154,27 @@ const ViewHistory = () => {
 
         const fetchHODData = async () => {
             const endpoint =
-                "http://localhost:5000/api/faculty/appraisal/getappraisal";
+                API_URL + "/api/faculty/appraisal/getappraisal";
             await axios
                 .post(endpoint, {
                     yearofAssesment: year2,
                     facultyName: name,
                 })
                 .then((response) => {
-                 
+
 
                     if (response.data.designation == "HOD") {
                         setIsHOD(true);
                     } else {
                         setDim4(response.data.Dimension4);
                     }
-                   
+
                 });
         };
 
         const fetchPrincipalData = async () => {
             const endpoint =
-                "http://localhost:5000/api/faculty/appraisal/getappraisal";
+                API_URL + "/api/faculty/appraisal/getappraisal";
             await axios
                 .post(endpoint, {
                     yearofAssesment: year3,
@@ -181,7 +182,7 @@ const ViewHistory = () => {
                 })
                 .then((response) => {
 
-                
+
                     setReport(response.data);
                     if (response.data.designation == "HOD") {
                         setIsHOD(true);
@@ -204,14 +205,14 @@ const ViewHistory = () => {
         handleOption();
     }, [year2, year3]);
 
-   
+
     // For Principal Select Box
     if (user.designation === "Principal") {
         useEffect(() => {
             const getDept = async () => {
                 await axios
                     .get(
-                        "http://localhost:5000/api/faculty/get/faculty/getalldepartments"
+                        API_URL + "/api/faculty/get/faculty/getalldepartments"
                     )
                     .then((res) => {
                         setAllDept(res.data);
@@ -220,13 +221,13 @@ const ViewHistory = () => {
             };
             getDept();
         }, []);
-       
+
     }
 
     const getPrincipalFaculty = async (dept) => {
 
         await axios
-            .post("http://localhost:5000/api/faculty/get/faculty/submitted", {
+            .post(API_URL + "/api/faculty/get/faculty/submitted", {
                 department: dept,
             })
             .then((res) => {
@@ -245,7 +246,7 @@ const ViewHistory = () => {
     const getYears = async (name) => {
 
         await fetch(
-            "http://localhost:5000/api/faculty/appraisal/get-hod-appraisal-year",
+            API_URL + "/api/faculty/appraisal/get-hod-appraisal-year",
             {
                 method: "POST",
                 headers: {
@@ -262,7 +263,7 @@ const ViewHistory = () => {
 
     const getPrincipalYears = async (name) => {
 
-        await fetch("http://localhost:5000/api/faculty/appraisal/getallappraisal", {
+        await fetch(API_URL + "/api/faculty/appraisal/getallappraisal", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -301,7 +302,7 @@ const ViewHistory = () => {
         setYear3(null);
         setNameForPrincipal(e.target[0].value);
         getPrincipalYears(e.target[0].value);
-       };
+    };
 
     useEffect(() => {
 
@@ -362,7 +363,7 @@ const ViewHistory = () => {
                             </form>
                         </div>
 
-                       
+
                         {selectedFaculty && (
                             <div className="dropdown justify-center pt-0">
                                 <div>Select a Year:</div>
@@ -383,7 +384,7 @@ const ViewHistory = () => {
                             </div>
                         )}
                     </div>
-                
+
 
                     {!year2 || !name ? (
                         <p
@@ -554,16 +555,16 @@ const ViewHistory = () => {
                         )}
                         {isHOD && (
                             <>
-                            <div
-                                ref={elementRefFaculty}
-                                style={{
-                                    width: "95%",
-                                    border: "1px solid black",
-                                    margin: "1em auto",
-                                }}
-                            >
-                                <AllSteps fullName={name} year={year2} showComments={true} />
                                 <div
+                                    ref={elementRefFaculty}
+                                    style={{
+                                        width: "95%",
+                                        border: "1px solid black",
+                                        margin: "1em auto",
+                                    }}
+                                >
+                                    <AllSteps fullName={name} year={year2} showComments={true} />
+                                    <div
                                         style={{
                                             display: "flex",
                                             justifyContent: "space-around",
@@ -591,21 +592,21 @@ const ViewHistory = () => {
                                             Date
                                         </div>
                                     </div>
-                            </div>
-                            <button
-                                onClick={handleExportPDFFaculty}
-                                style={{
-                                    backgroundColor: "#f32236",
-                                    color: "white",
-                                    padding: "10px",
-                                    border: "none",
-                                    width: "150px",
-                                    margin: "1em auto",
-                                    display: "block",
-                                }}
-                            >
-                                Export to PDF
-                            </button>
+                                </div>
+                                <button
+                                    onClick={handleExportPDFFaculty}
+                                    style={{
+                                        backgroundColor: "#f32236",
+                                        color: "white",
+                                        padding: "10px",
+                                        border: "none",
+                                        width: "150px",
+                                        margin: "1em auto",
+                                        display: "block",
+                                    }}
+                                >
+                                    Export to PDF
+                                </button>
                             </>
                         )}
                     </div>
@@ -690,7 +691,7 @@ const ViewHistory = () => {
                     {report && (
                         <>
                             <div className="switch-container">
-                               
+
                                 <label class="switch">
                                     <input type="checkbox" value={toggle} onChange={togglecheckbox} />
                                     <span class="slider round"></span>
@@ -712,7 +713,7 @@ const ViewHistory = () => {
                                 ref={elementRefPrincipal}
                                 style={{
                                     width: "95%",
-                                   
+
                                     border: "1px solid black",
                                     margin: "1em auto",
                                 }}
@@ -775,7 +776,7 @@ const ViewHistory = () => {
                                     <table
                                         style={{
                                             maxWidth: "95%",
-                                          
+
                                             marginTop: "1em",
                                         }}
                                     >
@@ -800,7 +801,7 @@ const ViewHistory = () => {
 
                                         </thead>
                                     </table>
-                                
+
                                     <div
                                         className="dimhead"
                                         style={{
@@ -1027,7 +1028,7 @@ const ViewHistory = () => {
                                         </option>
                                     );
                                 })}
-                               
+
                             </select>
                         </div>
                     ) : (
@@ -1053,7 +1054,7 @@ const ViewHistory = () => {
                                     ref={elementRefFaculty}
                                     style={{
                                         width: "95%",
-                                        
+
                                         border: "1px solid black",
                                         margin: "1em auto",
                                     }}

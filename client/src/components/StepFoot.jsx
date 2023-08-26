@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Modal, ModalBody, ModalFooter } from "reactstrap";
 import {toast} from "react-toastify";
+import { API_URL } from '../config';
 
 export default function StepFoot({
     activeStep,

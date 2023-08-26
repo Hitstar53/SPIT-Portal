@@ -23,6 +23,7 @@ import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/DateCalendar.css";
+import { API_URL } from '../config';
 
 const locales = {
     "en-US": enUS,
@@ -49,18 +50,18 @@ const DateCalendar = () => {
 
     const fetchEvents = async () => {
         await axios
-            .post("http://localhost:5000/api/faculty/get/event", {
+            .post(API_URL + "/api/faculty/get/event", {
                 email: user.email,
             })
             .then((res) => {
-                
+
                 const allEvents = res.data.map((event) => ({
                     title: event.title,
                     startDate: new Date(event.startDate),
                     endDate: new Date(event.endDate),
                     _id: event._id,
-                  }));
-                  setAllEvents(allEvents);
+                }));
+                setAllEvents(allEvents);
             })
             .catch((err) => {
                 console.log(err);
@@ -81,7 +82,7 @@ const DateCalendar = () => {
     const toggle2 = () => setModal2(!modal2);
 
     const handleAddEvent = async () => {
-    
+
         if (
             newEvent.title === "" ||
             newEvent.startDate === "" ||
@@ -100,12 +101,12 @@ const DateCalendar = () => {
             return;
         }
         await axios
-            .post("http://localhost:5000/api/faculty/add/event", {
+            .post(API_URL + "/api/faculty/add/event", {
                 email: user.email,
                 events: newEvent,
             })
             .then((res) => {
-             
+
                 setAllEvents(res.data);
             })
             .catch((err) => {
@@ -129,8 +130,8 @@ const DateCalendar = () => {
             />
         );
     });
-    
-   
+
+
     return (
         <div className="calendar-container">
             <Calendar

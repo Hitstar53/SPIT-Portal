@@ -1,69 +1,70 @@
 import { useForm } from "react-hook-form";
 import "../styles/ProfileForm.css";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { Navigate, redirect } from "react-router-dom";
 import { toast } from "react-toastify";
+import { API_URL } from '../config';
 
 export default function ProfileForm() {
-  const [redirect,setRedirect]=useState(false)
-  const {user,setUser}=useContext(UserContext)
+  const [redirect, setRedirect] = useState(false)
+  const { user, setUser } = useContext(UserContext)
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm({
-    defaultValues:{
-      fullName:user.fullName,
-      designation:user.designation,
-      department:user.department,
-      id:user.id,
-      dateOfBirth:user.dateOfBirth,
-      dateOfJoining:user.dateOfJoining,
-      gender:user.gender,
-      bloodGroup:user.bloodGroup,
-      type:user.type,
-      email:user.email,
-      mobileNumber:user.mobileNumber,
-      address:user.address,
-      gitHubProfile:user.gitHubProfile,
-      linkedinProfile:user.linkedinProfile,
-      qualification:user.qualification,
-      specialization:user.specialization,
-      classIncharge:user.classIncharge,
-      aadharCardNumber:user.aadharCardNumber,
-      panCardNumber:user.panCardNumber
+    defaultValues: {
+      fullName: user.fullName,
+      designation: user.designation,
+      department: user.department,
+      id: user.id,
+      dateOfBirth: user.dateOfBirth,
+      dateOfJoining: user.dateOfJoining,
+      gender: user.gender,
+      bloodGroup: user.bloodGroup,
+      type: user.type,
+      email: user.email,
+      mobileNumber: user.mobileNumber,
+      address: user.address,
+      gitHubProfile: user.gitHubProfile,
+      linkedinProfile: user.linkedinProfile,
+      qualification: user.qualification,
+      specialization: user.specialization,
+      classIncharge: user.classIncharge,
+      aadharCardNumber: user.aadharCardNumber,
+      panCardNumber: user.panCardNumber
     }
   });
   const onSubmit = (data) => {
 
-    fetch(`http://localhost:5000/api/faculty/update`,{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
+    fetch(API_URL + '/api/faculty/update', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      body:JSON.stringify(data)
+      body: JSON.stringify(data)
     })
-    .then(res=>res.json())
-    .then(data=>setUser(data))
-    .then(setRedirect(true))
-    .then(toast.success('Profile Updated Successfully', {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
+      .then(res => res.json())
+      .then(data => setUser(data))
+      .then(setRedirect(true))
+      .then(toast.success('Profile Updated Successfully', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
       }))
   }
 
-  if(redirect) return <Navigate to="/profile" />
+  if (redirect) return <Navigate to="/profile" />
 
-  
+
   return (
     <>
       <h1 className="profile-heading">Edit Profile</h1>
@@ -223,7 +224,7 @@ export default function ProfileForm() {
             </div>
           </div>
           <div className="btn-div">
-            <input type="submit" className="profile-submit"/>
+            <input type="submit" className="profile-submit" />
           </div>
         </form>
       </div>

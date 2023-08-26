@@ -11,9 +11,10 @@ import { IconButton } from "@mui/material";
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import SelectFaculty from "../assets/select-faculty.png";
 import "../styles/Principal.css"
+import { API_URL } from '../config';
 
 const Principal = () => {
-  const { user,yr } = useContext(UserContext);
+  const { user, yr } = useContext(UserContext);
   const [name, setName] = useState("");
   const [status, setStatus] = useState("Not searched");
   const [allDept, setAllDept] = useState([]);
@@ -45,7 +46,7 @@ const Principal = () => {
 
   useEffect(() => {
     const getDept = async () => {
-      await axios.get("http://localhost:5000/api/faculty/get/faculty/getalldepartments")
+      await axios.get(API_URL + "/api/faculty/get/faculty/getalldepartments")
         .then((res) => {
 
           setAllDept(res.data)
@@ -57,7 +58,7 @@ const Principal = () => {
 
 
   const viewReport = async (faculty) => {
-    await axios.post("http://localhost:5000/api/faculty/get/faculty/check-principal-faculty", {
+    await axios.post(API_URL + "/api/faculty/get/faculty/check-principal-faculty", {
       name: faculty,
       year: yr,
     })
@@ -83,7 +84,7 @@ const Principal = () => {
 
   const getPrincipalFaculty = async (dept) => {
 
-    await axios.post("http://localhost:5000/api/faculty/get/faculty/all-principal", {
+    await axios.post(API_URL + "/api/faculty/get/faculty/all-principal", {
       department: dept,
       year: yr
     })
@@ -132,22 +133,22 @@ const Principal = () => {
           </button>
         </form>
 
-       {selectedDept && (
-         <form className='flex items-center justify-center mt-4' onSubmit={handleSubmit}>
-           <Autocomplete
-             disablePortal
-             id="combo-box-demo"
-             options={facultyName}
-             sx={{ width: 300, display: "inline-block" }}
-             renderInput={(params) => (
-               <TextField {...params} label="Faculty Name" />
-             )}
-           />
-           <button type="submit" className="find-faculty-btn">
-             Find Faculty
-           </button>
-       </form>
-       )}
+        {selectedDept && (
+          <form className='flex items-center justify-center mt-4' onSubmit={handleSubmit}>
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={facultyName}
+              sx={{ width: 300, display: "inline-block" }}
+              renderInput={(params) => (
+                <TextField {...params} label="Faculty Name" />
+              )}
+            />
+            <button type="submit" className="find-faculty-btn">
+              Find Faculty
+            </button>
+          </form>
+        )}
       </div>
       <div>
         <div>
@@ -162,8 +163,8 @@ const Principal = () => {
           }
           {status === "Faculty found" &&
             <div style={{ marginTop: "-4rem" }}>
-              <AllSteps fullName={name} year={yr} isPrincipal={true} forHOD={facultyData.designation==='HOD'} />
-              <h1><Report facultyData={facultyData} name={name} forHOD={facultyData.designation==='HOD'}/>
+              <AllSteps fullName={name} year={yr} isPrincipal={true} forHOD={facultyData.designation === 'HOD'} />
+              <h1><Report facultyData={facultyData} name={name} forHOD={facultyData.designation === 'HOD'} />
               </h1>
             </div>}
           {status === "Faculty not found" && <h1>Faculty not found</h1>}
@@ -172,7 +173,7 @@ const Principal = () => {
       <div>
         {backToTop && (
           <IconButton
-            sx={{ position: "fixed", bottom: "2rem", right: "2.5rem", zIndex: "999",  backgroundColor: "gray", color: "white", "&:hover": { color: "black" }  }}
+            sx={{ position: "fixed", bottom: "2rem", right: "2.5rem", zIndex: "999", backgroundColor: "gray", color: "white", "&:hover": { color: "black" } }}
             className="back-to-top"
             onClick={scrollToTop}
             aria-label="Back to top"

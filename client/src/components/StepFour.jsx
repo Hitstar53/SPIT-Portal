@@ -9,11 +9,12 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
 import { Modal, ModalBody, ModalFooter } from "reactstrap";
 import AllSteps from "./AllSteps";
+import { API_URL } from '../config';
 
 function StepFour({ yr, fullName, setStatus }) {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
-  
+
 
   const {
     register,
@@ -32,7 +33,7 @@ function StepFour({ yr, fullName, setStatus }) {
       toast.error("Please enter the comment before resending the appraisal");
       return;
     }
-    fetch("http://localhost:5000/api/faculty/appraisal/hod-comments", {
+    fetch(API_URL + "/api/faculty/appraisal/hod-comments", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,13 +56,13 @@ function StepFour({ yr, fullName, setStatus }) {
 
   const onSubmit = (data) => {
     axios
-      .post("http://localhost:5000/api/faculty/appraisal/hodreview", {
+      .post(API_URL + "/api/faculty/appraisal/hodreview", {
         yearofAssesment: yr,
         fullName: fullName,
         Dimension4: data,
       })
       .then((res) => {
-        
+
         setStatus("Step Four Saved");
         toast.success("Step Four Saved!", {
           position: "top-center",
@@ -181,8 +182,8 @@ function StepFour({ yr, fullName, setStatus }) {
           </div>
         </form>
         {/* <h1>OR</h1> */}
-        <div style={{width: "100%", height: "20px", borderBottom: "1px solid black", textAlign: "center",margin:"3.5rem 0"}}>
-          <span style={{fontSize: '2rem' ,'backgroundColor': "#F3F5F6", padding: "0 10px"}}>
+        <div style={{ width: "100%", height: "20px", borderBottom: "1px solid black", textAlign: "center", margin: "3.5rem 0" }}>
+          <span style={{ fontSize: '2rem', 'backgroundColor': "#F3F5F6", padding: "0 10px" }}>
             OR{" "}
           </span>
         </div>
@@ -192,7 +193,7 @@ function StepFour({ yr, fullName, setStatus }) {
               Comment:
               <textarea
                 rows={4}
-                
+
                 placeholder="comment..."
                 className="form-textarea"
                 style={{ width: "100%" }}

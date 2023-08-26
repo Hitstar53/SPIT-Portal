@@ -18,6 +18,7 @@ import FingerprintIcon from "@mui/icons-material/Fingerprint";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
+import { API_URL } from '../config';
 
 const ViewProfile = () => {
   const { user } = useContext(UserContext);

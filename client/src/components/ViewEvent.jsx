@@ -5,7 +5,7 @@ import { UserContext } from '../context/UserContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { API_URL } from '../config';
 
 const ViewEvent = ({ title, start, end, id, fetchEvents, toggle2 }) => {
     const options = {
@@ -22,7 +22,7 @@ const ViewEvent = ({ title, start, end, id, fetchEvents, toggle2 }) => {
     const { user } = useContext(UserContext);
 
     const handleDelete = async () => {
-        await axios.post('http://localhost:5000/api/faculty/delete/event', { email: user.email, id: id })
+        await axios.post(API_URL + '/api/faculty/delete/event', { email: user.email, id: id })
             .then(async (res) => {
 
                 toast.success('Event Deleted Successfully!', {

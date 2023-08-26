@@ -8,6 +8,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import "../styles/Appraisal.css";
 import CircularProgress from "@mui/material/CircularProgress";
+import { API_URL } from '../config';
 
 const StepOne = ({ setDimension1, yr }) => {
   const { user } = useContext(UserContext);
@@ -70,13 +71,13 @@ const StepOne = ({ setDimension1, yr }) => {
 
     const getData = async () => {
       await axios
-        .post("http://localhost:5000/api/faculty/appraisal/get/dim1", {
+        .post(API_URL + "/api/faculty/appraisal/get/dim1", {
           faculty: user,
           yearofAssesment: yr,
         })
         .then((res) => {
-         
-        
+
+
           setMarks({
             AP1: res.data.Dimension1.info.AP1Marks,
             AP2: res.data.Dimension1.info.AP2Marks,
@@ -93,7 +94,7 @@ const StepOne = ({ setDimension1, yr }) => {
           localStorage.setItem("dim1Data", JSON.stringify(res.data.Dimension1));
           reset(JSON.parse(localStorage.getItem("dim1Data")));
           const storedData = localStorage.getItem("dim1Data");
-     
+
           if (storedData) {
             Object.keys(JSON.parse(storedData)).map((key) => {
               setValue(key, JSON.parse(storedData)[key]);
@@ -109,7 +110,7 @@ const StepOne = ({ setDimension1, yr }) => {
   }, []);
 
   useEffect(() => {
-  
+
   }, [marks])
 
   const {
@@ -167,16 +168,16 @@ const StepOne = ({ setDimension1, yr }) => {
   });
 
   const onSubmit = async (data) => {
-   
+
     setDimension1(data);
     await axios
-      .post("http://localhost:5000/api/faculty/appraisal/dim1", {
+      .post(API_URL + "/api/faculty/appraisal/dim1", {
         yearofAssesment: yr,
         faculty: user,
         Dimension1: data,
       })
       .then((res) => {
-        
+
         setMarks(res.data)
         toast.success("Step One Saved!", {
           position: "top-center",
@@ -988,7 +989,7 @@ const StepOne = ({ setDimension1, yr }) => {
               </button>
 
               <div className="marks-box">
-              Total Marks of Dimension 1 (Academics): <span>{marks.totalMarks}</span>
+                Total Marks of Dimension 1 (Academics): <span>{marks.totalMarks}</span>
               </div>
             </div>
 

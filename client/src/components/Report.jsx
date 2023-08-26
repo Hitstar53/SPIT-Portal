@@ -5,6 +5,7 @@ import "../styles/Principal.css";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import FinalTable from "../components/FinalTable";
+import { API_URL } from '../config';
 
 const Report = ({ facultyData, forHOD = false }) => {
 
@@ -30,8 +31,8 @@ const Report = ({ facultyData, forHOD = false }) => {
     });
 
     const onSubmit = (data) => {
-   
-        
+
+
         let dim4 = facultyData.Dimension4
         dim4.confidentialReport.principalRemarks = parseFloat(data.confidentialReport.principalRemarks)
         if (facultyData.designation === "HOD") {
@@ -40,7 +41,7 @@ const Report = ({ facultyData, forHOD = false }) => {
             dim4.feedbackMarks.C = parseFloat(data.feedbackMarks.C)
         }
 
-        
+
         sendMarks(dim4)
     };
 
@@ -49,15 +50,15 @@ const Report = ({ facultyData, forHOD = false }) => {
     }
 
     const sendMarks = async (dim4) => {
-      
+
         await axios
-            .post("http://localhost:5000/api/faculty/appraisal/principal-review", {
+            .post(API_URL + "/api/faculty/appraisal/principal-review", {
                 yearofAssesment: facultyData.yearofAssesment,
                 fullName: facultyData.facultyName,
                 Dimension4: dim4,
             })
             .then(async (res) => {
-                
+
                 toast.success("Marks Submitted!", {
                     position: "top-center",
                     autoClose: 1500,
@@ -75,29 +76,29 @@ const Report = ({ facultyData, forHOD = false }) => {
     };
 
     const sendBonus = async (dim4) => {
-        
+
         await axios
-        .post("http://localhost:5000/api/faculty/appraisal/principal-submit", {
-            yearofAssesment: facultyData.yearofAssesment,
-            fullName: facultyData.facultyName,
-            Dimension4: dim4,
-        })
-        .then(async (res) => {
-           
-            toast.success("Remarks Submitted!", {
-                position: "top-center",
-                autoClose: 1500,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
+            .post(API_URL + "/api/faculty/appraisal/principal-submit", {
+                yearofAssesment: facultyData.yearofAssesment,
+                fullName: facultyData.facultyName,
+                Dimension4: dim4,
+            })
+            .then(async (res) => {
+
+                toast.success("Remarks Submitted!", {
+                    position: "top-center",
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                });
+                await timeout(1500);
+                window.location.reload();
+            })
+            .catch((err) => {
+                console.log(err);
+                toast.error("Error in submitting marks!");
             });
-            await timeout(1500);
-            window.location.reload();
-        })
-        .catch((err) => {
-            console.log(err);
-            toast.error("Error in submitting marks!");
-        });
     }
 
     const handleBonus = (data) => {
@@ -112,9 +113,9 @@ const Report = ({ facultyData, forHOD = false }) => {
     return (
         <div>
             <div className="report">
-               
+
                 <form className="marks-sec" onSubmit={handleSubmit(onSubmit)}>
-                  
+
                     {forHOD && (
                         <Table striped bordered style={{ marginTop: "2rem" }}>
                             <thead>
@@ -269,7 +270,7 @@ const Report = ({ facultyData, forHOD = false }) => {
                         </thead>
                     </Table>
                     <div className="flex flex-col justify-center align-items-center">
-                       
+
                         <label style={{ fontSize: '1.5rem', fontWeight: '600' }} htmlFor="Enter Marks">Enter Multiplier factor:
                             <select style={{ height: 'max-content', fontSize: '1rem', minWidth: '100px', padding: '10px', borderRadius: '8px', margin: '0 10px', border: '2px solid grey' }}
                                 id="Enter Marks" {...register("confidentialReport.principalRemarks", { required: true })}>
@@ -280,7 +281,7 @@ const Report = ({ facultyData, forHOD = false }) => {
                                 <option value="0.80">0.80</option>
                             </select>
                         </label>
-                             <button style={{ fontSize: '20px', marginTop: '1rem' }} type="submit" className="find-faculty-btn">
+                        <button style={{ fontSize: '20px', marginTop: '1rem' }} type="submit" className="find-faculty-btn">
                             Submit
                         </button>
                     </div>
@@ -289,28 +290,28 @@ const Report = ({ facultyData, forHOD = false }) => {
                     {viewBonus && (
                         <div className="flex flex-col justify-center items-center">
                             <FinalTable facultyData={facultyData} change={change} />
-                            <div> 
+                            <div>
                                 <form onSubmit={handleSubmit(handleBonus)} className="w-full flex flex-col items-center justify-center">
                                     <div className="flex flex-col items-center justify-center gap-4 mt-8">
-                                    <label style={{ fontSize: '1.5rem', fontWeight: '600' }} htmlFor="Enter Marks">Enter Bonus Marks:
-                                        <select style={{ height: 'max-content', fontSize: '1rem', minWidth: '100px', padding: '10px', borderRadius: '8px', margin: '0 10px', border: '2px solid grey' }}
-                                            id="Enter Marks" {...register("confidentialReport.bonusMarks", { required: true })}>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
-                                    </label>
-                                    <label className="form-label text-3xl" style={{ fontSize: '1.5rem', fontWeight: '600' }} htmlFor="Enter Remarks">
-                                        Enter Remarks:
-                                        <textarea
-                                            className="form-textarea w-96 ml-4"
-                                            type="text"
-                                            placeholder="Remarks"
-                                            {...register("confidentialReport.principalComments", { maxLength: 200 })} />
-                                    </label>
+                                        <label style={{ fontSize: '1.5rem', fontWeight: '600' }} htmlFor="Enter Marks">Enter Bonus Marks:
+                                            <select style={{ height: 'max-content', fontSize: '1rem', minWidth: '100px', padding: '10px', borderRadius: '8px', margin: '0 10px', border: '2px solid grey' }}
+                                                id="Enter Marks" {...register("confidentialReport.bonusMarks", { required: true })}>
+                                                <option value="0">0</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </label>
+                                        <label className="form-label text-3xl" style={{ fontSize: '1.5rem', fontWeight: '600' }} htmlFor="Enter Remarks">
+                                            Enter Remarks:
+                                            <textarea
+                                                className="form-textarea w-96 ml-4"
+                                                type="text"
+                                                placeholder="Remarks"
+                                                {...register("confidentialReport.principalComments", { maxLength: 200 })} />
+                                        </label>
                                     </div>
                                     <button style={{ fontSize: '20px', marginTop: '1rem' }} type="submit" className="find-faculty-btn">
                                         Submit

@@ -3,6 +3,7 @@ import { UserContext } from '../context/UserContext';
 import axios from 'axios';
 import DateCalendar from '../components/DateCalendar';
 import '../styles/Home.css';
+import { API_URL } from '../config';
 
 const Home = () => {
 
