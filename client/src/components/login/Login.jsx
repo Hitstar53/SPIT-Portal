@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGoogleLogin, GoogleLogin } from "@react-oauth/google";
 import styles from "./Login.module.css";

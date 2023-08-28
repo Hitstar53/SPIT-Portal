@@ -78,7 +78,7 @@ const studentSchema = mongoose.Schema({
                 }
             ],
             sgpa:{ type : Number, required:true},
-            academicYear:{ type : String, required:true},
+            academicYear:{ type : Number, required:true},
             status:{ type : String, required:true},
         },
     ],
