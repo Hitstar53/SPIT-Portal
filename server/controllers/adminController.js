@@ -29,7 +29,6 @@ exports.intitializeFaculty = asyncHandler(async (req, res) => {
 
 exports.intitializeStudent = asyncHandler(async (req, res) => {
     const email = req.body.email
-    const uid = req.body.uid
     const name = req.body.name
     try {
         const placement = await new Placement({

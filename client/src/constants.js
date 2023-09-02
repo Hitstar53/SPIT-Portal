@@ -1,3 +1,3 @@
 const ServerUrl = "http://localhost:8000"
-// const ServerUrl = "https://spit-portal.onrender.com"
+// const ServerUrl = "http://studentportal.spit.ac.in/"
 export default ServerUrl

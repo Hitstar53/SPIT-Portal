@@ -4,3 +4,9 @@
     padding: 30px;
     min-width: calc(100% - 350px);
 }
+
+@media (max-width: 768px) {
+    .profile {
+        padding: 30px 10px;
+    }
+}

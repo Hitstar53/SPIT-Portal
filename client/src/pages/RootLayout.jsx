@@ -46,12 +46,12 @@ const RootLayout = () => {
               <Backdrop
                 sx={{
                   color: "#fff",
-                  marginLeft: open ? "240px" : "0px",
+                  marginLeft: open ? "240px" : "30px",
                   marginTop: "64px",
                 }}
                 open={true}
               >
-                <div className='flex flex-col items-center justify-center gap-3'>
+                <div className='flex flex-col items-center justify-center gap-3 text-xs sm:text-base'>
                   <CircularProgress color="inherit" />
                   Have patience, we are loading your data...
                 </div>

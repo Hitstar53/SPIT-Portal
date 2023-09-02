@@ -24,24 +24,22 @@ const ErrorPage = () => {
     message = error.data.message || "Something went wrong";
   }
   return (
-    <div className="flex flex-col gap-4 h-screen items-center justify-start pt-8">
-      <div className="w-[25rem]">
+    <div className="flex flex-col gap-4 h-screen items-center justify-center md:justify-start pt-8">
+      <div className="w-72 md:w-[25rem]">
         <Lottie animationData={animationData} />
       </div>
-      <h1 className="text-4xl font-semibold">{title}</h1>
-      <p className="text-xl text-gray-400">{message}</p>
+      <h1 className="text-xl font-semibold md:text-4xl">{title}</h1>
+      <p className="text-sm text-gray-400 md:text-xl">{message}</p>
       <div className="flex">
-        <button onClick={() => navigate(-1)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button
+          onClick={() => navigate(-1)}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-3 md:py-2 md:px-4 rounded text-sm md:text-base"
+        >
           Go Back
         </button>
       </div>
-      <p className="text-gray-600 flex gap-2 items-center">
-        <Info /> If this keep happeninwg, please 
-        <span className="text-blue-500 font-semibold">
-          <a href="mailto:hatim.sawai@spit.ac.in" target="_blank">
-            contact us
-          </a>
-        </span>
+      <p className="text-gray-600 flex flex-col gap-2 items-center text-sm md:text-base flex-wrap md:flex-row">
+        <Info /> If this keeps happening, try again later
       </p>
     </div>
   );

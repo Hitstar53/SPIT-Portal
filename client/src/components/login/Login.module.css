@@ -106,3 +106,42 @@
   border-radius: 50%;
   box-shadow: 0px 0px 10px 0px var(--text-color);
 }
+
+@media (max-width: 768px) {
+  .loginPage {
+    background: linear-gradient(0deg,
+        rgba(0, 0, 0, 0.6) 0%,
+        rgba(0, 0, 0, 0.5) 25%,
+        rgba(255, 255, 255, 0.1) 100%), url('../../assets/spitbg.webp');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .loginCard {
+    transform: scale(0.8);
+  }
+
+  .header {
+    font-size: 1.25rem;
+    width: 80%;
+  }
+
+  .loginButt {
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .links {
+    gap: 3.5rem;
+  }
+
+  .linksImg {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .links a {
+    font-size: 0.8rem;
+  }
+}
