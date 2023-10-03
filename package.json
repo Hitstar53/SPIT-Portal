@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "concurrently \"npm run client\" \"npm run server\"",
-    "client": "cd client && npm run dev",
-    "server": "cd server && npm start"
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "client": "cd client && npm run preview",
+    "server": "cd server && pm2 start server.js && ^C && pm2 save && pm2 restart server.js"
   },  
   "keywords": [],
   "author": "",
